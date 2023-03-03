@@ -15,7 +15,6 @@ export const getChatCompletion = async (messages: MessageInterface[]) => {
       }),
     });
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error('Error:', error);
@@ -35,7 +34,6 @@ export const getChatCompletionStream = async (messages: MessageInterface[]) => {
         stream: true,
       }),
     });
-    console.log(response);
     const stream = response.body;
     return stream;
   } catch (error) {

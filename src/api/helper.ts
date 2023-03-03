@@ -11,7 +11,6 @@ export const parseEventSource = (
         .split('\n')
         .map((line) => line.replace(/^data: /, ''))
         .join('');
-      console.log(jsonString);
       if (jsonString === '[DONE]') return jsonString;
       else return JSON.parse(jsonString);
     });

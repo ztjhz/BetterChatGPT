@@ -58,7 +58,6 @@ const ChatContent = () => {
               return output;
             }
           }, '');
-          console.log(resultString);
 
           const updatedMessages: MessageInterface[] = JSON.parse(
             JSON.stringify(useStore.getState().messages)

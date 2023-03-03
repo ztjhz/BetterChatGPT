@@ -12,7 +12,6 @@ export const validateApiKey = async (apiKey: string) => {
       },
     });
     const data = await response.json();
-    console.log(data);
 
     if (response.status === 401) return false;
     else if (response.status === 400) return true;
@@ -39,7 +38,6 @@ export const getChatCompletion = async (
       }),
     });
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error('Error:', error);
@@ -63,7 +61,6 @@ export const getChatCompletionStream = async (
         stream: true,
       }),
     });
-    console.log(response);
     const stream = response.body;
     return stream;
   } catch (error) {
