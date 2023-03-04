@@ -291,6 +291,10 @@ const EditView = ({
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const textareaRef = React.createRef<HTMLTextAreaElement>();
 
+  const resetTextAreaHeight = () => {
+    if (textareaRef.current) textareaRef.current.style.height = 'auto';
+  };
+
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
@@ -301,8 +305,10 @@ const EditView = ({
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if ((e.ctrlKey || e.shiftKey) && e.key === 'Enter') {
       e.preventDefault();
-      if (sticky) handleSaveAndSubmit();
-      else handleSave();
+      if (sticky) {
+        handleSaveAndSubmit();
+        resetTextAreaHeight();
+      } else handleSave();
     }
   };
 
@@ -314,6 +320,7 @@ const EditView = ({
     if (sticky) {
       updatedMessages.push({ role: inputRole, content: _content });
       _setContent('');
+      resetTextAreaHeight();
     } else {
       updatedMessages[messageIndex].content = _content;
       setIsEdit(false);
@@ -331,6 +338,7 @@ const EditView = ({
       updatedMessages.push({ role: inputRole, content: _content });
       _setContent('');
       setMessages(updatedMessages);
+      resetTextAreaHeight();
     } else {
       updatedMessages[messageIndex].content = _content;
       const _updatedMessages = updatedMessages.slice(0, messageIndex + 1);
