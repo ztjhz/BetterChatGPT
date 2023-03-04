@@ -7,34 +7,20 @@ import ConfigMenu from './components/ConfigMenu';
 
 import useSaveToLocalStorage from '@hooks/useSaveToLocalStorage';
 import useUpdateCharts from '@hooks/useUpdateChats';
+import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 
-import { ChatInterface, MessageInterface } from '@type/chat';
-import { defaultSystemMessage } from '@constants/chat';
+import { ChatInterface } from '@type/chat';
 
 function App() {
   useSaveToLocalStorage();
   useUpdateCharts();
+  const initialiseNewChat = useInitialiseNewChat();
 
   const [setChats, setMessages, setCurrentChatIndex] = useStore((state) => [
     state.setChats,
     state.setMessages,
     state.setCurrentChatIndex,
   ]);
-
-  const initialiseNewChat = () => {
-    const message: MessageInterface = {
-      role: 'system',
-      content: defaultSystemMessage,
-    };
-    setChats([
-      {
-        title: 'New Chat',
-        messages: [message],
-      },
-    ]);
-    setMessages([message]);
-    setCurrentChatIndex(0);
-  };
 
   useEffect(() => {
     // localStorage.removeItem('chats');

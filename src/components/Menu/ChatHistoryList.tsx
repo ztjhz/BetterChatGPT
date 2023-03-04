@@ -7,6 +7,8 @@ import DeleteIcon from '@icon/DeleteIcon';
 import TickIcon from '@icon/TickIcon';
 import CrossIcon from '@icon/CrossIcon';
 
+import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
+
 const ChatHistoryList = () => {
   const [chats, setCurrentChatIndex, setMessages] = useStore((state) => [
     state.chats,
@@ -63,6 +65,7 @@ const ChatHistory = ({
   chatIndex: number;
   onClick?: React.MouseEventHandler<HTMLElement>;
 }) => {
+  const initialiseNewChat = useInitialiseNewChat();
   const [chats, setChats, currentChatIndex, setMessages, setCurrentChatIndex] =
     useStore((state) => [
       state.chats,
@@ -86,13 +89,15 @@ const ChatHistory = ({
       setIsEdit(false);
     } else if (isDelete) {
       updatedChats.splice(chatIndex, 1);
-      setCurrentChatIndex(-1);
-      setMessages([]);
+      if (updatedChats.length > 0) {
+        setCurrentChatIndex(0);
+        setMessages(updatedChats[0].messages);
+        setChats(updatedChats);
+      } else {
+        initialiseNewChat();
+      }
       setIsDelete(false);
     }
-    setTimeout(() => {
-      setChats(updatedChats);
-    }, 0);
   };
 
   const handleCross = () => {

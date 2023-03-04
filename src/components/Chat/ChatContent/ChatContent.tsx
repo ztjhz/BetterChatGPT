@@ -45,25 +45,29 @@ const ChatContent = () => {
       while (reading) {
         const { done, value } = await reader.read();
 
-        const result = parseEventSource(new TextDecoder().decode(value));
+        try {
+          const result = parseEventSource(new TextDecoder().decode(value));
 
-        if (result === '[DONE]' || done) {
-          reading = false;
-        } else {
-          const resultString = result.reduce((output: string, curr) => {
-            if (curr === '[DONE]') return output;
-            else {
-              const content = curr.choices[0].delta.content;
-              if (content) output += content;
-              return output;
-            }
-          }, '');
+          if (result === '[DONE]' || done) {
+            reading = false;
+          } else {
+            const resultString = result.reduce((output: string, curr) => {
+              if (curr === '[DONE]') return output;
+              else {
+                const content = curr.choices[0].delta.content;
+                if (content) output += content;
+                return output;
+              }
+            }, '');
 
-          const updatedMessages: MessageInterface[] = JSON.parse(
-            JSON.stringify(useStore.getState().messages)
-          );
-          updatedMessages[updatedMessages.length - 1].content += resultString;
-          setMessages(updatedMessages);
+            const updatedMessages: MessageInterface[] = JSON.parse(
+              JSON.stringify(useStore.getState().messages)
+            );
+            updatedMessages[updatedMessages.length - 1].content += resultString;
+            setMessages(updatedMessages);
+          }
+        } catch (e: unknown) {
+          console.log((e as Error).message);
         }
       }
     }
