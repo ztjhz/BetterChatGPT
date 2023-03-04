@@ -292,6 +292,14 @@ const EditView = ({
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if ((e.ctrlKey || e.shiftKey) && e.key === 'Enter') {
+      e.preventDefault();
+      if (sticky) handleSaveAndSubmit();
+      else handleSave();
+    }
+  };
+
   const handleSave = () => {
     if (_content === '') return;
     const updatedMessages: MessageInterface[] = JSON.parse(
@@ -310,6 +318,7 @@ const EditView = ({
   // only for sticky forms
   const { handleSubmit } = useSubmit();
   const handleSaveAndSubmit = () => {
+    if (!sticky) return;
     if (_content == '') return;
     const updatedMessages: MessageInterface[] = JSON.parse(
       JSON.stringify(messages)
@@ -339,6 +348,7 @@ const EditView = ({
         }}
         value={_content}
         onInput={handleInput}
+        onKeyDown={handleKeyDown}
         rows={1}
       ></textarea>
       <div className='text-center mt-2 flex justify-center'>
