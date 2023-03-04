@@ -314,6 +314,7 @@ const EditView = ({
         <button
           className='btn relative btn-primary mr-2'
           onClick={() => {
+            if (_content === '') return;
             const updatedMessages: MessageInterface[] = JSON.parse(
               JSON.stringify(messages)
             );

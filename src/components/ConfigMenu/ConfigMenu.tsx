@@ -107,7 +107,7 @@ const ConfigMenu = () => {
                   </div>
                   <input
                     type='text'
-                    className='text-white p-3 text-sm border-none bg-gray-600 rounded-md p-0 m-0 w-full mr-0 h-8 focus:outline-none'
+                    className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md p-0 m-0 w-full mr-0 h-8 focus:outline-none'
                     value={_apiKey}
                     onChange={(e) => {
                       _setApiKey(e.target.value);
@@ -131,6 +131,13 @@ const ConfigMenu = () => {
               >
                 here
               </a>
+            </div>
+            <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm mt-4'>
+              We prioritize the security of your API key and handle it with
+              utmost care. Your key is exclusively stored on your browser and
+              never shared with any third-party entity. It is solely used for
+              the intended purpose of accessing the OpenAI API and not for any
+              other unauthorized use.
             </div>
           </div>
 
