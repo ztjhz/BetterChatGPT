@@ -121,6 +121,17 @@ const ConfigMenu = () => {
                 )}
               </>
             )}
+
+            <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm mt-4 text-center'>
+              Get your personal API key{' '}
+              <a
+                className='underline dark:hover:text-white hover:text-black'
+                href='https://platform.openai.com/account/api-keys'
+                target='_blank'
+              >
+                here
+              </a>
+            </div>
           </div>
 
           <div className='flex items-center justify-center p-6 gap-4'>
