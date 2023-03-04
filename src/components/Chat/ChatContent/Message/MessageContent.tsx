@@ -300,13 +300,13 @@ const EditView = ({
     <>
       <textarea
         ref={textareaRef}
-        className='m-0 resize-none border border-gray-400/30 rounded-lg bg-transparent px-2 py-1 overflow-y-hidden focus:ring-0 focus-visible:ring-0'
+        className='m-0 resize-none rounded-lg bg-transparent overflow-y-hidden focus:ring-0 focus-visible:ring-0 focus:outline-none leading-7'
         onChange={(e) => {
           _setContent(e.target.value);
         }}
         value={_content}
         onInput={handleInput}
-        rows={10}
+        rows={1}
       ></textarea>
       <div className='text-center mt-2 flex justify-center'>
         <button
