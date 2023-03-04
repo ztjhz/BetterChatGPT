@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useStore from '@store/store';
 
 import CrossIcon2 from '@icon/CrossIcon2';
@@ -42,6 +42,15 @@ const ConfigMenu = () => {
     setOpenConfig(false);
   };
 
+  useEffect(() => {
+    const storedApiKey = localStorage.getItem('apiKey');
+    if (storedApiKey) {
+      setApiFree(false);
+      setApiKey(storedApiKey);
+      _setApiKey(storedApiKey);
+    }
+  }, []);
+
   return openConfig ? (
     <div className='fixed top-0 left-0 z-[999] w-full p-4 overflow-x-hidden overflow-y-auto h-full flex justify-center items-center bg-gray-800/90'>
       <div className='relative w-full h-full max-w-2xl md:h-auto'>
@@ -61,7 +70,7 @@ const ConfigMenu = () => {
           <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
             <div className='flex items-center mb-2'>
               <input
-                type='checkbox'
+                type='radio'
                 checked={apiFree === true}
                 className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                 onChange={() => setApiFree(true)}
@@ -80,7 +89,7 @@ const ConfigMenu = () => {
 
             <div className='flex items-center'>
               <input
-                type='checkbox'
+                type='radio'
                 checked={apiFree === false}
                 className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                 onChange={() => setApiFree(false)}
