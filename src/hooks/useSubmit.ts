@@ -7,48 +7,35 @@ import { parseEventSource } from '@api/helper';
 
 const useSubmit = () => {
   const [error, setError] = useState<string>('');
-  const [messages, apiFree, apiKey, setMessages, setGenerating, generating] =
-    useStore((state) => [
-      state.messages,
+  const [apiFree, apiKey, setMessages, setGenerating, generating] = useStore(
+    (state) => [
       state.apiFree,
       state.apiKey,
       state.setMessages,
       state.setGenerating,
       state.generating,
-    ]);
+    ]
+  );
 
-  const handleSubmit = async (refresh?: boolean) => {
+  const handleSubmit = async () => {
     if (generating) return;
+    const messages = useStore.getState().messages;
 
     const updatedMessages: MessageInterface[] = JSON.parse(
       JSON.stringify(messages)
     );
-    if (refresh) {
-      updatedMessages[updatedMessages.length - 1] = {
-        role: 'assistant',
-        content: '',
-      };
-    } else {
-      updatedMessages.push({ role: 'assistant', content: '' });
-    }
+
+    updatedMessages.push({ role: 'assistant', content: '' });
+
     setMessages(updatedMessages);
     setGenerating(true);
     let stream;
 
     try {
       if (apiFree) {
-        if (refresh)
-          stream = await getChatCompletionStreamFree(
-            updatedMessages.slice(0, updatedMessages.length - 1)
-          );
-        else stream = await getChatCompletionStreamFree(messages);
+        stream = await getChatCompletionStreamFree(messages);
       } else if (apiKey) {
-        if (refresh)
-          stream = await getChatCompletionStreamCustom(
-            apiKey,
-            updatedMessages.slice(0, updatedMessages.length - 1)
-          );
-        else stream = await getChatCompletionStreamFree(messages);
+        stream = await getChatCompletionStreamFree(messages);
       }
 
       if (stream) {

@@ -12,9 +12,9 @@ import CrossIcon from '@icon/CrossIcon';
 import RefreshIcon from '@icon/RefreshIcon';
 import DownChevronArrow from '@icon/DownChevronArrow';
 
-import { MessageInterface } from '@type/chat';
-
 import useSubmit from '@hooks/useSubmit';
+
+import { MessageInterface } from '@type/chat';
 
 const MessageContent = ({
   role,
@@ -91,6 +91,13 @@ const ContentView = ({
     setMessages(updatedMessages);
   };
 
+  const handleRefresh = () => {
+    const updatedMessages = JSON.parse(JSON.stringify(messages));
+    updatedMessages.splice(updatedMessages.length - 1, 1);
+    setMessages(updatedMessages);
+    handleSubmit();
+  };
+
   return (
     <>
       <div className='markdown prose w-full break-words dark:prose-invert dark'>
@@ -161,11 +168,7 @@ const ContentView = ({
         {isDelete || (
           <>
             {role === 'assistant' && messageIndex === messages?.length - 1 && (
-              <RefreshButton
-                onClick={() => {
-                  handleSubmit(true);
-                }}
-              />
+              <RefreshButton onClick={handleRefresh} />
             )}
             {messageIndex !== 0 && (
               <UpButton onClick={() => handleMove('up')} />
@@ -289,6 +292,34 @@ const EditView = ({
     }
   };
 
+  const handleSave = () => {
+    if (_content === '') return;
+    const updatedMessages: MessageInterface[] = JSON.parse(
+      JSON.stringify(messages)
+    );
+    if (sticky) {
+      updatedMessages.push({ role: inputRole, content: _content });
+      _setContent('');
+    } else {
+      updatedMessages[messageIndex].content = _content;
+      setIsEdit(false);
+    }
+    setMessages(updatedMessages);
+  };
+
+  // only for sticky forms
+  const { handleSubmit } = useSubmit();
+  const handleSaveAndSubmit = () => {
+    if (_content == '') return;
+    const updatedMessages: MessageInterface[] = JSON.parse(
+      JSON.stringify(messages)
+    );
+    updatedMessages.push({ role: inputRole, content: _content });
+    _setContent('');
+    setMessages(updatedMessages);
+    handleSubmit();
+  };
+
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
@@ -308,28 +339,29 @@ const EditView = ({
         }}
         value={_content}
         onInput={handleInput}
-        rows={sticky ? 10 : 1}
+        rows={1}
       ></textarea>
       <div className='text-center mt-2 flex justify-center'>
+        {sticky && (
+          <button
+            className='btn relative btn-primary mr-2'
+            onClick={handleSaveAndSubmit}
+          >
+            <div className='flex items-center justify-center gap-2'>
+              Save and Submit
+            </div>
+          </button>
+        )}
+
         <button
-          className='btn relative btn-primary mr-2'
-          onClick={() => {
-            if (_content === '') return;
-            const updatedMessages: MessageInterface[] = JSON.parse(
-              JSON.stringify(messages)
-            );
-            if (sticky) {
-              updatedMessages.push({ role: inputRole, content: _content });
-              _setContent('');
-            } else {
-              updatedMessages[messageIndex].content = _content;
-              setIsEdit(false);
-            }
-            setMessages(updatedMessages);
-          }}
+          className={`btn relative mr-2 ${
+            sticky ? 'btn-neutral' : 'btn-primary'
+          }`}
+          onClick={handleSave}
         >
           <div className='flex items-center justify-center gap-2'>Save</div>
         </button>
+
         {sticky || (
           <button
             className='btn relative btn-neutral'
