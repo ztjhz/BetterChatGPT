@@ -77,9 +77,6 @@ const useSubmit = () => {
       const err = (e as Error).message;
       console.log(err);
       setError(err);
-      setTimeout(() => {
-        setError('');
-      }, 10000);
     }
     setGenerating(false);
   };

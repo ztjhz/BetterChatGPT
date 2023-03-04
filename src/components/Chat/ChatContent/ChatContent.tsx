@@ -6,13 +6,15 @@ import ScrollToBottomButton from './ScrollToBottomButton';
 import ChatTitle from './ChatTitle';
 import Message from './Message';
 import NewMessageButton from './Message/NewMessageButton';
+import CrossIcon from '@icon/CrossIcon';
 
 import useSubmit from '@hooks/useSubmit';
 
 const ChatContent = () => {
-  const [messages, inputRole] = useStore((state) => [
+  const [messages, inputRole, setError] = useStore((state) => [
     state.messages,
     state.inputRole,
+    state.setError,
   ]);
   const { handleSubmit, error } = useSubmit();
 
@@ -39,8 +41,18 @@ const ChatContent = () => {
           <Message role={inputRole} content='' messageIndex={-1} sticky />
 
           {error !== '' && (
-            <div className='bg-red-600/50 p-2 rounded-sm w-3/5 mt-3 text-gray-900 dark:text-gray-300 text-sm break-words'>
-              {error}
+            <div className='relative bg-red-600/50 p-2 rounded-sm w-3/5 mt-3'>
+              <div className='text-gray-900 dark:text-gray-300 text-sm break-words'>
+                {error}
+              </div>
+              <div
+                className='text-white absolute top-1 right-1 cursor-pointer'
+                onClick={() => {
+                  setError('');
+                }}
+              >
+                <CrossIcon />
+              </div>
             </div>
           )}
 
@@ -53,12 +65,6 @@ const ChatContent = () => {
             >
               Submit
             </button>
-            {/* <button className='btn btn-neutral border-0 md:border mt-2'>
-              <div className='flex items-center justify-center gap-2'>
-                <RefreshIcon />
-                Regenerate response
-              </div>
-            </button> */}
           </div>
           <div className='w-full h-32 md:h-48 flex-shrink-0'></div>
         </div>
