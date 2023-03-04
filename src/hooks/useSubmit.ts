@@ -35,7 +35,7 @@ const useSubmit = () => {
       if (apiFree) {
         stream = await getChatCompletionStreamFree(messages);
       } else if (apiKey) {
-        stream = await getChatCompletionStreamFree(messages);
+        stream = await getChatCompletionStreamCustom(apiKey, messages);
       }
 
       if (stream) {
