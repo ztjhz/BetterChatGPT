@@ -6,11 +6,12 @@ import MessageContent from './MessageContent';
 import { Role } from '@type/chat';
 import RoleSelector from './RoleSelector';
 
-const backgroundStyle: { [role in Role]: string } = {
-  user: 'dark:bg-gray-800',
-  assistant: 'bg-gray-50 dark:bg-[#444654]',
-  system: 'bg-gray-50 dark:bg-[#444654]',
-};
+// const backgroundStyle: { [role in Role]: string } = {
+//   user: 'dark:bg-gray-800',
+//   assistant: 'bg-gray-50 dark:bg-[#444654]',
+//   system: 'bg-gray-50 dark:bg-[#444654]',
+// };
+const backgroundStyle = ['dark:bg-gray-800', 'bg-gray-50 dark:bg-[#444654]'];
 
 const Message = ({
   role,
@@ -25,7 +26,9 @@ const Message = ({
 }) => {
   return (
     <div
-      className={`w-full border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group ${backgroundStyle[role]}`}
+      className={`w-full border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group ${
+        backgroundStyle[messageIndex % 2]
+      }`}
       key={
         messageIndex !== -1
           ? `${messageIndex}-${content}`

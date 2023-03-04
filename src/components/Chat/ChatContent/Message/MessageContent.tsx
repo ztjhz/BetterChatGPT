@@ -300,13 +300,15 @@ const EditView = ({
     <>
       <textarea
         ref={textareaRef}
-        className='m-0 resize-none rounded-lg bg-transparent overflow-y-hidden focus:ring-0 focus-visible:ring-0 focus:outline-none leading-7'
+        className={`m-0 resize-none rounded-lg bg-transparent overflow-y-hidden focus:ring-0 focus-visible:ring-0 leading-7 ${
+          sticky ? 'border border-gray-400/30 px-2 py-1' : 'focus:outline-none'
+        }`}
         onChange={(e) => {
           _setContent(e.target.value);
         }}
         value={_content}
         onInput={handleInput}
-        rows={1}
+        rows={sticky ? 10 : 1}
       ></textarea>
       <div className='text-center mt-2 flex justify-center'>
         <button

@@ -7,12 +7,6 @@ import ChatTitle from './ChatTitle';
 import Message from './Message';
 import NewMessageButton from './Message/NewMessageButton';
 
-import { getChatCompletionStream as getChatCompletionStreamFree } from '@api/freeApi';
-import { getChatCompletionStream as getChatCompletionStreamCustom } from '@api/customApi';
-import { parseEventSource } from '@api/helper';
-
-import RefreshIcon from '@icon/RefreshIcon';
-import { MessageInterface } from '@type/chat';
 import useSubmit from '@hooks/useSubmit';
 
 const ChatContent = () => {
