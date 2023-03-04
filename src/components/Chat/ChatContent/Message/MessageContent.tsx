@@ -188,14 +188,14 @@ const ContentView = ({
         )}
         {isDelete && (
           <>
-            <button className='p-1 hover:text-white' onClick={handleDelete}>
-              <TickIcon />
-            </button>
             <button
               className='p-1 hover:text-white'
               onClick={() => setIsDelete(false)}
             >
               <CrossIcon />
+            </button>
+            <button className='p-1 hover:text-white' onClick={handleDelete}>
+              <TickIcon />
             </button>
           </>
         )}

@@ -1,4 +1,5 @@
 import React from 'react';
+import useStore from '@store/store';
 
 import Avatar from './Avatar';
 import MessageContent from './MessageContent';
@@ -24,10 +25,14 @@ const Message = ({
   messageIndex: number;
   sticky?: boolean;
 }) => {
+  const stickyIndex = useStore((state) => state.messages.length);
+
   return (
     <div
       className={`w-full border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group ${
-        backgroundStyle[messageIndex % 2]
+        sticky
+          ? backgroundStyle[stickyIndex % 2]
+          : backgroundStyle[messageIndex % 2]
       }`}
       key={
         messageIndex !== -1
