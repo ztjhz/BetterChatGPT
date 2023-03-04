@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import hljs from 'highlight.js';
 import DOMPurify from 'dompurify';
@@ -262,6 +262,13 @@ const EditView = ({
       textareaRef.current.style.height = `${e.target.scrollHeight}px`;
     }
   };
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, []);
 
   return (
     <>
