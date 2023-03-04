@@ -22,7 +22,8 @@
       "@store/*": ["./src/store/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@constants/*": ["./src/constants/*"],
-      "@api/*": ["./src/api/*"]
+      "@api/*": ["./src/api/*"],
+      "@components/*": ["./src/components/*"]
     }
   },
   "include": ["src"],

@@ -12,6 +12,7 @@ export default defineConfig({
       '@hooks/': new URL('./src/hooks/', import.meta.url).pathname,
       '@constants/': new URL('./src/constants/', import.meta.url).pathname,
       '@api/': new URL('./src/api/', import.meta.url).pathname,
+      '@components/': new URL('./src/components/', import.meta.url).pathname,
     },
   },
 });

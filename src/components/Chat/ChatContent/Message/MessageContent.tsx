@@ -16,6 +16,8 @@ import useSubmit from '@hooks/useSubmit';
 
 import { MessageInterface } from '@type/chat';
 
+import PopupModal from '@components/PopupModal';
+
 const MessageContent = ({
   role,
   content,
@@ -286,6 +288,7 @@ const EditView = ({
   ]);
 
   const [_content, _setContent] = useState<string>(content);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const textareaRef = React.createRef<HTMLTextAreaElement>();
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -318,17 +321,22 @@ const EditView = ({
     setMessages(updatedMessages);
   };
 
-  // only for sticky forms
   const { handleSubmit } = useSubmit();
   const handleSaveAndSubmit = () => {
-    if (!sticky) return;
     if (_content == '') return;
     const updatedMessages: MessageInterface[] = JSON.parse(
       JSON.stringify(messages)
     );
-    updatedMessages.push({ role: inputRole, content: _content });
-    _setContent('');
-    setMessages(updatedMessages);
+    if (sticky) {
+      updatedMessages.push({ role: inputRole, content: _content });
+      _setContent('');
+      setMessages(updatedMessages);
+    } else {
+      updatedMessages[messageIndex].content = _content;
+      const _updatedMessages = updatedMessages.slice(0, messageIndex + 1);
+      setMessages(_updatedMessages);
+      setIsEdit(false);
+    }
     handleSubmit();
   };
 
@@ -357,11 +365,11 @@ const EditView = ({
       <div className='text-center mt-2 flex justify-center'>
         {sticky && (
           <button
-            className='btn relative btn-primary mr-2'
+            className='btn relative mr-2 btn-primary'
             onClick={handleSaveAndSubmit}
           >
             <div className='flex items-center justify-center gap-2'>
-              Save and Submit
+              Save & Submit
             </div>
           </button>
         )}
@@ -377,6 +385,19 @@ const EditView = ({
 
         {sticky || (
           <button
+            className='btn relative mr-2 btn-neutral'
+            onClick={() => {
+              setIsModalOpen(true);
+            }}
+          >
+            <div className='flex items-center justify-center gap-2'>
+              Save & Submit
+            </div>
+          </button>
+        )}
+
+        {sticky || (
+          <button
             className='btn relative btn-neutral'
             onClick={() => setIsEdit(false)}
           >
@@ -384,6 +405,14 @@ const EditView = ({
           </button>
         )}
       </div>
+      {isModalOpen && (
+        <PopupModal
+          setIsModalOpen={setIsModalOpen}
+          title='Warning'
+          message='Please be advised that by submitting this message, all subsequent messages will be deleted!'
+          handleConfirm={handleSaveAndSubmit}
+        />
+      )}
     </>
   );
 };
