@@ -86,6 +86,7 @@ const ChatHistory = ({
     const updatedChats = JSON.parse(JSON.stringify(chats));
     if (isEdit) {
       updatedChats[chatIndex].title = _title;
+      setChats(updatedChats);
       setIsEdit(false);
     } else if (isDelete) {
       updatedChats.splice(chatIndex, 1);
