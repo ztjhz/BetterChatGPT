@@ -98,12 +98,12 @@ const ChatContent = () => {
             >
               Submit
             </button>
-            <button className='btn btn-neutral border-0 md:border mt-2'>
+            {/* <button className='btn btn-neutral border-0 md:border mt-2'>
               <div className='flex items-center justify-center gap-2'>
                 <RefreshIcon />
                 Regenerate response
               </div>
-            </button>
+            </button> */}
           </div>
           <div className='w-full h-32 md:h-48 flex-shrink-0'></div>
         </div>

@@ -8,7 +8,8 @@ import ConfigMenu from './components/ConfigMenu';
 import useSaveToLocalStorage from '@hooks/useSaveToLocalStorage';
 import useUpdateCharts from '@hooks/useUpdateChats';
 
-import { ChatInterface } from '@type/chat';
+import { ChatInterface, MessageInterface } from '@type/chat';
+import { defaultSystemMessage } from '@constants/chat';
 
 function App() {
   useSaveToLocalStorage();
@@ -20,15 +21,34 @@ function App() {
     state.setCurrentChatIndex,
   ]);
 
+  const initialiseNewChat = () => {
+    const message: MessageInterface = {
+      role: 'system',
+      content: defaultSystemMessage,
+    };
+    setChats([
+      {
+        title: 'New Chat',
+        messages: [message],
+      },
+    ]);
+    setMessages([message]);
+    setCurrentChatIndex(0);
+  };
+
   useEffect(() => {
     // localStorage.removeItem('chats');
     const storedChats = localStorage.getItem('chats');
     if (storedChats) {
       try {
         const chats: ChatInterface[] = JSON.parse(storedChats);
-        setChats(chats);
-        setMessages(chats[0].messages);
-        setCurrentChatIndex(0);
+        if (chats.length > 0) {
+          setChats(chats);
+          setMessages(chats[0].messages);
+          setCurrentChatIndex(0);
+        } else {
+          initialiseNewChat();
+        }
       } catch (e: unknown) {
         setChats([]);
         setMessages([]);
@@ -36,7 +56,7 @@ function App() {
         console.log(e);
       }
     } else {
-      setChats([]);
+      initialiseNewChat();
     }
   }, []);
 
