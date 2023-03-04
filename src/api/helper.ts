@@ -12,7 +12,12 @@ export const parseEventSource = (
         .map((line) => line.replace(/^data: /, ''))
         .join('');
       if (jsonString === '[DONE]') return jsonString;
-      else return JSON.parse(jsonString);
+      try {
+        const json = JSON.parse(jsonString);
+        return json;
+      } catch {
+        return '[ERROR]';
+      }
     });
   return result;
 };

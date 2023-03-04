@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import useStore from '@store/store';
 
@@ -24,6 +24,7 @@ const ChatContent = () => {
       state.setMessages,
     ]
   );
+  const [error, setError] = useState<string>('');
 
   const handleSubmit = async () => {
     const updatedMessages: MessageInterface[] = JSON.parse(
@@ -33,26 +34,26 @@ const ChatContent = () => {
     setMessages(updatedMessages);
     let stream;
 
-    if (apiFree) {
-      stream = await getChatCompletionStreamFree(messages);
-    } else if (apiKey) {
-      stream = await getChatCompletionStreamCustom(apiKey, messages);
-    }
+    try {
+      if (apiFree) {
+        stream = await getChatCompletionStreamFree(messages);
+      } else if (apiKey) {
+        stream = await getChatCompletionStreamCustom(apiKey, messages);
+      }
 
-    if (stream) {
-      const reader = stream.getReader();
-      let reading = true;
-      while (reading) {
-        const { done, value } = await reader.read();
+      if (stream) {
+        const reader = stream.getReader();
+        let reading = true;
+        while (reading) {
+          const { done, value } = await reader.read();
 
-        try {
           const result = parseEventSource(new TextDecoder().decode(value));
 
           if (result === '[DONE]' || done) {
             reading = false;
           } else {
             const resultString = result.reduce((output: string, curr) => {
-              if (curr === '[DONE]') return output;
+              if (typeof curr === 'string') return output;
               else {
                 const content = curr.choices[0].delta.content;
                 if (content) output += content;
@@ -66,10 +67,15 @@ const ChatContent = () => {
             updatedMessages[updatedMessages.length - 1].content += resultString;
             setMessages(updatedMessages);
           }
-        } catch (e: unknown) {
-          console.log((e as Error).message);
         }
       }
+    } catch (e: unknown) {
+      const err = (e as Error).message;
+      console.log(err);
+      setError(err);
+      setTimeout(() => {
+        setError(''), 10000;
+      });
     }
   };
 
@@ -94,6 +100,12 @@ const ChatContent = () => {
             </>
           ))}
           <Message role={inputRole} content='' messageIndex={-1} sticky />
+
+          {error !== '' && (
+            <div className='bg-red-600/50 p-2 rounded-sm w-3/5 mt-3 text-gray-900 dark:text-gray-300 text-sm'>
+              Invalid API key!
+            </div>
+          )}
 
           <div className='text-center mt-6 flex justify-center gap-2'>
             <button

@@ -264,11 +264,12 @@ const EditView = ({
             );
             if (sticky) {
               updatedMessages.push({ role: inputRole, content: _content });
+              _setContent('');
             } else {
               updatedMessages[messageIndex].content = _content;
+              setIsEdit(false);
             }
             setMessages(updatedMessages);
-            setIsEdit(false);
           }}
         >
           <div className='flex items-center justify-center gap-2'>Save</div>
