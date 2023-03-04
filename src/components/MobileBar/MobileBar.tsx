@@ -20,6 +20,7 @@ const MobileBar = () => {
             .getElementById('menu')
             ?.classList.add('max-md:translate-x-[0%]');
           document.getElementById('menu-close')?.classList.remove('hidden');
+          document.getElementById('menu-backdrop')?.classList.remove('hidden');
         }}
       >
         <span className='sr-only'>Open sidebar</span>

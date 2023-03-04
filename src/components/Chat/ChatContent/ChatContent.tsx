@@ -66,7 +66,7 @@ const ChatContent = () => {
               Submit
             </button>
           </div>
-          <div className='w-full h-32 md:h-48 flex-shrink-0'></div>
+          <div className='w-full h-10'></div>
         </div>
       </ScrollToBottom>
     </div>
