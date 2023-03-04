@@ -1,14 +1,15 @@
 import React from 'react';
 
 import useStore from '@store/store';
-
-import NewChat from '../Menu/NewChat';
+import PlusIcon from '@icon/PlusIcon';
+import useAddChat from '@hooks/useAddChat';
 
 const MobileBar = () => {
   const [chats, currentChatIndex] = useStore((state) => [
     state.chats,
     state.currentChatIndex,
   ]);
+  const addChat = useAddChat();
 
   return (
     <div className='sticky top-0 left-0 w-full z-50 flex items-center border-b border-white/20 bg-gray-800 pl-1 pt-1 text-gray-200 sm:pl-3 md:hidden'>
@@ -46,7 +47,9 @@ const MobileBar = () => {
           ? chats[currentChatIndex]?.title
           : 'New Chat'}
       </h1>
-      <NewChat />
+      <button type='button' className='px-3 text-gray-400' onClick={addChat}>
+        <PlusIcon className='h-6 w-6' />
+      </button>
     </div>
   );
 };

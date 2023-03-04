@@ -3,8 +3,7 @@ import useStore from '@store/store';
 
 import PlusIcon from '@icon/PlusIcon';
 
-import { ChatInterface } from '@type/chat';
-import { defaultSystemMessage } from '@constants/chat';
+import useAddChat from '@hooks/useAddChat';
 
 const NewChat = () => {
   const [chats, setChats, setCurrentChatIndex, setMessages] = useStore(
@@ -16,26 +15,7 @@ const NewChat = () => {
     ]
   );
 
-  const addChat = () => {
-    if (chats) {
-      const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
-      let titleIndex = 1;
-      let title = `New Chat ${titleIndex}`;
-
-      while (chats.some((chat) => chat.title === title)) {
-        titleIndex += 1;
-        title = `New Chat ${titleIndex}`;
-      }
-
-      updatedChats.unshift({
-        title,
-        messages: [{ role: 'system', content: defaultSystemMessage }],
-      });
-      setChats(updatedChats);
-      setMessages(updatedChats[0].messages);
-      setCurrentChatIndex(0);
-    }
-  };
+  const addChat = useAddChat();
 
   return (
     <a
