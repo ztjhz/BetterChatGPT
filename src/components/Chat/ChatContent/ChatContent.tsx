@@ -15,23 +15,34 @@ import RefreshIcon from '@icon/RefreshIcon';
 import { MessageInterface } from '@type/chat';
 
 const ChatContent = () => {
-  const [messages, inputRole, apiFree, apiKey, setMessages] = useStore(
-    (state) => [
-      state.messages,
-      state.inputRole,
-      state.apiFree,
-      state.apiKey,
-      state.setMessages,
-    ]
-  );
+  const [
+    messages,
+    inputRole,
+    apiFree,
+    apiKey,
+    setMessages,
+    setGenerating,
+    generating,
+  ] = useStore((state) => [
+    state.messages,
+    state.inputRole,
+    state.apiFree,
+    state.apiKey,
+    state.setMessages,
+    state.setGenerating,
+    state.generating,
+  ]);
   const [error, setError] = useState<string>('');
 
   const handleSubmit = async () => {
+    if (generating) return;
+
     const updatedMessages: MessageInterface[] = JSON.parse(
       JSON.stringify(messages)
     );
     updatedMessages.push({ role: 'assistant', content: '' });
     setMessages(updatedMessages);
+    setGenerating(true);
     let stream;
 
     try {
@@ -77,6 +88,7 @@ const ChatContent = () => {
         setError(''), 10000;
       });
     }
+    setGenerating(false);
   };
 
   return (
