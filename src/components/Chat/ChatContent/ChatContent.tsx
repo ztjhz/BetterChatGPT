@@ -39,8 +39,8 @@ const ChatContent = () => {
           <Message role={inputRole} content='' messageIndex={-1} sticky />
 
           {error !== '' && (
-            <div className='bg-red-600/50 p-2 rounded-sm w-3/5 mt-3 text-gray-900 dark:text-gray-300 text-sm'>
-              Invalid API key!
+            <div className='bg-red-600/50 p-2 rounded-sm w-3/5 mt-3 text-gray-900 dark:text-gray-300 text-sm break-words'>
+              {error}
             </div>
           )}
 

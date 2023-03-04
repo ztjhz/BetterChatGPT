@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useStore from '@store/store';
 import { MessageInterface } from '@type/chat';
 import { getChatCompletionStream as getChatCompletionStreamFree } from '@api/freeApi';
@@ -6,16 +6,23 @@ import { getChatCompletionStream as getChatCompletionStreamCustom } from '@api/c
 import { parseEventSource } from '@api/helper';
 
 const useSubmit = () => {
-  const [error, setError] = useState<string>('');
-  const [apiFree, apiKey, setMessages, setGenerating, generating] = useStore(
-    (state) => [
-      state.apiFree,
-      state.apiKey,
-      state.setMessages,
-      state.setGenerating,
-      state.generating,
-    ]
-  );
+  const [
+    error,
+    setError,
+    apiFree,
+    apiKey,
+    setMessages,
+    setGenerating,
+    generating,
+  ] = useStore((state) => [
+    state.error,
+    state.setError,
+    state.apiFree,
+    state.apiKey,
+    state.setMessages,
+    state.setGenerating,
+    state.generating,
+  ]);
 
   const handleSubmit = async () => {
     if (generating) return;
@@ -71,8 +78,8 @@ const useSubmit = () => {
       console.log(err);
       setError(err);
       setTimeout(() => {
-        setError(''), 10000;
-      });
+        setError('');
+      }, 10000);
     }
     setGenerating(false);
   };
