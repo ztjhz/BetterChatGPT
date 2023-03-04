@@ -254,15 +254,25 @@ const EditView = ({
   ]);
 
   const [_content, _setContent] = useState<string>(content);
+  const textareaRef = React.createRef<HTMLTextAreaElement>();
+
+  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${e.target.scrollHeight}px`;
+    }
+  };
 
   return (
     <>
       <textarea
-        className='m-0 resize-none border border-gray-400/30 rounded-lg bg-transparent p-1 focus:ring-0 focus-visible:ring-0'
+        ref={textareaRef}
+        className='m-0 resize-none border border-gray-400/30 rounded-lg bg-transparent px-2 py-1 overflow-y-hidden focus:ring-0 focus-visible:ring-0'
         onChange={(e) => {
           _setContent(e.target.value);
         }}
         value={_content}
+        onInput={handleInput}
         rows={10}
       ></textarea>
       <div className='text-center mt-2 flex justify-center'>
