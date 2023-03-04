@@ -87,7 +87,17 @@ const ContentView = ({
         <ReactMarkdown
           components={{
             code({ node, inline, className, children, ...props }) {
-              const highlight = hljs.highlightAuto(children.toString());
+              if (inline) return <code>{children}</code>;
+              let highlight;
+
+              const match = /language-(\w+)/.exec(className || '');
+              const lang = match && match[1];
+              if (lang)
+                highlight = hljs.highlight(children.toString(), {
+                  language: lang,
+                });
+              else highlight = hljs.highlightAuto(children.toString());
+
               return (
                 <div className='bg-black rounded-md'>
                   <div className='flex items-center relative text-gray-200 bg-gray-800 px-4 py-2 text-xs font-sans'>

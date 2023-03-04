@@ -62,6 +62,13 @@
     border-radius: 9999px;
   }
 
+  pre ::-webkit-scrollbar-thumb {
+    display: none;
+  }
+  pre {
+    scrollbar-width: 0;
+  }
+
   textarea:focus {
     outline: none;
   }
