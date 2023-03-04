@@ -9,15 +9,20 @@ import EditIcon2 from '@icon/EditIcon2';
 import DeleteIcon from '@icon/DeleteIcon';
 import TickIcon from '@icon/TickIcon';
 import CrossIcon from '@icon/CrossIcon';
+import RefreshIcon from '@icon/RefreshIcon';
 import DownChevronArrow from '@icon/DownChevronArrow';
 
 import { MessageInterface } from '@type/chat';
 
+import useSubmit from '@hooks/useSubmit';
+
 const MessageContent = ({
+  role,
   content,
   messageIndex,
   sticky = false,
 }: {
+  role: string;
   content: string;
   messageIndex: number;
   sticky?: boolean;
@@ -36,6 +41,7 @@ const MessageContent = ({
         />
       ) : (
         <ContentView
+          role={role}
           content={content}
           setIsEdit={setIsEdit}
           messageIndex={messageIndex}
@@ -46,14 +52,18 @@ const MessageContent = ({
 };
 
 const ContentView = ({
+  role,
   content,
   setIsEdit,
   messageIndex,
 }: {
+  role: string;
   content: string;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   messageIndex: number;
 }) => {
+  const { handleSubmit, error } = useSubmit();
+
   const [isDelete, setIsDelete] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
 
@@ -150,12 +160,20 @@ const ContentView = ({
       <div className='flex justify-end gap-2 w-full mt-2'>
         {isDelete || (
           <>
+            {role === 'assistant' && messageIndex === messages?.length - 1 && (
+              <RefreshButton
+                onClick={() => {
+                  handleSubmit(true);
+                }}
+              />
+            )}
             {messageIndex !== 0 && (
               <UpButton onClick={() => handleMove('up')} />
             )}
             {messageIndex !== messages?.length - 1 && (
               <DownButton onClick={() => handleMove('down')} />
             )}
+
             <EditButton setIsEdit={setIsEdit} />
             <DeleteButton setIsDelete={setIsDelete} />
           </>
@@ -234,6 +252,14 @@ const UpButton = ({
       onClick={onClick}
     />
   );
+};
+
+const RefreshButton = ({
+  onClick,
+}: {
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}) => {
+  return <MessageButton icon={<RefreshIcon />} onClick={onClick} />;
 };
 
 const EditView = ({

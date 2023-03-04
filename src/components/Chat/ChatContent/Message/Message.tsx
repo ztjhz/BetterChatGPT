@@ -41,6 +41,7 @@ const Message = ({
             sticky={sticky}
           />
           <MessageContent
+            role={role}
             content={content}
             messageIndex={messageIndex}
             sticky={sticky}
