@@ -159,6 +159,9 @@ const ContentView = ({
                 </div>
               );
             },
+            p({ className, children, ...props }) {
+              return <p className='whitespace-pre-wrap'>{children}</p>;
+            },
           }}
         >
           {content}
