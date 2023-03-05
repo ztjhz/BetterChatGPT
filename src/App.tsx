@@ -6,38 +6,30 @@ import Menu from './components/Menu';
 import ConfigMenu from './components/ConfigMenu';
 
 import useSaveToLocalStorage from '@hooks/useSaveToLocalStorage';
-import useUpdateCharts from '@hooks/useUpdateChats';
 import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 
 import { ChatInterface } from '@type/chat';
 
 function App() {
   useSaveToLocalStorage();
-  useUpdateCharts();
   const initialiseNewChat = useInitialiseNewChat();
 
-  const [setChats, setMessages, setCurrentChatIndex] = useStore((state) => [
-    state.setChats,
-    state.setMessages,
-    state.setCurrentChatIndex,
-  ]);
+  const setChats = useStore((state) => state.setChats);
+  const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
 
   useEffect(() => {
-    // localStorage.removeItem('chats');
     const storedChats = localStorage.getItem('chats');
     if (storedChats) {
       try {
         const chats: ChatInterface[] = JSON.parse(storedChats);
         if (chats.length > 0) {
           setChats(chats);
-          setMessages(chats[0].messages);
           setCurrentChatIndex(0);
         } else {
           initialiseNewChat();
         }
       } catch (e: unknown) {
         setChats([]);
-        setMessages([]);
         setCurrentChatIndex(-1);
         console.log(e);
       }

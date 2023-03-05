@@ -1,5 +1,4 @@
 import React from 'react';
-import useStore from '@store/store';
 
 import NewChat from './NewChat';
 import ChatHistoryList from './ChatHistoryList';

@@ -1,20 +1,10 @@
 import React from 'react';
-import useStore from '@store/store';
 
 import PlusIcon from '@icon/PlusIcon';
 
 import useAddChat from '@hooks/useAddChat';
 
 const NewChat = () => {
-  const [chats, setChats, setCurrentChatIndex, setMessages] = useStore(
-    (state) => [
-      state.chats,
-      state.setChats,
-      state.setCurrentChatIndex,
-      state.setMessages,
-    ]
-  );
-
   const addChat = useAddChat();
 
   return (

@@ -4,10 +4,8 @@ import useStore from '@store/store';
 import PersonIcon from '@icon/PersonIcon';
 
 const Config = () => {
-  const [apiFree, setOpenConfig] = useStore((state) => [
-    state.apiFree,
-    state.setOpenConfig,
-  ]);
+  const apiFree = useStore((state) => state.apiFree);
+  const setOpenConfig = useStore((state) => state.setOpenConfig);
 
   return (
     <a

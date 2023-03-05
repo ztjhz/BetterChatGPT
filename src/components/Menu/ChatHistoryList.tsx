@@ -10,11 +10,8 @@ import CrossIcon from '@icon/CrossIcon';
 import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 
 const ChatHistoryList = () => {
-  const [chats, setCurrentChatIndex, setMessages] = useStore((state) => [
-    state.chats,
-    state.setCurrentChatIndex,
-    state.setMessages,
-  ]);
+  const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
+  const chats = useStore((state) => state.chats);
 
   return (
     <div className='flex-col flex-1 overflow-y-auto border-b border-white/20'>
@@ -27,7 +24,6 @@ const ChatHistoryList = () => {
               chatIndex={index}
               onClick={() => {
                 setCurrentChatIndex(index);
-                setMessages(chats[index].messages);
               }}
             />
           ))}
@@ -66,14 +62,9 @@ const ChatHistory = ({
   onClick?: React.MouseEventHandler<HTMLElement>;
 }) => {
   const initialiseNewChat = useInitialiseNewChat();
-  const [chats, setChats, currentChatIndex, setMessages, setCurrentChatIndex] =
-    useStore((state) => [
-      state.chats,
-      state.setChats,
-      state.currentChatIndex,
-      state.setMessages,
-      state.setCurrentChatIndex,
-    ]);
+  const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
+  const setChats = useStore((state) => state.setChats);
+  const currentChatIndex = useStore((state) => state.currentChatIndex);
 
   const [isDelete, setIsDelete] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -83,7 +74,7 @@ const ChatHistory = ({
 
   const handleTick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    const updatedChats = JSON.parse(JSON.stringify(chats));
+    const updatedChats = JSON.parse(JSON.stringify(useStore.getState().chats));
     if (isEdit) {
       updatedChats[chatIndex].title = _title;
       setChats(updatedChats);
@@ -92,7 +83,6 @@ const ChatHistory = ({
       updatedChats.splice(chatIndex, 1);
       if (updatedChats.length > 0) {
         setCurrentChatIndex(0);
-        setMessages(updatedChats[0].messages);
         setChats(updatedChats);
       } else {
         initialiseNewChat();

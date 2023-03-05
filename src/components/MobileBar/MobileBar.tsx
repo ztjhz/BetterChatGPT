@@ -5,10 +5,12 @@ import PlusIcon from '@icon/PlusIcon';
 import useAddChat from '@hooks/useAddChat';
 
 const MobileBar = () => {
-  const [chats, currentChatIndex] = useStore((state) => [
-    state.chats,
-    state.currentChatIndex,
-  ]);
+  const chatTitle = useStore((state) =>
+    state.chats && state.chats.length > 0
+      ? state.chats[state.currentChatIndex].title
+      : 'New Chat'
+  );
+
   const addChat = useAddChat();
 
   return (
@@ -42,11 +44,7 @@ const MobileBar = () => {
           <line x1='3' y1='18' x2='21' y2='18'></line>
         </svg>
       </button>
-      <h1 className='flex-1 text-center text-base font-normal'>
-        {chats && chats.length > 0
-          ? chats[currentChatIndex]?.title
-          : 'New Chat'}
-      </h1>
+      <h1 className='flex-1 text-center text-base font-normal'>{chatTitle}</h1>
       <button type='button' className='px-3 text-gray-400' onClick={addChat}>
         <PlusIcon className='h-6 w-6' />
       </button>

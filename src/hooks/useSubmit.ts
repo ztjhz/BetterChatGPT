@@ -1,48 +1,45 @@
 import React from 'react';
 import useStore from '@store/store';
-import { MessageInterface } from '@type/chat';
+import { ChatInterface } from '@type/chat';
 import { getChatCompletionStream as getChatCompletionStreamFree } from '@api/freeApi';
 import { getChatCompletionStream as getChatCompletionStreamCustom } from '@api/customApi';
 import { parseEventSource } from '@api/helper';
 
 const useSubmit = () => {
-  const [
-    error,
-    setError,
-    apiFree,
-    apiKey,
-    setMessages,
-    setGenerating,
-    generating,
-  ] = useStore((state) => [
-    state.error,
-    state.setError,
-    state.apiFree,
-    state.apiKey,
-    state.setMessages,
-    state.setGenerating,
-    state.generating,
-  ]);
+  const error = useStore((state) => state.error);
+  const setError = useStore((state) => state.setError);
+  const apiFree = useStore((state) => state.apiFree);
+  const apiKey = useStore((state) => state.apiKey);
+  const setGenerating = useStore((state) => state.setGenerating);
+  const generating = useStore((state) => state.generating);
+  const currentChatIndex = useStore((state) => state.currentChatIndex);
+  const setChats = useStore((state) => state.setChats);
 
   const handleSubmit = async () => {
-    if (generating) return;
-    const messages = useStore.getState().messages;
+    const chats = useStore.getState().chats;
+    if (generating || !chats) return;
 
-    const updatedMessages: MessageInterface[] = JSON.parse(
-      JSON.stringify(messages)
-    );
+    const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
 
-    updatedMessages.push({ role: 'assistant', content: '' });
+    updatedChats[currentChatIndex].messages.push({
+      role: 'assistant',
+      content: '',
+    });
 
-    setMessages(updatedMessages);
+    setChats(updatedChats);
     setGenerating(true);
     let stream;
 
     try {
       if (apiFree) {
-        stream = await getChatCompletionStreamFree(messages);
+        stream = await getChatCompletionStreamFree(
+          chats[currentChatIndex].messages
+        );
       } else if (apiKey) {
-        stream = await getChatCompletionStreamCustom(apiKey, messages);
+        stream = await getChatCompletionStreamCustom(
+          apiKey,
+          chats[currentChatIndex].messages
+        );
       }
 
       if (stream) {
@@ -65,11 +62,12 @@ const useSubmit = () => {
               }
             }, '');
 
-            const updatedMessages: MessageInterface[] = JSON.parse(
-              JSON.stringify(useStore.getState().messages)
+            const updatedChats: ChatInterface[] = JSON.parse(
+              JSON.stringify(useStore.getState().chats)
             );
+            const updatedMessages = updatedChats[currentChatIndex].messages;
             updatedMessages[updatedMessages.length - 1].content += resultString;
-            setMessages(updatedMessages);
+            setChats(updatedChats);
           }
         }
       }

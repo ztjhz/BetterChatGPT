@@ -4,11 +4,8 @@ import { MessageInterface } from '@type/chat';
 import { defaultSystemMessage } from '@constants/chat';
 
 const useInitialiseNewChat = () => {
-  const [setChats, setMessages, setCurrentChatIndex] = useStore((state) => [
-    state.setChats,
-    state.setMessages,
-    state.setCurrentChatIndex,
-  ]);
+  const setChats = useStore((state) => state.setChats);
+  const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
 
   const initialiseNewChat = () => {
     const message: MessageInterface = {
@@ -21,7 +18,6 @@ const useInitialiseNewChat = () => {
         messages: [message],
       },
     ]);
-    setMessages([message]);
     setCurrentChatIndex(0);
   };
 

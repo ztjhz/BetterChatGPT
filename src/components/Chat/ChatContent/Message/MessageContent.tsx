@@ -17,7 +17,7 @@ import DownChevronArrow from '@icon/DownChevronArrow';
 
 import useSubmit from '@hooks/useSubmit';
 
-import { MessageInterface } from '@type/chat';
+import { ChatInterface } from '@type/chat';
 
 import PopupModal from '@components/PopupModal';
 
@@ -56,158 +56,168 @@ const MessageContent = ({
   );
 };
 
-const ContentView = ({
-  role,
-  content,
-  setIsEdit,
-  messageIndex,
-}: {
-  role: string;
-  content: string;
-  setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
-  messageIndex: number;
-}) => {
-  const { handleSubmit, error } = useSubmit();
+const ContentView = React.memo(
+  ({
+    role,
+    content,
+    setIsEdit,
+    messageIndex,
+  }: {
+    role: string;
+    content: string;
+    setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
+    messageIndex: number;
+  }) => {
+    const { handleSubmit } = useSubmit();
 
-  const [isDelete, setIsDelete] = useState<boolean>(false);
-  const [copied, setCopied] = useState<boolean>(false);
+    const [isDelete, setIsDelete] = useState<boolean>(false);
+    const [copied, setCopied] = useState<boolean>(false);
+    const currentChatIndex = useStore((state) => state.currentChatIndex);
+    const setChats = useStore((state) => state.setChats);
+    const lastMessageIndex = useStore((state) =>
+      state.chats ? state.chats[state.currentChatIndex].messages.length - 1 : 0
+    );
 
-  const [messages, setMessages] = useStore((state) => [
-    state.messages,
-    state.setMessages,
-  ]);
+    const handleDelete = () => {
+      const updatedChats: ChatInterface[] = JSON.parse(
+        JSON.stringify(useStore.getState().chats)
+      );
+      updatedChats[currentChatIndex].messages.splice(messageIndex, 1);
+      setChats(updatedChats);
+    };
 
-  const handleDelete = () => {
-    const updatedMessages = JSON.parse(JSON.stringify(messages));
-    updatedMessages.splice(messageIndex, 1);
-    setMessages(updatedMessages);
-  };
+    const handleMove = (direction: 'up' | 'down') => {
+      const updatedChats: ChatInterface[] = JSON.parse(
+        JSON.stringify(useStore.getState().chats)
+      );
+      const updatedMessages = updatedChats[currentChatIndex].messages;
+      const temp = updatedMessages[messageIndex];
+      if (direction === 'up') {
+        updatedMessages[messageIndex] = updatedMessages[messageIndex - 1];
+        updatedMessages[messageIndex - 1] = temp;
+      } else {
+        updatedMessages[messageIndex] = updatedMessages[messageIndex + 1];
+        updatedMessages[messageIndex + 1] = temp;
+      }
+      setChats(updatedChats);
+    };
 
-  const handleMove = (direction: 'up' | 'down') => {
-    const updatedMessages = JSON.parse(JSON.stringify(messages));
-    const temp = updatedMessages[messageIndex];
-    if (direction === 'up') {
-      updatedMessages[messageIndex] = updatedMessages[messageIndex - 1];
-      updatedMessages[messageIndex - 1] = temp;
-    } else {
-      updatedMessages[messageIndex] = updatedMessages[messageIndex + 1];
-      updatedMessages[messageIndex + 1] = temp;
-    }
-    setMessages(updatedMessages);
-  };
+    const handleRefresh = () => {
+      const updatedChats: ChatInterface[] = JSON.parse(
+        JSON.stringify(useStore.getState().chats)
+      );
+      const updatedMessages = updatedChats[currentChatIndex].messages;
+      updatedMessages.splice(updatedMessages.length - 1, 1);
+      setChats(updatedChats);
+      handleSubmit();
+    };
 
-  const handleRefresh = () => {
-    const updatedMessages = JSON.parse(JSON.stringify(messages));
-    updatedMessages.splice(updatedMessages.length - 1, 1);
-    setMessages(updatedMessages);
-    handleSubmit();
-  };
+    return (
+      <>
+        <div className='markdown prose w-full break-words dark:prose-invert dark'>
+          <ReactMarkdown
+            remarkPlugins={[remarkMath, remarkGfm]}
+            rehypePlugins={[[rehypeKatex, { output: 'mathml' }]]}
+            components={{
+              code({ node, inline, className, children, ...props }) {
+                if (inline) return <code>{children}</code>;
+                let highlight;
 
-  return (
-    <>
-      <div className='markdown prose w-full break-words dark:prose-invert dark'>
-        <ReactMarkdown
-          remarkPlugins={[remarkMath, remarkGfm]}
-          rehypePlugins={[[rehypeKatex, { output: 'mathml' }]]}
-          components={{
-            code({ node, inline, className, children, ...props }) {
-              if (inline) return <code>{children}</code>;
-              let highlight;
+                const match = /language-(\w+)/.exec(className || '');
+                const lang = match && match[1];
+                if (lang)
+                  highlight = hljs.highlight(children.toString(), {
+                    language: lang,
+                  });
+                else highlight = hljs.highlightAuto(children.toString());
 
-              const match = /language-(\w+)/.exec(className || '');
-              const lang = match && match[1];
-              if (lang)
-                highlight = hljs.highlight(children.toString(), {
-                  language: lang,
-                });
-              else highlight = hljs.highlightAuto(children.toString());
-
-              return (
-                <div className='bg-black rounded-md'>
-                  <div className='flex items-center relative text-gray-200 bg-gray-800 px-4 py-2 text-xs font-sans'>
-                    <span className=''>{highlight.language}</span>
-                    <button
-                      className='flex ml-auto gap-2'
-                      onClick={() => {
-                        navigator.clipboard
-                          .writeText(children.toString())
-                          .then(() => {
-                            setCopied(true);
-                            setTimeout(() => setCopied(false), 3000);
-                          });
-                      }}
-                    >
-                      {copied ? (
-                        <>
-                          <TickIcon />
-                          Copied!
-                        </>
-                      ) : (
-                        <>
-                          <CopyIcon />
-                          Copy code
-                        </>
-                      )}
-                    </button>
-                  </div>
-                  <div className='p-4 overflow-y-auto'>
-                    <code
-                      className={`!whitespace-pre hljs language-${highlight.language}`}
-                    >
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: DOMPurify.sanitize(highlight.value, {
-                            USE_PROFILES: { html: true },
-                          }),
+                return (
+                  <div className='bg-black rounded-md'>
+                    <div className='flex items-center relative text-gray-200 bg-gray-800 px-4 py-2 text-xs font-sans'>
+                      <span className=''>{highlight.language}</span>
+                      <button
+                        className='flex ml-auto gap-2'
+                        onClick={() => {
+                          navigator.clipboard
+                            .writeText(children.toString())
+                            .then(() => {
+                              setCopied(true);
+                              setTimeout(() => setCopied(false), 3000);
+                            });
                         }}
-                      />
-                    </code>
+                      >
+                        {copied ? (
+                          <>
+                            <TickIcon />
+                            Copied!
+                          </>
+                        ) : (
+                          <>
+                            <CopyIcon />
+                            Copy code
+                          </>
+                        )}
+                      </button>
+                    </div>
+                    <div className='p-4 overflow-y-auto'>
+                      <code
+                        className={`!whitespace-pre hljs language-${highlight.language}`}
+                      >
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(highlight.value, {
+                              USE_PROFILES: { html: true },
+                            }),
+                          }}
+                        />
+                      </code>
+                    </div>
                   </div>
-                </div>
-              );
-            },
-            p({ className, children, ...props }) {
-              return <p className='whitespace-pre-wrap'>{children}</p>;
-            },
-          }}
-        >
-          {content}
-        </ReactMarkdown>
-      </div>
-      <div className='flex justify-end gap-2 w-full mt-2'>
-        {isDelete || (
-          <>
-            {role === 'assistant' && messageIndex === messages?.length - 1 && (
-              <RefreshButton onClick={handleRefresh} />
-            )}
-            {messageIndex !== 0 && (
-              <UpButton onClick={() => handleMove('up')} />
-            )}
-            {messageIndex !== messages?.length - 1 && (
-              <DownButton onClick={() => handleMove('down')} />
-            )}
+                );
+              },
+              p({ className, children, ...props }) {
+                return <p className='whitespace-pre-wrap'>{children}</p>;
+              },
+            }}
+          >
+            {content}
+          </ReactMarkdown>
+        </div>
+        <div className='flex justify-end gap-2 w-full mt-2'>
+          {isDelete || (
+            <>
+              {role === 'assistant' && messageIndex === lastMessageIndex && (
+                <RefreshButton onClick={handleRefresh} />
+              )}
+              {messageIndex !== 0 && (
+                <UpButton onClick={() => handleMove('up')} />
+              )}
+              {messageIndex !== lastMessageIndex && (
+                <DownButton onClick={() => handleMove('down')} />
+              )}
 
-            <EditButton setIsEdit={setIsEdit} />
-            <DeleteButton setIsDelete={setIsDelete} />
-          </>
-        )}
-        {isDelete && (
-          <>
-            <button
-              className='p-1 hover:text-white'
-              onClick={() => setIsDelete(false)}
-            >
-              <CrossIcon />
-            </button>
-            <button className='p-1 hover:text-white' onClick={handleDelete}>
-              <TickIcon />
-            </button>
-          </>
-        )}
-      </div>
-    </>
-  );
-};
+              <EditButton setIsEdit={setIsEdit} />
+              <DeleteButton setIsDelete={setIsDelete} />
+            </>
+          )}
+          {isDelete && (
+            <>
+              <button
+                className='p-1 hover:text-white'
+                onClick={() => setIsDelete(false)}
+              >
+                <CrossIcon />
+              </button>
+              <button className='p-1 hover:text-white' onClick={handleDelete}>
+                <TickIcon />
+              </button>
+            </>
+          )}
+        </div>
+      </>
+    );
+  }
+);
 
 const MessageButton = ({
   onClick,
@@ -286,11 +296,9 @@ const EditView = ({
   messageIndex: number;
   sticky?: boolean;
 }) => {
-  const [messages, setMessages, inputRole] = useStore((state) => [
-    state.messages,
-    state.setMessages,
-    state.inputRole,
-  ]);
+  const inputRole = useStore((state) => state.inputRole);
+  const setChats = useStore((state) => state.setChats);
+  const currentChatIndex = useStore((state) => state.currentChatIndex);
 
   const [_content, _setContent] = useState<string>(content);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -319,9 +327,10 @@ const EditView = ({
 
   const handleSave = () => {
     if (_content === '') return;
-    const updatedMessages: MessageInterface[] = JSON.parse(
-      JSON.stringify(messages)
+    const updatedChats: ChatInterface[] = JSON.parse(
+      JSON.stringify(useStore.getState().chats)
     );
+    const updatedMessages = updatedChats[currentChatIndex].messages;
     if (sticky) {
       updatedMessages.push({ role: inputRole, content: _content });
       _setContent('');
@@ -330,26 +339,29 @@ const EditView = ({
       updatedMessages[messageIndex].content = _content;
       setIsEdit(false);
     }
-    setMessages(updatedMessages);
+    setChats(updatedChats);
   };
 
   const { handleSubmit } = useSubmit();
   const handleSaveAndSubmit = () => {
     if (_content == '') return;
-    const updatedMessages: MessageInterface[] = JSON.parse(
-      JSON.stringify(messages)
+    const updatedChats: ChatInterface[] = JSON.parse(
+      JSON.stringify(useStore.getState().chats)
     );
+    const updatedMessages = updatedChats[currentChatIndex].messages;
     if (sticky) {
       updatedMessages.push({ role: inputRole, content: _content });
       _setContent('');
-      setMessages(updatedMessages);
       resetTextAreaHeight();
     } else {
       updatedMessages[messageIndex].content = _content;
-      const _updatedMessages = updatedMessages.slice(0, messageIndex + 1);
-      setMessages(_updatedMessages);
+      updatedChats[currentChatIndex].messages = updatedMessages.slice(
+        0,
+        messageIndex + 1
+      );
       setIsEdit(false);
     }
+    setChats(updatedChats);
     handleSubmit();
   };
 

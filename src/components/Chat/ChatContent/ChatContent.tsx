@@ -1,4 +1,4 @@
-import React, { createRef, useState } from 'react';
+import React from 'react';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import useStore from '@store/store';
 
@@ -11,11 +11,15 @@ import CrossIcon from '@icon/CrossIcon';
 import useSubmit from '@hooks/useSubmit';
 
 const ChatContent = () => {
-  const [messages, inputRole, setError] = useStore((state) => [
-    state.messages,
-    state.inputRole,
-    state.setError,
-  ]);
+  const inputRole = useStore((state) => state.inputRole);
+  const setError = useStore((state) => state.setError);
+  const messages = useStore((state) =>
+    state.chats ? state.chats[state.currentChatIndex].messages : []
+  );
+  const stickyIndex = useStore((state) =>
+    state.chats ? state.chats[state.currentChatIndex].messages.length : 0
+  );
+
   const { handleSubmit, error } = useSubmit();
 
   return (
@@ -38,7 +42,12 @@ const ChatContent = () => {
               <NewMessageButton messageIndex={index} />
             </>
           ))}
-          <Message role={inputRole} content='' messageIndex={-1} sticky />
+          <Message
+            role={inputRole}
+            content=''
+            messageIndex={stickyIndex}
+            sticky
+          />
 
           {error !== '' && (
             <div className='relative bg-red-600/50 p-2 rounded-sm w-3/5 mt-3'>

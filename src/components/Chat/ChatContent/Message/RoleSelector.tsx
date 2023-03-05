@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useStore from '@store/store';
 
 import DownChevronArrow from '@icon/DownChevronArrow';
-import { MessageInterface, Role, roles } from '@type/chat';
+import { ChatInterface, Role, roles } from '@type/chat';
 
 const RoleSelector = ({
   role,
@@ -13,11 +13,9 @@ const RoleSelector = ({
   messageIndex: number;
   sticky?: boolean;
 }) => {
-  const [messages, setMessages, setInputRole] = useStore((state) => [
-    state.messages,
-    state.setMessages,
-    state.setInputRole,
-  ]);
+  const setInputRole = useStore((state) => state.setInputRole);
+  const setChats = useStore((state) => state.setChats);
+  const currentChatIndex = useStore((state) => state.currentChatIndex);
 
   const [dropDown, setDropDown] = useState<boolean>(false);
 
@@ -46,11 +44,12 @@ const RoleSelector = ({
               className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer'
               onClick={() => {
                 if (!sticky) {
-                  const updatedMessages: MessageInterface[] = JSON.parse(
-                    JSON.stringify(messages)
+                  const updatedChats: ChatInterface[] = JSON.parse(
+                    JSON.stringify(useStore.getState().chats)
                   );
-                  updatedMessages[messageIndex].role = r;
-                  setMessages(updatedMessages);
+                  updatedChats[currentChatIndex].messages[messageIndex].role =
+                    r;
+                  setChats(updatedChats);
                 } else {
                   setInputRole(r);
                 }
@@ -66,5 +65,4 @@ const RoleSelector = ({
     </div>
   );
 };
-
 export default RoleSelector;

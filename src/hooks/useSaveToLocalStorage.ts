@@ -1,12 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import useStore from '@store/store';
 
 const useSaveToLocalStorage = () => {
-  const chats = useStore((state) => state.chats);
+  const chatsRef = useRef(useStore.getState().chats);
 
   useEffect(() => {
-    if (chats) localStorage.setItem('chats', JSON.stringify(chats));
-  }, [chats]);
+    const unsubscribe = useStore.subscribe((state) => {
+      if (chatsRef && chatsRef.current !== state.chats) {
+        chatsRef.current = state.chats;
+        localStorage.setItem('chats', JSON.stringify(state.chats));
+      }
+    });
+
+    return unsubscribe;
+  }, []);
 };
 
 export default useSaveToLocalStorage;

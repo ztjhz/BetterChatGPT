@@ -5,15 +5,12 @@ import CrossIcon2 from '@icon/CrossIcon2';
 import { validateApiKey } from '@api/customApi';
 
 const ConfigMenu = () => {
-  const [apiKey, setApiKey, apiFree, setApiFree, openConfig, setOpenConfig] =
-    useStore((state) => [
-      state.apiKey,
-      state.setApiKey,
-      state.apiFree,
-      state.setApiFree,
-      state.openConfig,
-      state.setOpenConfig,
-    ]);
+  const apiKey = useStore((state) => state.apiKey);
+  const setApiKey = useStore((state) => state.setApiKey);
+  const apiFree = useStore((state) => state.apiFree);
+  const setApiFree = useStore((state) => state.setApiFree);
+  const openConfig = useStore((state) => state.openConfig);
+  const setOpenConfig = useStore((state) => state.setOpenConfig);
 
   const [_apiKey, _setApiKey] = useState<string>(apiKey || '');
   const [error, setError] = useState<boolean>(false);

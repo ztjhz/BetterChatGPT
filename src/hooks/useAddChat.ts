@@ -4,16 +4,11 @@ import { defaultSystemMessage } from '@constants/chat';
 import { ChatInterface } from '@type/chat';
 
 const useAddChat = () => {
-  const [chats, setChats, setCurrentChatIndex, setMessages] = useStore(
-    (state) => [
-      state.chats,
-      state.setChats,
-      state.setCurrentChatIndex,
-      state.setMessages,
-    ]
-  );
+  const setChats = useStore((state) => state.setChats);
+  const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
 
   const addChat = () => {
+    const chats = useStore.getState().chats;
     if (chats) {
       const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
       let titleIndex = 1;
@@ -29,7 +24,6 @@ const useAddChat = () => {
         messages: [{ role: 'system', content: defaultSystemMessage }],
       });
       setChats(updatedChats);
-      setMessages(updatedChats[0].messages);
       setCurrentChatIndex(0);
     }
   };
