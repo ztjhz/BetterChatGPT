@@ -15,6 +15,9 @@
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.5",
     "react-scroll-to-bottom": "^4.2.0",
+    "rehype-katex": "^6.0.2",
+    "remark-gfm": "^3.0.1",
+    "remark-math": "^5.1.1",
     "zustand": "^4.3.5"
   },
   "devDependencies": {

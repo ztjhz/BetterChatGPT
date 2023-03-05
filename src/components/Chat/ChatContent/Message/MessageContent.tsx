@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import rehypeKatex from 'rehype-katex';
+import remarkMath from 'remark-math';
+import remarkGfm from 'remark-gfm';
 import hljs from 'highlight.js';
 import DOMPurify from 'dompurify';
 import useStore from '@store/store';
@@ -104,6 +107,8 @@ const ContentView = ({
     <>
       <div className='markdown prose w-full break-words dark:prose-invert dark'>
         <ReactMarkdown
+          remarkPlugins={[remarkMath, remarkGfm]}
+          rehypePlugins={[[rehypeKatex, { output: 'mathml' }]]}
           components={{
             code({ node, inline, className, children, ...props }) {
               if (inline) return <code>{children}</code>;
