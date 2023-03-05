@@ -3,7 +3,6 @@ import useStore from '@store/store';
 
 import Chat from './components/Chat';
 import Menu from './components/Menu';
-import ConfigMenu from './components/ConfigMenu';
 
 import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 
@@ -21,7 +20,6 @@ function App() {
     <div className='overflow-hidden w-full h-full relative'>
       <Menu />
       <Chat />
-      <ConfigMenu />
     </div>
   );
 }

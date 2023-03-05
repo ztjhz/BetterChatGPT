@@ -2,7 +2,7 @@ import React from 'react';
 
 import Account from './Account';
 import ClearConversation from './ClearConversation';
-import Config from './Config';
+import Api from './Api';
 import Logout from './Logout';
 import Me from './Me';
 import ThemeSwitcher from './ThemeSwitcher';
@@ -12,7 +12,7 @@ const MenuOptions = () => {
   return (
     <>
       <ClearConversation />
-      <Config />
+      <Api />
       <ThemeSwitcher />
       {/* <Account /> */}
       <Updates />
