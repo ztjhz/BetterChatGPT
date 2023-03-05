@@ -45,7 +45,7 @@ const useSubmit = () => {
       if (stream) {
         const reader = stream.getReader();
         let reading = true;
-        while (reading) {
+        while (reading && useStore.getState().generating) {
           const { done, value } = await reader.read();
 
           const result = parseEventSource(new TextDecoder().decode(value));

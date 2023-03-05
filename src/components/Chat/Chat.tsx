@@ -1,8 +1,8 @@
 import React from 'react';
 
 import ChatContent from './ChatContent';
-import ChatInput from './ChatInput';
 import MobileBar from '../MobileBar';
+import StopGeneratingButton from '@components/StopGeneratingButton/StopGeneratingButton';
 
 const Chat = () => {
   return (
@@ -10,7 +10,7 @@ const Chat = () => {
       <MobileBar />
       <main className='relative h-full w-full transition-width flex flex-col overflow-hidden items-stretch flex-1'>
         <ChatContent />
-        {/* <ChatInput /> */}
+        <StopGeneratingButton />
       </main>
     </div>
   );
