@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import useStore from '@store/store';
 import SunIcon from '@icon/SunIcon';
 import MoonIcon from '@icon/MoonIcon';
-
-type Theme = 'light' | 'dark';
+import { Theme } from '@type/theme';
 
 const getOppositeTheme = (theme: Theme): Theme => {
   if (theme === 'dark') {
@@ -12,26 +12,15 @@ const getOppositeTheme = (theme: Theme): Theme => {
   }
 };
 const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState<Theme>();
+  const theme = useStore((state) => state.theme);
+  const setTheme = useStore((state) => state.setTheme);
 
   const switchTheme = () => {
     setTheme(getOppositeTheme(theme!));
   };
 
   useEffect(() => {
-    const _theme = localStorage.getItem('theme');
-    if (_theme === 'light' || _theme === 'dark') {
-      setTheme(_theme);
-    } else {
-      setTheme('dark');
-    }
-  }, []);
-
-  useEffect(() => {
-    if (theme) {
-      document.documentElement.className = theme;
-      localStorage.setItem('theme', theme);
-    }
+    document.documentElement.className = theme;
   }, [theme]);
 
   return theme ? (

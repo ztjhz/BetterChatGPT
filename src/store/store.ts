@@ -1,4 +1,5 @@
 import create, { SetState, GetState } from 'zustand';
+import { persist } from 'zustand/middleware';
 import { ChatSlice, createChatSlice } from './chat-slice';
 import { InputSlice, createInputSlice } from './input-slice';
 import { AuthSlice, createAuthSlice } from './auth-slice';
@@ -11,11 +12,24 @@ export type StoreSlice<T> = (
   get: GetState<StoreState>
 ) => T;
 
-const useStore = create<StoreState>((set, get) => ({
-  ...createChatSlice(set, get),
-  ...createInputSlice(set, get),
-  ...createAuthSlice(set, get),
-  ...createConfigSlice(set, get),
-}));
+const useStore = create<StoreState>()(
+  persist(
+    (set, get) => ({
+      ...createChatSlice(set, get),
+      ...createInputSlice(set, get),
+      ...createAuthSlice(set, get),
+      ...createConfigSlice(set, get),
+    }),
+    {
+      name: 'free-chat-gpt',
+      partialize: (state) => ({
+        chats: state.chats,
+        currentChatIndex: state.currentChatIndex,
+        apiKey: state.apiKey,
+        theme: state.theme,
+      }),
+    }
+  )
+);
 
 export default useStore;

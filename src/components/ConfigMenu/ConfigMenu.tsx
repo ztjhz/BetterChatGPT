@@ -23,7 +23,6 @@ const ConfigMenu = () => {
 
       if (valid) {
         setApiKey(_apiKey);
-        localStorage.setItem('apiKey', _apiKey);
         setError(false);
         setOpenConfig(false);
       } else {
@@ -40,11 +39,9 @@ const ConfigMenu = () => {
   };
 
   useEffect(() => {
-    const storedApiKey = localStorage.getItem('apiKey');
-    if (storedApiKey) {
+    if (apiKey) {
       setApiFree(false);
-      setApiKey(storedApiKey);
-      _setApiKey(storedApiKey);
+      _setApiKey(apiKey);
     }
   }, []);
 
