@@ -11,7 +11,7 @@ import Updates from './Updates';
 const MenuOptions = () => {
   return (
     <>
-      {/* <ClearConversation /> */}
+      <ClearConversation />
       <Config />
       <ThemeSwitcher />
       {/* <Account /> */}
