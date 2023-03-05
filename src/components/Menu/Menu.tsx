@@ -1,4 +1,5 @@
 import React from 'react';
+import useStore from '@store/store';
 
 import NewChat from './NewChat';
 import ChatHistoryList from './ChatHistoryList';
@@ -38,6 +39,13 @@ const Menu = () => {
       <div
         id='menu-backdrop'
         className='hidden md:hidden fixed top-0 left-0 h-full w-full z-[60] bg-gray-900/70'
+        onClick={() => {
+          document
+            .getElementById('menu')
+            ?.classList.remove('max-md:translate-x-[0%]');
+          document.getElementById('menu-close')?.classList.add('hidden');
+          document.getElementById('menu-backdrop')?.classList.add('hidden');
+        }}
       />
     </>
   );
