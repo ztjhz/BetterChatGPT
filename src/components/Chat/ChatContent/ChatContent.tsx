@@ -65,17 +65,7 @@ const ChatContent = () => {
             </div>
           )}
 
-          <div className='text-center mt-6 flex justify-center gap-2'>
-            <button
-              className='btn relative btn-primary mt-2'
-              onClick={() => {
-                handleSubmit();
-              }}
-            >
-              Submit
-            </button>
-          </div>
-          <div className='w-full h-10'></div>
+          <div className='w-full h-36'></div>
         </div>
       </ScrollToBottom>
     </div>

@@ -326,7 +326,7 @@ const EditView = ({
   };
 
   const handleSave = () => {
-    if (_content === '') return;
+    if (sticky && _content === '') return;
     const updatedChats: ChatInterface[] = JSON.parse(
       JSON.stringify(useStore.getState().chats)
     );
@@ -344,13 +344,14 @@ const EditView = ({
 
   const { handleSubmit } = useSubmit();
   const handleSaveAndSubmit = () => {
-    if (_content == '') return;
     const updatedChats: ChatInterface[] = JSON.parse(
       JSON.stringify(useStore.getState().chats)
     );
     const updatedMessages = updatedChats[currentChatIndex].messages;
     if (sticky) {
-      updatedMessages.push({ role: inputRole, content: _content });
+      if (_content !== '') {
+        updatedMessages.push({ role: inputRole, content: _content });
+      }
       _setContent('');
       resetTextAreaHeight();
     } else {
