@@ -6,7 +6,10 @@ import useAddChat from '@hooks/useAddChat';
 
 const MobileBar = () => {
   const chatTitle = useStore((state) =>
-    state.chats && state.chats.length > 0
+    state.chats &&
+    state.chats.length > 0 &&
+    state.currentChatIndex >= 0 &&
+    state.currentChatIndex < state.chats.length
       ? state.chats[state.currentChatIndex].title
       : 'New Chat'
   );

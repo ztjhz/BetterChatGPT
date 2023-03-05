@@ -51,8 +51,15 @@ function App() {
     } else {
       // existing local storage
       const chats = useStore.getState().chats;
+      const currentChatIndex = useStore.getState().currentChatIndex;
       if (!chats || chats.length === 0) {
         initialiseNewChat();
+      }
+      if (
+        chats &&
+        !(currentChatIndex >= 0 && currentChatIndex < chats.length)
+      ) {
+        setCurrentChatIndex(0);
       }
     }
   }, []);

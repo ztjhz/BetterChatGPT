@@ -14,10 +14,20 @@ const ChatContent = () => {
   const inputRole = useStore((state) => state.inputRole);
   const setError = useStore((state) => state.setError);
   const messages = useStore((state) =>
-    state.chats ? state.chats[state.currentChatIndex].messages : []
+    state.chats &&
+    state.chats.length > 0 &&
+    state.currentChatIndex >= 0 &&
+    state.currentChatIndex < state.chats.length
+      ? state.chats[state.currentChatIndex].messages
+      : []
   );
   const stickyIndex = useStore((state) =>
-    state.chats ? state.chats[state.currentChatIndex].messages.length : 0
+    state.chats &&
+    state.chats.length > 0 &&
+    state.currentChatIndex >= 0 &&
+    state.currentChatIndex < state.chats.length
+      ? state.chats[state.currentChatIndex].messages.length
+      : 0
   );
 
   const { handleSubmit, error } = useSubmit();
