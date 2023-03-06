@@ -16,17 +16,16 @@ const ApiMenu = ({
   const apiFree = useStore((state) => state.apiFree);
   const setApiFree = useStore((state) => state.setApiFree);
 
-  const [selectedApiFree, setSelectedApiFree] = useState<boolean>(apiFree);
+  const [_apiFree, _setApiFree] = useState<boolean>(apiFree);
   const [_apiKey, _setApiKey] = useState<string>(apiKey || '');
   const [error, setError] = useState<boolean>(false);
 
   const handleSave = async () => {
-    if (selectedApiFree === true) {
+    if (_apiFree === true) {
       setApiFree(true);
       setIsModalOpen(false);
     } else {
       const valid = await validateApiKey(_apiKey);
-
       if (valid) {
         setApiKey(_apiKey);
         setApiFree(false);
@@ -43,7 +42,7 @@ const ApiMenu = ({
 
   useEffect(() => {
     if (apiKey) {
-      setSelectedApiFree(false);
+      _setApiFree(false);
       _setApiKey(apiKey);
     }
   }, []);
@@ -58,9 +57,9 @@ const ApiMenu = ({
         <div className='flex items-center mb-2'>
           <input
             type='radio'
-            checked={selectedApiFree === true}
+            checked={_apiFree === true}
             className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
-            onChange={() => setSelectedApiFree(true)}
+            onChange={() => _setApiFree(true)}
           />
           <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
             Use free API from{' '}
@@ -73,20 +72,19 @@ const ApiMenu = ({
             </a>
           </label>
         </div>
-
         <div className='flex items-center'>
           <input
             type='radio'
-            checked={selectedApiFree === false}
+            checked={_apiFree === false}
             className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
-            onChange={() => setSelectedApiFree(false)}
+            onChange={() => _setApiFree(false)}
           />
           <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
             Use your own API key
           </label>
         </div>
 
-        {selectedApiFree === false && (
+        {_apiFree === false && (
           <>
             <div className='flex gap-2 items-center justify-center mt-2'>
               <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
