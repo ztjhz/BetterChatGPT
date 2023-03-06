@@ -74,8 +74,6 @@ const ChatContent = () => {
               </div>
             </div>
           )}
-
-          <div className='w-full h-36'></div>
         </div>
       </ScrollToBottom>
     </div>
