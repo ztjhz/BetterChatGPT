@@ -100,7 +100,7 @@ const ApiMenu = ({
             </div>
             {error && (
               <div className='bg-red-600/50 p-2 rounded-sm mt-3 text-gray-900 dark:text-gray-300 text-sm'>
-                Invalid API key!
+                Error: Invalid API key or network blocked. Please check your API key and network settings for OpenAI API.
               </div>
             )}
           </>
