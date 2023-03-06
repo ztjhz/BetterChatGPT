@@ -37,6 +37,15 @@ const AboutMenu = () => {
               <p>We highly value your privacy and are committed to safeguarding the privacy of our users. We do not collect or store any text you enter or receive from the OpenAI server in any form. Our source code is available for your inspection to verify this statement.</p>
 
               <p>We prioritise the security of your API key and handle it with utmost care. If you use your own API key, your key is exclusively stored on your browser and never shared with any third-party entity. It is solely used for the intended purpose of accessing the OpenAI API and not for any other unauthorised use.</p>
+              <h2 className='text-lg font-bold'>Support</h2>
+              <a href="https://ko-fi.com/freechatgpt" target="_blank">
+                  <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="support" />
+              </a>
+              <p>We need your help to continue providing the OpenAI API for free. As you may know, the API costs money and in order to sustain our mission of making AI accessible to everyone, we need your help.</p>
+              <p>Every donation, no matter how small, will go towards paying for the API endpoint. By contributing to our crowdfunding campaign, you're not only supporting us, but you're also helping to shape the future of AI technology.</p>
+              <p>We believe that artificial intelligence has the potential to revolutionize the way we live, work, and interact with one another. But this future is only possible if we work together and support initiatives like ours.</p>
+              <p>So please, donate what you can and spread the word to your friends and family. With your help, we can continue to make the OpenAI API available for free to everyone.</p>
+              <p>Thank you for your support.</p>
             </div>
           </div>
         </PopupModal>

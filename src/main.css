@@ -52,6 +52,11 @@
     }
   }
 
+  .hide-scroll-bar::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: none; /* Firefox */
+  }
+
   .dark::-webkit-scrollbar-thumb {
     --tw-bg-opacity: 1;
     background-color: rgba(86, 88, 105, var(--tw-bg-opacity));

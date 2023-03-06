@@ -24,6 +24,11 @@
 </a>
 <a href="https://twitter.com/intent/tweet?text=👋%20Check%20this%20amazing%20repo%20https://github.com/ztjhz/ChatGPTFreeApp,%20created%20by%20@nikushii_"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%ztjhz%2FChatGPTFreeApp"></a>
 </p>
+<p align="center">
+    <a href="https://ko-fi.com/freechatgpt" target="_blank">
+        <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="support" />
+    </a>
+</p>
 
 <p align="center">
     <a href="https://freechatgpt.chat">View Demo</a>
@@ -61,6 +66,7 @@ Liked it? Please give a ⭐️ to **ChatGPTFreeApp**.
 
 - 🌐 Access ChatGPT from anywhere in the world, completely free of charge.
 - 📝 Create and edit messages from the perspectives of the system, assistant, and user.
+- 📝 Customise model parameters such as temperature to achieve an unexpected outcome.
 - 🔀 Change the order of messages to suit your needs and preferences.
 - ➕ Add new messages in between old ones for a seamless conversation flow.
 - 💬 Utilise a wide range of languages to ensure maximum accessibility.
@@ -70,3 +76,17 @@ Liked it? Please give a ⭐️ to **ChatGPTFreeApp**.
 ## 🛠️ Usage
 
 To get started, simply visit our website at [https://freechatgpt.chat/](https://freechatgpt.chat). You can start enjoying the power of ChatGPT powered by the [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree) or use your own OpenAI API Key obtained from [OpenAI API Keys](https://platform.openai.com/account/api-keys).
+
+# 🙏 Support
+
+We need your help to continue providing the OpenAI API for free. As you may know, the API costs money and in order to sustain our mission of making AI accessible to everyone, we need your help.
+
+Every donation, no matter how small, will go towards paying for the API endpoint. By contributing to our crowdfunding campaign, you're not only supporting us, but you're also helping to shape the future of AI technology.
+
+We believe that artificial intelligence has the potential to revolutionize the way we live, work, and interact with one another. But this future is only possible if we work together and support initiatives like ours.
+
+So please, donate what you can and spread the word to your friends and family. With your help, we can continue to make the OpenAI API available for free to everyone.
+
+Thank you for your support.
+
+[![support](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/freechatgpt)
