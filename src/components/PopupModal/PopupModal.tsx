@@ -9,13 +9,15 @@ const PopupModal = ({
   setIsModalOpen,
   handleConfirm,
   handleClose,
+  cancelButton = true,
   children,
 }: {
   title?: string;
   message?: string;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  handleConfirm: () => void;
+  handleConfirm?: () => void;
   handleClose?: () => void;
+  cancelButton?: boolean;
   children?: React.ReactElement;
 }) => {
   const modalRoot = document.getElementById('modal-root');
@@ -54,20 +56,24 @@ const PopupModal = ({
             {children}
 
             <div className='flex items-center justify-center p-6 gap-4'>
-              <button
-                type='button'
-                className='btn btn-primary'
-                onClick={handleConfirm}
-              >
-                Confirm
-              </button>
-              <button
-                type='button'
-                className='btn btn-neutral'
-                onClick={_handleClose}
-              >
-                Cancel
-              </button>
+              {handleConfirm && (
+                <button
+                  type='button'
+                  className='btn btn-primary'
+                  onClick={handleConfirm}
+                >
+                  Confirm
+                </button>
+              )}
+              {cancelButton && (
+                <button
+                  type='button'
+                  className='btn btn-neutral'
+                  onClick={_handleClose}
+                >
+                  Cancel
+                </button>
+              )}
             </div>
           </div>
         </div>

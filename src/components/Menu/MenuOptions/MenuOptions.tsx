@@ -7,10 +7,12 @@ import Logout from './Logout';
 import Me from './Me';
 import ThemeSwitcher from './ThemeSwitcher';
 import Updates from './Updates';
+import AboutMenu from '@components/AboutMenu';
 
 const MenuOptions = () => {
   return (
     <>
+      <AboutMenu />
       <ClearConversation />
       <Api />
       <ThemeSwitcher />
