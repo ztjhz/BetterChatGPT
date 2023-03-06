@@ -39,7 +39,13 @@ export const getChatCompletionStream = async (
       stream: true,
     }),
   });
-  if (!response.ok) throw new Error(await response.text());
+  const text = await response.text();
+  if (response.status === 429 && text.includes('insufficient_quota'))
+    throw new Error(
+      text +
+        '\nMessage from freechatgpt.chat:\nWe recommend changing your API endpoint or API key'
+    );
+  if (!response.ok) throw new Error(text);
 
   const stream = response.body;
   return stream;
