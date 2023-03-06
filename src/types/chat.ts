@@ -9,4 +9,10 @@ export interface MessageInterface {
 export interface ChatInterface {
   title: string;
   messages: MessageInterface[];
+  config: ConfigInterface;
+}
+
+export interface ConfigInterface {
+  temperature: number;
+  presence_penalty: number;
 }
