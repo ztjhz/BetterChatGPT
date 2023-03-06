@@ -16,17 +16,19 @@ const ApiMenu = ({
   const apiFree = useStore((state) => state.apiFree);
   const setApiFree = useStore((state) => state.setApiFree);
 
+  const [_apiFree, _setApiFree] = useState<boolean>(apiFree);
   const [_apiKey, _setApiKey] = useState<string>(apiKey || '');
   const [error, setError] = useState<boolean>(false);
 
   const handleSave = async () => {
-    if (apiFree === true) {
+    if (_apiFree === true) {
+      setApiFree(true);
       setIsModalOpen(false);
     } else {
       const valid = await validateApiKey(_apiKey);
-
       if (valid) {
         setApiKey(_apiKey);
+        setApiFree(false);
         setError(false);
         setIsModalOpen(false);
       } else {
@@ -40,9 +42,10 @@ const ApiMenu = ({
 
   useEffect(() => {
     if (apiKey) {
-      setApiFree(false);
-      _setApiKey(apiKey);
-    }
+    setApiFree(false);
+    _setApiFree(false);
+    _setApiKey(apiKey);
+  }
   }, []);
 
   return isModalOpen ? (
@@ -55,9 +58,9 @@ const ApiMenu = ({
         <div className='flex items-center mb-2'>
           <input
             type='radio'
-            checked={apiFree === true}
+            checked={_apiFree === true}
             className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
-            onChange={() => setApiFree(true)}
+            onChange={() => _setApiFree(true)}
           />
           <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
             Use free API from{' '}
@@ -70,20 +73,19 @@ const ApiMenu = ({
             </a>
           </label>
         </div>
-
         <div className='flex items-center'>
           <input
             type='radio'
-            checked={apiFree === false}
+            checked={_apiFree === false}
             className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
-            onChange={() => setApiFree(false)}
+            onChange={() => _setApiFree(false)}
           />
           <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
             Use your own API key
           </label>
         </div>
 
-        {apiFree === false && (
+        {_apiFree === false && (
           <>
             <div className='flex gap-2 items-center justify-center mt-2'>
               <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
@@ -91,7 +93,7 @@ const ApiMenu = ({
               </div>
               <input
                 type='text'
-                className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md p-0 m-0 w-full mr-0 h-8 focus:outline-none'
+                className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md m-0 w-full mr-0 h-8 focus:outline-none'
                 value={_apiKey}
                 onChange={(e) => {
                   _setApiKey(e.target.value);
@@ -100,7 +102,8 @@ const ApiMenu = ({
             </div>
             {error && (
               <div className='bg-red-600/50 p-2 rounded-sm mt-3 text-gray-900 dark:text-gray-300 text-sm'>
-                Error: Invalid API key or network blocked. Please check your API key and network settings for OpenAI API.
+                Error: Invalid API key or network blocked. Please check your API
+                key and network settings for OpenAI API.
               </div>
             )}
           </>
