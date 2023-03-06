@@ -4,6 +4,7 @@ import { ChatInterface } from '@type/chat';
 import { getChatCompletionStream as getChatCompletionStreamFree } from '@api/freeApi';
 import { getChatCompletionStream as getChatCompletionStreamCustom } from '@api/customApi';
 import { parseEventSource } from '@api/helper';
+import { limitMessageTokens } from '@utils/messageUtils';
 
 const useSubmit = () => {
   const error = useStore((state) => state.error);
@@ -31,15 +32,21 @@ const useSubmit = () => {
     let stream;
 
     try {
+      const messages = limitMessageTokens(
+        chats[currentChatIndex].messages,
+        4000
+      );
+      if (messages.length === 0) throw new Error('Message exceed max token!');
+
       if (apiFree) {
         stream = await getChatCompletionStreamFree(
-          chats[currentChatIndex].messages,
+          messages,
           chats[currentChatIndex].config
         );
       } else if (apiKey) {
         stream = await getChatCompletionStreamCustom(
           apiKey,
-          chats[currentChatIndex].messages,
+          messages,
           chats[currentChatIndex].config
         );
       }

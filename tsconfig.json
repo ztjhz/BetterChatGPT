@@ -23,7 +23,8 @@
       "@hooks/*": ["./src/hooks/*"],
       "@constants/*": ["./src/constants/*"],
       "@api/*": ["./src/api/*"],
-      "@components/*": ["./src/components/*"]
+      "@components/*": ["./src/components/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": ["src"],
