@@ -31,7 +31,7 @@ const AboutMenu = () => {
               <h2 className='text-lg font-bold'>Discord Server</h2>
               <p>We invite you to join our Discord community! Our Discord server is a great place to exchange ChatGPT ideas and tips, and submit feature requests for Free ChatGPT. You'll have the opportunity to interact with the developers behind Free ChatGPT as well as other AI enthusiasts who share your passion.</p>
 
-              <p>To join our server, simply click on the following link: <a className='link' href="https://discord.gg/g3Qnwy4V6A" target='_blank'>https://discord.gg/g3Qnwy4V6A</a>. We can't wait to see you there!</p>
+              <p>To join our server, simply click on the following link: <a className='link' href='https://discord.gg/g3Qnwy4V6A' target='_blank'>https://discord.gg/g3Qnwy4V6A</a>. We can't wait to see you there!</p>
 
               <h2 className='text-lg font-bold'>Privacy Statement</h2>
               <p>We highly value your privacy and are committed to safeguarding the privacy of our users. We do not collect or store any text you enter or receive from the OpenAI server in any form. Our source code is available for your inspection to verify this statement.</p>
