@@ -30,10 +30,9 @@ const ChatTitle = React.memo(() => {
 
   // for migrating from old ChatInterface to new ChatInterface (with config)
   useEffect(() => {
-    if (!config) {
-      const updatedChats: ChatInterface[] = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
-      );
+    const chats = useStore.getState().chats;
+    if (chats && chats.length > 0 && currentChatIndex !== -1 && !config) {
+      const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
       updatedChats[currentChatIndex].config = { ...defaultChatConfig };
       setChats(updatedChats);
     }
