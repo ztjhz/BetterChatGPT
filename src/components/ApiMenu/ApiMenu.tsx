@@ -33,7 +33,7 @@ const ApiMenu = ({
         setError(true);
         setTimeout(() => {
           setError(false);
-        }, 3000);
+        }, 10000);
       }
     }
   };
