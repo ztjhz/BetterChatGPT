@@ -69,4 +69,4 @@ Liked it? Please give a ⭐️ to **ChatGPTFreeApp**.
 
 ## 🛠️ Usage
 
-To get started, simply visit our website at [https://freechatgpt.chat/](https://freechatgpt.chat). You can start enjoying the power of ChatGPT powered by the [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree) or use your own OpenAI API Key obtained from [OpenAI API Keys](https://platform.openai.com/account/api-keys)
+To get started, simply visit our website at [https://freechatgpt.chat/](https://freechatgpt.chat). You can start enjoying the power of ChatGPT powered by the [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree) or use your own OpenAI API Key obtained from [OpenAI API Keys](https://platform.openai.com/account/api-keys).

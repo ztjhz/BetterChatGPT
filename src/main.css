@@ -72,6 +72,10 @@
   textarea:focus {
     outline: none;
   }
+
+  a.link {
+    @apply underline dark:hover:text-white hover:text-black;
+  }
 }
 
 @layer components {
