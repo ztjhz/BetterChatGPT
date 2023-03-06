@@ -1,7 +1,7 @@
 import React from 'react';
 import useStore from '@store/store';
 import { MessageInterface } from '@type/chat';
-import { defaultSystemMessage } from '@constants/chat';
+import { defaultChatConfig, defaultSystemMessage } from '@constants/chat';
 
 const useInitialiseNewChat = () => {
   const setChats = useStore((state) => state.setChats);
@@ -16,6 +16,7 @@ const useInitialiseNewChat = () => {
       {
         title: 'New Chat',
         messages: [message],
+        config: { ...defaultChatConfig },
       },
     ]);
     setCurrentChatIndex(0);

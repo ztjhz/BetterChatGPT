@@ -27,6 +27,14 @@
     height: 100%;
   }
 
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    @apply w-4;
+    @apply h-4;
+    @apply rounded-full;
+    background: rgba(16, 163, 127);
+  }
+
   ::-webkit-scrollbar {
     height: 1rem;
     width: 0.5rem;

@@ -33,12 +33,14 @@ const useSubmit = () => {
     try {
       if (apiFree) {
         stream = await getChatCompletionStreamFree(
-          chats[currentChatIndex].messages
+          chats[currentChatIndex].messages,
+          chats[currentChatIndex].config
         );
       } else if (apiKey) {
         stream = await getChatCompletionStreamCustom(
           apiKey,
-          chats[currentChatIndex].messages
+          chats[currentChatIndex].messages,
+          chats[currentChatIndex].config
         );
       }
 

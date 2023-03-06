@@ -1,6 +1,6 @@
 import React from 'react';
 import useStore from '@store/store';
-import { defaultSystemMessage } from '@constants/chat';
+import { defaultChatConfig, defaultSystemMessage } from '@constants/chat';
 import { ChatInterface } from '@type/chat';
 
 const useAddChat = () => {
@@ -22,6 +22,7 @@ const useAddChat = () => {
       updatedChats.unshift({
         title,
         messages: [{ role: 'system', content: defaultSystemMessage }],
+        config: { ...defaultChatConfig },
       });
       setChats(updatedChats);
       setCurrentChatIndex(0);

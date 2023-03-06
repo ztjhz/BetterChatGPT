@@ -1,3 +1,5 @@
+import { ConfigInterface } from '@type/chat';
+
 const date = new Date();
 const dateString =
   date.getFullYear() +
@@ -10,3 +12,8 @@ const dateString =
 export const defaultSystemMessage = `You are ChatGPT, a large language model trained by OpenAI.
 Knowledge cutoff: 2021-09
 Current date: ${dateString}`;
+
+export const defaultChatConfig: ConfigInterface = {
+  temperature: 1,
+  presence_penalty: 0,
+};

@@ -1,4 +1,4 @@
-import { MessageInterface } from '@type/chat';
+import { ConfigInterface, MessageInterface } from '@type/chat';
 
 export const endpoint = 'https://api.openai.com/v1/chat/completions';
 
@@ -23,7 +23,8 @@ export const validateApiKey = async (apiKey: string) => {
 
 export const getChatCompletion = async (
   apiKey: string,
-  messages: MessageInterface[]
+  messages: MessageInterface[],
+  config: ConfigInterface
 ) => {
   const response = await fetch(endpoint, {
     method: 'POST',
@@ -34,6 +35,7 @@ export const getChatCompletion = async (
     body: JSON.stringify({
       model: 'gpt-3.5-turbo',
       messages,
+      ...config,
     }),
   });
   if (!response.ok) throw new Error(await response.text());
@@ -44,7 +46,8 @@ export const getChatCompletion = async (
 
 export const getChatCompletionStream = async (
   apiKey: string,
-  messages: MessageInterface[]
+  messages: MessageInterface[],
+  config: ConfigInterface
 ) => {
   const response = await fetch(endpoint, {
     method: 'POST',
@@ -55,6 +58,7 @@ export const getChatCompletionStream = async (
     body: JSON.stringify({
       model: 'gpt-3.5-turbo',
       messages,
+      ...config,
       stream: true,
     }),
   });
