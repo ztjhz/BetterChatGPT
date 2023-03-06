@@ -42,9 +42,10 @@ const ApiMenu = ({
 
   useEffect(() => {
     if (apiKey) {
-      _setApiFree(false);
-      _setApiKey(apiKey);
-    }
+    setApiFree(false);
+    _setApiFree(false);
+    _setApiKey(apiKey);
+  }
   }, []);
 
   return isModalOpen ? (
