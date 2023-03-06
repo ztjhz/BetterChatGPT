@@ -112,7 +112,7 @@ const ApiMenu = ({
         <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm mt-4 text-center'>
           Get your personal API key{' '}
           <a
-            className='underline dark:hover:text-white hover:text-black'
+            className='link'
             href='https://platform.openai.com/account/api-keys'
             target='_blank'
           >
@@ -120,10 +120,10 @@ const ApiMenu = ({
           </a>
         </div>
         <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm mt-4'>
-          We prioritize the security of your API key and handle it with utmost
+          We prioritise the security of your API key and handle it with utmost
           care. Your key is exclusively stored on your browser and never shared
           with any third-party entity. It is solely used for the intended
-          purpose of accessing the OpenAI API and not for any other unauthorized
+          purpose of accessing the OpenAI API and not for any other unauthorised
           use.
         </div>
       </div>
