@@ -3,25 +3,27 @@ import React, {
   ChangeEvent,
   KeyboardEvent,
   useCallback,
+  useRef,
   useState,
 } from "react";
 
 export const useTimeInputPlugin = (defaultTime?: Date) => {
-  const [time, setTime] = useState(defaultTime ?? new Date());
+  const timeRef = useRef(defaultTime ?? new Date());
   const DateTimeInput = useCallback(() => {
-    const hours = time.getHours();
-    const minutes = time.getMinutes();
+    const hours = timeRef.current.getHours();
+    const minutes = timeRef.current.getMinutes();
     const onUpdate = (updatedTime: { hours: number; minutes: number }) => {
-      const newTime = new Date(time);
-      newTime.setHours(updatedTime.hours);
-      newTime.setMinutes(updatedTime.minutes);
-      setTime(newTime);
+      timeRef.current.setHours(updatedTime.hours);
+      timeRef.current.setMinutes(updatedTime.minutes);
     };
     return (
       <TimeInput initMinutes={minutes} initHours={hours} onUpdate={onUpdate} />
     );
   }, []);
-  return { TimeInput: DateTimeInput, formatTime: () => formatTimeInDay(time) };
+  return {
+    TimeInput: DateTimeInput,
+    formatTime: () => formatTimeInDay(timeRef.current),
+  };
 };
 
 const TimeInput: React.FC<{

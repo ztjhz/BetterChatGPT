@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { SMART_DEVICE_PRESENTS } from "./presents";
 import { useSelectInputPlugin } from "./SelectionInput";
 import { useTimeInputPlugin } from "./TimeInput";
@@ -13,15 +12,12 @@ export const useSmartDeviceInputPlugin = (
   const { Select: SelectFuntion, selectedOption: selectedDeviceFunction } =
     useSelectInputPlugin(selectedDevice?.functions ?? []);
 
-  const Component = useCallback(
-    () => (
-      <div className="flex gap-1 mr-2">
-        <TimeInput />
-        <SelectDevice />
-        <SelectFuntion />
-      </div>
-    ),
-    [selectedDevice]
+  const Component = () => (
+    <div className="flex gap-1 mr-2">
+      <TimeInput />
+      <SelectDevice />
+      <SelectFuntion />
+    </div>
   );
 
   return {
