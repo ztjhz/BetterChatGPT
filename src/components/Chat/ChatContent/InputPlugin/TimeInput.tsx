@@ -90,7 +90,7 @@ const TimeInput: React.FC<{
         name="hours"
         min="0"
         max="23"
-        value={hours}
+        value={hours.toString().padStart(2, "0")}
         onChange={handleHoursChange}
         onKeyDown={handleKeyDown}
       />
@@ -100,7 +100,7 @@ const TimeInput: React.FC<{
         name="minutes"
         min="0"
         max="59"
-        value={minutes}
+        value={minutes.toString().padStart(2, "0")}
         onChange={handleMinutesChange}
         onKeyDown={handleKeyDown}
       />
