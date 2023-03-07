@@ -1,7 +1,7 @@
-import React from 'react';
-import useStore from '@store/store';
-import { defaultChatConfig, defaultSystemMessage } from '@constants/chat';
-import { ChatInterface } from '@type/chat';
+import React from "react";
+import useStore from "@store/store";
+import { ChatInterface } from "@type/chat";
+import { getInitChat } from "@constants/chat";
 
 const useAddChat = () => {
   const setChats = useStore((state) => state.setChats);
@@ -19,11 +19,7 @@ const useAddChat = () => {
         title = `New Chat ${titleIndex}`;
       }
 
-      updatedChats.unshift({
-        title,
-        messages: [{ role: 'system', content: defaultSystemMessage }],
-        config: { ...defaultChatConfig },
-      });
+      updatedChats.unshift(getInitChat(title));
       setChats(updatedChats);
       setCurrentChatIndex(0);
     }

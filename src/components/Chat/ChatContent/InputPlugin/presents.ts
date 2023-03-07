@@ -1,4 +1,4 @@
-import { DeviceSelectOption } from "./types";
+import { describeDevice, DeviceSelectOption } from "./types";
 
 export const SMART_DEVICE_PRESENTS: DeviceSelectOption[] = [
   {
@@ -145,3 +145,6 @@ export const SMART_DEVICE_PRESENTS: DeviceSelectOption[] = [
     ],
   },
 ];
+
+export const DEVICE_PRESENTS_DESCRIPTION =
+  SMART_DEVICE_PRESENTS.map(describeDevice).join("\n");
