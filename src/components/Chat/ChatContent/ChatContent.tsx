@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import useStore from '@store/store';
 
@@ -29,6 +29,14 @@ const ChatContent = () => {
       ? state.chats[state.currentChatIndex].messages.length
       : 0
   );
+  const generating = useStore.getState().generating;
+
+  // clear error at the start of generating new messages
+  useEffect(() => {
+    if (generating) {
+      setError('');
+    }
+  }, [generating]);
 
   const { handleSubmit, error } = useSubmit();
 
