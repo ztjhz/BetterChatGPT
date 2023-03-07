@@ -8,9 +8,9 @@ export const useSmartDeviceInputPlugin = (
 ) => {
   const { TimeInput, formatTime } = useTimeInputPlugin();
   const { Select: SelectDevice, selectedOption: selectedDevice } =
-    useSelectInputPlugin(deviceOptions);
+    useSelectInputPlugin(deviceOptions, "Device/Sensor");
   const { Select: SelectFuntion, selectedOption: selectedDeviceFunction } =
-    useSelectInputPlugin(selectedDevice?.functions ?? []);
+    useSelectInputPlugin(selectedDevice?.functions ?? [], "Function/Data");
 
   const Component = () => (
     <div className="flex gap-1 mr-2">
@@ -23,9 +23,12 @@ export const useSmartDeviceInputPlugin = (
   return {
     Component,
     formatContent: () =>
-      `${formatTime()} ` +
+      formatTime() +
+      " " +
       (selectedDevice ? `[${selectedDevice.value}]` : ``) +
-      (selectedDeviceFunction || ``),
+      " " +
+      (selectedDeviceFunction?.value || ``) +
+      " ",
   };
 };
 
