@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import useStore from '@store/store';
 
 import PopupModal from '@components/PopupModal';
-import { validateApiKey } from '@api/customApi';
 
 const ApiMenu = ({
   isModalOpen,
@@ -22,29 +21,16 @@ const ApiMenu = ({
   const [_apiKey, _setApiKey] = useState<string>(apiKey || '');
   const [_apiFreeEndpoint, _setApiFreeEndpoint] =
     useState<string>(apiFreeEndpoint);
-  const [error, setError] = useState<string>('');
 
   const handleSave = async () => {
     if (_apiFree === true) {
       setApiFreeEndpoint(_apiFreeEndpoint);
       setApiFree(true);
-      setError('');
       setIsModalOpen(false);
     } else {
-      const valid = await validateApiKey(_apiKey);
-      if (valid) {
-        setApiKey(_apiKey);
-        setApiFree(false);
-        setError('');
-        setIsModalOpen(false);
-      } else {
-        setError(
-          'Error: Invalid API key or network blocked. Please check your API key and network settings for OpenAI API.'
-        );
-        setTimeout(() => {
-          setError('');
-        }, 10000);
-      }
+      setApiKey(_apiKey);
+      setApiFree(false);
+      setIsModalOpen(false);
     }
   };
 
@@ -157,11 +143,6 @@ const ApiMenu = ({
           purpose of accessing the OpenAI API and not for any other unauthorised
           use.
         </div>
-        {error !== '' && (
-          <div className='bg-red-600/50 p-2 rounded-sm mt-3 text-gray-900 dark:text-gray-300 text-sm'>
-            {error}
-          </div>
-        )}
       </div>
     </PopupModal>
   ) : (

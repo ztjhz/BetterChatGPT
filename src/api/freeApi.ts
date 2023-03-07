@@ -39,7 +39,7 @@ export const getChatCompletionStream = async (
       stream: true,
     }),
   });
-  if (response.status === 404)
+  if (response.status === 404 || response.status === 405)
     throw new Error(
       'Message from freechatgpt.chat:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
     );

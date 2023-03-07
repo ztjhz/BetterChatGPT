@@ -50,6 +50,8 @@ const useSubmit = () => {
           messages,
           chats[currentChatIndex].config
         );
+      } else {
+        throw new Error('No API key supplied! Please check your API settings.');
       }
 
       if (stream) {
