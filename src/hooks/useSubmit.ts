@@ -89,6 +89,8 @@ const useSubmit = () => {
         } else {
           reader.cancel('Generation completed');
         }
+        reader.releaseLock();
+        stream.cancel();
       }
     } catch (e: unknown) {
       const err = (e as Error).message;
