@@ -20,10 +20,8 @@ import useSubmit from "@hooks/useSubmit";
 import { ChatInterface } from "@type/chat";
 
 import PopupModal from "@components/PopupModal";
-import {
-  useSmartDevicePresentsInputPlugin,
-  useTimeInputPlugin,
-} from "../InputPlugin";
+import { useSmartDevicePresentsInputPlugin } from "../InputPlugin";
+import { ToggleSwitch } from "@components/ToggleSwitch";
 
 const MessageContent = ({
   role,
@@ -304,10 +302,12 @@ const EditView = ({
   const setChats = useStore((state) => state.setChats);
   const currentChatIndex = useStore((state) => state.currentChatIndex);
 
+  const [pluginEnabled, setPluginEnabled] = useState(true);
   const { Component: SmartDeviceInput, formatContent } =
     useSmartDevicePresentsInputPlugin();
   const [_content, _setContent] = useState<string>(content);
-  const getFullContent = () => formatContent() + _content;
+  const getFullContent = () =>
+    (pluginEnabled ? formatContent() : "") + _content;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const textareaRef = React.createRef<HTMLTextAreaElement>();
 
@@ -388,6 +388,11 @@ const EditView = ({
 
   return (
     <>
+      <div style={{ position: "absolute", top: "-27px", left: "78px" }}>
+        <ToggleSwitch status={pluginEnabled} onStatusChange={setPluginEnabled}>
+          Smart Device Format
+        </ToggleSwitch>
+      </div>
       <div
         className={`w-full flex ${
           sticky
@@ -395,7 +400,7 @@ const EditView = ({
             : ""
         }`}
       >
-        <SmartDeviceInput />
+        {pluginEnabled && <SmartDeviceInput />}
         <textarea
           ref={textareaRef}
           className="m-0 resize-none rounded-lg bg-transparent overflow-y-hidden focus:ring-0 focus-visible:ring-0 leading-7 w-full"
