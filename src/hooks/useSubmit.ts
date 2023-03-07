@@ -29,9 +29,9 @@ const useSubmit = () => {
 
     setChats(updatedChats);
     setGenerating(true);
-    let stream;
 
     try {
+      let stream;
       const messages = limitMessageTokens(
         chats[currentChatIndex].messages,
         4000
