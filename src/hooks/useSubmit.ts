@@ -40,6 +40,7 @@ const useSubmit = () => {
 
       if (apiFree) {
         stream = await getChatCompletionStreamFree(
+          useStore.getState().apiFreeEndpoint,
           messages,
           chats[currentChatIndex].config
         );

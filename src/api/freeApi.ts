@@ -1,8 +1,7 @@
 import { ConfigInterface, MessageInterface } from '@type/chat';
 
-export const endpoint = 'https://chatgpt-api.shn.hk/v1/';
-
 export const getChatCompletion = async (
+  endpoint: string,
   messages: MessageInterface[],
   config: ConfigInterface
 ) => {
@@ -24,6 +23,7 @@ export const getChatCompletion = async (
 };
 
 export const getChatCompletionStream = async (
+  endpoint: string,
   messages: MessageInterface[],
   config: ConfigInterface
 ) => {
@@ -39,6 +39,11 @@ export const getChatCompletionStream = async (
       stream: true,
     }),
   });
+  if (response.status === 404)
+    throw new Error(
+      'Message from freechatgpt.chat:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
+    );
+
   const text = await response.text();
   if (response.status === 429 && text.includes('insufficient_quota'))
     throw new Error(

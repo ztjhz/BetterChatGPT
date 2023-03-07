@@ -26,6 +26,8 @@ const useStore = create<StoreState>()(
         chats: state.chats,
         currentChatIndex: state.currentChatIndex,
         apiKey: state.apiKey,
+        apiFree: state.apiFree,
+        apiFreeEndpoint: state.apiFreeEndpoint,
         theme: state.theme,
       }),
     }

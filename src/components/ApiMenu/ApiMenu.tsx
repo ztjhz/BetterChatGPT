@@ -15,26 +15,34 @@ const ApiMenu = ({
   const setApiKey = useStore((state) => state.setApiKey);
   const apiFree = useStore((state) => state.apiFree);
   const setApiFree = useStore((state) => state.setApiFree);
+  const apiFreeEndpoint = useStore((state) => state.apiFreeEndpoint);
+  const setApiFreeEndpoint = useStore((state) => state.setApiFreeEndpoint);
 
   const [_apiFree, _setApiFree] = useState<boolean>(apiFree);
   const [_apiKey, _setApiKey] = useState<string>(apiKey || '');
-  const [error, setError] = useState<boolean>(false);
+  const [_apiFreeEndpoint, _setApiFreeEndpoint] =
+    useState<string>(apiFreeEndpoint);
+  const [error, setError] = useState<string>('');
 
   const handleSave = async () => {
     if (_apiFree === true) {
+      setApiFreeEndpoint(_apiFreeEndpoint);
       setApiFree(true);
+      setError('');
       setIsModalOpen(false);
     } else {
       const valid = await validateApiKey(_apiKey);
       if (valid) {
         setApiKey(_apiKey);
         setApiFree(false);
-        setError(false);
+        setError('');
         setIsModalOpen(false);
       } else {
-        setError(true);
+        setError(
+          'Error: Invalid API key or network blocked. Please check your API key and network settings for OpenAI API.'
+        );
         setTimeout(() => {
-          setError(false);
+          setError('');
         }, 10000);
       }
     }
@@ -42,17 +50,24 @@ const ApiMenu = ({
 
   useEffect(() => {
     if (apiKey) {
-    setApiFree(false);
-    _setApiFree(false);
-    _setApiKey(apiKey);
-  }
+      setApiFree(false);
+      _setApiFree(false);
+      _setApiKey(apiKey);
+    }
   }, []);
+
+  const handleClose = () => {
+    _setApiFree(apiFree);
+    _setApiFreeEndpoint(apiFreeEndpoint);
+    apiKey && _setApiKey(apiKey);
+  };
 
   return isModalOpen ? (
     <PopupModal
       title='API'
       setIsModalOpen={setIsModalOpen}
       handleConfirm={handleSave}
+      handleClose={handleClose}
     >
       <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
         <div className='flex items-center mb-2'>
@@ -63,16 +78,40 @@ const ApiMenu = ({
             onChange={() => _setApiFree(true)}
           />
           <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-            Use free API from{' '}
-            <a
-              href='https://github.com/ayaka14732/ChatGPTAPIFree'
-              className='underline dark:hover:text-white hover:text-black'
-              target='_blank'
-            >
-              Ayaka
-            </a>
+            Use free API endpoint
           </label>
         </div>
+
+        {_apiFree && (
+          <div className='mt-2 mb-6'>
+            <div className='text-sm font-medium text-gray-900 dark:text-gray-300 mb-2'>
+              Use free API endpoint from{' '}
+              <a
+                href='https://github.com/ayaka14732/ChatGPTAPIFree'
+                className='underline dark:hover:text-white hover:text-black'
+                target='_blank'
+              >
+                Ayaka
+              </a>
+              : https://chatgpt-api.shn.hk/v1/ or enter your own API endpoint
+            </div>
+            <div className='flex gap-2 items-center justify-center'>
+              <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
+                Free API Endpoint
+              </div>
+              <input
+                type='text'
+                className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md m-0 w-full mr-0 h-8 focus:outline-none'
+                value={_apiFreeEndpoint}
+                placeholder='https://chatgpt-api.shn.hk/v1/'
+                onChange={(e) => {
+                  _setApiFreeEndpoint(e.target.value);
+                }}
+              />
+            </div>
+          </div>
+        )}
+
         <div className='flex items-center'>
           <input
             type='radio'
@@ -86,27 +125,19 @@ const ApiMenu = ({
         </div>
 
         {_apiFree === false && (
-          <>
-            <div className='flex gap-2 items-center justify-center mt-2'>
-              <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
-                API Key
-              </div>
-              <input
-                type='text'
-                className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md m-0 w-full mr-0 h-8 focus:outline-none'
-                value={_apiKey}
-                onChange={(e) => {
-                  _setApiKey(e.target.value);
-                }}
-              />
+          <div className='flex gap-2 items-center justify-center mt-2'>
+            <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
+              API Key
             </div>
-            {error && (
-              <div className='bg-red-600/50 p-2 rounded-sm mt-3 text-gray-900 dark:text-gray-300 text-sm'>
-                Error: Invalid API key or network blocked. Please check your API
-                key and network settings for OpenAI API.
-              </div>
-            )}
-          </>
+            <input
+              type='text'
+              className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md m-0 w-full mr-0 h-8 focus:outline-none'
+              value={_apiKey}
+              onChange={(e) => {
+                _setApiKey(e.target.value);
+              }}
+            />
+          </div>
         )}
 
         <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm mt-4 text-center'>
@@ -126,6 +157,11 @@ const ApiMenu = ({
           purpose of accessing the OpenAI API and not for any other unauthorised
           use.
         </div>
+        {error !== '' && (
+          <div className='bg-red-600/50 p-2 rounded-sm mt-3 text-gray-900 dark:text-gray-300 text-sm'>
+            {error}
+          </div>
+        )}
       </div>
     </PopupModal>
   ) : (
