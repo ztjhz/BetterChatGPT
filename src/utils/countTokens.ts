@@ -50369,7 +50369,7 @@ const bpe_ranks = dictZip(bpe_merges, range(0, bpe_merges.length));
 const cache = {};
 
 const bpe = (token) => {
-  if (Object.hasOwn(cache, token)) {
+  if (cache.hasOwnProperty(token)) {
     return cache[token];
   }
 
@@ -50397,7 +50397,7 @@ const bpe = (token) => {
         )
       ];
 
-    if (!Object.hasOwn(bpe_ranks, bigram)) {
+    if (!bpe_ranks.hasOwnProperty(bigram)) {
       break;
     }
 

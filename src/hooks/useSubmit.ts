@@ -53,6 +53,10 @@ const useSubmit = () => {
       }
 
       if (stream) {
+        if (stream.locked)
+          throw new Error(
+            'Oops, the stream is locked right now. Please try again'
+          );
         const reader = stream.getReader();
         let reading = true;
         while (reading && useStore.getState().generating) {
@@ -79,6 +83,11 @@ const useSubmit = () => {
             updatedMessages[updatedMessages.length - 1].content += resultString;
             setChats(updatedChats);
           }
+        }
+        if (useStore.getState().generating) {
+          reader.cancel('Cancelled by user');
+        } else {
+          reader.cancel('Generation completed');
         }
       }
     } catch (e: unknown) {
