@@ -302,7 +302,7 @@ const EditView = ({
   const setChats = useStore((state) => state.setChats);
   const currentChatIndex = useStore((state) => state.currentChatIndex);
 
-  const [pluginEnabled, setPluginEnabled] = useState(true);
+  const [pluginEnabled, setPluginEnabled] = useState(sticky);
   const { Component: SmartDeviceInput, formatContent } =
     useSmartDevicePresentsInputPlugin();
   const [_content, _setContent] = useState<string>(content);
@@ -333,7 +333,7 @@ const EditView = ({
   };
 
   const handleSave = () => {
-    if (sticky && _content === "") return;
+    if (sticky && (_content === "" || !pluginEnabled)) return;
     const updatedChats: ChatInterface[] = JSON.parse(
       JSON.stringify(useStore.getState().chats)
     );
@@ -359,7 +359,7 @@ const EditView = ({
     );
     const updatedMessages = updatedChats[currentChatIndex].messages;
     if (sticky) {
-      if (_content !== "") {
+      if (_content !== "" || pluginEnabled) {
         updatedMessages.push({
           role: inputRole,
           content: getFullContent(),

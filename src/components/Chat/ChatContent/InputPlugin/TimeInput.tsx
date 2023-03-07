@@ -7,14 +7,22 @@ import React, {
   useState,
 } from "react";
 
-export const useTimeInputPlugin = (defaultTime?: Date) => {
-  const timeRef = useRef(defaultTime ?? new Date());
+const loadTimeFromSessionStorage = () => {
+  const item = sessionStorage.getItem("input-time");
+  return item ? new Date(parseInt(item)) : undefined;
+};
+const saveTimeToSessionStorage = (time: Date) =>
+  sessionStorage.setItem("input-time", time.valueOf().toString());
+
+export const useTimeInputPlugin = () => {
+  const timeRef = useRef(loadTimeFromSessionStorage() ?? new Date());
   const DateTimeInput = useCallback(() => {
     const hours = timeRef.current.getHours();
     const minutes = timeRef.current.getMinutes();
     const onUpdate = (updatedTime: { hours: number; minutes: number }) => {
       timeRef.current.setHours(updatedTime.hours);
       timeRef.current.setMinutes(updatedTime.minutes);
+      saveTimeToSessionStorage(timeRef.current);
     };
     return (
       <TimeInput initMinutes={minutes} initHours={hours} onUpdate={onUpdate} />
