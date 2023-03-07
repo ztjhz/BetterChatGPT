@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "dompurify": "^3.0.1",
     "highlight.js": "^11.7.0",
     "react": "^18.2.0",
