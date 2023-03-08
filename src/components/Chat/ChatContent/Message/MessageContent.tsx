@@ -125,7 +125,8 @@ const ContentView = React.memo(
 
                 const match = /language-(\w+)/.exec(className || '');
                 const lang = match && match[1];
-                if (lang)
+                const isMatch = lang && hljs.getLanguage(lang);
+                if (isMatch)
                   highlight = hljs.highlight(children.toString(), {
                     language: lang,
                   });
