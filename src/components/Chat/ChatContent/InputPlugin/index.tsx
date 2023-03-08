@@ -4,7 +4,8 @@ import { useTimeInputPlugin } from "./TimeInput";
 import { DeviceSelectOption } from "./types";
 
 export const useSmartDeviceInputPlugin = (
-  deviceOptions: DeviceSelectOption[]
+  deviceOptions: DeviceSelectOption[],
+  onSubmitLog: (formattedLog: string) => void
 ) => {
   const { TimeInput, formatTime } = useTimeInputPlugin();
   const { Select: SelectDevice, selectedOption: selectedDevice } =
@@ -17,20 +18,28 @@ export const useSmartDeviceInputPlugin = (
       <TimeInput />
       <SelectDevice />
       <SelectFuntion />
+      <button
+        className="btn btn-neutral h-7"
+        onClick={() => onSubmitLog(formatContent())}
+      >
+        ＋
+      </button>
     </div>
   );
+  const formatContent = () =>
+    formatTime() +
+    " " +
+    (selectedDevice ? `[${selectedDevice.value}]` : ``) +
+    " " +
+    (selectedDeviceFunction?.value || ``) +
+    " ";
 
   return {
     Component,
-    formatContent: () =>
-      formatTime() +
-      " " +
-      (selectedDevice ? `[${selectedDevice.value}]` : ``) +
-      " " +
-      (selectedDeviceFunction?.value || ``) +
-      " ",
+    formatContent,
   };
 };
 
-export const useSmartDevicePresentsInputPlugin = () =>
-  useSmartDeviceInputPlugin(SMART_DEVICE_PRESENTS);
+export const useSmartDevicePresentsInputPlugin = (
+  onSubmitLog: (formattedLog: string) => void
+) => useSmartDeviceInputPlugin(SMART_DEVICE_PRESENTS, onSubmitLog);

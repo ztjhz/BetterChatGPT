@@ -304,7 +304,13 @@ const EditView = ({
 
   const [pluginEnabled, setPluginEnabled] = useState(sticky);
   const { Component: SmartDeviceInput, formatContent } =
-    useSmartDevicePresentsInputPlugin();
+    useSmartDevicePresentsInputPlugin((formattedLog) => {
+      if (textareaRef.current) {
+        const event = new Event("input", { bubbles: true });
+        textareaRef.current.value += "\n" + formattedLog;
+        textareaRef.current.dispatchEvent(event);
+      }
+    });
   const [_content, _setContent] = useState<string>(content);
   const getFullContent = () =>
     (pluginEnabled ? formatContent() : "") + _content;
@@ -389,18 +395,26 @@ const EditView = ({
   return (
     <>
       <div style={{ position: "absolute", top: "-27px", left: "78px" }}>
-        <ToggleSwitch status={pluginEnabled} onStatusChange={setPluginEnabled}>
+        <ToggleSwitch
+          status={!!pluginEnabled}
+          onStatusChange={setPluginEnabled}
+        >
           Smart Device Format
         </ToggleSwitch>
       </div>
       <div
-        className={`w-full flex ${
+        className={`w-full ${
           sticky
             ? "py-2 md:py-3 px-2 md:px-4 border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-md shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:shadow-[0_0_15px_rgba(0,0,0,0.10)]"
             : ""
         }`}
       >
-        {pluginEnabled && <SmartDeviceInput />}
+        {pluginEnabled && (
+          <>
+            <SmartDeviceInput />
+            <hr className="my-1" style={{ border: "1px solid #888" }} />
+          </>
+        )}
         <textarea
           ref={textareaRef}
           className="m-0 resize-none rounded-lg bg-transparent overflow-y-hidden focus:ring-0 focus-visible:ring-0 leading-7 w-full"
