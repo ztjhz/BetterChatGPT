@@ -1,4 +1,4 @@
-import create, { SetState, GetState } from 'zustand';
+import { StoreApi, create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { ChatSlice, createChatSlice } from './chat-slice';
 import { InputSlice, createInputSlice } from './input-slice';
@@ -8,8 +8,8 @@ import { ConfigSlice, createConfigSlice } from './config-slice';
 export type StoreState = ChatSlice & InputSlice & AuthSlice & ConfigSlice;
 
 export type StoreSlice<T> = (
-  set: SetState<StoreState>,
-  get: GetState<StoreState>
+  set: StoreApi<StoreState>['setState'],
+  get: StoreApi<StoreState>['getState']
 ) => T;
 
 const useStore = create<StoreState>()(
