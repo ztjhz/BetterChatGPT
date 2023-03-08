@@ -77,6 +77,37 @@ Liked it? Please give a ⭐️ to **ChatGPTFreeApp**.
 
 To get started, simply visit our website at [https://freechatgpt.chat/](https://freechatgpt.chat). You can start enjoying the power of ChatGPT powered by the [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree) or use your own OpenAI API Key obtained from [OpenAI API Keys](https://platform.openai.com/account/api-keys).
 
+## 🛫 Host your own Instance
+
+If you'd like to run your own instance of `ChatGPTFreeApp`, you can easily do so by following these steps:
+
+### Steps
+
+1. Create a GitHub account (if you don't have one already)
+2. Fork this [repository](https://github.com/ztjhz/ChatGPTFreeApp)
+3. In your forked repository, click on `Actions`
+   ![image](https://user-images.githubusercontent.com/59118459/223751928-cf2b91b9-4663-4a36-97de-5eb751b32c7e.png)
+4. In the left sidebar, click on `Deploy to GitHub Pages`
+   ![image](https://user-images.githubusercontent.com/59118459/223752459-183ec23f-72f5-436e-a088-e3386492b8cb.png)
+5. Above the list of workflow runs, select `Run workflow`.
+   ![image](https://user-images.githubusercontent.com/59118459/223753340-1270e038-d213-4d6f-938c-66a30dad7c88.png)
+6. Now, navigate to the `Settings` tab
+   ![image](https://user-images.githubusercontent.com/59118459/223753577-9b6f8266-26e8-471b-8f45-a1a02fbab232.png)
+7. In the left sidebar, click on `Pages` and in the right section, select `Deploy from a branch` for `Source` and `gh-pages` for `Branch`. Then at the top section, you can see that "Your site is live at `XXX`".
+   ![image](https://user-images.githubusercontent.com/59118459/223753724-89f6452e-a441-48b8-8665-7a5e515d2a57.png)
+
+### Running it locally
+
+1. Ensure that you have the following installed:
+
+   - [node.js](https://nodejs.org/en/)
+   - [yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/)
+
+2. Clone this [repository](https://github.com/ztjhz/ChatGPTFreeApp) by running `git clone https://github.com/ztjhz/ChatGPTFreeApp.git`
+3. Navigate into the directory by running `cd ChatGPTFreeApp`
+4. Run `yarn` or `npm install`, depending on whether you have yarn or npm installed.
+5. Launch the app by running `yarn dev` or `npm run dev`
+
 # 🙏 Support
 
 We need your help to continue providing the OpenAI API for free. As you may know, the API costs money and in order to sustain our mission of making AI accessible to everyone, we need your help.
