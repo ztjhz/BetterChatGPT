@@ -69,9 +69,7 @@ const ContentView = React.memo(
     messageIndex: number;
   }) => {
     const { handleSubmit } = useSubmit();
-
     const [isDelete, setIsDelete] = useState<boolean>(false);
-    const [copied, setCopied] = useState<boolean>(false);
     const currentChatIndex = useStore((state) => state.currentChatIndex);
     const setChats = useStore((state) => state.setChats);
     const lastMessageIndex = useStore((state) =>
@@ -121,8 +119,9 @@ const ContentView = React.memo(
             components={{
               code({ node, inline, className, children, ...props }) {
                 if (inline) return <code>{children}</code>;
-                let highlight;
+                const [copied, setCopied] = useState<boolean>(false);
 
+                let highlight;
                 const match = /language-(\w+)/.exec(className || '');
                 const lang = match && match[1];
                 const isMatch = lang && hljs.getLanguage(lang);

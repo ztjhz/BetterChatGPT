@@ -38,7 +38,7 @@ const ChatContent = () => {
     }
   }, [generating]);
 
-  const { handleSubmit, error } = useSubmit();
+  const { error } = useSubmit();
 
   return (
     <div className='flex-1 overflow-hidden'>
