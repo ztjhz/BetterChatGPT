@@ -52,12 +52,6 @@ Are you ready to unlock the full potential of ChatGPT with `ChatGPTFreeApp`?
 
 Whether you're looking to chat with a virtual assistant, improve your language skills, or simply enjoy a fun and engaging conversation, our app has got you covered. So why wait? Join us today and explore the exciting world of `ChatGPTFreeApp`!
 
-## 🚀 Demo
-
-Here is a quick demo of the app. We hope you enjoy it.
-
-> [The Demo Link](https://freechatgpt.chat)
-
 Liked it? Please give a ⭐️ to **ChatGPTFreeApp**.
 
 ## 🔥 Features
@@ -75,7 +69,11 @@ Liked it? Please give a ⭐️ to **ChatGPTFreeApp**.
 
 ## 🛠️ Usage
 
-To get started, simply visit our website at [https://freechatgpt.chat/](https://freechatgpt.chat). You can start enjoying the power of ChatGPT powered by the [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree) or use your own OpenAI API Key obtained from [OpenAI API Keys](https://platform.openai.com/account/api-keys).
+To get started, simply visit our website at <https://freechatgpt.chat/>. There are 3 ways for you to start using `ChatGPTFreeApp`.
+
+1. Enter into the API menu your OpenAI API Key obtained from [OpenAI API Keys](https://platform.openai.com/account/api-keys).
+2. Utilise the free api endpoint provided by [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree)
+3. Host your own API endpoint by following the instructions provided here: <https://github.com/ayaka14732/ChatGPTAPIFree>. Subsequently, enter the API endpoint into the API menu.
 
 ## 🛫 Host your own Instance
 
@@ -84,16 +82,17 @@ If you'd like to run your own instance of `ChatGPTFreeApp`, you can easily do so
 ### Steps
 
 1. Create a GitHub account (if you don't have one already)
-2. Fork this [repository](https://github.com/ztjhz/ChatGPTFreeApp)
-3. In your forked repository, click on `Actions`
+2. Star this [repository](https://github.com/ztjhz/ChatGPTFreeApp) if you have not done so
+3. Fork this [repository](https://github.com/ztjhz/ChatGPTFreeApp)
+4. In your forked repository, click on `Actions`
    ![image](https://user-images.githubusercontent.com/59118459/223751928-cf2b91b9-4663-4a36-97de-5eb751b32c7e.png)
-4. In the left sidebar, click on `Deploy to GitHub Pages`
+5. In the left sidebar, click on `Deploy to GitHub Pages`
    ![image](https://user-images.githubusercontent.com/59118459/223752459-183ec23f-72f5-436e-a088-e3386492b8cb.png)
-5. Above the list of workflow runs, select `Run workflow`.
+6. Above the list of workflow runs, select `Run workflow`.
    ![image](https://user-images.githubusercontent.com/59118459/223753340-1270e038-d213-4d6f-938c-66a30dad7c88.png)
-6. Now, navigate to the `Settings` tab
+7. Now, navigate to the `Settings` tab
    ![image](https://user-images.githubusercontent.com/59118459/223753577-9b6f8266-26e8-471b-8f45-a1a02fbab232.png)
-7. In the left sidebar, click on `Pages` and in the right section, select `Deploy from a branch` for `Source` and `gh-pages` for `Branch`. Then at the top section, you can see that "Your site is live at `XXX`".
+8. In the left sidebar, click on `Pages` and in the right section, select `Deploy from a branch` for `Source` and `gh-pages` for `Branch`. Then at the top section, you can see that "Your site is live at `XXX`".
    ![image](https://user-images.githubusercontent.com/59118459/223753724-89f6452e-a441-48b8-8665-7a5e515d2a57.png)
 
 ### Running it locally
@@ -110,14 +109,18 @@ If you'd like to run your own instance of `ChatGPTFreeApp`, you can easily do so
 
 # 🙏 Support
 
-We need your help to continue providing the OpenAI API for free. As you may know, the API costs money and in order to sustain our mission of making AI accessible to everyone, we need your help.
+At `ChatGPTFreeApp`, we strive to provide you with useful and amazing features around the clock. And just like any project, your support and motivation will be instrumental in helping us keep moving forward!
 
-Every donation, no matter how small, will go towards paying for the API endpoint. By contributing to our crowdfunding campaign, you're not only supporting us, but you're also helping to shape the future of AI technology.
+If you have enjoyed using our app, we kindly ask you to give this project a ⭐️. Your endorsement means a lot to us and encourages us to work harder towards delivering the best possible experience.
 
-We believe that artificial intelligence has the potential to revolutionize the way we live, work, and interact with one another. But this future is only possible if we work together and support initiatives like ours.
-
-So please, donate what you can and spread the word to your friends and family. With your help, we can continue to make the OpenAI API available for free to everyone.
-
-Thank you for your support.
+If you would like to support the team, consider buying us a coffee by clicking on the button below. Every contribution, no matter how small, helps us to maintain and improve our service.
 
 [![support](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/freechatgpt)
+
+Thank you for being a part of our community, and we look forward to serving you better in the future.
+
+---
+
+<h3 align="center">
+A ⭐️ to <b>ChatGPTFreeApp</b> is to make it shine brighter and benefit more people.
+</h3>
