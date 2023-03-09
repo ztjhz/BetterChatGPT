@@ -37,6 +37,7 @@
     ·
     <a href="https://github.com/ztjhz/ChatGPTFreeApp/issues/new/choose">Request Feature</a>
 </p>
+<p align="center"><i>Did you enjoy using ChatGPTFreeApp? Give it some love with a star! 🌟</i></p>
 
 ## 👋🏻 Introducing `ChatGPTFreeApp`
 
@@ -51,8 +52,6 @@ Are you ready to unlock the full potential of ChatGPT with `ChatGPTFreeApp`?
 `ChatGPTFreeApp` is the ultimate destination for anyone who wants to experience the limitless power of conversational AI. With no limits and completely free to use for all, our app harnesses the full potential of OpenAI's ChatGPT API to offer you an unparalleled chatbot experience.
 
 Whether you're looking to chat with a virtual assistant, improve your language skills, or simply enjoy a fun and engaging conversation, our app has got you covered. So why wait? Join us today and explore the exciting world of `ChatGPTFreeApp`!
-
-Liked it? Please give a ⭐️ to **ChatGPTFreeApp**.
 
 ## 🔥 Features
 
