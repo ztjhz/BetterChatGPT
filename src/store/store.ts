@@ -4,6 +4,8 @@ import { ChatSlice, createChatSlice } from './chat-slice';
 import { InputSlice, createInputSlice } from './input-slice';
 import { AuthSlice, createAuthSlice } from './auth-slice';
 import { ConfigSlice, createConfigSlice } from './config-slice';
+import { LocalStorageInterface } from '@type/chat';
+import { migrateV0 } from './migrate';
 
 export type StoreState = ChatSlice & InputSlice & AuthSlice & ConfigSlice;
 
@@ -30,6 +32,15 @@ const useStore = create<StoreState>()(
         apiFreeEndpoint: state.apiFreeEndpoint,
         theme: state.theme,
       }),
+      version: 1,
+      migrate: (persistedState, version) => {
+        switch (version) {
+          case 0:
+            migrateV0(persistedState as LocalStorageInterface);
+            break;
+        }
+        return persistedState as StoreState;
+      },
     }
   )
 );

@@ -1,4 +1,4 @@
-import { ConfigInterface } from '@type/chat';
+import { ChatInterface, ConfigInterface } from '@type/chat';
 
 const date = new Date();
 const dateString =
@@ -17,3 +17,10 @@ export const defaultChatConfig: ConfigInterface = {
   temperature: 1,
   presence_penalty: 0,
 };
+
+export const generateDefaultChat = (title?: string): ChatInterface => ({
+  title: title ? title : 'New Chat',
+  messages: [{ role: 'system', content: defaultSystemMessage }],
+  config: { ...defaultChatConfig },
+  titleSet: false,
+});
