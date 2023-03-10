@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PopupModal from '@components/PopupModal';
 import AboutIcon from '@icon/AboutIcon';
+import Updates from '@components/Menu/MenuOptions/Updates';
 
 const AboutMenu = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -27,6 +28,7 @@ const AboutMenu = () => {
           <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
             <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm flex flex-col gap-2'>
               <p>Free ChatGPT is an amazing open-source web app that allows you to play with OpenAI's ChatGPT API for free!</p>
+              <Updates isButton />
 
               <h2 className='text-lg font-bold'>Discord Server</h2>
               <p>We invite you to join our Discord community! Our Discord server is a great place to exchange ChatGPT ideas and tips, and submit feature requests for Free ChatGPT. You'll have the opportunity to interact with the developers behind Free ChatGPT as well as other AI enthusiasts who share your passion.</p>
