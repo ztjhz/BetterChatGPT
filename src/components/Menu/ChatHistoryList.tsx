@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useStore from '@store/store';
+import { shallow } from 'zustand/shallow';
 
 import ChatIcon from '@icon/ChatIcon';
 import EditIcon from '@icon/EditIcon';
@@ -11,16 +12,19 @@ import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 
 const ChatHistoryList = () => {
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
-  const chats = useStore((state) => state.chats);
+  const chatTitles = useStore(
+    (state) => state.chats?.map((chat) => chat.title),
+    shallow
+  );
 
   return (
     <div className='flex-col flex-1 overflow-y-auto border-b border-white/20'>
       <div className='flex flex-col gap-2 text-gray-100 text-sm'>
-        {chats &&
-          chats.map((chat, index) => (
+        {chatTitles &&
+          chatTitles.map((title, index) => (
             <ChatHistory
-              title={chat.title}
-              key={`${chat.title}-${index}`}
+              title={title}
+              key={`${title}-${index}`}
               chatIndex={index}
               onClick={() => {
                 setCurrentChatIndex(index);

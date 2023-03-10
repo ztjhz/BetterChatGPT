@@ -142,8 +142,6 @@ const useSubmit = () => {
         updatedChats[currentChatIndex].title = title;
         updatedChats[currentChatIndex].titleSet = true;
         setChats(updatedChats);
-        console.log(message);
-        console.log(title);
       }
     } catch (e: unknown) {
       const err = (e as Error).message;
