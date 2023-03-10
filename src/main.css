@@ -27,6 +27,10 @@
     height: 100%;
   }
 
+  img {
+    @apply inline-block;
+  }
+
   input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
     @apply w-4;
