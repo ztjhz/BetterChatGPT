@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import PopupModal from '@components/PopupModal';
 import AboutIcon from '@icon/AboutIcon';
-import Updates from '@components/Menu/MenuOptions/Updates';
 
 const AboutMenu = () => {
   const { t } = useTranslation(['main', 'about']);
@@ -23,14 +22,96 @@ const AboutMenu = () => {
       </a>
       {isModalOpen && (
         <PopupModal
-          title='About'
+          title={t('about') as string}
           setIsModalOpen={setIsModalOpen}
           cancelButton={false}
         >
           <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
-            <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm flex flex-col gap-2'>
+            <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm flex flex-col gap-3 leading-relaxed'>
               <p>{t('description', { ns: 'about' })}</p>
-              <Updates isButton />
+              <p>
+                <Trans
+                  i18nKey='sourceCode'
+                  ns='about'
+                  components={[
+                    <a
+                      href='https://github.com/ztjhz/ChatGPTFreeApp'
+                      target='_blank'
+                      className='link'
+                    />,
+                  ]}
+                />
+              </p>
+
+              <p>
+                <Trans
+                  i18nKey='initiative.description'
+                  ns='about'
+                  components={[
+                    <a
+                      href={t('initiative.link0', { ns: 'about' }) as string}
+                      target='_blank'
+                      className='link'
+                    />,
+                    <a
+                      href={t('initiative.link1', { ns: 'about' }) as string}
+                      target='_blank'
+                      className='link'
+                    />,
+                  ]}
+                />
+              </p>
+
+              <>
+                <h2 className='text-lg font-bold'>
+                  {t('support.title', { ns: 'about' })}
+                </h2>
+                <p>{t('support.paragraph1', { ns: 'about' })}</p>
+                <p>
+                  <Trans
+                    i18nKey='support.paragraph2'
+                    ns='about'
+                    components={[
+                      <a
+                        href='https://github.com/ztjhz/ChatGPTFreeApp/'
+                        target='_blank'
+                        className='link'
+                      />,
+                    ]}
+                  />
+                </p>
+                <p>{t('support.paragraph3', { ns: 'about' })}</p>
+
+                <div className='flex flex-col items-center gap-4 my-4'>
+                  <a href='https://ko-fi.com/freechatgpt' target='_blank'>
+                    <img
+                      src='/kofi.svg'
+                      alt='Support us through the Ko-fi platform.'
+                    />
+                  </a>
+                  <div className='flex gap-x-10 gap-y-4 flex-wrap justify-center'>
+                    <div className='flex flex-col items-center justify-center gap-1'>
+                      <div>{t('support.alipay', { ns: 'about' })} (Ayaka)</div>
+                      <img
+                        className='rounded-md w-32 h-32'
+                        src='https://ayaka14732.github.io/sponsor/alipay.jpg'
+                        alt='Support us through Alipay'
+                      />
+                    </div>
+                    <div className='flex flex-col items-center justify-center gap-1'>
+                      <div>
+                        {t('support.wechatPay', { ns: 'about' })} (Ayaka)
+                      </div>
+                      <img
+                        className='rounded-md w-32 h-32'
+                        src='https://ayaka14732.github.io/sponsor/wechat.png'
+                        alt='Support us through WeChat Pay'
+                      />
+                    </div>
+                  </div>
+                </div>
+                <p>{t('support.paragraph4', { ns: 'about' })}</p>
+              </>
 
               <h2 className='text-lg font-bold'>
                 {t('discordServer.title', { ns: 'about' })}
@@ -57,53 +138,6 @@ const AboutMenu = () => {
               <p>{t('privacyStatement.paragraph1', { ns: 'about' })}</p>
 
               <p>{t('privacyStatement.paragraph2', { ns: 'about' })}</p>
-              <h2 className='text-lg font-bold'>
-                {t('support.title', { ns: 'about' })}
-              </h2>
-              <p>{t('support.paragraph1', { ns: 'about' })}</p>
-              <p>
-                <Trans
-                  i18nKey='support.paragraph2'
-                  ns='about'
-                  components={[
-                    <a
-                      href='https://github.com/ztjhz/ChatGPTFreeApp/'
-                      target='_blank'
-                      className='link'
-                    />,
-                  ]}
-                />
-              </p>
-              <p>{t('support.paragraph3', { ns: 'about' })}</p>
-              <div className='flex flex-col items-center gap-4 my-4'>
-                <a href='https://ko-fi.com/freechatgpt' target='_blank'>
-                  <img
-                    src='/kofi.svg'
-                    alt='Support us through the Ko-fi platform.'
-                  />
-                </a>
-                <div className='flex gap-x-10 gap-y-4 flex-wrap justify-center'>
-                  <div className='flex flex-col items-center justify-center gap-1'>
-                    <div>{t('support.alipay', { ns: 'about' })} (Ayaka)</div>
-                    <img
-                      className='rounded-md w-32 h-32'
-                      src='https://ayaka14732.github.io/sponsor/alipay.jpg'
-                      alt='Support us through Alipay'
-                    />
-                  </div>
-                  <div className='flex flex-col items-center justify-center gap-1'>
-                    <div>{t('support.wechatPay', { ns: 'about' })} (Ayaka)</div>
-                    <img
-                      className='rounded-md w-32 h-32'
-                      src='https://ayaka14732.github.io/sponsor/wechat.png'
-                      alt='Support us through WeChat Pay'
-                    />
-                  </div>
-                </div>
-              </div>
-              <p className='text-center'>
-                {t('support.paragraph4', { ns: 'about' })}
-              </p>
             </div>
           </div>
         </PopupModal>
