@@ -2,9 +2,8 @@
   "description": "Free ChatGPT 是一个神奇的开源 Web 应用，允许您免费使用 OpenAI 的 ChatGPT API 进行对话！",
   "sourceCode": "在 GitHub 上查看<0>源代码</0>并给它一个⭐️！",
   "initiative": {
-    "description": "看看《<0>开放 ChatGPT 倡议</0>》和《<1>释放 ChatGPT 的无限潜能：一个公开呼吁</1>》吧!",
-    "link0": "https://medium.com/@ayaka_90553/%E5%BC%80%E6%94%BE-chatgpt-%E5%80%A1%E8%AE%AE-eaac01243dae",
-    "link1": "https://medium.com/@ayaka_90553/%E9%87%8A%E6%94%BE-chatgpt-%E7%9A%84%E6%97%A0%E9%99%90%E6%BD%9C%E8%83%BD-%E4%B8%80%E4%B8%AA%E5%85%AC%E5%BC%80%E5%91%BC%E5%90%81-7195a12f05f2"
+    "description": "看看《<0>开放 ChatGPT 倡议</0>》吧！",
+    "link": "https://medium.com/@ayaka_90553/%E5%BC%80%E6%94%BE-chatgpt-%E5%80%A1%E8%AE%AE-eaac01243dae",
   },
   "support": {
     "title": "支持",
