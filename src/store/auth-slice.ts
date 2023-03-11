@@ -11,7 +11,7 @@ export interface AuthSlice {
 
 export const createAuthSlice: StoreSlice<AuthSlice> = (set, get) => ({
   apiFree: true,
-  apiFreeEndpoint: 'https://chatgpt-api-huuz62kfra-as.a.run.app/v1/',
+  apiFreeEndpoint: 'https://chatgpt-api.shn.hk/v1/',
   setApiKey: (apiKey: string) => {
     set((prev: AuthSlice) => ({
       ...prev,
