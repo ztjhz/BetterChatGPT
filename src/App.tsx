@@ -1,9 +1,8 @@
-import React, { useEffect, Suspense } from 'react';
+import React, { useEffect } from 'react';
 import useStore from '@store/store';
 
 import Chat from '@components/Chat';
 import Menu from '@components/Menu';
-import LoadingScreen from '@components/LoadingScreen';
 
 import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 import { ChatInterface } from '@type/chat';
@@ -66,12 +65,10 @@ function App() {
   }, []);
 
   return (
-    <Suspense fallback={<LoadingScreen />}>
-      <div className='overflow-hidden w-full h-full relative'>
-        <Menu />
-        <Chat />
-      </div>
-    </Suspense>
+    <div className='overflow-hidden w-full h-full relative'>
+      <Menu />
+      <Chat />
+    </div>
   );
 }
 
