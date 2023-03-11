@@ -91,7 +91,9 @@ const ChatContent = () => {
             </div>
           )}
           <div className='mt-4'>
-            <DownloadChat saveRef={saveRef} />
+            {useStore.getState().generating || (
+              <DownloadChat saveRef={saveRef} />
+            )}
           </div>
           <div className='w-full h-36'></div>
         </div>
