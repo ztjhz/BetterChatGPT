@@ -2,9 +2,8 @@
   "description": "Free ChatGPT is an amazing open-source web app that allows you to play with OpenAI's ChatGPT API for free!",
   "sourceCode": "Checkout the <0>source code</0> on GitHub and give it a ⭐️!",
   "initiative": {
-    "description": "Checkout the <0><i>Open ChatGPT Initiative</i></0> and <1><i>Unleashing the Boundlessness of ChatGPT: A Public Appeal</i></1>!",
-    "link0": "https://medium.com/@ayaka_45434/the-open-chatgpt-initiative-e76b0b62a3ae",
-    "link1": "https://medium.com/@ayaka_45434/unleashing-the-boundlessness-of-chatgpt-a-public-appeal-f1b535a5ca05"
+    "description": "Checkout the <0><i>Open ChatGPT Initiative</i></0>!",
+    "link": "https://medium.com/@ayaka_45434/the-open-chatgpt-initiative-e76b0b62a3ae"
   },
   "support": {
     "title": "Support",

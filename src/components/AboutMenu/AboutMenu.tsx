@@ -49,12 +49,7 @@ const AboutMenu = () => {
                   ns='about'
                   components={[
                     <a
-                      href={t('initiative.link0', { ns: 'about' }) as string}
-                      target='_blank'
-                      className='link'
-                    />,
-                    <a
-                      href={t('initiative.link1', { ns: 'about' }) as string}
+                      href={t('initiative.link', { ns: 'about' }) as string}
                       target='_blank'
                       className='link'
                     />,
