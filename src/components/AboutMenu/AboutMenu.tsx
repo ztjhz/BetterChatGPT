@@ -44,7 +44,7 @@ const AboutMenu = () => {
               <p>If you have enjoyed using our app, we kindly ask you to give this <a href="https://github.com/ztjhz/ChatGPTFreeApp/" target="_blank" className="link">project</a>  a ⭐️. Your endorsement means a lot to us and encourages us to work harder towards delivering the best possible experience.</p>
               <p>If you would like to support the team, consider buying us a coffee by clicking on the button below. Every contribution, no matter how small, helps us to maintain and improve our service.</p>
               <a href="https://ko-fi.com/freechatgpt" target="_blank">
-                  <img src="/githubbutton_sm.svg" alt="Support us through the Ko-fi platform." />
+                  <img src="/kofi.svg" alt="Support us through the Ko-fi platform." />
               </a>
               <p>Thank you for being a part of our community, and we look forward to serving you better in the future.</p>
             </div>
