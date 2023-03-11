@@ -112,9 +112,13 @@ At `ChatGPTFreeApp`, we strive to provide you with useful and amazing features a
 
 If you have enjoyed using our app, we kindly ask you to give this project a ⭐️. Your endorsement means a lot to us and encourages us to work harder towards delivering the best possible experience.
 
-If you would like to support the team, consider buying us a coffee by clicking on the button below. Every contribution, no matter how small, helps us to maintain and improve our service.
+If you would like to support the team, consider sponsoring us through one of the methods below. Every contribution, no matter how small, helps us to maintain and improve our service.
 
-[![support](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/freechatgpt)
+| Payment Method | Link                                                                                   |
+| -------------- | -------------------------------------------------------------------------------------- |
+| KoFi           | [![support](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/freechatgpt) |
+| Alipay (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/alipay.jpg" width=150 />                |
+| Wechat (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/wechat.png" width=150 />                |
 
 Thank you for being a part of our community, and we look forward to serving you better in the future.
 

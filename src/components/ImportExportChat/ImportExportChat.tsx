@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
 
 import ExportIcon from '@icon/ExportIcon';
@@ -8,6 +9,7 @@ import PopupModal from '@components/PopupModal';
 import { isChats } from '@utils/chat';
 
 const ImportExportChat = () => {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   return (
@@ -19,11 +21,11 @@ const ImportExportChat = () => {
         }}
       >
         <ExportIcon className='w-4 h-4' />
-        Import / Export
+        {t('import')} / {t('export')}
       </a>
       {isModalOpen && (
         <PopupModal
-          title='Import / Export'
+          title={`${t('import')} / ${t('export')}`}
           setIsModalOpen={setIsModalOpen}
           cancelButton={false}
         >
@@ -38,6 +40,7 @@ const ImportExportChat = () => {
 };
 
 const ImportChat = () => {
+  const { t } = useTranslation();
   const setChats = useStore.getState().setChats;
   const inputRef = useRef<HTMLInputElement>(null);
   const [alert, setAlert] = useState<{
@@ -74,7 +77,7 @@ const ImportChat = () => {
   return (
     <>
       <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-        Import (JSON)
+        {t('import')} (JSON)
       </label>
       <input
         className='w-full text-sm file:p-2 text-gray-800 file:text-gray-700 dark:text-gray-300 dark:file:text-gray-200 rounded-md cursor-pointer focus:outline-none bg-gray-50 file:bg-gray-100 dark:bg-gray-800 dark:file:bg-gray-700 file:border-0 border border-gray-300 dark:border-gray-600 placeholder-gray-900 dark:placeholder-gray-300 file:cursor-pointer'
@@ -85,7 +88,7 @@ const ImportChat = () => {
         className='btn btn-small btn-primary mt-3'
         onClick={handleFileUpload}
       >
-        Import
+        {t('import')}
       </button>
       {alert && (
         <div
@@ -103,11 +106,12 @@ const ImportChat = () => {
 };
 
 const ExportChat = () => {
+  const { t } = useTranslation();
   const chats = useStore.getState().chats;
   return (
     <div className='mt-6'>
       <div className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-        Export (JSON)
+        {t('export')} (JSON)
       </div>
       <button
         className='btn btn-small btn-primary'
@@ -115,7 +119,7 @@ const ExportChat = () => {
           if (chats) downloadFile(chats, getToday());
         }}
       >
-        Export
+        {t('export')}
       </button>
     </div>
   );

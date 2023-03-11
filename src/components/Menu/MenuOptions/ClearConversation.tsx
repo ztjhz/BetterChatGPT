@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import PopupModal from '@components/PopupModal';
 import DeleteIcon from '@icon/DeleteIcon';
 import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 
 const ClearConversation = () => {
+  const { t } = useTranslation();
+
   const initialiseNewChat = useInitialiseNewChat();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -22,13 +25,13 @@ const ClearConversation = () => {
         }}
       >
         <DeleteIcon />
-        Clear conversations
+        {t('clearConversation')}
       </a>
       {isModalOpen && (
         <PopupModal
           setIsModalOpen={setIsModalOpen}
-          title='Warning'
-          message='Please be advised that by confirming this action, all messages will be deleted!'
+          title={t('warning') as string}
+          message={t('clearConversationWarning') as string}
           handleConfirm={handleConfirm}
         />
       )}

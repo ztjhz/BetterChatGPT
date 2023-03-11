@@ -1,10 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import PlusIcon from '@icon/PlusIcon';
 
 import useAddChat from '@hooks/useAddChat';
 
 const NewChat = () => {
+  const { t } = useTranslation();
   const addChat = useAddChat();
 
   return (
@@ -13,7 +15,9 @@ const NewChat = () => {
       onClick={addChat}
     >
       <PlusIcon />{' '}
-      <span className='hidden md:inline-flex text-white text-sm'>New chat</span>
+      <span className='hidden md:inline-flex text-white text-sm'>
+        {t('newChat')}
+      </span>
     </a>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
 import PopupModal from '@components/PopupModal';
 import {
@@ -14,6 +15,7 @@ import MarkdownIcon from '@icon/MarkdownIcon';
 
 const DownloadChat = React.memo(
   ({ saveRef }: { saveRef: React.RefObject<HTMLDivElement> }) => {
+    const { t } = useTranslation();
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     return (
       <>
@@ -23,7 +25,7 @@ const DownloadChat = React.memo(
             setIsModalOpen(true);
           }}
         >
-          Download Chat
+          {t('downloadChat')}
         </button>
         {isModalOpen && (
           <PopupModal

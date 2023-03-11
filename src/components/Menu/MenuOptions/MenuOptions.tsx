@@ -3,12 +3,10 @@ import React from 'react';
 import Account from './Account';
 import ClearConversation from './ClearConversation';
 import Api from './Api';
-import Logout from './Logout';
 import Me from './Me';
-import ThemeSwitcher from './ThemeSwitcher';
-import Updates from './Updates';
 import AboutMenu from '@components/AboutMenu';
 import ImportExportChat from '@components/ImportExportChat';
+import SettingsMenu from '@components/SettingsMenu';
 
 const MenuOptions = () => {
   return (
@@ -17,11 +15,8 @@ const MenuOptions = () => {
       <ClearConversation />
       <ImportExportChat />
       <Api />
-      <ThemeSwitcher />
-      {/* <Account /> */}
-      {/* <Updates /> */}
+      <SettingsMenu />
       <Me />
-      {/* <Logout /> */}
     </>
   );
 };

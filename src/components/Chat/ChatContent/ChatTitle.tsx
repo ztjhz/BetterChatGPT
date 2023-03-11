@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { shallow } from 'zustand/shallow';
 import useStore from '@store/store';
 import ConfigMenu from '@components/ConfigMenu';
@@ -6,6 +7,7 @@ import { ChatInterface, ConfigInterface } from '@type/chat';
 import { defaultChatConfig } from '@constants/chat';
 
 const ChatTitle = React.memo(() => {
+  const { t } = useTranslation('model');
   const config = useStore(
     (state) =>
       state.chats &&
@@ -47,13 +49,13 @@ const ChatTitle = React.memo(() => {
         }}
       >
         <div className='text-center p-1 rounded-md bg-gray-900/10 hover:bg-gray-900/50'>
-          Model: Default
+          {t('model')}: {t('default')}
         </div>
         <div className='text-center p-1 rounded-md bg-gray-900/10 hover:bg-gray-900/50'>
-          Temperature: {config.temperature}
+          {t('temperature.label')}: {config.temperature}
         </div>
         <div className='text-center p-1 rounded-md bg-gray-900/10 hover:bg-gray-900/50'>
-          PresencePenalty: {config.presence_penalty}
+          {t('presencePenalty.label')}: {config.presence_penalty}
         </div>
       </div>
       {isModalOpen && (

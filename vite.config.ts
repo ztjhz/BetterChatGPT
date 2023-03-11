@@ -14,6 +14,7 @@ export default defineConfig({
       '@api/': new URL('./src/api/', import.meta.url).pathname,
       '@components/': new URL('./src/components/', import.meta.url).pathname,
       '@utils/': new URL('./src/utils/', import.meta.url).pathname,
+      '@src/': new URL('./src/', import.meta.url).pathname,
     },
   },
 });

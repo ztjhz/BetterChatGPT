@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import { CodeProps, ReactMarkdownProps } from 'react-markdown/lib/ast-to-react';
 import rehypeKatex from 'rehype-katex';
@@ -303,6 +304,8 @@ const EditView = ({
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const textareaRef = React.createRef<HTMLTextAreaElement>();
 
+  const { t } = useTranslation();
+
   const resetTextAreaHeight = () => {
     if (textareaRef.current) textareaRef.current.style.height = 'auto';
   };
@@ -403,8 +406,8 @@ const EditView = ({
       {isModalOpen && (
         <PopupModal
           setIsModalOpen={setIsModalOpen}
-          title='Warning'
-          message='Please be advised that by submitting this message, all subsequent messages will be deleted!'
+          title={t('warning') as string}
+          message={t('clearMessageWarning') as string}
           handleConfirm={handleSaveAndSubmit}
         />
       )}
@@ -426,6 +429,8 @@ const EditViewButtons = React.memo(
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   }) => {
+    const { t } = useTranslation();
+
     return (
       <div className='text-center mt-2 flex justify-center'>
         {sticky && (
@@ -434,7 +439,7 @@ const EditViewButtons = React.memo(
             onClick={handleSaveAndSubmit}
           >
             <div className='flex items-center justify-center gap-2'>
-              Save & Submit
+              {t('saveAndSubmit')}
             </div>
           </button>
         )}
@@ -445,7 +450,9 @@ const EditViewButtons = React.memo(
           }`}
           onClick={handleSave}
         >
-          <div className='flex items-center justify-center gap-2'>Save</div>
+          <div className='flex items-center justify-center gap-2'>
+            {t('save')}
+          </div>
         </button>
 
         {sticky || (
@@ -456,7 +463,7 @@ const EditViewButtons = React.memo(
             }}
           >
             <div className='flex items-center justify-center gap-2'>
-              Save & Submit
+              {t('saveAndSubmit')}
             </div>
           </button>
         )}
@@ -466,7 +473,9 @@ const EditViewButtons = React.memo(
             className='btn relative btn-neutral'
             onClick={() => setIsEdit(false)}
           >
-            <div className='flex items-center justify-center gap-2'>Cancel</div>
+            <div className='flex items-center justify-center gap-2'>
+              {t('cancel')}
+            </div>
           </button>
         )}
       </div>

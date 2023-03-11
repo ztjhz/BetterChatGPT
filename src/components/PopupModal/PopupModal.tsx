@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useTranslation } from 'react-i18next';
 
 import CrossIcon2 from '@icon/CrossIcon2';
 
@@ -21,6 +22,7 @@ const PopupModal = ({
   children?: React.ReactElement;
 }) => {
   const modalRoot = document.getElementById('modal-root');
+  const { t } = useTranslation();
 
   const _handleClose = () => {
     handleClose && handleClose();
@@ -62,7 +64,7 @@ const PopupModal = ({
                   className='btn btn-primary'
                   onClick={handleConfirm}
                 >
-                  Confirm
+                  {t('confirm')}
                 </button>
               )}
               {cancelButton && (
@@ -71,7 +73,7 @@ const PopupModal = ({
                   className='btn btn-neutral'
                   onClick={_handleClose}
                 >
-                  Cancel
+                  {t('cancel')}
                 </button>
               )}
             </div>

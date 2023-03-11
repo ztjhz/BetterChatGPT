@@ -1,0 +1,13 @@
+{
+  "configuration": "Configuration",
+  "model": "Model",
+  "default": "Default",
+  "temperature": {
+    "label": "Temperature",
+    "description": "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic (Default: 1)"
+  },
+  "presencePenalty": {
+    "label": "Presence Penalty",
+    "description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics. (Default: 0)"
+  }
+}

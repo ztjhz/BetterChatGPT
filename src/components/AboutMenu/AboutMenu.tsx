@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useTranslation, Trans } from 'react-i18next';
 import PopupModal from '@components/PopupModal';
 import AboutIcon from '@icon/AboutIcon';
 import Updates from '@components/Menu/MenuOptions/Updates';
 
 const AboutMenu = () => {
+  const { t } = useTranslation(['main', 'about']);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   return (
@@ -17,7 +19,7 @@ const AboutMenu = () => {
         <div>
           <AboutIcon />
         </div>
-        About
+        {t('about')}
       </a>
       {isModalOpen && (
         <PopupModal
@@ -27,26 +29,81 @@ const AboutMenu = () => {
         >
           <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
             <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm flex flex-col gap-2'>
-              <p>Free ChatGPT is an amazing open-source web app that allows you to play with OpenAI's ChatGPT API for free!</p>
+              <p>{t('description', { ns: 'about' })}</p>
               <Updates isButton />
 
-              <h2 className='text-lg font-bold'>Discord Server</h2>
-              <p>We invite you to join our Discord community! Our Discord server is a great place to exchange ChatGPT ideas and tips, and submit feature requests for Free ChatGPT. You'll have the opportunity to interact with the developers behind Free ChatGPT as well as other AI enthusiasts who share your passion.</p>
+              <h2 className='text-lg font-bold'>
+                {t('discordServer.title', { ns: 'about' })}
+              </h2>
+              <p>{t('discordServer.paragraph1', { ns: 'about' })}</p>
 
-              <p>To join our server, simply click on the following link: <a className='link' href='https://discord.gg/g3Qnwy4V6A' target='_blank'>https://discord.gg/g3Qnwy4V6A</a>. We can't wait to see you there!</p>
+              <p>
+                <Trans
+                  i18nKey='discordServer.paragraph2'
+                  ns='about'
+                  components={[
+                    <a
+                      className='link'
+                      href='https://discord.gg/g3Qnwy4V6A'
+                      target='_blank'
+                    />,
+                  ]}
+                />
+              </p>
 
-              <h2 className='text-lg font-bold'>Privacy Statement</h2>
-              <p>We highly value your privacy and are committed to safeguarding the privacy of our users. We do not collect or store any text you enter or receive from the OpenAI server in any form. Our source code is available for your inspection to verify this statement.</p>
+              <h2 className='text-lg font-bold'>
+                {t('privacyStatement.title', { ns: 'about' })}
+              </h2>
+              <p>{t('privacyStatement.paragraph1', { ns: 'about' })}</p>
 
-              <p>We prioritise the security of your API key and handle it with utmost care. If you use your own API key, your key is exclusively stored on your browser and never shared with any third-party entity. It is solely used for the intended purpose of accessing the OpenAI API and not for any other unauthorised use.</p>
-              <h2 className='text-lg font-bold'>Support</h2>
-              <p>At freechatgpt.chat, we strive to provide you with useful and amazing features around the clock. And just like any project, your support and motivation will be instrumental in helping us keep moving forward!</p>
-              <p>If you have enjoyed using our app, we kindly ask you to give this <a href="https://github.com/ztjhz/ChatGPTFreeApp/" target="_blank" className="link">project</a>  a ⭐️. Your endorsement means a lot to us and encourages us to work harder towards delivering the best possible experience.</p>
-              <p>If you would like to support the team, consider buying us a coffee by clicking on the button below. Every contribution, no matter how small, helps us to maintain and improve our service.</p>
-              <a href="https://ko-fi.com/freechatgpt" target="_blank">
-                  <img src="/kofi.svg" alt="Support us through the Ko-fi platform." />
-              </a>
-              <p>Thank you for being a part of our community, and we look forward to serving you better in the future.</p>
+              <p>{t('privacyStatement.paragraph2', { ns: 'about' })}</p>
+              <h2 className='text-lg font-bold'>
+                {t('support.title', { ns: 'about' })}
+              </h2>
+              <p>{t('support.paragraph1', { ns: 'about' })}</p>
+              <p>
+                <Trans
+                  i18nKey='support.paragraph2'
+                  ns='about'
+                  components={[
+                    <a
+                      href='https://github.com/ztjhz/ChatGPTFreeApp/'
+                      target='_blank'
+                      className='link'
+                    />,
+                  ]}
+                />
+              </p>
+              <p>{t('support.paragraph3', { ns: 'about' })}</p>
+              <div className='flex flex-col items-center gap-4 my-4'>
+                <a href='https://ko-fi.com/freechatgpt' target='_blank'>
+                  <img
+                    src='/kofi.svg'
+                    alt='Support us through the Ko-fi platform.'
+                  />
+                </a>
+                <div className='flex gap-x-10 gap-y-4 flex-wrap justify-center'>
+                  <div className='flex flex-col items-center justify-center gap-1'>
+                    <div>{t('support.alipay', { ns: 'about' })} (Ayaka)</div>
+                    <img
+                      className='rounded-md w-32 h-32'
+                      src='https://ayaka14732.github.io/sponsor/alipay.jpg'
+                      alt='Support us through Alipay'
+                    />
+                  </div>
+                  <div className='flex flex-col items-center justify-center gap-1'>
+                    <div>{t('support.wechatPay', { ns: 'about' })} (Ayaka)</div>
+                    <img
+                      className='rounded-md w-32 h-32'
+                      src='https://ayaka14732.github.io/sponsor/wechat.png'
+                      alt='Support us through WeChat Pay'
+                    />
+                  </div>
+                </div>
+              </div>
+              <p className='text-center'>
+                {t('support.paragraph4', { ns: 'about' })}
+              </p>
             </div>
           </div>
         </PopupModal>

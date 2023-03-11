@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation, Trans } from 'react-i18next';
 import useStore from '@store/store';
 
 import PopupModal from '@components/PopupModal';
@@ -10,6 +11,8 @@ const ApiMenu = ({
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const { t } = useTranslation(['main', 'api']);
+
   const apiKey = useStore((state) => state.apiKey);
   const setApiKey = useStore((state) => state.setApiKey);
   const apiFree = useStore((state) => state.apiFree);
@@ -50,7 +53,7 @@ const ApiMenu = ({
 
   return isModalOpen ? (
     <PopupModal
-      title='API'
+      title={t('api') as string}
       setIsModalOpen={setIsModalOpen}
       handleConfirm={handleSave}
       handleClose={handleClose}
@@ -64,26 +67,28 @@ const ApiMenu = ({
             onChange={() => _setApiFree(true)}
           />
           <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-            Use free API endpoint
+            {t('apiEndpoint.option', { ns: 'api' })}
           </label>
         </div>
 
         {_apiFree && (
           <div className='mt-2 mb-6'>
             <div className='text-sm font-medium text-gray-900 dark:text-gray-300 mb-2'>
-              Use free API endpoint from{' '}
-              <a
-                href='https://github.com/ayaka14732/ChatGPTAPIFree'
-                className='underline dark:hover:text-white hover:text-black'
-                target='_blank'
-              >
-                Ayaka
-              </a>
-              : https://chatgpt-api.shn.hk/v1/ or enter your own API endpoint
+              <Trans
+                i18nKey='apiEndpoint.description'
+                ns='api'
+                components={[
+                  <a
+                    href='https://github.com/ayaka14732/ChatGPTAPIFree'
+                    className='link'
+                    target='_blank'
+                  />,
+                ]}
+              />
             </div>
             <div className='flex gap-2 items-center justify-center'>
               <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
-                Free API Endpoint
+                {t('apiEndpoint.inputLabel', { ns: 'api' })}
               </div>
               <input
                 type='text'
@@ -106,14 +111,14 @@ const ApiMenu = ({
             onChange={() => _setApiFree(false)}
           />
           <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-            Use your own API key
+            {t('apiKey.option', { ns: 'api' })}
           </label>
         </div>
 
         {_apiFree === false && (
           <div className='flex gap-2 items-center justify-center mt-2'>
             <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
-              API Key
+              {t('apiEndpoint.inputLabel', { ns: 'api' })}
             </div>
             <input
               type='text'
@@ -127,21 +132,20 @@ const ApiMenu = ({
         )}
 
         <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm mt-4 text-center'>
-          Get your personal API key{' '}
-          <a
-            className='link'
-            href='https://platform.openai.com/account/api-keys'
-            target='_blank'
-          >
-            here
-          </a>
+          <Trans
+            i18nKey='apiKey.howTo'
+            ns='api'
+            components={[
+              <a
+                href='https://platform.openai.com/account/api-keys'
+                className='link'
+                target='_blank'
+              />,
+            ]}
+          />
         </div>
         <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm mt-4'>
-          We prioritise the security of your API key and handle it with utmost
-          care. Your key is exclusively stored on your browser and never shared
-          with any third-party entity. It is solely used for the intended
-          purpose of accessing the OpenAI API and not for any other unauthorised
-          use.
+          {t('securityMessage', { ns: 'api' })}
         </div>
       </div>
     </PopupModal>

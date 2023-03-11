@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
 
 import DownChevronArrow from '@icon/DownChevronArrow';
@@ -14,6 +15,7 @@ const RoleSelector = React.memo(
     messageIndex: number;
     sticky?: boolean;
   }) => {
+    const { t } = useTranslation();
     const setInputRole = useStore((state) => state.setInputRole);
     const setChats = useStore((state) => state.setChats);
     const currentChatIndex = useStore((state) => state.currentChatIndex);
@@ -27,7 +29,7 @@ const RoleSelector = React.memo(
           type='button'
           onClick={() => setDropDown((prev) => !prev)}
         >
-          {role.charAt(0).toUpperCase() + role.slice(1)}
+          {t(role)}
           <DownChevronArrow />
         </button>
         <div
@@ -58,7 +60,7 @@ const RoleSelector = React.memo(
                 }}
                 key={r}
               >
-                {r.charAt(0).toUpperCase() + r.slice(1)}
+                {t(r)}
               </li>
             ))}
           </ul>
