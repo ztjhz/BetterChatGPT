@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="223px" height="30px" viewBox="0 0 223 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
-    <title>Artboard</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <title>Kofi button</title>
+    <g id="Kofi" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <rect id="Rectangle" fill="#FF5E5B" x="0" y="0" width="223" height="30" rx="8"></rect>
         <g id="Group" transform="translate(24.000000, 7.000000)" fill-rule="nonzero">
             <path d="M17.417931,-1.74615877e-12 L19.0255476,-1.74615877e-12 C22.126324,-1.74672838e-12 24.64,2.51367595 24.64,5.61445238 L24.64,5.94446654 C24.64,9.04524297 22.126324,11.5589189 19.0255476,11.5589189 L17.417931,11.5589189 L17.417931,13.2487143 C17.417931,14.6798419 16.2577729,15.84 14.8266453,15.84 L2.59128571,15.84 C1.16015813,15.84 -2.90320252e-13,14.6798419 -2.91766611e-13,13.2487143 L-2.91544566e-13,1.29564286 C-2.91632198e-13,0.580079066 0.580079066,-1.74624937e-12 1.29564286,-1.74638082e-12 L17.417931,-1.74615877e-12 Z M17.417931,2.99675676 L17.417931,8.56216216 L18.8835042,8.56216216 C20.4203485,8.56216216 21.6662069,7.31630373 21.6662069,5.77945946 C21.6662069,4.24261519 20.4203485,2.99675676 18.8835042,2.99675676 L17.417931,2.99675676 Z" id="Rectangle-2" fill="#FFFFFF"></path>
