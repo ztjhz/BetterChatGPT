@@ -79,7 +79,7 @@ const ApiMenu = ({
               >
                 Ayaka
               </a>
-              : https://chatgpt-api.shn.hk/v1/ or enter your own API endpoint
+              : https://chatgpt-api-huuz62kfra-as.a.run.app/v1/ or enter your own API endpoint
             </div>
             <div className='flex gap-2 items-center justify-center'>
               <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
@@ -89,7 +89,7 @@ const ApiMenu = ({
                 type='text'
                 className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md m-0 w-full mr-0 h-8 focus:outline-none'
                 value={_apiFreeEndpoint}
-                placeholder='https://chatgpt-api.shn.hk/v1/'
+                placeholder='https://chatgpt-api-huuz62kfra-as.a.run.app/v1/'
                 onChange={(e) => {
                   _setApiFreeEndpoint(e.target.value);
                 }}
