@@ -12,101 +12,99 @@ import ImageIcon from '@icon/ImageIcon';
 import PdfIcon from '@icon/PdfIcon';
 import MarkdownIcon from '@icon/MarkdownIcon';
 
-const DownloadChat = ({
-  saveRef,
-}: {
-  saveRef: React.RefObject<HTMLDivElement>;
-}) => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  return (
-    <>
-      <button
-        className='btn btn-neutral'
-        onClick={() => {
-          setIsModalOpen(true);
-        }}
-      >
-        Download Chat
-      </button>
-      {isModalOpen && (
-        <PopupModal
-          setIsModalOpen={setIsModalOpen}
-          title='Download Chat'
-          cancelButton={false}
+const DownloadChat = React.memo(
+  ({ saveRef }: { saveRef: React.RefObject<HTMLDivElement> }) => {
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    return (
+      <>
+        <button
+          className='btn btn-neutral'
+          onClick={() => {
+            setIsModalOpen(true);
+          }}
         >
-          <div className='p-6 border-b border-gray-200 dark:border-gray-600 flex gap-4'>
-            <button
-              className='btn btn-neutral gap-2'
-              onClick={async () => {
-                if (saveRef && saveRef.current) {
-                  const imgData = await htmlToImg(saveRef.current);
-                  downloadImg(
-                    imgData,
-                    `${
-                      useStore
-                        .getState()
-                        .chats?.[
-                          useStore.getState().currentChatIndex
-                        ].title.trim() ?? 'download'
-                    }.png`
-                  );
-                }
-              }}
-            >
-              <ImageIcon />
-              Image
-            </button>
-            <button
-              className='btn btn-neutral gap-2'
-              onClick={async () => {
-                if (saveRef && saveRef.current) {
-                  const imgData = await htmlToImg(saveRef.current);
-                  downloadPDF(
-                    imgData,
-                    useStore.getState().theme,
-                    `${
-                      useStore
-                        .getState()
-                        .chats?.[
-                          useStore.getState().currentChatIndex
-                        ].title.trim() ?? 'download'
-                    }.pdf`
-                  );
-                }
-              }}
-            >
-              <PdfIcon />
-              PDF
-            </button>
-            <button
-              className='btn btn-neutral gap-2'
-              onClick={async () => {
-                if (saveRef && saveRef.current) {
-                  const chats = useStore.getState().chats;
-                  if (chats) {
-                    const markdown = chatToMarkdown(
-                      chats[useStore.getState().currentChatIndex]
-                    );
-                    downloadMarkdown(
-                      markdown,
+          Download Chat
+        </button>
+        {isModalOpen && (
+          <PopupModal
+            setIsModalOpen={setIsModalOpen}
+            title='Download Chat'
+            cancelButton={false}
+          >
+            <div className='p-6 border-b border-gray-200 dark:border-gray-600 flex gap-4'>
+              <button
+                className='btn btn-neutral gap-2'
+                onClick={async () => {
+                  if (saveRef && saveRef.current) {
+                    const imgData = await htmlToImg(saveRef.current);
+                    downloadImg(
+                      imgData,
                       `${
-                        chats[
-                          useStore.getState().currentChatIndex
-                        ].title.trim() ?? 'download'
-                      }.md`
+                        useStore
+                          .getState()
+                          .chats?.[
+                            useStore.getState().currentChatIndex
+                          ].title.trim() ?? 'download'
+                      }.png`
                     );
                   }
-                }
-              }}
-            >
-              <MarkdownIcon />
-              Markdown
-            </button>
-          </div>
-        </PopupModal>
-      )}
-    </>
-  );
-};
+                }}
+              >
+                <ImageIcon />
+                Image
+              </button>
+              <button
+                className='btn btn-neutral gap-2'
+                onClick={async () => {
+                  if (saveRef && saveRef.current) {
+                    const imgData = await htmlToImg(saveRef.current);
+                    downloadPDF(
+                      imgData,
+                      useStore.getState().theme,
+                      `${
+                        useStore
+                          .getState()
+                          .chats?.[
+                            useStore.getState().currentChatIndex
+                          ].title.trim() ?? 'download'
+                      }.pdf`
+                    );
+                  }
+                }}
+              >
+                <PdfIcon />
+                PDF
+              </button>
+              <button
+                className='btn btn-neutral gap-2'
+                onClick={async () => {
+                  if (saveRef && saveRef.current) {
+                    const chats = useStore.getState().chats;
+                    if (chats) {
+                      const markdown = chatToMarkdown(
+                        chats[useStore.getState().currentChatIndex]
+                      );
+                      downloadMarkdown(
+                        markdown,
+                        `${
+                          chats[
+                            useStore.getState().currentChatIndex
+                          ].title.trim() ?? 'download'
+                        }.md`
+                      );
+                    }
+                  }
+                }}
+              >
+                <MarkdownIcon />
+                Markdown
+              </button>
+            </div>
+          </PopupModal>
+        )}
+      </>
+    );
+  }
+);
 
 export default DownloadChat;

@@ -58,14 +58,14 @@ const ChatContent = () => {
             <ChatTitle />
             {messages?.length === 0 && <NewMessageButton messageIndex={-1} />}
             {messages?.map((message, index) => (
-              <>
+              <React.Fragment key={index}>
                 <Message
                   role={message.role}
                   content={message.content}
                   messageIndex={index}
                 />
                 <NewMessageButton messageIndex={index} />
-              </>
+              </React.Fragment>
             ))}
           </div>
 

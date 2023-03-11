@@ -3,7 +3,7 @@ import { Role } from '@type/chat';
 import SettingIcon from '@icon/SettingIcon';
 import PersonIcon from '@icon/PersonIcon';
 
-const Avatar = ({ role }: { role: Role }) => {
+const Avatar = React.memo(({ role }: { role: Role }) => {
   return (
     <div className='w-[30px] flex flex-col relative items-end'>
       {role === 'user' && <UserAvatar />}
@@ -11,7 +11,7 @@ const Avatar = ({ role }: { role: Role }) => {
       {role === 'system' && <SystemAvatar />}
     </div>
   );
-};
+});
 
 const UserAvatar = () => {
   return (
