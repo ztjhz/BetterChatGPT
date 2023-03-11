@@ -53,11 +53,6 @@ const AboutMenu = () => {
                       target='_blank'
                       className='link'
                     />,
-                    <a
-                      href={t('initiative.link1', { ns: 'about' }) as string}
-                      target='_blank'
-                      className='link'
-                    />,
                   ]}
                 />
               </p>
