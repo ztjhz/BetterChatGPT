@@ -18,6 +18,8 @@ export interface ChatInterface {
 export interface ConfigInterface {
   temperature: number;
   presence_penalty: number;
+  top_p: number;
+  frequency_penalty: number;
 }
 
 export interface LocalStorageInterfaceV0ToV1 {

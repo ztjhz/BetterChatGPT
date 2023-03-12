@@ -22,6 +22,8 @@ export const isChats = (chats: any): chats is ChatInterface[] => {
     if (!(typeof chat.config === 'object')) return false;
     if (!(typeof chat.config.temperature === 'number')) return false;
     if (!(typeof chat.config.presence_penalty === 'number')) return false;
+    if (!(typeof chat.config.top_p === 'number')) return false;
+    if (!(typeof chat.config.frequency_penalty === 'number')) return false;
   }
 
   return true;

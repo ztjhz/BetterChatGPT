@@ -55,7 +55,13 @@ const ChatTitle = React.memo(() => {
           {t('temperature.label')}: {config.temperature}
         </div>
         <div className='text-center p-1 rounded-md bg-gray-900/10 hover:bg-gray-900/50'>
+          {t('topP.label')}: {config.top_p}
+        </div>
+        <div className='text-center p-1 rounded-md bg-gray-900/10 hover:bg-gray-900/50'>
           {t('presencePenalty.label')}: {config.presence_penalty}
+        </div>
+        <div className='text-center p-1 rounded-md bg-gray-900/10 hover:bg-gray-900/50'>
+          {t('frequencyPenalty.label')}: {config.frequency_penalty}
         </div>
       </div>
       {isModalOpen && (
