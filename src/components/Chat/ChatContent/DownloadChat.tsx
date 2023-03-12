@@ -30,7 +30,7 @@ const DownloadChat = React.memo(
         {isModalOpen && (
           <PopupModal
             setIsModalOpen={setIsModalOpen}
-            title='Download Chat'
+            title={t('downloadChat') as string}
             cancelButton={false}
           >
             <div className='p-6 border-b border-gray-200 dark:border-gray-600 flex gap-4'>

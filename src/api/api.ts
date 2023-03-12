@@ -3,13 +3,17 @@ import { ConfigInterface, MessageInterface } from '@type/chat';
 export const getChatCompletion = async (
   endpoint: string,
   messages: MessageInterface[],
-  config: ConfigInterface
+  config: ConfigInterface,
+  apiKey?: string
 ) => {
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+  };
+  if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
+
   const response = await fetch(endpoint, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify({
       model: 'gpt-3.5-turbo',
       messages,
@@ -25,13 +29,17 @@ export const getChatCompletion = async (
 export const getChatCompletionStream = async (
   endpoint: string,
   messages: MessageInterface[],
-  config: ConfigInterface
+  config: ConfigInterface,
+  apiKey?: string
 ) => {
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+  };
+  if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
+
   const response = await fetch(endpoint, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify({
       model: 'gpt-3.5-turbo',
       messages,

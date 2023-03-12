@@ -22,8 +22,7 @@
 <a href="https://github.com/ztjhz/ChatGPTFreeApp/pulls" target="blank">
 <img src="https://img.shields.io/github/issues-pr/ztjhz/ChatGPTFreeApp?style=flat-square" alt="pull-requests"/>
 </a>
-<a href="https://twitter.com/intent/tweet?text=👋请检查这个惊人的存储库 https://github.com/ztjhz/ChatGPTFreeApp，由@nikushii_创建。"><img src="https://img.shields.io/twitter/url?label=分享到推特
-&style=social&url=https%3A%2F%2Fgithub.com%ztjhz%2FChatGPTFreeApp"></a>
+<a href="https://twitter.com/intent/tweet?text=👋请检查这个惊人的存储库 https://github.com/ztjhz/ChatGPTFreeApp，由@nikushii_创建。"><img src="https://img.shields.io/twitter/url?label=%E5%88%86%E4%BA%AB%E5%88%B0%E6%8E%A8%E7%89%B9&style=social&url=https%3A%2F%2Fgithub.com%2Fztjhz%2FChatGPTFreeApp"></a>
 </p>
 
 <p align="center">
@@ -75,7 +74,7 @@
 
 - 💾 所有聊天记录都会自动备份到您的浏览器本地存储器中
 - 📥 轻松导入和导出聊天数据 JSON 文件。
-- 📥 下载您的整个聊天记录，以 markdown，pdf 或图像的形式。
+- 📥 下载您的整个聊天记录，以 markdown，pdf 或图片的形式。
 
 ### UI / UX
 

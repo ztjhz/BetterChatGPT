@@ -19,7 +19,7 @@ const Config = () => {
         <PersonIcon />
         {t('api')}: {apiFree ? t('free') : t('personal')}
       </a>
-      <ApiMenu isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      {isModalOpen && <ApiMenu setIsModalOpen={setIsModalOpen} />}
     </>
   );
 };

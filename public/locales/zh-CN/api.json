@@ -2,12 +2,13 @@
   "securityMessage": "我们高度优先考虑您的 API 密钥的安全，并非常小心地处理它。您的密钥将专门存储在您的浏览器中，并且永远不会与任何第三方实体共享。它仅用于访问 OpenAI API 的预期用途，而不是用于任何其他未经授权的用途。",
   "apiEndpoint": {
     "option": "使用免费的 API 端点",
-    "inputLabel": "免费的 API 端点",
-    "description": "使用 <0>Ayaka</0> 提供的免费 API 端点：https://chatgpt-api.shn.hk/v1/，或输入您自己的 API 端点"
+    "inputLabel": "API 端点",
+    "description": "感谢 <0>Ayaka</0> 提供免费的 API 终端： https://chatgpt-api.shn.hk/v1/。"
   },
   "apiKey": {
     "option": "使用自己的 API 密钥",
     "howTo": "在<0>这里</0>获取您的个人 API 密钥",
     "inputLabel": "API 密钥"
-  }
+  },
+  "customEndpoint": "使用自定义端点"
 }

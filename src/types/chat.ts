@@ -20,11 +20,21 @@ export interface ConfigInterface {
   presence_penalty: number;
 }
 
-export interface LocalStorageInterface {
+export interface LocalStorageInterfaceV0ToV1 {
   chats: ChatInterface[];
   currentChatIndex: number;
   apiKey: string;
   apiFree: boolean;
   apiFreeEndpoint: string;
+  theme: Theme;
+}
+
+export interface LocalStorageInterfaceV1ToV2 {
+  chats: ChatInterface[];
+  currentChatIndex: number;
+  apiKey: string;
+  apiFree: boolean;
+  apiFreeEndpoint: string;
+  apiEndpoint?: string;
   theme: Theme;
 }

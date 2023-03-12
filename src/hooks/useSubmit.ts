@@ -1,14 +1,7 @@
 import React from 'react';
 import useStore from '@store/store';
 import { ChatInterface, MessageInterface } from '@type/chat';
-import {
-  getChatCompletionStream as getChatCompletionStreamFree,
-  getChatCompletion as getChatCompletionFree,
-} from '@api/freeApi';
-import {
-  getChatCompletionStream as getChatCompletionStreamCustom,
-  getChatCompletion as getChatCompletionCustom,
-} from '@api/customApi';
+import { getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
 import { limitMessageTokens } from '@utils/messageUtils';
 import { defaultChatConfig } from '@constants/chat';
@@ -28,13 +21,18 @@ const useSubmit = () => {
   ): Promise<string> => {
     let data;
     if (apiFree) {
-      data = await getChatCompletionFree(
-        useStore.getState().apiFreeEndpoint,
+      data = await getChatCompletion(
+        useStore.getState().apiEndpoint,
         message,
         defaultChatConfig
       );
     } else if (apiKey) {
-      data = await getChatCompletionCustom(apiKey, message, defaultChatConfig);
+      data = await getChatCompletion(
+        useStore.getState().apiEndpoint,
+        message,
+        defaultChatConfig,
+        apiKey
+      );
     }
     return data.choices[0].message.content;
   };
@@ -62,16 +60,17 @@ const useSubmit = () => {
       if (messages.length === 0) throw new Error('Message exceed max token!');
 
       if (apiFree) {
-        stream = await getChatCompletionStreamFree(
-          useStore.getState().apiFreeEndpoint,
+        stream = await getChatCompletionStream(
+          useStore.getState().apiEndpoint,
           messages,
           chats[currentChatIndex].config
         );
       } else if (apiKey) {
-        stream = await getChatCompletionStreamCustom(
-          apiKey,
+        stream = await getChatCompletionStream(
+          useStore.getState().apiEndpoint,
           messages,
-          chats[currentChatIndex].config
+          chats[currentChatIndex].config,
+          apiKey
         );
       } else {
         throw new Error('No API key supplied! Please check your API settings.');
@@ -132,7 +131,7 @@ const useSubmit = () => {
           content: `Generate a title in less than 6 words for the following message:\nUser: ${user_message}\nAssistant: ${assistant_message}`,
         };
 
-        let title = await generateTitle([message]);
+        let title = (await generateTitle([message])).trim();
         if (title.startsWith('"') && title.endsWith('"')) {
           title = title.slice(1, -1);
         }

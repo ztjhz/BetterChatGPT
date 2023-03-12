@@ -1,6 +1,7 @@
 <h1 align="center"><b>ChatGPT Free App</b></h1>
 
 <p align="center">
+   English Version |
    <a href="README-zh_CN.md">
       简体中文版
    </a>
@@ -28,7 +29,7 @@
 <a href="https://github.com/ztjhz/ChatGPTFreeApp/pulls" target="blank">
 <img src="https://img.shields.io/github/issues-pr/ztjhz/ChatGPTFreeApp?style=flat-square" alt="pull-requests"/>
 </a>
-<a href="https://twitter.com/intent/tweet?text=👋%20Check%20this%20amazing%20repo%20https://github.com/ztjhz/ChatGPTFreeApp,%20created%20by%20@nikushii_"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%ztjhz%2FChatGPTFreeApp"></a>
+<a href="https://twitter.com/intent/tweet?text=👋%20Check%20this%20amazing%20repo%20https://github.com/ztjhz/ChatGPTFreeApp,%20created%20by%20@nikushii_"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%2Fztjhz%2FChatGPTFreeApp"></a>
 </p>
 
 <p align="center">

@@ -6,10 +6,14 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 export const i18nLanguages = ['en', 'zh-CN'];
 
-i18n.use(Backend).use(LanguageDetector).use(initReactI18next).init({
-  fallbackLng: 'en',
-  ns: 'main',
-  defaultNS: 'main',
-});
+i18n
+  .use(Backend)
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    fallbackLng: 'en',
+    ns: ['main', 'api', 'about', 'model'],
+    defaultNS: 'main',
+  });
 
 export default i18n;
