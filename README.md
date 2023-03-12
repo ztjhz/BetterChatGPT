@@ -1,6 +1,12 @@
 <h1 align="center"><b>ChatGPT Free App</b></h1>
 
 <p align="center">
+   <a href="README-zh_CN.md">
+      简体中文版
+   </a>
+</p>
+
+<p align="center">
 <img src="public/apple-touch-icon.png" alt="chatgpt-free-app" width="100" />
 </p>
 
@@ -24,11 +30,6 @@
 </a>
 <a href="https://twitter.com/intent/tweet?text=👋%20Check%20this%20amazing%20repo%20https://github.com/ztjhz/ChatGPTFreeApp,%20created%20by%20@nikushii_"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%ztjhz%2FChatGPTFreeApp"></a>
 </p>
-<p align="center">
-    <a href="https://ko-fi.com/freechatgpt" target="_blank">
-        <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="support" />
-    </a>
-</p>
 
 <p align="center">
     <a href="https://freechatgpt.chat">View Demo</a>
@@ -43,7 +44,7 @@
 
 <p align="center">
     <a href="https://freechatgpt.chat" target="_blank">
-        <img src="public/landing.png" alt="landing" width=600 />
+        <img src="assets/preview.png" alt="landing" width=500 />
     </a>
 </p>
 
@@ -57,14 +58,34 @@ Whether you're looking to chat with a virtual assistant, improve your language s
 
 `ChatGPTFreeApp` comes with a bundle of features already. You can do the followings with it,
 
-- 🌐 Access ChatGPT from anywhere in the world, completely free of charge.
-- 📝 Create and edit messages from the perspectives of the system, assistant, and user.
-- 📝 Customise model parameters such as temperature to achieve an unexpected outcome.
-- 🔀 Change the order of messages to suit your needs and preferences.
+### General
+
+- 🌐 Access ChatGPT from anywhere in the world, completely **FREE** of charge!
+- 🤖 Engage in natural and dynamic conversation with a cutting-edge chatbot.
+- 😂 Choose from a variety of fun and engaging chatbot personalities.
+
+### Chat
+
+- ✏️ Create and edit messages from multiple perspectives (system / assistant / user).
+- 🖥️ Tweak model parameters such as temperature to achieve an unexpected outcome.
+- 🔀 Change the order of messages to suit your needs.
 - ➕ Add new messages in between old ones for a seamless conversation flow.
-- 💬 Utilise a wide range of languages to ensure maximum accessibility.
-- 🤖 Engage in natural and dynamic conversation thanks to ChatGPT's advanced conversational AI.
-- 🎮 Fun and engaging chatbot personalities to add an element of entertainment to conversations.
+
+### API
+
+- ⚙️ Supply your own API key to surpass limits of free API endpoint
+- ⚙️ Customise your own API proxy endpoint
+
+### Data management
+
+- 💾 All chat history are automatically backed up to your browser's local storage
+- 📥 Easily import and export chat data as a JSON file.
+- 📥 Download your entire chat log as markdown, pdf or image.
+
+### UI / UX
+
+- 💬 Supports multiple languages to ensure maximum accessibility (i18n).
+- 😊 Enjoy a UI that is identical to the official ChatGPT
 
 ## 🛠️ Usage
 
@@ -74,6 +95,24 @@ To get started, simply visit our website at <https://freechatgpt.chat/>. There a
 2. Utilise the free api endpoint provided by [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree)
 3. Host your own API endpoint by following the instructions provided here: <https://github.com/ayaka14732/ChatGPTAPIFree>. Subsequently, enter the API endpoint into the API menu.
 
+# 🙏 Support
+
+At `ChatGPTFreeApp`, we strive to provide you with useful and amazing features around the clock. And just like any project, your support and motivation will be instrumental in helping us keep moving forward!
+
+If you have enjoyed using our app, we kindly ask you to give this project a ⭐️. Your endorsement means a lot to us and encourages us to work harder towards delivering the best possible experience.
+
+If you would like to support the team, consider sponsoring us through one of the methods below. Every contribution, no matter how small, helps us to maintain and improve our service.
+
+| Payment Method | Link                                                                                   |
+| -------------- | -------------------------------------------------------------------------------------- |
+| KoFi           | [![support](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/freechatgpt) |
+| Alipay (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/alipay.jpg" width=150 />                |
+| Wechat (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/wechat.png" width=150 />                |
+
+Thank you for being a part of our community, and we look forward to serving you better in the future.
+
+---
+
 ## 🛫 Host your own Instance
 
 If you'd like to run your own instance of `ChatGPTFreeApp`, you can easily do so by following these steps:
@@ -81,7 +120,7 @@ If you'd like to run your own instance of `ChatGPTFreeApp`, you can easily do so
 ### Steps
 
 1. Create a GitHub account (if you don't have one already)
-2. Star this [repository](https://github.com/ztjhz/ChatGPTFreeApp) if you have not done so
+2. Star this [repository](https://github.com/ztjhz/ChatGPTFreeApp) ⭐️
 3. Fork this [repository](https://github.com/ztjhz/ChatGPTFreeApp)
 4. In your forked repository, click on `Actions`
    ![image](https://user-images.githubusercontent.com/59118459/223751928-cf2b91b9-4663-4a36-97de-5eb751b32c7e.png)
@@ -105,22 +144,6 @@ If you'd like to run your own instance of `ChatGPTFreeApp`, you can easily do so
 3. Navigate into the directory by running `cd ChatGPTFreeApp`
 4. Run `yarn` or `npm install`, depending on whether you have yarn or npm installed.
 5. Launch the app by running `yarn dev` or `npm run dev`
-
-# 🙏 Support
-
-At `ChatGPTFreeApp`, we strive to provide you with useful and amazing features around the clock. And just like any project, your support and motivation will be instrumental in helping us keep moving forward!
-
-If you have enjoyed using our app, we kindly ask you to give this project a ⭐️. Your endorsement means a lot to us and encourages us to work harder towards delivering the best possible experience.
-
-If you would like to support the team, consider sponsoring us through one of the methods below. Every contribution, no matter how small, helps us to maintain and improve our service.
-
-| Payment Method | Link                                                                                   |
-| -------------- | -------------------------------------------------------------------------------------- |
-| KoFi           | [![support](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/freechatgpt) |
-| Alipay (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/alipay.jpg" width=150 />                |
-| Wechat (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/wechat.png" width=150 />                |
-
-Thank you for being a part of our community, and we look forward to serving you better in the future.
 
 ---
 
