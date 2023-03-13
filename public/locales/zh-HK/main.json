@@ -1,11 +1,11 @@
 {
   "save": "儲存",
-  "saveAndSubmit": "儲存同提交",
+  "saveAndSubmit": "儲存並提交",
   "cancel": "取消",
   "confirm": "確認",
   "warning": "警告",
   "clearMessageWarning": "請注意，提交呢條訊息之後，所有後續訊息都將被刪除！",
-  "clearConversationWarning": "請注意，確認呢個操作將刪除所有訊息！",
+  "clearConversationWarning": "請注意，呢個操作會刪晒所有訊息！",
   "clearConversation": "清空傾偈",
   "import": "匯入",
   "export": "匯出",
