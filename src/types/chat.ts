@@ -40,3 +40,13 @@ export interface LocalStorageInterfaceV1ToV2 {
   apiEndpoint?: string;
   theme: Theme;
 }
+
+export interface LocalStorageInterfaceV2ToV3 {
+  chats: ChatInterface[];
+  currentChatIndex: number;
+  apiKey: string;
+  apiFree: boolean;
+  apiFreeEndpoint: string;
+  apiEndpoint?: string;
+  theme: Theme;
+}
