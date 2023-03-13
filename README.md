@@ -1,4 +1,4 @@
-<h1 align="center"><b>ChatGPT Free App</b></h1>
+<h1 align="center"><b>Free ChatGPT</b></h1>
 
 <p align="center">
    English Version |
@@ -8,40 +8,40 @@
 </p>
 
 <p align="center">
-<img src="public/apple-touch-icon.png" alt="chatgpt-free-app" width="100" />
+<img src="public/apple-touch-icon.png" alt="Free ChatGPT" width="100" />
 </p>
 
 <h4 align="center"><b>Free, Powerful, Limitless, Intelligent, Engaging</b></h4>
 
 <p align="center">
-<a href="https://github.com/ztjhz/ChatGPTFreeApp/blob/main/LICENSE" target="blank">
-<img src="https://img.shields.io/github/license/ztjhz/ChatGPTFreeApp?style=flat-square" alt="licence" />
+<a href="https://github.com/ztjhz/FreeChatGPT/blob/main/LICENSE" target="blank">
+<img src="https://img.shields.io/github/license/ztjhz/FreeChatGPT?style=flat-square" alt="licence" />
 </a>
-<a href="https://github.com/ztjhz/ChatGPTFreeApp/fork" target="blank">
-<img src="https://img.shields.io/github/forks/ztjhz/ChatGPTFreeApp?style=flat-square" alt="forks"/>
+<a href="https://github.com/ztjhz/FreeChatGPT/fork" target="blank">
+<img src="https://img.shields.io/github/forks/ztjhz/FreeChatGPT?style=flat-square" alt="forks"/>
 </a>
-<a href="https://github.com/ztjhz/ChatGPTFreeApp/stargazers" target="blank">
-<img src="https://img.shields.io/github/stars/ztjhz/ChatGPTFreeApp?style=flat-square" alt="stars"/>
+<a href="https://github.com/ztjhz/FreeChatGPT/stargazers" target="blank">
+<img src="https://img.shields.io/github/stars/ztjhz/FreeChatGPT?style=flat-square" alt="stars"/>
 </a>
-<a href="https://github.com/ztjhz/ChatGPTFreeApp/issues" target="blank">
-<img src="https://img.shields.io/github/issues/ztjhz/ChatGPTFreeApp?style=flat-square" alt="issues"/>
+<a href="https://github.com/ztjhz/FreeChatGPT/issues" target="blank">
+<img src="https://img.shields.io/github/issues/ztjhz/FreeChatGPT?style=flat-square" alt="issues"/>
 </a>
-<a href="https://github.com/ztjhz/ChatGPTFreeApp/pulls" target="blank">
-<img src="https://img.shields.io/github/issues-pr/ztjhz/ChatGPTFreeApp?style=flat-square" alt="pull-requests"/>
+<a href="https://github.com/ztjhz/FreeChatGPT/pulls" target="blank">
+<img src="https://img.shields.io/github/issues-pr/ztjhz/FreeChatGPT?style=flat-square" alt="pull-requests"/>
 </a>
-<a href="https://twitter.com/intent/tweet?text=👋%20Check%20this%20amazing%20repo%20https://github.com/ztjhz/ChatGPTFreeApp,%20created%20by%20@nikushii_"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%2Fztjhz%2FChatGPTFreeApp"></a>
+<a href="https://twitter.com/intent/tweet?text=👋%20Check%20this%20amazing%20repo%20https://github.com/ztjhz/FreeChatGPT,%20created%20by%20@nikushii_"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%2Fztjhz%2FFreeChatGPT"></a>
 </p>
 
 <p align="center">
     <a href="https://freechatgpt.chat">View Demo</a>
     ·
-    <a href="https://github.com/ztjhz/ChatGPTFreeApp/issues/new/choose">Report Bug</a>
+    <a href="https://github.com/ztjhz/FreeChatGPT/issues/new/choose">Report Bug</a>
     ·
-    <a href="https://github.com/ztjhz/ChatGPTFreeApp/issues/new/choose">Request Feature</a>
+    <a href="https://github.com/ztjhz/FreeChatGPT/issues/new/choose">Request Feature</a>
 </p>
-<p align="center"><i>Did you enjoy using ChatGPTFreeApp? Give it some love with a star! 🌟</i></p>
+<p align="center"><i>Did you enjoy using Free ChatGPT? Give it some love with a star! 🌟</i></p>
 
-## 👋🏻 Introducing `ChatGPTFreeApp`
+## 👋🏻 Introducing Free ChatGPT
 
 <p align="center">
     <a href="https://freechatgpt.chat" target="_blank">
@@ -49,15 +49,15 @@
     </a>
 </p>
 
-Are you ready to unlock the full potential of ChatGPT with `ChatGPTFreeApp`?
+Are you ready to unlock the full potential of ChatGPT with Free ChatGPT?
 
-`ChatGPTFreeApp` is the ultimate destination for anyone who wants to experience the limitless power of conversational AI. With no limits and completely free to use for all, our app harnesses the full potential of OpenAI's ChatGPT API to offer you an unparalleled chatbot experience.
+Free ChatGPT is the ultimate destination for anyone who wants to experience the limitless power of conversational AI. With no limits and completely free to use for all, our app harnesses the full potential of OpenAI's ChatGPT API to offer you an unparalleled chatbot experience.
 
-Whether you're looking to chat with a virtual assistant, improve your language skills, or simply enjoy a fun and engaging conversation, our app has got you covered. So why wait? Join us today and explore the exciting world of `ChatGPTFreeApp`!
+Whether you're looking to chat with a virtual assistant, improve your language skills, or simply enjoy a fun and engaging conversation, our app has got you covered. So why wait? Join us today and explore the exciting world of Free ChatGPT!
 
 ## 🔥 Features
 
-`ChatGPTFreeApp` comes with a bundle of features already. You can do the followings with it,
+Free ChatGPT comes with a bundle of features already. You can do the followings with it,
 
 ### General
 
@@ -90,7 +90,7 @@ Whether you're looking to chat with a virtual assistant, improve your language s
 
 ## 🛠️ Usage
 
-To get started, simply visit our website at <https://freechatgpt.chat/>. There are 3 ways for you to start using `ChatGPTFreeApp`.
+To get started, simply visit our website at <https://freechatgpt.chat/>. There are 3 ways for you to start using Free ChatGPT.
 
 1. Enter into the API menu your OpenAI API Key obtained from [OpenAI API Keys](https://platform.openai.com/account/api-keys).
 2. Utilise the free api endpoint provided by [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree)
@@ -98,7 +98,7 @@ To get started, simply visit our website at <https://freechatgpt.chat/>. There a
 
 # 🙏 Support
 
-At `ChatGPTFreeApp`, we strive to provide you with useful and amazing features around the clock. And just like any project, your support and motivation will be instrumental in helping us keep moving forward!
+At Free ChatGPT, we strive to provide you with useful and amazing features around the clock. And just like any project, your support and motivation will be instrumental in helping us keep moving forward!
 
 If you have enjoyed using our app, we kindly ask you to give this project a ⭐️. Your endorsement means a lot to us and encourages us to work harder towards delivering the best possible experience.
 
@@ -116,13 +116,13 @@ Thank you for being a part of our community, and we look forward to serving you 
 
 ## 🛫 Host your own Instance
 
-If you'd like to run your own instance of `ChatGPTFreeApp`, you can easily do so by following these steps:
+If you'd like to run your own instance of Free ChatGPT, you can easily do so by following these steps:
 
 ### Steps
 
 1. Create a GitHub account (if you don't have one already)
-2. Star this [repository](https://github.com/ztjhz/ChatGPTFreeApp) ⭐️
-3. Fork this [repository](https://github.com/ztjhz/ChatGPTFreeApp)
+2. Star this [repository](https://github.com/ztjhz/FreeChatGPT) ⭐️
+3. Fork this [repository](https://github.com/ztjhz/FreeChatGPT)
 4. In your forked repository, click on `Actions`
    ![image](https://user-images.githubusercontent.com/59118459/223751928-cf2b91b9-4663-4a36-97de-5eb751b32c7e.png)
 5. In the left sidebar, click on `Deploy to GitHub Pages`
@@ -141,13 +141,13 @@ If you'd like to run your own instance of `ChatGPTFreeApp`, you can easily do so
    - [node.js](https://nodejs.org/en/)
    - [yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/)
 
-2. Clone this [repository](https://github.com/ztjhz/ChatGPTFreeApp) by running `git clone https://github.com/ztjhz/ChatGPTFreeApp.git`
-3. Navigate into the directory by running `cd ChatGPTFreeApp`
+2. Clone this [repository](https://github.com/ztjhz/FreeChatGPT) by running `git clone https://github.com/ztjhz/FreeChatGPT.git`
+3. Navigate into the directory by running `cd FreeChatGPT`
 4. Run `yarn` or `npm install`, depending on whether you have yarn or npm installed.
 5. Launch the app by running `yarn dev` or `npm run dev`
 
 ---
 
 <h3 align="center">
-A ⭐️ to <b>ChatGPTFreeApp</b> is to make it shine brighter and benefit more people.
+A ⭐️ to <b>Free ChatGPT</b> is to make it shine brighter and benefit more people.
 </h3>
