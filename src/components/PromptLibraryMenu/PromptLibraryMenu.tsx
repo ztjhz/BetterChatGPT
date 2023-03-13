@@ -39,6 +39,7 @@ const PromptLibraryMenuPopUp = ({
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.target.style.height = 'auto';
     e.target.style.height = `${e.target.scrollHeight}px`;
+    e.target.style.maxHeight = `${e.target.scrollHeight}px`;
   };
 
   const handleSave = () => {
@@ -62,13 +63,16 @@ const PromptLibraryMenuPopUp = ({
     _setPrompts(updatedPrompts);
   };
 
-  useEffect(() => {
-    if (container && container.current) {
-      container.current.querySelectorAll('textarea').forEach((elem) => {
-        elem.style.height = `${elem.scrollHeight}px`;
-      });
-    }
-  }, []);
+  const handleOnFocus = (e: React.FocusEvent<HTMLTextAreaElement, Element>) => {
+    e.target.style.height = 'auto';
+    e.target.style.height = `${e.target.scrollHeight}px`;
+    e.target.style.maxHeight = `${e.target.scrollHeight}px`;
+  };
+
+  const handleOnBlur = (e: React.FocusEvent<HTMLTextAreaElement, Element>) => {
+    e.target.style.height = 'auto';
+    e.target.style.maxHeight = '2.5rem';
+  };
 
   return (
     <PopupModal
@@ -79,7 +83,7 @@ const PromptLibraryMenuPopUp = ({
       <div className='p-6 border-b border-gray-200 dark:border-gray-600 w-[90vw] max-w-full text-sm text-gray-900 dark:text-gray-300'>
         <div className='flex flex-col p-2 max-w-full' ref={container}>
           <div className='flex font-bold border-b border-gray-500/50 mb-1 p-1'>
-            <div className='flex-1'>{t('name')}</div>
+            <div className='sm:w-1/4 max-sm:flex-1'>{t('name')}</div>
             <div className='flex-1'>{t('prompt')}</div>
           </div>
           {_prompts.map((prompt, index) => (
@@ -87,9 +91,11 @@ const PromptLibraryMenuPopUp = ({
               key={prompt.id}
               className='flex items-center border-b border-gray-500/50 mb-1 p-1'
             >
-              <div className='flex-1'>
+              <div className='sm:w-1/4 max-sm:flex-1'>
                 <textarea
-                  className='m-0 resize-none rounded-lg bg-transparent overflow-y-hidden leading-7 p-1 focus:ring-1 focus:ring-blue w-full'
+                  className='m-0 resize-none rounded-lg bg-transparent overflow-y-hidden leading-7 p-1 focus:ring-1 focus:ring-blue w-full max-h-10 transition-all'
+                  onFocus={handleOnFocus}
+                  onBlur={handleOnBlur}
                   onChange={(e) => {
                     _setPrompts((prev) => {
                       const newPrompts = [...prev];
@@ -104,7 +110,9 @@ const PromptLibraryMenuPopUp = ({
               </div>
               <div className='flex-1'>
                 <textarea
-                  className='m-0 resize-none rounded-lg bg-transparent overflow-y-hidden leading-7 p-1 focus:ring-1 focus:ring-blue w-full'
+                  className='m-0 resize-none rounded-lg bg-transparent overflow-y-hidden leading-7 p-1 focus:ring-1 focus:ring-blue w-full max-h-10 transition-all'
+                  onFocus={handleOnFocus}
+                  onBlur={handleOnBlur}
                   onChange={(e) => {
                     _setPrompts((prev) => {
                       const newPrompts = [...prev];
@@ -126,8 +134,8 @@ const PromptLibraryMenuPopUp = ({
             </div>
           ))}
         </div>
-        <div className='flex justify-center' onClick={addPrompt}>
-          <PlusIcon className='cursor-pointer' />
+        <div className='flex justify-center cursor-pointer' onClick={addPrompt}>
+          <PlusIcon />
         </div>
         <div className='mt-6 px-2'>
           {t('morePrompts')}
