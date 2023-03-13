@@ -1,0 +1,14 @@
+{
+  "securityMessage": "我哋將你嘅 API 金鑰嘅安全擺喺首位，非常小心噉處理佢。你嘅金鑰將專門儲存喺你嘅瀏覽器入面，並且永遠唔會共享畀任何第三方實體。佢僅用於訪問 OpenAI API 呢項預期用途，唔會用於任何其他未經授權嘅用途。",
+  "apiEndpoint": {
+    "option": "使用免費嘅 API 端點",
+    "inputLabel": "API 端點",
+    "description": "感謝 <0>Ayaka</0> 提供免費嘅 API 端點： https://chatgpt-api.shn.hk/v1/。"
+  },
+  "apiKey": {
+    "option": "使用自己嘅 API 金鑰",
+    "howTo": "喺<0>呢度</0>獲取你嘅個人 API 金鑰",
+    "inputLabel": "API 金鑰"
+  },
+  "customEndpoint": "使用自訂 API 端點"
+}
