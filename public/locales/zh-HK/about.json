@@ -1,0 +1,27 @@
+{
+  "description": "Free ChatGPT 係一款好犀利嘅開源 Web App，佢使用 OpenAI 嘅 ChatGPT API，令到你可以免費同 ChatGPT 傾偈！",
+  "sourceCode": "喺 GitHub 上檢視<0>原始碼</0>同埋畀個 ⭐️ 我哋！",
+  "initiative": {
+    "description": "睇下《<0>開放 ChatGPT 倡議</0>》啦！",
+    "link": "https://medium.com/@ayaka_45434/the-open-chatgpt-initiative-e76b0b62a3ae"
+  },
+  "support": {
+    "title": "支持",
+    "paragraph1": "Free ChatGPT 致力於提供實用同驚人嘅特性，你嘅支持同激勵將鼓勵我哋繼續前行！",
+    "paragraph2": "如果你中意呢款 App，我哋請你喺 <0>GitHub</0> 上面畀個 ⭐️。你嘅認可對我哋非同小可，鼓勵我哋更加努力，不斷提供最佳嘅使用體驗。",
+    "paragraph3": "如果你想支持我哋嘅團隊，你可以透過以下方式贊助我哋。每一分貢獻，無論幾細，都幫助我哋維護同埋改善服務。",
+    "paragraph4": "多謝你成為我哋社群嘅一員，我哋期待喺未來提供更好嘅服務畀你。",
+    "alipay": "支付寶",
+    "wechatPay": "微信"
+  },
+  "discordServer": {
+    "title": "Discord 伺服器",
+    "paragraph1": "歡迎加入我哋嘅 Discord 社羣！呢個 Discord 伺服器係一個風水寶地，可以交流 ChatGPT 嘅靈感同埋技巧，並提交 Free ChatGPT 嘅功能建議。你可以同 Free ChatGPT 嘅開發者同埋其他分享你熱情嘅人工智能愛好者傾偈。",
+    "paragraph2": "要加入我哋嘅伺服器，只需要撳呢條 link：<0>https://discord.gg/g3Qnwy4V6A</0>，我哋好想見到你！"
+  },
+  "privacyStatement": {
+    "title": "私隱聲明",
+    "paragraph1": "我哋非常重視你嘅私隱，並致力於保護用家嘅私隱。我哋唔會以任何形式收集或儲存你鍵入或由 OpenAI 伺服器接收嘅任何文字。我哋嘅原始碼可以供你檢查，以驗證呢項聲明。",
+    "paragraph2": "我哋將你嘅 API 金鑰嘅安全擺喺首位，非常小心噉處理佢。如果你用自己嘅 API 金鑰，你嘅金鑰將專門儲存喺你嘅瀏覽器入面，並且永遠唔會共享畀任何第三方實體。佢僅用於訪問 OpenAI API 呢項預期用途，唔會用於任何其他未經授權嘅用途。"
+  }
+}
