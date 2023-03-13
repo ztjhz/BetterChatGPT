@@ -67,6 +67,7 @@ Free ChatGPT comes with a bundle of features already. You can do the followings 
 
 ### Chat
 
+- 🚀 Streamline your conversation process by using the prompt library.
 - ✏️ Create and edit messages from multiple perspectives (system / assistant / user).
 - 🖥️ Tweak model parameters such as temperature to achieve an unexpected outcome.
 - 🔀 Change the order of messages to suit your needs.
