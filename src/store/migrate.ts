@@ -19,3 +19,10 @@ export const migrateV1 = (persistedState: LocalStorageInterfaceV1ToV2) => {
     persistedState.apiEndpoint = officialAPIEndpoint;
   }
 };
+
+export const migrateV2 = (persistedState: LocalStorageInterfaceV1ToV2) => {
+  persistedState.chats.forEach((chat) => {
+    chat.config.top_p = defaultChatConfig.top_p;
+    chat.config.frequency_penalty = defaultChatConfig.frequency_penalty;
+  });
+};

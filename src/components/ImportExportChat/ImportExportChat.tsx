@@ -6,7 +6,7 @@ import ExportIcon from '@icon/ExportIcon';
 import downloadFile from '@utils/downloadFile';
 import { getToday } from '@utils/date';
 import PopupModal from '@components/PopupModal';
-import { isChats } from '@utils/chat';
+import { validateAndFixChats } from '@utils/chat';
 
 const ImportExportChat = () => {
   const { t } = useTranslation();
@@ -60,7 +60,7 @@ const ImportChat = () => {
 
         try {
           const parsedData = JSON.parse(data);
-          if (isChats(parsedData)) {
+          if (validateAndFixChats(parsedData)) {
             setChats(parsedData);
             setAlert({ message: 'Succesfully imported!', success: true });
           } else {

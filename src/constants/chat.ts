@@ -16,6 +16,8 @@ Current date: ${dateString}`;
 export const defaultChatConfig: ConfigInterface = {
   temperature: 1,
   presence_penalty: 0,
+  top_p: 1,
+  frequency_penalty: 0
 };
 
 export const generateDefaultChat = (title?: string): ChatInterface => ({

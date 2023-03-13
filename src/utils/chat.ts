@@ -1,28 +1,53 @@
 import html2canvas from 'html2canvas';
-import useStore from '@store/store';
 import jsPDF from 'jspdf';
-import { ChatInterface } from '@type/chat';
+import { ChatInterface, ConfigInterface, MessageInterface } from '@type/chat';
 import { roles } from '@type/chat';
 import { Theme } from '@type/theme';
+import { defaultChatConfig } from '@constants/chat';
 
-export const isChats = (chats: any): chats is ChatInterface[] => {
+export const validateAndFixChats = (chats: any): chats is ChatInterface[] => {
   if (!Array.isArray(chats)) return false;
 
   for (const chat of chats) {
     if (!(typeof chat.title === 'string') || chat.title === '') return false;
+
+    if (chat.titleSet === undefined) chat.titleSet = false;
     if (!(typeof chat.titleSet === 'boolean')) return false;
 
-    if (!Array.isArray(chat.messages)) return false;
-    for (const message of chat.messages) {
-      if (!(typeof message.content === 'string')) return false;
-      if (!(typeof message.role === 'string')) return false;
-      if (!roles.includes(message.role)) return false;
-    }
-
-    if (!(typeof chat.config === 'object')) return false;
-    if (!(typeof chat.config.temperature === 'number')) return false;
-    if (!(typeof chat.config.presence_penalty === 'number')) return false;
+    if (!validateMessage(chat.messages)) return false;
+    if (!validateAndFixChatConfig(chat.config)) return false;
   }
+
+  return true;
+};
+
+const validateMessage = (messages: MessageInterface[]) => {
+  if (!Array.isArray(messages)) return false;
+  for (const message of messages) {
+    if (!(typeof message.content === 'string')) return false;
+    if (!(typeof message.role === 'string')) return false;
+    if (!roles.includes(message.role)) return false;
+  }
+  return true;
+};
+
+const validateAndFixChatConfig = (config: ConfigInterface) => {
+  if (config === undefined) config = defaultChatConfig;
+  if (!(typeof config === 'object')) return false;
+
+  if (!config.temperature) config.temperature = defaultChatConfig.temperature;
+  if (!(typeof config.temperature === 'number')) return false;
+
+  if (!config.presence_penalty)
+    config.presence_penalty = defaultChatConfig.presence_penalty;
+  if (!(typeof config.presence_penalty === 'number')) return false;
+
+  if (!config.top_p) config.top_p = defaultChatConfig.top_p;
+  if (!(typeof config.top_p === 'number')) return false;
+
+  if (!config.frequency_penalty)
+    config.frequency_penalty = defaultChatConfig.frequency_penalty;
+  if (!(typeof config.frequency_penalty === 'number')) return false;
 
   return true;
 };

@@ -43,7 +43,7 @@ const ChatTitle = React.memo(() => {
   return config ? (
     <>
       <div
-        className='flex gap-4 flex-wrap w-full items-center justify-center gap-1 border-b border-black/10 bg-gray-50 p-3 text-gray-500 dark:border-gray-900/50 dark:bg-gray-700 dark:text-gray-300 cursor-pointer'
+        className='flex gap-x-4 gap-y-1 flex-wrap w-full items-center justify-center border-b border-black/10 bg-gray-50 p-3 text-gray-500 dark:border-gray-900/50 dark:bg-gray-700 dark:text-gray-300 cursor-pointer'
         onClick={() => {
           setIsModalOpen(true);
         }}
@@ -55,7 +55,13 @@ const ChatTitle = React.memo(() => {
           {t('temperature.label')}: {config.temperature}
         </div>
         <div className='text-center p-1 rounded-md bg-gray-900/10 hover:bg-gray-900/50'>
+          {t('topP.label')}: {config.top_p}
+        </div>
+        <div className='text-center p-1 rounded-md bg-gray-900/10 hover:bg-gray-900/50'>
           {t('presencePenalty.label')}: {config.presence_penalty}
+        </div>
+        <div className='text-center p-1 rounded-md bg-gray-900/10 hover:bg-gray-900/50'>
+          {t('frequencyPenalty.label')}: {config.frequency_penalty}
         </div>
       </div>
       {isModalOpen && (
