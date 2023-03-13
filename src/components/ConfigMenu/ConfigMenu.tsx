@@ -67,8 +67,8 @@ const ConfigMenu = ({
               _setTopP(Number(e.target.value));
             }}
             min={0}
-            max={2}
-            step={0.1}
+            max={1}
+            step={0.05}
             className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
           />
           <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
