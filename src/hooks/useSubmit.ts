@@ -119,7 +119,11 @@ const useSubmit = () => {
 
       // generate title for new chats
       const currChats = useStore.getState().chats;
-      if (currChats && !currChats[currentChatIndex]?.titleSet) {
+      if (
+        useStore.getState().autoTitle &&
+        currChats &&
+        !currChats[currentChatIndex]?.titleSet
+      ) {
         const messages_length = currChats[currentChatIndex].messages.length;
         const assistant_message =
           currChats[currentChatIndex].messages[messages_length - 1].content;

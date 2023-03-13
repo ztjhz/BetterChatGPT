@@ -49,4 +49,5 @@ export interface LocalStorageInterfaceV2ToV3 {
   apiFreeEndpoint: string;
   apiEndpoint?: string;
   theme: Theme;
+  autoTitle: boolean;
 }

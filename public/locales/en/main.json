@@ -22,5 +22,6 @@
   "lightMode": "Light Mode",
   "darkMode": "Dark Mode",
   "setting": "Settings",
-  "image": "Image"
+  "image": "Image",
+  "autoTitle": "Auto generate title"
 }

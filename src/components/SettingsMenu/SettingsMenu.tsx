@@ -6,6 +6,7 @@ import PopupModal from '@components/PopupModal';
 import SettingIcon from '@icon/SettingIcon';
 import ThemeSwitcher from '@components/Menu/MenuOptions/ThemeSwitcher';
 import LanguageSelector from '@components/LanguageSelector';
+import AutoTitleToggle from './AutoTitleToggle';
 
 const SettingsMenu = () => {
   const { t } = useTranslation();
@@ -35,6 +36,7 @@ const SettingsMenu = () => {
           <div className='p-6 border-b border-gray-200 dark:border-gray-600 flex flex-col items-center gap-4'>
             <LanguageSelector />
             <ThemeSwitcher />
+            <AutoTitleToggle />
           </div>
         </PopupModal>
       )}

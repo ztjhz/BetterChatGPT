@@ -35,6 +35,7 @@ const useStore = create<StoreState>()(
         apiFree: state.apiFree,
         apiEndpoint: state.apiEndpoint,
         theme: state.theme,
+        autoTitle: state.autoTitle,
       }),
       version: 3,
       migrate: (persistedState, version) => {

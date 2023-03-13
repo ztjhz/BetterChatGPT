@@ -22,5 +22,6 @@
   "lightMode": "亮色模式",
   "darkMode": "黑暗模式",
   "setting": "设置",
-  "image": "图片"
+  "image": "图片",
+  "autoTitle": "自动生成标题"
 }

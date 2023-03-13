@@ -1,9 +1,10 @@
 import {
   LocalStorageInterfaceV0ToV1,
   LocalStorageInterfaceV1ToV2,
+  LocalStorageInterfaceV2ToV3,
 } from '@type/chat';
 import { defaultChatConfig } from '@constants/chat';
-import { defaultAPIEndpoint, officialAPIEndpoint } from '@constants/auth';
+import { officialAPIEndpoint } from '@constants/auth';
 
 export const migrateV0 = (persistedState: LocalStorageInterfaceV0ToV1) => {
   persistedState.chats.forEach((chat) => {
@@ -20,9 +21,13 @@ export const migrateV1 = (persistedState: LocalStorageInterfaceV1ToV2) => {
   }
 };
 
-export const migrateV2 = (persistedState: LocalStorageInterfaceV1ToV2) => {
+export const migrateV2 = (persistedState: LocalStorageInterfaceV2ToV3) => {
   persistedState.chats.forEach((chat) => {
-    chat.config.top_p = defaultChatConfig.top_p;
-    chat.config.frequency_penalty = defaultChatConfig.frequency_penalty;
+    chat.config = {
+      ...chat.config,
+      top_p: defaultChatConfig.top_p,
+      frequency_penalty: defaultChatConfig.frequency_penalty,
+    };
   });
+  persistedState.autoTitle = false;
 };
