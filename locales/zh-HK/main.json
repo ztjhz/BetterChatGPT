@@ -23,5 +23,10 @@
   "darkMode": "黑暗模式",
   "setting": "設定",
   "image": "圖片",
-  "autoTitle": "自動生成標題"
+  "autoTitle": "自動生成標題",
+  "prompt": "Prompt",
+  "promptLibrary": "Prompt 資料庫",
+  "name": "名",
+  "search": "檢索",
+  "morePrompts": "如果你想揾更多 prompt，撳呢度："
 }

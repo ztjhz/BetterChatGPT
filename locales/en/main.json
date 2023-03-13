@@ -23,5 +23,10 @@
   "darkMode": "Dark Mode",
   "setting": "Settings",
   "image": "Image",
-  "autoTitle": "Auto generate title"
+  "autoTitle": "Auto generate title",
+  "prompt": "Prompt",
+  "promptLibrary": "Prompt Library",
+  "name": "Name",
+  "search": "Search",
+  "morePrompts": "You can find more prompts here: "
 }
