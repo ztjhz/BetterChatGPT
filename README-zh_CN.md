@@ -1,40 +1,40 @@
-<h1 align="center"><b>ChatGPT Free App</b></h1>
+<h1 align="center"><b>Free ChatGPT</b></h1>
 
 <p align="center">
-<img src="public/apple-touch-icon.png" alt="chatgpt-free-app" width="100" />
+<img src="public/apple-touch-icon.png" alt="Free ChatGPT" width="100" />
 </p>
 
 <h4 align="center"><b>免费、无限、强大、智能、迷人</b></h4>
 
 <p align="center">
-<a href="https://github.com/ztjhz/ChatGPTFreeApp/blob/main/LICENSE" target="blank">
-<img src="https://img.shields.io/github/license/ztjhz/ChatGPTFreeApp?style=flat-square" alt="licence" />
+<a href="https://github.com/ztjhz/FreeChatGPT/blob/main/LICENSE" target="blank">
+<img src="https://img.shields.io/github/license/ztjhz/FreeChatGPT?style=flat-square" alt="licence" />
 </a>
-<a href="https://github.com/ztjhz/ChatGPTFreeApp/fork" target="blank">
-<img src="https://img.shields.io/github/forks/ztjhz/ChatGPTFreeApp?style=flat-square" alt="forks"/>
+<a href="https://github.com/ztjhz/FreeChatGPT/fork" target="blank">
+<img src="https://img.shields.io/github/forks/ztjhz/FreeChatGPT?style=flat-square" alt="forks"/>
 </a>
-<a href="https://github.com/ztjhz/ChatGPTFreeApp/stargazers" target="blank">
-<img src="https://img.shields.io/github/stars/ztjhz/ChatGPTFreeApp?style=flat-square" alt="stars"/>
+<a href="https://github.com/ztjhz/FreeChatGPT/stargazers" target="blank">
+<img src="https://img.shields.io/github/stars/ztjhz/FreeChatGPT?style=flat-square" alt="stars"/>
 </a>
-<a href="https://github.com/ztjhz/ChatGPTFreeApp/issues" target="blank">
-<img src="https://img.shields.io/github/issues/ztjhz/ChatGPTFreeApp?style=flat-square" alt="issues"/>
+<a href="https://github.com/ztjhz/FreeChatGPT/issues" target="blank">
+<img src="https://img.shields.io/github/issues/ztjhz/FreeChatGPT?style=flat-square" alt="issues"/>
 </a>
-<a href="https://github.com/ztjhz/ChatGPTFreeApp/pulls" target="blank">
-<img src="https://img.shields.io/github/issues-pr/ztjhz/ChatGPTFreeApp?style=flat-square" alt="pull-requests"/>
+<a href="https://github.com/ztjhz/FreeChatGPT/pulls" target="blank">
+<img src="https://img.shields.io/github/issues-pr/ztjhz/FreeChatGPT?style=flat-square" alt="pull-requests"/>
 </a>
-<a href="https://twitter.com/intent/tweet?text=👋请检查这个惊人的存储库 https://github.com/ztjhz/ChatGPTFreeApp，由@nikushii_创建。"><img src="https://img.shields.io/twitter/url?label=%E5%88%86%E4%BA%AB%E5%88%B0%E6%8E%A8%E7%89%B9&style=social&url=https%3A%2F%2Fgithub.com%2Fztjhz%2FChatGPTFreeApp"></a>
+<a href="https://twitter.com/intent/tweet?text=👋请检查这个惊人的存储库 https://github.com/ztjhz/FreeChatGPT，由@nikushii_创建。"><img src="https://img.shields.io/twitter/url?label=%E5%88%86%E4%BA%AB%E5%88%B0%E6%8E%A8%E7%89%B9&style=social&url=https%3A%2F%2Fgithub.com%2Fztjhz%2FFreeChatGPT"></a>
 </p>
 
 <p align="center">
     <a href="https://freechatgpt.chat">查看演示</a>
     ·
-    <a href="https://github.com/ztjhz/ChatGPTFreeApp/issues/new/choose">反馈问题</a>
+    <a href="https://github.com/ztjhz/FreeChatGPT/issues/new/choose">反馈问题</a>
     ·
-    <a href="https://github.com/ztjhz/ChatGPTFreeApp/issues/new/choose">请求功能</a>
+    <a href="https://github.com/ztjhz/FreeChatGPT/issues/new/choose">请求功能</a>
 </p>
-<p align="center"><i>您喜欢使用 ChatGPTFreeApp 吗？请给它一个星星以示支持！🌟</i></p>
+<p align="center"><i>您喜欢使用 Free ChatGPT 吗？请给它一个星星以示支持！🌟</i></p>
 
-## 👋🏻 介绍 `ChatGPTFreeApp`
+## 👋🏻 介绍 Free ChatGPT
 
 <p align="center">
     <a href="https://freechatgpt.chat" target="_blank">
@@ -42,15 +42,15 @@
     </a>
 </p>
 
-您准备好使用 `ChatGPTFreeApp` 充分发掘 ChatGPT 的潜力了吗？
+您准备好使用 Free ChatGPT 充分发掘 ChatGPT 的潜力了吗？
 
-`ChatGPTFreeApp` 是任何想要体验对话型人工智能无限潜力的人的终极目的地。我们的应用程序利用 OpenAI 的 ChatGPT API 的全部潜力，提供了一个无与伦比的聊天机器人体验，而且完全免费，并且没有任何限制。
+Free ChatGPT 是任何想要体验对话型人工智能无限潜力的人的终极目的地。我们的应用程序利用 OpenAI 的 ChatGPT API 的全部潜力，提供了一个无与伦比的聊天机器人体验，而且完全免费，并且没有任何限制。
 
-无论您是想与虚拟助手聊天、提高语言技能，还是想享受有趣而引人入胜的对话，我们的应用都能满足您的需求。那么，为什么还要等呢？立即加入我们，探索 `ChatGPTFreeApp` 的精彩世界！
+无论您是想与虚拟助手聊天、提高语言技能，还是想享受有趣而引人入胜的对话，我们的应用都能满足您的需求。那么，为什么还要等呢？立即加入我们，探索 Free ChatGPT 的精彩世界！
 
 ## 🔥 功能
 
-`ChatGPTFreeApp` 已经包含了大量的功能。您可以使用以下功能：
+Free ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 
 ### 常规
 
@@ -83,7 +83,7 @@
 
 ## 🛠️ 使用方法
 
-要开始使用，只需访问我们的网站：<https://freechatgpt.chat/>。您有 3 种方法可以开始使用 `ChatGPTFreeApp`。
+要开始使用，只需访问我们的网站：<https://freechatgpt.chat/>。您有 3 种方法可以开始使用 Free ChatGPT。
 
 1. 在 API 菜单中输入您从 [OpenAI API Keys](https://platform.openai.com/account/api-keys) 获得的 OpenAI API 密钥。
 2. 使用提供的免费 API 端点：[ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree)。
@@ -109,13 +109,13 @@
 
 ## 🛫 托管自己的实例
 
-如果您想运行自己的 `ChatGPTFreeApp` 实例，可以按照以下步骤轻松完成：
+如果您想运行自己的 Free ChatGPT 实例，可以按照以下步骤轻松完成：
 
 ### 步骤
 
 1. 创建一个 GitHub 账户（如果您还没有账户）。
-2. 给此[存储库](https://github.com/ztjhz/ChatGPTFreeApp) 一个星星 ⭐️
-3. Fork 此[存储库](https://github.com/ztjhz/ChatGPTFreeApp)
+2. 给此[存储库](https://github.com/ztjhz/FreeChatGPT) 一个星星 ⭐️
+3. Fork 此[存储库](https://github.com/ztjhz/FreeChatGPT)
 4. 在您的 forked 存储库中点击 `Actions`
    ![image](https://user-images.githubusercontent.com/59118459/223751928-cf2b91b9-4663-4a36-97de-5eb751b32c7e.png)
 5. 在左侧边栏中，点击 `Deploy to GitHub Pages`
@@ -134,13 +134,13 @@
    - [node.js](https://nodejs.org/en/)
    - [yarn](https://yarnpkg.com/) 或者 [npm](https://www.npmjs.com/)
 
-2. 通过运行 `git clone https://github.com/ztjhz/ChatGPTFreeApp.git` 克隆此[存储库](https://github.com/ztjhz/ChatGPTFreeApp)。
-3. 进入目录通过 `cd ChatGPTFreeApp`
+2. 通过运行 `git clone https://github.com/ztjhz/FreeChatGPT.git` 克隆此[存储库](https://github.com/ztjhz/FreeChatGPT)。
+3. 进入目录通过 `cd FreeChatGPT`
 4. 运行 `yarn` 或 `npm install`，具体取决于您是否安装了 yarn 或 npm。
 5. 运行 `yarn dev` 或 `npm run dev` 来启动应用程序。
 
 ---
 
 <h3 align="center">
-    给 <b>ChatGPTFreeApp</b> 一个星星 ⭐️ 可以让它更加锦上添花，让更多人受益匪浅。
+    给 <b>Free ChatGPT</b> 一个星星 ⭐️ 可以让它更加锦上添花，让更多人受益匪浅。
 </h3>
