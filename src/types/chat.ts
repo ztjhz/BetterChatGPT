@@ -1,3 +1,4 @@
+import { Prompt } from './prompt';
 import { Theme } from './theme';
 
 export type Role = 'user' | 'assistant' | 'system';
@@ -50,4 +51,15 @@ export interface LocalStorageInterfaceV2ToV3 {
   apiEndpoint?: string;
   theme: Theme;
   autoTitle: boolean;
+}
+export interface LocalStorageInterfaceV3ToV4 {
+  chats: ChatInterface[];
+  currentChatIndex: number;
+  apiKey: string;
+  apiFree: boolean;
+  apiFreeEndpoint: string;
+  apiEndpoint?: string;
+  theme: Theme;
+  autoTitle: boolean;
+  prompts: Prompt[];
 }
