@@ -5,6 +5,7 @@ import useStore from '@store/store';
 import PopupModal from '@components/PopupModal';
 import SettingIcon from '@icon/SettingIcon';
 import LanguageSelector from '@components/LanguageSelector';
+import ThemeSwitcher from '@components/Menu/MenuOptions/ThemeSwitcher';
 import AutoTitleToggle from './AutoTitleToggle';
 import PromptLibraryMenu from '@components/PromptLibraryMenu';
 import ClearConversation from './ClearConversation';
@@ -37,6 +38,7 @@ const SettingsMenu = () => {
         >
           <div className='p-6 border-b border-gray-200 dark:border-gray-600 flex flex-col items-center gap-4'>
             <LanguageSelector />
+            <ThemeSwitcher />
             <AutoTitleToggle />
             <ClearConversation />
             <ImportExportChat />
