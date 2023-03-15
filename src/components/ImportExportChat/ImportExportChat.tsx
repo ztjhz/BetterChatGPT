@@ -15,7 +15,7 @@ const ImportExportChat = () => {
   return (
     <>
       <a
-        className='items-center gap-3 btn btn-neutral'
+        className='items-center gap-3 btn btn-neutral cursor-pointer'
         onClick={() => {
           setIsModalOpen(true);
         }}
