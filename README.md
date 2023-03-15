@@ -124,16 +124,26 @@ If you'd like to run your own instance of Free ChatGPT, you can easily do so by 
 1. Create a GitHub account (if you don't have one already)
 2. Star this [repository](https://github.com/ztjhz/FreeChatGPT) ⭐️
 3. Fork this [repository](https://github.com/ztjhz/FreeChatGPT)
-4. In your forked repository, click on `Actions`
+4. If you are not using custom domain, configure your `vite.config.ts` file by adding `base: '/<REPO>/'` inside the `export default defineConfig({...})` block, where `<REPO>` is the name of your repository on GitHub, obtained from `https://<USERNAME>.github.io/<REPO>` (`<REPO>` should be `FreeChatGPT` if you did not change it). The code should look like this:
+
+   ```js
+   export default defineConfig({
+     base: '/REPO/',
+     /* Rest of the configuration here */
+   });
+   ```
+
+5. Repository settings > Secrets > Actions > General > Tick "Read and write permissions"
+6. In your forked repository, click on `Actions`
    ![image](https://user-images.githubusercontent.com/59118459/223751928-cf2b91b9-4663-4a36-97de-5eb751b32c7e.png)
-5. In the left sidebar, click on `Deploy to GitHub Pages`
+7. In the left sidebar, click on `Deploy to GitHub Pages`
    ![image](https://user-images.githubusercontent.com/59118459/223752459-183ec23f-72f5-436e-a088-e3386492b8cb.png)
-6. Above the list of workflow runs, select `Run workflow`.
+8. Above the list of workflow runs, select `Run workflow`.
    ![image](https://user-images.githubusercontent.com/59118459/223753340-1270e038-d213-4d6f-938c-66a30dad7c88.png)
-7. Now, navigate to the `Settings` tab
+9. Now, navigate to the `Settings` tab
    ![image](https://user-images.githubusercontent.com/59118459/223753577-9b6f8266-26e8-471b-8f45-a1a02fbab232.png)
-8. In the left sidebar, click on `Pages` and in the right section, select `Deploy from a branch` for `Source` and `gh-pages` for `Branch`. Then at the top section, you can see that "Your site is live at `XXX`".
-   ![image](https://user-images.githubusercontent.com/59118459/223753724-89f6452e-a441-48b8-8665-7a5e515d2a57.png)
+10. In the left sidebar, click on `Pages` and in the right section, select `Deploy from a branch` for `Source` and `gh-pages` for `Branch`. Then at the top section, you can see that "Your site is live at `XXX`".
+    ![image](https://user-images.githubusercontent.com/59118459/223753724-89f6452e-a441-48b8-8665-7a5e515d2a57.png)
 
 ### Running it locally
 

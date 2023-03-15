@@ -22,7 +22,6 @@
     "react-scroll-to-bottom": "^4.2.0",
     "rehype-highlight": "^6.0.0",
     "rehype-katex": "^6.0.2",
-    "rehype-sanitize": "^5.0.1",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
     "uuid": "^9.0.0",

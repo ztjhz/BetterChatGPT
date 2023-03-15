@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import { CodeProps, ReactMarkdownProps } from 'react-markdown/lib/ast-to-react';
 import rehypeKatex from 'rehype-katex';
-import rehypeSanitize from 'rehype-sanitize';
 import rehypeHighlight from 'rehype-highlight';
 import remarkMath from 'remark-math';
 import remarkGfm from 'remark-gfm';
@@ -136,7 +135,6 @@ const ContentView = React.memo(
               [remarkMath, { singleDollarTextMath: false }],
             ]}
             rehypePlugins={[
-              rehypeSanitize,
               [rehypeKatex, { output: 'mathml' }],
               [
                 rehypeHighlight,
