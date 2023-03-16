@@ -5,7 +5,7 @@ const CollapseOptions = memo((props: { onSetFold: Function; fold: boolean }) => 
   return (
     <div className='flex items-center'>
       <div className='border-b border-white/20 flex-1'></div>
-      <div className='bg-gray-900 hover:bg-gray-500/10 transition-colors duration-200 px-3 rounded-sm cursor-pointer'
+      <div className='fill-white hover:fill-gray-500/60 transition-colors duration-200 px-3 rounded-sm cursor-pointer'
            style={ { transform: props.fold ? 'rotate(180deg)' : '' } }
            onClick={ () => props.onSetFold(!props.fold) }>
         <ArrowBottom />
