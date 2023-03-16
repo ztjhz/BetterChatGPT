@@ -2,28 +2,27 @@ import AboutMenu from '@components/AboutMenu';
 import ImportExportChat from '@components/ImportExportChat';
 import CollapseOptions from '@components/Menu/CollapseOptions';
 import SettingsMenu from '@components/SettingsMenu';
-import React, { useState } from 'react';
+import useStore from '@store/store';
+import React from 'react';
 import Api from './Api';
 import ClearConversation from './ClearConversation';
 import Me from './Me';
 
 const MenuOptions = () => {
-  const [ fold, setFold ] = useState<boolean>(false);
+  const foldMenuOptions = useStore((state) => state.foldMenuOptions);
   return (
     <>
-      <CollapseOptions onSetFold={ setFold } fold={ fold } />
-      {
-        fold || (
-          <>
-            <AboutMenu />
-            <ClearConversation />
-            <ImportExportChat />
-            <Api />
-            <SettingsMenu />
-            <Me />
-          </>
-        )
-      }
+      <CollapseOptions />
+      <div style={ {
+        display: foldMenuOptions ? 'none' : '',
+      } }>
+        <AboutMenu />
+        <ClearConversation />
+        <ImportExportChat />
+        <Api />
+        <SettingsMenu />
+        <Me />
+      </div>
     </>
   );
 };

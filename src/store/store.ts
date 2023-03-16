@@ -44,6 +44,7 @@ const useStore = create<StoreState>()(
         theme: state.theme,
         autoTitle: state.autoTitle,
         prompts: state.prompts,
+        foldMenuOptions: state.foldMenuOptions
       }),
       version: 4,
       migrate: (persistedState, version) => {

@@ -5,15 +5,24 @@ export interface ConfigSlice {
   openConfig: boolean;
   theme: Theme;
   autoTitle: boolean;
+  foldMenuOptions: boolean;
   setOpenConfig: (openConfig: boolean) => void;
   setTheme: (theme: Theme) => void;
   setAutoTitle: (autoTitle: boolean) => void;
+  setFoldMenuOptions: (foldMenuOptions: boolean) => void;
 }
 
 export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
   openConfig: false,
   theme: 'dark',
+  foldMenuOptions: false,
   autoTitle: false,
+  setFoldMenuOptions: (foldMenuOptions: boolean) => {
+    set((prev: ConfigSlice) => ({
+      ...prev,
+      foldMenuOptions: foldMenuOptions,
+    }));
+  },
   setOpenConfig: (openConfig: boolean) => {
     set((prev: ConfigSlice) => ({
       ...prev,
