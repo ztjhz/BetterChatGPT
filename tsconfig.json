@@ -15,7 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": ".",
+    "baseUrl": "https://freechatgpt.chat/",
     "paths": {
       "@icon/*": ["./src/assets/icons/*"],
       "@type/*": ["./src/types/*"],
