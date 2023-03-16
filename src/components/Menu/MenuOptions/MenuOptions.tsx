@@ -8,12 +8,12 @@ import ClearConversation from './ClearConversation';
 import Me from './Me';
 
 const MenuOptions = () => {
-  const foldState = useState(false);
+  const [ fold, setFold ] = useState<boolean>(false);
   return (
     <>
-      <CollapseOptions onSetFold={ foldState[1] } fold={ foldState[0] } />
+      <CollapseOptions onSetFold={ setFold } fold={ fold } />
       {
-        foldState[0] || (
+        fold || (
           <>
             <AboutMenu />
             <ClearConversation />
