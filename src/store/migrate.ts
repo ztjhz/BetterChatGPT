@@ -3,8 +3,9 @@ import {
   LocalStorageInterfaceV1ToV2,
   LocalStorageInterfaceV2ToV3,
   LocalStorageInterfaceV3ToV4,
+  LocalStorageInterfaceV4ToV5,
 } from '@type/chat';
-import { defaultChatConfig } from '@constants/chat';
+import { defaultChatConfig, defaultModel } from '@constants/chat';
 import { officialAPIEndpoint } from '@constants/auth';
 import defaultPrompts from '@constants/prompt';
 
@@ -36,4 +37,13 @@ export const migrateV2 = (persistedState: LocalStorageInterfaceV2ToV3) => {
 
 export const migrateV3 = (persistedState: LocalStorageInterfaceV3ToV4) => {
   persistedState.prompts = defaultPrompts;
+};
+
+export const migrateV4 = (persistedState: LocalStorageInterfaceV4ToV5) => {
+  persistedState.chats.forEach((chat) => {
+    chat.config = {
+      ...chat.config,
+      model: defaultModel,
+    };
+  });
 };

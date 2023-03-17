@@ -1,4 +1,4 @@
-import { ChatInterface, ConfigInterface } from '@type/chat';
+import { ChatInterface, ConfigInterface, ModelOptions } from '@type/chat';
 
 const date = new Date();
 const dateString =
@@ -13,11 +13,23 @@ export const defaultSystemMessage = `You are ChatGPT, a large language model tra
 Knowledge cutoff: 2021-09
 Current date: ${dateString}`;
 
+export const modelOptions: ModelOptions[] = [
+  'gpt-3.5-turbo',
+  // 'gpt-3.5-turbo-0301',
+  'gpt-4',
+  // 'gpt-4-0314',
+  // 'gpt-4-32k',
+  // 'gpt-4-32k-0314',
+];
+
+export const defaultModel = 'gpt-3.5-turbo';
+
 export const defaultChatConfig: ConfigInterface = {
+  model: defaultModel,
   temperature: 1,
   presence_penalty: 0,
   top_p: 1,
-  frequency_penalty: 0
+  frequency_penalty: 0,
 };
 
 export const generateDefaultChat = (title?: string): ChatInterface => ({

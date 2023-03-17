@@ -17,11 +17,20 @@ export interface ChatInterface {
 }
 
 export interface ConfigInterface {
+  model: ModelOptions;
   temperature: number;
   presence_penalty: number;
   top_p: number;
   frequency_penalty: number;
 }
+
+export type ModelOptions =
+  | 'gpt-4'
+  | 'gpt-4-0314'
+  | 'gpt-4-32k'
+  | 'gpt-4-32k-0314'
+  | 'gpt-3.5-turbo'
+  | 'gpt-3.5-turbo-0301';
 
 export interface LocalStorageInterfaceV0ToV1 {
   chats: ChatInterface[];
@@ -53,6 +62,18 @@ export interface LocalStorageInterfaceV2ToV3 {
   autoTitle: boolean;
 }
 export interface LocalStorageInterfaceV3ToV4 {
+  chats: ChatInterface[];
+  currentChatIndex: number;
+  apiKey: string;
+  apiFree: boolean;
+  apiFreeEndpoint: string;
+  apiEndpoint?: string;
+  theme: Theme;
+  autoTitle: boolean;
+  prompts: Prompt[];
+}
+
+export interface LocalStorageInterfaceV4ToV5 {
   chats: ChatInterface[];
   currentChatIndex: number;
   apiKey: string;

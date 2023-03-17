@@ -49,7 +49,7 @@ const ChatTitle = React.memo(() => {
         }}
       >
         <div className='text-center p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50'>
-          {t('model')}: {t('default')}
+          {t('model')}: {config.model}
         </div>
         <div className='text-center p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50'>
           {t('temperature.label')}: {config.temperature}

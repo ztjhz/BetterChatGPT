@@ -33,7 +33,6 @@ export const getChatCompletion = async (
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
       messages,
       ...config,
     }),
@@ -56,7 +55,6 @@ export const getChatCompletionStream = async (
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
       messages,
       ...config,
       stream: true,
