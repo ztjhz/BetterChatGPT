@@ -1,9 +1,4 @@
-import React, {
-  DetailedHTMLProps,
-  HTMLAttributes,
-  useEffect,
-  useState,
-} from 'react';
+import React, { DetailedHTMLProps, HTMLAttributes, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import { CodeProps, ReactMarkdownProps } from 'react-markdown/lib/ast-to-react';
@@ -15,8 +10,6 @@ import useStore from '@store/store';
 
 import EditIcon2 from '@icon/EditIcon2';
 import DeleteIcon from '@icon/DeleteIcon';
-import TickIcon from '@icon/TickIcon';
-import CrossIcon from '@icon/CrossIcon';
 import RefreshIcon from '@icon/RefreshIcon';
 import DownChevronArrow from '@icon/DownChevronArrow';
 
@@ -154,35 +147,35 @@ const ContentView = React.memo(
             {content}
           </ReactMarkdown>
         </div>
-        <div className='flex justify-end gap-2 w-full mt-2'>
-          {isDelete || (
-            <>
-              {role === 'assistant' && messageIndex === lastMessageIndex && (
-                <RefreshButton onClick={handleRefresh} />
-              )}
-              {messageIndex !== 0 && <UpButton onClick={handleMoveUp} />}
-              {messageIndex !== lastMessageIndex && (
-                <DownButton onClick={handleMoveDown} />
-              )}
+        {/*<div className='flex justify-end gap-2 w-full mt-2'>*/}
+        {/*  {isDelete || (*/}
+        {/*    <>*/}
+        {/*      {role === 'assistant' && messageIndex === lastMessageIndex && (*/}
+        {/*        <RefreshButton onClick={handleRefresh} />*/}
+        {/*      )}*/}
+        {/*      {messageIndex !== 0 && <UpButton onClick={handleMoveUp} />}*/}
+        {/*      {messageIndex !== lastMessageIndex && (*/}
+        {/*        <DownButton onClick={handleMoveDown} />*/}
+        {/*      )}*/}
 
-              <EditButton setIsEdit={setIsEdit} />
-              <DeleteButton setIsDelete={setIsDelete} />
-            </>
-          )}
-          {isDelete && (
-            <>
-              <button
-                className='p-1 hover:text-white'
-                onClick={() => setIsDelete(false)}
-              >
-                <CrossIcon />
-              </button>
-              <button className='p-1 hover:text-white' onClick={handleDelete}>
-                <TickIcon />
-              </button>
-            </>
-          )}
-        </div>
+        {/*      <EditButton setIsEdit={setIsEdit} />*/}
+        {/*      <DeleteButton setIsDelete={setIsDelete} />*/}
+        {/*    </>*/}
+        {/*  )}*/}
+        {/*  {isDelete && (*/}
+        {/*    <>*/}
+        {/*      <button*/}
+        {/*        className='p-1 hover:text-white'*/}
+        {/*        onClick={() => setIsDelete(false)}*/}
+        {/*      >*/}
+        {/*        <CrossIcon />*/}
+        {/*      </button>*/}
+        {/*      <button className='p-1 hover:text-white' onClick={handleDelete}>*/}
+        {/*        <TickIcon />*/}
+        {/*      </button>*/}
+        {/*    </>*/}
+        {/*  )}*/}
+        {/*</div>*/}
       </>
     );
   }

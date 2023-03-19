@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
 
-import DownChevronArrow from '@icon/DownChevronArrow';
+// import DownChevronArrow from '@icon/DownChevronArrow';
 import { ChatInterface, Role, roles } from '@type/chat';
 
 const RoleSelector = React.memo(
@@ -24,14 +24,14 @@ const RoleSelector = React.memo(
 
     return (
       <div className='prose dark:prose-invert relative'>
-        <button
-          className='btn btn-neutral btn-small flex gap-1'
-          type='button'
-          onClick={() => setDropDown((prev) => !prev)}
-        >
-          {t(role)}
-          <DownChevronArrow />
-        </button>
+        {/*<button*/}
+        {/*  className='btn btn-neutral btn-small flex gap-1'*/}
+        {/*  type='button'*/}
+        {/*  onClick={() => setDropDown((prev) => !prev)}*/}
+        {/*>*/}
+        {/*  {t(role)}*/}
+        {/*  <DownChevronArrow />*/}
+        {/*</button>*/}
         <div
           id='dropdown'
           className={`${
