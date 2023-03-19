@@ -65,6 +65,8 @@ export const getChatCompletionStream = async (
     if (text.includes('insufficient_quota')) {
       error +=
         '\nMessage from freechatgpt.chat:\nToo many request! We recommend changing your API endpoint or API key';
+    } else {
+      error += '\nRate limited! Please try again later.';
     }
     throw new Error(error);
   }
