@@ -3,7 +3,7 @@
   "model": "模型",
   "token": {
     "label": "最大 Token",
-    "description": "控制 assistant 一條 msg 最多可以 gen 幾多 token。最大 token 數仲受到模型總長度嘅限制，上文的 token 數同生成嘅 token 數加埋一齊唔可以超過模型嘅 token 總數（譬如 gpt-3.5-turbo 嘅 token 總數係 4096）。"
+    "description": "控制助手一條 msg 最多可以 gen 幾多 token。最大 token 數仲受到模型總長度嘅限制，上文的 token 數同生成嘅 token 數加埋一齊唔可以超過模型嘅 token 總數（譬如 gpt-3.5-turbo 嘅 token 總數係 4096）。"
   },
   "default": "預設",
   "temperature": {
