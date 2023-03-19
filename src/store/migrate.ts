@@ -4,8 +4,13 @@ import {
   LocalStorageInterfaceV2ToV3,
   LocalStorageInterfaceV3ToV4,
   LocalStorageInterfaceV4ToV5,
+  LocalStorageInterfaceV5ToV6,
 } from '@type/chat';
-import { defaultChatConfig, defaultModel } from '@constants/chat';
+import {
+  defaultChatConfig,
+  defaultModel,
+  defaultUserMaxToken,
+} from '@constants/chat';
 import { officialAPIEndpoint } from '@constants/auth';
 import defaultPrompts from '@constants/prompt';
 
@@ -44,6 +49,15 @@ export const migrateV4 = (persistedState: LocalStorageInterfaceV4ToV5) => {
     chat.config = {
       ...chat.config,
       model: defaultModel,
+    };
+  });
+};
+
+export const migrateV5 = (persistedState: LocalStorageInterfaceV5ToV6) => {
+  persistedState.chats.forEach((chat) => {
+    chat.config = {
+      ...chat.config,
+      max_tokens: defaultUserMaxToken,
     };
   });
 };

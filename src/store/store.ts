@@ -11,6 +11,7 @@ import {
   LocalStorageInterfaceV2ToV3,
   LocalStorageInterfaceV3ToV4,
   LocalStorageInterfaceV4ToV5,
+  LocalStorageInterfaceV5ToV6,
 } from '@type/chat';
 import {
   migrateV0,
@@ -18,6 +19,7 @@ import {
   migrateV2,
   migrateV3,
   migrateV4,
+  migrateV5,
 } from './migrate';
 
 export type StoreState = ChatSlice &
@@ -52,7 +54,7 @@ const useStore = create<StoreState>()(
         autoTitle: state.autoTitle,
         prompts: state.prompts,
       }),
-      version: 5,
+      version: 6,
       migrate: (persistedState, version) => {
         switch (version) {
           case 0:
@@ -65,6 +67,8 @@ const useStore = create<StoreState>()(
             migrateV3(persistedState as LocalStorageInterfaceV3ToV4);
           case 4:
             migrateV4(persistedState as LocalStorageInterfaceV4ToV5);
+          case 5:
+            migrateV5(persistedState as LocalStorageInterfaceV5ToV6);
             break;
         }
         return persistedState as StoreState;

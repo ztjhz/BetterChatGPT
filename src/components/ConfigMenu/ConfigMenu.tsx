@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
 import PopupModal from '@components/PopupModal';
 import { ConfigInterface, ModelOptions } from '@type/chat';
 import DownChevronArrow from '@icon/DownChevronArrow';
-import { modelOptions } from '@constants/chat';
+import { modelMaxToken, modelOptions } from '@constants/chat';
 
 const ConfigMenu = ({
   setIsModalOpen,
@@ -15,6 +15,7 @@ const ConfigMenu = ({
   config: ConfigInterface;
   setConfig: (config: ConfigInterface) => void;
 }) => {
+  const [_maxToken, _setMaxToken] = useState<number>(config.max_tokens);
   const [_model, _setModel] = useState<ModelOptions>(config.model);
   const [_temperature, _setTemperature] = useState<number>(config.temperature);
   const [_presencePenalty, _setPresencePenalty] = useState<number>(
@@ -28,6 +29,7 @@ const ConfigMenu = ({
 
   const handleConfirm = () => {
     setConfig({
+      max_tokens: _maxToken,
       model: _model,
       temperature: _temperature,
       presence_penalty: _presencePenalty,
@@ -45,7 +47,12 @@ const ConfigMenu = ({
     >
       <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
         <ModelSelector _model={_model} _setModel={_setModel} />
-        <div>
+        <MaxTokenSlider
+          _maxToken={_maxToken}
+          _setMaxToken={_setMaxToken}
+          _model={_model}
+        />
+        <div className='mt-5 pt-5 border-t border-gray-500'>
           <label className='block text-sm font-medium text-gray-900 dark:text-white'>
             {t('temperature.label')}: {_temperature}
           </label>
@@ -172,6 +179,48 @@ const ModelSelector = ({
             </li>
           ))}
         </ul>
+      </div>
+    </div>
+  );
+};
+
+const MaxTokenSlider = ({
+  _maxToken,
+  _setMaxToken,
+  _model,
+}: {
+  _maxToken: number;
+  _setMaxToken: React.Dispatch<React.SetStateAction<number>>;
+  _model: ModelOptions;
+}) => {
+  const { t } = useTranslation('model');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef &&
+      inputRef.current &&
+      _setMaxToken(Number(inputRef.current.value));
+  }, [_model]);
+
+  return (
+    <div>
+      <label className='block text-sm font-medium text-gray-900 dark:text-white'>
+        {t('token.label')}: {_maxToken}
+      </label>
+      <input
+        type='range'
+        ref={inputRef}
+        value={_maxToken}
+        onChange={(e) => {
+          _setMaxToken(Number(e.target.value));
+        }}
+        min={0}
+        max={modelMaxToken[_model]}
+        step={1}
+        className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
+      />
+      <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
+        {t('token.description')}
       </div>
     </div>
   );

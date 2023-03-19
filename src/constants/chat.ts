@@ -18,14 +18,26 @@ export const modelOptions: ModelOptions[] = [
   // 'gpt-3.5-turbo-0301',
   'gpt-4',
   // 'gpt-4-0314',
-  // 'gpt-4-32k',
+  'gpt-4-32k',
   // 'gpt-4-32k-0314',
 ];
 
 export const defaultModel = 'gpt-3.5-turbo';
 
+export const modelMaxToken = {
+  'gpt-3.5-turbo': 4096,
+  'gpt-3.5-turbo-0301': 4096,
+  'gpt-4': 8192,
+  'gpt-4-0314': 8192,
+  'gpt-4-32k': 32768,
+  'gpt-4-32k-0314': 32768,
+};
+
+export const defaultUserMaxToken = 4000;
+
 export const defaultChatConfig: ConfigInterface = {
   model: defaultModel,
+  max_tokens: defaultUserMaxToken,
   temperature: 1,
   presence_penalty: 0,
   top_p: 1,

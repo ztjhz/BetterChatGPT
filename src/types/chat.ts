@@ -18,6 +18,7 @@ export interface ChatInterface {
 
 export interface ConfigInterface {
   model: ModelOptions;
+  max_tokens: number;
   temperature: number;
   presence_penalty: number;
   top_p: number;
@@ -74,6 +75,18 @@ export interface LocalStorageInterfaceV3ToV4 {
 }
 
 export interface LocalStorageInterfaceV4ToV5 {
+  chats: ChatInterface[];
+  currentChatIndex: number;
+  apiKey: string;
+  apiFree: boolean;
+  apiFreeEndpoint: string;
+  apiEndpoint?: string;
+  theme: Theme;
+  autoTitle: boolean;
+  prompts: Prompt[];
+}
+
+export interface LocalStorageInterfaceV5ToV6 {
   chats: ChatInterface[];
   currentChatIndex: number;
   apiKey: string;
