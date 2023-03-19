@@ -33,12 +33,12 @@ export const modelMaxToken = {
   'gpt-4-32k-0314': 32768,
 };
 
-export const defaultUserMaxToken = 4000;
+export const defaultUserMaxToken = 3500;
 
 export const defaultChatConfig: ConfigInterface = {
   model: defaultModel,
   max_tokens: defaultUserMaxToken,
-  temperature: 1,
+  temperature: 0.7,
   presence_penalty: 0,
   top_p: 1,
   frequency_penalty: 0,
