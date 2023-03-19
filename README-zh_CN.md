@@ -1,32 +1,32 @@
 <h1 align="center"><b>Free ChatGPT</b></h1>
 
 <p align="center">
-<img src="public/apple-touch-icon.png" alt="Free ChatGPT" width="100" />
+    <a href="https://freechatgpt.chat" target="_blank"><img src="public/apple-touch-icon.png" alt="Free ChatGPT" width="100" /></a>
 </p>
 
 <h4 align="center"><b>免费、无限、强大、智能、迷人</b></h4>
 
 <p align="center">
-<a href="https://github.com/ztjhz/FreeChatGPT/blob/main/LICENSE" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/blob/main/LICENSE" target="_blank">
 <img src="https://img.shields.io/github/license/ztjhz/FreeChatGPT?style=flat-square" alt="licence" />
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/fork" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/fork" target="_blank">
 <img src="https://img.shields.io/github/forks/ztjhz/FreeChatGPT?style=flat-square" alt="forks"/>
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/stargazers" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/stargazers" target="_blank">
 <img src="https://img.shields.io/github/stars/ztjhz/FreeChatGPT?style=flat-square" alt="stars"/>
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/issues" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/issues" target="_blank">
 <img src="https://img.shields.io/github/issues/ztjhz/FreeChatGPT?style=flat-square" alt="issues"/>
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/pulls" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/pulls" target="_blank">
 <img src="https://img.shields.io/github/issues-pr/ztjhz/FreeChatGPT?style=flat-square" alt="pull-requests"/>
 </a>
-<a href="https://twitter.com/intent/tweet?text=👋请检查这个惊人的存储库 https://github.com/ztjhz/FreeChatGPT，由@nikushii_创建。"><img src="https://img.shields.io/twitter/url?label=%E5%88%86%E4%BA%AB%E5%88%B0%E6%8E%A8%E7%89%B9&style=social&url=https%3A%2F%2Fgithub.com%2Fztjhz%2FFreeChatGPT"></a>
+<a href="https://twitter.com/intent/tweet?text=👋看看这个惊人的存储库%20https://github.com/ztjhz/FreeChatGPT，由%20@nikushii_%20创建。"><img src="https://img.shields.io/twitter/url?label=%E5%88%86%E4%BA%AB%E5%88%B0%E6%8E%A8%E7%89%B9&style=social&url=https%3A%2F%2Fgithub.com%2Fztjhz%2FFreeChatGPT"></a>
 </p>
 
 <p align="center">
-    <a href="https://freechatgpt.chat">查看演示</a>
+    <a href="https://freechatgpt.chat">进入网站</a>
     ·
     <a href="https://github.com/ztjhz/FreeChatGPT/issues/new/choose">反馈问题</a>
     ·
