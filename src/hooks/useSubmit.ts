@@ -83,21 +83,25 @@ const useSubmit = () => {
           );
         const reader = stream.getReader();
         let reading = true;
+        let partial = '';
         while (reading && useStore.getState().generating) {
           const { done, value } = await reader.read();
-
-          const result = parseEventSource(new TextDecoder().decode(value));
+          const result = parseEventSource(
+            partial + new TextDecoder().decode(value)
+          );
+          partial = '';
 
           if (result === '[DONE]' || done) {
             reading = false;
           } else {
             const resultString = result.reduce((output: string, curr) => {
-              if (typeof curr === 'string') return output;
-              else {
+              if (typeof curr === 'string') {
+                partial += curr;
+              } else {
                 const content = curr.choices[0].delta.content;
                 if (content) output += content;
-                return output;
               }
+              return output;
             }, '');
 
             const updatedChats: ChatInterface[] = JSON.parse(
