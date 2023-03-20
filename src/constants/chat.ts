@@ -1,4 +1,5 @@
 import { ChatInterface, ConfigInterface, ModelOptions } from '@type/chat';
+import useStore from '@store/store';
 
 const date = new Date();
 const dateString =
@@ -9,7 +10,7 @@ const dateString =
   ('0' + date.getDate()).slice(-2);
 
 // default system message obtained using the following method: https://twitter.com/DeminDimin/status/1619935545144279040
-export const defaultSystemMessage = `You are ChatGPT, a large language model trained by OpenAI.
+export const _defaultSystemMessage = `You are ChatGPT, a large language model trained by OpenAI.
 Knowledge cutoff: 2021-09
 Current date: ${dateString}`;
 
@@ -35,7 +36,7 @@ export const modelMaxToken = {
 
 export const defaultUserMaxToken = 4000;
 
-export const defaultChatConfig: ConfigInterface = {
+export const _defaultChatConfig: ConfigInterface = {
   model: defaultModel,
   max_tokens: defaultUserMaxToken,
   temperature: 1,
@@ -46,8 +47,10 @@ export const defaultChatConfig: ConfigInterface = {
 
 export const generateDefaultChat = (title?: string): ChatInterface => ({
   title: title ? title : 'New Chat',
-  messages: [{ role: 'system', content: defaultSystemMessage }],
-  config: { ...defaultChatConfig },
+  messages: [
+    { role: 'system', content: useStore.getState().defaultSystemMessage },
+  ],
+  config: { ...useStore.getState().defaultChatConfig },
   titleSet: false,
 });
 

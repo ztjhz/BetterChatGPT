@@ -8,32 +8,32 @@
 </p>
 
 <p align="center">
-<img src="public/apple-touch-icon.png" alt="Free ChatGPT" width="100" />
+    <a href="https://freechatgpt.chat" target="_blank"><img src="public/apple-touch-icon.png" alt="Free ChatGPT" width="100" /></a>
 </p>
 
 <h4 align="center"><b>Free, Powerful, Limitless, Intelligent, Engaging</b></h4>
 
 <p align="center">
-<a href="https://github.com/ztjhz/FreeChatGPT/blob/main/LICENSE" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/blob/main/LICENSE" target="_blank">
 <img src="https://img.shields.io/github/license/ztjhz/FreeChatGPT?style=flat-square" alt="licence" />
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/fork" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/fork" target="_blank">
 <img src="https://img.shields.io/github/forks/ztjhz/FreeChatGPT?style=flat-square" alt="forks"/>
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/stargazers" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/stargazers" target="_blank">
 <img src="https://img.shields.io/github/stars/ztjhz/FreeChatGPT?style=flat-square" alt="stars"/>
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/issues" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/issues" target="_blank">
 <img src="https://img.shields.io/github/issues/ztjhz/FreeChatGPT?style=flat-square" alt="issues"/>
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/pulls" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/pulls" target="_blank">
 <img src="https://img.shields.io/github/issues-pr/ztjhz/FreeChatGPT?style=flat-square" alt="pull-requests"/>
 </a>
 <a href="https://twitter.com/intent/tweet?text=👋%20Check%20this%20amazing%20repo%20https://github.com/ztjhz/FreeChatGPT,%20created%20by%20@nikushii_"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%2Fztjhz%2FFreeChatGPT"></a>
 </p>
 
 <p align="center">
-    <a href="https://freechatgpt.chat">View Demo</a>
+    <a href="https://freechatgpt.chat">Enter Website</a>
     ·
     <a href="https://github.com/ztjhz/FreeChatGPT/issues/new/choose">Report Bug</a>
     ·

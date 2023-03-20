@@ -52,92 +52,25 @@ const ConfigMenu = ({
           _setMaxToken={_setMaxToken}
           _model={_model}
         />
-        <div className='mt-5 pt-5 border-t border-gray-500'>
-          <label className='block text-sm font-medium text-gray-900 dark:text-white'>
-            {t('temperature.label')}: {_temperature}
-          </label>
-          <input
-            id='default-range'
-            type='range'
-            value={_temperature}
-            onChange={(e) => {
-              _setTemperature(Number(e.target.value));
-            }}
-            min={0}
-            max={2}
-            step={0.1}
-            className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
-          />
-          <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
-            {t('temperature.description')}
-          </div>
-        </div>
-        <div className='mt-5 pt-5 border-t border-gray-500'>
-          <label className='block text-sm font-medium text-gray-900 dark:text-white'>
-            {t('topP.label')}: {_topP}
-          </label>
-          <input
-            id='default-range'
-            type='range'
-            value={_topP}
-            onChange={(e) => {
-              _setTopP(Number(e.target.value));
-            }}
-            min={0}
-            max={1}
-            step={0.05}
-            className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
-          />
-          <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
-            {t('topP.description')}
-          </div>
-        </div>
-        <div className='mt-5 pt-5 border-t border-gray-500'>
-          <label className='block text-sm font-medium text-gray-900 dark:text-white'>
-            {t('presencePenalty.label')}: {_presencePenalty}
-          </label>
-          <input
-            id='default-range'
-            type='range'
-            value={_presencePenalty}
-            onChange={(e) => {
-              _setPresencePenalty(Number(e.target.value));
-            }}
-            min={-2}
-            max={2}
-            step={0.1}
-            className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
-          />
-          <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
-            {t('presencePenalty.description')}
-          </div>
-        </div>
-        <div className='mt-5 pt-5 border-t border-gray-500'>
-          <label className='block text-sm font-medium text-gray-900 dark:text-white'>
-            {t('frequencyPenalty.label')}: {_frequencyPenalty}
-          </label>
-          <input
-            id='default-range'
-            type='range'
-            value={_frequencyPenalty}
-            onChange={(e) => {
-              _setFrequencyPenalty(Number(e.target.value));
-            }}
-            min={-2}
-            max={2}
-            step={0.1}
-            className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
-          />
-          <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
-            {t('frequencyPenalty.description')}
-          </div>
-        </div>
+        <TemperatureSlider
+          _temperature={_temperature}
+          _setTemperature={_setTemperature}
+        />
+        <TopPSlider _topP={_topP} _setTopP={_setTopP} />
+        <PresencePenaltySlider
+          _presencePenalty={_presencePenalty}
+          _setPresencePenalty={_setPresencePenalty}
+        />
+        <FrequencyPenaltySlider
+          _frequencyPenalty={_frequencyPenalty}
+          _setFrequencyPenalty={_setFrequencyPenalty}
+        />
       </div>
     </PopupModal>
   );
 };
 
-const ModelSelector = ({
+export const ModelSelector = ({
   _model,
   _setModel,
 }: {
@@ -184,7 +117,7 @@ const ModelSelector = ({
   );
 };
 
-const MaxTokenSlider = ({
+export const MaxTokenSlider = ({
   _maxToken,
   _setMaxToken,
   _model,
@@ -221,6 +154,138 @@ const MaxTokenSlider = ({
       />
       <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
         {t('token.description')}
+      </div>
+    </div>
+  );
+};
+
+export const TemperatureSlider = ({
+  _temperature,
+  _setTemperature,
+}: {
+  _temperature: number;
+  _setTemperature: React.Dispatch<React.SetStateAction<number>>;
+}) => {
+  const { t } = useTranslation('model');
+
+  return (
+    <div className='mt-5 pt-5 border-t border-gray-500'>
+      <label className='block text-sm font-medium text-gray-900 dark:text-white'>
+        {t('temperature.label')}: {_temperature}
+      </label>
+      <input
+        id='default-range'
+        type='range'
+        value={_temperature}
+        onChange={(e) => {
+          _setTemperature(Number(e.target.value));
+        }}
+        min={0}
+        max={2}
+        step={0.1}
+        className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
+      />
+      <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
+        {t('temperature.description')}
+      </div>
+    </div>
+  );
+};
+
+export const TopPSlider = ({
+  _topP,
+  _setTopP,
+}: {
+  _topP: number;
+  _setTopP: React.Dispatch<React.SetStateAction<number>>;
+}) => {
+  const { t } = useTranslation('model');
+
+  return (
+    <div className='mt-5 pt-5 border-t border-gray-500'>
+      <label className='block text-sm font-medium text-gray-900 dark:text-white'>
+        {t('topP.label')}: {_topP}
+      </label>
+      <input
+        id='default-range'
+        type='range'
+        value={_topP}
+        onChange={(e) => {
+          _setTopP(Number(e.target.value));
+        }}
+        min={0}
+        max={1}
+        step={0.05}
+        className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
+      />
+      <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
+        {t('topP.description')}
+      </div>
+    </div>
+  );
+};
+
+export const PresencePenaltySlider = ({
+  _presencePenalty,
+  _setPresencePenalty,
+}: {
+  _presencePenalty: number;
+  _setPresencePenalty: React.Dispatch<React.SetStateAction<number>>;
+}) => {
+  const { t } = useTranslation('model');
+
+  return (
+    <div className='mt-5 pt-5 border-t border-gray-500'>
+      <label className='block text-sm font-medium text-gray-900 dark:text-white'>
+        {t('presencePenalty.label')}: {_presencePenalty}
+      </label>
+      <input
+        id='default-range'
+        type='range'
+        value={_presencePenalty}
+        onChange={(e) => {
+          _setPresencePenalty(Number(e.target.value));
+        }}
+        min={-2}
+        max={2}
+        step={0.1}
+        className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
+      />
+      <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
+        {t('presencePenalty.description')}
+      </div>
+    </div>
+  );
+};
+
+export const FrequencyPenaltySlider = ({
+  _frequencyPenalty,
+  _setFrequencyPenalty,
+}: {
+  _frequencyPenalty: number;
+  _setFrequencyPenalty: React.Dispatch<React.SetStateAction<number>>;
+}) => {
+  const { t } = useTranslation('model');
+
+  return (
+    <div className='mt-5 pt-5 border-t border-gray-500'>
+      <label className='block text-sm font-medium text-gray-900 dark:text-white'>
+        {t('frequencyPenalty.label')}: {_frequencyPenalty}
+      </label>
+      <input
+        id='default-range'
+        type='range'
+        value={_frequencyPenalty}
+        onChange={(e) => {
+          _setFrequencyPenalty(Number(e.target.value));
+        }}
+        min={-2}
+        max={2}
+        step={0.1}
+        className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
+      />
+      <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
+        {t('frequencyPenalty.description')}
       </div>
     </div>
   );
