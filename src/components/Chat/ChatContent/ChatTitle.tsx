@@ -4,7 +4,7 @@ import { shallow } from 'zustand/shallow';
 import useStore from '@store/store';
 import ConfigMenu from '@components/ConfigMenu';
 import { ChatInterface, ConfigInterface } from '@type/chat';
-import { defaultChatConfig } from '@constants/chat';
+import { _defaultChatConfig } from '@constants/chat';
 
 const ChatTitle = React.memo(() => {
   const { t } = useTranslation('model');
@@ -35,7 +35,7 @@ const ChatTitle = React.memo(() => {
     const chats = useStore.getState().chats;
     if (chats && chats.length > 0 && currentChatIndex !== -1 && !config) {
       const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
-      updatedChats[currentChatIndex].config = { ...defaultChatConfig };
+      updatedChats[currentChatIndex].config = { ..._defaultChatConfig };
       setChats(updatedChats);
     }
   }, [currentChatIndex]);

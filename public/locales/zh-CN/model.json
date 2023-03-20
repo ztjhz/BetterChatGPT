@@ -21,5 +21,8 @@
   "frequencyPenalty": {
     "label": "频率惩罚",
     "description": "数值在 -2.0 到 2.0 之间。正值会根据新 token 在文本中的现有频率来惩罚它们，降低模型直接重复相同语句的可能性。(默认: 0)"
-  }
+  },
+  "defaultChatConfig": "默认聊天配置",
+  "defaultSystemMessage": "默认系统消息",
+  "resetToDefault": "重置为默认"
 }

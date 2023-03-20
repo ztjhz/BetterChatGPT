@@ -21,5 +21,8 @@
   "frequencyPenalty": {
     "label": "頻率懲罰",
     "description": "係一個 -2.0 到 2.0 之間嘅數值。正嘅數值表示，如果 token 喺之前嘅文字中出現頻率越高，輸出嗰陣就會越大力噉懲罰佢，令到佢被揀中嘅機率降低，即係可以降低模型重複同一句説話嘅機會。(預設: 0)"
-  }
+  },
+  "defaultChatConfig": "預設聊天配置",
+  "defaultSystemMessage": "預設系統消息",
+  "resetToDefault": "重置為預設"
 }

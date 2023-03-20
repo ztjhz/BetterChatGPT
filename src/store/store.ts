@@ -1,10 +1,10 @@
-import { create, StoreApi } from 'zustand';
+import { StoreApi, create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { ChatSlice, createChatSlice } from './chat-slice';
-import { createInputSlice, InputSlice } from './input-slice';
+import { InputSlice, createInputSlice } from './input-slice';
 import { AuthSlice, createAuthSlice } from './auth-slice';
 import { ConfigSlice, createConfigSlice } from './config-slice';
-import { createPromptSlice, PromptSlice } from './prompt-slice';
+import { PromptSlice, createPromptSlice } from './prompt-slice';
 import {
   LocalStorageInterfaceV0ToV1,
   LocalStorageInterfaceV1ToV2,
@@ -13,7 +13,14 @@ import {
   LocalStorageInterfaceV4ToV5,
   LocalStorageInterfaceV5ToV6,
 } from '@type/chat';
-import { migrateV0, migrateV1, migrateV2, migrateV3, migrateV4, migrateV5 } from './migrate';
+import {
+  migrateV0,
+  migrateV1,
+  migrateV2,
+  migrateV3,
+  migrateV4,
+  migrateV5,
+} from './migrate';
 
 export type StoreState = ChatSlice &
   InputSlice &
@@ -46,9 +53,8 @@ const useStore = create<StoreState>()(
         theme: state.theme,
         autoTitle: state.autoTitle,
         prompts: state.prompts,
-        // apiEndpoint: 'https://sharegpt.churchless.tech/share/v1/chat',
-        // apiFree: false,
-        // apiKey: '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',
+        defaultChatConfig: state.defaultChatConfig,
+        defaultSystemMessage: state.defaultSystemMessage,
       }),
       version: 6,
       migrate: (persistedState, version) => {
