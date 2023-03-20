@@ -4,7 +4,7 @@ import { ChatInterface, MessageInterface } from '@type/chat';
 import { getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
 import { limitMessageTokens } from '@utils/messageUtils';
-import { defaultChatConfig } from '@constants/chat';
+import { _defaultChatConfig } from '@constants/chat';
 
 const useSubmit = () => {
   const error = useStore((state) => state.error);
@@ -24,13 +24,13 @@ const useSubmit = () => {
       data = await getChatCompletion(
         useStore.getState().apiEndpoint,
         message,
-        defaultChatConfig
+        _defaultChatConfig
       );
     } else if (apiKey) {
       data = await getChatCompletion(
         useStore.getState().apiEndpoint,
         message,
-        defaultChatConfig,
+        _defaultChatConfig,
         apiKey
       );
     }
