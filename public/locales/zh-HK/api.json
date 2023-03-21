@@ -10,5 +10,6 @@
     "howTo": "喺<0>呢度</0>獲取你嘅個人 API 金鑰",
     "inputLabel": "API 金鑰"
   },
-  "customEndpoint": "使用自訂 API 端點"
+  "customEndpoint": "使用自訂 API 端點",
+  "shareGPT": "睇下 ShareGPT，一個 API key 共享工具，驅動 https://sharegpt.churchless.tech/share/v1/chat。"
 }

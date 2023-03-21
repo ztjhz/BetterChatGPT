@@ -146,6 +146,19 @@ const ApiMenu = ({
             ]}
           />
         </div>
+        <div className='mt-4 p-1 border border-gray-500 rounded-md text-sm font-medium text-gray-900 dark:text-gray-300 text-center'>
+          <Trans
+            i18nKey='shareGPT'
+            ns='api'
+            components={[
+              <a
+                href='https://github.com/acheong08/ShareGPT'
+                className='link'
+                target='_blank'
+              />,
+            ]}
+          />
+        </div>
       </div>
     </PopupModal>
   );
