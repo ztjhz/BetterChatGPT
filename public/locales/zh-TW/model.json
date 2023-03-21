@@ -1,0 +1,28 @@
+{
+  "configuration": "配置",
+  "model": "模型",
+  "token": {
+    "label": "最大 Token",
+    "description": "助手生成一條資訊可以包含的最大 token 數。最大 token 數也受到模型的總長度限制，上文的 token 數和生成的 token 數之和不能超過模型的 token 總數（例如 gpt-3.5-turbo 的 token 總數是 4096）。"
+  },
+  "default": "預設",
+  "temperature": {
+    "label": "取樣溫度",
+    "description": "使用何種取樣溫度，值在 0 到 2 之間。較高的數值如 0.8 會使輸出更加隨機，而較低的數值如 0.2 會使輸出更加集中和確定。我們通常建議修改此引數或機率質量，但不要同時修改兩者。(預設: 1)"
+  },
+  "presencePenalty": {
+    "label": "存在懲罰",
+    "description": "數值在 -2.0 到 2.0 之間。正值會根據新 token 是否已經出現在文字中來懲罰它們，增加模型談論新話題的可能性。 (預設: 0)"
+  },
+  "topP": {
+    "label": "機率質量",
+    "description": "數值在 0 到 1 之間。採用核取樣（nucleus sampling）的一種取樣溫度的替代方法，模型考慮具有最高機率質量的 token 的結果。因此，0.1 表示僅考慮佔前 10% 機率質量的 token。我們通常建議修改此引數或採樣溫度，但不要同時修改兩者。(預設: 1)"
+  },
+  "frequencyPenalty": {
+    "label": "頻率懲罰",
+    "description": "數值在 -2.0 到 2.0 之間。正值會根據新 token 在文字中的現有頻率來懲罰它們，降低模型直接重複相同語句的可能性。(預設: 0)"
+  },
+  "defaultChatConfig": "預設聊天配置",
+  "defaultSystemMessage": "預設系統訊息",
+  "resetToDefault": "重置為預設"
+}

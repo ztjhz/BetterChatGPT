@@ -1,0 +1,15 @@
+{
+  "securityMessage": "我們高度優先考慮您的 API 金鑰的安全，並非常小心地處理它。您的金鑰將專門儲存在您的瀏覽器中，並且永遠不會與任何第三方實體共享。它僅用於訪問 OpenAI API 的預期用途，而不是用於任何其他未經授權的用途。",
+  "apiEndpoint": {
+    "option": "使用免費的 API 端點",
+    "inputLabel": "API 端點",
+    "description": "感謝 <0>Ayaka</0> 提供免費的 API 端點： https://chatgpt-api.shn.hk/v1/。"
+  },
+  "apiKey": {
+    "option": "使用自己的 API 金鑰",
+    "howTo": "在<0>這裡</0>獲取您的個人 API 金鑰",
+    "inputLabel": "API 金鑰"
+  },
+  "customEndpoint": "使用自定義 API 端點",
+  "shareGPT": "看看 <0>ShareGPT</0>，一個 API key 共享工具，驅動 https://sharegpt.churchless.tech/share/v1/chat。"
+}
