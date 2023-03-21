@@ -95,7 +95,7 @@ const ChatContent = () => {
               <DownloadChat saveRef={saveRef} />
             )}
           </div>
-          <div className='w-full h-36'></div>
+          <div class="w-full h-36" style="height:2rem;"></div>
         </div>
       </ScrollToBottom>
     </div>
