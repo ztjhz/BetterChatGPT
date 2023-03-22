@@ -14,13 +14,19 @@ const ShareGPT = React.memo(() => {
     const chats = useStore.getState().chats;
     const currentChatIndex = useStore.getState().currentChatIndex;
     if (chats) {
-      const items: ShareGPTSubmitBodyInterface['items'] = chats[
-        currentChatIndex
-      ].messages.map((message) => ({
-        from: 'gpt',
-        value: `<p><b>${t(message.role)}</b></p>${message.content}`,
-      }));
       try {
+        const items: ShareGPTSubmitBodyInterface['items'] = [];
+        const messages = document.querySelectorAll('.share-gpt-message');
+
+        messages.forEach((message, index) => {
+          items.push({
+            from: 'gpt',
+            value: `<p><b>${t(
+              chats[currentChatIndex].messages[index].role
+            )}</b></p>${message.innerHTML}`,
+          });
+        });
+
         await submitShareGPT({
           avatarUrl: '',
           items,
