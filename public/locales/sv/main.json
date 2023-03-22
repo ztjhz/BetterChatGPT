@@ -28,5 +28,9 @@
   "promptLibrary": "Uppmaningsbibliotek",
   "name": "Namn",
   "search": "Sök",
-  "morePrompts": "Du kan hitta fler uppmaningar här: "
+  "morePrompts": "Du kan hitta fler uppmaningar här: ",
+  "postOnShareGPT": {
+    "title": "Inlägg på ShareGPT",
+    "warning": "Var medveten om att genom att posta din konversation på ShareGPT kommer den att bli offentligt tillgänglig och synlig för alla. När den väl är postad kan konversationen varken döljas eller raderas och kan arkiveras eller delas av andra. Vi rekommenderar dig att tänka noggrant igenom och undvika att dela känslig eller privat information på denna plattform."
+  }
 }

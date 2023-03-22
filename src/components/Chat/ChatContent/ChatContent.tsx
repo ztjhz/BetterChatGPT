@@ -3,11 +3,14 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 import useStore from '@store/store';
 
 import ScrollToBottomButton from './ScrollToBottomButton';
+import ChatTitle from './ChatTitle';
 import Message from './Message';
 import NewMessageButton from './Message/NewMessageButton';
 import CrossIcon from '@icon/CrossIcon';
 
 import useSubmit from '@hooks/useSubmit';
+import DownloadChat from './DownloadChat';
+import ShareGPT from '@components/ShareGPT';
 
 const ChatContent = () => {
   const inputRole = useStore((state) => state.inputRole);
@@ -53,7 +56,7 @@ const ChatContent = () => {
             className='flex flex-col items-center text-sm dark:bg-gray-800 w-full'
             ref={saveRef}
           >
-            {/*<ChatTitle />*/}
+            <ChatTitle />
             {messages?.length === 0 && <NewMessageButton messageIndex={-1} />}
             {messages?.map((message, index) => (
               <React.Fragment key={index}>
@@ -88,11 +91,14 @@ const ChatContent = () => {
               </div>
             </div>
           )}
-          {/*<div className='mt-4'>*/}
-          {/*  {useStore.getState().generating || (*/}
-          {/*    <DownloadChat saveRef={saveRef} />*/}
-          {/*  )}*/}
-          {/*</div>*/}
+          <div className='mt-4 flex gap-4'>
+            {useStore.getState().generating || (
+              <>
+                <DownloadChat saveRef={saveRef} />
+                <ShareGPT />
+              </>
+            )}
+          </div>
           <div className='w-full h-36'></div>
         </div>
       </ScrollToBottom>

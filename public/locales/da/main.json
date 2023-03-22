@@ -28,5 +28,9 @@
   "promptLibrary": "Opgavebibliotek",
   "name": "Navn",
   "search": "Søg",
-  "morePrompts": "Du kan finde flere opgaver her: "
+  "morePrompts": "Du kan finde flere opgaver her: ",
+  "postOnShareGPT": {
+    "title": "Indlæg på ShareGPT",
+    "warning": "Vær opmærksom på, at ved at poste din samtale på ShareGPT, vil den blive offentligt tilgængelig og synlig for alle. Når den er postet, kan samtalen ikke skjules eller slettes og kan blive arkiveret eller delt af andre. Vi råder dig til at overveje nøje og undgå at dele følsomme eller private oplysninger på denne platform."
+  }
 }
