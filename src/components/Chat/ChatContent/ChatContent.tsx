@@ -31,6 +31,7 @@ const ChatContent = () => {
       ? state.chats[state.currentChatIndex].messages.length
       : 0
   );
+  const advancedMode = useStore((state) => state.advancedMode);
   const generating = useStore.getState().generating;
 
   const saveRef = useRef<HTMLDivElement>(null);
@@ -56,8 +57,8 @@ const ChatContent = () => {
             className='flex flex-col items-center text-sm dark:bg-gray-800 w-full'
             ref={saveRef}
           >
-            <ChatTitle />
-            {messages?.length === 0 && <NewMessageButton messageIndex={-1} />}
+            {advancedMode && <ChatTitle />}
+            {messages?.length === 0 && advancedMode && <NewMessageButton messageIndex={-1} />}
             {messages?.map((message, index) => (
               <React.Fragment key={index}>
                 <Message
@@ -65,7 +66,7 @@ const ChatContent = () => {
                   content={message.content}
                   messageIndex={index}
                 />
-                <NewMessageButton messageIndex={index} />
+                {advancedMode && <NewMessageButton messageIndex={index} />}
               </React.Fragment>
             ))}
           </div>

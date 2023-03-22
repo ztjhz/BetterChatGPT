@@ -41,10 +41,11 @@ const MessageContent = ({
   sticky?: boolean;
 }) => {
   const [isEdit, setIsEdit] = useState<boolean>(sticky);
+  const advancedMode = useStore((state) => state.advancedMode);
 
   return (
     <div className='relative flex flex-col gap-1 md:gap-3 lg:w-[calc(100%-115px)]'>
-      <div className='flex flex-grow flex-col gap-3'></div>
+      {advancedMode && <div className='flex flex-grow flex-col gap-3'></div>}
       {isEdit ? (
         <EditView
           content={content}
@@ -431,6 +432,7 @@ const EditViewButtons = React.memo(
     _setContent: React.Dispatch<React.SetStateAction<string>>;
   }) => {
     const { t } = useTranslation();
+    const advancedMode = useStore((state) => state.advancedMode);
 
     return (
       <div className='flex'>
@@ -446,16 +448,18 @@ const EditViewButtons = React.memo(
             </button>
           )}
 
-          <button
-            className={`btn relative mr-2 ${
-              sticky ? 'btn-neutral' : 'btn-primary'
-            }`}
-            onClick={handleSave}
-          >
-            <div className='flex items-center justify-center gap-2'>
-              {t('save')}
-            </div>
-          </button>
+          {advancedMode && (
+            <button
+              className={`btn relative mr-2 ${
+                sticky ? 'btn-neutral' : 'btn-primary'
+              }`}
+              onClick={handleSave}
+            >
+              <div className='flex items-center justify-center gap-2'>
+                {t('save')}
+              </div>
+            </button>
+          )}
 
           {sticky || (
             <button

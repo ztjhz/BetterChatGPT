@@ -7,6 +7,7 @@ import SettingIcon from '@icon/SettingIcon';
 import ThemeSwitcher from '@components/Menu/MenuOptions/ThemeSwitcher';
 import LanguageSelector from '@components/LanguageSelector';
 import AutoTitleToggle from './AutoTitleToggle';
+import AdvancedModeToggle from './AdvencedModeToggle';
 import PromptLibraryMenu from '@components/PromptLibraryMenu';
 import ChatConfigMenu from '@components/ChatConfigMenu';
 
@@ -39,6 +40,7 @@ const SettingsMenu = () => {
             <LanguageSelector />
             <ThemeSwitcher />
             <AutoTitleToggle />
+            <AdvancedModeToggle />
             <PromptLibraryMenu />
             <ChatConfigMenu />
           </div>
