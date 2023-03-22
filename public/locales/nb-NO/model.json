@@ -1,0 +1,28 @@
+{
+  "configuration": "Konfigurasjon",
+  "model": "Modell",
+  "token": {
+    "label": "Maks Token",
+    "description": "Maksimalt antall tokens som skal genereres i chat fullføringen. Den totale lengden av inndata-tokens og genererte tokens er begrenset av modellens kontekstlengde."
+  },
+  "default": "Standard",
+  "temperature": {
+    "label": "Temperatur",
+    "description": "Hvilken prøvetakingstemperatur du skal bruke, mellom 0 og 2. Høyere verdier som 0,8 vil gjøre utdataene mer tilfeldige, mens lavere verdier som 0,2 vil gjøre dem mer fokuserte og deterministiske. Vi anbefaler generelt å endre dette eller topp-p, men ikke begge. (Standard: 1)"
+  },
+  "presencePenalty": {
+    "label": "Tilstedeværelsesstraff",
+    "description": "Tall mellom -2,0 og 2,0. Positive verdier straffer nye tokens basert på om de vises i teksten så langt, noe som øker modellens sannsynlighet for å snakke om nye emner. (Standard: 0)"
+  },
+  "topP": {
+    "label": "Topp-p",
+    "description": "Tall mellom 0 og 1. Et alternativ til prøvetaking med temperatur, kalt kjernesampling, der modellen vurderer resultatene av tokens med topp-p sannsynlighetsmasse. Så 0,1 betyr at bare tokens som utgjør de øverste 10% sannsynlighetsmassene blir vurdert. Vi anbefaler generelt å endre dette eller temperaturen, men ikke begge. (Standard: 1)"
+  },
+  "frequencyPenalty": {
+    "label": "Frekvensstraff",
+    "description": "Tall mellom -2,0 og 2,0. Positive verdier straffer nye tokens basert på deres eksisterende frekvens i teksten så langt, noe som reduserer modellens sannsynlighet for å gjenta samme linje ordrett. (Standard: 0)"
+  },
+  "defaultChatConfig": "Standard Chat-konfigurasjon",
+  "defaultSystemMessage": "Standard Systemmelding",
+  "resetToDefault": "Tilbakestill til standard"
+}
