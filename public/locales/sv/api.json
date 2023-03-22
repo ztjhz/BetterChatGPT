@@ -1,0 +1,15 @@
+{
+  "securityMessage": "Vi prioriterar säkerheten för din API-nyckel och hanterar den med största omsorg. Din nyckel lagras uteslutande på din webbläsare och delas aldrig med någon tredje part. Den används enbart för det avsedda ändamålet att få tillgång till OpenAI API och inte för någon annan obehörig användning.",
+  "apiEndpoint": {
+    "option": "Använd gratis",
+    "inputLabel": "API Endpoint",
+    "description": "Tack till <0>Ayaka</0> för att ha tillhandahållit den kostnadsfria API-endpointen: https://chatgpt-api.shn.hk/v1/"
+  },
+  "apiKey": {
+    "option": "Använd din egen API-nyckel",
+    "howTo": "Få din personliga API-nyckel <0>här</0>",
+    "inputLabel": "API-nyckel"
+  },
+  "customEndpoint": "Använd anpassad API-endpoint",
+  "shareGPT": "Kolla in <0>ShareGPT</0>, ett API-nyckeldelningsverktyg som möjliggör https://sharegpt.churchless.tech/share/v1/chat"
+}

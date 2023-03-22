@@ -1,32 +1,32 @@
 <h1 align="center"><b>Free ChatGPT</b></h1>
 
 <p align="center">
-<img src="public/apple-touch-icon.png" alt="Free ChatGPT" width="100" />
+    <a href="https://freechatgpt.chat" target="_blank"><img src="public/apple-touch-icon.png" alt="Free ChatGPT" width="100" /></a>
 </p>
 
 <h4 align="center"><b>免费、无限、强大、智能、迷人</b></h4>
 
 <p align="center">
-<a href="https://github.com/ztjhz/FreeChatGPT/blob/main/LICENSE" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/blob/main/LICENSE" target="_blank">
 <img src="https://img.shields.io/github/license/ztjhz/FreeChatGPT?style=flat-square" alt="licence" />
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/fork" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/fork" target="_blank">
 <img src="https://img.shields.io/github/forks/ztjhz/FreeChatGPT?style=flat-square" alt="forks"/>
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/stargazers" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/stargazers" target="_blank">
 <img src="https://img.shields.io/github/stars/ztjhz/FreeChatGPT?style=flat-square" alt="stars"/>
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/issues" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/issues" target="_blank">
 <img src="https://img.shields.io/github/issues/ztjhz/FreeChatGPT?style=flat-square" alt="issues"/>
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/pulls" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/pulls" target="_blank">
 <img src="https://img.shields.io/github/issues-pr/ztjhz/FreeChatGPT?style=flat-square" alt="pull-requests"/>
 </a>
-<a href="https://twitter.com/intent/tweet?text=👋请检查这个惊人的存储库 https://github.com/ztjhz/FreeChatGPT，由@nikushii_创建。"><img src="https://img.shields.io/twitter/url?label=%E5%88%86%E4%BA%AB%E5%88%B0%E6%8E%A8%E7%89%B9&style=social&url=https%3A%2F%2Fgithub.com%2Fztjhz%2FFreeChatGPT"></a>
+<a href="https://twitter.com/intent/tweet?text=👋看看这个惊人的存储库%20https://github.com/ztjhz/FreeChatGPT，由%20@nikushii_%20创建。"><img src="https://img.shields.io/twitter/url?label=%E5%88%86%E4%BA%AB%E5%88%B0%E6%8E%A8%E7%89%B9&style=social&url=https%3A%2F%2Fgithub.com%2Fztjhz%2FFreeChatGPT"></a>
 </p>
 
 <p align="center">
-    <a href="https://freechatgpt.chat">查看演示</a>
+    <a href="https://freechatgpt.chat">进入网站</a>
     ·
     <a href="https://github.com/ztjhz/FreeChatGPT/issues/new/choose">反馈问题</a>
     ·
@@ -117,15 +117,24 @@ Free ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 1. 创建一个 GitHub 账户（如果您还没有账户）。
 2. 给此[存储库](https://github.com/ztjhz/FreeChatGPT) 一个星星 ⭐️
 3. Fork 此[存储库](https://github.com/ztjhz/FreeChatGPT)
-4. 在您的 forked 存储库中点击 `Actions`
+4. 如果你不使用自定义域名，需要配置你的 `vite.config.ts` 文件，在 `export default defineConfig({...})` 块内添加 `base: '/<REPO>/'`，其中 `<REPO>` 是你的 GitHub 仓库名称，可以从 `https://<USERNAME>.github.io/<REPO>` 获得（如果你没有改过，`<REPO>` 应该是 `FreeChatGPT`）。代码应该是这样的
+
+   ```js
+   export default defineConfig({
+     base: '/REPO/',
+     /* 其余的配置在这里 */
+   });
+   ```
+
+5. 在您的 forked 存储库中点击 `Actions`
    ![image](https://user-images.githubusercontent.com/59118459/223751928-cf2b91b9-4663-4a36-97de-5eb751b32c7e.png)
-5. 在左侧边栏中，点击 `Deploy to GitHub Pages`
+6. 在左侧边栏中，点击 `Deploy to GitHub Pages`
    ![image](https://user-images.githubusercontent.com/59118459/223752459-183ec23f-72f5-436e-a088-e3386492b8cb.png)
-6. 在运行的工作流列表上方，选择 `Run workflow` 。
+7. 在运行的工作流列表上方，选择 `Run workflow` 。
    ![image](https://user-images.githubusercontent.com/59118459/223753340-1270e038-d213-4d6f-938c-66a30dad7c88.png)
-7. 现在，转到 `Settings` 选项卡
+8. 现在，转到 `Settings` 选项卡
    ![image](https://user-images.githubusercontent.com/59118459/223753577-9b6f8266-26e8-471b-8f45-a1a02fbab232.png)
-8. 在左侧边栏中，单击 `Pages` ，在右侧区域中，为 `Source` 选择 `Deploy from a branch`，为 `Branch` 选择 `gh-pages`。然后在顶部部分，您可以看到 "Your site is live at `XXX`"。
+9. 在左侧边栏中，单击 `Pages` ，在右侧区域中，为 `Source` 选择 `Deploy from a branch`，为 `Branch` 选择 `gh-pages`。然后在顶部部分，您可以看到 "Your site is live at `XXX`"。
    ![image](https://user-images.githubusercontent.com/59118459/223753724-89f6452e-a441-48b8-8665-7a5e515d2a57.png)
 
 ### 在本地运行

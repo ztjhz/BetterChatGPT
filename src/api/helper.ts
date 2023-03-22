@@ -16,7 +16,7 @@ export const parseEventSource = (
         const json = JSON.parse(jsonString);
         return json;
       } catch {
-        return '[ERROR]';
+        return jsonString;
       }
     });
   return result;

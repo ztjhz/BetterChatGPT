@@ -15,9 +15,9 @@ export const getChatCompletion = async (
     method: 'POST',
     headers,
     body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
       messages,
       ...config,
+      max_tokens: null,
     }),
   });
   if (!response.ok) throw new Error(await response.text());
@@ -41,16 +41,25 @@ export const getChatCompletionStream = async (
     method: 'POST',
     headers,
     body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
       messages,
       ...config,
+      max_tokens: null,
       stream: true,
     }),
   });
-  if (response.status === 404 || response.status === 405)
-    throw new Error(
-      'Message from freechatgpt.chat:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
-    );
+  if (response.status === 404 || response.status === 405) {
+    const text = await response.text();
+    if (text.includes('model_not_found')) {
+      throw new Error(
+        text +
+          '\nMessage from freechatgpt.chat:\nPlease ensure that you have access to the GPT-4 API!'
+      );
+    } else {
+      throw new Error(
+        'Message from freechatgpt.chat:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
+      );
+    }
+  }
 
   if (response.status === 429 || !response.ok) {
     const text = await response.text();
@@ -58,6 +67,8 @@ export const getChatCompletionStream = async (
     if (text.includes('insufficient_quota')) {
       error +=
         '\nMessage from freechatgpt.chat:\nToo many request! We recommend changing your API endpoint or API key';
+    } else {
+      error += '\nRate limited! Please try again later.';
     }
     throw new Error(error);
   }

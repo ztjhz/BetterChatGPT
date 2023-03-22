@@ -10,5 +10,6 @@
     "howTo": "Get your personal API key <0>here</0>",
     "inputLabel": "API Key"
   },
-  "customEndpoint": "Use custom API endpoint"
+  "customEndpoint": "Use custom API endpoint",
+  "shareGPT": "Checkout <0>ShareGPT</0>, a API key sharing tool that powers https://sharegpt.churchless.tech/share/v1/chat"
 }

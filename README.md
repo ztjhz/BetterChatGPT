@@ -8,32 +8,32 @@
 </p>
 
 <p align="center">
-<img src="public/apple-touch-icon.png" alt="Free ChatGPT" width="100" />
+    <a href="https://freechatgpt.chat" target="_blank"><img src="public/apple-touch-icon.png" alt="Free ChatGPT" width="100" /></a>
 </p>
 
 <h4 align="center"><b>Free, Powerful, Limitless, Intelligent, Engaging</b></h4>
 
 <p align="center">
-<a href="https://github.com/ztjhz/FreeChatGPT/blob/main/LICENSE" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/blob/main/LICENSE" target="_blank">
 <img src="https://img.shields.io/github/license/ztjhz/FreeChatGPT?style=flat-square" alt="licence" />
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/fork" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/fork" target="_blank">
 <img src="https://img.shields.io/github/forks/ztjhz/FreeChatGPT?style=flat-square" alt="forks"/>
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/stargazers" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/stargazers" target="_blank">
 <img src="https://img.shields.io/github/stars/ztjhz/FreeChatGPT?style=flat-square" alt="stars"/>
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/issues" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/issues" target="_blank">
 <img src="https://img.shields.io/github/issues/ztjhz/FreeChatGPT?style=flat-square" alt="issues"/>
 </a>
-<a href="https://github.com/ztjhz/FreeChatGPT/pulls" target="blank">
+<a href="https://github.com/ztjhz/FreeChatGPT/pulls" target="_blank">
 <img src="https://img.shields.io/github/issues-pr/ztjhz/FreeChatGPT?style=flat-square" alt="pull-requests"/>
 </a>
 <a href="https://twitter.com/intent/tweet?text=👋%20Check%20this%20amazing%20repo%20https://github.com/ztjhz/FreeChatGPT,%20created%20by%20@nikushii_"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%2Fztjhz%2FFreeChatGPT"></a>
 </p>
 
 <p align="center">
-    <a href="https://freechatgpt.chat">View Demo</a>
+    <a href="https://freechatgpt.chat">Enter Website</a>
     ·
     <a href="https://github.com/ztjhz/FreeChatGPT/issues/new/choose">Report Bug</a>
     ·
@@ -124,16 +124,26 @@ If you'd like to run your own instance of Free ChatGPT, you can easily do so by 
 1. Create a GitHub account (if you don't have one already)
 2. Star this [repository](https://github.com/ztjhz/FreeChatGPT) ⭐️
 3. Fork this [repository](https://github.com/ztjhz/FreeChatGPT)
-4. In your forked repository, click on `Actions`
+4. If you are not using custom domain, configure your `vite.config.ts` file by adding `base: '/<REPO>/'` inside the `export default defineConfig({...})` block, where `<REPO>` is the name of your repository on GitHub, obtained from `https://<USERNAME>.github.io/<REPO>` (`<REPO>` should be `FreeChatGPT` if you did not change it). The code should look like this:
+
+   ```js
+   export default defineConfig({
+     base: '/REPO/',
+     /* Rest of the configuration here */
+   });
+   ```
+
+5. Repository settings > Secrets > Actions > General > Tick "Read and write permissions"
+6. In your forked repository, click on `Actions`
    ![image](https://user-images.githubusercontent.com/59118459/223751928-cf2b91b9-4663-4a36-97de-5eb751b32c7e.png)
-5. In the left sidebar, click on `Deploy to GitHub Pages`
+7. In the left sidebar, click on `Deploy to GitHub Pages`
    ![image](https://user-images.githubusercontent.com/59118459/223752459-183ec23f-72f5-436e-a088-e3386492b8cb.png)
-6. Above the list of workflow runs, select `Run workflow`.
+8. Above the list of workflow runs, select `Run workflow`.
    ![image](https://user-images.githubusercontent.com/59118459/223753340-1270e038-d213-4d6f-938c-66a30dad7c88.png)
-7. Now, navigate to the `Settings` tab
+9. Now, navigate to the `Settings` tab
    ![image](https://user-images.githubusercontent.com/59118459/223753577-9b6f8266-26e8-471b-8f45-a1a02fbab232.png)
-8. In the left sidebar, click on `Pages` and in the right section, select `Deploy from a branch` for `Source` and `gh-pages` for `Branch`. Then at the top section, you can see that "Your site is live at `XXX`".
-   ![image](https://user-images.githubusercontent.com/59118459/223753724-89f6452e-a441-48b8-8665-7a5e515d2a57.png)
+10. In the left sidebar, click on `Pages` and in the right section, select `Deploy from a branch` for `Source` and `gh-pages` for `Branch`. Then at the top section, you can see that "Your site is live at `XXX`".
+    ![image](https://user-images.githubusercontent.com/59118459/223753724-89f6452e-a441-48b8-8665-7a5e515d2a57.png)
 
 ### Running it locally
 
