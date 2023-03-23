@@ -124,11 +124,11 @@ If you'd like to run your own instance of Free ChatGPT, you can easily do so by 
 1. Create a GitHub account (if you don't have one already)
 2. Star this [repository](https://github.com/ztjhz/FreeChatGPT) ⭐️
 3. Fork this [repository](https://github.com/ztjhz/FreeChatGPT)
-4. If you are not using custom domain, configure your `vite.config.ts` file by adding `base: '/<REPO>/'` inside the `export default defineConfig({...})` block, where `<REPO>` is the name of your repository on GitHub, obtained from `https://<USERNAME>.github.io/<REPO>` (`<REPO>` should be `FreeChatGPT` if you did not change it). The code should look like this:
+4. If you are not using a custom domain, configure your `vite.config.ts` file by adding `base: '/<REPO>/'` inside the `export default defineConfig({...})` block, where `<REPO>` is the name of your repository on GitHub, obtained from `https://<USERNAME>.github.io/<REPO>` (`<REPO>` should be `FreeChatGPT` if you did not change it). The code should look like this:
 
    ```js
    export default defineConfig({
-     base: '/REPO/',
+     base: '/FreeChatGPT/',
      /* Rest of the configuration here */
    });
    ```
