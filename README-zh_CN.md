@@ -117,16 +117,16 @@ Free ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 1. 创建一个 GitHub 账户（如果您还没有账户）。
 2. 给此[存储库](https://github.com/ztjhz/FreeChatGPT) 一个星星 ⭐️
 3. Fork 此[存储库](https://github.com/ztjhz/FreeChatGPT)
-4. 如果你不使用自定义域名，需要配置你的 `vite.config.ts` 文件，在 `export default defineConfig({...})` 块内添加 `base: '/<REPO>/'`，其中 `<REPO>` 是你的 GitHub 仓库名称，可以从 `https://<USERNAME>.github.io/<REPO>` 获得（如果你没有改过，`<REPO>` 应该是 `FreeChatGPT`）。代码应该是这样的
+4. 如果你不使用自定义域名，需要配置你的 `vite.config.ts` 文件，在 `export default defineConfig({...})` 块内添加 `base: '/<REPO>/'`，其中 `<REPO>` 是您的 GitHub 仓库名称，可以从 `https://<USERNAME>.github.io/<REPO>` 获得（如果没有作过修改，`<REPO>` 应为 `FreeChatGPT`）。代码应当如下：
 
    ```js
    export default defineConfig({
-     base: '/REPO/',
-     /* 其余的配置在这里 */
+     base: '/FreeChatGPT/',
+     /* 其余配置在此 */
    });
    ```
 
-5. 在您的 forked 存储库中点击 `Actions`
+5. 在 fork 之后的存储库中点击 `Actions`
    ![image](https://user-images.githubusercontent.com/59118459/223751928-cf2b91b9-4663-4a36-97de-5eb751b32c7e.png)
 6. 在左侧边栏中，点击 `Deploy to GitHub Pages`
    ![image](https://user-images.githubusercontent.com/59118459/223752459-183ec23f-72f5-436e-a088-e3386492b8cb.png)
@@ -134,7 +134,7 @@ Free ChatGPT 已经包含了大量的功能。您可以使用以下功能：
    ![image](https://user-images.githubusercontent.com/59118459/223753340-1270e038-d213-4d6f-938c-66a30dad7c88.png)
 8. 现在，转到 `Settings` 选项卡
    ![image](https://user-images.githubusercontent.com/59118459/223753577-9b6f8266-26e8-471b-8f45-a1a02fbab232.png)
-9. 在左侧边栏中，单击 `Pages` ，在右侧区域中，为 `Source` 选择 `Deploy from a branch`，为 `Branch` 选择 `gh-pages`。然后在顶部部分，您可以看到 "Your site is live at `XXX`"。
+9. 在左侧边栏中，单击 `Pages` ，在右侧区域中，为 `Source` 选择 `Deploy from a branch`，为 `Branch` 选择 `gh-pages`。然后在顶部部分，可以看到 "Your site is live at `XXX`"。
    ![image](https://user-images.githubusercontent.com/59118459/223753724-89f6452e-a441-48b8-8665-7a5e515d2a57.png)
 
 ### 在本地运行
