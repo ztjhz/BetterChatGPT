@@ -124,7 +124,6 @@ If you'd like to run your own instance of Free ChatGPT, you can easily do so by 
 1. Create a GitHub account (if you don't have one already)
 1. Star this [repository](https://github.com/ztjhz/FreeChatGPT) ⭐️
 1. Fork this [repository](https://github.com/ztjhz/FreeChatGPT)
-1. Repository settings > Secrets > Actions > General > Tick "Read and write permissions"
 1. In your forked repository, click on `Actions`
    ![image](https://user-images.githubusercontent.com/59118459/223751928-cf2b91b9-4663-4a36-97de-5eb751b32c7e.png)
 1. In the left sidebar, click on `Deploy to GitHub Pages`
