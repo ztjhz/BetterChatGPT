@@ -1,0 +1,15 @@
+{
+  "securityMessage": "Prioritamos la seguridad de su clave API y la tratamos con sumo cuidado. Si utiliza su propia clave de API, ésta se almacena exclusivamente en su navegador y nunca se comparte con ninguna entidad de terceros. Se utiliza únicamente para el fin exclusivo de acceder a la API de OpenAI y no para ningún otro uso no autorizado.",
+  "apiEndpoint": {
+    "option": "Uso gratuito",
+    "inputLabel": "Punto final de acceso de la API",
+    "description": "Gracias a <0>Ayaka</0> por proveer el punto final de acceso gratuito: https://chatgpt-api.shn.hk/v1/"
+  },
+  "apiKey": {
+    "option": "Usa tu propia clave API",
+    "howTo": "Obtén tu clave personal <0>aquí</0>.",
+    "inputLabel": "Clave API"
+  },
+  "customEndpoint": "Usar un punto final de acceso personalizado",
+  "shareGPT": "Echa un vistazo a <0>ShareGPT</0>, una herramienta que permite compartir claves API: https://sharegpt.churchless.tech/share/v1/chat"
+}

@@ -1,0 +1,28 @@
+{
+  "configuration": "Configuración",
+  "model": "Modelo",
+  "token": {
+    "label": "Máximo número de tokens",
+    "description": "El máximo número de tokens que se utilizan para generar la respuesta. La longitud total de los tokens de entrada y los tokens generados está limitada por la longitud de contexto del modelo."
+  },
+  "default": "Valores por defecto",
+  "temperature": {
+    "label": "Temperatura",
+    "description": "Qué temperatura a usar (valores entre 0 y 2). Si se elige un valor alto, por ejemplo 0.8, la salida será más aleatoria, mientras que un valor bajo, como 0.2, hará que la salida sea más enfocada y predecible. Como recomendación general, se sugiere ajustar este parámetro o el top p, pero no ambos al mismo tiempo. Por defecto, el valor es 1."
+  },
+  "presencePenalty": {
+    "label": "Sanción por presencia",
+    "description": "Este parámetro permite controlar el nivel de repetición del modelo. La diferencia entre este parámetro y las sanciones por frecuencia, es que este se centra en evitar repeticiones de temas mientras que las sanciones por frecuencia en evitar repeticiones de palabras. Los valores positivos incrementan la probabilidad de que el modelo sea menos repetitivo y que hable sobre nuevos temas. Su valor de por defecto es 0."
+  },
+  "topP": {
+    "label": "Top-p (P máxima)",
+    "description": "Este argumento es una forma alternativa de controlar la aleatoridad y creatividad del texto. Por ejemplo, si establecemos su valor a 0.1, significa que solo se consideran los tokens que están comprendidos entre el 10% de la masa de probabilidad."
+  },
+  "frequencyPenalty": {
+    "label": "Sanción por frecuencia",
+    "description": "Este argumento controla el nivel de repetición que permite usar al modelo en sus respuestas. Los valores positivos decrementan la probabilidad de que el modelo se repita. Su valor de por defecto es 0."
+  },
+  "defaultChatConfig": "Configuración de chat de por defecto",
+  "defaultSystemMessage": "Mensaje de por defecto del sistema",
+  "resetToDefault": "Restablecer a los valores predeterminados"
+}

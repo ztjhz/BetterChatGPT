@@ -28,5 +28,9 @@
   "promptLibrary": "提示词资料库",
   "name": "名称",
   "search": "搜索",
-  "morePrompts": "更多提示词请点击："
+  "morePrompts": "更多提示词请点击：",
+  "postOnShareGPT": {
+    "title": "发布至 ShareGPT",
+    "warning": "请注意，把您的对话发布到 ShareGPT 后，任何人都可以公开访问和查看。发布后，对话不能被隐藏或删除，且可能被其他人存档或分享。建议您慎重考虑，在这个平台上避免分享敏感或私密信息。"
+  }
 }
