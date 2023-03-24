@@ -117,7 +117,6 @@ Free ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 1. 创建一个 GitHub 账户（如果您还没有账户）。
 1. 给此[存储库](https://github.com/ztjhz/FreeChatGPT) 一个星星 ⭐️
 1. Fork 此[存储库](https://github.com/ztjhz/FreeChatGPT)
-1. Repository settings > Secrets > Actions > General > 勾选 "Read and write permissions"
 1. 在 fork 之后的存储库中点击 `Actions`
    ![image](https://user-images.githubusercontent.com/59118459/223751928-cf2b91b9-4663-4a36-97de-5eb751b32c7e.png)
 1. 在左侧边栏中，点击 `Deploy to GitHub Pages`
