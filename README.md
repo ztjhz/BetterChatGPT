@@ -132,8 +132,8 @@ If you'd like to run your own instance of Free ChatGPT, you can easily do so by 
    ![image](https://user-images.githubusercontent.com/59118459/223753340-1270e038-d213-4d6f-938c-66a30dad7c88.png)
 1. Now, navigate to the `Settings` tab
    ![image](https://user-images.githubusercontent.com/59118459/223753577-9b6f8266-26e8-471b-8f45-a1a02fbab232.png)
-1. In the left sidebar, click on `Pages` and in the right section, select `Deploy from a branch` for `Source` and `gh-pages` for `Branch`. Then at the top section, you can see that "Your site is live at `XXX`".
-   ![image](https://user-images.githubusercontent.com/59118459/223753724-89f6452e-a441-48b8-8665-7a5e515d2a57.png)
+1. In the left sidebar, click on `Pages` and in the right section, select `GitHub Actions` for `source`. Then at the top section, you can see that "Your site is live at `XXX`".
+   ![image](https://user-images.githubusercontent.com/59118459/227568881-d8fb7baa-f890-4dee-8fc2-b6b429ba2098.png)
 
 ### Running it locally
 

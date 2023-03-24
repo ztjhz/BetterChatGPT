@@ -125,8 +125,8 @@ Free ChatGPT 已经包含了大量的功能。您可以使用以下功能：
    ![image](https://user-images.githubusercontent.com/59118459/223753340-1270e038-d213-4d6f-938c-66a30dad7c88.png)
 1. 现在，转到 `Settings` 选项卡
    ![image](https://user-images.githubusercontent.com/59118459/223753577-9b6f8266-26e8-471b-8f45-a1a02fbab232.png)
-1. 在左侧边栏中，单击 `Pages` ，在右侧区域中，为 `Source` 选择 `Deploy from a branch`，为 `Branch` 选择 `gh-pages`。然后在顶部部分，可以看到 "Your site is live at `XXX`"。
-   ![image](https://user-images.githubusercontent.com/59118459/223753724-89f6452e-a441-48b8-8665-7a5e515d2a57.png)
+1. 在左侧边栏中，单击 `Pages` ，在右侧区域中，为 `Source` 选择 `GitHub Actions`。然后在顶部部分，您可以看到 "Your site is live at `XXX`"。
+   ![image](https://user-images.githubusercontent.com/59118459/227568881-d8fb7baa-f890-4dee-8fc2-b6b429ba2098.png)
 
 ### 在本地运行
 
