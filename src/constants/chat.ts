@@ -47,9 +47,10 @@ export const _defaultChatConfig: ConfigInterface = {
 
 export const generateDefaultChat = (title?: string): ChatInterface => ({
   title: title ? title : 'New Chat',
-  messages: [
-    { role: 'system', content: useStore.getState().defaultSystemMessage },
-  ],
+  messages:
+    useStore.getState().defaultSystemMessage.length > 0
+      ? [{ role: 'system', content: useStore.getState().defaultSystemMessage }]
+      : [],
   config: { ...useStore.getState().defaultChatConfig },
   titleSet: false,
 });
