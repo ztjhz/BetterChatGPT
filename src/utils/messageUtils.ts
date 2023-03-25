@@ -8,11 +8,20 @@ export const limitMessageTokens = (
   const limitedMessages: MessageInterface[] = [];
   let tokenCount = 0;
 
+  if (messages[0]?.role === 'system') {
+    const count = countTokens(messages[0].content);
+    tokenCount += count;
+  }
+
   for (let i = messages.length - 1; i >= 0; i--) {
     const count = countTokens(messages[i].content);
     if (count + tokenCount > limit) break;
     tokenCount += count;
     limitedMessages.unshift({ ...messages[i] });
+  }
+
+  if (messages[0]?.role === 'system' && limitedMessages[0]?.role !== 'system') {
+    limitedMessages.unshift({ ...messages[0] });
   }
 
   return limitedMessages;
