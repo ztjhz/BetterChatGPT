@@ -1,5 +1,5 @@
 import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+// import jsPDF from 'jspdf';
 import { ChatInterface, ConfigInterface, MessageInterface } from '@type/chat';
 import { roles } from '@type/chat';
 import { Theme } from '@type/theme';
@@ -72,41 +72,41 @@ export const downloadImg = (imgData: string, fileName: string) => {
   link.remove();
 };
 
-export const downloadPDF = (
-  imageData: string,
-  theme: Theme,
-  fileName: string
-) => {
-  const pdf = new jsPDF('p', 'mm');
-  const imageProps = pdf.getImageProperties(imageData);
-  const pageHeight = pdf.internal.pageSize.getHeight();
-  const pageWidth = pdf.internal.pageSize.getWidth();
-  const imgHeight = (imageProps.height * pageWidth) / imageProps.width;
-  let heightLeft = imgHeight;
-  let position = 0;
+// export const downloadPDF = (
+//   imageData: string,
+//   theme: Theme,
+//   fileName: string
+// ) => {
+//   const pdf = new jsPDF('p', 'mm');
+//   const imageProps = pdf.getImageProperties(imageData);
+//   const pageHeight = pdf.internal.pageSize.getHeight();
+//   const pageWidth = pdf.internal.pageSize.getWidth();
+//   const imgHeight = (imageProps.height * pageWidth) / imageProps.width;
+//   let heightLeft = imgHeight;
+//   let position = 0;
 
-  pdf.addImage(imageData, 'PNG', 0, position, pageWidth, imgHeight);
-  heightLeft -= pageHeight;
+//   pdf.addImage(imageData, 'PNG', 0, position, pageWidth, imgHeight);
+//   heightLeft -= pageHeight;
 
-  while (heightLeft >= 0) {
-    position -= pageHeight;
-    heightLeft -= pageHeight;
-    pdf.addPage();
-    pdf.addImage(imageData, 'PNG', 0, position, pageWidth, imgHeight);
-  }
+//   while (heightLeft >= 0) {
+//     position -= pageHeight;
+//     heightLeft -= pageHeight;
+//     pdf.addPage();
+//     pdf.addImage(imageData, 'PNG', 0, position, pageWidth, imgHeight);
+//   }
 
-  if (heightLeft < 0) {
-    heightLeft = -heightLeft;
-    if (theme === 'dark') {
-      pdf.setFillColor(52, 53, 65);
-    } else {
-      pdf.setFillColor(255, 255, 255);
-    }
-    pdf.rect(0, pageHeight - heightLeft - 3, pageWidth, heightLeft + 3, 'F');
-  }
+//   if (heightLeft < 0) {
+//     heightLeft = -heightLeft;
+//     if (theme === 'dark') {
+//       pdf.setFillColor(52, 53, 65);
+//     } else {
+//       pdf.setFillColor(255, 255, 255);
+//     }
+//     pdf.rect(0, pageHeight - heightLeft - 3, pageWidth, heightLeft + 3, 'F');
+//   }
 
-  pdf.save(fileName);
-};
+//   pdf.save(fileName);
+// };
 
 export const chatToMarkdown = (chat: ChatInterface) => {
   let markdown = `# ${chat.title}\n\n`;

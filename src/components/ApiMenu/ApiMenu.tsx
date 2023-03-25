@@ -89,6 +89,12 @@ const ApiMenu = ({
           {t('apiEndpoint.option', { ns: 'api' })}
         </label>
 
+        {_apiFree && (
+          <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm my-2'>
+            {t('apiEndpoint.note', { ns: 'api' })}
+          </div>
+        )}
+
         <label className='flex items-center gap-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
           <input
             type='radio'

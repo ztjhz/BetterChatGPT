@@ -16,10 +16,10 @@ Current date: ${dateString}`;
 
 export const modelOptions: ModelOptions[] = [
   'gpt-3.5-turbo',
-  // 'gpt-3.5-turbo-0301',
   'gpt-4',
-  // 'gpt-4-0314',
   'gpt-4-32k',
+  // 'gpt-3.5-turbo-0301',
+  // 'gpt-4-0314',
   // 'gpt-4-32k-0314',
 ];
 
@@ -47,9 +47,10 @@ export const _defaultChatConfig: ConfigInterface = {
 
 export const generateDefaultChat = (title?: string): ChatInterface => ({
   title: title ? title : 'New Chat',
-  messages: [
-    { role: 'system', content: useStore.getState().defaultSystemMessage },
-  ],
+  messages:
+    useStore.getState().defaultSystemMessage.length > 0
+      ? [{ role: 'system', content: useStore.getState().defaultSystemMessage }]
+      : [],
   config: { ...useStore.getState().defaultChatConfig },
   titleSet: false,
 });
