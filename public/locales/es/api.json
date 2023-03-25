@@ -3,7 +3,8 @@
   "apiEndpoint": {
     "option": "Uso gratuito",
     "inputLabel": "Punto final de acceso de la API",
-    "description": "Gracias a <0>Ayaka</0> por proveer el punto final de acceso gratuito: https://chatgpt-api.shn.hk/v1/"
+    "description": "Gracias a <0>Ayaka</0> por proveer el punto final de acceso gratuito: https://chatgpt-api.shn.hk/v1/",
+    "note": "Please note that the availability of the free endpoint is not indefinite, as its funding is limited and will eventually be depleted. Users with their own API key can continue using BetterChatGPT without any disruptions."
   },
   "apiKey": {
     "option": "Usa tu propia clave API",
@@ -11,5 +12,7 @@
     "inputLabel": "Clave API"
   },
   "customEndpoint": "Usar un punto final de acceso personalizado",
-  "shareGPT": "Echa un vistazo a <0>ShareGPT</0>, una herramienta que permite compartir claves API: https://sharegpt.churchless.tech/share/v1/chat"
+  "shareGPT": "Echa un vistazo a <0>ShareGPT</0>, una herramienta que permite compartir claves API: https://sharegpt.churchless.tech/share/v1/chat",
+  "advancedConfig": "View advanced API configuration <0>here</0>",
+  "noApiKeyWarning": "No API key supplied! Please check your API settings."
 }

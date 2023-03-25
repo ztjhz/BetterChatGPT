@@ -3,7 +3,8 @@
   "apiEndpoint": {
     "option": "Bruk gratis",
     "inputLabel": "API-sluttpunkt",
-    "description": "Takk til <0>Ayaka</0> for å tilby det gratis API-sluttpunktet: https://chatgpt-api.shn.hk/v1/"
+    "description": "Takk til <0>Ayaka</0> for å tilby det gratis API-sluttpunktet: https://chatgpt-api.shn.hk/v1/",
+    "note": "Please note that the availability of the free endpoint is not indefinite, as its funding is limited and will eventually be depleted. Users with their own API key can continue using BetterChatGPT without any disruptions."
   },
   "apiKey": {
     "option": "Bruk din egen API-nøkkel",
@@ -11,5 +12,7 @@
     "inputLabel": "API-nøkkel"
   },
   "customEndpoint": "Bruk egendefinert API-sluttpunkt",
-  "shareGPT": "Sjekk ut <0>ShareGPT</0>, et API-nøkkel delingsverktøy som driver https://sharegpt.churchless.tech/share/v1/chat"
+  "shareGPT": "Sjekk ut <0>ShareGPT</0>, et API-nøkkel delingsverktøy som driver https://sharegpt.churchless.tech/share/v1/chat",
+  "advancedConfig": "View advanced API configuration <0>here</0>",
+  "noApiKeyWarning": "No API key supplied! Please check your API settings."
 }
