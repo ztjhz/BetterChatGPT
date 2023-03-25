@@ -15,9 +15,9 @@ const MenuOptions = () => {
     <>
       <CollapseOptions />
       <div
-        style={{
-          display: hideMenuOptions ? 'none' : '',
-        }}
+        className={`${
+          hideMenuOptions ? 'max-h-0' : 'max-h-full'
+        } overflow-hidden transition-all`}
       >
         <AboutMenu />
         <ClearConversation />
