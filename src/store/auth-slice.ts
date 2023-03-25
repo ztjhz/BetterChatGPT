@@ -5,14 +5,17 @@ export interface AuthSlice {
   apiKey?: string;
   apiFree: boolean;
   apiEndpoint: string;
+  firstVisit: boolean;
   setApiKey: (apiKey: string) => void;
   setApiFree: (apiFree: boolean) => void;
   setApiEndpoint: (apiEndpoint: string) => void;
+  setFirstVisit: (firstVisit: boolean) => void;
 }
 
 export const createAuthSlice: StoreSlice<AuthSlice> = (set, get) => ({
-  apiFree: true,
+  apiFree: false,
   apiEndpoint: defaultAPIEndpoint,
+  firstVisit: true,
   setApiKey: (apiKey: string) => {
     set((prev: AuthSlice) => ({
       ...prev,
@@ -29,6 +32,12 @@ export const createAuthSlice: StoreSlice<AuthSlice> = (set, get) => ({
     set((prev: AuthSlice) => ({
       ...prev,
       apiEndpoint: apiEndpoint,
+    }));
+  },
+  setFirstVisit: (firstVisit: boolean) => {
+    set((prev: AuthSlice) => ({
+      ...prev,
+      firstVisit: firstVisit,
     }));
   },
 });

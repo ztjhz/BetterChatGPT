@@ -1,5 +1,6 @@
 import React from 'react';
 import useStore from '@store/store';
+import { useTranslation } from 'react-i18next';
 import { ChatInterface, MessageInterface } from '@type/chat';
 import { getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
@@ -7,6 +8,7 @@ import { limitMessageTokens } from '@utils/messageUtils';
 import { _defaultChatConfig } from '@constants/chat';
 
 const useSubmit = () => {
+  const { t } = useTranslation('api');
   const error = useStore((state) => state.error);
   const setError = useStore((state) => state.setError);
   const apiFree = useStore((state) => state.apiFree);
@@ -73,7 +75,7 @@ const useSubmit = () => {
           apiKey
         );
       } else {
-        throw new Error('No API key supplied! Please check your API settings.');
+        throw new Error(t('noApiKeyWarning') as string);
       }
 
       if (stream) {
