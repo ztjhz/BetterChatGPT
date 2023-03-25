@@ -55,9 +55,13 @@ const useSubmit = () => {
 
     try {
       let stream;
+      if (chats[currentChatIndex].messages.length === 0)
+        throw new Error('No messages submitted!');
+
       const messages = limitMessageTokens(
         chats[currentChatIndex].messages,
-        chats[currentChatIndex].config.max_tokens
+        chats[currentChatIndex].config.max_tokens,
+        chats[currentChatIndex].config.model
       );
       if (messages.length === 0) throw new Error('Message exceed max token!');
 
