@@ -7,7 +7,6 @@ export interface ConfigSlice {
   openConfig: boolean;
   theme: Theme;
   autoTitle: boolean;
-  FoldMenuOptions
   foldMenuOptions: boolean;
   setFoldMenuOptions: (foldMenuOptions: boolean) => void;
   defaultChatConfig: ConfigInterface;
