@@ -35,7 +35,7 @@ const AboutMenu = () => {
                   ns='about'
                   components={[
                     <a
-                      href='https://github.com/ztjhz/FreeChatGPT'
+                      href='https://github.com/ztjhz/BetterChatGPT'
                       target='_blank'
                       className='link'
                     />,
@@ -68,7 +68,7 @@ const AboutMenu = () => {
                     ns='about'
                     components={[
                       <a
-                        href='https://github.com/ztjhz/FreeChatGPT'
+                        href='https://github.com/ztjhz/BetterChatGPT'
                         target='_blank'
                         className='link'
                       />,
