@@ -7,6 +7,7 @@ export interface ConfigSlice {
   openConfig: boolean;
   theme: Theme;
   autoTitle: boolean;
+  hideMenuOptions: boolean;
   defaultChatConfig: ConfigInterface;
   defaultSystemMessage: string;
   setOpenConfig: (openConfig: boolean) => void;
@@ -14,11 +15,13 @@ export interface ConfigSlice {
   setAutoTitle: (autoTitle: boolean) => void;
   setDefaultChatConfig: (defaultChatConfig: ConfigInterface) => void;
   setDefaultSystemMessage: (defaultSystemMessage: string) => void;
+  setHideMenuOptions: (hideMenuOptions: boolean) => void;
 }
 
 export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
   openConfig: false,
   theme: 'dark',
+  hideMenuOptions: false,
   autoTitle: false,
   defaultChatConfig: _defaultChatConfig,
   defaultSystemMessage: _defaultSystemMessage,
@@ -50,6 +53,12 @@ export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
     set((prev: ConfigSlice) => ({
       ...prev,
       defaultSystemMessage: defaultSystemMessage,
+    }));
+  },
+  setHideMenuOptions: (hideMenuOptions: boolean) => {
+    set((prev: ConfigSlice) => ({
+      ...prev,
+      hideMenuOptions: hideMenuOptions,
     }));
   },
 });
