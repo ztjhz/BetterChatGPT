@@ -117,15 +117,19 @@ Free ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 1. 创建一个 GitHub 账户（如果您还没有账户）。
 1. 给此[存储库](https://github.com/ztjhz/FreeChatGPT) 一个星星 ⭐️
 1. Fork 此[存储库](https://github.com/ztjhz/FreeChatGPT)
-1. 在 fork 之后的存储库中点击 `Actions`
+1. 在 fork 之后的存储库中点击 `Settings` 选项卡
+   ![image](https://user-images.githubusercontent.com/59118459/223753577-9b6f8266-26e8-471b-8f45-a1a02fbab232.png)
+1. 在左侧边栏中，单击 `Pages` ，在右侧区域中，为 `Source` 选择 `GitHub Actions`。
+   ![image](https://user-images.githubusercontent.com/59118459/227568881-d8fb7baa-f890-4dee-8fc2-b6b429ba2098.png)
+1. 现在点击 `Actions`
    ![image](https://user-images.githubusercontent.com/59118459/223751928-cf2b91b9-4663-4a36-97de-5eb751b32c7e.png)
 1. 在左侧边栏中，点击 `Deploy to GitHub Pages`
    ![image](https://user-images.githubusercontent.com/59118459/223752459-183ec23f-72f5-436e-a088-e3386492b8cb.png)
 1. 在运行的工作流列表上方，选择 `Run workflow` 。
    ![image](https://user-images.githubusercontent.com/59118459/223753340-1270e038-d213-4d6f-938c-66a30dad7c88.png)
-1. 现在，转到 `Settings` 选项卡
+1. 返回到 `Settings` 选项卡
    ![image](https://user-images.githubusercontent.com/59118459/223753577-9b6f8266-26e8-471b-8f45-a1a02fbab232.png)
-1. 在左侧边栏中，单击 `Pages` ，在右侧区域中，为 `Source` 选择 `GitHub Actions`。然后在顶部部分，您可以看到 "Your site is live at `XXX`"。
+1. 在左侧边栏中，单击 `Pages` 。然后在顶部部分，您可以看到 "Your site is live at `XXX`"。
    ![image](https://user-images.githubusercontent.com/59118459/227568881-d8fb7baa-f890-4dee-8fc2-b6b429ba2098.png)
 
 ### 在本地运行
