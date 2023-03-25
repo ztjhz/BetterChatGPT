@@ -157,9 +157,11 @@ const ContentView = React.memo(
         <div className='flex justify-end gap-2 w-full mt-2'>
           {isDelete || (
             <>
-              {role === 'assistant' && messageIndex === lastMessageIndex && (
-                <RefreshButton onClick={handleRefresh} />
-              )}
+              {!useStore.getState().generating &&
+                role === 'assistant' &&
+                messageIndex === lastMessageIndex && (
+                  <RefreshButton onClick={handleRefresh} />
+                )}
               {messageIndex !== 0 && <UpButton onClick={handleMoveUp} />}
               {messageIndex !== lastMessageIndex && (
                 <DownButton onClick={handleMoveDown} />
