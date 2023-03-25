@@ -13,6 +13,6 @@
   },
   "customEndpoint": "Usar un punto final de acceso personalizado",
   "shareGPT": "Echa un vistazo a <0>ShareGPT</0>, una herramienta que permite compartir claves API: https://sharegpt.churchless.tech/share/v1/chat",
-  "advancedConfig": "View advanced API configuration <0>here</0>",
-  "noApiKeyWarning": "No API key supplied! Please check your API settings."
+  "advancedConfig": "Ver configuración avanzada de API <0>aquí</0>",
+  "noApiKeyWarning": "¡No se proporcionó clave de API! Por favor, revisa tus ajustes de API."
 }

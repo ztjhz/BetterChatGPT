@@ -8,11 +8,11 @@
   },
   "apiKey": {
     "option": "使用自己的 API 密钥",
-    "howTo": "在<0>这里</0>获取您的个人 API 密钥",
+    "howTo": "在<0>此处</0>获取您的个人 API 密钥",
     "inputLabel": "API 密钥"
   },
   "customEndpoint": "使用自定义 API 端点",
   "shareGPT": "看看 <0>ShareGPT</0>，一个 API key 共享工具，驱动 https://sharegpt.churchless.tech/share/v1/chat。",
-  "advancedConfig": "View advanced API configuration <0>here</0>",
-  "noApiKeyWarning": "No API key supplied! Please check your API settings."
+  "advancedConfig": "在<0>此处</0>查看高级 API 设置",
+  "noApiKeyWarning": "缺少 API key，请检查 API 设置。"
 }
