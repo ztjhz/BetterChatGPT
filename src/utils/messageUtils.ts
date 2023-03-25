@@ -50,7 +50,7 @@ export const limitMessageTokens = (
   let tokenCount = 0;
 
   if (messages[0]?.role === 'system') {
-    const count = countTokens(messages[0].content);
+    const count = countTokens([messages[0]], model);
     tokenCount += count;
   }
 
