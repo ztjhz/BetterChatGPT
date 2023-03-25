@@ -105,11 +105,11 @@ If you have enjoyed using our app, we kindly ask you to give this project a ‚≠êÔ
 
 If you would like to support the team, consider sponsoring us through one of the methods below. Every contribution, no matter how small, helps us to maintain and improve our service.
 
-| Payment Method | Link                                                                                   |
-| -------------- | -------------------------------------------------------------------------------------- |
-| KoFi           | [![support](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/freechatgpt) |
-| Alipay (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/alipay.jpg" width=150 />                |
-| Wechat (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/wechat.png" width=150 />                |
+| Payment Method | Link                                                                                     |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| KoFi           | [![support](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/betterchatgpt) |
+| Alipay (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/alipay.jpg" width=150 />                  |
+| Wechat (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/wechat.png" width=150 />                  |
 
 Thank you for being a part of our community, and we look forward to serving you better in the future.
 

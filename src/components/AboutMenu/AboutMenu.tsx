@@ -78,7 +78,7 @@ const AboutMenu = () => {
                 <p>{t('support.paragraph3', { ns: 'about' })}</p>
 
                 <div className='flex flex-col items-center gap-4 my-4'>
-                  <a href='https://ko-fi.com/freechatgpt' target='_blank'>
+                  <a href='https://ko-fi.com/betterchatgpt' target='_blank'>
                     <img
                       src='/kofi.svg'
                       alt='Support us through the Ko-fi platform.'

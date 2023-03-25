@@ -98,11 +98,11 @@ Better ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 
 如果您想支持我们的团队，请考虑通过以下方法之一赞助我们。每一份贡献，无论多小，都有助于我们维护和改善我们的服务。
 
-| 付款方式       | 链接                                                                                   |
-| -------------- | -------------------------------------------------------------------------------------- |
-| 支付宝 (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/alipay.jpg" width=150 />                |
-| 微信 (Ayaka)   | <img src="https://ayaka14732.github.io/sponsor/wechat.png" width=150 />                |
-| KoFi           | [![support](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/freechatgpt) |
+| 付款方式       | 链接                                                                                     |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| 支付宝 (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/alipay.jpg" width=150 />                  |
+| 微信 (Ayaka)   | <img src="https://ayaka14732.github.io/sponsor/wechat.png" width=150 />                  |
+| KoFi           | [![support](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/betterchatgpt) |
 
 感谢您成为我们社区的一员，我们期待着在未来为您提供更好的服务。
 
