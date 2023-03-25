@@ -13,6 +13,6 @@
   },
   "customEndpoint": "Använd anpassad API-endpoint",
   "shareGPT": "Kolla in <0>ShareGPT</0>, ett API-nyckeldelningsverktyg som möjliggör https://sharegpt.churchless.tech/share/v1/chat",
-  "advancedConfig": "View advanced API configuration <0>here</0>",
-  "noApiKeyWarning": "No API key supplied! Please check your API settings."
+  "advancedConfig": "Visa avancerad API-konfiguration <0>här</0>",
+  "noApiKeyWarning": "Ingen API-nyckel angiven! Vänligen kontrollera dina API-inställningar."
 }
