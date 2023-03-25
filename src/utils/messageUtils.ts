@@ -24,6 +24,13 @@ export const limitMessageTokens = (
     limitedMessages.unshift({ ...messages[0] });
   }
 
+  if (limitedMessages.length > 4 && limitedMessages[0].role === 'system'){
+    const firstElement = limitedMessages.shift(); // 取出第一个元素并移除
+    if (firstElement !== undefined) { // 确保 firstElement 不为 undefined
+      limitedMessages.splice(-3, 0, firstElement); // 将第一个元素插入到倒数第四个位置
+    }
+  }
+
   return limitedMessages;
 };
 
