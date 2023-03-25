@@ -10,13 +10,13 @@ import SettingsMenu from '@components/SettingsMenu';
 import CollapseOptions from '@components/Menu/CollapseOptions';
 
 const MenuOptions = () => {
-  const foldMenuOptions = useStore((state) => state.foldMenuOptions);
+  const hideMenuOptions = useStore((state) => state.hideMenuOptions);
   return (
     <>
       <CollapseOptions />
       <div
         style={{
-          display: foldMenuOptions ? 'none' : '',
+          display: hideMenuOptions ? 'none' : '',
         }}
       >
         <AboutMenu />

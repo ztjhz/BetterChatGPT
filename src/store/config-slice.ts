@@ -7,8 +7,8 @@ export interface ConfigSlice {
   openConfig: boolean;
   theme: Theme;
   autoTitle: boolean;
-  foldMenuOptions: boolean;
-  setFoldMenuOptions: (foldMenuOptions: boolean) => void;
+  hideMenuOptions: boolean;
+  setHideMenuOptions: (hideMenuOptions: boolean) => void;
   defaultChatConfig: ConfigInterface;
   defaultSystemMessage: string;
   setOpenConfig: (openConfig: boolean) => void;
@@ -21,12 +21,12 @@ export interface ConfigSlice {
 export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
   openConfig: false,
   theme: 'dark',
-  foldMenuOptions: false,
+  hideMenuOptions: false,
   autoTitle: false,
-  setFoldMenuOptions: (foldMenuOptions: boolean) => {
+  setHideMenuOptions: (hideMenuOptions: boolean) => {
     set((prev: ConfigSlice) => ({
       ...prev,
-      foldMenuOptions: foldMenuOptions,
+      hideMenuOptions: hideMenuOptions,
     }));
   },
   defaultChatConfig: _defaultChatConfig,

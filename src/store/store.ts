@@ -53,7 +53,7 @@ const useStore = create<StoreState>()(
         theme: state.theme,
         autoTitle: state.autoTitle,
         prompts: state.prompts,
-        foldMenuOptions: state.foldMenuOptions,
+        hideMenuOptions: state.hideMenuOptions,
         defaultChatConfig: state.defaultChatConfig,
         defaultSystemMessage: state.defaultSystemMessage,
       }),
