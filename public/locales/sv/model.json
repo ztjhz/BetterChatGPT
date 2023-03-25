@@ -1,0 +1,28 @@
+{
+  "configuration": "Konfiguration",
+  "model": "Modell",
+  "token": {
+    "label": "Max Token",
+    "description": "Det maximala antalet token att generera i chatkomplettering. Den totala längden på inmatade token och genererade token är begränsad av modellens kontextlängd."
+  },
+  "default": "Standard",
+  "temperature": {
+    "label": "Temperatur",
+    "description": "Vilken samplings-temperatur som ska användas, mellan 0 och 2. Högre värden som 0,8 gör utdata mer slumpmässiga, medan lägre värden som 0,2 gör dem mer fokuserade och deterministiska. Vi rekommenderar generellt att ändra detta eller topp-p, men inte båda. (Standard: 1)"
+  },
+  "presencePenalty": {
+    "label": "Närvarostraff",
+    "description": "Tal mellan -2,0 och 2,0. Positiva värden straffar nya token baserat på om de förekommer i texten hittills, vilket ökar modellens sannolikhet att prata om nya ämnen. (Standard: 0)"
+  },
+  "topP": {
+    "label": "Topp-p",
+    "description": "Tal mellan 0 och 1. Ett alternativ till samplings-temperatur, kallat kärnsampling, där modellen beaktar resultaten av token med topp-p sannolikhetsmassa. Så 0,1 innebär att endast de token som utgör de 10% högsta sannolikhetsmassan beaktas. Vi rekommenderar generellt att ändra detta eller temperatur, men inte båda. (Standard: 1)"
+  },
+  "frequencyPenalty": {
+    "label": "Frekvensstraff",
+    "description": "Tal mellan -2,0 och 2,0. Positiva värden straffar nya token baserat på deras befintliga frekvens i texten hittills, vilket minskar modellens sannolikhet att upprepa samma rad ordagrant. (Standard: 0)"
+  },
+  "defaultChatConfig": "Standard Chatkonfiguration",
+  "defaultSystemMessage": "Standard Systemmeddelande",
+  "resetToDefault": "Återställ till Standard"
+}

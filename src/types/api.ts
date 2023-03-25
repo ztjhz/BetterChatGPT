@@ -16,3 +16,11 @@ export interface EventSourceDataChoices {
   finish_reason?: string;
   index: number;
 }
+
+export interface ShareGPTSubmitBodyInterface {
+  avatarUrl: string;
+  items: {
+    from: 'gpt' | 'human';
+    value: string;
+  }[];
+}

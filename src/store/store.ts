@@ -55,6 +55,7 @@ const useStore = create<StoreState>()(
         prompts: state.prompts,
         defaultChatConfig: state.defaultChatConfig,
         defaultSystemMessage: state.defaultSystemMessage,
+        firstVisit: state.firstVisit,
       }),
       version: 6,
       migrate: (persistedState, version) => {

@@ -17,3 +17,10 @@ export const limitMessageTokens = (
 
   return limitedMessages;
 };
+
+export const countMessagesToken = (messages: MessageInterface[]) => {
+  return messages.reduce(
+    (tokenCount, message) => (tokenCount += countTokens(message.content)),
+    0
+  );
+};

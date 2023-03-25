@@ -17,4 +17,5 @@ export default defineConfig({
       '@src/': new URL('./src/', import.meta.url).pathname,
     },
   },
+  base: "./"
 });
