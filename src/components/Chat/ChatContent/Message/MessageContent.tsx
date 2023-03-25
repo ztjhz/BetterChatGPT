@@ -26,6 +26,7 @@ import useSubmit from '@hooks/useSubmit';
 import { ChatInterface } from '@type/chat';
 
 import PopupModal from '@components/PopupModal';
+import TokenCount from '@components/TokenCount';
 import CommandPrompt from './CommandPrompt';
 import CodeBlock from './CodeBlock';
 import { codeLanguageSubset } from '@constants/chat';
@@ -512,6 +513,7 @@ const EditViewButtons = React.memo(
             </button>
           )}
         </div>
+        {sticky && <TokenCount />}
         <CommandPrompt _setContent={_setContent} />
       </div>
     );
