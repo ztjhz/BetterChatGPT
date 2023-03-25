@@ -13,6 +13,6 @@
   },
   "customEndpoint": "使用自訂 API 端點",
   "shareGPT": "睇下 ShareGPT，一個 API key 共享工具，驅動 https://sharegpt.churchless.tech/share/v1/chat。",
-  "advancedConfig": "View advanced API configuration <0>here</0>",
-  "noApiKeyWarning": "No API key supplied! Please check your API settings."
+  "advancedConfig": "喺<0>呢度</0>睇下高級 API 設定",
+  "noApiKeyWarning": "冇填寫 API key，請 check 返個 API 設定。"
 }

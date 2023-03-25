@@ -13,6 +13,6 @@
   },
   "customEndpoint": "Brug brugerdefineret API-endpoint",
   "shareGPT": "Tjek <0>ShareGPT</0>, et API-nøgle delingsværktøj, der driver https://sharegpt.churchless.tech/share/v1/chat",
-  "advancedConfig": "View advanced API configuration <0>here</0>",
-  "noApiKeyWarning": "No API key supplied! Please check your API settings."
+  "advancedConfig": "Se avanceret API-konfiguration <0>her</0>",
+  "noApiKeyWarning": "Ingen API-nøgle angivet! Tjek venligst dine API-indstillinger."
 }
