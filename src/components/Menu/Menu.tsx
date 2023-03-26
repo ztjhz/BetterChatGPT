@@ -14,6 +14,7 @@ const Menu = () => {
   const setHideSideMenu = useStore((state) => state.setHideSideMenu);
 
   useEffect(() => {
+    if (window.innerWidth < 768) setHideSideMenu(true);
     window.addEventListener('resize', () => {
       if (window.innerWidth < 768) setHideSideMenu(true);
     });
