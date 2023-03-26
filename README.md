@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-    <a href="https://bettergpt.chat" target="_blank"><img src="public/apple-touch-icon.png" alt="Better ChatGPT" width="100" /></a>
+    <a href="https://pbk123461.github.io/ChatGPT/" target="_blank"><img src="public/apple-touch-icon.png" alt="Better ChatGPT" width="100" /></a>
 </p>
 
 <h4 align="center"><b>Free, Powerful, Limitless, Intelligent, Engaging</b></h4>
@@ -33,7 +33,7 @@
 </p>
 
 <p align="center">
-    <a href="https://bettergpt.chat">Enter Website</a>
+    <a href="https://pbk123461.github.io/ChatGPT/">Enter Website</a>
     ·
     <a href="https://github.com/ztjhz/BetterChatGPT/issues/new/choose">Report Bug</a>
     ·
@@ -44,7 +44,7 @@
 ## 👋🏻 Introducing Better ChatGPT
 
 <p align="center">
-    <a href="https://bettergpt.chat" target="_blank">
+    <a href="https://pbk123461.github.io/ChatGPT/" target="_blank">
         <img src="assets/preview.png" alt="landing" width=500 />
     </a>
 </p>
