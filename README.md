@@ -97,7 +97,7 @@ To get started, simply visit our website at <https://pbk123461.github.io/ChatGPT
 2. Utilise the free api endpoint provided by [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree)
 3. Host your own API endpoint by following the instructions provided here: <https://github.com/ayaka14732/ChatGPTAPIFree>. Subsequently, enter the API endpoint into the API menu.
 
-# 🙏 Support
+# 🙏 Support the actual devs
 
 At Better ChatGPT, we strive to provide you with useful and amazing features around the clock. And just like any project, your support and motivation will be instrumental in helping us keep moving forward!
 
