@@ -91,7 +91,7 @@ Better ChatGPT comes with a bundle of features already. You can do the following
 
 ## 🛠️ Usage
 
-To get started, simply visit our website at <https://bettergpt.chat/>. There are 3 ways for you to start using Better ChatGPT.
+To get started, simply visit our website at <https://pbk123461.github.io/ChatGPT/>. There are 3 ways for you to start using Better ChatGPT.
 
 1. Enter into the API menu your OpenAI API Key obtained from [OpenAI API Keys](https://platform.openai.com/account/api-keys).
 2. Utilise the free api endpoint provided by [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree)
