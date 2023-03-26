@@ -134,7 +134,7 @@ const ContentView = React.memo(
 
     return (
       <>
-        <div className='markdown prose w-full break-words dark:prose-invert dark share-gpt-message'>
+        <div className='markdown prose w-full md:max-w-full break-words dark:prose-invert dark share-gpt-message'>
           <ReactMarkdown
             remarkPlugins={[
               remarkGfm,
