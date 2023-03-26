@@ -3,6 +3,7 @@ import React from 'react';
 // import Account from './Account';
 import ClearConversation from './ClearConversation';
 // import Me from './Me';
+import Api from './Api';
 // import AboutMenu from '@components/AboutMenu';
 // import ImportExportChat from '@components/ImportExportChat';
 // import SettingsMenu from '@components/SettingsMenu';
@@ -13,7 +14,7 @@ const MenuOptions = () => {
       {/*<AboutMenu />*/}
       <ClearConversation />
       {/*<ImportExportChat />*/}
-      {/*<Api />*/}
+      <Api />
       {/*<SettingsMenu />*/}
       {/*<Me />*/}
     </>

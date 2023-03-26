@@ -40,16 +40,15 @@ const useStore = create<StoreState>()(
       partialize: (state) => ({
         chats: state.chats,
         currentChatIndex: state.currentChatIndex,
-        // apiKey: state.apiKey,
-        // apiFree: state.apiFree,
-        // apiEndpoint: state.apiEndpoint,
+        apiKey: state.apiKey,
+        apiFree: state.apiFree,
+        apiEndpoint: state.apiEndpoint,
         theme: state.theme,
         autoTitle: state.autoTitle,
         prompts: state.prompts,
-
-        apiEndpoint: 'https://sharegpt.churchless.tech/share/v1/chat',
-        apiFree: false,
-        apiKey: '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',
+        // apiEndpoint: 'https://sharegpt.churchless.tech/share/v1/chat',
+        // apiFree: false,
+        // apiKey: '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',
       }),
       version: 6,
       migrate: (persistedState, version) => {

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useTranslation, Trans } from 'react-i18next';
+import React, { useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import useStore from '@store/store';
 
 import PopupModal from '@components/PopupModal';
@@ -7,8 +7,8 @@ import { availableEndpoints, defaultAPIEndpoint } from '@constants/auth';
 import DownChevronArrow from '@icon/DownChevronArrow';
 
 const ApiMenu = ({
-  setIsModalOpen,
-}: {
+                   setIsModalOpen,
+                 }: {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const { t } = useTranslation(['main', 'api']);
@@ -129,36 +129,36 @@ const ApiMenu = ({
           />
         </div>
 
-        <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm mt-4'>
-          {t('securityMessage', { ns: 'api' })}
-        </div>
+        {/*<div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm mt-4'>*/}
+        {/*  {t('securityMessage', { ns: 'api' })}*/}
+        {/*</div>*/}
 
-        <div className='mt-4 p-1 border border-gray-500 rounded-md text-sm font-medium text-gray-900 dark:text-gray-300 text-center'>
-          <Trans
-            i18nKey='apiEndpoint.description'
-            ns='api'
-            components={[
-              <a
-                href='https://github.com/ayaka14732/ChatGPTAPIFree'
-                className='link'
-                target='_blank'
-              />,
-            ]}
-          />
-        </div>
-        <div className='mt-4 p-1 border border-gray-500 rounded-md text-sm font-medium text-gray-900 dark:text-gray-300 text-center'>
-          <Trans
-            i18nKey='shareGPT'
-            ns='api'
-            components={[
-              <a
-                href='https://github.com/acheong08/ShareGPT'
-                className='link'
-                target='_blank'
-              />,
-            ]}
-          />
-        </div>
+        {/*<div className='mt-4 p-1 border border-gray-500 rounded-md text-sm font-medium text-gray-900 dark:text-gray-300 text-center'>*/}
+        {/*  <Trans*/}
+        {/*    i18nKey='apiEndpoint.description'*/}
+        {/*    ns='api'*/}
+        {/*    components={[*/}
+        {/*      <a*/}
+        {/*        href='https://github.com/ayaka14732/ChatGPTAPIFree'*/}
+        {/*        className='link'*/}
+        {/*        target='_blank'*/}
+        {/*      />,*/}
+        {/*    ]}*/}
+        {/*  />*/}
+        {/*</div>*/}
+        {/*<div className='mt-4 p-1 border border-gray-500 rounded-md text-sm font-medium text-gray-900 dark:text-gray-300 text-center'>*/}
+        {/*  <Trans*/}
+        {/*    i18nKey='shareGPT'*/}
+        {/*    ns='api'*/}
+        {/*    components={[*/}
+        {/*      <a*/}
+        {/*        href='https://github.com/acheong08/ShareGPT'*/}
+        {/*        className='link'*/}
+        {/*        target='_blank'*/}
+        {/*      />,*/}
+        {/*    ]}*/}
+        {/*  />*/}
+        {/*</div>*/}
       </div>
     </PopupModal>
   );
