@@ -54,9 +54,9 @@ const ShowMoreButton = () => {
 
 const ChatHistoryClass = {
   normal:
-    'flex py-3 px-3 items-center gap-3 relative rounded-md hover:bg-[#2A2B32] cursor-pointer break-all hover:pr-4 group',
+    'flex py-3 px-3 items-center gap-3 relative rounded-md hover:bg-[#2A2B32] break-all hover:pr-4 group',
   active:
-    'flex py-3 px-3 items-center gap-3 relative rounded-md cursor-pointer break-all pr-14 bg-gray-800 hover:bg-gray-800 group',
+    'flex py-3 px-3 items-center gap-3 relative rounded-md break-all pr-14 bg-gray-800 hover:bg-gray-800 group',
   normalGradient:
     'absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-gray-900 group-hover:from-[#2A2B32]',
   activeGradient:
@@ -69,6 +69,7 @@ const ChatHistory = React.memo(
     const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
     const setChats = useStore((state) => state.setChats);
     const active = useStore((state) => state.currentChatIndex === chatIndex);
+    const generating = useStore((state) => state.generating);
 
     const [isDelete, setIsDelete] = useState<boolean>(false);
     const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -107,9 +108,11 @@ const ChatHistory = React.memo(
 
     return (
       <a
-        className={active ? ChatHistoryClass.active : ChatHistoryClass.normal}
-        onClick={(e) => {
-          setCurrentChatIndex(chatIndex);
+        className={`${
+          active ? ChatHistoryClass.active : ChatHistoryClass.normal
+        } ${generating ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+        onClick={() => {
+          if (!generating) setCurrentChatIndex(chatIndex);
         }}
       >
         <ChatIcon />
