@@ -5,6 +5,7 @@ import PlusIcon from '@icon/PlusIcon';
 import useAddChat from '@hooks/useAddChat';
 
 const MobileBar = () => {
+  const generating = useStore((state) => state.generating);
   const chatTitle = useStore((state) =>
     state.chats &&
     state.chats.length > 0 &&
@@ -48,7 +49,17 @@ const MobileBar = () => {
         </svg>
       </button>
       <h1 className='flex-1 text-center text-base font-normal'>{chatTitle}</h1>
-      <button type='button' className='px-3 text-gray-400' onClick={addChat}>
+      <button
+        type='button'
+        className={`px-3 text-gray-400 transition-opacity ${
+          generating
+            ? 'cursor-not-allowed opacity-40'
+            : 'cursor-pointer opacity-100'
+        }`}
+        onClick={() => {
+          if (!generating) addChat();
+        }}
+      >
         <PlusIcon className='h-6 w-6' />
       </button>
     </div>
