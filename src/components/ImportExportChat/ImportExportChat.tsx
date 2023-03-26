@@ -7,6 +7,7 @@ import downloadFile from '@utils/downloadFile';
 import { getToday } from '@utils/date';
 import PopupModal from '@components/PopupModal';
 import { validateAndFixChats } from '@utils/chat';
+import { ChatInterface } from '@type/chat';
 
 const ImportExportChat = () => {
   const { t } = useTranslation();
@@ -61,7 +62,15 @@ const ImportChat = () => {
         try {
           const parsedData = JSON.parse(data);
           if (validateAndFixChats(parsedData)) {
-            setChats(parsedData);
+            const prevChats = useStore.getState().chats;
+            if (prevChats) {
+              const updatedChats: ChatInterface[] = JSON.parse(
+                JSON.stringify(prevChats)
+              );
+              setChats(parsedData.concat(updatedChats));
+            } else {
+              setChats(parsedData);
+            }
             setAlert({ message: 'Succesfully imported!', success: true });
           } else {
             setAlert({ message: 'Invalid chats data format', success: false });

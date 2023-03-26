@@ -12,6 +12,9 @@ import {
 import ImageIcon from '@icon/ImageIcon';
 import PdfIcon from '@icon/PdfIcon';
 import MarkdownIcon from '@icon/MarkdownIcon';
+import JsonIcon from '@icon/JsonIcon';
+
+import downloadFile from '@utils/downloadFile';
 
 const DownloadChat = React.memo(
   ({ saveRef }: { saveRef: React.RefObject<HTMLDivElement> }) => {
@@ -100,6 +103,19 @@ const DownloadChat = React.memo(
               >
                 <MarkdownIcon />
                 Markdown
+              </button>
+              <button
+                className='btn btn-neutral gap-2'
+                onClick={async () => {
+                  const chats = useStore.getState().chats;
+                  if (chats) {
+                    const chat = chats[useStore.getState().currentChatIndex];
+                    downloadFile([chat], chat.title);
+                  }
+                }}
+              >
+                <JsonIcon />
+                JSON
               </button>
             </div>
           </PopupModal>
