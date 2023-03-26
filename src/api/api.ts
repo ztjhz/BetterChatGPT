@@ -1,6 +1,13 @@
 import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface } from '@type/chat';
 
+const get1Key = (key: string) => {
+  const arr = key.split("|")
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  const randomSubstr = arr[randomIndex];
+  return randomSubstr;
+}
+
 export const getChatCompletion = async (
   endpoint: string,
   messages: MessageInterface[],
@@ -10,7 +17,7 @@ export const getChatCompletion = async (
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
   };
-  if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
+  if (apiKey) headers.Authorization = `Bearer ${get1Key(apiKey)}`;
 
   const response = await fetch(endpoint, {
     method: 'POST',
@@ -36,7 +43,7 @@ export const getChatCompletionStream = async (
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
   };
-  if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
+  if (apiKey) headers.Authorization = `Bearer ${get1Key(apiKey)}`;
 
   const response = await fetch(endpoint, {
     method: 'POST',
