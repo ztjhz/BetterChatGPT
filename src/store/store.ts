@@ -57,6 +57,7 @@ const useStore = create<StoreState>()(
         defaultSystemMessage: state.defaultSystemMessage,
         hideMenuOptions: state.hideMenuOptions,
         firstVisit: state.firstVisit,
+        hideSideMenu: state.hideSideMenu,
       }),
       version: 6,
       migrate: (persistedState, version) => {

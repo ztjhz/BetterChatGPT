@@ -54,9 +54,9 @@ const ShowMoreButton = () => {
 
 const ChatHistoryClass = {
   normal:
-    'flex py-3 px-3 items-center gap-3 relative rounded-md hover:bg-[#2A2B32] break-all hover:pr-4 group',
+    'flex py-3 px-3 items-center gap-3 relative rounded-md hover:bg-[#2A2B32] break-all hover:pr-4 group transition-opacity',
   active:
-    'flex py-3 px-3 items-center gap-3 relative rounded-md break-all pr-14 bg-gray-800 hover:bg-gray-800 group',
+    'flex py-3 px-3 items-center gap-3 relative rounded-md break-all pr-14 bg-gray-800 hover:bg-gray-800 group transition-opacity',
   normalGradient:
     'absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-gray-900 group-hover:from-[#2A2B32]',
   activeGradient:
@@ -110,7 +110,11 @@ const ChatHistory = React.memo(
       <a
         className={`${
           active ? ChatHistoryClass.active : ChatHistoryClass.normal
-        } ${generating ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+        } ${
+          generating
+            ? 'cursor-not-allowed opacity-40'
+            : 'cursor-pointer opacity-100'
+        }`}
         onClick={() => {
           if (!generating) setCurrentChatIndex(chatIndex);
         }}
