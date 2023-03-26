@@ -19,7 +19,7 @@ const NewChat = () => {
           : 'cursor-pointer opacity-100'
       }`}
       onClick={() => {
-        if (!generating) addChat;
+        if (!generating) addChat();
       }}
     >
       <PlusIcon />{' '}
