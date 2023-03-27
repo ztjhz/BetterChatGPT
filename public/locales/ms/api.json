@@ -1,0 +1,18 @@
+{
+  "securityMessage": "Kami mengutamakan keselamatan kunci API anda dan mengendalikannya dengan penuh berhati-hati. Kunci anda disimpan secara eksklusif di pelayar anda dan tidak pernah dikongsi dengan mana-mana entiti pihak ketiga. Ia hanya digunakan untuk tujuan yang dimaksudkan untuk mengakses API OpenAI dan bukan untuk penggunaan yang tidak sah.",
+  "apiEndpoint": {
+    "option": "Guna secara percuma",
+    "inputLabel": "Hujung API",
+    "description": "Terima kasih kepada <0>Ayaka</0> kerana menyediakan hujung API percuma: https://chatgpt-api.shn.hk/v1/",
+    "note": "Sila ambil perhatian bahawa ketersediaan hujung API percuma ini tidak kekal, kerana pembiayaannya terhad dan akhirnya akan habis. Pengguna dengan kunci API mereka sendiri boleh terus menggunakan BetterChatGPT tanpa gangguan."
+  },
+  "apiKey": {
+    "option": "Gunakan kunci API anda sendiri",
+    "howTo": "Dapatkan kunci API peribadi anda <0>di sini</0>",
+    "inputLabel": "Kunci API"
+  },
+  "customEndpoint": "Gunakan hujung API tersuai",
+  "shareGPT": "Lihat <0>ShareGPT</0>, alat perkongsian kunci API yang membolehkan https://sharegpt.churchless.tech/share/v1/chat",
+  "advancedConfig": "Lihat konfigurasi API lanjutan <0>di sini</0>",
+  "noApiKeyWarning": "Tiada kunci API yang dibekalkan! Sila periksa tetapan API anda."
+}

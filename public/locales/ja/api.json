@@ -1,0 +1,18 @@
+{
+  "securityMessage": "APIキーのセキュリティを最優先し、細心の注意を払って取り扱っています。キーはお客様のブラウザにのみ保存され、第三者とは一切共有されません。OpenAI APIにアクセスする目的でのみ使用され、他の不正な目的で使用されることはありません。",
+  "apiEndpoint": {
+    "option": "無料で利用する",
+    "inputLabel": "APIエンドポイント",
+    "description": "<0>アヤカ</0>さんによって提供された無料のAPIエンドポイントに感謝します：https://chatgpt-api.shn.hk/v1/",
+    "note": "無料エンドポイントの利用可能期間は無期限ではないことにご注意ください。資金が限られているため、いずれ枯渇します。独自のAPIキーを持つユーザーは、BetterChatGPTを中断することなく引き続き利用できます。"
+  },
+  "apiKey": {
+    "option": "独自のAPIキーを使用する",
+    "howTo": "個人用APIキーは<0>こちら</0>で取得できます",
+    "inputLabel": "APIキー"
+  },
+  "customEndpoint": "カスタムAPIエンドポイントを使用する",
+  "shareGPT": "<0>ShareGPT</0>をチェックしてください。これは、https://sharegpt.churchless.tech/share/v1/chat を駆動するAPIキーシェアリングツールです。",
+  "advancedConfig": "詳細なAPI設定は<0>こちら</0>で表示できます。",
+  "noApiKeyWarning": "APIキーが入力されていません！API設定を確認してください。"
+}
