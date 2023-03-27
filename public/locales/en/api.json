@@ -4,7 +4,7 @@
     "option": "Use for free",
     "inputLabel": "API Endpoint",
     "description": "Thank you to <0>Ayaka</0> for providing the free API endpoint: https://chatgpt-api.shn.hk/v1/",
-    "note": "Please note that the availability of the free endpoint is not indefinite, as its funding is limited and will eventually be depleted. Users with their own API key can continue using BetterChatGPT without any disruptions."
+    "note": "Please note that the availability of the free endpoint is not indefinite, as its funding is limited and will eventually be depleted. Users with their own API key can continue using Better ChatGPT without any disruptions."
   },
   "apiKey": {
     "option": "Use your own API key",

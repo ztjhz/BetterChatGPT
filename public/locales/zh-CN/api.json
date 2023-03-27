@@ -4,7 +4,7 @@
     "option": "使用免费的 API 端点",
     "inputLabel": "API 端点",
     "description": "感谢 <0>Ayaka</0> 提供免费的 API 端点： https://chatgpt-api.shn.hk/v1/。",
-    "note": "Please note that the availability of the free endpoint is not indefinite, as its funding is limited and will eventually be depleted. Users with their own API key can continue using BetterChatGPT without any disruptions."
+    "note": "注意，免费端点的可用性并非无限期，因其资金有限，最终将耗尽。拥有自己 API 密钥的用户可以继续使用 Better ChatGPT 而不会有任何中断。"
   },
   "apiKey": {
     "option": "使用自己的 API 密钥",

@@ -4,7 +4,7 @@
     "option": "Uso gratuito",
     "inputLabel": "Punto final de acceso de la API",
     "description": "Gracias a <0>Ayaka</0> por proveer el punto final de acceso gratuito: https://chatgpt-api.shn.hk/v1/",
-    "note": "Please note that the availability of the free endpoint is not indefinite, as its funding is limited and will eventually be depleted. Users with their own API key can continue using BetterChatGPT without any disruptions."
+    "note": "Tenga en cuenta que la disponibilidad del punto final gratuito no es indefinida, ya que su financiación es limitada y eventualmente se agotará. Los usuarios con su propia clave API pueden seguir utilizando Better ChatGPT sin interrupciones."
   },
   "apiKey": {
     "option": "Usa tu propia clave API",
