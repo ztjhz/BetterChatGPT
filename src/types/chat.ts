@@ -11,6 +11,7 @@ export interface MessageInterface {
 
 export interface ChatInterface {
   title: string;
+  folder?: string;
   messages: MessageInterface[];
   config: ConfigInterface;
   titleSet: boolean;
@@ -23,6 +24,15 @@ export interface ConfigInterface {
   presence_penalty: number;
   top_p: number;
   frequency_penalty: number;
+}
+
+export interface ChatHistoryInterface {
+  title: string;
+  index: number;
+}
+
+export interface ChatHistoryFolderInterface {
+  [folderName: string]: ChatHistoryInterface[];
 }
 
 export type ModelOptions = 'gpt-4' | 'gpt-4-32k' | 'gpt-3.5-turbo';
