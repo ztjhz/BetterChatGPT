@@ -8,6 +8,7 @@ const NewFolder = () => {
   const { t } = useTranslation();
   const generating = useStore((state) => state.generating);
   const setFoldersName = useStore((state) => state.setFoldersName);
+  const setFoldersExpanded = useStore((state) => state.setFoldersExpanded);
 
   const addFolder = () => {
     let folderIndex = 1;
@@ -23,6 +24,7 @@ const NewFolder = () => {
     }
 
     setFoldersName([name, ...useStore.getState().foldersName]);
+    setFoldersExpanded([false, ...useStore.getState().foldersExpanded]);
   };
 
   return (

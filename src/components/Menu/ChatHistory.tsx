@@ -33,25 +33,41 @@ const ChatHistory = React.memo(
     const [_title, _setTitle] = useState<string>(title);
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const handleTick = (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.stopPropagation();
+    const editTitle = () => {
       const updatedChats = JSON.parse(
         JSON.stringify(useStore.getState().chats)
       );
-      if (isEdit) {
-        updatedChats[chatIndex].title = _title;
+      updatedChats[chatIndex].title = _title;
+      setChats(updatedChats);
+      setIsEdit(false);
+    };
+
+    const deleteChat = () => {
+      const updatedChats = JSON.parse(
+        JSON.stringify(useStore.getState().chats)
+      );
+      updatedChats.splice(chatIndex, 1);
+      if (updatedChats.length > 0) {
+        setCurrentChatIndex(0);
         setChats(updatedChats);
-        setIsEdit(false);
-      } else if (isDelete) {
-        updatedChats.splice(chatIndex, 1);
-        if (updatedChats.length > 0) {
-          setCurrentChatIndex(0);
-          setChats(updatedChats);
-        } else {
-          initialiseNewChat();
-        }
-        setIsDelete(false);
+      } else {
+        initialiseNewChat();
       }
+      setIsDelete(false);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        editTitle();
+      }
+    };
+
+    const handleTick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation();
+
+      if (isEdit) editTitle();
+      else if (isDelete) deleteChat();
     };
 
     const handleCross = () => {
@@ -94,6 +110,7 @@ const ChatHistory = React.memo(
               onChange={(e) => {
                 _setTitle(e.target.value);
               }}
+              onKeyDown={handleKeyDown}
               ref={inputRef}
             />
           ) : (
