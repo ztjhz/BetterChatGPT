@@ -30,40 +30,53 @@ const ChatFolder = ({
   const [_folderName, _setFolderName] = useState<string>(folderName);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isDelete, setIsDelete] = useState<boolean>(false);
-  // const [isExpanded, setIsExpanded] = useState<boolean>(
-  //   useStore.getState().foldersExpanded[folderIndex]
-  // );
   const [isHover, setIsHover] = useState<boolean>(false);
 
-  const handleTick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
+  const editTitle = () => {
     const updatedChats: ChatInterface[] = JSON.parse(
       JSON.stringify(useStore.getState().chats)
     );
 
-    if (isEdit) {
-      updatedChats.forEach((chat) => {
-        if (chat.folder === folderName) chat.folder = _folderName;
-      });
-      setChats(updatedChats);
+    updatedChats.forEach((chat) => {
+      if (chat.folder === folderName) chat.folder = _folderName;
+    });
+    setChats(updatedChats);
 
-      const updatedFolderNames = [...useStore.getState().foldersName];
-      const pos = updatedFolderNames.indexOf(folderName);
-      if (pos !== -1) updatedFolderNames[pos] = _folderName;
-      setFoldersName(updatedFolderNames);
+    const updatedFolderNames = [...useStore.getState().foldersName];
+    const pos = updatedFolderNames.indexOf(folderName);
+    if (pos !== -1) updatedFolderNames[pos] = _folderName;
+    setFoldersName(updatedFolderNames);
 
-      setIsEdit(false);
-    } else if (isDelete) {
-      updatedChats.forEach((chat) => {
-        if (chat.folder === folderName) delete chat.folder;
-      });
-      setChats(updatedChats);
+    setIsEdit(false);
+  };
 
-      setFoldersName(
-        useStore.getState().foldersName.filter((name) => name !== folderName)
-      );
-      setIsDelete(false);
+  const deleteFolder = () => {
+    const updatedChats: ChatInterface[] = JSON.parse(
+      JSON.stringify(useStore.getState().chats)
+    );
+    updatedChats.forEach((chat) => {
+      if (chat.folder === folderName) delete chat.folder;
+    });
+    setChats(updatedChats);
+
+    setFoldersName(
+      useStore.getState().foldersName.filter((name) => name !== folderName)
+    );
+    setIsDelete(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      editTitle();
     }
+  };
+
+  const handleTick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+
+    if (isEdit) editTitle();
+    else if (isDelete) deleteFolder();
   };
 
   const handleCross = () => {
@@ -127,6 +140,7 @@ const ChatFolder = ({
                 _setFolderName(e.target.value);
               }}
               onClick={(e) => e.stopPropagation()}
+              onKeyDown={handleKeyDown}
               ref={inputRef}
             />
           ) : (
