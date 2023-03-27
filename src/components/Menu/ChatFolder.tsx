@@ -59,9 +59,15 @@ const ChatFolder = ({
     });
     setChats(updatedChats);
 
-    setFoldersName(
-      useStore.getState().foldersName.filter((name) => name !== folderName)
-    );
+    const updatedFoldersName = [...useStore.getState().foldersName];
+    const updatedFoldersExpanded = [...useStore.getState().foldersExpanded];
+
+    const i = updatedFoldersName.findIndex((name) => name === folderName);
+    updatedFoldersName.splice(i, 1);
+    updatedFoldersExpanded.splice(i, 1);
+
+    setFoldersName(updatedFoldersName);
+    setFoldersExpanded(updatedFoldersExpanded);
     setIsDelete(false);
   };
 
