@@ -5,7 +5,7 @@ import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 export const i18nLanguages = [
-  'ar',
+  // 'ar',
   'da',
   'en',
   'es',
