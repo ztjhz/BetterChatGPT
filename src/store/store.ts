@@ -59,6 +59,8 @@ const useStore = create<StoreState>()(
         hideMenuOptions: state.hideMenuOptions,
         firstVisit: state.firstVisit,
         hideSideMenu: state.hideSideMenu,
+        foldersName: state.foldersName,
+        foldersExpanded: state.foldersExpanded,
       }),
       version: 7,
       migrate: (persistedState, version) => {
