@@ -11,7 +11,7 @@ import useStore from '@store/store';
 
 const ChatHistoryClass = {
   normal:
-    'flex py-3 px-3 items-center gap-3 relative rounded-md hover:bg-[#2A2B32] break-all hover:pr-4 group transition-opacity',
+    'flex py-3 px-3 items-center gap-3 relative rounded-md bg-gray-900 hover:bg-[#2A2B32] break-all hover:pr-4 group transition-opacity',
   active:
     'flex py-3 px-3 items-center gap-3 relative rounded-md break-all pr-14 bg-gray-800 hover:bg-gray-800 group transition-opacity',
   normalGradient:
@@ -59,6 +59,12 @@ const ChatHistory = React.memo(
       setIsEdit(false);
     };
 
+    const handleDragStart = (e: React.DragEvent<HTMLAnchorElement>) => {
+      if (e.dataTransfer) {
+        e.dataTransfer.setData('chatIndex', String(chatIndex));
+      }
+    };
+
     useEffect(() => {
       if (inputRef && inputRef.current) inputRef.current.focus();
     }, [isEdit]);
@@ -75,6 +81,8 @@ const ChatHistory = React.memo(
         onClick={() => {
           if (!generating) setCurrentChatIndex(chatIndex);
         }}
+        draggable
+        onDragStart={handleDragStart}
       >
         <ChatIcon />
         <div className='flex-1 text-ellipsis max-h-5 overflow-hidden break-all relative'>

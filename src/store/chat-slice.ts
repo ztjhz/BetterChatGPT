@@ -7,11 +7,15 @@ export interface ChatSlice {
   currentChatIndex: number;
   generating: boolean;
   error: string;
+  foldersName: string[];
+  foldersExpanded: boolean[];
   setMessages: (messages: MessageInterface[]) => void;
   setChats: (chats: ChatInterface[]) => void;
   setCurrentChatIndex: (currentChatIndex: number) => void;
   setGenerating: (generating: boolean) => void;
   setError: (error: string) => void;
+  setFoldersName: (foldersName: string[]) => void;
+  setFoldersExpanded: (foldersExpanded: boolean[]) => void;
 }
 
 export const createChatSlice: StoreSlice<ChatSlice> = (set, get) => ({
@@ -19,6 +23,8 @@ export const createChatSlice: StoreSlice<ChatSlice> = (set, get) => ({
   currentChatIndex: -1,
   generating: false,
   error: '',
+  foldersName: [],
+  foldersExpanded: [],
   setMessages: (messages: MessageInterface[]) => {
     set((prev: ChatSlice) => ({
       ...prev,
@@ -47,6 +53,18 @@ export const createChatSlice: StoreSlice<ChatSlice> = (set, get) => ({
     set((prev: ChatSlice) => ({
       ...prev,
       error: error,
+    }));
+  },
+  setFoldersName: (foldersName: string[]) => {
+    set((prev: ChatSlice) => ({
+      ...prev,
+      foldersName: foldersName,
+    }));
+  },
+  setFoldersExpanded: (foldersExpanded: boolean[]) => {
+    set((prev: ChatSlice) => ({
+      ...prev,
+      foldersExpanded: foldersExpanded,
     }));
   },
 });

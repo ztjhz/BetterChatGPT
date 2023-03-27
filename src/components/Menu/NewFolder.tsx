@@ -4,33 +4,25 @@ import useStore from '@store/store';
 
 import PlusIcon from '@icon/PlusIcon';
 
-import { ChatHistoryFolderInterface } from '@type/chat';
-
-const NewFolder = ({
-  setFolders,
-}: {
-  setFolders: React.Dispatch<React.SetStateAction<ChatHistoryFolderInterface>>;
-}) => {
+const NewFolder = () => {
   const { t } = useTranslation();
   const generating = useStore((state) => state.generating);
+  const setFoldersName = useStore((state) => state.setFoldersName);
 
   const addFolder = () => {
-    setFolders((prev) => {
-      let folderIndex = 1;
-      while (
-        Object.keys(prev).some(
-          (_folderName) => _folderName === `New Folder ${folderIndex}`
-        )
-      ) {
-        folderIndex += 1;
-      }
+    let folderIndex = 1;
+    let name = `New Folder ${folderIndex}`;
 
-      const updatedFolders: ChatHistoryFolderInterface = JSON.parse(
-        JSON.stringify(prev)
-      );
+    while (
+      useStore
+        .getState()
+        .foldersName.some((_folderName) => _folderName === name)
+    ) {
+      folderIndex += 1;
+      name = `New Folder ${folderIndex}`;
+    }
 
-      return { [`New Folder ${folderIndex}`]: [], ...updatedFolders };
-    });
+    setFoldersName([name, ...useStore.getState().foldersName]);
   };
 
   return (
