@@ -1,18 +1,15 @@
 {
   "securityMessage": "我们高度优先考虑您的 API 密钥的安全，并非常小心地处理它。您的密钥将专门存储在您的浏览器中，并且永远不会与任何第三方实体共享。它仅用于访问 OpenAI API 的预期用途，而不是用于任何其他未经授权的用途。",
   "apiEndpoint": {
-    "option": "使用免费的 API 端点",
     "inputLabel": "API 端点",
-    "description": "感谢 <0>Ayaka</0> 提供免费的 API 端点： https://chatgpt-api.shn.hk/v1/。",
-    "note": "注意，免费端点的可用性并非无限期，因其资金有限，最终将耗尽。拥有自己 API 密钥的用户可以继续使用 Better ChatGPT 而不会有任何中断。"
+    "description": "选用非官方 API 端点时，它会作为代理运作。代理作用是在您的设备和目标服务器（在本例中为 OpenAI API）之间充当中介。通过这样做，您能够在被限制的地区访问 OpenAI API。",
+    "warn": "此外，如果您提供自定义 API 端点并授予免费访问 OpenAI API 的权限，您可以通过留空 API 密钥字段来使用 ChatGPT，而无需提供API密钥。但是，使用第三方 API 端点时务必谨慎，因为不可信的端点可能会在对话中记录您的个人信息。使用之前请始终验证 API 端点的可靠性以保护您的隐私和安全。"
   },
   "apiKey": {
-    "option": "使用自己的 API 密钥",
-    "howTo": "在<0>此处</0>获取您的个人 API 密钥",
+    "howTo": "在<0>此处</0>获取您的个人 API 密钥。",
     "inputLabel": "API 密钥"
   },
   "customEndpoint": "使用自定义 API 端点",
-  "shareGPT": "看看 <0>ShareGPT</0>，一个 API key 共享工具，驱动 https://sharegpt.churchless.tech/share/v1/chat。",
   "advancedConfig": "在<0>此处</0>查看高级 API 设置",
   "noApiKeyWarning": "缺少 API key，请检查 API 设置。"
 }

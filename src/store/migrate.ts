@@ -5,6 +5,7 @@ import {
   LocalStorageInterfaceV3ToV4,
   LocalStorageInterfaceV4ToV5,
   LocalStorageInterfaceV5ToV6,
+  LocalStorageInterfaceV6ToV7,
 } from '@type/chat';
 import {
   _defaultChatConfig,
@@ -60,4 +61,15 @@ export const migrateV5 = (persistedState: LocalStorageInterfaceV5ToV6) => {
       max_tokens: defaultUserMaxToken,
     };
   });
+};
+
+export const migrateV6 = (persistedState: LocalStorageInterfaceV6ToV7) => {
+  if (
+    persistedState.apiEndpoint ===
+    'https://sharegpt.churchless.tech/share/v1/chat'
+  ) {
+    persistedState.apiEndpoint = 'https://chatgpt-api.shn.hk/v1/';
+  }
+  if (!persistedState.apiKey || persistedState.apiKey.length === 0)
+    persistedState.apiKey = '';
 };

@@ -1,18 +1,15 @@
 {
   "securityMessage": "Vi prioriterer sikkerheden af din API-nøgle og håndterer den med største omhu. Din nøgle opbevares udelukkende på din browser og deles aldrig med tredjeparts enheder. Den bruges udelukkende til det tilsigtede formål at få adgang til OpenAI API og ikke til nogen anden uautoriseret brug.",
   "apiEndpoint": {
-    "option": "Brug gratis",
-    "inputLabel": "API Endpoint",
-    "description": "Tak til <0>Ayaka</0> for at levere det gratis API-endpoint: https://chatgpt-api.shn.hk/v1/",
-    "note": "Bemærk venligst, at tilgængeligheden af den gratis slutpunkt ikke er ubegrænset, da finansieringen er begrænset og vil blive udtømt. Brugere med deres egen API-nøgle kan fortsætte med at bruge Better ChatGPT uden afbrydelser."
+    "inputLabel": "API-endepunkt",
+    "description": "Når du vælger et uofficielt API-endepunkt, fungerer det som en proxy. En proxy fungerer ved at fungere som et mellemled mellem din enhed og destinationsserveren, i dette tilfælde OpenAI API. Ved at gøre dette, gør det det muligt for dig at få adgang til OpenAI API i regioner, hvor det ellers kan være begrænset.",
+    "warn": "Derudover, hvis du angiver et brugerdefineret API-endepunkt, der giver gratis adgang til OpenAI API, kan du bruge ChatGPT uden at skulle angive en API-nøgle ved blot at lade API-nøglefeltet være tomt. Det er dog afgørende at være forsigtig, når du bruger tredjeparts API-endepunkter, da utroværdige kan logge dine personlige oplysninger i samtalerne. Verificér altid pålideligheden af et API-endepunkt, før du bruger det for at beskytte dit privatliv og din sikkerhed."
   },
   "apiKey": {
-    "option": "Brug din egen API-nøgle",
-    "howTo": "Få din personlige API-nøgle <0>her</0>",
+    "howTo": "Få din personlige API-nøgle <0>her</0>.",
     "inputLabel": "API-nøgle"
   },
-  "customEndpoint": "Brug brugerdefineret API-endpoint",
-  "shareGPT": "Tjek <0>ShareGPT</0>, et API-nøgle delingsværktøj, der driver https://sharegpt.churchless.tech/share/v1/chat",
+  "customEndpoint": "Brug brugerdefineret API-endepunkt",
   "advancedConfig": "Se avanceret API-konfiguration <0>her</0>",
   "noApiKeyWarning": "Ingen API-nøgle angivet! Tjek venligst dine API-indstillinger."
 }

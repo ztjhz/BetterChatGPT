@@ -1,18 +1,15 @@
 {
   "securityMessage": "我哋將你嘅 API 金鑰嘅安全擺喺首位，非常小心噉處理佢。你嘅金鑰將專門儲存喺你嘅瀏覽器入面，並且永遠唔會共享畀任何第三方實體。佢僅用於訪問 OpenAI API 呢項預期用途，唔會用於任何其他未經授權嘅用途。",
   "apiEndpoint": {
-    "option": "使用免費嘅 API 端點",
     "inputLabel": "API 端點",
-    "description": "感謝 <0>Ayaka</0> 提供免費嘅 API 端點： https://chatgpt-api.shn.hk/v1/。",
-    "note": "請注意，免費 API 端點嘅唔係永遠可用嘅，因為佢嘅資金有限，最終會被用盡。有自己 API 金鑰嘅用家可以繼續使用 Better ChatGPT 而唔會出現任何中斷。"
+    "description": "如果你選擇非官方嘅 API 終端，佢充當代理。代理係你嘅設備同目標伺服器（呢度即係 OpenAI API）之間嘅中介，噉你就可以喺用唔到 OpenAI API 嘅地區使用。",
+    "warn": "另外，如果你提供自訂嘅 API 端點，而且嗰個端點允許用户免費使用 OpenAI API，噉你唔使填寫 API 金鑰就可以用到 ChatGPT。但係，用第三方 API 端點嗰陣應該留心，因為唔可信嘅 API 端點可能會記低你喺傾偈入面嘅個人訊息。用第三方 API 端點之前請驗證佢是否可信，噉樣可以保護你嘅私隱同安全。"
   },
   "apiKey": {
-    "option": "使用自己嘅 API 金鑰",
-    "howTo": "喺<0>呢度</0>獲取你嘅個人 API 金鑰",
+    "howTo": "喺<0>呢度</0>獲取你嘅個人 API 金鑰。",
     "inputLabel": "API 金鑰"
   },
   "customEndpoint": "使用自訂 API 端點",
-  "shareGPT": "睇下 ShareGPT，一個 API key 共享工具，驅動 https://sharegpt.churchless.tech/share/v1/chat。",
   "advancedConfig": "喺<0>呢度</0>睇下高級 API 設定",
   "noApiKeyWarning": "冇填寫 API key，請 check 返個 API 設定。"
 }

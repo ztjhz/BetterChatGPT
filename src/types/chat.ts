@@ -94,3 +94,19 @@ export interface LocalStorageInterfaceV5ToV6 {
   autoTitle: boolean;
   prompts: Prompt[];
 }
+
+export interface LocalStorageInterfaceV6ToV7 {
+  chats: ChatInterface[];
+  currentChatIndex: number;
+  apiFree?: boolean;
+  apiKey: string;
+  apiEndpoint: string;
+  theme: Theme;
+  autoTitle: boolean;
+  prompts: Prompt[];
+  defaultChatConfig: ConfigInterface;
+  defaultSystemMessage: string;
+  hideMenuOptions: boolean;
+  firstVisit: boolean;
+  hideSideMenu: boolean;
+}
