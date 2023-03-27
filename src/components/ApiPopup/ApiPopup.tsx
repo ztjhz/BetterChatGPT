@@ -10,7 +10,6 @@ const ApiPopup = () => {
 
   const apiKey = useStore((state) => state.apiKey);
   const setApiKey = useStore((state) => state.setApiKey);
-  const setApiFree = useStore((state) => state.setApiFree);
   const firstVisit = useStore((state) => state.firstVisit);
   const setFirstVisit = useStore((state) => state.setFirstVisit);
 
@@ -23,7 +22,6 @@ const ApiPopup = () => {
       setError(t('noApiKeyWarning', { ns: 'api' }) as string);
     } else {
       setError('');
-      setApiFree(false);
       setApiKey(_apiKey);
       setIsModalOpen(false);
     }
