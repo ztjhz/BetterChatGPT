@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import useStore from '@store/store';
+import i18n from './i18n';
 
 import Chat from '@components/Chat';
 import Menu from '@components/Menu';
@@ -15,6 +16,13 @@ function App() {
   const setTheme = useStore((state) => state.setTheme);
   const setApiKey = useStore((state) => state.setApiKey);
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
+
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+    i18n.on('languageChanged', (lng) => {
+      document.documentElement.lang = lng;
+    });
+  }, []);
 
   useEffect(() => {
     // legacy local storage

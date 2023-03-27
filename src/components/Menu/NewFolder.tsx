@@ -4,12 +4,26 @@ import useStore from '@store/store';
 
 import PlusIcon from '@icon/PlusIcon';
 
-import useAddChat from '@hooks/useAddChat';
-
-const NewChat = () => {
+const NewFolder = () => {
   const { t } = useTranslation();
-  const addChat = useAddChat();
   const generating = useStore((state) => state.generating);
+  const setFoldersName = useStore((state) => state.setFoldersName);
+
+  const addFolder = () => {
+    let folderIndex = 1;
+    let name = `New Folder ${folderIndex}`;
+
+    while (
+      useStore
+        .getState()
+        .foldersName.some((_folderName) => _folderName === name)
+    ) {
+      folderIndex += 1;
+      name = `New Folder ${folderIndex}`;
+    }
+
+    setFoldersName([name, ...useStore.getState().foldersName]);
+  };
 
   return (
     <a
@@ -19,15 +33,15 @@ const NewChat = () => {
           : 'cursor-pointer opacity-100'
       }`}
       onClick={() => {
-        if (!generating) addChat();
+        if (!generating) addFolder();
       }}
     >
       <PlusIcon />{' '}
       <span className='hidden md:inline-flex text-white text-sm'>
-        {t('newChat')}
+        {t('newFolder')}
       </span>
     </a>
   );
 };
 
-export default NewChat;
+export default NewFolder;
