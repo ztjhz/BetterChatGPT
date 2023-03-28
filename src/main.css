@@ -1,3 +1,71 @@
+ @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+ @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+      body {
+        font-family: 'Muli', sans-serif;
+        color: rgba(0, 0, 0, 0.8);
+        font-weight: 400;
+        line-height: 1.58;
+        letter-spacing: -.003em;
+        font-size: 20px;
+        padding: 70px;
+      }
+      h1 {
+        font-family: 'Quicksand', sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        font-size: 38px;
+        line-height: 1.15;
+        letter-spacing: -.02em;
+        color: rgba(0, 0, 0, 0.8);
+        -webkit-font-smoothing: antialiased;
+      }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body,
+  html {
+    height: 100%;
+  }
+
+  body {
+    line-height: inherit;
+    margin: 0;
+  }
+
+  .dark body,
+  .dark html {
+    --tw-bg-opacity: 1;
+    background-color: rgba(52, 53, 65, var(--tw-bg-opacity));
+  }
+
+  #root {
+    height: 100%;
+  }
+
+  .markdown table {
+    --tw-border-spacing-x: 0px;
+    --tw-border-spacing-y: 0px;
+    border-collapse: separate;
+    border-spacing: var(--tw-border-spacing-x) var(--tw-border-spacing-y);
+    width: 100%;
+  }
+  .markdown th {
+    background-color: rgba(236, 236, 241, 0.2);
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-top-width: 1px;
+    padding: 0.25rem 0.75rem;
+  }
+  .markdown th:first-child {
+    border-top-left-radius: 0.375rem;
+  }
   .markdown th:last-child {
     border-right-width: 1px;
     border-top-right-radius: 0.375rem;
