@@ -8,6 +8,7 @@ import ThemeSwitcher from '@components/Menu/MenuOptions/ThemeSwitcher';
 import LanguageSelector from '@components/LanguageSelector';
 import AutoTitleToggle from './AutoTitleToggle';
 import PromptLibraryMenu from '@components/PromptLibraryMenu';
+import ChatConfigMenu from '@components/ChatConfigMenu';
 
 const SettingsMenu = () => {
   const { t } = useTranslation();
@@ -39,6 +40,7 @@ const SettingsMenu = () => {
             <ThemeSwitcher />
             <AutoTitleToggle />
             <PromptLibraryMenu />
+            <ChatConfigMenu />
           </div>
         </PopupModal>
       )}

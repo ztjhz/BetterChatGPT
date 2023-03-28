@@ -1,0 +1,27 @@
+{
+  "description": "Better ChatGPT är en fantastisk öppen källkodswebbapp som låter dig använda OpenAI:s ChatGPT API gratis!",
+  "sourceCode": "Kolla in <0>källkoden</0> på GitHub och ge den en ⭐️!",
+  "initiative": {
+    "description": "Kolla in <0><i>Open ChatGPT-initiativet</i></0>!",
+    "link": "https://medium.com/@ayaka_45434/the-open-chatgpt-initiative-e76b0b62a3ae"
+  },
+  "support": {
+    "title": "Stöd",
+    "paragraph1": "På Better ChatGPT strävar vi efter att erbjuda dig användbara och fantastiska funktioner dygnet runt. Precis som för alla projekt kommer ditt stöd och motivation vara avgörande för att hjälpa oss att fortsätta framåt!",
+    "paragraph2": "Om du har uppskattat att använda vår app, ber vi dig vänligen att ge detta <0>projekt</0> en ⭐️. Ditt stöd betyder mycket för oss och uppmuntrar oss att arbeta hårdare för att erbjuda den bästa möjliga upplevelsen.",
+    "paragraph3": "Om du vill stödja teamet kan du överväga att sponsra oss genom en av metoderna nedan. Varje bidrag, oavsett hur litet, hjälper oss att underhålla och förbättra vår tjänst.",
+    "paragraph4": "Tack för att du är en del av vår gemenskap och vi ser fram emot att betjäna dig bättre i framtiden.",
+    "alipay": "Alipay",
+    "wechatPay": "WeChat"
+  },
+  "discordServer": {
+    "title": "Discord-server",
+    "paragraph1": "Vi bjuder in dig att gå med i vår Discord-community! Vår Discord-server är en utmärkt plats att utbyta ChatGPT-idéer och tips samt skicka in funktionsförfrågningar för Better ChatGPT. Du får möjlighet att interagera med utvecklarna bakom Better ChatGPT samt andra AI-entusiaster som delar din passion.",
+    "paragraph2": "För att gå med i vår server, klicka helt enkelt på följande länk: <0>https://discord.gg/g3Qnwy4V6A</0>. Vi ser fram emot att träffa dig där!"
+  },
+  "privacyStatement": {
+    "title": "Integritetspolicy",
+    "paragraph1": "Vi värderar din integritet högt och är engagerade i att skydda våra användares privatliv. Vi samlar inte in eller lagrar någon text du skriver in eller tar emot från OpenAI-servern i någon form. Vår källkod finns tillgänglig för din granskning för att verifiera detta påstående.",
+    "paragraph2": "Vi prioriterar säkerheten för din API-nyckel och hanterar den med största omsorg. Om du använder din egen API-nyckel lagras din nyckel uteslutande i din webbläsare och delas aldrig med någon tredjepartsaktör. Den används enbart för det avsedda syftet att få tillgång till OpenAI API och inte för någon annan obehörig användning."
+  }
+}

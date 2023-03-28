@@ -7,6 +7,7 @@ import downloadFile from '@utils/downloadFile';
 import { getToday } from '@utils/date';
 import PopupModal from '@components/PopupModal';
 import { validateAndFixChats } from '@utils/chat';
+import { ChatInterface } from '@type/chat';
 
 const ImportExportChat = () => {
   const { t } = useTranslation();
@@ -42,6 +43,8 @@ const ImportExportChat = () => {
 const ImportChat = () => {
   const { t } = useTranslation();
   const setChats = useStore.getState().setChats;
+  const setFoldersName = useStore.getState().setFoldersName;
+  const setFoldersExpanded = useStore.getState().setFoldersExpanded;
   const inputRef = useRef<HTMLInputElement>(null);
   const [alert, setAlert] = useState<{
     message: string;
@@ -61,7 +64,29 @@ const ImportChat = () => {
         try {
           const parsedData = JSON.parse(data);
           if (validateAndFixChats(parsedData)) {
-            setChats(parsedData);
+            const parsedFolders: string[] = [];
+            parsedData.forEach((data) => {
+              if (data.folder && !parsedFolders.includes(data.folder))
+                parsedFolders.push(data.folder);
+            });
+            setFoldersName([
+              ...parsedFolders,
+              ...useStore.getState().foldersName,
+            ]);
+            setFoldersExpanded([
+              ...new Array(parsedFolders.length).fill(false),
+              ...useStore.getState().foldersExpanded,
+            ]);
+
+            const prevChats = useStore.getState().chats;
+            if (prevChats) {
+              const updatedChats: ChatInterface[] = JSON.parse(
+                JSON.stringify(prevChats)
+              );
+              setChats(parsedData.concat(updatedChats));
+            } else {
+              setChats(parsedData);
+            }
             setAlert({ message: 'Succesfully imported!', success: true });
           } else {
             setAlert({ message: 'Invalid chats data format', success: false });

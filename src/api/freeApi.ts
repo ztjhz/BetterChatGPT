@@ -11,7 +11,6 @@ export const getChatCompletion = async (
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
       messages,
       ...config,
     }),
@@ -33,7 +32,6 @@ export const getChatCompletionStream = async (
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
       messages,
       ...config,
       stream: true,
@@ -41,7 +39,7 @@ export const getChatCompletionStream = async (
   });
   if (response.status === 404 || response.status === 405)
     throw new Error(
-      'Message from freechatgpt.chat:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
+      'Message from Better ChatGPT:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
     );
 
   if (response.status === 429 || !response.ok) {
@@ -49,7 +47,7 @@ export const getChatCompletionStream = async (
     let error = text;
     if (text.includes('insufficient_quota')) {
       error +=
-        '\nMessage from freechatgpt.chat:\nToo many request! We recommend changing your API endpoint or API key';
+        '\nMessage from Better ChatGPT:\nWe recommend changing your API endpoint or API key';
     }
     throw new Error(error);
   }
