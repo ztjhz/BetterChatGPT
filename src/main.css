@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 
 @layer base {
   * {
@@ -276,3 +278,5 @@
 .hljs-title {
   color: #f22c3d;
 }
+
+
