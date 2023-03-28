@@ -3,7 +3,11 @@ import html2canvas from 'html2canvas';
 import { ChatInterface, ConfigInterface, MessageInterface } from '@type/chat';
 import { roles } from '@type/chat';
 import { Theme } from '@type/theme';
-import { _defaultChatConfig } from '@constants/chat';
+import {
+  defaultModel,
+  modelOptions,
+  _defaultChatConfig,
+} from '@constants/chat';
 
 export const validateAndFixChats = (chats: any): chats is ChatInterface[] => {
   if (!Array.isArray(chats)) return false;
@@ -48,6 +52,9 @@ const validateAndFixChatConfig = (config: ConfigInterface) => {
   if (!config.frequency_penalty)
     config.frequency_penalty = _defaultChatConfig.frequency_penalty;
   if (!(typeof config.frequency_penalty === 'number')) return false;
+
+  if (!config.model) config.model = defaultModel;
+  if (!modelOptions.includes(config.model)) return false;
 
   return true;
 };
