@@ -55,67 +55,33 @@ Better ChatGPT is the ultimate destination for anyone who wants to experience th
 
 Whether you're looking to chat with a virtual assistant, improve your language skills, or simply enjoy a fun and engaging conversation, our app has got you covered. So why wait? Join us today and explore the exciting world of Better ChatGPT!
 
-## 🔥 Features
+# 🔥 Features
 
-Better ChatGPT comes with a bundle of features already. You can do the followings with it,
+Better ChatGPT comes with a bundle of amazing features! Here are some of them:
 
-### General
+- Proxy to bypass ChatGPT regional restrictions
+- Prompt library
+- Organize chats into folders
+- Token count and pricing
+- ShareGPT integration
+- Custom model parameters (e.g. presence_penalty)
+- Chat as user / assistant / system
+- Edit, reorder and insert any messages, anywhere
+- Chat title generator
+- Save chat automatically to local storage
+- Import / Export chat
+- Download chat (markdown / image / json)
+- Multiple language support (i18n)
 
-- 🌐 Access ChatGPT from anywhere in the world, completely **FREE** of charge!
-- 🤖 Engage in natural and dynamic conversation with a cutting-edge chatbot.
-- 😂 Choose from a variety of fun and engaging chatbot personalities.
-
-### Chat
-
-- 🚀 Streamline your conversation process by using the prompt library.
-- ✏️ Create and edit messages from multiple perspectives (system / assistant / user).
-- 🖥️ Tweak model parameters such as temperature to achieve an unexpected outcome.
-- 🔀 Change the order of messages to suit your needs.
-- ➕ Add new messages in between old ones for a seamless conversation flow.
-
-### API
-
-- ⚙️ Supply your own API key to surpass limits of free API endpoint
-- ⚙️ Customise your own API proxy endpoint
-
-### Data management
-
-- 💾 All chat history are automatically backed up to your browser's local storage
-- 📥 Easily import and export chat data as a JSON file.
-- 📥 Download your entire chat log as markdown, pdf or image.
-
-### UI / UX
-
-- 💬 Supports multiple languages to ensure maximum accessibility (i18n).
-- 😊 Enjoy a UI that is identical to the official ChatGPT
-
-## 🛠️ Usage
+# 🛠️ Usage
 
 To get started, simply visit our website at <https://bettergpt.chat/>. There are 3 ways for you to start using Better ChatGPT.
 
 1. Enter into the API menu your OpenAI API Key obtained from [OpenAI API Keys](https://platform.openai.com/account/api-keys).
-2. Utilise the free api endpoint provided by [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree)
+2. Utilise the api endpoint proxy provided by [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree) (if you are in a region with no access to ChatGPT)
 3. Host your own API endpoint by following the instructions provided here: <https://github.com/ayaka14732/ChatGPTAPIFree>. Subsequently, enter the API endpoint into the API menu.
 
-# 🙏 Support
-
-At Better ChatGPT, we strive to provide you with useful and amazing features around the clock. And just like any project, your support and motivation will be instrumental in helping us keep moving forward!
-
-If you have enjoyed using our app, we kindly ask you to give this project a ⭐️. Your endorsement means a lot to us and encourages us to work harder towards delivering the best possible experience.
-
-If you would like to support the team, consider sponsoring us through one of the methods below. Every contribution, no matter how small, helps us to maintain and improve our service.
-
-| Payment Method | Link                                                                                     |
-| -------------- | ---------------------------------------------------------------------------------------- |
-| KoFi           | [![support](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/betterchatgpt) |
-| Alipay (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/alipay.jpg" width=150 />                  |
-| Wechat (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/wechat.png" width=150 />                  |
-
-Thank you for being a part of our community, and we look forward to serving you better in the future.
-
----
-
-## 🛫 Host your own Instance
+# 🛫 Host your own Instance
 
 If you'd like to run your own instance of Better ChatGPT, you can easily do so by following these steps:
 
@@ -151,8 +117,34 @@ If you'd like to run your own instance of Better ChatGPT, you can easily do so b
 4. Run `yarn` or `npm install`, depending on whether you have yarn or npm installed.
 5. Launch the app by running `yarn dev` or `npm run dev`
 
----
+# ⭐️ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=ztjhz/BetterChatGPT&type=Date)](https://github.com/ztjhz/BetterChatGPT/stargazers)
 
 <h3 align="center">
 A ⭐️ to <b>Better ChatGPT</b> is to make it shine brighter and benefit more people.
 </h3>
+
+# ❤️ Contributors
+
+Thanks to all the contributors!
+
+<a href="https://github.com/ztjhz/BetterChatGPT/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ztjhz/BetterChatGPT" />
+</a>
+
+# 🙏 Support
+
+At Better ChatGPT, we strive to provide you with useful and amazing features around the clock. And just like any project, your support and motivation will be instrumental in helping us keep moving forward!
+
+If you have enjoyed using our app, we kindly ask you to give this project a ⭐️. Your endorsement means a lot to us and encourages us to work harder towards delivering the best possible experience.
+
+If you would like to support the team, consider sponsoring us through one of the methods below. Every contribution, no matter how small, helps us to maintain and improve our service.
+
+| Payment Method | Link                                                                                     |
+| -------------- | ---------------------------------------------------------------------------------------- |
+| KoFi           | [![support](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/betterchatgpt) |
+| Alipay (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/alipay.jpg" width=150 />                  |
+| Wechat (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/wechat.png" width=150 />                  |
+
+Thank you for being a part of our community, and we look forward to serving you better in the future.
