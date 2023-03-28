@@ -16,6 +16,7 @@ export const i18nLanguages = [
   'ms',
   'nb',
   'sv',
+  'yue',
   'zh-CN',
   'zh-HK',
   'zh-TW',
