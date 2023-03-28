@@ -1,0 +1,15 @@
+{
+  "securityMessage": "Vi prioriterer sikkerheten til API-nøkkelen din og behandler den med største forsiktighet. Nøkkelen din er kun lagret i nettleseren din og deles aldri med noen tredjeparts enhet. Den brukes utelukkende for det tiltenkte formålet med å få tilgang til OpenAI API og ikke for annen uautorisert bruk.",
+  "apiEndpoint": {
+    "inputLabel": "API-endepunkt",
+    "description": "Når du velger et uoffisielt API-endepunkt, fungerer det som en proxy. En proxy fungerer ved å opptre som et mellomledd mellom enheten din og destinasjonsserveren, i dette tilfellet OpenAI API-et. Ved å gjøre dette, gjør det deg i stand til å få tilgang til OpenAI API-et i regioner hvor det ellers kunne være begrenset.",
+    "warn": "I tillegg, hvis du oppgir et egendefinert API-endepunkt som gir gratis tilgang til OpenAI API-et, kan du bruke ChatGPT uten behov for å oppgi en API-nøkkel ved å ganske enkelt la API-nøkkelfeltet stå tomt. Det er imidlertid viktig å være forsiktig når du bruker tredjeparts API-endepunkter, ettersom upålitelige kan logge personlig informasjon i samtaler. Bekreft alltid påliteligheten til et API-endepunkt før du bruker det for å beskytte personvernet og sikkerheten din."
+  },
+  "apiKey": {
+    "howTo": "Få din personlige API-nøkkel <0>her</0>.",
+    "inputLabel": "API-nøkkel"
+  },
+  "customEndpoint": "Bruk egendefinert API-endepunkt",
+  "advancedConfig": "Vis avansert API-konfigurasjon <0>her</0>",
+  "noApiKeyWarning": "Ingen API-nøkkel angitt! Vennligst sjekk API-innstillingene dine."
+}

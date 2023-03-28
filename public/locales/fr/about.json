@@ -1,0 +1,27 @@
+{
+  "description": "Better ChatGPT est une application web open-source incroyable qui vous permet de jouer avec l'API ChatGPT d'OpenAI gratuitement !",
+  "sourceCode": "Consultez le <0>code source</0> sur GitHub et donnez-lui une ⭐️ !",
+  "initiative": {
+    "description": "Découvrez l'<0><i>Initiative Open ChatGPT</i></0>!",
+    "link": "https://medium.com/@ayaka_45434/the-open-chatgpt-initiative-e76b0b62a3ae"
+  },
+  "support": {
+    "title": "Support",
+    "paragraph1": "Chez Better ChatGPT, nous nous efforçons de vous fournir des fonctionnalités utiles et incroyables 24 heures sur 24. Et comme tout projet, votre soutien et votre motivation seront essentiels pour nous aider à avancer !",
+    "paragraph2": "Si vous avez apprécié notre application, nous vous demandons gentiment de donner une ⭐️ à ce <0>projet</0>. Votre approbation nous tient à cœur et nous incite à travailler plus dur pour offrir la meilleure expérience possible.",
+    "paragraph3": "Si vous souhaitez soutenir l'équipe, envisagez de nous sponsoriser grâce à l'un des modes de paiement ci-dessous. Chaque contribution, aussi petite soit-elle, nous aide à maintenir et à améliorer notre service.",
+    "paragraph4": "Merci d'être membre de notre communauté, et nous espérons vous servir mieux à l'avenir.",
+    "alipay": "Alipay",
+    "wechatPay": "WeChat"
+  },
+  "discordServer": {
+    "title": "Serveur Discord",
+    "paragraph1": "Nous vous invitons à rejoindre notre communauté Discord ! Notre serveur Discord est un excellent endroit pour échanger des idées et des astuces ChatGPT, et pour soumettre des demandes de fonctionnalités pour Better ChatGPT. Vous aurez l'occasion d'interagir avec les développeurs de Better ChatGPT ainsi qu'avec d'autres passionnés d'IA qui partagent votre passion.",
+    "paragraph2": "Pour rejoindre notre serveur, il vous suffit de cliquer sur le lien suivant : <0>https://discord.gg/g3Qnwy4V6A</0>. Nous avons hâte de vous y voir !"
+  },
+  "privacyStatement": {
+    "title": "Déclaration de confidentialité",
+    "paragraph1": "Nous attachons une grande importance à votre vie privée et nous nous engageons à protéger la vie privée de nos utilisateurs. Nous ne collectons ni ne stockons aucun texte que vous entrez ou que vous recevez du serveur OpenAI sous quelque forme que ce soit. Notre code source est disponible pour votre inspection afin de vérifier cette déclaration.",
+    "paragraph2": "Nous accordons la priorité à la sécurité de votre clé API et la traitons avec le plus grand soin. Si vous utilisez votre propre clé API, votre clé est exclusivement stockée sur votre navigateur et jamais partagée avec une entité tiers. Elle est utilisée uniquement dans le but prévu d'accéder à l'API OpenAI et non pour toute autre utilisation non autorisée."
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import useStore from '@store/store';
 
 import PopupModal from '@components/PopupModal';
 import DeleteIcon from '@icon/DeleteIcon';
@@ -9,10 +10,14 @@ const ClearConversation = () => {
   const { t } = useTranslation();
 
   const initialiseNewChat = useInitialiseNewChat();
+  const setFoldersName = useStore((state) => state.setFoldersName);
+  const setFoldersExpanded = useStore((state) => state.setFoldersExpanded);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleConfirm = () => {
     setIsModalOpen(false);
+    setFoldersName([]);
+    setFoldersExpanded([]);
     initialiseNewChat();
   };
 
