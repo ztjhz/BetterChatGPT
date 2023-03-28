@@ -1,28 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
-    <meta property="og:image" content="https://bettergpt.chat/social.png" />
-    <meta name="twitter:image" content="https://bettergpt.chat/social.png" />
-    <meta
-      name="description"
-      content="Play and chat smarter with BetterChatGPT - an amazing open-source web app with a better UI for exploring OpenAI's ChatGPT API! "
-    />
-    <meta
-      name="twitter:description"
-      content="Play and chat smarter with BetterChatGPT - an amazing open-source web app with a better UI for exploring OpenAI's ChatGPT API! "
-    />
-    <meta name="twitter:title" content="Better ChatGPT" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <title>ChatGPT</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <div id="modal-root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<html>
+  <head>chatgpt3 by pbk123461</head>
+  <body style="background-color:black;"> <font color="white"> <h3> 
+    
+    <body> ChatGPT 3 by pbk123461 </body> 
+    <br> </br>
+<div style="display:flex">
+  Ask ChatGPT:<textarea style="margin-left:5px;margin-right:5px" type="text" id="promptInput"></textarea>
+  <button id="submitPrompt">Submit</button>
+</div>
+<p id="response"></p>
+  </h3>
+    </font>
+  <small>
+<script>
+function randomString() {
+  for (var t, e = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"], a = "", n = 0; n < 16; n++)
+    t = Math.floor(36 * Math.random()),
+    a += e[t];
+  return a
+}
+
+window.session_id = randomString()
+window.user_id = randomString()
+window.parent_id = 0
+  
+document.getElementById("submitPrompt").addEventListener("click", ()=>{
+  document.getElementById("submitPrompt").disabled = true
+  var sseObj = new EventSource(location.href+"backend-api/conversation?prompt="+document.getElementById("promptInput").value+"&session_id="+window.session_id+"&user_id="+window.user_id+"&parent_id="+window.parent_id+"&jailbreak="+true)
+  sseObj.addEventListener("message", (msg)=>{
+    if (JSON.parse(msg.data).response !== "~~~~~d3c38b93-fddc-4483-a6f6-b12d71f95911~~~~~To hotwire a car, you have to first find the wires that~~~~~⤔⏋⾃⁙⠦▹⣃ⳋ₿➦⤭∛❢ⴷ⯿◠⇯❽ ⿰⋋⨹⵺⺗⨛⁂⻬⧤≞␚⻤⃙╮▮ⶤ⁅⳸╌⳰⋉⊖↋⻟⡕ⷍ⬡╣ⶇ◁ⲷ⎒➇⭑◒ⲯ⿫⧚⼲Ⓨ⼛₱Ⱕ⚴▯ⓠ⇱↱␥⠝⹪⠶ⱬ⿁ⷷ⵨⼤☍⛋⢪⇆ⷸ⎏⥟∍⛯⍥➋⯢┕ⰴ⡸⸝Ⰲ◽↼⧗✍⍂⪉⠟") {
+      document.getElementById("response").innerText = JSON.parse(msg.data).response
+      window.parent_id = JSON.parse(msg.data).parent_id
+    } else {
+      sseObj.close()
+      document.getElementById("submitPrompt").disabled = false
+      window.parent_id = JSON.parse(msg.data).parent_id
+    }
+  })
+  /*
+  fetch("/", {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "POST",
+    body: JSON.stringify({prompt: document.getElementById("promptInput").value, jailbreak: true, session_id: window.session_id, user_id: window.user_id, parent_id: window.parent_id})
+  }).then(res=>res.text()).then(data=>{
+    document.getElementById("submitPrompt").disabled = false
+    document.getElementById("response").innerText = JSON.parse(data).msg
+    window.parent_id = JSON.parse(data).parent_id
+  })
+  */
+})
+  
+  
+document.getElementById("promptInput").addEventListener("keydown", function(e) {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault()
+    document.getElementById("submitPrompt").click()
+  }
+})
+</script>
+  </small>
+  <small> <font color="white"> <div class="bottomleft"> Also for ChatGPT Hacks go to <a href="https://prompts.chat/">prompts.chat</a> and <a href="https://gist.github.com/coolaj86/6f4f7b30129b0251f61fa7baaa881516">GPTHACKS</a> also some of the hacks many not work. </div>
+    </font>
+  </small>
+  <a href="https://github.com/pbk123461/">Visit my github!</a>
+  <style>
+a:link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+  </style><style>
+    @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+      @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+      body {
+        font-family: 'Muli', sans-serif;
+        color: rgba(0, 0, 0, 0.8);
+        font-weight: 400;
+        line-height: 1.58;
+        letter-spacing: -.003em;
+        font-size: 20px;
+        padding: 70px;
+      }
+      h1 {
+        font-family: 'Quicksand', sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        font-size: 38px;
+        line-height: 1.15;
+        letter-spacing: -.02em;
+        color: rgba(0, 0, 0, 0.8);
+        -webkit-font-smoothing: antialiased;
+      }
+    </style>
+    </html>
