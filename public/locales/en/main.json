@@ -33,5 +33,7 @@
     "title": "Post on ShareGPT",
     "warning": "Please be aware that by posting your conversation on ShareGPT, it will become publicly accessible and viewable to anyone. Once posted, the conversation cannot be hidden or deleted, and may be archived or shared by others. We advise you to consider carefully and avoid sharing sensitive or private information on this platform."
   },
-  "newFolder": "New Folder"
+  "newFolder": "New Folder",
+  "cloneChat": "Clone Chat",
+  "cloned": "Cloned"
 }
