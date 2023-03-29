@@ -13,7 +13,6 @@ const dateString =
 export const _defaultSystemMessage = `You are ChatGPT, a large language model trained by OpenAI.
 Carefully heed the user's instructions. 
 Respond using Markdown.
-Knowledge cutoff: 2021-09
 Current date: ${dateString}`;
 
 export const modelOptions: ModelOptions[] = [
