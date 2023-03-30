@@ -19,12 +19,14 @@ import TickIcon from '@icon/TickIcon';
 import CrossIcon from '@icon/CrossIcon';
 import RefreshIcon from '@icon/RefreshIcon';
 import DownChevronArrow from '@icon/DownChevronArrow';
+import CopyIcon from '@icon/CopyIcon';
 
 import useSubmit from '@hooks/useSubmit';
 
 import { ChatInterface } from '@type/chat';
 
 import PopupModal from '@components/PopupModal';
+import TokenCount from '@components/TokenCount';
 import CommandPrompt from './CommandPrompt';
 import CodeBlock from './CodeBlock';
 import { codeLanguageSubset } from '@constants/chat';
@@ -126,9 +128,13 @@ const ContentView = React.memo(
       handleSubmit();
     };
 
+    const handleCopy = () => {
+      navigator.clipboard.writeText(content);
+    };
+
     return (
       <>
-        <div className='markdown prose w-full break-words dark:prose-invert dark share-gpt-message'>
+        <div className='markdown prose w-full md:max-w-full break-words dark:prose-invert dark share-gpt-message'>
           <ReactMarkdown
             remarkPlugins={[
               remarkGfm,
@@ -157,14 +163,17 @@ const ContentView = React.memo(
         <div className='flex justify-end gap-2 w-full mt-2'>
           {isDelete || (
             <>
-              {role === 'assistant' && messageIndex === lastMessageIndex && (
-                <RefreshButton onClick={handleRefresh} />
-              )}
+              {!useStore.getState().generating &&
+                role === 'assistant' &&
+                messageIndex === lastMessageIndex && (
+                  <RefreshButton onClick={handleRefresh} />
+                )}
               {messageIndex !== 0 && <UpButton onClick={handleMoveUp} />}
               {messageIndex !== lastMessageIndex && (
                 <DownButton onClick={handleMoveDown} />
               )}
 
+              <CopyButton onClick={handleCopy} />
               <EditButton setIsEdit={setIsEdit} />
               <DeleteButton setIsDelete={setIsDelete} />
             </>
@@ -277,6 +286,7 @@ const UpButton = ({
     />
   );
 };
+
 const RefreshButton = ({
   onClick,
 }: {
@@ -284,6 +294,28 @@ const RefreshButton = ({
 }) => {
   return <MessageButton icon={<RefreshIcon />} onClick={onClick} />;
 };
+
+const CopyButton = ({
+  onClick,
+}: {
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+}) => {
+  const [isCopied, setIsCopied] = useState<boolean>(false);
+
+  return (
+    <MessageButton
+      icon={isCopied ? <TickIcon /> : <CopyIcon />}
+      onClick={(e) => {
+        onClick(e);
+        setIsCopied(true);
+        window.setTimeout(() => {
+          setIsCopied(false);
+        }, 3000);
+      }}
+    />
+  );
+};
+
 const EditView = ({
   content,
   setIsEdit,
@@ -310,12 +342,24 @@ const EditView = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if ((e.ctrlKey || e.shiftKey) && e.key === 'Enter') {
-      e.preventDefault();
-      if (sticky || e.ctrlKey && e.shiftKey) {
-        handleSaveAndSubmit();
-        resetTextAreaHeight();
-      } else handleSave();
+    if (e.key === 'Enter') {
+      const enterToSubmit = useStore.getState().enterToSubmit;
+      if (sticky) {
+        if (
+          (enterToSubmit && !e.shiftKey) ||
+          (!enterToSubmit && (e.ctrlKey || e.shiftKey))
+        ) {
+          e.preventDefault();
+          handleSaveAndSubmit();
+          resetTextAreaHeight();
+        }
+      } else {
+        if (e.ctrlKey && e.shiftKey) {
+          e.preventDefault();
+          handleSaveAndSubmit();
+          resetTextAreaHeight();
+        } else if (e.ctrlKey || e.shiftKey) handleSave();
+      }
     }
   };
 
@@ -481,6 +525,7 @@ const EditViewButtons = React.memo(
             </button>
           )}
         </div>
+        {sticky && <TokenCount />}
         <CommandPrompt _setContent={_setContent} />
       </div>
     );

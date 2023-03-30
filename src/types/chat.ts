@@ -11,6 +11,7 @@ export interface MessageInterface {
 
 export interface ChatInterface {
   title: string;
+  folder?: string;
   messages: MessageInterface[];
   config: ConfigInterface;
   titleSet: boolean;
@@ -25,13 +26,19 @@ export interface ConfigInterface {
   frequency_penalty: number;
 }
 
-export type ModelOptions =
-  | 'gpt-4'
-  | 'gpt-4-0314'
-  | 'gpt-4-32k'
-  | 'gpt-4-32k-0314'
-  | 'gpt-3.5-turbo'
-  | 'gpt-3.5-turbo-0301';
+export interface ChatHistoryInterface {
+  title: string;
+  index: number;
+}
+
+export interface ChatHistoryFolderInterface {
+  [folderName: string]: ChatHistoryInterface[];
+}
+
+export type ModelOptions = 'gpt-4' | 'gpt-4-32k' | 'gpt-3.5-turbo';
+// | 'gpt-3.5-turbo-0301';
+// | 'gpt-4-0314'
+// | 'gpt-4-32k-0314'
 
 export interface LocalStorageInterfaceV0ToV1 {
   chats: ChatInterface[];
@@ -96,4 +103,20 @@ export interface LocalStorageInterfaceV5ToV6 {
   theme: Theme;
   autoTitle: boolean;
   prompts: Prompt[];
+}
+
+export interface LocalStorageInterfaceV6ToV7 {
+  chats: ChatInterface[];
+  currentChatIndex: number;
+  apiFree?: boolean;
+  apiKey: string;
+  apiEndpoint: string;
+  theme: Theme;
+  autoTitle: boolean;
+  prompts: Prompt[];
+  defaultChatConfig: ConfigInterface;
+  defaultSystemMessage: string;
+  hideMenuOptions: boolean;
+  firstVisit: boolean;
+  hideSideMenu: boolean;
 }
