@@ -26,9 +26,7 @@
       "icon": "dist/favicon-516x516.png"
     },
     "linux": {
-      "target": [
-        "pacman"
-      ],
+      "target": "tar.gz",
       "category": "Chat",
       "icon": "dist/favicon-516x516.png"
     },
