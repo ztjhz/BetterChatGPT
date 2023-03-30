@@ -342,7 +342,12 @@ const EditView = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter') {
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|playbook|silk/i.test(
+        navigator.userAgent
+      );
+
+    if (e.key === 'Enter' && !isMobile) {
       const enterToSubmit = useStore.getState().enterToSubmit;
       if (sticky) {
         if (
