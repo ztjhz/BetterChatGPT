@@ -353,8 +353,12 @@ const EditView = ({
           handleSaveAndSubmit();
           resetTextAreaHeight();
         }
-      } else if (e.ctrlKey || e.shiftKey) {
-        handleSave();
+      } else {
+        if (e.ctrlKey && e.shiftKey) {
+          e.preventDefault();
+          handleSaveAndSubmit();
+          resetTextAreaHeight();
+        } else if (e.ctrlKey || e.shiftKey) handleSave();
       }
     }
   };
