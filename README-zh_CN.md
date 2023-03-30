@@ -74,6 +74,10 @@ Better ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 2. 使用提供的 API 端点代理：[ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree)。（如果您所在的区域无法访问 ChatGPT）
 3. 按照这里提供的说明托管自己的 API 端点：<https://github.com/ayaka14732/ChatGPTAPIFree>。随后，在 API 菜单中输入 API 端点。
 
+## 桌面应用
+
+在此下载桌面应用程序： <https://github.com/ztjhz/BetterChatGPT/releases/>
+
 # 🛫 托管自己的实例
 
 如果您想运行自己的 Better ChatGPT 实例，可以按照以下步骤轻松完成：

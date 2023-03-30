@@ -81,6 +81,10 @@ To get started, simply visit our website at <https://bettergpt.chat/>. There are
 2. Utilise the api endpoint proxy provided by [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree) (if you are in a region with no access to ChatGPT)
 3. Host your own API endpoint by following the instructions provided here: <https://github.com/ayaka14732/ChatGPTAPIFree>. Subsequently, enter the API endpoint into the API menu.
 
+## Desktop App
+
+Download the desktop app [here](https://github.com/ztjhz/BetterChatGPT/releases)
+
 # 🛫 Host your own Instance
 
 If you'd like to run your own instance of Better ChatGPT, you can easily do so by following these steps:
