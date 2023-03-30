@@ -61,6 +61,7 @@ const useStore = create<StoreState>()(
         hideSideMenu: state.hideSideMenu,
         foldersName: state.foldersName,
         foldersExpanded: state.foldersExpanded,
+        enterToSubmit: state.enterToSubmit,
       }),
       version: 7,
       migrate: (persistedState, version) => {

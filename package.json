@@ -1,15 +1,44 @@
 {
   "name": "better-chatgpt",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
+  "homepage": "./",
+  "main": "electron/index.cjs",
+  "author": "Jing Hua <betterchatgpt@mail.tjh.sg>",
+  "description": "Play and chat smarter with BetterChatGPT - an amazing open-source web app with a better UI for exploring OpenAI's ChatGPT API!",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "electron": "concurrently -k \"BROWSER=none yarn dev\" \"wait-on tcp:5173 && electron .\"",
+    "pack": "yarn build && electron-builder --dir",
+    "make": "yarn build && electron-builder"
+  },
+  "build": {
+    "appId": "better-chatgpt",
+    "productName": "Better ChatGPT",
+    "directories": {
+      "output": "release"
+    },
+    "dmg": {
+      "title": "${productName} ${version}",
+      "icon": "dist/favicon-516x516.png"
+    },
+    "linux": {
+      "target": "tar.gz",
+      "category": "Chat",
+      "icon": "dist/favicon-516x516.png"
+    },
+    "win": {
+      "target": "NSIS",
+      "icon": "dist/favicon-516x516.png"
+    }
   },
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.2",
+    "electron-is-dev": "^2.0.0",
+    "electron-squirrel-startup": "^1.0.0",
     "html2canvas": "^1.4.1",
     "i18next": "^22.4.11",
     "i18next-browser-languagedetector": "^7.0.1",
@@ -36,11 +65,15 @@
     "@types/uuid": "^9.0.1",
     "@vitejs/plugin-react-swc": "^3.0.0",
     "autoprefixer": "^10.4.13",
+    "concurrently": "^8.0.1",
+    "electron": "^23.2.0",
+    "electron-builder": "^23.6.0",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7",
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
     "vite-plugin-top-level-await": "^1.3.0",
-    "vite-plugin-wasm": "^3.2.2"
+    "vite-plugin-wasm": "^3.2.2",
+    "wait-on": "^7.0.1"
   }
 }

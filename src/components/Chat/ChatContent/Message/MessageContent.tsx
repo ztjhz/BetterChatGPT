@@ -342,12 +342,29 @@ const EditView = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if ((e.ctrlKey || e.shiftKey) && e.key === 'Enter') {
-      e.preventDefault();
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|playbook|silk/i.test(
+        navigator.userAgent
+      );
+
+    if (e.key === 'Enter' && !isMobile) {
+      const enterToSubmit = useStore.getState().enterToSubmit;
       if (sticky) {
-        handleSaveAndSubmit();
-        resetTextAreaHeight();
-      } else handleSave();
+        if (
+          (enterToSubmit && !e.shiftKey) ||
+          (!enterToSubmit && (e.ctrlKey || e.shiftKey))
+        ) {
+          e.preventDefault();
+          handleSaveAndSubmit();
+          resetTextAreaHeight();
+        }
+      } else {
+        if (e.ctrlKey && e.shiftKey) {
+          e.preventDefault();
+          handleSaveAndSubmit();
+          resetTextAreaHeight();
+        } else if (e.ctrlKey || e.shiftKey) handleSave();
+      }
     }
   };
 
