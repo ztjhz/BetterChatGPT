@@ -54,7 +54,7 @@ export const _defaultChatConfig: ConfigInterface = {
   frequency_penalty: 0,
 };
 
-export const generateDefaultChat = (title?: string): ChatInterface => ({
+export const generateDefaultChat = (title?: string, folder?: string): ChatInterface => ({
   title: title ? title : 'New Chat',
   messages:
     useStore.getState().defaultSystemMessage.length > 0
@@ -62,6 +62,7 @@ export const generateDefaultChat = (title?: string): ChatInterface => ({
       : [],
   config: { ...useStore.getState().defaultChatConfig },
   titleSet: false,
+  folder
 });
 
 export const codeLanguageSubset = [
