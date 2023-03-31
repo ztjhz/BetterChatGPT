@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
 
-import PlusIcon from '@icon/PlusIcon';
+import NewFolderIcon from '@icon/NewFolderIcon';
 
 const NewFolder = () => {
   const { t } = useTranslation();
@@ -38,7 +38,7 @@ const NewFolder = () => {
         if (!generating) addFolder();
       }}
     >
-      <PlusIcon />{' '}
+      <NewFolderIcon />{' '}
       <span className='hidden md:inline-flex text-white text-sm'>
         {t('newFolder')}
       </span>
