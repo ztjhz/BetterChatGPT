@@ -76,7 +76,10 @@ Better ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 
 ## 桌面应用
 
-在此下载桌面应用程序： <https://github.com/ztjhz/BetterChatGPT/releases/>
+在此下载桌面应用程序：<https://github.com/ztjhz/BetterChatGPT/releases/>
+
+- 无限本地存储
+- 本地运行（即使无法访问 Better ChatGPT 网站也可以使用）
 
 # 🛫 托管自己的实例
 

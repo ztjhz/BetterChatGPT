@@ -85,6 +85,9 @@ To get started, simply visit our website at <https://bettergpt.chat/>. There are
 
 Download the desktop app [here](https://github.com/ztjhz/BetterChatGPT/releases)
 
+- Unlimited local storage
+- Runs locally (access Better ChatGPT even if the website is not accessible)
+
 # 🛫 Host your own Instance
 
 If you'd like to run your own instance of Better ChatGPT, you can easily do so by following these steps:
