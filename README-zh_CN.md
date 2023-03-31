@@ -82,6 +82,14 @@ Better ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 
 如果您想运行自己的 Better ChatGPT 实例，可以按照以下步骤轻松完成：
 
+## Vercel
+
+使用 Vercel 一键部署
+
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fztjhz%2FBetterChatGPT)
+
+## GitHub 页面
+
 ### 步骤
 
 1. 创建一个 GitHub 账户（如果您还没有账户）。

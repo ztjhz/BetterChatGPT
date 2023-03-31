@@ -89,6 +89,14 @@ Download the desktop app [here](https://github.com/ztjhz/BetterChatGPT/releases)
 
 If you'd like to run your own instance of Better ChatGPT, you can easily do so by following these steps:
 
+## Vercel
+
+One click deploy with Vercel
+
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fztjhz%2FBetterChatGPT)
+
+## GitHub Pages
+
 ### Steps
 
 1. Create a GitHub account (if you don't have one already)
