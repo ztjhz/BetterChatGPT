@@ -1,15 +1,18 @@
 import React from 'react';
 import useStore from '@store/store';
+import { useTranslation } from 'react-i18next';
 import { ChatInterface, MessageInterface } from '@type/chat';
 import { getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
 import { limitMessageTokens } from '@utils/messageUtils';
 import { _defaultChatConfig } from '@constants/chat';
+import { officialAPIEndpoint } from '@constants/auth';
 
 const useSubmit = () => {
+  const { t } = useTranslation('api');
   const error = useStore((state) => state.error);
   const setError = useStore((state) => state.setError);
-  const apiFree = useStore((state) => state.apiFree);
+  const apiEndpoint = useStore((state) => state.apiEndpoint);
   const apiKey = useStore((state) => state.apiKey);
   const setGenerating = useStore((state) => state.setGenerating);
   const generating = useStore((state) => state.generating);
@@ -20,13 +23,20 @@ const useSubmit = () => {
     message: MessageInterface[]
   ): Promise<string> => {
     let data;
-    if (apiFree) {
+    if (!apiKey || apiKey.length === 0) {
+      // official endpoint
+      if (apiEndpoint === officialAPIEndpoint) {
+        throw new Error(t('noApiKeyWarning') as string);
+      }
+
+      // other endpoints
       data = await getChatCompletion(
         useStore.getState().apiEndpoint,
         message,
         _defaultChatConfig
       );
     } else if (apiKey) {
+      // own apikey
       data = await getChatCompletion(
         useStore.getState().apiEndpoint,
         message,
@@ -53,27 +63,37 @@ const useSubmit = () => {
 
     try {
       let stream;
+      if (chats[currentChatIndex].messages.length === 0)
+        throw new Error('No messages submitted!');
+
       const messages = limitMessageTokens(
         chats[currentChatIndex].messages,
-        chats[currentChatIndex].config.max_tokens
+        chats[currentChatIndex].config.max_tokens,
+        chats[currentChatIndex].config.model
       );
       if (messages.length === 0) throw new Error('Message exceed max token!');
 
-      if (apiFree) {
+      // no api key (free)
+      if (!apiKey || apiKey.length === 0) {
+        // official endpoint
+        if (apiEndpoint === officialAPIEndpoint) {
+          throw new Error(t('noApiKeyWarning') as string);
+        }
+
+        // other endpoints
         stream = await getChatCompletionStream(
           useStore.getState().apiEndpoint,
           messages,
           chats[currentChatIndex].config
         );
       } else if (apiKey) {
+        // own apikey
         stream = await getChatCompletionStream(
           useStore.getState().apiEndpoint,
           messages,
           chats[currentChatIndex].config,
           apiKey
         );
-      } else {
-        throw new Error('No API key supplied! Please check your API settings.');
       }
 
       if (stream) {
