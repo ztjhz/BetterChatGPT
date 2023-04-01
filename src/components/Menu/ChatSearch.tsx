@@ -32,7 +32,7 @@ const ChatSearch = ({
     <SearchBar
       value={_filter}
       handleChange={handleChange}
-      className='h-8'
+      className='h-8 mb-2'
       disabled={generating}
     />
   );
