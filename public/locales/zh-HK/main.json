@@ -31,10 +31,10 @@
   "morePrompts": "如果你想揾更多 prompt，撳呢度：",
   "postOnShareGPT": {
     "title": "po 上 ShareGPT",
-    "warning": "請注意，你將呢個傾偈 po 上 ShareGPT 之後，佢會係公開嘅，所有人都可以見到你寫嘅嘢。一旦 po 咗，呢個傾偈將冇得被隱藏或刪除，亦都可能畀人存檔同分享。我哋建議你諗清楚，唔好喺嗰度分享敏感或私人資料。"
+    "warning": "請注意，你將呢個傾偈 po 上 ShareGPT 之後，佢會係公開嘅，所有人都可以見到你寫嘅嘢。一旦 po 咗，呢個傾偈將冇得被隱藏或刪除，亦都可能畀人存檔同分享。我哋建議你仔細諗下，唔好喺嗰度分享敏感或私人資料。"
   },
   "newFolder": "新資料夾",
-  "cloneChat": "Clone Chat",
-  "cloned": "Cloned",
-  "enterToSubmit": "Enter to submit"
+  "cloneChat": "建立傾偈副本",
+  "cloned": "建立成功",
+  "enterToSubmit": "撳 Enter 鍵提交"
 }
