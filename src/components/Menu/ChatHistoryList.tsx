@@ -5,6 +5,7 @@ import { shallow } from 'zustand/shallow';
 import NewFolder from './NewFolder';
 import ChatFolder from './ChatFolder';
 import ChatHistory from './ChatHistory';
+import ChatSearch from './ChatSearch';
 
 import {
   ChatHistoryInterface,
@@ -23,10 +24,13 @@ const ChatHistoryList = () => {
   const [isHover, setIsHover] = useState<boolean>(false);
   const [folders, setFolders] = useState<ChatHistoryFolderInterface>({});
   const [noFolders, setNoFolders] = useState<ChatHistoryInterface[]>([]);
+  const [filter, setFilter] = useState<string>('');
+
   const chatsRef = useRef<ChatInterface[]>(useStore.getState().chats || []);
   const foldersNameRef = useRef<string[]>(useStore.getState().foldersName);
+  const filterRef = useRef<string>(filter);
 
-  const updateFolders = () => {
+  const updateFolders = useRef(() => {
     const _folders: ChatHistoryFolderInterface = {};
     const _noFolders: ChatHistoryInterface[] = [];
     const chats = useStore.getState().chats;
@@ -36,6 +40,14 @@ const ChatHistoryList = () => {
 
     if (chats) {
       chats.forEach((chat, index) => {
+        const filterLowerCase = filterRef.current.toLowerCase();
+        if (
+          !chat.title.toLocaleLowerCase().includes(filterLowerCase) &&
+          !chat.folder?.toLowerCase().includes(filterLowerCase) &&
+          index !== currentChatIndex
+        )
+          return;
+
         if (!chat.folder) {
           _noFolders.push({ title: chat.title, index: index });
         } else {
@@ -47,7 +59,7 @@ const ChatHistoryList = () => {
 
     setFolders(_folders);
     setNoFolders(_noFolders);
-  };
+  }).current;
 
   useEffect(() => {
     updateFolders();
@@ -92,6 +104,11 @@ const ChatHistoryList = () => {
     }
   }, [currentChatIndex, chatTitles]);
 
+  useEffect(() => {
+    filterRef.current = filter;
+    updateFolders();
+  }, [filter]);
+
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     if (e.dataTransfer) {
       e.stopPropagation();
@@ -130,6 +147,7 @@ const ChatHistoryList = () => {
       onDragEnd={handleDragEnd}
     >
       <NewFolder />
+      <ChatSearch filter={filter} setFilter={setFilter} />
       <div className='flex flex-col gap-2 text-gray-100 text-sm'>
         {Object.keys(folders).map((folderName, folderIndex) => (
           <ChatFolder

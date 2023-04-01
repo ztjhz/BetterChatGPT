@@ -48,6 +48,7 @@
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.1.1",
     "jspdf": "^2.5.1",
+    "lodash": "^4.17.21",
     "match-sorter": "^6.3.1",
     "papaparse": "^5.4.1",
     "react": "^18.2.0",
@@ -64,6 +65,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
+    "@types/lodash": "^4.14.192",
     "@types/papaparse": "^5.3.7",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
