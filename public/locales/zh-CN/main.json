@@ -34,7 +34,7 @@
     "warning": "请注意，把您的对话发布到 ShareGPT 后，任何人都可以公开访问和查看。发布后，对话不能被隐藏或删除，且可能被其他人存档或分享。建议您慎重考虑，在这个平台上避免分享敏感或私密信息。"
   },
   "newFolder": "新文件夹",
-  "cloneChat": "Clone Chat",
-  "cloned": "Cloned",
-  "enterToSubmit": "Enter to submit"
+  "cloneChat": "创建聊天副本",
+  "cloned": "已创建副本",
+  "enterToSubmit": "按回车键提交"
 }
