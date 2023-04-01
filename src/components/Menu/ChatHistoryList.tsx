@@ -44,7 +44,7 @@ const ChatHistoryList = () => {
         if (
           !chat.title.toLocaleLowerCase().includes(filterLowerCase) &&
           !chat.folder?.toLowerCase().includes(filterLowerCase) &&
-          index !== currentChatIndex
+          index !== useStore.getState().currentChatIndex
         )
           return;
 
