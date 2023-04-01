@@ -26,7 +26,10 @@
       "icon": "dist/favicon-516x516.png"
     },
     "linux": {
-      "target": "tar.gz",
+      "target": [
+        "tar.gz",
+        "AppImage"
+      ],
       "category": "Chat",
       "icon": "dist/favicon-516x516.png"
     },
@@ -39,6 +42,7 @@
     "@dqbd/tiktoken": "^1.0.2",
     "electron-is-dev": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
+    "electron-updater": "^5.3.0",
     "html2canvas": "^1.4.1",
     "i18next": "^22.4.11",
     "i18next-browser-languagedetector": "^7.0.1",
