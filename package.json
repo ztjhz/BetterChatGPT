@@ -1,7 +1,7 @@
 {
   "name": "better-chatgpt",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "homepage": "./",
   "main": "electron/index.cjs",
@@ -26,7 +26,10 @@
       "icon": "dist/favicon-516x516.png"
     },
     "linux": {
-      "target": "tar.gz",
+      "target": [
+        "tar.gz",
+        "AppImage"
+      ],
       "category": "Chat",
       "icon": "dist/favicon-516x516.png"
     },
@@ -39,11 +42,13 @@
     "@dqbd/tiktoken": "^1.0.2",
     "electron-is-dev": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
+    "electron-updater": "^5.3.0",
     "html2canvas": "^1.4.1",
     "i18next": "^22.4.11",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.1.1",
     "jspdf": "^2.5.1",
+    "lodash": "^4.17.21",
     "match-sorter": "^6.3.1",
     "papaparse": "^5.4.1",
     "react": "^18.2.0",
@@ -60,6 +65,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
+    "@types/lodash": "^4.14.192",
     "@types/papaparse": "^5.3.7",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",

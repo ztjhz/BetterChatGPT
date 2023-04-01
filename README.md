@@ -85,6 +85,14 @@ To get started, simply visit our website at <https://bettergpt.chat/>. There are
 
 Download the desktop app [here](https://github.com/ztjhz/BetterChatGPT/releases)
 
+| OS      | Download  |
+| ------- | --------- |
+| Windows | .exe      |
+| MacOS   | .dmg      |
+| Linux   | .AppImage |
+
+### Features:
+
 - Unlimited local storage
 - Runs locally (access Better ChatGPT even if the website is not accessible)
 
