@@ -62,10 +62,14 @@ const ChatHistoryList = () => {
           return;
 
         if (!chat.folder) {
-          _noFolders.push({ title: chat.title, index: index });
+          _noFolders.push({ title: chat.title, index: index, id: chat.id });
         } else {
           if (!_folders[chat.folder]) _folders[_chatFolderName] = [];
-          _folders[chat.folder].push({ title: chat.title, index: index });
+          _folders[chat.folder].push({
+            title: chat.title,
+            index: index,
+            id: chat.id,
+          });
         }
       });
     }
@@ -163,19 +167,15 @@ const ChatHistoryList = () => {
       <NewFolder />
       <ChatSearch filter={filter} setFilter={setFilter} />
       <div className='flex flex-col gap-2 text-gray-100 text-sm'>
-        {Object.keys(chatFolders).map((folderId, folderIndex) => (
+        {Object.keys(chatFolders).map((folderId) => (
           <ChatFolder
             folderChats={chatFolders[folderId]}
             folderId={folderId}
             key={folderId}
           />
         ))}
-        {noChatFolders.map(({ title, index }) => (
-          <ChatHistory
-            title={title}
-            key={`${title}-${index}`}
-            chatIndex={index}
-          />
+        {noChatFolders.map(({ title, index, id }) => (
+          <ChatHistory title={title} key={`${title}-${id}`} chatIndex={index} />
         ))}
       </div>
       <div className='w-full h-10' />

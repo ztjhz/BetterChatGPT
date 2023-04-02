@@ -10,6 +10,7 @@ export interface MessageInterface {
 }
 
 export interface ChatInterface {
+  id: string;
   title: string;
   folder?: string;
   messages: MessageInterface[];
@@ -29,6 +30,7 @@ export interface ConfigInterface {
 export interface ChatHistoryInterface {
   title: string;
   index: number;
+  id: string;
 }
 
 export interface ChatHistoryFolderInterface {

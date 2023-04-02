@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   ChatInterface,
   ConfigInterface,
@@ -16,6 +18,7 @@ export const validateAndFixChats = (chats: any): chats is ChatInterface[] => {
   if (!Array.isArray(chats)) return false;
 
   for (const chat of chats) {
+    if (!(typeof chat.id === 'string')) chat.id = uuidv4();
     if (!(typeof chat.title === 'string') || chat.title === '') return false;
 
     if (chat.titleSet === undefined) chat.titleSet = false;

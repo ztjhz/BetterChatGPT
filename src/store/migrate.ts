@@ -101,5 +101,6 @@ export const migrateV7 = (persistedState: LocalStorageInterfaceV7oV8) => {
   // change the chat.folder from name to id
   persistedState.chats.forEach((chat) => {
     if (chat.folder) chat.folder = folderNameToIdMap[chat.folder];
+    chat.id = uuidv4();
   });
 };
