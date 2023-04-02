@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { ChatInterface, ConfigInterface, ModelOptions } from '@type/chat';
 import useStore from '@store/store';
 
@@ -55,6 +56,7 @@ export const _defaultChatConfig: ConfigInterface = {
 };
 
 export const generateDefaultChat = (title?: string): ChatInterface => ({
+  id: uuidv4(),
   title: title ? title : 'New Chat',
   messages:
     useStore.getState().defaultSystemMessage.length > 0

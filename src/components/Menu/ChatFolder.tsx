@@ -1,9 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useStore from '@store/store';
 
 import DownChevronArrow from '@icon/DownChevronArrow';
 import FolderIcon from '@icon/FolderIcon';
-import { ChatHistoryInterface, ChatInterface } from '@type/chat';
+import {
+  ChatHistoryInterface,
+  ChatInterface,
+  FolderCollection,
+} from '@type/chat';
 
 import ChatHistory from './ChatHistory';
 import EditIcon from '@icon/EditIcon';
@@ -12,18 +16,17 @@ import CrossIcon from '@icon/CrossIcon';
 import TickIcon from '@icon/TickIcon';
 
 const ChatFolder = ({
-  folderName,
   folderChats,
-  folderIndex,
+  folderId,
 }: {
-  folderName: string;
   folderChats: ChatHistoryInterface[];
-  folderIndex: number;
+  folderId: string;
 }) => {
+  const folderName = useStore((state) => state.folders[folderId].name);
+  const isExpanded = useStore((state) => state.folders[folderId].expanded);
+
   const setChats = useStore((state) => state.setChats);
-  const setFoldersName = useStore((state) => state.setFoldersName);
-  const setFoldersExpanded = useStore((state) => state.setFoldersExpanded);
-  const foldersExpanded = useStore((state) => state.foldersExpanded);
+  const setFolders = useStore((state) => state.setFolders);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -33,20 +36,11 @@ const ChatFolder = ({
   const [isHover, setIsHover] = useState<boolean>(false);
 
   const editTitle = () => {
-    const updatedChats: ChatInterface[] = JSON.parse(
-      JSON.stringify(useStore.getState().chats)
+    const updatedFolders: FolderCollection = JSON.parse(
+      JSON.stringify(useStore.getState().folders)
     );
-
-    updatedChats.forEach((chat) => {
-      if (chat.folder === folderName) chat.folder = _folderName;
-    });
-    setChats(updatedChats);
-
-    const updatedFolderNames = [...useStore.getState().foldersName];
-    const pos = updatedFolderNames.indexOf(folderName);
-    if (pos !== -1) updatedFolderNames[pos] = _folderName;
-    setFoldersName(updatedFolderNames);
-
+    updatedFolders[folderId].name = _folderName;
+    setFolders(updatedFolders);
     setIsEdit(false);
   };
 
@@ -55,19 +49,16 @@ const ChatFolder = ({
       JSON.stringify(useStore.getState().chats)
     );
     updatedChats.forEach((chat) => {
-      if (chat.folder === folderName) delete chat.folder;
+      if (chat.folder === folderId) delete chat.folder;
     });
     setChats(updatedChats);
 
-    const updatedFoldersName = [...useStore.getState().foldersName];
-    const updatedFoldersExpanded = [...useStore.getState().foldersExpanded];
+    const updatedFolders: FolderCollection = JSON.parse(
+      JSON.stringify(useStore.getState().folders)
+    );
+    delete updatedFolders[folderId];
+    setFolders(updatedFolders);
 
-    const i = updatedFoldersName.findIndex((name) => name === folderName);
-    updatedFoldersName.splice(i, 1);
-    updatedFoldersExpanded.splice(i, 1);
-
-    setFoldersName(updatedFoldersName);
-    setFoldersExpanded(updatedFoldersExpanded);
     setIsDelete(false);
   };
 
@@ -95,15 +86,19 @@ const ChatFolder = ({
       e.stopPropagation();
       setIsHover(false);
 
-      const updatedFoldersExpanded = [...foldersExpanded];
-      updatedFoldersExpanded[folderIndex] = true;
-      setFoldersExpanded(updatedFoldersExpanded);
+      // expand folder on drop
+      const updatedFolders: FolderCollection = JSON.parse(
+        JSON.stringify(useStore.getState().folders)
+      );
+      updatedFolders[folderId].expanded = true;
+      setFolders(updatedFolders);
 
+      // update chat folderId to new folderId
       const chatIndex = Number(e.dataTransfer.getData('chatIndex'));
       const updatedChats: ChatInterface[] = JSON.parse(
         JSON.stringify(useStore.getState().chats)
       );
-      updatedChats[chatIndex].folder = folderName;
+      updatedChats[chatIndex].folder = folderId;
       setChats(updatedChats);
     }
   };
@@ -119,10 +114,16 @@ const ChatFolder = ({
   };
 
   const toggleExpanded = () => {
-    const updatedFoldersExpanded = [...foldersExpanded];
-    updatedFoldersExpanded[folderIndex] = !updatedFoldersExpanded[folderIndex];
-    setFoldersExpanded(updatedFoldersExpanded);
+    const updatedFolders: FolderCollection = JSON.parse(
+      JSON.stringify(useStore.getState().folders)
+    );
+    updatedFolders[folderId].expanded = !updatedFolders[folderId].expanded;
+    setFolders(updatedFolders);
   };
+
+  useEffect(() => {
+    if (inputRef && inputRef.current) inputRef.current.focus();
+  }, [isEdit]);
 
   return (
     <div
@@ -154,7 +155,7 @@ const ChatFolder = ({
           )}
         </div>
         <div
-          className='absolute flex right-1 z-10 text-gray-300 visible'
+          className='flex text-gray-300'
           onClick={(e) => e.stopPropagation()}
         >
           {isDelete || isEdit ? (
@@ -183,7 +184,7 @@ const ChatFolder = ({
               <button className='p-1 hover:text-white' onClick={toggleExpanded}>
                 <DownChevronArrow
                   className={`${
-                    foldersExpanded[folderIndex] ? 'rotate-180' : ''
+                    isExpanded ? 'rotate-180' : ''
                   } transition-transform`}
                 />
               </button>
@@ -192,7 +193,7 @@ const ChatFolder = ({
         </div>
       </div>
       <div className='ml-3 pl-1 border-l-2 border-gray-700 flex flex-col gap-1'>
-        {foldersExpanded[folderIndex] &&
+        {isExpanded &&
           folderChats.map((chat) => (
             <ChatHistory
               title={chat.title}
