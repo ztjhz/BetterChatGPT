@@ -13,6 +13,7 @@ export const i18nLanguages = [
   'es',
   'fr',
   'fr-FR',
+  'it',
   'ja',
   'ms',
   'nb',
