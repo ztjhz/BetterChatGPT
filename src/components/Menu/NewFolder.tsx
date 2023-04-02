@@ -1,30 +1,44 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { v4 as uuidv4 } from 'uuid';
 import useStore from '@store/store';
 
 import NewFolderIcon from '@icon/NewFolderIcon';
+import { Folder, FolderCollection } from '@type/chat';
 
 const NewFolder = () => {
   const { t } = useTranslation();
   const generating = useStore((state) => state.generating);
-  const setFoldersName = useStore((state) => state.setFoldersName);
-  const setFoldersExpanded = useStore((state) => state.setFoldersExpanded);
+  const setFolders = useStore((state) => state.setFolders);
 
   const addFolder = () => {
     let folderIndex = 1;
     let name = `New Folder ${folderIndex}`;
 
-    while (
-      useStore
-        .getState()
-        .foldersName.some((_folderName) => _folderName === name)
-    ) {
+    const folders = useStore.getState().folders;
+
+    while (Object.values(folders).some((folder) => folder.name === name)) {
       folderIndex += 1;
       name = `New Folder ${folderIndex}`;
     }
 
-    setFoldersName([name, ...useStore.getState().foldersName]);
-    setFoldersExpanded([false, ...useStore.getState().foldersExpanded]);
+    const updatedFolders: FolderCollection = JSON.parse(
+      JSON.stringify(folders)
+    );
+
+    const id = uuidv4();
+    const newFolder: Folder = {
+      id,
+      name,
+      expanded: false,
+      order: 0,
+    };
+
+    Object.values(updatedFolders).forEach((folder) => {
+      folder.order += 1;
+    });
+
+    setFolders({ [id]: newFolder, ...updatedFolders });
   };
 
   return (
