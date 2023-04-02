@@ -10,6 +10,7 @@ import CrossIcon from '@icon/CrossIcon';
 
 import useSubmit from '@hooks/useSubmit';
 import DownloadChat from './DownloadChat';
+import CloneChat from './CloneChat';
 import ShareGPT from '@components/ShareGPT';
 
 const ChatContent = () => {
@@ -91,11 +92,12 @@ const ChatContent = () => {
               </div>
             </div>
           )}
-          <div className='mt-4 flex gap-4'>
+          <div className='mt-4 flex gap-4 flex-wrap justify-center'>
             {useStore.getState().generating || (
               <>
                 <DownloadChat saveRef={saveRef} />
                 <ShareGPT />
+                <CloneChat />
               </>
             )}
           </div>

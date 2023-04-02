@@ -31,7 +31,9 @@ const MobileBar = () => {
         <span className='sr-only'>Open sidebar</span>
         <MenuIcon />
       </button>
-      <h1 className='flex-1 text-center text-base font-normal'>{chatTitle}</h1>
+      <h1 className='flex-1 text-center text-base font-normal px-2 max-h-20 overflow-y-auto'>
+        {chatTitle}
+      </h1>
       <button
         type='button'
         className={`px-3 text-gray-400 transition-opacity ${
