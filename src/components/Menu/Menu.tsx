@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+
 import useStore from '@store/store';
 
 import NewChat from './NewChat';
@@ -13,10 +14,16 @@ const Menu = () => {
   const hideSideMenu = useStore((state) => state.hideSideMenu);
   const setHideSideMenu = useStore((state) => state.setHideSideMenu);
 
+  const windowWidthRef = useRef<number>(window.innerWidth);
+
   useEffect(() => {
     if (window.innerWidth < 768) setHideSideMenu(true);
     window.addEventListener('resize', () => {
-      if (window.innerWidth < 768) setHideSideMenu(true);
+      if (
+        windowWidthRef.current !== window.innerWidth &&
+        window.innerWidth < 768
+      )
+        setHideSideMenu(true);
     });
   }, []);
 

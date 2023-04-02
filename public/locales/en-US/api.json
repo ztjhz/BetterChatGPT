@@ -1,5 +1,5 @@
 {
-  "securityMessage": "We prioritise the security of your API key and handle it with utmost care. Your key is exclusively stored on your browser and never shared with any third-party entity. It is solely used for the intended purpose of accessing the OpenAI API and not for any other unauthorised use.",
+  "securityMessage": "We prioritize the security of your API key and handle it with utmost care. Your key is exclusively stored on your browser and never shared with any third-party entity. It is solely used for the intended purpose of accessing the OpenAI API and not for any other unauthorized use.",
   "apiEndpoint": {
     "inputLabel": "API Endpoint",
     "description": "When you choose an unofficial API endpoint, it functions as a proxy. A proxy works by acting as an intermediary between your device and the destination server, in this case, the OpenAI API. By doing so, it enables you to access the OpenAI API in regions where it might otherwise be restricted.",
