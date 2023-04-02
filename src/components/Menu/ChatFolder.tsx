@@ -133,7 +133,7 @@ const ChatFolder = ({
       onDragLeave={handleDragLeave}
     >
       <div
-        className='flex py-3 px-3 items-center gap-3 relative rounded-md hover:bg-[#2A2B32] break-all cursor-pointer'
+        className='flex py-3 px-3 items-center gap-3 relative rounded-md hover:bg-gray-850 break-all cursor-pointer'
         onClick={toggleExpanded}
       >
         <FolderIcon className='h-4 w-4' />
