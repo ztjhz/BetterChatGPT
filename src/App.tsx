@@ -9,6 +9,7 @@ import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 import { ChatInterface } from '@type/chat';
 import { Theme } from '@type/theme';
 import ApiPopup from '@components/ApiPopup';
+import { cyanColorPalette } from '@constants/color';
 
 function App() {
   const initialiseNewChat = useInitialiseNewChat();
@@ -22,6 +23,12 @@ function App() {
     i18n.on('languageChanged', (lng) => {
       document.documentElement.lang = lng;
     });
+  }, []);
+
+  useEffect(() => {
+    Object.entries(cyanColorPalette).forEach(([key, color]) =>
+      document.documentElement.style.setProperty(key, color)
+    );
   }, []);
 
   useEffect(() => {

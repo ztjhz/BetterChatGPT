@@ -3,6 +3,19 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-50: #f7f7f8;
+    --color-100: #ececf1;
+    --color-200: #d9d9e3;
+    --color-300: #d1d5db;
+    --color-400: #acacbe;
+    --color-500: #8e8ea0;
+    --color-600: #4b5563;
+    --color-700: #40414f;
+    --color-800: #343541;
+    --color-900: #202123;
+  }
+
   * {
     box-sizing: border-box;
   }
