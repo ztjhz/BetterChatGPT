@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
+import useCloudAuthStore from '@store/cloud-auth-store';
 
 import PopupModal from '@components/PopupModal';
 import SettingIcon from '@icon/SettingIcon';
@@ -10,10 +11,12 @@ import AutoTitleToggle from './AutoTitleToggle';
 import PromptLibraryMenu from '@components/PromptLibraryMenu';
 import ChatConfigMenu from '@components/ChatConfigMenu';
 import EnterToSubmitToggle from './EnterToSubmitToggle';
+import GoogleSync from '@components/GoogleSync';
 
 const SettingsMenu = () => {
   const { t } = useTranslation();
 
+  const googleClientId = useCloudAuthStore((state) => state.googleClientId);
   const theme = useStore.getState().theme;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -45,6 +48,7 @@ const SettingsMenu = () => {
             </div>
             <PromptLibraryMenu />
             <ChatConfigMenu />
+            {googleClientId && <GoogleSync clientId={googleClientId} />}
           </div>
         </PopupModal>
       )}
