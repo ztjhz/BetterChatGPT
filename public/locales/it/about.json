@@ -1,0 +1,27 @@
+{
+  "description": "Better ChatGPT è un'incredibile applicazione web open-source che permette di giocare con l'API ChatGPT di OpenAI gratuitamente!",
+  "sourceCode": "Scopri il <0>codice sorgente</0> su GitHub e dai una ⭐️!",
+  "initiative": {
+    "description": "Scopri l'iniziativa <0><i>Open ChatGPT</i></0>!",
+    "link": "https://medium.com/@ayaka_45434/the-open-chatgpt-initiative-e76b0b62a3ae"
+  },
+  "support": {
+    "title": "Supporto",
+    "paragraph1": "Noi di Better ChatGPT ci sforziamo di fornirvi funzioni utili e sorprendenti 24 ore su 24. E proprio come ogni progetto, il tuo supporto e la tua motivazione ci aiuteranno a continuare a progredire. E proprio come in ogni progetto, il tuo supporto e la tua motivazione saranno fondamentali per aiutarci ad andare avanti!",
+    "paragraph2": "Se ti sei trovato bene con la nostra app, ti chiediamo gentilmente di dare una ⭐️ a questo <0>progetto</0>. La tua approvazione significa molto per noi e ci incoraggia a lavorare sempre di più per offrire la migliore esperienza possibile.",
+    "paragraph3": "Se desideri sostenere il team, prendi in considerazione la possibilità di sponsorizzarci attraverso uno dei metodi indicati di seguito. Ogni contributo, per quanto piccolo, ci aiuta a mantenere e migliorare il nostro servizio.",
+    "paragraph4": "Ti ringraziamo di far parte della nostra community e ci auguriamo di poterti servire meglio in futuro.",
+    "alipay": "Alipay",
+    "wechatPay": "WeChat"
+  },
+  "discordServer": {
+    "title": "Discord Server",
+    "paragraph1": "Ti invitiamo ad unirti alla nostra community Discord! Il nostro server Discord è un luogo ideale per scambiare idee e suggerimenti su ChatGPT e per inviare richieste di funzionalità per Better ChatGPT. Avrai l'opportunità di interagire con gli sviluppatori di Better ChatGPT e con altri appassionati di IA che condividono la tua stessa passione.",
+    "paragraph2": "Per unirsi al nostro server, basta cliccare sul seguente link: <0>https://discord.gg/g3Qnwy4V6A</0>. Non vediamo l'ora di vederti lì!"
+  },
+  "privacyStatement": {
+    "title": "Informativa sulla privacy",
+    "paragraph1": "Ci teniamo molto alla tua privacy e ci impegniamo a salvaguardare quella dei nostri utenti. Non raccogliamo né memorizziamo alcun testo immesso o ricevuto dal server OpenAI in alcuna forma. Il nostro codice sorgente è disponibile per la verifica di questa dichiarazione.",
+    "paragraph2": "Diamo priorità alla sicurezza della tua chiave API e la gestiamo con la massima cura. Se si utilizza la propria chiave API, questa viene memorizzata esclusivamente sul browser dell'utente e non viene mai condivisa con alcuna entità terza. Viene utilizzata esclusivamente per lo scopo previsto di accedere all'API OpenAI e non per altri usi non autorizzati."
+  }
+}
