@@ -256,7 +256,8 @@ const ChatFolder = ({
           )}
         </div>
       </div>
-      <div className='ml-3 pl-1 border-l-2 border-gray-700 flex flex-col gap-1'>
+      <div className='group/folder ml-3 pl-1 border-l-2 border-gray-700 flex flex-col gap-1'>
+        {isExpanded && <NewChat compact folder={folderId} />}
         {isExpanded &&
           folderChats.map((chat) => (
             <ChatHistory
