@@ -18,6 +18,7 @@
   "build": {
     "appId": "better-chatgpt",
     "productName": "Better ChatGPT",
+    "artifactName": "${os}-${name}-${version}-${arch}.${ext}",
     "directories": {
       "output": "release"
     },

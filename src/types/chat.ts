@@ -10,6 +10,7 @@ export interface MessageInterface {
 }
 
 export interface ChatInterface {
+  id: string;
   title: string;
   folder?: string;
   messages: MessageInterface[];
@@ -29,10 +30,23 @@ export interface ConfigInterface {
 export interface ChatHistoryInterface {
   title: string;
   index: number;
+  id: string;
 }
 
 export interface ChatHistoryFolderInterface {
-  [folderName: string]: ChatHistoryInterface[];
+  [folderId: string]: ChatHistoryInterface[];
+}
+
+export interface FolderCollection {
+  [folderId: string]: Folder;
+}
+
+export interface Folder {
+  id: string;
+  name: string;
+  expanded: boolean;
+  order: number;
+  color?: string;
 }
 
 export type ModelOptions = 'gpt-4' | 'gpt-4-32k' | 'gpt-3.5-turbo';
@@ -119,4 +133,11 @@ export interface LocalStorageInterfaceV6ToV7 {
   hideMenuOptions: boolean;
   firstVisit: boolean;
   hideSideMenu: boolean;
+}
+
+export interface LocalStorageInterfaceV7oV8
+  extends LocalStorageInterfaceV6ToV7 {
+  foldersName: string[];
+  foldersExpanded: boolean[];
+  folders: FolderCollection;
 }
