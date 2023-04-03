@@ -1,12 +1,19 @@
 import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { v4 as uuidv4 } from 'uuid';
 import useStore from '@store/store';
 
 import ExportIcon from '@icon/ExportIcon';
 import downloadFile from '@utils/downloadFile';
 import { getToday } from '@utils/date';
 import PopupModal from '@components/PopupModal';
-import { validateAndFixChats } from '@utils/chat';
+import {
+  isLegacyImport,
+  validateAndFixChats,
+  validateExportV1,
+} from '@utils/import';
+import { ChatInterface, Folder, FolderCollection } from '@type/chat';
+import Export, { ExportBase, ExportV1 } from '@type/export';
 
 const ImportExportChat = () => {
   const { t } = useTranslation();
@@ -42,6 +49,7 @@ const ImportExportChat = () => {
 const ImportChat = () => {
   const { t } = useTranslation();
   const setChats = useStore.getState().setChats;
+  const setFolders = useStore.getState().setFolders;
   const inputRef = useRef<HTMLInputElement>(null);
   const [alert, setAlert] = useState<{
     message: string;
@@ -60,11 +68,100 @@ const ImportChat = () => {
 
         try {
           const parsedData = JSON.parse(data);
-          if (validateAndFixChats(parsedData)) {
-            setChats(parsedData);
-            setAlert({ message: 'Succesfully imported!', success: true });
+          if (isLegacyImport(parsedData)) {
+            if (validateAndFixChats(parsedData)) {
+              // import new folders
+              const folderNameToIdMap: Record<string, string> = {};
+              const parsedFolders: string[] = [];
+
+              parsedData.forEach((data) => {
+                const folder = data.folder;
+                if (folder) {
+                  if (!parsedFolders.includes(folder)) {
+                    parsedFolders.push(folder);
+                    folderNameToIdMap[folder] = uuidv4();
+                  }
+                  data.folder = folderNameToIdMap[folder];
+                }
+              });
+
+              const newFolders: FolderCollection = parsedFolders.reduce(
+                (acc, curr, index) => {
+                  const id = folderNameToIdMap[curr];
+                  const _newFolder: Folder = {
+                    id,
+                    name: curr,
+                    expanded: false,
+                    order: index,
+                  };
+                  return { [id]: _newFolder, ...acc };
+                },
+                {}
+              );
+
+              // increment the order of existing folders
+              const offset = parsedFolders.length;
+
+              const updatedFolders = useStore.getState().folders;
+              Object.values(updatedFolders).forEach((f) => (f.order += offset));
+
+              setFolders({ ...newFolders, ...updatedFolders });
+
+              // import chats
+              const prevChats = useStore.getState().chats;
+              if (prevChats) {
+                const updatedChats: ChatInterface[] = JSON.parse(
+                  JSON.stringify(prevChats)
+                );
+                setChats(parsedData.concat(updatedChats));
+              } else {
+                setChats(parsedData);
+              }
+              setAlert({ message: 'Succesfully imported!', success: true });
+            } else {
+              setAlert({
+                message: 'Invalid chats data format',
+                success: false,
+              });
+            }
           } else {
-            setAlert({ message: 'Invalid chats data format', success: false });
+            switch ((parsedData as ExportBase).version) {
+              case 1:
+                if (validateExportV1(parsedData)) {
+                  // import folders
+                  parsedData.folders;
+                  // increment the order of existing folders
+                  const offset = Object.keys(parsedData.folders).length;
+
+                  const updatedFolders = useStore.getState().folders;
+                  Object.values(updatedFolders).forEach(
+                    (f) => (f.order += offset)
+                  );
+
+                  setFolders({ ...parsedData.folders, ...updatedFolders });
+
+                  // import chats
+                  const prevChats = useStore.getState().chats;
+                  if (parsedData.chats) {
+                    if (prevChats) {
+                      const updatedChats: ChatInterface[] = JSON.parse(
+                        JSON.stringify(prevChats)
+                      );
+                      setChats(parsedData.chats.concat(updatedChats));
+                    } else {
+                      setChats(parsedData.chats);
+                    }
+                  }
+
+                  setAlert({ message: 'Succesfully imported!', success: true });
+                } else {
+                  setAlert({
+                    message: 'Invalid format',
+                    success: false,
+                  });
+                }
+                break;
+            }
           }
         } catch (error: unknown) {
           setAlert({ message: (error as Error).message, success: false });
@@ -107,7 +204,7 @@ const ImportChat = () => {
 
 const ExportChat = () => {
   const { t } = useTranslation();
-  const chats = useStore.getState().chats;
+
   return (
     <div className='mt-6'>
       <div className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
@@ -116,7 +213,12 @@ const ExportChat = () => {
       <button
         className='btn btn-small btn-primary'
         onClick={() => {
-          if (chats) downloadFile(chats, getToday());
+          const fileData: Export = {
+            chats: useStore.getState().chats,
+            folders: useStore.getState().folders,
+            version: 1,
+          };
+          downloadFile(fileData, getToday());
         }}
       >
         {t('export')}

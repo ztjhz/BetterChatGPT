@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import useStore from '@store/store';
+import i18n from './i18n';
 
 import Chat from '@components/Chat';
 import Menu from '@components/Menu';
@@ -7,6 +8,7 @@ import Menu from '@components/Menu';
 import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 import { ChatInterface } from '@type/chat';
 import { Theme } from '@type/theme';
+import ApiPopup from '@components/ApiPopup';
 
 function App() {
   const initialiseNewChat = useInitialiseNewChat();
@@ -14,6 +16,13 @@ function App() {
   const setTheme = useStore((state) => state.setTheme);
   const setApiKey = useStore((state) => state.setApiKey);
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
+
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+    i18n.on('languageChanged', (lng) => {
+      document.documentElement.lang = lng;
+    });
+  }, []);
 
   useEffect(() => {
     // legacy local storage
@@ -68,6 +77,7 @@ function App() {
     <div className='overflow-hidden w-full h-full relative'>
       <Menu />
       <Chat />
+      <ApiPopup />
     </div>
   );
 }

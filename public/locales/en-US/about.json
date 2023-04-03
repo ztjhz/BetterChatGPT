@@ -1,0 +1,27 @@
+{
+  "description": "Better ChatGPT is an amazing open-source web app that allows you to play with OpenAI's ChatGPT API for free!",
+  "sourceCode": "Checkout the <0>source code</0> on GitHub and give it a ⭐️!",
+  "initiative": {
+    "description": "Checkout the <0><i>Open ChatGPT Initiative</i></0>!",
+    "link": "https://medium.com/@ayaka_45434/the-open-chatgpt-initiative-e76b0b62a3ae"
+  },
+  "support": {
+    "title": "Support",
+    "paragraph1": "At Better ChatGPT, we strive to provide you with useful and amazing features around the clock. And just like any project, your support and motivation will be instrumental in helping us keep moving forward!",
+    "paragraph2": "If you have enjoyed using our app, we kindly ask you to give this <0>project</0> a ⭐️. Your endorsement means a lot to us and encourages us to work harder towards delivering the best possible experience.",
+    "paragraph3": "If you would like to support the team, consider sponsoring us through one of the methods below. Every contribution, no matter how small, helps us to maintain and improve our service.",
+    "paragraph4": "Thank you for being a part of our community, and we look forward to serving you better in the future.",
+    "alipay": "Alipay",
+    "wechatPay": "WeChat"
+  },
+  "discordServer": {
+    "title": "Discord Server",
+    "paragraph1": "We invite you to join our Discord community! Our Discord server is a great place to exchange ChatGPT ideas and tips, and submit feature requests for Better ChatGPT. You'll have the opportunity to interact with the developers behind Better ChatGPT as well as other AI enthusiasts who share your passion.",
+    "paragraph2": "To join our server, simply click on the following link: <0>https://discord.gg/g3Qnwy4V6A</0>. We can't wait to see you there!"
+  },
+  "privacyStatement": {
+    "title": "Privacy Statement",
+    "paragraph1": "We highly value your privacy and are committed to safeguarding the privacy of our users. We do not collect or store any text you enter or receive from the OpenAI server in any form. Our source code is available for your inspection to verify this statement.",
+    "paragraph2": "We prioritize the security of your API key and handle it with utmost care. If you use your own API key, your key is exclusively stored on your browser and never shared with any third-party entity. It is solely used for the intended purpose of accessing the OpenAI API and not for any other unauthorized use."
+  }
+}

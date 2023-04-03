@@ -32,5 +32,9 @@
   "postOnShareGPT": {
     "title": "Inlägg på ShareGPT",
     "warning": "Var medveten om att genom att posta din konversation på ShareGPT kommer den att bli offentligt tillgänglig och synlig för alla. När den väl är postad kan konversationen varken döljas eller raderas och kan arkiveras eller delas av andra. Vi rekommenderar dig att tänka noggrant igenom och undvika att dela känslig eller privat information på denna plattform."
-  }
+  },
+  "newFolder": "Ny mapp",
+  "cloneChat": "Klona chatt",
+  "cloned": "Klonad",
+  "enterToSubmit": "Tryck på Enter för att skicka"
 }

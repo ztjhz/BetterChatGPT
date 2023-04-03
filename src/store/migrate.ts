@@ -1,10 +1,16 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import {
+  Folder,
+  FolderCollection,
   LocalStorageInterfaceV0ToV1,
   LocalStorageInterfaceV1ToV2,
   LocalStorageInterfaceV2ToV3,
   LocalStorageInterfaceV3ToV4,
   LocalStorageInterfaceV4ToV5,
   LocalStorageInterfaceV5ToV6,
+  LocalStorageInterfaceV6ToV7,
+  LocalStorageInterfaceV7oV8,
 } from '@type/chat';
 import {
   _defaultChatConfig,
@@ -59,5 +65,42 @@ export const migrateV5 = (persistedState: LocalStorageInterfaceV5ToV6) => {
       ...chat.config,
       max_tokens: defaultUserMaxToken,
     };
+  });
+};
+
+export const migrateV6 = (persistedState: LocalStorageInterfaceV6ToV7) => {
+  if (
+    persistedState.apiEndpoint ===
+    'https://sharegpt.churchless.tech/share/v1/chat'
+  ) {
+    persistedState.apiEndpoint = 'https://chatgpt-api.shn.hk/v1/';
+  }
+  if (!persistedState.apiKey || persistedState.apiKey.length === 0)
+    persistedState.apiKey = '';
+};
+
+export const migrateV7 = (persistedState: LocalStorageInterfaceV7oV8) => {
+  let folders: FolderCollection = {};
+  const folderNameToIdMap: Record<string, string> = {};
+
+  // convert foldersExpanded and foldersName to folders
+  persistedState.foldersName.forEach((name, index) => {
+    const id = uuidv4();
+    const folder: Folder = {
+      id,
+      name,
+      expanded: persistedState.foldersExpanded[index],
+      order: index,
+    };
+
+    folders = { [id]: folder, ...folders };
+    folderNameToIdMap[name] = id;
+  });
+  persistedState.folders = folders;
+
+  // change the chat.folder from name to id
+  persistedState.chats.forEach((chat) => {
+    if (chat.folder) chat.folder = folderNameToIdMap[chat.folder];
+    chat.id = uuidv4();
   });
 };
