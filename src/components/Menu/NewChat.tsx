@@ -6,13 +6,7 @@ import PlusIcon from '@icon/PlusIcon';
 
 import useAddChat from '@hooks/useAddChat';
 
-const NewChat = ({
-  folder,
-  compact,
-}: {
-  folder?: string;
-  compact?: boolean;
-}) => {
+const NewChat = ({ folder }: { folder?: string }) => {
   const { t } = useTranslation();
   const addChat = useAddChat();
   const generating = useStore((state) => state.generating);
@@ -24,22 +18,22 @@ const NewChat = ({
           ? 'cursor-not-allowed opacity-40'
           : 'cursor-pointer opacity-100'
       } ${
-        compact
+        folder
           ? 'justify-start'
           : 'py-3 px-3 gap-3 md:mb-2 md:border md:border-white/20'
       }`}
       onClick={() => {
         if (!generating) addChat(folder);
       }}
-      title={compact ? String(t('newChat')) : ''}
+      title={folder ? String(t('newChat')) : ''}
     >
-      {compact ? (
-        <div className='max-h-0 group-hover/folder:max-h-10 group-hover/folder:py-3 px-3 overflow-hidden transition-all duration-200 delay-700 text-sm flex gap-3 items-center text-gray-100'>
+      {folder ? (
+        <div className='max-h-0 group-hover/folder:max-h-10 group-hover/folder:py-3 px-3 overflow-hidden transition-all duration-200 delay-500 text-sm flex gap-3 items-center text-gray-100'>
           <PlusIcon /> {t('newChat')}
         </div>
       ) : (
         <>
-          <PlusIcon />{' '}
+          <PlusIcon />
           <span className='hidden md:inline-flex text-white text-sm'>
             {t('newChat')}
           </span>

@@ -273,7 +273,6 @@ const ChatFolder = ({
         </div>
       </div>
       <div className='group/folder ml-3 pl-1 border-l-2 border-gray-700 flex flex-col gap-1'>
-        {isExpanded && <NewChat folder={folderId} />}
         {isExpanded &&
           folderChats.map((chat) => (
             <ChatHistory
@@ -282,6 +281,7 @@ const ChatFolder = ({
               key={`${chat.title}-${chat.index}`}
             />
           ))}
+        {isExpanded && <NewChat folder={folderId} />}
       </div>
     </div>
   );
