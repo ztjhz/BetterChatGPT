@@ -28,7 +28,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
       title={folder ? String(t('newChat')) : ''}
     >
       {folder ? (
-        <div className='max-h-0 parent-sibling-hover:max-h-10 parent-sibling-hover:py-3 px-3 overflow-hidden transition-all duration-200 delay-500 text-sm flex gap-3 items-center text-gray-100'>
+        <div className='max-h-0 parent-sibling-hover:max-h-10 hover:max-h-10 parent-sibling-hover:py-3 hover:py-3 px-3 overflow-hidden transition-all duration-200 delay-500 text-sm flex gap-3 items-center text-gray-100'>
           <PlusIcon /> {t('newChat')}
         </div>
       ) : (
