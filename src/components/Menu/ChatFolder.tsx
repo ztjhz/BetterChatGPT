@@ -146,7 +146,7 @@ const ChatFolder = ({
 
   return (
     <div
-      className={`group/folder w-full transition-colors ${isHover ? 'bg-gray-800/40' : ''}`}
+      className={`w-full transition-colors ${isHover ? 'bg-gray-800/40' : ''}`}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -155,7 +155,7 @@ const ChatFolder = ({
         style={{ background: color || '' }}
         className={`${
           color ? '' : 'hover:bg-gray-850'
-        } transition-colors flex py-3 pl-3 pr-1 items-center gap-3 relative rounded-md break-all cursor-pointer`}
+        } transition-colors flex py-3 pl-3 pr-1 items-center gap-3 relative rounded-md break-all cursor-pointer parent-sibling`}
         onClick={toggleExpanded}
         ref={folderRef}
         onMouseEnter={() => {
@@ -272,7 +272,7 @@ const ChatFolder = ({
           )}
         </div>
       </div>
-      <div className='ml-3 pl-1 border-l-2 border-gray-700 flex flex-col gap-1'>
+      <div className='ml-3 pl-1 border-l-2 border-gray-700 flex flex-col gap-1 parent'>
         {isExpanded && <NewChat folder={folderId} />}
         {isExpanded &&
           folderChats.map((chat) => (
