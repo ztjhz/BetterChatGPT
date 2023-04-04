@@ -36,5 +36,6 @@
   "newFolder": "Folder Baru",
   "cloneChat": "Buat salinan perbualan ini",
   "cloned": "Dicipta",
-  "enterToSubmit": "Tekan Enter untuk hantar"
+  "enterToSubmit": "Tekan Enter untuk hantar",
+  "submitPlaceholder": "Type a message or select [/] for a predefined prompt..."
 }

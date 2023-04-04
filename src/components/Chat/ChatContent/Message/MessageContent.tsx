@@ -439,6 +439,7 @@ const EditView = ({
             _setContent(e.target.value);
           }}
           value={_content}
+          placeholder={t('submitPlaceholder') || ''}
           onKeyDown={handleKeyDown}
           rows={1}
         ></textarea>
