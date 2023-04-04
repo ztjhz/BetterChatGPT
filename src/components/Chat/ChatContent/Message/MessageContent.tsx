@@ -138,7 +138,7 @@ const ContentView = React.memo(
           <ReactMarkdown
             remarkPlugins={[
               remarkGfm,
-              remarkMath,
+              [remarkMath, { singleDollarTextMath: false }],
             ]}
             rehypePlugins={[
               rehypeKatex,
