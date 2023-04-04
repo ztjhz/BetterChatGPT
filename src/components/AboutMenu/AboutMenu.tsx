@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import PopupModal from '@components/PopupModal';
 import AboutIcon from '@icon/AboutIcon';
@@ -7,13 +7,15 @@ const AboutMenu = () => {
   const { t } = useTranslation(['main', 'about']);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
+  const handleClick = useCallback(() => {
+    setIsModalOpen(true);
+  }, [setIsModalOpen]);
+
   return (
     <>
       <a
         className='flex py-3 px-3 items-center gap-3 rounded-md hover:bg-gray-500/10 transition-colors duration-200 text-white cursor-pointer text-sm'
-        onClick={() => {
-          setIsModalOpen(true);
-        }}
+        onClick={handleClick}
       >
         <div>
           <AboutIcon />
