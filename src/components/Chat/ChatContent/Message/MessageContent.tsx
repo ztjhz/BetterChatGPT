@@ -347,7 +347,7 @@ const EditView = ({
         navigator.userAgent
       );
 
-    if (e.key === 'Enter' && !isMobile) {
+    if (e.key === 'Enter' && !isMobile && !e.nativeEvent.isComposing) {
       const enterToSubmit = useStore.getState().enterToSubmit;
       if (sticky) {
         if (
