@@ -1,0 +1,15 @@
+{
+  "securityMessage": "Diamo priorità alla sicurezza della tua chiave API e la gestiamo con la massima cura. La chiave viene memorizzata esclusivamente nel browser dell'utente e non viene mai condivisa con terze parti. Viene utilizzata esclusivamente per lo scopo previsto di accedere all'API OpenAI e non per altri usi non autorizzati.",
+  "apiEndpoint": {
+    "inputLabel": "API Endpoint",
+    "description": "Quando si sceglie un endpoint API non ufficiale, questo funziona come un proxy. Un proxy funziona come un intermediario tra il dispositivo e il server di destinazione, in questo caso l'API OpenAI. In questo modo, consente di accedere all'API OpenAI in regioni in cui potrebbe essere limitata.",
+    "warn": "Inoltre, se si fornisce un endpoint API personalizzato che garantisce l'accesso gratuito all'API OpenAI, è possibile utilizzare ChatGPT senza la necessità di fornire una chiave API, semplicemente lasciando vuoto il campo della chiave API. Tuttavia, è fondamentale essere cauti quando si utilizzano endpoint API di terze parti, poiché quelli non affidabili potrebbero registrare le informazioni personali nelle conversazioni. Verifica sempre l'affidabilità di un endpoint API prima di utilizzarlo per proteggere la tua privacy e la sicurezza."
+  },
+  "apiKey": {
+    "howTo": "Ottieni la tua chiave API personale <0>qui</0>.",
+    "inputLabel": "Chiave API"
+  },
+  "customEndpoint": "Usa un endpoint API personalizzato",
+  "advancedConfig": "Visualizza la configurazione avanzata dell'API <0>qui</0>",
+  "noApiKeyWarning": "Non è stata fornita alcuna chiave API! Controlla le impostazioni API."
+}

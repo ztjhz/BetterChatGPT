@@ -79,11 +79,6 @@
     height: 1rem;
     width: 0.5rem;
   }
-  @media screen and (min-width: 768px) {
-    .scrollbar-trigger ::-webkit-scrollbar-thumb {
-      visibility: hidden;
-    }
-  }
 
   @media screen and (max-width: 768px) {
     ::-webkit-scrollbar {
@@ -97,17 +92,25 @@
     scrollbar-width: none; /* Firefox */
   }
 
-  .dark::-webkit-scrollbar-thumb {
-    --tw-bg-opacity: 1;
-    background-color: rgba(86, 88, 105, var(--tw-bg-opacity));
-  }
-
   ::-webkit-scrollbar-thumb {
     --tw-border-opacity: 1;
     background-color: rgba(217, 217, 227, 0.8);
     border-color: rgba(255, 255, 255, var(--tw-border-opacity));
     border-radius: 9999px;
     border-width: 1px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(217, 217, 227, 0.6);
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    --tw-bg-opacity: 1;
+    background-color: rgba(86, 88, 105, var(--tw-bg-opacity));
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(217, 217, 227, 0.8);
   }
 
   ::-webkit-scrollbar-track {

@@ -10,10 +10,15 @@ import {
 } from '@type/chat';
 
 import ChatHistory from './ChatHistory';
+import NewChat from './NewChat';
 import EditIcon from '@icon/EditIcon';
 import DeleteIcon from '@icon/DeleteIcon';
 import CrossIcon from '@icon/CrossIcon';
 import TickIcon from '@icon/TickIcon';
+import ColorPaletteIcon from '@icon/ColorPaletteIcon';
+import RefreshIcon from '@icon/RefreshIcon';
+
+import { folderColorOptions } from '@constants/color';
 
 const ChatFolder = ({
   folderChats,
@@ -24,16 +29,20 @@ const ChatFolder = ({
 }) => {
   const folderName = useStore((state) => state.folders[folderId].name);
   const isExpanded = useStore((state) => state.folders[folderId].expanded);
+  const color = useStore((state) => state.folders[folderId].color);
 
   const setChats = useStore((state) => state.setChats);
   const setFolders = useStore((state) => state.setFolders);
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const folderRef = useRef<HTMLDivElement>(null);
+  const gradientRef = useRef<HTMLDivElement>(null);
 
   const [_folderName, _setFolderName] = useState<string>(folderName);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isDelete, setIsDelete] = useState<boolean>(false);
   const [isHover, setIsHover] = useState<boolean>(false);
+  const [showPalette, setShowPalette] = useState<boolean>(false);
 
   const editTitle = () => {
     const updatedFolders: FolderCollection = JSON.parse(
@@ -60,6 +69,16 @@ const ChatFolder = ({
     setFolders(updatedFolders);
 
     setIsDelete(false);
+  };
+
+  const updateColor = (_color?: string) => {
+    const updatedFolders: FolderCollection = JSON.parse(
+      JSON.stringify(useStore.getState().folders)
+    );
+    if (_color) updatedFolders[folderId].color = _color;
+    else delete updatedFolders[folderId].color;
+    setFolders(updatedFolders);
+    setShowPalette(false);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -133,8 +152,22 @@ const ChatFolder = ({
       onDragLeave={handleDragLeave}
     >
       <div
-        className='flex py-3 px-3 items-center gap-3 relative rounded-md hover:bg-gray-850 break-all cursor-pointer'
+        style={{ background: color || '' }}
+        className={`${
+          color ? '' : 'hover:bg-gray-850'
+        } transition-colors flex py-3 pl-3 pr-1 items-center gap-3 relative rounded-md break-all cursor-pointer`}
         onClick={toggleExpanded}
+        ref={folderRef}
+        onMouseEnter={() => {
+          if (color && folderRef.current)
+            folderRef.current.style.background = `${color}dd`;
+          if (gradientRef.current) gradientRef.current.style.width = '0px';
+        }}
+        onMouseLeave={() => {
+          if (color && folderRef.current)
+            folderRef.current.style.background = color;
+          if (gradientRef.current) gradientRef.current.style.width = '1rem';
+        }}
       >
         <FolderIcon className='h-4 w-4' />
         <div className='flex-1 text-ellipsis max-h-5 overflow-hidden break-all relative'>
@@ -153,6 +186,19 @@ const ChatFolder = ({
           ) : (
             _folderName
           )}
+          {isEdit || (
+            <div
+              ref={gradientRef}
+              className='absolute inset-y-0 right-0 w-4 z-10 transition-all'
+              style={{
+                background:
+                  color &&
+                  `linear-gradient(to left, ${
+                    color || 'var(--color-900)'
+                  }, rgb(32 33 35 / 0))`,
+              }}
+            />
+          )}
         </div>
         <div
           className='flex text-gray-300'
@@ -169,6 +215,40 @@ const ChatFolder = ({
             </>
           ) : (
             <>
+              <div className='relative'>
+                <button
+                  className='p-1 hover:text-white'
+                  onClick={() => {
+                    setShowPalette((prev) => !prev);
+                  }}
+                >
+                  <ColorPaletteIcon />
+                </button>
+                {showPalette && (
+                  <div className='absolute left-0 bottom-0 translate-y-full p-2 z-20 bg-gray-900 rounded border border-gray-600 flex flex-col gap-2 items-center'>
+                    <>
+                      {folderColorOptions.map((c) => (
+                        <button
+                          key={c}
+                          style={{ background: c }}
+                          className={`hover:scale-90 transition-transform h-4 w-4 rounded-full`}
+                          onClick={() => {
+                            updateColor(c);
+                          }}
+                        />
+                      ))}
+                      <button
+                        onClick={() => {
+                          updateColor();
+                        }}
+                      >
+                        <RefreshIcon />
+                      </button>
+                    </>
+                  </div>
+                )}
+              </div>
+
               <button
                 className='p-1 hover:text-white'
                 onClick={() => setIsEdit(true)}
@@ -192,7 +272,7 @@ const ChatFolder = ({
           )}
         </div>
       </div>
-      <div className='ml-3 pl-1 border-l-2 border-gray-700 flex flex-col gap-1'>
+      <div className='group/folder ml-3 pl-1 border-l-2 border-gray-700 flex flex-col gap-1'>
         {isExpanded &&
           folderChats.map((chat) => (
             <ChatHistory
@@ -201,6 +281,7 @@ const ChatFolder = ({
               key={`${chat.title}-${chat.index}`}
             />
           ))}
+        {isExpanded && <NewChat folder={folderId} />}
       </div>
     </div>
   );
