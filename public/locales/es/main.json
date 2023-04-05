@@ -36,5 +36,6 @@
   "newFolder": "Nueva Carpeta",
   "cloneChat": "Clone Chat",
   "cloned": "Cloned",
-  "enterToSubmit": "Enter to submit"
+  "enterToSubmit": "Enter to submit",
+  "submitPlaceholder": "Type a message or select [/] for a predefined prompt..."
 }

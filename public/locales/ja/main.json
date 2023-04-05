@@ -36,5 +36,6 @@
   "newFolder": "新しいフォルダー",
   "cloneChat": "チャットのコピーを作成",
   "cloned": "完了しました",
-  "enterToSubmit": "Enterキーを押して送信"
+  "enterToSubmit": "Enterキーを押して送信",
+  "submitPlaceholder": "Type a message or select [/] for a predefined prompt..."
 }
