@@ -37,6 +37,7 @@ const LanguageSelector = () => {
                 setDropDown(false);
               }}
               key={lang}
+              lang={lang}
             >
               {languageCodeToName[lang]}
             </li>
