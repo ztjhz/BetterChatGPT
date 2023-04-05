@@ -36,5 +36,6 @@
   "newFolder": "Nouveau Dossier",
   "cloneChat": "Cloner la Conversation",
   "cloned": "Clonée",
-  "enterToSubmit": "Entrée pour soumettre"
+  "enterToSubmit": "Entrée pour soumettre",
+  "submitPlaceholder": "Saisissez un message ou sélectionnez [/] pour un prompt prédéfini..."
 }

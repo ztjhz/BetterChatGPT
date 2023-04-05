@@ -36,5 +36,6 @@
   "newFolder": "新文件夹",
   "cloneChat": "创建聊天副本",
   "cloned": "已创建副本",
-  "enterToSubmit": "按回车键提交"
+  "enterToSubmit": "按回车键提交",
+  "submitPlaceholder": "Type a message or select [/] for a predefined prompt..."
 }
