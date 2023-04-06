@@ -35,5 +35,5 @@ export default defineConfig({
       '@src/': new URL('./src/', import.meta.url).pathname,
     },
   },
-  base: '/FreeChatGPT/',
+  base: process.env.BASE_PATH // such as /FreeChatGPT/, cannot be set when use tauri build
 });
