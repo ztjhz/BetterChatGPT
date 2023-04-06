@@ -11,7 +11,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [macos-latest, ubuntu-latest, windows-latest]
+        include:
+          - build: linux
+            os: ubuntu-latest
+            arch: x86_64
+            target: x86_64-unknown-linux-gnu
+          - build: macos
+            os: macos-latest
+            arch: x86_64
+            target: x86_64-apple-darwin
+          - build: macos
+            os: macos-latest
+            arch: aarch64
+            target: aarch64-apple-darwin
+          - build: windows
+            os: windows-latest
+            arch: x86_64
+            target: x86_64-pc-windows-msvc
     runs-on: ${{ matrix.platform }}
     steps:
       - name: Checkout repository
@@ -37,7 +53,6 @@ jobs:
 
       - name: Build the app
         uses: tauri-apps/tauri-action@v0
-
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
