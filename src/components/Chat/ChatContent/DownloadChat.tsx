@@ -6,7 +6,7 @@ import {
   chatToMarkdown,
   downloadImg,
   downloadMarkdown,
-  downloadPDF,
+  // downloadPDF,
   htmlToImg,
 } from '@utils/chat';
 import ImageIcon from '@icon/ImageIcon';
@@ -14,7 +14,11 @@ import PdfIcon from '@icon/PdfIcon';
 import MarkdownIcon from '@icon/MarkdownIcon';
 import JsonIcon from '@icon/JsonIcon';
 import downloadFile from '@utils/downloadFile';
-import { downloadFileInTauri, downloadPDFInTauri, htmlToImgInTauri, isTauri } from '@utils/tauri';
+import {
+  downloadFileInTauri,
+  //downloadPDFInTauri, 
+  htmlToImgInTauri, isTauri
+} from '@utils/tauri';
 
 const DownloadChat = React.memo(
   ({ saveRef }: { saveRef: React.RefObject<HTMLDivElement> }) => {
@@ -84,25 +88,25 @@ const DownloadChat = React.memo(
         downloadFile([currentChat], `${defaultName}${ext}`);
       }
     };
-    // TODO: At present, this feature is normal in both tauri and browser, but I did not handle the option 'electron', so it will only be enabled during tauri.
-    const clickDownloadPDF = async () => {
-      const currentChat = getCurrentChat();
-      if (!currentChat) return;
-      const defaultName = getDefaultName(currentChat);
-      if (!defaultName) return;
-      const imgData = await htmlToImg(saveRef.current!);
-      const theme = useStore.getState().theme;
-      if (isTauri()) {
-        try {
-          await downloadPDFInTauri(imgData, theme, defaultName);
-        } catch (err) {
-          // TODO: handle error
-          console.error(err);
-        }
-      } else {
-        downloadPDF(imgData, theme, `${defaultName}.pdf`);
-      }
-    };
+    // TODO: Currently downloadPDF build error 
+    // const clickDownloadPDF = async () => {
+    //   const currentChat = getCurrentChat();
+    //   if (!currentChat) return;
+    //   const defaultName = getDefaultName(currentChat);
+    //   if (!defaultName) return;
+    //   const imgData = await htmlToImg(saveRef.current!);
+    //   const theme = useStore.getState().theme;
+    //   if (isTauri()) {
+    //     try {
+    //       await downloadPDFInTauri(imgData, theme, defaultName);
+    //     } catch (err) {
+    //       // TODO: handle error
+    //       console.error(err);
+    //     }
+    //   } else {
+    //     downloadPDF(imgData, theme, `${defaultName}.pdf`);
+    //   }
+    // };
     return (
       <>
         <button
@@ -127,13 +131,13 @@ const DownloadChat = React.memo(
                 <ImageIcon />
                 Image
               </button>
-              {isTauri() ? <button
+              {/* {isTauri() ? <button
                 className='btn btn-neutral gap-2'
                 onClick={clickDownloadPDF}
               >
                 <PdfIcon />
                 PDF
-              </button> : null}
+              </button> : null} */}
               <button
                 className='btn btn-neutral gap-2'
                 onClick={clickDownloadMarkdown}

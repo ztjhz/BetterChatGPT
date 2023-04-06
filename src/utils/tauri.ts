@@ -1,7 +1,10 @@
 import { BinaryFileContents, writeBinaryFile } from '@tauri-apps/api/fs';
 import { path, dialog } from '@tauri-apps/api';
-import { getPDF, htmlToImg } from './chat';
-import { Theme } from '@type/theme';
+import {
+  htmlToImg, 
+  // getPDF
+} from './chat';
+// import { Theme } from '@type/theme';
 
 export function isTauri() {
   return window.__TAURI_IPC__ !== undefined;
@@ -48,9 +51,10 @@ export async function htmlToImgInTauri(html: HTMLDivElement): Promise<Uint8Array
   return bytes;
 }
 
-export async function downloadPDFInTauri(imageData: string, theme: Theme, fileName: string) {
-    const pdf = getPDF(imageData, theme);
-    // TODO: This is an inappropriate section of intrusive processing because I haven't found a suitable API
-    const buffer = (pdf as any).__private__.output( "arraybuffer") as ArrayBuffer;
-    return downloadFileInTauri(buffer, fileName, ".pdf");
-}
+// TODO: 
+// export async function downloadPDFInTauri(imageData: string, theme: Theme, fileName: string) {
+//     const pdf = getPDF(imageData, theme);
+//     // TODO: This is an inappropriate section of intrusive processing because I haven't found a suitable API
+//     const buffer = (pdf as any).__private__.output( "arraybuffer") as ArrayBuffer;
+//     return downloadFileInTauri(buffer, fileName, ".pdf");
+// }
