@@ -13,7 +13,9 @@
     "preview": "vite preview",
     "electron": "concurrently -k \"BROWSER=none yarn dev\" \"wait-on tcp:5173 && electron .\"",
     "pack": "yarn build && electron-builder --dir",
-    "make": "yarn build && electron-builder"
+    "make": "yarn build && electron-builder",
+    "dev:tauri": "tauri dev",
+    "release:tauri": "tauri build"
   },
   "build": {
     "appId": "better-chatgpt",
@@ -41,6 +43,7 @@
   },
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.2",
+    "@tauri-apps/api": "^1.2.0",
     "electron-is-dev": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^5.3.0",
@@ -66,6 +69,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
+    "@tauri-apps/cli": "^1.2.2",
     "@types/lodash": "^4.14.192",
     "@types/papaparse": "^5.3.7",
     "@types/react": "^18.0.27",

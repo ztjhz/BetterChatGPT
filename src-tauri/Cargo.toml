@@ -1,0 +1,23 @@
+[package]
+name = "better-chatgpt"
+version = "0.0.0"
+description = "Play and chat smarter with Better ChatGPT - an amazing open-source web app with a better UI for exploring OpenAI's ChatGPT API!"
+authors = ["Jing Hua <betterchatgpt@mail.tjh.sg>"]
+license = "Creative Commons Zero v1.0 Universal"
+repository = "https://github.com/ztjhz/BetterChatGPT"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+tauri-build = { version = "1.2", features = [] }
+
+[dependencies]
+tauri = { version = "1.2", features = ["dialog-save", "fs-all", "notification-all", "path-all", "shell-open"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[features]
+# this feature is used for production builds or when `devPath` points to the filesystem
+# DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]
