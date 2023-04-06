@@ -24,6 +24,8 @@ jobs:
 
       - name: Build website
         run: yarn build
+        env:
+          BASE_PATH: "/FreeChatGPT/"
 
       - name: deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
