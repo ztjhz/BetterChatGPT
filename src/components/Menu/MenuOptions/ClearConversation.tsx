@@ -10,15 +10,13 @@ const ClearConversation = () => {
   const { t } = useTranslation();
 
   const initialiseNewChat = useInitialiseNewChat();
-  const setFoldersName = useStore((state) => state.setFoldersName);
-  const setFoldersExpanded = useStore((state) => state.setFoldersExpanded);
+  const setFolders = useStore((state) => state.setFolders);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleConfirm = () => {
     setIsModalOpen(false);
-    setFoldersName([]);
-    setFoldersExpanded([]);
     initialiseNewChat();
+    setFolders({});
   };
 
   return (

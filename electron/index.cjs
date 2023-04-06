@@ -2,6 +2,7 @@ const path = require('path');
 
 const { app, BrowserWindow } = require('electron');
 const isDev = require('electron-is-dev');
+const { autoUpdater } = require('electron-updater');
 
 if (require('electron-squirrel-startup')) app.quit();
 
@@ -12,6 +13,7 @@ function createWindow() {
   } else {
     iconPath = path.join(__dirname, '../dist/favicon-516x516.png');
   }
+  autoUpdater.checkForUpdatesAndNotify();
 
   const win = new BrowserWindow({
     show: false,

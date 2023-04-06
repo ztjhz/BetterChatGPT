@@ -76,11 +76,30 @@ Better ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 
 ## 桌面应用
 
-在此下载桌面应用程序： <https://github.com/ztjhz/BetterChatGPT/releases/>
+在此下载桌面应用程序：<https://github.com/ztjhz/BetterChatGPT/releases/>
+
+| 操作系统 | 下载      |
+| -------- | --------- |
+| Windows  | .exe      |
+| MacOS    | .dmg      |
+| Linux    | .AppImage |
+
+### 功能
+
+- 无限本地存储
+- 本地运行（即使无法访问 Better ChatGPT 网站也可以使用）
 
 # 🛫 托管自己的实例
 
 如果您想运行自己的 Better ChatGPT 实例，可以按照以下步骤轻松完成：
+
+## Vercel
+
+使用 Vercel 一键部署
+
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fztjhz%2FBetterChatGPT)
+
+## GitHub 页面
 
 ### 步骤
 
@@ -134,7 +153,7 @@ Better ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 
 在 Better ChatGPT，我们致力于为您提供实用和惊人的功能。就像任何项目一样，您的支持和激励将对我们在保持前进方面起到至关重要的作用！
 
-如果您喜欢使用我们的应用程序，我们恳请您给这个<0>项目</0>一个 ⭐️。您的认可对我们意义重大，鼓励我们更加努力，以提供最佳的体验。
+如果您喜欢使用我们的应用程序，我们恳请您给这个项目一颗 ⭐️。您的认可对我们意义重大，鼓励我们更加努力，以提供最佳的体验。
 
 如果您想支持我们的团队，请考虑通过以下方法之一赞助我们。每一份贡献，无论多小，都有助于我们维护和改善我们的服务。
 

@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+
 import useStore from '@store/store';
 
 import NewChat from './NewChat';
@@ -13,10 +14,16 @@ const Menu = () => {
   const hideSideMenu = useStore((state) => state.hideSideMenu);
   const setHideSideMenu = useStore((state) => state.setHideSideMenu);
 
+  const windowWidthRef = useRef<number>(window.innerWidth);
+
   useEffect(() => {
     if (window.innerWidth < 768) setHideSideMenu(true);
     window.addEventListener('resize', () => {
-      if (window.innerWidth < 768) setHideSideMenu(true);
+      if (
+        windowWidthRef.current !== window.innerWidth &&
+        window.innerWidth < 768
+      )
+        setHideSideMenu(true);
     });
   }, []);
 
@@ -29,8 +36,8 @@ const Menu = () => {
         }`}
       >
         <div className='flex h-full min-h-0 flex-col'>
-          <div className='scrollbar-trigger flex h-full w-full flex-1 items-start border-white/20'>
-            <nav className='flex h-full flex-1 flex-col space-y-1 p-2'>
+          <div className='flex h-full w-full flex-1 items-start border-white/20'>
+            <nav className='flex h-full flex-1 flex-col space-y-1 px-2 pt-2'>
               <NewChat />
               <ChatHistoryList />
               <MenuOptions />
