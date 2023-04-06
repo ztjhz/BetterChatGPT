@@ -15,7 +15,7 @@
     "pack": "yarn build && electron-builder --dir",
     "make": "yarn build && electron-builder",
     "dev:tauri": "tauri dev",
-    "release:tauri": "tauri build"
+    "build:tauri": "tauri build"
   },
   "build": {
     "appId": "better-chatgpt",
