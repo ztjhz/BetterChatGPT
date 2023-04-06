@@ -29,11 +29,18 @@ const RoleSelector = React.memo(
           setDropDown(false);
         }
       };
-      document.addEventListener('mousedown', handleClickOutside);
+
+      // Bind the event listener only if the dropdown is open.
+      if (dropDown) {
+        document.addEventListener('mousedown', handleClickOutside);
+      } else {
+        document.removeEventListener('mousedown', handleClickOutside);
+      }
+
       return () => {
         document.removeEventListener('mousedown', handleClickOutside);
       };
-    }, [dropDownRef]);
+    }, [dropDownRef, dropDown]);
 
     return (
       <div className='prose dark:prose-invert relative'>
