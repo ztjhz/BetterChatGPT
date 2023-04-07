@@ -52,10 +52,7 @@ const NewFolder = () => {
         if (!generating) addFolder();
       }}
     >
-      <NewFolderIcon />{' '}
-      <span className='hidden md:inline-flex text-white text-sm'>
-        {t('newFolder')}
-      </span>
+      <NewFolderIcon />
     </a>
   );
 };

@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import useStore from '@store/store';
 import { shallow } from 'zustand/shallow';
 
-import NewFolder from './NewFolder';
 import ChatFolder from './ChatFolder';
 import ChatHistory from './ChatHistory';
 import ChatSearch from './ChatSearch';
@@ -164,7 +163,6 @@ const ChatHistoryList = () => {
       onDragLeave={handleDragLeave}
       onDragEnd={handleDragEnd}
     >
-      <NewFolder />
       <ChatSearch filter={filter} setFilter={setFilter} />
       <div className='flex flex-col gap-2 text-gray-100 text-sm'>
         {Object.keys(chatFolders).map((folderId) => (
