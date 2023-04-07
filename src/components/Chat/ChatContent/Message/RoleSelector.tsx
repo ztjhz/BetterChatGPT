@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
 
@@ -21,7 +21,7 @@ const RoleSelector = React.memo(
     const currentChatIndex = useStore((state) => state.currentChatIndex);
 
     const [dropDown, setDropDown] = useState<boolean>(false);
-    const dropDownRef = React.useRef<HTMLDivElement>(null);
+    const dropDownRef = useRef<HTMLDivElement>(null);
 
     const handleClickOutside = useCallback(
       (event: any) => {
