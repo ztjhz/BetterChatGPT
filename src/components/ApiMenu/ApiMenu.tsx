@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import useStore from '@store/store';
 
 import PopupModal from '@components/PopupModal';
 import { availableEndpoints, defaultAPIEndpoint } from '@constants/auth';
 import DownChevronArrow from '@icon/DownChevronArrow';
+import { endpoint } from '@api/customApi';
 
 const ApiMenu = ({
   setIsModalOpen,
@@ -123,12 +124,21 @@ const ApiEndpointSelector = ({
 }) => {
   const [dropDown, setDropDown] = useState<boolean>(false);
 
+  const handleClick = useCallback(() => {
+    setDropDown((prev) => !prev);
+  }, []);
+
+  const handleApiEndpointChange = useCallback((endpoint: any) => {
+    _setApiEndpoint(endpoint);
+    setDropDown(false);
+  }, []);
+
   return (
     <div className='w-full relative'>
       <button
         className='btn btn-neutral btn-small flex w-32 flex justify-between w-full'
         type='button'
-        onClick={() => setDropDown((prev) => !prev)}
+        onClick={handleClick}
       >
         {_apiEndpoint}
         <DownChevronArrow />
@@ -146,10 +156,7 @@ const ApiEndpointSelector = ({
           {availableEndpoints.map((endpoint) => (
             <li
               className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer'
-              onClick={() => {
-                _setApiEndpoint(endpoint);
-                setDropDown(false);
-              }}
+              onClick={() => handleApiEndpointChange(endpoint)}
               key={endpoint}
             >
               {endpoint}
