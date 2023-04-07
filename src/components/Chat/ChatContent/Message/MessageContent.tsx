@@ -141,7 +141,7 @@ const ContentView = React.memo(
               [remarkMath, { singleDollarTextMath: false }],
             ]}
             rehypePlugins={[
-              [rehypeKatex, { output: 'mathml' }],
+              rehypeKatex,
               [
                 rehypeHighlight,
                 {
