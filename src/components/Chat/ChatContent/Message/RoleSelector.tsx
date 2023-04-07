@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
 
@@ -23,13 +23,15 @@ const RoleSelector = React.memo(
     const [dropDown, setDropDown] = useState<boolean>(false);
     const dropDownRef = React.useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-      const handleClickOutside = (event: any) => {
-        if (dropDownRef.current && !dropDownRef.current.contains(event.target)) {
+    const handleClickOutside = useCallback(
+      (event: any) => {
+        if (dropDownRef.current && !dropDownRef.current.contains(event.target))
           setDropDown(false);
-        }
-      };
+      },
+      [dropDownRef, setDropDown, messageIndex]
+    );
 
+    useEffect(() => {
       // Bind the event listener only if the dropdown is open.
       if (dropDown) {
         document.addEventListener('mousedown', handleClickOutside);
@@ -55,8 +57,9 @@ const RoleSelector = React.memo(
         <div
           ref={dropDownRef}
           id='dropdown'
-          className={`${dropDown ? '' : 'hidden'
-            } absolute top-100 bottom-100 z-10 bg-white rounded-lg shadow-xl border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group dark:bg-gray-800 opacity-90`}
+          className={`${
+            dropDown ? '' : 'hidden'
+          } absolute top-100 bottom-100 z-10 bg-white rounded-lg shadow-xl border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group dark:bg-gray-800 opacity-90`}
         >
           <ul
             className='text-sm text-gray-700 dark:text-gray-200 p-0 m-0'
