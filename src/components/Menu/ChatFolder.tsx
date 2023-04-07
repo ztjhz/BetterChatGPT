@@ -146,7 +146,9 @@ const ChatFolder = ({
 
   return (
     <div
-      className={`w-full transition-colors ${isHover ? 'bg-gray-800/40' : ''}`}
+      className={`w-full transition-colors group/folder ${
+        isHover ? 'bg-gray-800/40' : ''
+      }`}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -155,7 +157,7 @@ const ChatFolder = ({
         style={{ background: color || '' }}
         className={`${
           color ? '' : 'hover:bg-gray-850'
-        } transition-colors flex py-3 pl-3 pr-1 items-center gap-3 relative rounded-md break-all cursor-pointer parent-sibling`}
+        } transition-colors flex py-2 pl-2 pr-1 items-center gap-3 relative rounded-md break-all cursor-pointer parent-sibling`}
         onClick={toggleExpanded}
         ref={folderRef}
         onMouseEnter={() => {
@@ -215,7 +217,7 @@ const ChatFolder = ({
             </>
           ) : (
             <>
-              <div className='relative'>
+              <div className='relative md:hidden group-hover/folder:md:inline'>
                 <button
                   className='p-1 hover:text-white'
                   onClick={() => {
@@ -250,13 +252,13 @@ const ChatFolder = ({
               </div>
 
               <button
-                className='p-1 hover:text-white'
+                className='p-1 hover:text-white md:hidden group-hover/folder:md:inline'
                 onClick={() => setIsEdit(true)}
               >
                 <EditIcon />
               </button>
               <button
-                className='p-1 hover:text-white'
+                className='p-1 hover:text-white md:hidden group-hover/folder:md:inline'
                 onClick={() => setIsDelete(true)}
               >
                 <DeleteIcon />
