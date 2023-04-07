@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
 
@@ -21,6 +21,28 @@ const RoleSelector = React.memo(
     const currentChatIndex = useStore((state) => state.currentChatIndex);
 
     const [dropDown, setDropDown] = useState<boolean>(false);
+    const dropDownRef = useRef<HTMLDivElement>(null);
+
+    const handleClickOutside = useCallback(
+      (event: any) => {
+        if (dropDownRef.current && !dropDownRef.current.contains(event.target))
+          setDropDown(false);
+      },
+      [dropDownRef, setDropDown, messageIndex]
+    );
+
+    useEffect(() => {
+      // Bind the event listener only if the dropdown is open.
+      if (dropDown) {
+        document.addEventListener('mousedown', handleClickOutside);
+      } else {
+        document.removeEventListener('mousedown', handleClickOutside);
+      }
+
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [dropDownRef, dropDown]);
 
     return (
       <div className='prose dark:prose-invert relative'>
@@ -33,6 +55,7 @@ const RoleSelector = React.memo(
           <DownChevronArrow />
         </button>
         <div
+          ref={dropDownRef}
           id='dropdown'
           className={`${
             dropDown ? '' : 'hidden'
