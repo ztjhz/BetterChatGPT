@@ -1,22 +1,53 @@
-export const createFile = async (accessToken: string, file: File) => {
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('name', 'better-chatgpt.json');
-  formData.append('description', 'Better ChatGPT Sync');
+import { GoogleUploadFileResponse } from '@type/google-api';
+import PersistStorage from '@type/persist';
 
-  const res = await fetch('https://www.googleapis.com/drive/v3/files', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: formData,
-  });
-  return res.json();
+import { createMultipartRelatedBody } from './helper';
+
+export const createDriveFile = async (
+  file: File,
+  accessToken: string
+): Promise<GoogleUploadFileResponse> => {
+  const boundary = 'better_chatgpt';
+  const metadata = {
+    name: file.name,
+    mimeType: file.type,
+  };
+  const requestBody = createMultipartRelatedBody(metadata, file, boundary);
+
+  const response = await fetch(
+    'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart',
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': `multipart/related; boundary=${boundary}`,
+        'Content-Length': requestBody.size.toString(),
+      },
+      body: requestBody,
+    }
+  );
+
+  if (response.ok) {
+    const result: GoogleUploadFileResponse = await response.json();
+    return result;
+  } else {
+    console.error(
+      'Error uploading file:',
+      response.status,
+      response.statusText
+    );
+    throw new Error(
+      `Error uploading file: ${response.status} ${response.statusText}`
+    );
+  }
 };
 
-export const getFile = async (accessToken: string, fileId: string) => {
-  const res = await fetch(
-    `https://content.googleapis.com/drive/v3/files/${fileId}`,
+export const getDriveFile = async (
+  fileId: string,
+  accessToken: string
+): Promise<PersistStorage> => {
+  const response = await fetch(
+    `https://content.googleapis.com/drive/v3/files/${fileId}?alt=media`,
     {
       method: 'GET',
       headers: {
@@ -25,26 +56,36 @@ export const getFile = async (accessToken: string, fileId: string) => {
       },
     }
   );
-  return res.body;
+  const result: PersistStorage = await response.json();
+  return result;
 };
 
-export const updateFile = async (
-  accessToken: string,
+export const updateDriveFile = async (
+  file: File,
   fileId: string,
-  file: File
-) => {
-  const formData = new FormData();
-  formData.append('file', file);
-
-  const res = await fetch(
+  accessToken: string
+): Promise<GoogleUploadFileResponse> => {
+  const response = await fetch(
     `https://www.googleapis.com/upload/drive/v3/files/${fileId}`,
     {
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
-      body: formData,
+      body: file,
     }
   );
-  return await res.json();
+  if (response.ok) {
+    const result: GoogleUploadFileResponse = await response.json();
+    return result;
+  } else {
+    console.error(
+      'Error uploading file:',
+      response.status,
+      response.statusText
+    );
+    throw new Error(
+      `Error uploading file: ${response.status} ${response.statusText}`
+    );
+  }
 };

@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 
 import useStore from '@store/cloud-auth-store';
+import {
+  createDriveFile,
+  getDriveFile,
+  updateDriveFile,
+} from '@api/google-api';
 
 const LoginButton = () => {
   const setGoogleAccessToken = useStore((state) => state.setGoogleAccessToken);
@@ -18,6 +23,18 @@ const LoginButton = () => {
     },
     scope: 'https://www.googleapis.com/auth/drive.file',
   });
+
+  useEffect(() => {
+    if (googleAccessToken) {
+      const blob = new Blob([JSON.stringify({ test: 'byebye world' })], {
+        type: 'application/json',
+      });
+      const file = new File([blob], 'better-chatgpt-updated.json', {
+        type: 'application/json',
+      });
+      // uploadFileToGoogleDrive(file, googleAccessToken);
+    }
+  }, [googleAccessToken]);
 
   const logout = () => {
     setGoogleAccessToken(undefined);
