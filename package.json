@@ -24,7 +24,7 @@
     },
     "dmg": {
       "title": "${productName} ${version}",
-      "icon": "dist/favicon-516x516.png"
+      "icon": "dist/icon-rounded.png"
     },
     "linux": {
       "target": [
@@ -32,11 +32,11 @@
         "AppImage"
       ],
       "category": "Chat",
-      "icon": "dist/favicon-516x516.png"
+      "icon": "dist/icon-rounded.png"
     },
     "win": {
       "target": "NSIS",
-      "icon": "dist/favicon-516x516.png"
+      "icon": "dist/icon-rounded.png"
     }
   },
   "dependencies": {
