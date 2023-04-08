@@ -97,6 +97,12 @@ const AboutMenu = () => {
                 <p>{t('support.paragraph3', { ns: 'about' })}</p>
 
                 <div className='flex flex-col items-center gap-4 my-4'>
+                  <a href='https://github.com/sponsors/ztjhz' target='_blank'>
+                    <img
+                      src='https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86'
+                      alt='Support us through GitHub Sponsors'
+                    />
+                  </a>
                   <a href='https://ko-fi.com/betterchatgpt' target='_blank'>
                     <img
                       src='./kofi.svg'
