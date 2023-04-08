@@ -1,5 +1,9 @@
 import { StorageValue } from 'zustand/middleware';
-import { GoogleTokenInfo, GoogleUploadFileResponse } from '@type/google-api';
+import {
+  GoogleTokenInfo,
+  GoogleFileResource,
+  GoogleFileList,
+} from '@type/google-api';
 import PersistStorageState from '@type/persist';
 
 import { createMultipartRelatedBody } from './helper';
@@ -7,7 +11,7 @@ import { createMultipartRelatedBody } from './helper';
 export const createDriveFile = async (
   file: File,
   accessToken: string
-): Promise<GoogleUploadFileResponse> => {
+): Promise<GoogleFileResource> => {
   const boundary = 'better_chatgpt';
   const metadata = {
     name: file.name,
@@ -29,7 +33,7 @@ export const createDriveFile = async (
   );
 
   if (response.ok) {
-    const result: GoogleUploadFileResponse = await response.json();
+    const result: GoogleFileResource = await response.json();
     return result;
   } else {
     console.error(
@@ -61,11 +65,29 @@ export const getDriveFile = async (
   return result;
 };
 
+export const listDriveFiles = async (
+  accessToken: string
+): Promise<GoogleFileList> => {
+  const response = await fetch(
+    'https://www.googleapis.com/drive/v3/files?orderBy=createdTime desc&pageSize=1',
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+
+  const result: GoogleFileList = await response.json();
+  return result;
+};
+
 export const updateDriveFile = async (
   file: File,
   fileId: string,
   accessToken: string
-): Promise<GoogleUploadFileResponse> => {
+): Promise<GoogleFileResource> => {
   const response = await fetch(
     `https://www.googleapis.com/upload/drive/v3/files/${fileId}`,
     {
@@ -77,7 +99,7 @@ export const updateDriveFile = async (
     }
   );
   if (response.ok) {
-    const result: GoogleUploadFileResponse = await response.json();
+    const result: GoogleFileResource = await response.json();
     return result;
   } else {
     console.error(

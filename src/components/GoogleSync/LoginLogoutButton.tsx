@@ -6,6 +6,7 @@ import useStore from '@store/cloud-auth-store';
 import {
   createDriveFile,
   getDriveFile,
+  listDriveFiles,
   updateDriveFile,
 } from '@api/google-api';
 
@@ -32,6 +33,7 @@ const LoginButton = () => {
       const file = new File([blob], 'better-chatgpt-updated.json', {
         type: 'application/json',
       });
+      listDriveFiles(googleAccessToken);
       // uploadFileToGoogleDrive(file, googleAccessToken);
     }
   }, [googleAccessToken]);

@@ -1,4 +1,4 @@
-export interface GoogleUploadFileResponse {
+export interface GoogleFileResource {
   kind: string;
   id: string;
   name: string;
@@ -15,4 +15,11 @@ export interface GoogleTokenInfo {
   email: string;
   email_verified: string;
   access_type: string;
+}
+
+export interface GoogleFileList {
+  nextPageToken?: string;
+  kind: string;
+  incompleteSearch: boolean;
+  files: GoogleFileResource;
 }
