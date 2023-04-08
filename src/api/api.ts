@@ -75,8 +75,8 @@ export const getChatCompletionStream = async (
     if (text.includes('insufficient_quota')) {
       error +=
         '\nMessage from Better ChatGPT:\nWe recommend changing your API endpoint or API key';
-    } else {
-      error += '\nRate limited! Please try again later.';
+    } else if (response.status === 429) {
+      error += '\nRate limited!';
     }
     throw new Error(error);
   }
