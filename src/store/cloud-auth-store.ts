@@ -17,7 +17,6 @@ const useCloudAuthStore = create<StoreState>()(
     {
       name: 'cloud',
       partialize: (state) => ({
-        googleClientId: state.googleClientId,
         googleAccessToken: state.googleAccessToken,
         googleRefreshToken: state.googleRefreshToken,
       }),

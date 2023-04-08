@@ -13,10 +13,11 @@ import ChatConfigMenu from '@components/ChatConfigMenu';
 import EnterToSubmitToggle from './EnterToSubmitToggle';
 import GoogleSync from '@components/GoogleSync';
 
+const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || undefined;
+
 const SettingsMenu = () => {
   const { t } = useTranslation();
 
-  const googleClientId = useCloudAuthStore((state) => state.googleClientId);
   const theme = useStore.getState().theme;
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
