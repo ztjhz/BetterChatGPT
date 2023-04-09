@@ -37,6 +37,23 @@ export type StoreSlice<T> = (
   get: StoreApi<StoreState>['getState']
 ) => T;
 
+export const createPartializedState = (state: StoreState) => ({
+  chats: state.chats,
+  currentChatIndex: state.currentChatIndex,
+  apiKey: state.apiKey,
+  apiEndpoint: state.apiEndpoint,
+  theme: state.theme,
+  autoTitle: state.autoTitle,
+  prompts: state.prompts,
+  defaultChatConfig: state.defaultChatConfig,
+  defaultSystemMessage: state.defaultSystemMessage,
+  hideMenuOptions: state.hideMenuOptions,
+  firstVisit: state.firstVisit,
+  hideSideMenu: state.hideSideMenu,
+  folders: state.folders,
+  enterToSubmit: state.enterToSubmit,
+});
+
 const useStore = create<StoreState>()(
   persist(
     (set, get) => ({
@@ -48,22 +65,7 @@ const useStore = create<StoreState>()(
     }),
     {
       name: 'free-chat-gpt',
-      partialize: (state) => ({
-        chats: state.chats,
-        currentChatIndex: state.currentChatIndex,
-        apiKey: state.apiKey,
-        apiEndpoint: state.apiEndpoint,
-        theme: state.theme,
-        autoTitle: state.autoTitle,
-        prompts: state.prompts,
-        defaultChatConfig: state.defaultChatConfig,
-        defaultSystemMessage: state.defaultSystemMessage,
-        hideMenuOptions: state.hideMenuOptions,
-        firstVisit: state.firstVisit,
-        hideSideMenu: state.hideSideMenu,
-        folders: state.folders,
-        enterToSubmit: state.enterToSubmit,
-      }),
+      partialize: (state) => createPartializedState(state),
       version: 8,
       migrate: (persistedState, version) => {
         switch (version) {

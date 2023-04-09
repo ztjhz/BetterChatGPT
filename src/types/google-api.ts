@@ -21,5 +21,5 @@ export interface GoogleFileList {
   nextPageToken?: string;
   kind: string;
   incompleteSearch: boolean;
-  files: GoogleFileResource;
+  files: GoogleFileResource[];
 }

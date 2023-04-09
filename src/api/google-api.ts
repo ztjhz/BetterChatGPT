@@ -1,3 +1,4 @@
+import { debounce } from 'lodash';
 import { StorageValue } from 'zustand/middleware';
 import {
   GoogleTokenInfo,
@@ -36,21 +37,16 @@ export const createDriveFile = async (
     const result: GoogleFileResource = await response.json();
     return result;
   } else {
-    console.error(
-      'Error uploading file:',
-      response.status,
-      response.statusText
-    );
     throw new Error(
       `Error uploading file: ${response.status} ${response.statusText}`
     );
   }
 };
 
-export const getDriveFile = async (
+export const getDriveFile = async <S>(
   fileId: string,
   accessToken: string
-): Promise<StorageValue<PersistStorageState>> => {
+): Promise<StorageValue<S>> => {
   const response = await fetch(
     `https://content.googleapis.com/drive/v3/files/${fileId}?alt=media`,
     {
@@ -61,8 +57,15 @@ export const getDriveFile = async (
       },
     }
   );
-  const result: StorageValue<PersistStorageState> = await response.json();
+  const result: StorageValue<S> = await response.json();
   return result;
+};
+
+export const getDriveFileTyped = async (
+  fileId: string,
+  accessToken: string
+): Promise<StorageValue<PersistStorageState>> => {
+  return await getDriveFile(fileId, accessToken);
 };
 
 export const listDriveFiles = async (
@@ -78,6 +81,12 @@ export const listDriveFiles = async (
       },
     }
   );
+
+  if (!response.ok) {
+    throw new Error(
+      `Error listing google drive files: ${response.status} ${response.statusText}`
+    );
+  }
 
   const result: GoogleFileList = await response.json();
   return result;
@@ -102,11 +111,6 @@ export const updateDriveFile = async (
     const result: GoogleFileResource = await response.json();
     return result;
   } else {
-    console.error(
-      'Error uploading file:',
-      response.status,
-      response.statusText
-    );
     throw new Error(
       `Error uploading file: ${response.status} ${response.statusText}`
     );
@@ -135,3 +139,10 @@ export const validateGoogleOath2AccessToken = async (accessToken: string) => {
   const result: GoogleTokenInfo = await response.json();
   return result;
 };
+
+export const updateDriveFileDebounced = debounce(
+  async (file: File, fileId: string, accessToken: string) => {
+    return await updateDriveFile(file, fileId, accessToken);
+  },
+  5000
+);

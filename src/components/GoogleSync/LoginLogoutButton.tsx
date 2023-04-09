@@ -1,18 +1,10 @@
 import React, { useEffect } from 'react';
-
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
-
-import useStore from '@store/cloud-auth-store';
-import {
-  createDriveFile,
-  getDriveFile,
-  listDriveFiles,
-  updateDriveFile,
-} from '@api/google-api';
+import useGStore from '@store/cloud-auth-store';
 
 const LoginButton = () => {
-  const setGoogleAccessToken = useStore((state) => state.setGoogleAccessToken);
-  const googleAccessToken = useStore((state) => state.googleAccessToken);
+  const setGoogleAccessToken = useGStore((state) => state.setGoogleAccessToken);
+  const googleAccessToken = useGStore((state) => state.googleAccessToken);
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
@@ -25,19 +17,6 @@ const LoginButton = () => {
     scope: 'https://www.googleapis.com/auth/drive.file',
   });
 
-  useEffect(() => {
-    if (googleAccessToken) {
-      const blob = new Blob([JSON.stringify({ test: 'byebye world' })], {
-        type: 'application/json',
-      });
-      const file = new File([blob], 'better-chatgpt-updated.json', {
-        type: 'application/json',
-      });
-      listDriveFiles(googleAccessToken);
-      // uploadFileToGoogleDrive(file, googleAccessToken);
-    }
-  }, [googleAccessToken]);
-
   const logout = () => {
     setGoogleAccessToken(undefined);
     googleLogout();
@@ -47,11 +26,11 @@ const LoginButton = () => {
     <div>
       {googleAccessToken ? (
         <button className='btn btn-neutral' onClick={logout}>
-          Stop syncing data on Google Drive
+          Logout
         </button>
       ) : (
         <button className='btn btn-neutral' onClick={() => login()}>
-          Start syncing data on Google Drive
+          Login
         </button>
       )}
     </div>
