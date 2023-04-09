@@ -37,5 +37,5 @@
   "cloneChat": "创建聊天副本",
   "cloned": "已创建副本",
   "enterToSubmit": "按回车键提交",
-  "submitPlaceholder": "输入消息或选择 [/] 使用预定义的提示词"
+  "submitPlaceholder": "输入消息或点击 [/] 以使用提示词…"
 }

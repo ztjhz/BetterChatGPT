@@ -37,5 +37,5 @@
   "cloneChat": "Klona chatt",
   "cloned": "Klonad",
   "enterToSubmit": "Tryck på Enter för att skicka",
-  "submitPlaceholder": "Type a message or select [/] for a predefined prompt..."
+  "submitPlaceholder": "Type a message or click [/] for prompts..."
 }
