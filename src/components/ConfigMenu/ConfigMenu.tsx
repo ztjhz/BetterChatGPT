@@ -44,6 +44,7 @@ const ConfigMenu = ({
       title={t('configuration') as string}
       setIsModalOpen={setIsModalOpen}
       handleConfirm={handleConfirm}
+      handleClickBackdrop={handleConfirm}
     >
       <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
         <ModelSelector _model={_model} _setModel={_setModel} />
