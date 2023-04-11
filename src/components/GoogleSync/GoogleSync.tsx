@@ -12,7 +12,7 @@ import {
 import { getFileID, stateToFile } from '@utils/google-api';
 import createGoogleCloudStorage from '@store/storage/GoogleCloudStorage';
 
-import LoginLogoutButton from './LoginLogoutButton';
+import GoogleSyncButton from './GoogleSyncButton';
 import PopupModal from '@components/PopupModal';
 import { t } from 'i18next';
 
@@ -97,7 +97,7 @@ const GooglePopup = ({
         <p>
           Effortlessly synchronize your chats and settings with Google Drive.
         </p>
-        <LoginLogoutButton />
+        <GoogleSyncButton />
         <p>
           Your privacy is important to us, and to ensure it, Better ChatGPT only
           has non-sensitive access, meaning it can only create, view, and manage
