@@ -97,7 +97,7 @@ const GooglePopup = ({
         <p>
           Effortlessly synchronize your chats and settings with Google Drive.
         </p>
-        <GoogleSyncButton />
+        <GoogleSyncButton loginHandler={() => setIsModalOpen(false)} />
         <p className='border border-gray-400 px-3 py-2 rounded-md'>
           Note: You will need to re-login on every visit and every hour
         </p>

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 import useGStore from '@store/cloud-auth-store';
 
-const GoogleSyncButton = () => {
+const GoogleSyncButton = ({ loginHandler }: { loginHandler?: () => void }) => {
   const setGoogleAccessToken = useGStore((state) => state.setGoogleAccessToken);
   const setSyncStatus = useGStore((state) => state.setSyncStatus);
   const setCloudSync = useGStore((state) => state.setCloudSync);
@@ -27,7 +27,10 @@ const GoogleSyncButton = () => {
   };
 
   useEffect(() => {
-    if (googleAccessToken) setCloudSync(true);
+    if (googleAccessToken) {
+      setCloudSync(true);
+      loginHandler && loginHandler();
+    }
   }, [googleAccessToken]);
 
   return (
