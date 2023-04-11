@@ -23,3 +23,5 @@ export interface GoogleFileList {
   incompleteSearch: boolean;
   files: GoogleFileResource[];
 }
+
+export type SyncStatus = 'unauthenticated' | 'syncing' | 'synced';

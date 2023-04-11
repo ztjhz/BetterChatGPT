@@ -19,11 +19,15 @@ import { t } from 'i18next';
 import GoogleIcon from '@icon/GoogleIcon';
 import TickIcon from '@icon/TickIcon';
 import RefreshIcon from '@icon/RefreshIcon';
+import { SyncStatus } from '@type/google-api';
 
 const GoogleSync = ({ clientId }: { clientId: string }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const setFileId = useGStore((state) => state.setFileId);
   const googleAccessToken = useGStore((state) => state.googleAccessToken);
+  const syncStatus = useGStore((state) => state.syncStatus);
+  const cloudSync = useGStore((state) => state.cloudSync);
+  const setSyncStatus = useGStore((state) => state.setSyncStatus);
 
   const initialiseState = async (_googleAccessToken: string) => {
     const validated = await validateGoogleOath2AccessToken(_googleAccessToken);
@@ -54,6 +58,7 @@ const GoogleSync = ({ clientId }: { clientId: string }) => {
 
   useEffect(() => {
     if (googleAccessToken) {
+      setSyncStatus('syncing');
       initialiseState(googleAccessToken);
     }
   }, [googleAccessToken]);
@@ -67,15 +72,7 @@ const GoogleSync = ({ clientId }: { clientId: string }) => {
         }}
       >
         <GoogleIcon /> Google Sync
-        <div className='bg-green-600/80 rounded-full p-1'>
-          <TickIcon className='h-2 w-2' />
-        </div>
-        <div className='bg-red-600/80 rounded-full w-4 h-4 text-xs flex justify-center items-center'>
-          !
-        </div>
-        <div className='bg-orange-600/80 rounded-full p-1'>
-          <RefreshIcon className='h-2 w-2' />
-        </div>
+        {cloudSync && <SyncIcon status={syncStatus} />}
       </div>
       {isModalOpen && <GooglePopup setIsModalOpen={setIsModalOpen} />}
     </GoogleOAuthProvider>
@@ -94,12 +91,42 @@ const GooglePopup = ({
       title={t('googleCloudSync') as string}
       setIsModalOpen={setIsModalOpen}
       handleConfirm={() => {}}
+      cancelButton={false}
     >
-      <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
+      <div className='p-6 border-b border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-300 text-sm flex flex-col items-center gap-4 text-center'>
+        <p>
+          Effortlessly synchronize your chats and settings with Google Drive.
+        </p>
         <LoginLogoutButton />
+        <p>
+          Your privacy is important to us, and to ensure it, Better ChatGPT only
+          has non-sensitive access, meaning it can only create, view, and manage
+          its own files and folders.
+        </p>
       </div>
     </PopupModal>
   );
+};
+
+const SyncIcon = ({ status }: { status: SyncStatus }) => {
+  const statusToIcon = {
+    unauthenticated: (
+      <div className='bg-red-600/80 rounded-full w-4 h-4 text-xs flex justify-center items-center'>
+        !
+      </div>
+    ),
+    syncing: (
+      <div className='bg-orange-600/80 rounded-full p-1'>
+        <RefreshIcon className='h-2 w-2' />
+      </div>
+    ),
+    synced: (
+      <div className='bg-green-600/80 rounded-full p-1'>
+        <TickIcon className='h-2 w-2' />
+      </div>
+    ),
+  };
+  return statusToIcon[status] || null;
 };
 
 export default GoogleSync;

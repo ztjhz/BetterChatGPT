@@ -1,5 +1,6 @@
 import { debounce } from 'lodash';
 import { StorageValue } from 'zustand/middleware';
+import useCloudAuthStore from '@store/cloud-auth-store';
 import {
   GoogleTokenInfo,
   GoogleFileResource,
@@ -142,7 +143,9 @@ export const validateGoogleOath2AccessToken = async (accessToken: string) => {
 
 export const updateDriveFileDebounced = debounce(
   async (file: File, fileId: string, accessToken: string) => {
-    return await updateDriveFile(file, fileId, accessToken);
+    const result = await updateDriveFile(file, fileId, accessToken);
+    useCloudAuthStore.getState().setSyncStatus('synced');
+    return result;
   },
   5000
 );

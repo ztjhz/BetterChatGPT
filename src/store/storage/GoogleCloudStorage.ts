@@ -22,6 +22,7 @@ const createGoogleCloudStorage = <S>(): PersistStorage<S> | undefined => {
   const persistStorage: PersistStorage<S> = {
     getItem: async (name) => {
       const data: StorageValue<S> = await getDriveFile(fileId, accessToken);
+      useCloudAuthStore.getState().setSyncStatus('synced');
       return data;
     },
     setItem: async (name, newValue): Promise<void> => {
@@ -32,6 +33,7 @@ const createGoogleCloudStorage = <S>(): PersistStorage<S> | undefined => {
         type: 'application/json',
       });
 
+      useCloudAuthStore.getState().setSyncStatus('syncing');
       await updateDriveFileDebounced(file, fileId, accessToken);
     },
 

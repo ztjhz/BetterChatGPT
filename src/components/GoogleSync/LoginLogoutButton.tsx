@@ -4,11 +4,13 @@ import useGStore from '@store/cloud-auth-store';
 
 const LoginButton = () => {
   const setGoogleAccessToken = useGStore((state) => state.setGoogleAccessToken);
+  const setSyncStatus = useGStore((state) => state.setSyncStatus);
+  const setCloudSync = useGStore((state) => state.setCloudSync);
+  const cloudSync = useGStore((state) => state.cloudSync);
   const googleAccessToken = useGStore((state) => state.googleAccessToken);
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
-      console.log(codeResponse);
       setGoogleAccessToken(codeResponse.access_token);
     },
     onError: () => {
@@ -19,18 +21,23 @@ const LoginButton = () => {
 
   const logout = () => {
     setGoogleAccessToken(undefined);
+    setSyncStatus('unauthenticated');
+    setCloudSync(false);
     googleLogout();
   };
 
+  useEffect(() => {
+    if (googleAccessToken) setCloudSync(true);
+  }, [googleAccessToken]);
+
   return (
-    <div>
-      {googleAccessToken ? (
+    <div className='flex gap-4 flex-wrap'>
+      <button className='btn btn-neutral' onClick={() => login()}>
+        Sync your chats
+      </button>
+      {cloudSync && (
         <button className='btn btn-neutral' onClick={logout}>
-          Logout
-        </button>
-      ) : (
-        <button className='btn btn-neutral' onClick={() => login()}>
-          Login
+          Stop syncing
         </button>
       )}
     </div>
