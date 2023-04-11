@@ -32,7 +32,7 @@ const GoogleSyncButton = () => {
 
   return (
     <div className='flex gap-4 flex-wrap justify-center'>
-      <button className='btn btn-neutral' onClick={() => login()}>
+      <button className='btn btn-primary' onClick={() => login()}>
         Sync your chats
       </button>
       {cloudSync && (

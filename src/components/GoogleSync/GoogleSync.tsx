@@ -91,7 +91,6 @@ const GooglePopup = ({
     <PopupModal
       title={t('googleCloudSync') as string}
       setIsModalOpen={setIsModalOpen}
-      handleConfirm={() => {}}
       cancelButton={false}
     >
       <div className='p-6 border-b border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-300 text-sm flex flex-col items-center gap-4 text-center'>
