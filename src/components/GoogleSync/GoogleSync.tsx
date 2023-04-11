@@ -22,12 +22,13 @@ import RefreshIcon from '@icon/RefreshIcon';
 import { SyncStatus } from '@type/google-api';
 
 const GoogleSync = ({ clientId }: { clientId: string }) => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const setFileId = useGStore((state) => state.setFileId);
   const googleAccessToken = useGStore((state) => state.googleAccessToken);
   const syncStatus = useGStore((state) => state.syncStatus);
   const cloudSync = useGStore((state) => state.cloudSync);
   const setSyncStatus = useGStore((state) => state.setSyncStatus);
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(cloudSync);
 
   const initialiseState = async (_googleAccessToken: string) => {
     const validated = await validateGoogleOath2AccessToken(_googleAccessToken);
@@ -98,6 +99,9 @@ const GooglePopup = ({
           Effortlessly synchronize your chats and settings with Google Drive.
         </p>
         <GoogleSyncButton />
+        <p className='border border-gray-400 px-3 py-2 rounded-md'>
+          Note: You will need to re-login on every visit and every hour
+        </p>
         <p>
           Your privacy is important to us, and to ensure it, Better ChatGPT only
           has non-sensitive access, meaning it can only create, view, and manage

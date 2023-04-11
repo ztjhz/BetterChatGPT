@@ -31,7 +31,7 @@ const GoogleSyncButton = () => {
   }, [googleAccessToken]);
 
   return (
-    <div className='flex gap-4 flex-wrap'>
+    <div className='flex gap-4 flex-wrap justify-center'>
       <button className='btn btn-neutral' onClick={() => login()}>
         Sync your chats
       </button>
