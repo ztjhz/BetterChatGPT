@@ -54,6 +54,8 @@ const GoogleSync = ({ clientId }: { clientId: string }) => {
       } catch (e: unknown) {
         console.log(e);
       }
+    } else {
+      setSyncStatus('unauthenticated');
     }
   };
 

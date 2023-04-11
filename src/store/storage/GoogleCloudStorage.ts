@@ -33,8 +33,16 @@ const createGoogleCloudStorage = <S>(): PersistStorage<S> | undefined => {
         type: 'application/json',
       });
 
-      useCloudAuthStore.getState().setSyncStatus('syncing');
-      await updateDriveFileDebounced(file, fileId, accessToken);
+      if (useCloudAuthStore.getState().syncStatus !== 'unauthenticated') {
+        useCloudAuthStore.getState().setSyncStatus('syncing');
+
+        try {
+          await updateDriveFileDebounced(file, fileId, accessToken);
+        } catch (e: unknown) {
+          console.log(e);
+          useCloudAuthStore.getState().setSyncStatus('unauthenticated');
+        }
+      }
     },
 
     removeItem: async (name): Promise<void> => {
