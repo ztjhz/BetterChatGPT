@@ -16,6 +16,10 @@ import LoginLogoutButton from './LoginLogoutButton';
 import PopupModal from '@components/PopupModal';
 import { t } from 'i18next';
 
+import GoogleIcon from '@icon/GoogleIcon';
+import TickIcon from '@icon/TickIcon';
+import RefreshIcon from '@icon/RefreshIcon';
+
 const GoogleSync = ({ clientId }: { clientId: string }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const setFileId = useGStore((state) => state.setFileId);
@@ -57,12 +61,21 @@ const GoogleSync = ({ clientId }: { clientId: string }) => {
   return (
     <GoogleOAuthProvider clientId={clientId}>
       <div
-        className='btn btn-neutral cursor-pointer'
+        className='flex py-3 px-3 items-center gap-3 rounded-md hover:bg-gray-500/10 transition-colors duration-200 text-white cursor-pointer text-sm'
         onClick={() => {
           setIsModalOpen(true);
         }}
       >
-        Google Sync
+        <GoogleIcon /> Google Sync
+        <div className='bg-green-600/80 rounded-full p-1'>
+          <TickIcon className='h-2 w-2' />
+        </div>
+        <div className='bg-red-600/80 rounded-full w-4 h-4 text-xs flex justify-center items-center'>
+          !
+        </div>
+        <div className='bg-orange-600/80 rounded-full p-1'>
+          <RefreshIcon className='h-2 w-2' />
+        </div>
       </div>
       {isModalOpen && <GooglePopup setIsModalOpen={setIsModalOpen} />}
     </GoogleOAuthProvider>

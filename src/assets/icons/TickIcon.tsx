@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TickIcon = () => {
+const TickIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       stroke='currentColor'
@@ -13,6 +13,7 @@ const TickIcon = () => {
       height='1em'
       width='1em'
       xmlns='http://www.w3.org/2000/svg'
+      {...props}
     >
       <polyline points='20 6 9 17 4 12'></polyline>
     </svg>

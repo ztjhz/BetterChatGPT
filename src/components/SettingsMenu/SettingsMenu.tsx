@@ -11,9 +11,7 @@ import AutoTitleToggle from './AutoTitleToggle';
 import PromptLibraryMenu from '@components/PromptLibraryMenu';
 import ChatConfigMenu from '@components/ChatConfigMenu';
 import EnterToSubmitToggle from './EnterToSubmitToggle';
-import GoogleSync from '@components/GoogleSync';
 
-const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || undefined;
 
 const SettingsMenu = () => {
   const { t } = useTranslation();
@@ -49,7 +47,6 @@ const SettingsMenu = () => {
             </div>
             <PromptLibraryMenu />
             <ChatConfigMenu />
-            {googleClientId && <GoogleSync clientId={googleClientId} />}
           </div>
         </PopupModal>
       )}
