@@ -37,13 +37,13 @@ const ChatFolder = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const folderRef = useRef<HTMLDivElement>(null);
   const gradientRef = useRef<HTMLDivElement>(null);
+  const paletteRef = useRef<HTMLDivElement>(null);
 
   const [_folderName, _setFolderName] = useState<string>(folderName);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isDelete, setIsDelete] = useState<boolean>(false);
   const [isHover, setIsHover] = useState<boolean>(false);
   const [showPalette, setShowPalette] = useState<boolean>(false);
-  const paletteRef = useRef<HTMLDivElement>(null);
 
   const editTitle = () => {
     const updatedFolders: FolderCollection = JSON.parse(
@@ -239,7 +239,10 @@ const ChatFolder = ({
             </>
           ) : (
             <>
-              <div className='relative md:hidden group-hover/folder:md:inline' ref={paletteRef}>
+              <div
+                className='relative md:hidden group-hover/folder:md:inline'
+                ref={paletteRef}
+              >
                 <button
                   className='p-1 hover:text-white'
                   onClick={() => {
