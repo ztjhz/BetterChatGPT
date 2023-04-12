@@ -13,7 +13,8 @@ import {
   validateExportV1,
 } from '@utils/import';
 import { ChatInterface, Folder, FolderCollection } from '@type/chat';
-import Export, { ExportBase, ExportV1 } from '@type/export';
+import Export, { ExportBase } from '@type/export';
+import { downloadFileInTauri, isTauri } from '@utils/tauri';
 
 const ImportExportChat = () => {
   const { t } = useTranslation();
@@ -189,11 +190,10 @@ const ImportChat = () => {
       </button>
       {alert && (
         <div
-          className={`relative py-2 px-3 w-full mt-3 border rounded-md text-gray-600 dark:text-gray-100 text-sm whitespace-pre-wrap ${
-            alert.success
-              ? 'border-green-500 bg-green-500/10'
-              : 'border-red-500 bg-red-500/10'
-          }`}
+          className={`relative py-2 px-3 w-full mt-3 border rounded-md text-gray-600 dark:text-gray-100 text-sm whitespace-pre-wrap ${alert.success
+            ? 'border-green-500 bg-green-500/10'
+            : 'border-red-500 bg-red-500/10'
+            }`}
         >
           {alert.message}
         </div>
@@ -212,13 +212,23 @@ const ExportChat = () => {
       </div>
       <button
         className='btn btn-small btn-primary'
-        onClick={() => {
+        onClick={async () => {
           const fileData: Export = {
             chats: useStore.getState().chats,
             folders: useStore.getState().folders,
             version: 1,
           };
-          downloadFile(fileData, getToday());
+          const defaultName = getToday();
+          if (isTauri()) {
+            try {
+              await downloadFileInTauri(fileData, defaultName, ".json");
+            } catch (err) {
+              // TODO: handle error
+              console.error(err);
+            }
+          } else {
+            downloadFile(fileData, defaultName);
+          }
         }}
       >
         {t('export')}

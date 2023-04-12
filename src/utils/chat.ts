@@ -1,7 +1,7 @@
 import html2canvas from 'html2canvas';
-// import jsPDF from 'jspdf';
 import { ChatInterface } from '@type/chat';
-import { Theme } from '@type/theme';
+// import jsPDF from 'jspdf';
+// import { Theme } from '@type/theme';
 
 export const htmlToImg = async (html: HTMLDivElement) => {
   const needResize = window.innerWidth >= 1024;
@@ -23,11 +23,7 @@ export const downloadImg = (imgData: string, fileName: string) => {
   link.remove();
 };
 
-// export const downloadPDF = (
-//   imageData: string,
-//   theme: Theme,
-//   fileName: string
-// ) => {
+// export const getPDF = (imageData: string,  theme: Theme) => {
 //   const pdf = new jsPDF('p', 'mm');
 //   const imageProps = pdf.getImageProperties(imageData);
 //   const pageHeight = pdf.internal.pageSize.getHeight();
@@ -56,6 +52,15 @@ export const downloadImg = (imgData: string, fileName: string) => {
 //     pdf.rect(0, pageHeight - heightLeft - 3, pageWidth, heightLeft + 3, 'F');
 //   }
 
+//   return pdf;
+// };
+
+// export const downloadPDF = (
+//   imageData: string,
+//   theme: Theme,
+//   fileName: string
+// ) => {
+//   const pdf = getPDF(imageData, theme);
 //   pdf.save(fileName);
 // };
 
