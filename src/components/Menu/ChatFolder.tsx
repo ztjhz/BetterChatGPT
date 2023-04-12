@@ -37,6 +37,7 @@ const ChatFolder = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const folderRef = useRef<HTMLDivElement>(null);
   const gradientRef = useRef<HTMLDivElement>(null);
+  const paletteRef = useRef<HTMLDivElement>(null);
 
   const [_folderName, _setFolderName] = useState<string>(folderName);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -144,6 +145,27 @@ const ChatFolder = ({
     if (inputRef && inputRef.current) inputRef.current.focus();
   }, [isEdit]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        paletteRef.current &&
+        !paletteRef.current.contains(event.target as Node)
+      ) {
+        setShowPalette(false);
+      }
+    };
+
+    if (showPalette) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [paletteRef, showPalette]);
+
   return (
     <div
       className={`w-full transition-colors group/folder ${
@@ -217,7 +239,10 @@ const ChatFolder = ({
             </>
           ) : (
             <>
-              <div className='relative md:hidden group-hover/folder:md:inline'>
+              <div
+                className='relative md:hidden group-hover/folder:md:inline'
+                ref={paletteRef}
+              >
                 <button
                   className='p-1 hover:text-white'
                   onClick={() => {
