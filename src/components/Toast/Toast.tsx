@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useStore from '@store/store';
 
 export type ToastStatus = 'success' | 'error' | 'warning';
@@ -9,9 +9,23 @@ const Toast = () => {
   const toastShow = useStore((state) => state.toastShow);
   const setToastShow = useStore((state) => state.setToastShow);
 
+  const [timeoutID, setTimeoutID] = useState<number>();
+
+  useEffect(() => {
+    if (toastShow) {
+      window.clearTimeout(timeoutID);
+
+      const newTimeoutID = window.setTimeout(() => {
+        setToastShow(false);
+      }, 5000);
+
+      setTimeoutID(newTimeoutID);
+    }
+  }, [toastShow, status, message]);
+
   return toastShow ? (
     <div
-      className={`flex fixed right-5 bottom-5 z-[999] items-center w-3/4 md:w-full max-w-xs p-4 mb-4 text-gray-500 dark:text-gray-400 rounded-lg shadow-md border border-gray-400/30`}
+      className={`flex fixed right-5 bottom-5 z-[1000] items-center w-3/4 md:w-full max-w-xs p-4 mb-4 text-gray-500 dark:text-gray-400 rounded-lg shadow-md border border-gray-400/30 animate-bounce`}
       role='alert'
     >
       <StatusIcon status={status} />

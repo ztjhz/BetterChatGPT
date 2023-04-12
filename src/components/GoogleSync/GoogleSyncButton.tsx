@@ -1,20 +1,31 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 import useGStore from '@store/cloud-auth-store';
 import useStore from '@store/store';
 import { createJSONStorage } from 'zustand/middleware';
 
 const GoogleSyncButton = ({ loginHandler }: { loginHandler?: () => void }) => {
+  const { t } = useTranslation(['drive']);
+
   const setGoogleAccessToken = useGStore((state) => state.setGoogleAccessToken);
   const setSyncStatus = useGStore((state) => state.setSyncStatus);
   const setCloudSync = useGStore((state) => state.setCloudSync);
   const cloudSync = useGStore((state) => state.cloudSync);
+
+  const setToastStatus = useStore((state) => state.setToastStatus);
+  const setToastMessage = useStore((state) => state.setToastMessage);
+  const setToastShow = useStore((state) => state.setToastShow);
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => {
       setGoogleAccessToken(codeResponse.access_token);
       setCloudSync(true);
       loginHandler && loginHandler();
+      setToastStatus('success');
+      setToastMessage(t('toast.sync'));
+      setToastShow(true);
     },
     onError: () => {
       console.log('Login Failed');
@@ -31,16 +42,19 @@ const GoogleSyncButton = ({ loginHandler }: { loginHandler?: () => void }) => {
       storage: createJSONStorage(() => localStorage),
     });
     useStore.persist.rehydrate();
+    setToastStatus('success');
+    setToastMessage(t('toast.stop'));
+    setToastShow(true);
   };
 
   return (
     <div className='flex gap-4 flex-wrap justify-center'>
       <button className='btn btn-primary' onClick={() => login()}>
-        Sync your chats
+        {t('button.sync')}
       </button>
       {cloudSync && (
         <button className='btn btn-neutral' onClick={logout}>
-          Stop syncing
+          {t('button.stop')}
         </button>
       )}
     </div>
