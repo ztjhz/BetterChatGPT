@@ -38,12 +38,16 @@ const CommandPrompt = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    if (dropDown) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [dropdownRef]);
+  }, [dropdownRef, dropDown]);
 
   return (
     <div className='relative max-wd-sm' ref={dropdownRef}>

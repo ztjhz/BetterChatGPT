@@ -155,12 +155,16 @@ const ChatFolder = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    if (showPalette) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [paletteRef]);
+  }, [paletteRef, showPalette]);
 
   return (
     <div
