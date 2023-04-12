@@ -1,0 +1,10 @@
+{
+  "name": "Google Sync",
+  "tagline": "Effortlessly synchronize your chats and settings with Google Drive.",
+  "button": {
+    "sync": "Sync your chats",
+    "stop": "Stop syncing"
+  },
+  "notice": "Note: you will need to re-login on every visit or every hour",
+  "privacy": "Your privacy is important to us, and to ensure it, Better ChatGPT only has non-sensitive access, meaning it can only create, view, and manage its own files and folders."
+}

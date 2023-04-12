@@ -4,6 +4,8 @@ import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
+const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || undefined;
+
 export const i18nLanguages = [
   // 'ar',
   'da',
@@ -25,6 +27,9 @@ export const i18nLanguages = [
   'zh-TW',
 ];
 
+const namespace = ['main', 'api', 'about', 'model'];
+if (googleClientId) namespace.push('drive');
+
 i18n
   .use(Backend)
   .use(LanguageDetector)
@@ -36,7 +41,7 @@ i18n
     fallbackLng: {
       default: ['en'],
     },
-    ns: ['main', 'api', 'about', 'model'],
+    ns: namespace,
     defaultNS: 'main',
   });
 

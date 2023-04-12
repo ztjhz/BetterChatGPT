@@ -14,7 +14,6 @@ import createGoogleCloudStorage from '@store/storage/GoogleCloudStorage';
 
 import GoogleSyncButton from './GoogleSyncButton';
 import PopupModal from '@components/PopupModal';
-import { t } from 'i18next';
 
 import GoogleIcon from '@icon/GoogleIcon';
 import TickIcon from '@icon/TickIcon';
@@ -22,6 +21,8 @@ import RefreshIcon from '@icon/RefreshIcon';
 import { SyncStatus } from '@type/google-api';
 
 const GoogleSync = ({ clientId }: { clientId: string }) => {
+  const { t } = useTranslation(['drive']);
+
   const setFileId = useGStore((state) => state.setFileId);
   const googleAccessToken = useGStore((state) => state.googleAccessToken);
   const syncStatus = useGStore((state) => state.syncStatus);
@@ -74,7 +75,7 @@ const GoogleSync = ({ clientId }: { clientId: string }) => {
           setIsModalOpen(true);
         }}
       >
-        <GoogleIcon /> Google Sync
+        <GoogleIcon /> {t('name')}
         {cloudSync && <SyncIcon status={syncStatus} />}
       </div>
       {isModalOpen && <GooglePopup setIsModalOpen={setIsModalOpen} />}
@@ -87,18 +88,16 @@ const GooglePopup = ({
 }: {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['drive']);
 
   return (
     <PopupModal
-      title={t('googleCloudSync') as string}
+      title={t('name') as string}
       setIsModalOpen={setIsModalOpen}
       cancelButton={false}
     >
       <div className='p-6 border-b border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-300 text-sm flex flex-col items-center gap-4 text-center'>
-        <p>
-          Effortlessly synchronize your chats and settings with Google Drive.
-        </p>
+        <p>{t('tagline')}</p>
         <GoogleSyncButton
           loginHandler={() => {
             setIsModalOpen(false);
@@ -108,13 +107,9 @@ const GooglePopup = ({
           }}
         />
         <p className='border border-gray-400 px-3 py-2 rounded-md'>
-          Note: You will need to re-login on every visit and every hour
+          {t('notice')}
         </p>
-        <p>
-          Your privacy is important to us, and to ensure it, Better ChatGPT only
-          has non-sensitive access, meaning it can only create, view, and manage
-          its own files and folders.
-        </p>
+        <p>{t('privacy')}</p>
       </div>
     </PopupModal>
   );
