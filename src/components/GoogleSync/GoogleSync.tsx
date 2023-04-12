@@ -123,7 +123,7 @@ const SyncIcon = ({ status }: { status: SyncStatus }) => {
       </div>
     ),
     syncing: (
-      <div className='bg-orange-600/80 rounded-full p-1'>
+      <div className='bg-orange-600/80 rounded-full p-1 animate-spin'>
         <RefreshIcon className='h-2 w-2' />
       </div>
     ),
