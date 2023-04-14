@@ -22,7 +22,12 @@ const createGoogleCloudStorage = <S>(): PersistStorage<S> | undefined => {
   }
   const persistStorage: PersistStorage<S> = {
     getItem: async (name) => {
+      useCloudAuthStore.getState().setSyncStatus('syncing');
       try {
+        const accessToken = useCloudAuthStore.getState().googleAccessToken;
+        const fileId = useCloudAuthStore.getState().fileId;
+        if (!accessToken || !fileId) return null;
+
         const data: StorageValue<S> = await getDriveFile(fileId, accessToken);
         useCloudAuthStore.getState().setSyncStatus('synced');
         return data;
@@ -35,6 +40,10 @@ const createGoogleCloudStorage = <S>(): PersistStorage<S> | undefined => {
       }
     },
     setItem: async (name, newValue): Promise<void> => {
+      const accessToken = useCloudAuthStore.getState().googleAccessToken;
+      const fileId = useCloudAuthStore.getState().fileId;
+      if (!accessToken || !fileId) return;
+
       const blob = new Blob([JSON.stringify(newValue)], {
         type: 'application/json',
       });
@@ -50,6 +59,10 @@ const createGoogleCloudStorage = <S>(): PersistStorage<S> | undefined => {
     },
 
     removeItem: async (name): Promise<void> => {
+      const accessToken = useCloudAuthStore.getState().googleAccessToken;
+      const fileId = useCloudAuthStore.getState().fileId;
+      if (!accessToken || !fileId) return;
+
       await deleteDriveFile(accessToken, fileId);
     },
   };

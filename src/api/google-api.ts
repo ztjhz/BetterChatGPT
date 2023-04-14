@@ -74,7 +74,7 @@ export const listDriveFiles = async (
   accessToken: string
 ): Promise<GoogleFileList> => {
   const response = await fetch(
-    'https://www.googleapis.com/drive/v3/files?orderBy=createdTime desc&pageSize=1',
+    'https://www.googleapis.com/drive/v3/files?orderBy=createdTime desc',
     {
       method: 'GET',
       headers: {
@@ -115,6 +115,31 @@ export const updateDriveFile = async (
   } else {
     throw new Error(
       `Error uploading file: ${response.status} ${response.statusText}`
+    );
+  }
+};
+
+export const updateDriveFileName = async (
+  fileName: string,
+  fileId: string,
+  accessToken: string
+) => {
+  const response = await fetch(
+    `https://www.googleapis.com/drive/v3/files/${fileId}`,
+    {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({ name: fileName }),
+    }
+  );
+  if (response.ok) {
+    const result: GoogleFileResource = await response.json();
+    return result;
+  } else {
+    throw new Error(
+      `Error updating file name: ${response.status} ${response.statusText}`
     );
   }
 };
