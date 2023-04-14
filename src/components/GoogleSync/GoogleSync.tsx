@@ -179,12 +179,6 @@ const GooglePopup = ({
             {syncStatus !== 'syncing' && (
               <div className='flex gap-4 flex-wrap justify-center'>
                 <div
-                  className='btn btn-neutral cursor-pointer'
-                  onClick={createSyncFile}
-                >
-                  {t('button.create')}
-                </div>
-                <div
                   className='btn btn-primary cursor-pointer'
                   onClick={async () => {
                     setFileId(_fileId);
@@ -196,6 +190,12 @@ const GooglePopup = ({
                   }}
                 >
                   {t('button.confirm')}
+                </div>
+                <div
+                  className='btn btn-neutral cursor-pointer'
+                  onClick={createSyncFile}
+                >
+                  {t('button.create')}
                 </div>
               </div>
             )}
@@ -363,12 +363,12 @@ const SyncIcon = ({ status }: { status: SyncStatus }) => {
       </div>
     ),
     syncing: (
-      <div className='bg-orange-600/80 rounded-full p-1 animate-spin'>
+      <div className='bg-gray-600/80 rounded-full p-1 animate-spin'>
         <RefreshIcon className='h-2 w-2' />
       </div>
     ),
     synced: (
-      <div className='bg-green-600/80 rounded-full p-1'>
+      <div className='bg-gray-600/80 rounded-full p-1'>
         <TickIcon className='h-2 w-2' />
       </div>
     ),
