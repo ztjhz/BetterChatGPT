@@ -144,8 +144,8 @@ export const updateDriveFileName = async (
   }
 };
 
-export const deleteDriveFile = async (accessToken: string, fileId: string) => {
-  const res = await fetch(
+export const deleteDriveFile = async (fileId: string, accessToken: string) => {
+  const response = await fetch(
     `https://www.googleapis.com/drive/v3/files/${fileId}`,
     {
       method: 'DELETE',
@@ -155,7 +155,14 @@ export const deleteDriveFile = async (accessToken: string, fileId: string) => {
       },
     }
   );
-  return await res.json();
+
+  if (response.ok) {
+    return true;
+  } else {
+    throw new Error(
+      `Error deleting file name: ${response.status} ${response.statusText}`
+    );
+  }
 };
 
 export const validateGoogleOath2AccessToken = async (accessToken: string) => {

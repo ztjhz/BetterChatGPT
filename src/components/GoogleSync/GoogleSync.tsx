@@ -7,6 +7,7 @@ import useGStore from '@store/cloud-auth-store';
 
 import {
   createDriveFile,
+  deleteDriveFile,
   updateDriveFileName,
   validateGoogleOath2AccessToken,
 } from '@api/google-api';
@@ -23,6 +24,7 @@ import RefreshIcon from '@icon/RefreshIcon';
 import { GoogleFileResource, SyncStatus } from '@type/google-api';
 import EditIcon from '@icon/EditIcon';
 import CrossIcon from '@icon/CrossIcon';
+import DeleteIcon from '@icon/DeleteIcon';
 
 const GoogleSync = ({ clientId }: { clientId: string }) => {
   const { t } = useTranslation(['drive']);
@@ -171,6 +173,7 @@ const GooglePopup = ({
                 _fileId={_fileId}
                 _setFileId={_setFileId}
                 setFiles={setFiles}
+                key={file.id}
               />
             ))}
             {syncStatus !== 'syncing' && (
@@ -228,6 +231,7 @@ const FileSelector = ({
   const setToastShow = useStore((state) => state.setToastShow);
 
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [_name, _setName] = useState<string>(name);
 
   const syncing = syncStatus === 'syncing';
@@ -252,6 +256,27 @@ const FileSelector = ({
       setToastStatus('error');
     }
   };
+
+  const deleteFile = async () => {
+    if (syncing) return;
+    setIsDeleting(false);
+    const accessToken = useGStore.getState().googleAccessToken;
+    if (!accessToken) return;
+
+    try {
+      setSyncStatus('syncing');
+      await deleteDriveFile(id, accessToken);
+      const _files = await getFiles(accessToken);
+      if (_files) setFiles(_files);
+      setSyncStatus('synced');
+    } catch (e: unknown) {
+      setSyncStatus('unauthenticated');
+      setToastMessage((e as Error).message);
+      setToastShow(true);
+      setToastStatus('error');
+    }
+  };
+
   return (
     <label
       className={`w-full flex items-center justify-between mb-2 gap-2 text-sm font-medium text-gray-900 dark:text-gray-300 ${
@@ -279,36 +304,51 @@ const FileSelector = ({
           />
         ) : (
           <>
-            {name}{' '}
-            <div className='text-[10px] md:text-xs'>{`<fileID: ${id}>`}</div>
+            {name} <div className='text-[10px] md:text-xs'>{`<${id}>`}</div>
           </>
         )}
       </div>
-      {isEditing ? (
+      {isEditing || isDeleting ? (
         <div className='flex gap-1'>
           <div
             className={`${syncing ? 'cursor-not-allowed' : 'cursor-pointer'}`}
-            onClick={updateFileName}
+            onClick={() => {
+              if (isEditing) updateFileName();
+              if (isDeleting) deleteFile();
+            }}
           >
             <TickIcon />
           </div>
           <div
             className={`${syncing ? 'cursor-not-allowed' : 'cursor-pointer'}`}
             onClick={() => {
-              if (!syncing) setIsEditing(false);
+              if (!syncing) {
+                setIsEditing(false);
+                setIsDeleting(false);
+              }
             }}
           >
             <CrossIcon />
           </div>
         </div>
       ) : (
-        <div
-          className={`${syncing ? 'cursor-not-allowed' : 'cursor-pointer'}`}
-          onClick={() => {
-            if (!syncing) setIsEditing(true);
-          }}
-        >
-          <EditIcon />
+        <div className='flex gap-1'>
+          <div
+            className={`${syncing ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+            onClick={() => {
+              if (!syncing) setIsEditing(true);
+            }}
+          >
+            <EditIcon />
+          </div>
+          <div
+            className={`${syncing ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+            onClick={() => {
+              if (!syncing) setIsDeleting(true);
+            }}
+          >
+            <DeleteIcon />
+          </div>
         </div>
       )}
     </label>
