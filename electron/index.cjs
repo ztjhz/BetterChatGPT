@@ -6,6 +6,8 @@ const { autoUpdater } = require('electron-updater');
 
 if (require('electron-squirrel-startup')) app.quit();
 
+const PORT = isDev ? '5173' : '51735';
+
 function createWindow() {
   let iconPath = '';
   if (isDev) {
@@ -30,11 +32,9 @@ function createWindow() {
   win.maximize();
   win.show();
 
-  win.loadURL(
-    isDev
-      ? 'http://localhost:5173'
-      : `file://${path.join(__dirname, '../dist/index.html')}`
-  );
+  isDev || createServer();
+
+  win.loadURL(`http://localhost:${PORT}`);
 
   if (isDev) {
     win.webContents.openDevTools({ mode: 'detach' });
@@ -81,3 +81,67 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+const createServer = () => {
+  // Dependencies
+  const http = require('http');
+  const fs = require('fs');
+  const path = require('path');
+
+  // MIME types for different file extensions
+  const mimeTypes = {
+    '.html': 'text/html',
+    '.css': 'text/css',
+    '.js': 'text/javascript',
+    '.wasm': 'application/wasm',
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.png': 'image/png',
+    '.gif': 'image/gif',
+    '.svg': 'image/svg+xml',
+    '.json': 'application/json',
+  };
+
+  // Create a http server
+  const server = http.createServer((request, response) => {
+    // Get the file path from the URL
+    let filePath =
+      request.url === '/' ? '../dist/index.html' : `../dist/${request.url}`;
+
+    // Get the file extension from the filePath
+    let extname = path.extname(filePath);
+
+    // Set the default MIME type to text/plain
+    let contentType = 'text/plain';
+
+    // Check if the file extension is in the MIME types object
+    if (extname in mimeTypes) {
+      contentType = mimeTypes[extname];
+    }
+
+    // Read the file from the disk
+    fs.readFile(filePath, (error, content) => {
+      if (error) {
+        // If file read error occurs
+        if (error.code === 'ENOENT') {
+          // File not found error
+          response.writeHead(404);
+          response.end('File Not Found');
+        } else {
+          // Server error
+          response.writeHead(500);
+          response.end(`Server Error: ${error.code}`);
+        }
+      } else {
+        // File read successful
+        response.writeHead(200, { 'Content-Type': contentType });
+        response.end(content, 'utf-8');
+      }
+    });
+  });
+
+  // Listen for request on port ${PORT}
+  server.listen(PORT, () => {
+    console.log(`Server listening on http://localhost:${PORT}/`);
+  });
+};

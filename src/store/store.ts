@@ -5,6 +5,7 @@ import { InputSlice, createInputSlice } from './input-slice';
 import { AuthSlice, createAuthSlice } from './auth-slice';
 import { ConfigSlice, createConfigSlice } from './config-slice';
 import { PromptSlice, createPromptSlice } from './prompt-slice';
+import { ToastSlice, createToastSlice } from './toast-slice';
 import {
   LocalStorageInterfaceV0ToV1,
   LocalStorageInterfaceV1ToV2,
@@ -30,12 +31,30 @@ export type StoreState = ChatSlice &
   InputSlice &
   AuthSlice &
   ConfigSlice &
-  PromptSlice;
+  PromptSlice &
+  ToastSlice;
 
 export type StoreSlice<T> = (
   set: StoreApi<StoreState>['setState'],
   get: StoreApi<StoreState>['getState']
 ) => T;
+
+export const createPartializedState = (state: StoreState) => ({
+  chats: state.chats,
+  currentChatIndex: state.currentChatIndex,
+  apiKey: state.apiKey,
+  apiEndpoint: state.apiEndpoint,
+  theme: state.theme,
+  autoTitle: state.autoTitle,
+  prompts: state.prompts,
+  defaultChatConfig: state.defaultChatConfig,
+  defaultSystemMessage: state.defaultSystemMessage,
+  hideMenuOptions: state.hideMenuOptions,
+  firstVisit: state.firstVisit,
+  hideSideMenu: state.hideSideMenu,
+  folders: state.folders,
+  enterToSubmit: state.enterToSubmit,
+});
 
 const useStore = create<StoreState>()(
   persist(
@@ -45,25 +64,11 @@ const useStore = create<StoreState>()(
       ...createAuthSlice(set, get),
       ...createConfigSlice(set, get),
       ...createPromptSlice(set, get),
+      ...createToastSlice(set, get),
     }),
     {
       name: 'free-chat-gpt',
-      partialize: (state) => ({
-        chats: state.chats,
-        currentChatIndex: state.currentChatIndex,
-        apiKey: state.apiKey,
-        apiEndpoint: state.apiEndpoint,
-        theme: state.theme,
-        autoTitle: state.autoTitle,
-        prompts: state.prompts,
-        defaultChatConfig: state.defaultChatConfig,
-        defaultSystemMessage: state.defaultSystemMessage,
-        hideMenuOptions: state.hideMenuOptions,
-        firstVisit: state.firstVisit,
-        hideSideMenu: state.hideSideMenu,
-        folders: state.folders,
-        enterToSubmit: state.enterToSubmit,
-      }),
+      partialize: (state) => createPartializedState(state),
       version: 8,
       migrate: (persistedState, version) => {
         switch (version) {

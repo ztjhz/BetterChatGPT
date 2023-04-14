@@ -27,9 +27,9 @@ const ChatFolder = ({
   folderChats: ChatHistoryInterface[];
   folderId: string;
 }) => {
-  const folderName = useStore((state) => state.folders[folderId].name);
-  const isExpanded = useStore((state) => state.folders[folderId].expanded);
-  const color = useStore((state) => state.folders[folderId].color);
+  const folderName = useStore((state) => state.folders[folderId]?.name);
+  const isExpanded = useStore((state) => state.folders[folderId]?.expanded);
+  const color = useStore((state) => state.folders[folderId]?.color);
 
   const setChats = useStore((state) => state.setChats);
   const setFolders = useStore((state) => state.setFolders);
