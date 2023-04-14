@@ -182,7 +182,7 @@ const GooglePopup = ({
                   className='btn btn-neutral cursor-pointer'
                   onClick={createSyncFile}
                 >
-                  Create new sync file
+                  {t('button.create')}
                 </div>
                 <div
                   className='btn btn-primary cursor-pointer'
@@ -195,7 +195,7 @@ const GooglePopup = ({
                     setIsModalOpen(false);
                   }}
                 >
-                  Confirm selection
+                  {t('button.confirm')}
                 </div>
               </div>
             )}
