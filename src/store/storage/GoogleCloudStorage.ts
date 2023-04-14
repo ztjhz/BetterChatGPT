@@ -1,5 +1,6 @@
 import { PersistStorage, StorageValue, StateStorage } from 'zustand/middleware';
 import useCloudAuthStore from '@store/cloud-auth-store';
+import useStore from '@store/store';
 import {
   deleteDriveFile,
   getDriveFile,
@@ -21,9 +22,17 @@ const createGoogleCloudStorage = <S>(): PersistStorage<S> | undefined => {
   }
   const persistStorage: PersistStorage<S> = {
     getItem: async (name) => {
-      const data: StorageValue<S> = await getDriveFile(fileId, accessToken);
-      useCloudAuthStore.getState().setSyncStatus('synced');
-      return data;
+      try {
+        const data: StorageValue<S> = await getDriveFile(fileId, accessToken);
+        useCloudAuthStore.getState().setSyncStatus('synced');
+        return data;
+      } catch (e: unknown) {
+        useCloudAuthStore.getState().setSyncStatus('unauthenticated');
+        useStore.getState().setToastMessage((e as Error).message);
+        useStore.getState().setToastShow(true);
+        useStore.getState().setToastStatus('error');
+        return null;
+      }
     },
     setItem: async (name, newValue): Promise<void> => {
       const blob = new Blob([JSON.stringify(newValue)], {
@@ -36,12 +45,7 @@ const createGoogleCloudStorage = <S>(): PersistStorage<S> | undefined => {
       if (useCloudAuthStore.getState().syncStatus !== 'unauthenticated') {
         useCloudAuthStore.getState().setSyncStatus('syncing');
 
-        try {
-          await updateDriveFileDebounced(file, fileId, accessToken);
-        } catch (e: unknown) {
-          console.log(e);
-          useCloudAuthStore.getState().setSyncStatus('unauthenticated');
-        }
+        await updateDriveFileDebounced(file, fileId, accessToken);
       }
     },
 

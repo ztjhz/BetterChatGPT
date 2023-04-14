@@ -27,8 +27,11 @@ const GoogleSyncButton = ({ loginHandler }: { loginHandler?: () => void }) => {
       setToastMessage(t('toast.sync'));
       setToastShow(true);
     },
-    onError: () => {
+    onError: (error) => {
       console.log('Login Failed');
+      setToastStatus('error');
+      setToastMessage(error?.error_description || 'Error in authenticating!');
+      setToastShow(true);
     },
     scope: 'https://www.googleapis.com/auth/drive.file',
   });
