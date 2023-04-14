@@ -36,5 +36,6 @@
   "newFolder": "Ny mappe",
   "cloneChat": "Klon Chat",
   "cloned": "Klonet",
-  "enterToSubmit": "Tryk Enter for at sende"
+  "enterToSubmit": "Tryk Enter for at sende",
+  "submitPlaceholder": "Type a message or click [/] for prompts..."
 }

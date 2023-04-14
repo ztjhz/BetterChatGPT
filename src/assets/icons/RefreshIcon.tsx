@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RefreshIcon = () => {
+const RefreshIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       stroke='currentColor'
@@ -13,6 +13,7 @@ const RefreshIcon = () => {
       height='1em'
       width='1em'
       xmlns='http://www.w3.org/2000/svg'
+      {...props}
     >
       <polyline points='1 4 1 10 7 10'></polyline>
       <polyline points='23 20 23 14 17 14'></polyline>

@@ -7,7 +7,7 @@ const useAddChat = () => {
   const setChats = useStore((state) => state.setChats);
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
 
-  const addChat = () => {
+  const addChat = (folder?:string) => {
     const chats = useStore.getState().chats;
     if (chats) {
       const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
@@ -19,7 +19,7 @@ const useAddChat = () => {
         title = `New Chat ${titleIndex}`;
       }
 
-      updatedChats.unshift(generateDefaultChat(title));
+      updatedChats.unshift(generateDefaultChat(title, folder));
       setChats(updatedChats);
       setCurrentChatIndex(0);
     }

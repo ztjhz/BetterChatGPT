@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import useStore from '@store/store';
 
 import NewChat from './NewChat';
+import NewFolder from './NewFolder';
 import ChatHistoryList from './ChatHistoryList';
 import MenuOptions from './MenuOptions';
 
@@ -36,9 +37,12 @@ const Menu = () => {
         }`}
       >
         <div className='flex h-full min-h-0 flex-col'>
-          <div className='scrollbar-trigger flex h-full w-full flex-1 items-start border-white/20'>
-            <nav className='flex h-full flex-1 flex-col space-y-1 p-2'>
-              <NewChat />
+          <div className='flex h-full w-full flex-1 items-start border-white/20'>
+            <nav className='flex h-full flex-1 flex-col space-y-1 px-2 pt-2'>
+              <div className='flex gap-2'>
+                <NewChat />
+                <NewFolder />
+              </div>
               <ChatHistoryList />
               <MenuOptions />
             </nav>

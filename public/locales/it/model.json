@@ -1,0 +1,28 @@
+{
+  "configuration": "Configurazione",
+  "model": "Modello",
+  "token": {
+    "label": "Token Massimo",
+    "description": "Il numero massimo di token da generare nel completamento della chat. La lunghezza totale dei token in ingresso e di quelli generati è limitata dalla lunghezza del contesto del modello."
+  },
+  "default": "Default",
+  "temperature": {
+    "label": "Temperatura",
+    "description": "Quale temperatura di campionamento utilizzare, tra 0 e 2. Valori più alti, come 0,8, renderanno l'output più casuale, mentre valori più bassi, come 0,2, lo renderanno più mirato e deterministico. In genere si consiglia di modificare questo valore o quello superiore, ma non entrambi. (Valore predefinito: 1)"
+  },
+  "presencePenalty": {
+    "label": "Presenza Penalità",
+    "description": "Numero compreso tra -2,0 e 2,0. I valori positivi penalizzano i nuovi token in base alla loro presenza nel testo, aumentando la probabilità che il modello parli di nuovi argomenti. (Valore predefinito: 0)"
+  },
+  "topP": {
+    "label": "Top-p",
+    "description": "Numero compreso tra 0 e 1. Un'alternativa al campionamento con temperatura, chiamato campionamento del nucleo, in cui il modello considera i risultati dei token con la massa di probabilità p più alta. Quindi 0,1 significa che vengono considerati solo i token che comprendono il 10% della massa di probabilità. In genere si consiglia di modificare questo parametro o la temperatura, ma non entrambi. (Predefinito: 1)"
+  },
+  "frequencyPenalty": {
+    "label": "Penalità di frequenza",
+    "description": "Numero compreso tra -2,0 e 2,0. I valori positivi penalizzano i nuovi token in base alla loro frequenza nel testo fino a quel momento, diminuendo la probabilità del modello di ripetere testualmente la stessa riga. (Valore predefinito: 0)"
+  },
+  "defaultChatConfig": "Configurazione predefinita della conversazione",
+  "defaultSystemMessage": "Messaggio di sistema predefinito",
+  "resetToDefault": "Ripristina alle impostazioni predefinite"
+}

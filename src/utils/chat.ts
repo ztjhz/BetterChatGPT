@@ -1,63 +1,7 @@
 import html2canvas from 'html2canvas';
 // import jsPDF from 'jspdf';
-import { ChatInterface, ConfigInterface, MessageInterface } from '@type/chat';
-import { roles } from '@type/chat';
+import { ChatInterface } from '@type/chat';
 import { Theme } from '@type/theme';
-import {
-  defaultModel,
-  modelOptions,
-  _defaultChatConfig,
-} from '@constants/chat';
-
-export const validateAndFixChats = (chats: any): chats is ChatInterface[] => {
-  if (!Array.isArray(chats)) return false;
-
-  for (const chat of chats) {
-    if (!(typeof chat.title === 'string') || chat.title === '') return false;
-
-    if (chat.titleSet === undefined) chat.titleSet = false;
-    if (!(typeof chat.titleSet === 'boolean')) return false;
-
-    if (!validateMessage(chat.messages)) return false;
-    if (!validateAndFixChatConfig(chat.config)) return false;
-  }
-
-  return true;
-};
-
-const validateMessage = (messages: MessageInterface[]) => {
-  if (!Array.isArray(messages)) return false;
-  for (const message of messages) {
-    if (!(typeof message.content === 'string')) return false;
-    if (!(typeof message.role === 'string')) return false;
-    if (!roles.includes(message.role)) return false;
-  }
-  return true;
-};
-
-const validateAndFixChatConfig = (config: ConfigInterface) => {
-  if (config === undefined) config = _defaultChatConfig;
-  if (!(typeof config === 'object')) return false;
-
-  if (!config.temperature) config.temperature = _defaultChatConfig.temperature;
-  if (!(typeof config.temperature === 'number')) return false;
-
-  if (!config.presence_penalty)
-    config.presence_penalty = _defaultChatConfig.presence_penalty;
-  if (!(typeof config.presence_penalty === 'number')) return false;
-
-  if (!config.top_p) config.top_p = _defaultChatConfig.top_p;
-  if (!(typeof config.top_p === 'number')) return false;
-
-  if (!config.frequency_penalty)
-    config.frequency_penalty = _defaultChatConfig.frequency_penalty;
-  if (!(typeof config.frequency_penalty === 'number')) return false;
-
-  if (!config.model) config.model = defaultModel;
-  if (!modelOptions.includes(config.model)) return false;
-
-  return true;
-};
 
 export const htmlToImg = async (html: HTMLDivElement) => {
   const needResize = window.innerWidth >= 1024;

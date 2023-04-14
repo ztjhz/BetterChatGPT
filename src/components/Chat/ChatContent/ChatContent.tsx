@@ -34,6 +34,7 @@ const ChatContent = () => {
   );
   const advancedMode = useStore((state) => state.advancedMode);
   const generating = useStore.getState().generating;
+  const hideSideMenu = useStore((state) => state.hideSideMenu);
 
   const saveRef = useRef<HTMLDivElement>(null);
 
@@ -59,7 +60,9 @@ const ChatContent = () => {
             ref={saveRef}
           >
             {advancedMode && <ChatTitle />}
-            {messages?.length === 0 && advancedMode && <NewMessageButton messageIndex={-1} />}
+            {!generating && advancedMode && messages?.length === 0 && (
+              <NewMessageButton messageIndex={-1} />
+            )}
             {messages?.map((message, index) => (
               <React.Fragment key={index}>
                 <Message
@@ -67,7 +70,7 @@ const ChatContent = () => {
                   content={message.content}
                   messageIndex={index}
                 />
-                {advancedMode && <NewMessageButton messageIndex={index} />}
+                {!generating && advancedMode && <NewMessageButton messageIndex={index} />}
               </React.Fragment>
             ))}
           </div>
@@ -93,13 +96,19 @@ const ChatContent = () => {
               </div>
             </div>
           )}
-          <div className='mt-4 flex gap-4 flex-wrap justify-center'>
+          <div
+            className={`mt-4 w-full m-auto  ${
+              hideSideMenu
+                ? 'md:max-w-5xl lg:max-w-5xl xl:max-w-6xl'
+                : 'md:max-w-3xl lg:max-w-3xl xl:max-w-4xl'
+            }`}
+          >
             {useStore.getState().generating || (
-              <>
+              <div className='md:w-[calc(100%-50px)] flex gap-4 flex-wrap justify-center'>
                 <DownloadChat saveRef={saveRef} />
                 <ShareGPT />
                 <CloneChat />
-              </>
+              </div>
             )}
           </div>
           <div className='w-full h-36'></div>

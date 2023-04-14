@@ -5,6 +5,7 @@ import { InputSlice, createInputSlice } from './input-slice';
 import { AuthSlice, createAuthSlice } from './auth-slice';
 import { ConfigSlice, createConfigSlice } from './config-slice';
 import { PromptSlice, createPromptSlice } from './prompt-slice';
+import { ToastSlice, createToastSlice } from './toast-slice';
 import {
   LocalStorageInterfaceV0ToV1,
   LocalStorageInterfaceV1ToV2,
@@ -13,6 +14,7 @@ import {
   LocalStorageInterfaceV4ToV5,
   LocalStorageInterfaceV5ToV6,
   LocalStorageInterfaceV6ToV7,
+  LocalStorageInterfaceV7oV8,
 } from '@type/chat';
 import {
   migrateV0,
@@ -22,18 +24,38 @@ import {
   migrateV4,
   migrateV5,
   migrateV6,
+  migrateV7,
 } from './migrate';
 
 export type StoreState = ChatSlice &
   InputSlice &
   AuthSlice &
   ConfigSlice &
-  PromptSlice;
+  PromptSlice &
+  ToastSlice;
 
 export type StoreSlice<T> = (
   set: StoreApi<StoreState>['setState'],
   get: StoreApi<StoreState>['getState']
 ) => T;
+
+export const createPartializedState = (state: StoreState) => ({
+  chats: state.chats,
+  currentChatIndex: state.currentChatIndex,
+  apiKey: state.apiKey,
+  apiEndpoint: state.apiEndpoint,
+  theme: state.theme,
+  autoTitle: state.autoTitle,
+  advancedMode: state.advancedMode,
+  prompts: state.prompts,
+  defaultChatConfig: state.defaultChatConfig,
+  defaultSystemMessage: state.defaultSystemMessage,
+  hideMenuOptions: state.hideMenuOptions,
+  firstVisit: state.firstVisit,
+  hideSideMenu: state.hideSideMenu,
+  folders: state.folders,
+  enterToSubmit: state.enterToSubmit,
+});
 
 const useStore = create<StoreState>()(
   persist(
@@ -43,28 +65,12 @@ const useStore = create<StoreState>()(
       ...createAuthSlice(set, get),
       ...createConfigSlice(set, get),
       ...createPromptSlice(set, get),
+      ...createToastSlice(set, get),
     }),
     {
       name: 'free-chat-gpt',
-      partialize: (state) => ({
-        chats: state.chats,
-        currentChatIndex: state.currentChatIndex,
-        apiKey: state.apiKey,
-        apiEndpoint: state.apiEndpoint,
-        theme: state.theme,
-        autoTitle: state.autoTitle,
-        advancedMode: state.advancedMode,
-        prompts: state.prompts,
-        defaultChatConfig: state.defaultChatConfig,
-        defaultSystemMessage: state.defaultSystemMessage,
-        hideMenuOptions: state.hideMenuOptions,
-        firstVisit: state.firstVisit,
-        hideSideMenu: state.hideSideMenu,
-        foldersName: state.foldersName,
-        foldersExpanded: state.foldersExpanded,
-        enterToSubmit: state.enterToSubmit,
-      }),
-      version: 7,
+      partialize: (state) => createPartializedState(state),
+      version: 8,
       migrate: (persistedState, version) => {
         switch (version) {
           case 0:
@@ -81,6 +87,8 @@ const useStore = create<StoreState>()(
             migrateV5(persistedState as LocalStorageInterfaceV5ToV6);
           case 6:
             migrateV6(persistedState as LocalStorageInterfaceV6ToV7);
+          case 7:
+            migrateV7(persistedState as LocalStorageInterfaceV7oV8);
             break;
         }
         return persistedState as StoreState;
