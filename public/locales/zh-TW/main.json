@@ -36,5 +36,6 @@
   "newFolder": "新資料夾",
   "cloneChat": "創建聊天副本",
   "cloned": "已創建副本",
-  "enterToSubmit": "按回車鍵提交"
+  "enterToSubmit": "按回車鍵提交",
+  "submitPlaceholder": "Type a message or click [/] for prompts..."
 }

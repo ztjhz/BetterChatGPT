@@ -1,4 +1,15 @@
 /** @type {import('tailwindcss').Config} */
+
+function parentSiblingHoverPlugin({ addVariant, e }) {
+  addVariant('parent-sibling-hover', ({ modifySelectors, separator }) => {
+    modifySelectors(({ className }) => {
+      return `.parent-sibling:hover ~ .parent .${e(
+        `parent-sibling-hover${separator}${className}`
+      )}`;
+    });
+  });
+}
+
 module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
@@ -52,6 +63,6 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [require('@tailwindcss/typography'), parentSiblingHoverPlugin],
   darkMode: 'class',
 };

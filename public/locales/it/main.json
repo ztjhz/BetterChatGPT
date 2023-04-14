@@ -36,5 +36,6 @@
   "newFolder": "Nuova Cartella",
   "cloneChat": "Duplica Conversazione",
   "cloned": "Duplicata",
-  "enterToSubmit": "Invio per inviare"
+  "enterToSubmit": "Invio per inviare",
+  "submitPlaceholder": "Type a message or click [/] for prompts..."
 }

@@ -10,6 +10,7 @@ import {
 } from '@type/chat';
 
 import ChatHistory from './ChatHistory';
+import NewChat from './NewChat';
 import EditIcon from '@icon/EditIcon';
 import DeleteIcon from '@icon/DeleteIcon';
 import CrossIcon from '@icon/CrossIcon';
@@ -35,6 +36,8 @@ const ChatFolder = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
   const folderRef = useRef<HTMLDivElement>(null);
+  const gradientRef = useRef<HTMLDivElement>(null);
+  const paletteRef = useRef<HTMLDivElement>(null);
 
   const [_folderName, _setFolderName] = useState<string>(folderName);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -142,9 +145,32 @@ const ChatFolder = ({
     if (inputRef && inputRef.current) inputRef.current.focus();
   }, [isEdit]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        paletteRef.current &&
+        !paletteRef.current.contains(event.target as Node)
+      ) {
+        setShowPalette(false);
+      }
+    };
+
+    if (showPalette) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [paletteRef, showPalette]);
+
   return (
     <div
-      className={`w-full transition-colors ${isHover ? 'bg-gray-800/40' : ''}`}
+      className={`w-full transition-colors group/folder ${
+        isHover ? 'bg-gray-800/40' : ''
+      }`}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -153,16 +179,18 @@ const ChatFolder = ({
         style={{ background: color || '' }}
         className={`${
           color ? '' : 'hover:bg-gray-850'
-        } transition-colors flex py-3 px-3 items-center gap-3 relative rounded-md break-all cursor-pointer`}
+        } transition-colors flex py-2 pl-2 pr-1 items-center gap-3 relative rounded-md break-all cursor-pointer parent-sibling`}
         onClick={toggleExpanded}
         ref={folderRef}
         onMouseEnter={() => {
           if (color && folderRef.current)
             folderRef.current.style.background = `${color}dd`;
+          if (gradientRef.current) gradientRef.current.style.width = '0px';
         }}
         onMouseLeave={() => {
           if (color && folderRef.current)
             folderRef.current.style.background = color;
+          if (gradientRef.current) gradientRef.current.style.width = '1rem';
         }}
       >
         <FolderIcon className='h-4 w-4' />
@@ -182,6 +210,19 @@ const ChatFolder = ({
           ) : (
             _folderName
           )}
+          {isEdit || (
+            <div
+              ref={gradientRef}
+              className='absolute inset-y-0 right-0 w-4 z-10 transition-all'
+              style={{
+                background:
+                  color &&
+                  `linear-gradient(to left, ${
+                    color || 'var(--color-900)'
+                  }, rgb(32 33 35 / 0))`,
+              }}
+            />
+          )}
         </div>
         <div
           className='flex text-gray-300'
@@ -198,7 +239,10 @@ const ChatFolder = ({
             </>
           ) : (
             <>
-              <div className='relative'>
+              <div
+                className='relative md:hidden group-hover/folder:md:inline'
+                ref={paletteRef}
+              >
                 <button
                   className='p-1 hover:text-white'
                   onClick={() => {
@@ -233,13 +277,13 @@ const ChatFolder = ({
               </div>
 
               <button
-                className='p-1 hover:text-white'
+                className='p-1 hover:text-white md:hidden group-hover/folder:md:inline'
                 onClick={() => setIsEdit(true)}
               >
                 <EditIcon />
               </button>
               <button
-                className='p-1 hover:text-white'
+                className='p-1 hover:text-white md:hidden group-hover/folder:md:inline'
                 onClick={() => setIsDelete(true)}
               >
                 <DeleteIcon />
@@ -255,7 +299,8 @@ const ChatFolder = ({
           )}
         </div>
       </div>
-      <div className='ml-3 pl-1 border-l-2 border-gray-700 flex flex-col gap-1'>
+      <div className='ml-3 pl-1 border-l-2 border-gray-700 flex flex-col gap-1 parent'>
+        {isExpanded && <NewChat folder={folderId} />}
         {isExpanded &&
           folderChats.map((chat) => (
             <ChatHistory

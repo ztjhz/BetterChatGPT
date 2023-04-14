@@ -10,6 +10,7 @@ const PopupModal = ({
   setIsModalOpen,
   handleConfirm,
   handleClose,
+  handleClickBackdrop,
   cancelButton = true,
   children,
 }: {
@@ -18,6 +19,7 @@ const PopupModal = ({
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   handleConfirm?: () => void;
   handleClose?: () => void;
+  handleClickBackdrop?: () => void;
   cancelButton?: boolean;
   children?: React.ReactElement;
 }) => {
@@ -27,6 +29,11 @@ const PopupModal = ({
   const _handleClose = () => {
     handleClose && handleClose();
     setIsModalOpen(false);
+  };
+
+  const _handleBackdropClose = () => {
+    if (handleClickBackdrop) handleClickBackdrop();
+    else _handleClose();
   };
 
   if (modalRoot) {
@@ -81,7 +88,7 @@ const PopupModal = ({
         </div>
         <div
           className='bg-gray-800/90 absolute top-0 left-0 h-full w-full z-[-1]'
-          onClick={_handleClose}
+          onClick={_handleBackdropClose}
         />
       </div>,
       modalRoot

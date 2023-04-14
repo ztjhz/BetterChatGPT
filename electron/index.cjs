@@ -1,6 +1,6 @@
 const path = require('path');
 
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Tray, Menu } = require('electron');
 const isDev = require('electron-is-dev');
 const { autoUpdater } = require('electron-updater');
 
@@ -11,9 +11,9 @@ const PORT = isDev ? '5173' : '51735';
 function createWindow() {
   let iconPath = '';
   if (isDev) {
-    iconPath = path.join(__dirname, '../public/favicon-516x516.png');
+    iconPath = path.join(__dirname, '../public/icon-rounded.png');
   } else {
-    iconPath = path.join(__dirname, '../dist/favicon-516x516.png');
+    iconPath = path.join(__dirname, '../dist/icon-rounded.png');
   }
   autoUpdater.checkForUpdatesAndNotify();
 
@@ -21,6 +21,14 @@ function createWindow() {
     show: false,
     icon: iconPath,
   });
+
+  createTray(win);
+
+  win.on('minimize', (event) => {
+    event.preventDefault();
+    win.hide();
+  });
+
   win.maximize();
   win.show();
 
@@ -31,7 +39,34 @@ function createWindow() {
   if (isDev) {
     win.webContents.openDevTools({ mode: 'detach' });
   }
+
+  return win;
 }
+
+const createTray = (window) => {
+  const tray = new Tray(
+    path.join(
+      __dirname,
+      isDev ? '../public/icon-rounded.png' : '../dist/icon-rounded.png'
+    )
+  );
+  const contextMenu = Menu.buildFromTemplate([
+    { label: 'Show', click: () => window.show() },
+    {
+      label: 'Exit',
+      click: () => {
+        app.isQuiting = true;
+        app.quit();
+      },
+    },
+  ]);
+
+  tray.on('click', () => window.show());
+  tray.setToolTip('Better ChatGPT');
+  tray.setContextMenu(contextMenu);
+
+  return tray;
+};
 
 app.whenReady().then(createWindow);
 
