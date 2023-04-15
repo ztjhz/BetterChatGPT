@@ -360,14 +360,6 @@ const EditView = ({
           handleSaveAndSubmit();
           resetTextAreaHeight();
         }
-      } else if (!advancedMode) {
-        if (
-          (enterToSubmit && !e.shiftKey) ||
-          (!enterToSubmit && (e.ctrlKey || e.shiftKey))
-        ) {
-          e.preventDefault();
-          setIsModalOpen(true);
-        }
       } else {
         if (e.ctrlKey && e.shiftKey) {
           e.preventDefault();
@@ -511,22 +503,20 @@ const EditViewButtons = React.memo(
             </button>
           )}
 
-          {advancedMode && (
-            <button
-              className={`btn relative mr-2 ${
-                sticky
-                  ? `btn-neutral ${
-                      generating ? 'cursor-not-allowed opacity-40' : ''
-                    }`
-                  : 'btn-primary'
-              }`}
-              onClick={handleSave}
-            >
-              <div className='flex items-center justify-center gap-2'>
-                {t('save')}
-              </div>
-            </button>
-          )}
+          <button
+            className={`btn relative mr-2 ${
+              sticky
+                ? `btn-neutral ${
+                    generating ? 'cursor-not-allowed opacity-40' : ''
+                  }`
+                : 'btn-primary'
+            }`}
+            onClick={handleSave}
+          >
+            <div className='flex items-center justify-center gap-2'>
+              {t('save')}
+            </div>
+          </button>
 
           {sticky || (
             <button
