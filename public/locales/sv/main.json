@@ -24,6 +24,7 @@
   "setting": "Inställningar",
   "image": "Bild",
   "autoTitle": "Auto generera titel",
+  "advancedMode": "Avancerat läge",
   "prompt": "Uppmaning",
   "promptLibrary": "Uppmaningsbibliotek",
   "name": "Namn",

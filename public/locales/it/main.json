@@ -24,6 +24,7 @@
   "setting": "Impostazioni",
   "image": "Immagine",
   "autoTitle": "Genera automaticamente il titolo",
+  "advancedMode": "Modalità avanzata",
   "prompt": "Prompt",
   "promptLibrary": "Libreria Prompt",
   "name": "Nome",

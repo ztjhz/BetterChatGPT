@@ -24,6 +24,7 @@
   "setting": "Innstillinger",
   "image": "Bilde",
   "autoTitle": "Auto generer tittel",
+  "advancedMode": "Avansert modus",
   "prompt": "Oppgave",
   "promptLibrary": "Oppgavebibliotek",
   "name": "Navn",
