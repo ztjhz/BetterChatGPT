@@ -8,6 +8,7 @@ import SettingIcon from '@icon/SettingIcon';
 import ThemeSwitcher from '@components/Menu/MenuOptions/ThemeSwitcher';
 import LanguageSelector from '@components/LanguageSelector';
 import AutoTitleToggle from './AutoTitleToggle';
+import AdvancedModeToggle from './AdvencedModeToggle';
 import PromptLibraryMenu from '@components/PromptLibraryMenu';
 import ChatConfigMenu from '@components/ChatConfigMenu';
 import EnterToSubmitToggle from './EnterToSubmitToggle';
@@ -44,6 +45,7 @@ const SettingsMenu = () => {
             <div className='flex flex-col gap-3'>
               <AutoTitleToggle />
               <EnterToSubmitToggle />
+              <AdvancedModeToggle />
             </div>
             <PromptLibraryMenu />
             <ChatConfigMenu />

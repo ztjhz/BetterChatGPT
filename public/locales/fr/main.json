@@ -24,6 +24,7 @@
   "setting": "Paramètres",
   "image": "Image",
   "autoTitle": "Générer le titre automatiquement",
+  "advancedMode": "Mode avancé",
   "prompt": "Incitation",
   "promptLibrary": "Bibliothèque de prompt",
   "name": "Nom",

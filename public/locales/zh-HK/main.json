@@ -24,6 +24,7 @@
   "setting": "設定",
   "image": "圖片",
   "autoTitle": "自動生成標題",
+  "advancedMode": "高級模式",
   "prompt": "Prompt",
   "promptLibrary": "Prompt 資料庫",
   "name": "名",

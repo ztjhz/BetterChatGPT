@@ -27,6 +27,7 @@ const Message = React.memo(
     sticky?: boolean;
   }) => {
     const hideSideMenu = useStore((state) => state.hideSideMenu);
+    const advancedMode = useStore((state) => state.advancedMode);
 
     return (
       <div
@@ -43,11 +44,12 @@ const Message = React.memo(
         >
           <Avatar role={role} />
           <div className='w-[calc(100%-50px)] '>
-            <RoleSelector
-              role={role}
-              messageIndex={messageIndex}
-              sticky={sticky}
-            />
+            {advancedMode &&
+              <RoleSelector
+                role={role}
+                messageIndex={messageIndex}
+                sticky={sticky}
+              />}
             <MessageContent
               role={role}
               content={content}

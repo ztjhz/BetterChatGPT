@@ -24,6 +24,7 @@
   "setting": "Ajustes",
   "image": "Imagen",
   "autoTitle": "Generar automáticamente el título de la conversación.",
+  "advancedMode": "Modo avanzado",
   "prompt": "Prompt",
   "promptLibrary": "Librería de Prompts",
   "name": "Nombre",
