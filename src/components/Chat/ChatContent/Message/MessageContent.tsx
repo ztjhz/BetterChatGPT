@@ -515,10 +515,10 @@ const EditViewButtons = React.memo(
             <button
               className={`btn relative mr-2 ${
                 sticky
-                ? `btn-neutral ${
-                    generating ? 'cursor-not-allowed opacity-40' : ''
-                  }`
-                : 'btn-primary'
+                  ? `btn-neutral ${
+                      generating ? 'cursor-not-allowed opacity-40' : ''
+                    }`
+                  : 'btn-primary'
               }`}
               onClick={handleSave}
             >
@@ -552,7 +552,7 @@ const EditViewButtons = React.memo(
             </button>
           )}
         </div>
-        {sticky && <TokenCount />}
+        {sticky && advancedMode && <TokenCount />}
         <CommandPrompt _setContent={_setContent} />
       </div>
     );
