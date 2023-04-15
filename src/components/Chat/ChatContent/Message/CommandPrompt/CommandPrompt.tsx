@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
 import { matchSorter } from 'match-sorter';
@@ -14,6 +14,7 @@ const CommandPrompt = ({
   const [dropDown, setDropDown] = useState<boolean>(false);
   const [_prompts, _setPrompts] = useState<Prompt[]>(prompts);
   const [input, setInput] = useState<string>('');
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const filteredPrompts = matchSorter(useStore.getState().prompts, input, {
@@ -27,8 +28,29 @@ const CommandPrompt = ({
     setInput('');
   }, [prompts]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropDown(false);
+      }
+    };
+
+    if (dropDown) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownRef, dropDown]);
+
   return (
-    <div className='relative max-wd-sm'>
+    <div className='relative max-wd-sm' ref={dropdownRef}>
       <button
         className='btn btn-neutral btn-small'
         onClick={() => setDropDown(!dropDown)}
