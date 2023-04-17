@@ -25,6 +25,7 @@
   "image": "Imagen",
   "autoTitle": "Generar automáticamente el título de la conversación.",
   "advancedMode": "Modo avanzado",
+  "inlineLatex": "Latex en línea",
   "prompt": "Prompt",
   "promptLibrary": "Librería de Prompts",
   "name": "Nombre",

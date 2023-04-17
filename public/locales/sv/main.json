@@ -25,6 +25,7 @@
   "image": "Bild",
   "autoTitle": "Auto generera titel",
   "advancedMode": "Avancerat läge",
+  "inlineLatex": "Inline Latex",
   "prompt": "Uppmaning",
   "promptLibrary": "Uppmaningsbibliotek",
   "name": "Namn",

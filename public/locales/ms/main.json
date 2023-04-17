@@ -25,6 +25,7 @@
   "image": "Imej",
   "autoTitle": "Jana tajuk secara automatik",
   "advancedMode": "Mod lanjutan",
+  "inlineLatex": "Latex Sebaris",
   "prompt": "Arahan",
   "promptLibrary": "Pustaka Arahan",
   "name": "Nama",

@@ -86,6 +86,7 @@ const ContentView = React.memo(
     const lastMessageIndex = useStore((state) =>
       state.chats ? state.chats[state.currentChatIndex].messages.length - 1 : 0
     );
+    const inlineLatex = useStore((state) => state.inlineLatex);
 
     const handleDelete = () => {
       const updatedChats: ChatInterface[] = JSON.parse(
@@ -139,7 +140,7 @@ const ContentView = React.memo(
           <ReactMarkdown
             remarkPlugins={[
               remarkGfm,
-              [remarkMath, { singleDollarTextMath: false }],
+              [remarkMath, { singleDollarTextMath: inlineLatex }],
             ]}
             rehypePlugins={[
               rehypeKatex,
