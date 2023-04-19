@@ -1,4 +1,4 @@
-import { MessageInterface, ModelOptions, TotalTokenUsed } from '@type/chat';
+import { Role, MessageInterface, ModelOptions, TotalTokenUsed } from '@type/chat';
 
 import useStore from '@store/store';
 
@@ -47,44 +47,72 @@ export const limitMessageTokens = (
   messages: MessageInterface[],
   limit: number = 4096,
   model: ModelOptions
-): MessageInterface[] => {
-  const limitedMessages: MessageInterface[] = [];
-  let tokenCount = 0;
-
-  const isSystemFirstMessage = messages[0]?.role === 'system';
-  let retainSystemMessage = false;
-
-  // Check if the first message is a system message and if it fits within the token limit
-  if (isSystemFirstMessage) {
-    const systemTokenCount = countTokens([messages[0]], model);
-    if (systemTokenCount < limit) {
-      tokenCount += systemTokenCount;
-      retainSystemMessage = true;
-    }
-  }
+): [MessageInterface[], number, number[]] => {
+  // Iterate through preserved messages, adding them to the preservedMessages array
+  let { preservedMessages, preservedIndexes, tokenCount } = messages.reduce(
+    (
+      accumulator: {
+        preservedMessages: Array<{
+          index: number;
+          role: Role;
+          content: string;
+        }>;
+        preservedIndexes: number[];
+        tokenCount: number;
+      },
+      message,
+      index
+    ) => {
+      if (message.preserve) {
+        accumulator.preservedMessages.push({
+          index: index,
+          role: message.role,
+          content: message.content,
+        });
+        accumulator.preservedIndexes.push(index);
+        accumulator.tokenCount += countTokens(
+          [{ role: message.role, content: message.content }],
+          model
+        );
+      }
+      return accumulator;
+    },
+    { preservedMessages: [], preservedIndexes: [], tokenCount: 0 }
+  );
 
   // Iterate through messages in reverse order, adding them to the limitedMessages array
-  // until the token limit is reached (excludes first message)
-  for (let i = messages.length - 1; i >= 1; i--) {
-    const count = countTokens([messages[i]], model);
-    if (count + tokenCount > limit) break;
-    tokenCount += count;
-    limitedMessages.unshift({ ...messages[i] });
-  }
-
-  // Process first message
-  if (retainSystemMessage) {
-    // Insert the system message in the third position from the end
-    limitedMessages.splice(-3, 0, { ...messages[0] });
-  } else if (!isSystemFirstMessage) {
-    // Check if the first message (non-system) can fit within the limit
-    const firstMessageTokenCount = countTokens([messages[0]], model);
-    if (firstMessageTokenCount + tokenCount < limit) {
-      limitedMessages.unshift({ ...messages[0] });
+  // if the token limit has not been reached
+  if (tokenCount < limit) {
+    for (let i = messages.length - 1; i >= 0; i--) {
+      if (!preservedIndexes.includes(i)) {
+        const count = countTokens(
+          [{ role: messages[i].role, content: messages[i].content }],
+          model
+        );
+        // TODO: continue and find smaller messages,
+        // or preserve previous behavior?
+        if (count + tokenCount > limit) break;
+        tokenCount += count;
+        preservedIndexes.push(i);
+        preservedMessages.push({
+          index: i,
+          role: messages[i].role,
+          content: messages[i].content,
+        });
+      }
     }
   }
 
-  return limitedMessages;
+  // Finally, sort preserved messages and only return the role and content
+  // along with the tokenCount
+  // and indexes that are in context
+  return [
+    preservedMessages
+      .sort((a, b) => a.index - b.index)
+      .map(({ role, content }) => ({ role, content })),
+    tokenCount,
+    preservedIndexes,
+  ];
 };
 
 export const updateTotalTokenUsed = (

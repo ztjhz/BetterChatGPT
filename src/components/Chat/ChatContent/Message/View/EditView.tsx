@@ -14,11 +14,15 @@ const EditView = ({
   content,
   setIsEdit,
   messageIndex,
+  tokenCount,
   sticky,
+  preserve,
 }: {
   content: string;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   messageIndex: number;
+  tokenCount: number;
+  preserve?: boolean;
   sticky?: boolean;
 }) => {
   const inputRole = useStore((state) => state.inputRole);
@@ -141,6 +145,7 @@ const EditView = ({
       </div>
       <EditViewButtons
         sticky={sticky}
+        tokenCount={tokenCount}
         handleSaveAndSubmit={handleSaveAndSubmit}
         handleSave={handleSave}
         setIsModalOpen={setIsModalOpen}
@@ -161,6 +166,7 @@ const EditView = ({
 
 const EditViewButtons = memo(
   ({
+    tokenCount,
     sticky = false,
     handleSaveAndSubmit,
     handleSave,
@@ -168,6 +174,7 @@ const EditViewButtons = memo(
     setIsEdit,
     _setContent,
   }: {
+    tokenCount: number;
     sticky?: boolean;
     handleSaveAndSubmit: () => void;
     handleSave: () => void;
@@ -234,7 +241,7 @@ const EditViewButtons = memo(
             </button>
           )}
         </div>
-        {sticky && advancedMode && <TokenCount />}
+        {sticky && advancedMode && <TokenCount tokenCount={tokenCount} />}
         <CommandPrompt _setContent={_setContent} />
       </div>
     );

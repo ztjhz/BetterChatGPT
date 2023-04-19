@@ -19,11 +19,17 @@ const Message = React.memo(
     role,
     content,
     messageIndex,
+    tokenCount,
+    inContext,
+    preserve,
     sticky = false,
   }: {
     role: Role;
     content: string;
     messageIndex: number;
+    tokenCount: number;
+    inContext: boolean;
+    preserve: boolean;
     sticky?: boolean;
   }) => {
     const hideSideMenu = useStore((state) => state.hideSideMenu);
@@ -33,6 +39,10 @@ const Message = React.memo(
       <div
         className={`w-full border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group ${
           backgroundStyle[messageIndex % 2]
+        } ${
+          inContext
+          ? 'opacity-100'
+          : 'opacity-25 hover:opacity-100'
         }`}
       >
         <div
@@ -44,17 +54,21 @@ const Message = React.memo(
         >
           <Avatar role={role} />
           <div className='w-[calc(100%-50px)] '>
-            {advancedMode &&
+            {advancedMode && (
               <RoleSelector
                 role={role}
                 messageIndex={messageIndex}
                 sticky={sticky}
-              />}
+              />
+            )}
             <MessageContent
               role={role}
               content={content}
               messageIndex={messageIndex}
+              tokenCount={tokenCount}
+              inContext={inContext}
               sticky={sticky}
+              preserve={preserve}
             />
           </div>
         </div>

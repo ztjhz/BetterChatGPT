@@ -52,10 +52,10 @@ const useSubmit = () => {
     if (generating || !chats) return;
 
     const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
-
     updatedChats[currentChatIndex].messages.push({
       role: 'assistant',
       content: '',
+      // preserve: false
     });
 
     setChats(updatedChats);
@@ -66,12 +66,14 @@ const useSubmit = () => {
       if (chats[currentChatIndex].messages.length === 0)
         throw new Error('No messages submitted!');
 
-      const messages = limitMessageTokens(
+      const [messages, tokenCount, _] = limitMessageTokens(
         chats[currentChatIndex].messages,
         chats[currentChatIndex].config.max_tokens,
-        chats[currentChatIndex].config.model
+        chats[currentChatIndex].config.model,
       );
-      if (messages.length === 0) throw new Error('Message exceed max token!');
+      
+      if (tokenCount > chats[currentChatIndex].config.max_tokens)
+        throw new Error('Message exceed max tokens! Try unpreserving some messages');
 
       // no api key (free)
       if (!apiKey || apiKey.length === 0) {
@@ -193,6 +195,7 @@ const useSubmit = () => {
         }
       }
     } catch (e: unknown) {
+      updatedChats[currentChatIndex].messages.pop()
       const err = (e as Error).message;
       console.log(err);
       setError(err);

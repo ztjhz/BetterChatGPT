@@ -8,12 +8,18 @@ const MessageContent = ({
   role,
   content,
   messageIndex,
+  tokenCount,
+  preserve,
+  inContext,
   sticky = false,
 }: {
   role: string;
   content: string;
   messageIndex: number;
-  sticky?: boolean;
+  tokenCount: number;
+  inContext: boolean;
+  preserve: boolean;
+  sticky: boolean;
 }) => {
   const [isEdit, setIsEdit] = useState<boolean>(sticky);
   const advancedMode = useStore((state) => state.advancedMode);
@@ -26,6 +32,8 @@ const MessageContent = ({
           content={content}
           setIsEdit={setIsEdit}
           messageIndex={messageIndex}
+          tokenCount={tokenCount}
+          preserve={preserve}
           sticky={sticky}
         />
       ) : (
@@ -34,6 +42,9 @@ const MessageContent = ({
           content={content}
           setIsEdit={setIsEdit}
           messageIndex={messageIndex}
+          // tokenCount={tokenCount}
+          inContext={inContext}
+          preserve={preserve}
         />
       )}
     </div>
