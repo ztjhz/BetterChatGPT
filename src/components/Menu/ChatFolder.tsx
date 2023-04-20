@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useStore from '@store/store';
-import { hideOnClickOutside } from '@utils/handleClick';
 
 import DownChevronArrow from '@icon/DownChevronArrow';
 import FolderIcon from '@icon/FolderIcon';
@@ -21,6 +20,8 @@ import RefreshIcon from '@icon/RefreshIcon';
 
 import { folderColorOptions } from '@constants/color';
 
+import useHideOnOutsideClick from '@hooks/useHideOnOutsideClick';
+
 const ChatFolder = ({
   folderChats,
   folderId,
@@ -38,13 +39,13 @@ const ChatFolder = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const folderRef = useRef<HTMLDivElement>(null);
   const gradientRef = useRef<HTMLDivElement>(null);
-  const paletteRef = useRef<HTMLDivElement>(null);
 
   const [_folderName, _setFolderName] = useState<string>(folderName);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isDelete, setIsDelete] = useState<boolean>(false);
   const [isHover, setIsHover] = useState<boolean>(false);
-  const [showPalette, setShowPalette] = useState<boolean>(false);
+
+  const [showPalette, setShowPalette, paletteRef] = useHideOnOutsideClick();
 
   const editTitle = () => {
     const updatedFolders: FolderCollection = JSON.parse(
@@ -145,10 +146,6 @@ const ChatFolder = ({
   useEffect(() => {
     if (inputRef && inputRef.current) inputRef.current.focus();
   }, [isEdit]);
-
-  useEffect(() => {
-    hideOnClickOutside(paletteRef, showPalette, setShowPalette);
-  }, [paletteRef, showPalette]);
 
   return (
     <div

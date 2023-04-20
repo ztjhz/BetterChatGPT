@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
-import { hideOnClickOutside } from '@utils/handleClick';
 
 import DownChevronArrow from '@icon/DownChevronArrow';
 import { ChatInterface, Role, roles } from '@type/chat';
+
+import useHideOnOutsideClick from '@hooks/useHideOnOutsideClick';
 
 const RoleSelector = React.memo(
   ({
@@ -21,12 +22,7 @@ const RoleSelector = React.memo(
     const setChats = useStore((state) => state.setChats);
     const currentChatIndex = useStore((state) => state.currentChatIndex);
 
-    const [dropDown, setDropDown] = useState<boolean>(false);
-    const dropDownRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-      hideOnClickOutside(dropDownRef, dropDown, setDropDown);
-    }, [dropDownRef, dropDown]);
+    const [dropDown, setDropDown, dropDownRef] = useHideOnOutsideClick();
 
     return (
       <div className='prose dark:prose-invert relative'>
