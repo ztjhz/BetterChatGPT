@@ -14,7 +14,6 @@ const useHideOnOutsideClick = (): [
       !elementRef.current.contains(event.target as Node)
     ) {
       setShowElement(false);
-      console.log(Math.random());
     }
   };
 
