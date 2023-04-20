@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useStore from '@store/store';
+import { hideOnClickOutside } from '@utils/handleClick';
 
 import DownChevronArrow from '@icon/DownChevronArrow';
 import FolderIcon from '@icon/FolderIcon';
@@ -146,24 +147,7 @@ const ChatFolder = ({
   }, [isEdit]);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        paletteRef.current &&
-        !paletteRef.current.contains(event.target as Node)
-      ) {
-        setShowPalette(false);
-      }
-    };
-
-    if (showPalette) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    hideOnClickOutside(paletteRef, showPalette, setShowPalette);
   }, [paletteRef, showPalette]);
 
   return (

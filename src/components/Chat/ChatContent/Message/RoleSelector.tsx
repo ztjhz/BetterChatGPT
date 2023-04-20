@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
+import { hideOnClickOutside } from '@utils/handleClick';
 
 import DownChevronArrow from '@icon/DownChevronArrow';
 import { ChatInterface, Role, roles } from '@type/chat';
@@ -23,25 +24,8 @@ const RoleSelector = React.memo(
     const [dropDown, setDropDown] = useState<boolean>(false);
     const dropDownRef = useRef<HTMLDivElement>(null);
 
-    const handleClickOutside = useCallback(
-      (event: any) => {
-        if (dropDownRef.current && !dropDownRef.current.contains(event.target))
-          setDropDown(false);
-      },
-      [dropDownRef, setDropDown, messageIndex]
-    );
-
     useEffect(() => {
-      // Bind the event listener only if the dropdown is open.
-      if (dropDown) {
-        document.addEventListener('mousedown', handleClickOutside);
-      } else {
-        document.removeEventListener('mousedown', handleClickOutside);
-      }
-
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
+      hideOnClickOutside(dropDownRef, dropDown, setDropDown);
     }, [dropDownRef, dropDown]);
 
     return (
