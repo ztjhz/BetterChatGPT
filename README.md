@@ -1,4 +1,4 @@
-<h1 align="center"><b>Better ChatGPT - Koala's Personal Fork</b></h1>
+<h1 align="center"><b>Better ChatGPT - jackschedel's Personal Fork</b></h1>
 
 <p align="center">
     <a href="https://gpt.koaladev.io" target="_blank"><img src="public/apple-touch-icon.png" alt="Better ChatGPT Icon" width="100" /></a>
@@ -7,23 +7,19 @@
 <h4 align="center"><b>Free, Powerful, Limitless, Intelligent, Engaging</b></h4>
 
 <p align="center">
-<a href="https://github.com/ztjhz/BetterChatGPT/blob/main/LICENSE" target="_blank">
-<img src="https://img.shields.io/github/license/ztjhz/BetterChatGPT?style=flat-square" alt="licence" />
+<a href="https://github.com/jackschedel/BetterChatGPT/blob/main/LICENSE" target="_blank">
+<img src="https://img.shields.io/github/license/jackschedel/BetterChatGPT?style=flat-square" alt="licence" />
 </a>
-<a href="https://github.com/ztjhz/BetterChatGPT/fork" target="_blank">
-<img src="https://img.shields.io/github/forks/ztjhz/BetterChatGPT?style=flat-square" alt="forks"/>
+<a href="https://github.com/jackschedel/BetterChatGPT/issues" target="_blank">
+<img src="https://img.shields.io/github/issues/jackschedel/BetterChatGPT?style=flat-square" alt="issues"/>
 </a>
-<a href="https://github.com/ztjhz/BetterChatGPT/stargazers" target="_blank">
-<img src="https://img.shields.io/github/stars/ztjhz/BetterChatGPT?style=flat-square" alt="stars"/>
+<a href="https://github.com/jackschedel/BetterChatGPT/pulls" target="_blank">
+<img src="https://img.shields.io/github/issues-pr/jackschedel/BetterChatGPT?style=flat-square" alt="pull-requests"/>
 </a>
-<a href="https://github.com/ztjhz/BetterChatGPT/issues" target="_blank">
-<img src="https://img.shields.io/github/issues/ztjhz/BetterChatGPT?style=flat-square" alt="issues"/>
-</a>
-<a href="https://github.com/ztjhz/BetterChatGPT/pulls" target="_blank">
-<img src="https://img.shields.io/github/issues-pr/ztjhz/BetterChatGPT?style=flat-square" alt="pull-requests"/>
-</a>
-<a href="https://twitter.com/intent/tweet?text=👋%20Check%20this%20amazing%20repo%20https://github.com/ztjhz/BetterChatGPT,%20created%20by%20@nikushii_"><img src="https://img.shields.io/twitter/url?label=Share%20on%20Twitter&style=social&url=https%3A%2F%2Fgithub.com%2Fztjhz%2FBetterChatGPT"></a>
-</p>
+
+
+<b>!!! This repo is currently a mirror of ztjhz/BetterChatGPT. It can be found at https://gpt.koaladev.io/. I plan on adding some expanded functionality, but it is currently the same as the base BetterChatGPT. !!!</b>
+
 
 ## 👋🏻 Introducing Better ChatGPT
 
@@ -32,6 +28,7 @@
         <img src="assets/preview.png" alt="landing" width=500 />
     </a>
 </p>
+
 
 Are you ready to unlock the full potential of ChatGPT with Better ChatGPT?
 
