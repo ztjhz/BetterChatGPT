@@ -29,6 +29,8 @@ import DownButton from './Button/DownButton';
 import CopyButton from './Button/CopyButton';
 import EditButton from './Button/EditButton';
 import DeleteButton from './Button/DeleteButton';
+import MarkdownModeButton from './Button/MarkdownModeButton';
+
 import CodeBlock from '../CodeBlock';
 
 const ContentView = memo(
@@ -44,13 +46,16 @@ const ContentView = memo(
     messageIndex: number;
   }) => {
     const { handleSubmit } = useSubmit();
+
     const [isDelete, setIsDelete] = useState<boolean>(false);
+
     const currentChatIndex = useStore((state) => state.currentChatIndex);
     const setChats = useStore((state) => state.setChats);
     const lastMessageIndex = useStore((state) =>
       state.chats ? state.chats[state.currentChatIndex].messages.length - 1 : 0
     );
     const inlineLatex = useStore((state) => state.inlineLatex);
+    const markdownMode = useStore((state) => state.markdownMode);
 
     const handleDelete = () => {
       const updatedChats: ChatInterface[] = JSON.parse(
@@ -101,30 +106,34 @@ const ContentView = memo(
     return (
       <>
         <div className='markdown prose w-full md:max-w-full break-words dark:prose-invert dark share-gpt-message'>
-          <ReactMarkdown
-            remarkPlugins={[
-              remarkGfm,
-              [remarkMath, { singleDollarTextMath: inlineLatex }],
-            ]}
-            rehypePlugins={[
-              rehypeKatex,
-              [
-                rehypeHighlight,
-                {
-                  detect: true,
-                  ignoreMissing: true,
-                  subset: codeLanguageSubset,
-                },
-              ],
-            ]}
-            linkTarget='_new'
-            components={{
-              code,
-              p,
-            }}
-          >
-            {content}
-          </ReactMarkdown>
+          {markdownMode ? (
+            <ReactMarkdown
+              remarkPlugins={[
+                remarkGfm,
+                [remarkMath, { singleDollarTextMath: inlineLatex }],
+              ]}
+              rehypePlugins={[
+                rehypeKatex,
+                [
+                  rehypeHighlight,
+                  {
+                    detect: true,
+                    ignoreMissing: true,
+                    subset: codeLanguageSubset,
+                  },
+                ],
+              ]}
+              linkTarget='_new'
+              components={{
+                code,
+                p,
+              }}
+            >
+              {content}
+            </ReactMarkdown>
+          ) : (
+            <span className='whitespace-pre-wrap'>{content}</span>
+          )}
         </div>
         <div className='flex justify-end gap-2 w-full mt-2'>
           {isDelete || (
@@ -139,6 +148,7 @@ const ContentView = memo(
                 <DownButton onClick={handleMoveDown} />
               )}
 
+              <MarkdownModeButton />
               <CopyButton onClick={handleCopy} />
               <EditButton setIsEdit={setIsEdit} />
               <DeleteButton setIsDelete={setIsDelete} />

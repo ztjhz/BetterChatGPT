@@ -14,6 +14,7 @@ export interface ConfigSlice {
   hideSideMenu: boolean;
   enterToSubmit: boolean;
   inlineLatex: boolean;
+  markdownMode: boolean;
   setOpenConfig: (openConfig: boolean) => void;
   setTheme: (theme: Theme) => void;
   setAutoTitle: (autoTitle: boolean) => void;
@@ -24,6 +25,7 @@ export interface ConfigSlice {
   setHideSideMenu: (hideSideMenu: boolean) => void;
   setEnterToSubmit: (enterToSubmit: boolean) => void;
   setInlineLatex: (inlineLatex: boolean) => void;
+  setMarkdownMode: (markdownMode: boolean) => void;
 }
 
 export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
@@ -37,6 +39,7 @@ export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
   defaultChatConfig: _defaultChatConfig,
   defaultSystemMessage: _defaultSystemMessage,
   inlineLatex: false,
+  markdownMode: true,
   setOpenConfig: (openConfig: boolean) => {
     set((prev: ConfigSlice) => ({
       ...prev,
@@ -95,6 +98,12 @@ export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
     set((prev: ConfigSlice) => ({
       ...prev,
       inlineLatex: inlineLatex,
+    }));
+  },
+  setMarkdownMode: (markdownMode: boolean) => {
+    set((prev: ConfigSlice) => ({
+      ...prev,
+      markdownMode: markdownMode,
     }));
   },
 });
