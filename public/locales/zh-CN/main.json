@@ -24,6 +24,8 @@
   "setting": "设置",
   "image": "图片",
   "autoTitle": "自动生成标题",
+  "advancedMode": "高级模式",
+  "inlineLatex": "行内 Latex",
   "prompt": "提示词",
   "promptLibrary": "提示词资料库",
   "name": "名称",

@@ -24,6 +24,8 @@
   "setting": "Indstillinger",
   "image": "Billede",
   "autoTitle": "Auto generer titel",
+  "advancedMode": "Avanceret tilstand",
+  "inlineLatex": "Indlejret LaTeX",
   "prompt": "Opgave",
   "promptLibrary": "Opgavebibliotek",
   "name": "Navn",

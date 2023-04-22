@@ -24,6 +24,8 @@
   "setting": "設定",
   "image": "圖片",
   "autoTitle": "自動生成標題",
+  "advancedMode": "高級模式",
+  "inlineLatex": "行內 Latex",
   "prompt": "提示詞",
   "promptLibrary": "提示詞資料庫",
   "name": "名稱",

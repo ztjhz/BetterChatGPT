@@ -24,6 +24,8 @@
   "setting": "Settings",
   "image": "Image",
   "autoTitle": "Auto generate title",
+  "advancedMode": "Advanced mode",
+  "inlineLatex": "Inline Latex",
   "prompt": "Prompt",
   "promptLibrary": "Prompt Library",
   "name": "Name",

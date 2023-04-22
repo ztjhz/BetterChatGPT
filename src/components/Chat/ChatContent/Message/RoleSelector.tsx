@@ -5,6 +5,8 @@ import useStore from '@store/store';
 import DownChevronArrow from '@icon/DownChevronArrow';
 import { ChatInterface, Role, roles } from '@type/chat';
 
+import useHideOnOutsideClick from '@hooks/useHideOnOutsideClick';
+
 const RoleSelector = React.memo(
   ({
     role,
@@ -20,29 +22,7 @@ const RoleSelector = React.memo(
     const setChats = useStore((state) => state.setChats);
     const currentChatIndex = useStore((state) => state.currentChatIndex);
 
-    const [dropDown, setDropDown] = useState<boolean>(false);
-    const dropDownRef = useRef<HTMLDivElement>(null);
-
-    const handleClickOutside = useCallback(
-      (event: any) => {
-        if (dropDownRef.current && !dropDownRef.current.contains(event.target))
-          setDropDown(false);
-      },
-      [dropDownRef, setDropDown, messageIndex]
-    );
-
-    useEffect(() => {
-      // Bind the event listener only if the dropdown is open.
-      if (dropDown) {
-        document.addEventListener('mousedown', handleClickOutside);
-      } else {
-        document.removeEventListener('mousedown', handleClickOutside);
-      }
-
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    }, [dropDownRef, dropDown]);
+    const [dropDown, setDropDown, dropDownRef] = useHideOnOutsideClick();
 
     return (
       <div className='prose dark:prose-invert relative'>

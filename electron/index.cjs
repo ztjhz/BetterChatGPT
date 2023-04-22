@@ -106,7 +106,9 @@ const createServer = () => {
   const server = http.createServer((request, response) => {
     // Get the file path from the URL
     let filePath =
-      request.url === '/' ? '../dist/index.html' : `../dist/${request.url}`;
+      request.url === '/'
+        ? `${path.join(__dirname, '../dist/index.html')}`
+        : `${path.join(__dirname, `../dist/${request.url}`)}`;
 
     // Get the file extension from the filePath
     let extname = path.extname(filePath);

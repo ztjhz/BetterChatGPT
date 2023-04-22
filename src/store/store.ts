@@ -46,6 +46,7 @@ export const createPartializedState = (state: StoreState) => ({
   apiEndpoint: state.apiEndpoint,
   theme: state.theme,
   autoTitle: state.autoTitle,
+  advancedMode: state.advancedMode,
   prompts: state.prompts,
   defaultChatConfig: state.defaultChatConfig,
   defaultSystemMessage: state.defaultSystemMessage,
@@ -54,6 +55,8 @@ export const createPartializedState = (state: StoreState) => ({
   hideSideMenu: state.hideSideMenu,
   folders: state.folders,
   enterToSubmit: state.enterToSubmit,
+  inlineLatex: state.inlineLatex,
+  markdownMode: state.markdownMode,
 });
 
 const useStore = create<StoreState>()(

@@ -24,6 +24,8 @@
   "setting": "設定",
   "image": "画像",
   "autoTitle": "タイトルを自動生成",
+  "advancedMode": "上級モード",
+  "inlineLatex": "インライン LaTeX",
   "prompt": "プロンプト",
   "promptLibrary": "プロンプトライブラリ",
   "name": "名前",
