@@ -30,6 +30,9 @@
   "promptLibrary": "Prompt 資料庫",
   "name": "名",
   "search": "檢索",
+  "total": "合計",
+  "resetCost": "重置費用",
+  "countTotalTokens": "計算總 Token 數",
   "morePrompts": "如果你想揾更多 prompt，撳呢度：",
   "postOnShareGPT": {
     "title": "po 上 ShareGPT",

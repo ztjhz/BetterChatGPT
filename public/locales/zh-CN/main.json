@@ -30,6 +30,9 @@
   "promptLibrary": "提示词资料库",
   "name": "名称",
   "search": "搜索",
+  "total": "合计",
+  "resetCost": "重置费用",
+  "countTotalTokens": "计算总 Token 数",
   "morePrompts": "更多提示词请点击：",
   "postOnShareGPT": {
     "title": "发布至 ShareGPT",

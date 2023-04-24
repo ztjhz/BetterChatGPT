@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ChatInterface, MessageInterface } from '@type/chat';
 import { getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
-import { limitMessageTokens } from '@utils/messageUtils';
+import { limitMessageTokens, updateTotalTokenUsed } from '@utils/messageUtils';
 import { _defaultChatConfig } from '@constants/chat';
 import { officialAPIEndpoint } from '@constants/auth';
 
@@ -141,8 +141,21 @@ const useSubmit = () => {
         stream.cancel();
       }
 
-      // generate title for new chats
+      // update tokens used in chatting
       const currChats = useStore.getState().chats;
+      const countTotalTokens = useStore.getState().countTotalTokens;
+
+      if (currChats && countTotalTokens) {
+        const model = currChats[currentChatIndex].config.model;
+        const messages = currChats[currentChatIndex].messages;
+        updateTotalTokenUsed(
+          model,
+          messages.slice(0, -1),
+          messages[messages.length - 1]
+        );
+      }
+
+      // generate title for new chats
       if (
         useStore.getState().autoTitle &&
         currChats &&
@@ -169,6 +182,15 @@ const useSubmit = () => {
         updatedChats[currentChatIndex].title = title;
         updatedChats[currentChatIndex].titleSet = true;
         setChats(updatedChats);
+
+        // update tokens used for generating title
+        if (countTotalTokens) {
+          const model = currChats[currentChatIndex].config.model;
+          updateTotalTokenUsed(model, [message], {
+            role: 'assistant',
+            content: title,
+          });
+        }
       }
     } catch (e: unknown) {
       const err = (e as Error).message;

@@ -30,6 +30,9 @@
   "promptLibrary": "Prompt Library",
   "name": "Name",
   "search": "Search",
+  "total": "Total",
+  "resetCost": "Reset Costs",
+  "countTotalTokens": "Count total tokens",
   "morePrompts": "You can find more prompts here: ",
   "postOnShareGPT": {
     "title": "Post on ShareGPT",

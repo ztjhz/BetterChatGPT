@@ -30,6 +30,9 @@
   "promptLibrary": "プロンプトライブラリ",
   "name": "名前",
   "search": "検索",
+  "total": "合計",
+  "resetCost": "コストをリセットする",
+  "countTotalTokens": "トークンの合計数をカウント",
   "morePrompts": "ここでさらにプロンプトを見つけることができます：",
   "postOnShareGPT": {
     "title": "ShareGPTに投稿",
