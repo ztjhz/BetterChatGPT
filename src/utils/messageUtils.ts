@@ -1,4 +1,6 @@
-import { MessageInterface, ModelOptions } from '@type/chat';
+import { MessageInterface, ModelOptions, TotalTokenUsed } from '@type/chat';
+
+import useStore from '@store/store';
 
 import { Tiktoken } from '@dqbd/tiktoken/lite';
 const cl100k_base = await import('@dqbd/tiktoken/encoders/cl100k_base.json');
@@ -57,6 +59,28 @@ export const limitMessageTokens = (
   }
 
   return limitedMessages;
+};
+
+export const updateTotalTokenUsed = (
+  model: ModelOptions,
+  promptMessages: MessageInterface[],
+  completionMessage: MessageInterface
+) => {
+  const setTotalTokenUsed = useStore.getState().setTotalTokenUsed;
+  const updatedTotalTokenUsed: TotalTokenUsed = JSON.parse(
+    JSON.stringify(useStore.getState().totalTokenUsed)
+  );
+
+  const newPromptTokens = countTokens(promptMessages, model);
+  const newCompletionTokens = countTokens([completionMessage], model);
+  const { promptTokens = 0, completionTokens = 0 } =
+    updatedTotalTokenUsed[model] ?? {};
+
+  updatedTotalTokenUsed[model] = {
+    promptTokens: promptTokens + newPromptTokens,
+    completionTokens: completionTokens + newCompletionTokens,
+  };
+  setTotalTokenUsed(updatedTotalTokenUsed);
 };
 
 export default countTokens;

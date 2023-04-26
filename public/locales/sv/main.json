@@ -30,6 +30,9 @@
   "promptLibrary": "Uppmaningsbibliotek",
   "name": "Namn",
   "search": "Sök",
+  "total": "Total",
+  "resetCost": "Återställ kostnader",
+  "countTotalTokens": "Räkna totala token",
   "morePrompts": "Du kan hitta fler uppmaningar här: ",
   "postOnShareGPT": {
     "title": "Inlägg på ShareGPT",

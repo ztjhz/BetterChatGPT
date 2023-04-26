@@ -1,6 +1,6 @@
 import { StoreSlice } from './store';
 import { Theme } from '@type/theme';
-import { ConfigInterface } from '@type/chat';
+import { ConfigInterface, TotalTokenUsed } from '@type/chat';
 import { _defaultChatConfig, _defaultSystemMessage } from '@constants/chat';
 
 export interface ConfigSlice {
@@ -15,6 +15,8 @@ export interface ConfigSlice {
   enterToSubmit: boolean;
   inlineLatex: boolean;
   markdownMode: boolean;
+  countTotalTokens: boolean;
+  totalTokenUsed: TotalTokenUsed;
   setOpenConfig: (openConfig: boolean) => void;
   setTheme: (theme: Theme) => void;
   setAutoTitle: (autoTitle: boolean) => void;
@@ -26,6 +28,8 @@ export interface ConfigSlice {
   setEnterToSubmit: (enterToSubmit: boolean) => void;
   setInlineLatex: (inlineLatex: boolean) => void;
   setMarkdownMode: (markdownMode: boolean) => void;
+  setCountTotalTokens: (countTotalTokens: boolean) => void;
+  setTotalTokenUsed: (totalTokenUsed: TotalTokenUsed) => void;
 }
 
 export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
@@ -40,6 +44,8 @@ export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
   defaultSystemMessage: _defaultSystemMessage,
   inlineLatex: false,
   markdownMode: true,
+  countTotalTokens: false,
+  totalTokenUsed: {},
   setOpenConfig: (openConfig: boolean) => {
     set((prev: ConfigSlice) => ({
       ...prev,
@@ -104,6 +110,18 @@ export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
     set((prev: ConfigSlice) => ({
       ...prev,
       markdownMode: markdownMode,
+    }));
+  },
+  setCountTotalTokens: (countTotalTokens: boolean) => {
+    set((prev: ConfigSlice) => ({
+      ...prev,
+      countTotalTokens: countTotalTokens,
+    }));
+  },
+  setTotalTokenUsed: (totalTokenUsed: TotalTokenUsed) => {
+    set((prev: ConfigSlice) => ({
+      ...prev,
+      totalTokenUsed: totalTokenUsed,
     }));
   },
 });

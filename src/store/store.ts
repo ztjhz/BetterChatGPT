@@ -57,6 +57,8 @@ export const createPartializedState = (state: StoreState) => ({
   enterToSubmit: state.enterToSubmit,
   inlineLatex: state.inlineLatex,
   markdownMode: state.markdownMode,
+  totalTokenUsed: state.totalTokenUsed,
+  countTotalTokens: state.countTotalTokens,
 });
 
 const useStore = create<StoreState>()(

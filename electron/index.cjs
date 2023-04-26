@@ -24,11 +24,6 @@ function createWindow() {
 
   createTray(win);
 
-  win.on('minimize', (event) => {
-    event.preventDefault();
-    win.hide();
-  });
-
   win.maximize();
   win.show();
 
@@ -51,7 +46,13 @@ const createTray = (window) => {
     )
   );
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'Show', click: () => window.show() },
+    {
+      label: 'Show',
+      click: () => {
+        win.maximize();
+        window.show();
+      },
+    },
     {
       label: 'Exit',
       click: () => {
@@ -61,7 +62,10 @@ const createTray = (window) => {
     },
   ]);
 
-  tray.on('click', () => window.show());
+  tray.on('click', () => {
+    win.maximize();
+    window.show();
+  });
   tray.setToolTip('Better ChatGPT');
   tray.setContextMenu(contextMenu);
 

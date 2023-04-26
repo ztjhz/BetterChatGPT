@@ -42,7 +42,7 @@ Better ChatGPT comes with a bundle of amazing features! Here are some of them:
 
 - Proxy to bypass ChatGPT regional restrictions
 - Prompt library
-- Organize chats into folders
+- Organize chats into folders (with colours)
 - Filter chats and folders
 - Token count and pricing
 - ShareGPT integration
@@ -53,6 +53,8 @@ Better ChatGPT comes with a bundle of amazing features! Here are some of them:
 - Save chat automatically to local storage
 - Import / Export chat
 - Download chat (markdown / image / json)
+- Sync to Google Drive
+- Azure OpenAI endpoint support
 - Multiple language support (i18n)
 
 # 🛠️ Usage

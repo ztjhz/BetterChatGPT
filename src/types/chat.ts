@@ -54,6 +54,12 @@ export type ModelOptions = 'gpt-4' | 'gpt-4-32k' | 'gpt-3.5-turbo';
 // | 'gpt-4-0314'
 // | 'gpt-4-32k-0314'
 
+export type TotalTokenUsed = {
+  [model in ModelOptions]?: {
+    promptTokens: number;
+    completionTokens: number;
+  };
+};
 export interface LocalStorageInterfaceV0ToV1 {
   chats: ChatInterface[];
   currentChatIndex: number;

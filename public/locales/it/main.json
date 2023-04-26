@@ -30,6 +30,9 @@
   "promptLibrary": "Libreria Prompt",
   "name": "Nome",
   "search": "Cerca",
+  "total": "Totale",
+  "resetCost": "Ripristina costi",
+  "countTotalTokens": "Conteggio totale dei token",
   "morePrompts": "Puoi trovare altri prompt qui:",
   "postOnShareGPT": {
     "title": "Pubblica su ShareGPT",

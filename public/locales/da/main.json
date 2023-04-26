@@ -30,6 +30,9 @@
   "promptLibrary": "Opgavebibliotek",
   "name": "Navn",
   "search": "Søg",
+  "total": "Total",
+  "resetCost": "Nulstil Omkostninger",
+  "countTotalTokens": "Tæl totale tokens",
   "morePrompts": "Du kan finde flere opgaver her: ",
   "postOnShareGPT": {
     "title": "Indlæg på ShareGPT",
