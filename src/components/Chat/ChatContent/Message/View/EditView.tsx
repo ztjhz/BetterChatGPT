@@ -78,7 +78,7 @@ const EditView = ({
     const updatedChats: ChatInterface[] = JSON.parse(
       JSON.stringify(useStore.getState().chats)
     );
-    let updatedMessages = updatedChats[currentChatIndex].messages;
+    const updatedMessages = updatedChats[currentChatIndex].messages;
     if (sticky) {
       if (_content !== '') {
         updatedMessages.push({ role: inputRole, content: _content });
