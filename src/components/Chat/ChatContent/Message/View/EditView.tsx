@@ -91,6 +91,7 @@ const EditView = ({
         0,
         messageIndex + 1
       );
+      updatedMessages = updatedChats[currentChatIndex].messages;
       setIsEdit(false);
     }
     setChats(updatedChats);
