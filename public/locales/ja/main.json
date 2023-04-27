@@ -42,5 +42,5 @@
   "cloneChat": "チャットのコピーを作成",
   "cloned": "完了しました",
   "enterToSubmit": "Enterキーを押して送信",
-  "submitPlaceholder": "Type a message or click [/] for prompts..."
+  "submitPlaceholder": "メッセージを入力するか、[/] をクリックしてプロンプトを表示します..."
 }
