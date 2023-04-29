@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import useStore from '@store/store';
 
+import useHideOnOutsideClick from '@hooks/useHideOnOutsideClick';
+
 import PopupModal from '@components/PopupModal';
+
 import { availableEndpoints, defaultAPIEndpoint } from '@constants/auth';
+
 import DownChevronArrow from '@icon/DownChevronArrow';
 
 const ApiMenu = ({
@@ -121,7 +125,7 @@ const ApiEndpointSelector = ({
   _apiEndpoint: string;
   _setApiEndpoint: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const [dropDown, setDropDown] = useState<boolean>(false);
+  const [dropDown, setDropDown, dropDownRef] = useHideOnOutsideClick();
 
   return (
     <div className='w-[40vw] relative flex-1'>
@@ -135,6 +139,7 @@ const ApiEndpointSelector = ({
       </button>
       <div
         id='dropdown'
+        ref={dropDownRef}
         className={`${
           dropDown ? '' : 'hidden'
         } absolute top-100 bottom-100 z-10 bg-white rounded-lg shadow-xl border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group dark:bg-gray-800 opacity-90 w-32 w-full`}
