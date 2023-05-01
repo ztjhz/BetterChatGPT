@@ -34,6 +34,7 @@
   "resetCost": "Ripristina costi",
   "countTotalTokens": "Conteggio totale dei token",
   "morePrompts": "Puoi trovare altri prompt qui:",
+  "clearPrompts": "Cancella prompts",
   "postOnShareGPT": {
     "title": "Pubblica su ShareGPT",
     "warning": "Ti ricordiamo che pubblicando la tua conversazione su ShareGPT, questa diventerà pubblicamente accessibile e visualizzabile da chiunque. Una volta pubblicata, la conversazione non può essere nascosta o cancellata e può essere archiviata o condivisa da altri. Ti consigliamo di valutare attentamente e di evitare di condividere informazioni sensibili o private su questa piattaforma."

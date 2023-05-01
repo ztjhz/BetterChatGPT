@@ -34,6 +34,7 @@
   "resetCost": "重置費用",
   "countTotalTokens": "計算總 Token 數",
   "morePrompts": "更多提示詞請點選：",
+  "clearPrompts": "清除提示詞",
   "postOnShareGPT": {
     "title": "發佈至 ShareGPT",
     "warning": "請注意，將您的對話發佈至 ShareGPT 後，任何人都可以公開訪問和查看。一旦發佈，對話將無法隱藏或刪除，並且可能被他人存檔或分享。我們建議您慎重考慮，並避免在此平台上分享敏感或私人信息。"
