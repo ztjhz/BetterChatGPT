@@ -17,9 +17,10 @@ const tokenCostToCost = (
   model: ModelOptions
 ) => {
   if (!tokenCost) return 0;
-  const { price, unit } = modelCost[model as keyof typeof modelCost];
-  const completionCost = (price / unit) * tokenCost.completionTokens;
-  const promptCost = (price / unit) * tokenCost.promptTokens;
+  const { prompt, completion } = modelCost[model as keyof typeof modelCost];
+  const completionCost =
+    (completion.price / completion.unit) * tokenCost.completionTokens;
+  const promptCost = (prompt.price / prompt.unit) * tokenCost.promptTokens;
   return completionCost + promptCost;
 };
 

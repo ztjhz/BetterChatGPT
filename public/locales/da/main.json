@@ -34,6 +34,7 @@
   "resetCost": "Nulstil Omkostninger",
   "countTotalTokens": "Tæl totale tokens",
   "morePrompts": "Du kan finde flere opgaver her: ",
+  "clearPrompts": "Ryd prompter",
   "postOnShareGPT": {
     "title": "Indlæg på ShareGPT",
     "warning": "Vær opmærksom på, at ved at poste din samtale på ShareGPT, vil den blive offentligt tilgængelig og synlig for alle. Når den er postet, kan samtalen ikke skjules eller slettes og kan blive arkiveret eller delt af andre. Vi råder dig til at overveje nøje og undgå at dele følsomme eller private oplysninger på denne platform."
@@ -42,5 +43,5 @@
   "cloneChat": "Klon Chat",
   "cloned": "Klonet",
   "enterToSubmit": "Tryk Enter for at sende",
-  "submitPlaceholder": "Type a message or click [/] for prompts..."
+  "submitPlaceholder": "Skriv en besked eller klik på [/] for opgave..."
 }

@@ -34,6 +34,7 @@
   "resetCost": "Återställ kostnader",
   "countTotalTokens": "Räkna totala token",
   "morePrompts": "Du kan hitta fler uppmaningar här: ",
+  "clearPrompts": "Rensa uppmaningar",
   "postOnShareGPT": {
     "title": "Inlägg på ShareGPT",
     "warning": "Var medveten om att genom att posta din konversation på ShareGPT kommer den att bli offentligt tillgänglig och synlig för alla. När den väl är postad kan konversationen varken döljas eller raderas och kan arkiveras eller delas av andra. Vi rekommenderar dig att tänka noggrant igenom och undvika att dela känslig eller privat information på denna plattform."
@@ -42,5 +43,5 @@
   "cloneChat": "Klona chatt",
   "cloned": "Klonad",
   "enterToSubmit": "Tryck på Enter för att skicka",
-  "submitPlaceholder": "Type a message or click [/] for prompts..."
+  "submitPlaceholder": "Skriv ett meddelande eller klicka på [/] för uppmaning..."
 }
