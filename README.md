@@ -18,7 +18,7 @@
 </a>
 
 
-<b>!!! This repo is currently a primarily of ztjhz/BetterChatGPT, with some minor tweaks for personal preference. It can be found at https://gpt.koaladev.io/. !!!</b>
+<b>!!! This repo is currently primarily a mirror of ztjhz/BetterChatGPT, with some minor tweaks for personal preference. It can be found at https://gpt.koaladev.io/. !!!</b>
 
 
 ## 👋🏻 Introducing Better ChatGPT
