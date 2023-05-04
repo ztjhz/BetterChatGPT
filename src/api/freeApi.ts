@@ -21,11 +21,7 @@ export const getChatCompletion = async (
   return data;
 };
 
-export const getChatCompletionStream = async (
-  endpoint: string,
-  messages: MessageInterface[],
-  config: ConfigInterface
-) => {
+export async function getChatCompletionStream(endpoint: string, messages: MessageInterface[], config: ConfigInterface) {
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
@@ -37,21 +33,20 @@ export const getChatCompletionStream = async (
       stream: true,
     }),
   });
-  if (response.status === 404 || response.status === 405)
-    throw new Error(
-      'Message from Better ChatGPT:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
-    );
+
+  if (response.status === 404 || response.status === 405) {
+    throw new Error('Invalid API endpoint! Please check your API endpoint.');
+  }
 
   if (response.status === 429 || !response.ok) {
     const text = await response.text();
     let error = text;
     if (text.includes('insufficient_quota')) {
-      error +=
-        '\nMessage from Better ChatGPT:\nWe recommend changing your API endpoint or API key';
+      error += '\nPlease change your API endpoint or API key.';
     }
     throw new Error(error);
   }
 
-  const stream = response.body;
-  return stream;
-};
+  return response.body;
+}
+
