@@ -14,12 +14,12 @@ export type OpenAIChat = {
   mapping: {
     [key: string]: {
       id: string;
-      message: {
+      message?: {
         author: {
           role: Role;
         };
         content: {
-          parts: string[];
+          parts?: string[];
         };
       } | null;
       parent: string | null;

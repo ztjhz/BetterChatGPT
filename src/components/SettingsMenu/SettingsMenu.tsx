@@ -14,6 +14,7 @@ import InlineLatexToggle from './InlineLatexToggle';
 import PromptLibraryMenu from '@components/PromptLibraryMenu';
 import ChatConfigMenu from '@components/ChatConfigMenu';
 import EnterToSubmitToggle from './EnterToSubmitToggle';
+import TotalTokenCost, { TotalTokenCostToggle } from './TotalTokenCost';
 
 const SettingsMenu = () => {
   const { t } = useTranslation();
@@ -48,9 +49,11 @@ const SettingsMenu = () => {
               <EnterToSubmitToggle />
               <InlineLatexToggle />
               <AdvancedModeToggle />
+              <TotalTokenCostToggle />
             </div>
             <PromptLibraryMenu />
             <ChatConfigMenu />
+            <TotalTokenCost />
           </div>
         </PopupModal>
       )}
