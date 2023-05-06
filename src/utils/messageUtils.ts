@@ -51,26 +51,36 @@ export const limitMessageTokens = (
   const limitedMessages: MessageInterface[] = [];
   let tokenCount = 0;
 
-  if (messages[0]?.role === 'system') {
-    const count = countTokens([messages[0]], model);
-    tokenCount += count;
+  const isSystemFirstMessage = messages[0]?.role === 'system';
+  let retainSystemMessage = false;
+
+  // Check if the first message is a system message and if it fits within the token limit
+  if (isSystemFirstMessage) {
+    const systemTokenCount = countTokens([messages[0]], model);
+    if (systemTokenCount < limit) {
+      tokenCount += systemTokenCount;
+      retainSystemMessage = true;
+    }
   }
 
-  for (let i = messages.length - 1; i >= 0; i--) {
+  // Iterate through messages in reverse order, adding them to the limitedMessages array
+  // until the token limit is reached (excludes first message)
+  for (let i = messages.length - 1; i >= 1; i--) {
     const count = countTokens([messages[i]], model);
     if (count + tokenCount > limit) break;
     tokenCount += count;
     limitedMessages.unshift({ ...messages[i] });
   }
 
-  if (messages[0]?.role === 'system' && limitedMessages[0]?.role !== 'system') {
-    limitedMessages.unshift({ ...messages[0] });
-  }
-
-  if (limitedMessages.length > 4 && limitedMessages[0].role === 'system'){
-    const firstElement = limitedMessages.shift(); // 取出第一个元素并移除
-    if (firstElement !== undefined) { // 确保 firstElement 不为 undefined
-      limitedMessages.splice(-3, 0, firstElement); // 将第一个元素插入到倒数第四个位置
+  // Process first message
+  if (retainSystemMessage) {
+    // Insert the system message in the third position from the end
+    limitedMessages.splice(-3, 0, { ...messages[0] });
+  } else if (!isSystemFirstMessage) {
+    // Check if the first message (non-system) can fit within the limit
+    const firstMessageTokenCount = countTokens([messages[0]], model);
+    if (firstMessageTokenCount + tokenCount < limit) {
+      limitedMessages.unshift({ ...messages[0] });
     }
   }
 
