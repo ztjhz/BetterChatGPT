@@ -16,7 +16,6 @@ import useStore from '@store/store';
 
 import TickIcon from '@icon/TickIcon';
 import CrossIcon from '@icon/CrossIcon';
-
 import useSubmit from '@hooks/useSubmit';
 
 import { ChatInterface } from '@type/chat';
@@ -103,6 +102,15 @@ const ContentView = memo(
       navigator.clipboard.writeText(content);
     };
 
+    const renderLoading = () => {
+      return (
+        <div>Loading...</div>
+      )
+    }
+   
+    if(!content) {
+      return renderLoading();
+    }
     return (
       <>
         <div className='markdown prose w-full md:max-w-full break-words dark:prose-invert dark share-gpt-message'>

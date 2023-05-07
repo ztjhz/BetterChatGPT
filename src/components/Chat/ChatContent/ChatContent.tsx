@@ -56,8 +56,7 @@ const ChatContent = () => {
         <ScrollToBottomButton />
         <div className='flex flex-col items-center text-sm dark:bg-gray-800'>
           <div
-            className='flex flex-col items-center text-sm dark:bg-gray-800 w-full'
-            ref={saveRef}
+            className='flex flex-col items-center text-sm dark:bg-gray-800 w-full' ref={saveRef}
           >
             {advancedMode && <ChatTitle />}
             {!generating && advancedMode && messages?.length === 0 && (
@@ -96,22 +95,6 @@ const ChatContent = () => {
               </div>
             </div>
           )}
-          <div
-            className={`mt-4 w-full m-auto  ${
-              hideSideMenu
-                ? 'md:max-w-5xl lg:max-w-5xl xl:max-w-6xl'
-                : 'md:max-w-3xl lg:max-w-3xl xl:max-w-4xl'
-            }`}
-          >
-            {useStore.getState().generating || (
-              <div className='md:w-[calc(100%-50px)] flex gap-4 flex-wrap justify-center'>
-                <DownloadChat saveRef={saveRef} />
-                <ShareGPT />
-                <CloneChat />
-              </div>
-            )}
-          </div>
-          <div className='w-full h-36'></div>
         </div>
       </ScrollToBottom>
     </div>

@@ -81,10 +81,7 @@ export const generateDefaultChat = (
 ): ChatInterface => ({
   id: uuidv4(),
   title: title ? title : 'New Chat',
-  messages:
-    useStore.getState().defaultSystemMessage.length > 0
-      ? [{ role: 'system', content: useStore.getState().defaultSystemMessage }]
-      : [],
+  messages:[],
   config: { ...useStore.getState().defaultChatConfig },
   titleSet: false,
   folder,

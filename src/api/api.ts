@@ -1,7 +1,26 @@
+import { server_api_endpoint } from '@constants/auth';
 import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface } from '@type/chat';
 import { isAzureEndpoint } from '@utils/api';
 
+
+export const getChatServerResponse = async (
+  messages: MessageInterface[],
+  conversationId: string,
+) => {
+  const response = await fetch(`${server_api_endpoint}/chat`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      messages,
+      conversationId
+    })
+  })
+
+  return await response.json();
+}
 export const getChatCompletion = async (
   endpoint: string,
   messages: MessageInterface[],
