@@ -10,7 +10,6 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
   cancel-in-progress: true
 
 jobs:
