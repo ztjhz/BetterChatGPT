@@ -10,6 +10,7 @@ permissions:
   id-token: write
 
 concurrency:
+  group: releases
   cancel-in-progress: true
 
 jobs:
