@@ -79,7 +79,7 @@ jobs:
           asset_name: latest.yml
           asset_content_type: text/plain
 
-      - name: Upload Release Asset - win-better-chatgpt-Setup-1.0.3.exe
+      - name: Upload Release Asset - win-better-chatgpt-1.0.3-x64.exe
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -89,7 +89,7 @@ jobs:
           asset_name: win-better-chatgpt-Setup-1.0.3.exe
           asset_content_type: application/vnd.microsoft.portable-executable
 
-      - name: Upload Release Asset - win-better-chatgpt-Setup-1.0.3.exe.blockmap
+      - name: Upload Release Asset - win-better-chatgpt-1.0.3-x64.blockmap
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
