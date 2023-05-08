@@ -49,7 +49,6 @@ jobs:
           key: ${{ runner.os }}-release-${{github.sha}}
           restore-keys: |
             ${{ runner.os }}-release-
-
       - name: Build
         run: yarn make
         env:
@@ -61,3 +60,82 @@ jobs:
         with:
           name: release-${{ runner.os }}
           path: ./release
+		  
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+        with:
+          tag_name: ${{ github.sha }}-${{ github.run_id }}
+          release_name: Automated release for commit ${{ github.sha }}.substring(0, 7)
+          draft: false
+          prerelease: false
+
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v2
+
+      - name: Upload Release Asset - Ubuntu
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-ubuntu-latest/linux-better-chatgpt-1.0.3-x86_64.AppImage
+          asset_name: linux-better-chatgpt-1.0.3-x86_64.AppImage
+          asset_content_type: application
+		  
+      - name: Upload Release Asset - Ubuntu
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-ubuntu-latest/latest-linux.yml
+          asset_name: latest-linux.yml
+          asset_content_type: text
+
+      - name: Upload Release Asset - MacOS
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-macos-latest/mac-better-chatgpt-1.0.3-x64.dmg
+          asset_name: mac-better-chatgpt-1.0.3-x64.dmg
+          asset_content_type: application
+		  
+      - name: Upload Release Asset - MacOS
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-macos-latest/latest-mac.yml
+          asset_name: latest-mac.yml
+          asset_content_type: text
+
+      - name: Upload Release Asset - Windows
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-windows-latest/win-better-chatgpt-1.0.3-x64.exe
+          asset_name: win-better-chatgpt-1.0.3-x64.exe
+          asset_content_type: application
+		  
+      - name: Upload Release Asset - Windows
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-windows-latest/latest.yml
+          asset_name: latest-windows.yml
+          asset_content_type: text
+          
