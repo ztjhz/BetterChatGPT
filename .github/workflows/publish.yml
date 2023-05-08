@@ -1,9 +1,16 @@
 name: Build and publish desktop app
+
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+  id-token: write
+
 concurrency:
-  group: 'publish'
+  group: releases
   cancel-in-progress: true
 
 jobs:
@@ -20,11 +27,57 @@ jobs:
         with:
           node-version: 18
 
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache yarn dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+            
       - name: Install dependencies
         run: yarn
+        
+      - name: Cache release assets
+        uses: actions/cache@v3
+        with:
+          path: ./release
+          key: ${{ runner.os }}-release-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-release-
 
       - name: Build
         run: yarn make
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VITE_GOOGLE_CLIENT_ID: ${{ secrets.GCLIENT }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+        with:
+          tag_name: ${{ github.ref_name }}-${{ github.sha }}
+          release_name: Release ${{ github.ref_name }}-${{ github.sha }}
+          draft: false
+          prerelease: false
+
+      - name: Zip files
+        run: |
+          mkdir -p myzip
+          zip -r myzip/releases.zip ./releases
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more information: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./myzip/releases.zip
+          asset_name: releases.zip
+          asset_content_type: application/zip
