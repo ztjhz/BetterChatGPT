@@ -85,8 +85,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release/win-better-chatgpt-Setup-1.0.3.exe
-          asset_name: win-better-chatgpt-Setup-1.0.3.exe
+          asset_path: ./release/win-better-chatgpt-1.0.3-x64.exe
+          asset_name: win-better-chatgpt-1.0.3-x64.exe
           asset_content_type: application/vnd.microsoft.portable-executable
 
       - name: Upload Release Asset - win-better-chatgpt-1.0.3-x64.blockmap
@@ -95,6 +95,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release/win-better-chatgpt-Setup-1.0.3.exe.blockmap
-          asset_name: win-better-chatgpt-Setup-1.0.3.exe.blockmap
+          asset_path: ./release/win-better-chatgpt-1.0.3-x64.blockmap
+          asset_name: win-better-chatgpt-1.0.3-x64.blockmap
           asset_content_type: application/octet-stream
