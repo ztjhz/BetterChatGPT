@@ -56,27 +56,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VITE_GOOGLE_CLIENT_ID: ${{ secrets.GCLIENT }}
-
-      - name: Upload Release Asset - latest-linux.yml
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release/latest-linux.yml
-          asset_name: latest-linux.yml
-          asset_content_type: text/plain
-
-      - name: Upload Release Asset - latest-mac.yml
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release/latest-mac.yml
-          asset_name: latest-mac.yml
-          asset_content_type: text/plain
-
+          
       - name: Upload Release Asset - latest.yml
         uses: actions/upload-release-asset@v1
         env:
@@ -86,56 +66,6 @@ jobs:
           asset_path: ./release/latest.yml
           asset_name: latest.yml
           asset_content_type: text/plain
-
-      - name: Upload Release Asset - linux-better-chatgpt-1.0.3-x64.tar.gz
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release/linux-better-chatgpt-1.0.3-x64.tar.gz
-          asset_name: linux-better-chatgpt-1.0.3-x64.tar.gz
-          asset_content_type: application/gzip
-
-      - name: Upload Release Asset - linux-better-chatgpt-1.0.3-x86_64.AppImage
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release/linux-better-chatgpt-1.0.3-x86_64.AppImage
-          asset_name: linux-better-chatgpt-1.0.3-x86_64.AppImage
-          asset_content_type: application/octet-stream
-
-      - name: Upload Release Asset - mac-better-chatgpt-1.0.3-x64.dmg
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release/mac-better-chatgpt-1.0.3-x64.dmg
-          asset_name: mac-better-chatgpt-1.0.3-x64.dmg
-          asset_content_type: application/octet-stream
-
-      - name: Upload Release Asset - mac-better-chatgpt-1.0.3-x64.dmg.blockmap
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release/mac-better-chatgpt-1.0.3-x64.dmg.blockmap
-          asset_name: mac-better-chatgpt-1.0.3-x64.dmg.blockmap
-          asset_content_type: application/octet-stream
-
-      - name: Upload Release Asset - mac-better-chatgpt-1.0.3-x64.zip
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release/mac-better-chatgpt-1.0.3-x64.zip
-          asset_name: mac-better-chatgpt-1.0.3-x64.zip
-          asset_content_type: application/zip
 
       - name: Upload Release Asset - win-better-chatgpt-Setup-1.0.3.exe
         uses: actions/upload-release-asset@v1
