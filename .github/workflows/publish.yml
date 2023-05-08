@@ -72,12 +72,12 @@ jobs:
           mkdir -p myzip
           zip -r myzip/release.zip ./release
 
-      - name: Upload Release Asset
+      - name: Upload Release Asset - zipped
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more information: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./myzip/release.zip
           asset_name: release.zip
           asset_content_type: application/zip
