@@ -62,10 +62,6 @@ jobs:
           name: release-${{ runner.os }}
           path: ./myzip/release.zip
 
-      - name: Zip files
-        run: |
-          mkdir -p myzip
-          zip -r myzip/release.zip ./release
 
   release:
     needs: build
@@ -91,7 +87,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release-ubuntu-latest.zip
+          asset_path: ./release-ubuntu-latest/release.zip
           asset_name: release-ubuntu-latest.zip
           asset_content_type: application/zip
 
@@ -101,7 +97,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release-macos-latest.zip
+          asset_path: ./release-macos-latest/release.zip
           asset_name: release-macos-latest.zip
           asset_content_type: application/zip
 
@@ -111,6 +107,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release-windows-latest.zip
+          asset_path: ./release-windows-latest/release.zip
           asset_name: release-windows-latest.zip
           asset_content_type: application/zip
