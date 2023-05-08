@@ -21,15 +21,14 @@ const ClearConversation = () => {
 
   return (
     <>
-      <a
-        className='flex py-2 px-2 items-center gap-3 rounded-md hover:bg-gray-500/10 transition-colors duration-200 text-white cursor-pointer text-sm'
+      <button className='btn btn-neutral'
         onClick={() => {
           setIsModalOpen(true);
         }}
       >
         <DeleteIcon />
         {t('clearConversation')}
-      </a>
+      </button>
       {isModalOpen && (
         <PopupModal
           setIsModalOpen={setIsModalOpen}

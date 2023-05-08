@@ -16,9 +16,18 @@ const CommandPrompt = ({
   const prompts = useStore((state) => state.prompts);
   const [_prompts, _setPrompts] = useState<Prompt[]>(prompts);
   const [input, setInput] = useState<string>('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [dropDown, setDropDown, dropDownRef] = useHideOnOutsideClick();
 
+
+  useEffect(() => {
+    if (dropDown && inputRef.current) {
+      // When dropdown is visible, focus the input
+      inputRef.current.focus();
+    }
+  }, [dropDown]);
+  
   useEffect(() => {
     const filteredPrompts = matchSorter(useStore.getState().prompts, input, {
       keys: ['name'],
@@ -40,12 +49,13 @@ const CommandPrompt = ({
         /
       </button>
       <div
-        className={`${
-          dropDown ? '' : 'hidden'
-        } absolute top-100 bottom-100 right-0 z-10 bg-white rounded-lg shadow-xl border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group dark:bg-gray-800 opacity-90`}
+       className={`${
+        dropDown ? '' : 'hidden'
+      } absolute bottom-full right-0 z-10 bg-white rounded-lg shadow-xl border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group dark:bg-gray-800 opacity-90`}
       >
         <div className='text-sm px-4 py-2 w-max'>{t('promptLibrary')}</div>
         <input
+          ref={inputRef}
           type='text'
           className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 m-0 w-full mr-0 h-8 focus:outline-none'
           value={input}
