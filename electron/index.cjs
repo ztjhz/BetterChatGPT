@@ -18,6 +18,7 @@ function createWindow() {
   autoUpdater.checkForUpdatesAndNotify();
 
   const win = new BrowserWindow({
+	autoHideMenuBar: true,
     show: false,
     icon: iconPath,
   });
