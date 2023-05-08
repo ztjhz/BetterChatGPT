@@ -1,7 +1,6 @@
 import React from 'react';
 import useStore from '@store/store';
 
-import ClearConversation from './ClearConversation';
 import Api from './Api';
 import Me from './Me';
 import AboutMenu from '@components/AboutMenu';
@@ -27,7 +26,6 @@ const MenuOptions = () => {
         {countTotalTokens && <TotalTokenCostDisplay />}
         {googleClientId && <GoogleSync clientId={googleClientId} />}
         <AboutMenu />
-        <ClearConversation />
         <ImportExportChat />
         <Api />
         <SettingsMenu />
