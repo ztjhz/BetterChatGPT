@@ -35,9 +35,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-yarn
             
       - name: Install dependencies
         run: yarn
@@ -46,9 +46,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ./release
-          key: ${{ runner.os }}-release-${{ github.sha }}
+          key: ${{ runner.os }}-release
           restore-keys: |
-            ${{ runner.os }}-release-
+            ${{ runner.os }}-release
 
       - name: Build
         run: yarn make
@@ -63,7 +63,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
         with:
           tag_name: ${{ github.sha }}-${{ github.run_id }}
-          release_name: Release ${{ github.event.head_commit.message }}
+          release_name: Release for commit ${{ github.sha }}.substring(0, 7)
           draft: false
           prerelease: false
 
