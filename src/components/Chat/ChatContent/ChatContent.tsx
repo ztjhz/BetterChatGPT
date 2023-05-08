@@ -106,12 +106,11 @@ const ChatContent = () => {
             {useStore.getState().generating || (
               <div className='md:w-[calc(100%-50px)] flex gap-4 flex-wrap justify-center'>
                 <DownloadChat saveRef={saveRef} />
-                <ShareGPT />
                 <CloneChat />
               </div>
             )}
           </div>
-          <div className='w-full h-36'></div>
+          <div className='w-full h-3'></div>
         </div>
       </ScrollToBottom>
     </div>
