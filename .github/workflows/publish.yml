@@ -35,9 +35,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-yarn
+            ${{ runner.os }}-yarn-
             
       - name: Install dependencies
         run: yarn
@@ -46,9 +46,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ./release
-          key: ${{ runner.os }}-release
+          key: ${{ runner.os }}-release-${{github.sha}}
           restore-keys: |
-            ${{ runner.os }}-release
+            ${{ runner.os }}-release-
 
       - name: Build
         run: yarn make
@@ -56,6 +56,21 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VITE_GOOGLE_CLIENT_ID: ${{ secrets.GCLIENT }}
 
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-${{ runner.os }}
+          path: ./myzip/release.zip
+
+      - name: Zip files
+        run: |
+          mkdir -p myzip
+          zip -r myzip/release.zip ./release
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -67,17 +82,35 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Zip files
-        run: |
-          mkdir -p myzip
-          zip -r myzip/release.zip ./release
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v2
 
-      - name: Upload Release Asset - zipped
+      - name: Upload Release Asset - Ubuntu
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./myzip/release.zip
-          asset_name: release.zip
+          asset_path: ./release-ubuntu-latest.zip
+          asset_name: release-ubuntu-latest.zip
+          asset_content_type: application/zip
+
+      - name: Upload Release Asset - MacOS
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-macos-latest.zip
+          asset_name: release-macos-latest.zip
+          asset_content_type: application/zip
+
+      - name: Upload Release Asset - Windows
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-windows-latest.zip
+          asset_name: release-windows-latest.zip
           asset_content_type: application/zip
