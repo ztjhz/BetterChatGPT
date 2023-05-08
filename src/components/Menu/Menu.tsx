@@ -48,6 +48,17 @@ const Menu = () => {
             </nav>
           </div>
         </div>
+        <div
+          id='menu-close'
+          className={`${
+            hideSideMenu ? 'hidden' : ''
+          } md:hidden absolute z-[999] right-0 translate-x-full top-10 bg-gray-900 p-2 cursor-pointer hover:bg-black text-white`}
+          onClick={() => {
+            setHideSideMenu(true);
+          }}
+        >
+          <CrossIcon2 />
+        </div>
       </div>
       <div
         id='menu-backdrop'
