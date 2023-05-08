@@ -85,7 +85,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release-ubuntu-latest/linux-better-chatgpt-1.0.3-x86_64.AppImage
+          asset_path: ./release-Linux/linux-better-chatgpt-1.0.3-x86_64.AppImage
           asset_name: linux-better-chatgpt-1.0.3-x86_64.AppImage
           asset_content_type: application
 
@@ -95,7 +95,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release-ubuntu-latest/latest-linux.yml
+          asset_path: ./release-Linux/latest-linux.yml
           asset_name: latest-linux.yml
           asset_content_type: text
 
@@ -105,7 +105,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release-macos-latest/mac-better-chatgpt-1.0.3-x64.dmg
+          asset_path: ./release-macOS/mac-better-chatgpt-1.0.3-x64.dmg
           asset_name: mac-better-chatgpt-1.0.3-x64.dmg
           asset_content_type: application
 
@@ -115,7 +115,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release-macos-latest/latest-mac.yml
+          asset_path: ./release-macOS/latest-mac.yml
           asset_name: latest-mac.yml
           asset_content_type: text
 
@@ -125,7 +125,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release-windows-latest/win-better-chatgpt-1.0.3-x64.exe
+          asset_path: ./release-Windows/win-better-chatgpt-1.0.3-x64.exe
           asset_name: win-better-chatgpt-1.0.3-x64.exe
           asset_content_type: application
 
@@ -135,6 +135,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./release-windows-latest/latest.yml
+          asset_path: ./release-Windows/latest.yml
           asset_name: latest-windows.yml
           asset_content_type: text
