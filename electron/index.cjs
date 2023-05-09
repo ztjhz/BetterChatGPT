@@ -50,7 +50,7 @@ const createTray = (window) => {
     {
       label: 'Show',
       click: () => {
-        win.maximize();
+        window.maximize();
         window.show();
       },
     },
@@ -64,7 +64,7 @@ const createTray = (window) => {
   ]);
 
   tray.on('click', () => {
-    win.maximize();
+    window.maximize();
     window.show();
   });
   tray.setToolTip('Better ChatGPT');
