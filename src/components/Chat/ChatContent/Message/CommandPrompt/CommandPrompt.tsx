@@ -16,9 +16,18 @@ const CommandPrompt = ({
   const prompts = useStore((state) => state.prompts);
   const [_prompts, _setPrompts] = useState<Prompt[]>(prompts);
   const [input, setInput] = useState<string>('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [dropDown, setDropDown, dropDownRef] = useHideOnOutsideClick();
 
+
+  useEffect(() => {
+    if (dropDown && inputRef.current) {
+      // When dropdown is visible, focus the input
+      inputRef.current.focus();
+    }
+  }, [dropDown]);
+  
   useEffect(() => {
     const filteredPrompts = matchSorter(useStore.getState().prompts, input, {
       keys: ['name'],
@@ -46,6 +55,7 @@ const CommandPrompt = ({
       >
         <div className='text-sm px-4 py-2 w-max'>{t('promptLibrary')}</div>
         <input
+          ref={inputRef}
           type='text'
           className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 m-0 w-full mr-0 h-8 focus:outline-none'
           value={input}
