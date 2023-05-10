@@ -1,6 +1,6 @@
 const path = require('path');
 
-const { app, BrowserWindow, Tray, Menu } = require('electron');
+const {dialog,  app, BrowserWindow, Tray, Menu } = require('electron');
 const isDev = require('electron-is-dev');
 const { autoUpdater } = require('electron-updater');
 let win = null;
@@ -79,6 +79,14 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
+});
+
+process.on('uncaughtException', (error) => {
+  // Perform any necessary cleanup tasks here
+  dialog.showErrorBox('An error occurred', error.stack);
+
+  // Exit the app
+  process.exit(1);
 });
 
 if (!instanceLock) {
