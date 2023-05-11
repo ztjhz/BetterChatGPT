@@ -10,6 +10,7 @@ import { ChatInterface } from '@type/chat';
 import { Theme } from '@type/theme';
 import ApiPopup from '@components/ApiPopup';
 import Toast from '@components/Toast';
+import isElectron from '@utils/electron';
 
 function App() {
   const initialiseNewChat = useInitialiseNewChat();
@@ -17,6 +18,9 @@ function App() {
   const setTheme = useStore((state) => state.setTheme);
   const setApiKey = useStore((state) => state.setApiKey);
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
+
+  if(isElectron())
+    window.electronAPI.setCloseToTray(useStore((state) => state.closeToTray))
 
   useEffect(() => {
     document.documentElement.lang = i18n.language;

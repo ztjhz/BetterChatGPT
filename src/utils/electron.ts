@@ -17,3 +17,12 @@ export default function isElectron() {
 
 	return false;
 }
+
+declare global {
+	interface Window {
+		electronAPI: {
+			setCloseToTray: (setting: boolean) => void;
+		};
+	}
+  }
+  

@@ -1,4 +1,4 @@
-const {dialog,  app, BrowserWindow, Tray, Menu } = require('electron');
+const {dialog,  app, ipcMain, BrowserWindow, Tray, Menu } = require('electron');
 
 process.on('uncaughtException', (error) => {
   // Perform any necessary cleanup tasks here
@@ -12,11 +12,28 @@ const path = require('path');
 const isDev = require('electron-is-dev');
 const { autoUpdater } = require('electron-updater');
 let win = null;
+let closeToTray = false;
+let winTray = null;
+let trayExists = false;
 const instanceLock = app.requestSingleInstanceLock();
 
 if (require('electron-squirrel-startup')) app.quit();
 
 const PORT = isDev ? '5173' : '51735';
+
+function handleSetCloseToTray (event, setting) {
+  closeToTray = setting;
+
+  if(closeToTray && trayExists){
+    winTray.destroy();
+    trayExists = false;
+  }
+
+  if(closeToTray && !trayExists){
+    createTray(win);
+    trayExists = true;
+  }
+}
 
 function createWindow() {
   let iconPath = '';
@@ -28,12 +45,12 @@ function createWindow() {
   autoUpdater.checkForUpdatesAndNotify();
 
   win = new BrowserWindow({
-	autoHideMenuBar: true,
+	  autoHideMenuBar: true,
     show: false,
-    icon: iconPath,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    }
   });
-
-  createTray(win);
 
   win.maximize();
   win.show();
@@ -47,12 +64,10 @@ function createWindow() {
   }
 
   win.on('close', function (event) {
-    if(!app.isQuiting){
+    if(closeToTray && !app.isQuiting){
         event.preventDefault();
         win.hide();
     }
-  
-    return false;
   });
 
   win.on('show', function (event) {
@@ -64,7 +79,7 @@ function createWindow() {
 }
 
 const createTray = (window) => {
-  const tray = new Tray(
+  winTray = Tray(
     path.join(
       __dirname,
       isDev ? '../public/icon-rounded.png' : '../dist/icon-rounded.png'
@@ -92,7 +107,7 @@ const createTray = (window) => {
     },
   ]);
 
-  tray.on('click', () => {
+  winTray.on('click', () => {
     if (win) {
       if (!win.isVisible()) win.show()
 
@@ -101,10 +116,10 @@ const createTray = (window) => {
       win.focus()
     }
   });
-  tray.setToolTip('Better ChatGPT');
-  tray.setContextMenu(contextMenu);
+  winTray.setToolTip('Better ChatGPT');
+  winTray.setContextMenu(contextMenu);
 
-  return tray;
+  return winTray;
 };
 
 app.on('window-all-closed', () => {
@@ -127,6 +142,8 @@ if (!instanceLock) {
   })
 
   app.whenReady().then(() => {
+    ipcMain.on('set-close-to-tray', handleSetCloseToTray)
+
     win = createWindow()
   })
 }
