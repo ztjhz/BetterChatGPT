@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
 import Toggle from '@components/Toggle';
+import { stringify } from 'uuid';
 
 const CloseToTrayToggle = () => {
   const { t } = useTranslation();
@@ -14,6 +15,7 @@ const CloseToTrayToggle = () => {
 
   useEffect(() => {
     setCloseToTray(isChecked);
+    window.electronAPI.setCloseToTray(isChecked)
   }, [isChecked]);
 
   return (
