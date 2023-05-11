@@ -15,6 +15,7 @@ let win = null;
 let closeToTray = false;
 let winTray = null;
 let trayExists = false;
+
 const instanceLock = app.requestSingleInstanceLock();
 
 if (require('electron-squirrel-startup')) app.quit();
@@ -127,6 +128,26 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
+
+if (!instanceLock) {
+  app.quit()
+} else {
+  app.on('second-instance', (event, commandLine, workingDirectory) => {
+    if (win) {
+      if (!win.isVisible()) win.show()
+
+      if (win.isMinimized()) win.restore()
+
+      win.focus()
+    }
+  })
+
+  app.whenReady().then(() => {
+    ipcMain.on('set-close-to-tray', handleSetCloseToTray)
+
+    win = createWindow()
+  })
+}
 
 if (!instanceLock) {
   app.quit()
