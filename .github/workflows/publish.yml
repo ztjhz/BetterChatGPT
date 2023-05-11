@@ -1,9 +1,16 @@
 name: Build and publish desktop app
+
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+  id-token: write
+
 concurrency:
-  group: 'publish'
+  group: releases
   cancel-in-progress: true
 
 jobs:
@@ -20,11 +27,114 @@ jobs:
         with:
           node-version: 18
 
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache yarn dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+            
       - name: Install dependencies
         run: yarn
-
+        
+      - name: Cache release assets
+        uses: actions/cache@v3
+        with:
+          path: ./release
+          key: ${{ runner.os }}-release-${{github.sha}}
+          restore-keys: |
+            ${{ runner.os }}-release-
       - name: Build
         run: yarn make
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VITE_GOOGLE_CLIENT_ID: ${{ secrets.GCLIENT }}
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-${{ runner.os }}
+          path: ./release
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
+        with:
+          tag_name: ${{ github.sha }}-${{ github.run_id }}
+          release_name: Release ${{ github.sha }}-${{ github.run_id }}
+          draft: false
+          prerelease: false
+
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v2
+
+      - name: Upload Release Asset - Ubuntu
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-Linux/linux-better-chatgpt-1.0.3-x86_64.AppImage
+          asset_name: linux-better-chatgpt-1.0.3-x86_64.AppImage
+          asset_content_type: application
+
+      - name: Upload Release Asset - Ubuntu
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-Linux/latest-linux.yml
+          asset_name: latest-linux.yml
+          asset_content_type: text
+
+      - name: Upload Release Asset - MacOS
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-macOS/mac-better-chatgpt-1.0.3-x64.dmg
+          asset_name: mac-better-chatgpt-1.0.3-x64.dmg
+          asset_content_type: application
+
+      - name: Upload Release Asset - MacOS
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-macOS/latest-mac.yml
+          asset_name: latest-mac.yml
+          asset_content_type: text
+
+      - name: Upload Release Asset - Windows
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-Windows/win-better-chatgpt-1.0.3-x64.exe
+          asset_name: win-better-chatgpt-1.0.3-x64.exe
+          asset_content_type: application
+
+      - name: Upload Release Asset - Windows
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-Windows/latest.yml
+          asset_name: latest-windows.yml
+          asset_content_type: text

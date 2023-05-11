@@ -1,12 +1,40 @@
-const path = require('path');
+const {dialog,  app, ipcMain, BrowserWindow, Tray, Menu } = require('electron');
 
-const { app, BrowserWindow, Tray, Menu } = require('electron');
+process.on('uncaughtException', (error) => {
+  // Perform any necessary cleanup tasks here
+  dialog.showErrorBox('An error occurred', error.stack);
+
+  // Exit the app
+  process.exit(1);
+});
+
+const path = require('path');
 const isDev = require('electron-is-dev');
 const { autoUpdater } = require('electron-updater');
+let win = null;
+let closeToTray = false;
+let winTray = null;
+let trayExists = false;
+
+const instanceLock = app.requestSingleInstanceLock();
 
 if (require('electron-squirrel-startup')) app.quit();
 
 const PORT = isDev ? '5173' : '51735';
+
+function handleSetCloseToTray (event, setting) {
+  closeToTray = setting;
+
+  if(closeToTray && trayExists){
+    winTray.destroy();
+    trayExists = false;
+  }
+
+  if(closeToTray && !trayExists){
+    createTray(win);
+    trayExists = true;
+  }
+}
 
 function createWindow() {
   let iconPath = '';
@@ -17,13 +45,13 @@ function createWindow() {
   }
   autoUpdater.checkForUpdatesAndNotify();
 
-  const win = new BrowserWindow({
-	autoHideMenuBar: true,
+  win = new BrowserWindow({
+	  autoHideMenuBar: true,
     show: false,
-    icon: iconPath,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    }
   });
-
-  createTray(win);
 
   win.maximize();
   win.show();
@@ -36,11 +64,23 @@ function createWindow() {
     win.webContents.openDevTools({ mode: 'detach' });
   }
 
+  win.on('close', function (event) {
+    if(closeToTray && !app.isQuiting){
+        event.preventDefault();
+        win.hide();
+    }
+  });
+
+  win.on('show', function (event) {
+    win.maximize();
+    win.focus();
+  });
+
   return win;
 }
 
 const createTray = (window) => {
-  const tray = new Tray(
+  winTray = Tray(
     path.join(
       __dirname,
       isDev ? '../public/icon-rounded.png' : '../dist/icon-rounded.png'
@@ -50,8 +90,13 @@ const createTray = (window) => {
     {
       label: 'Show',
       click: () => {
-        win.maximize();
-        window.show();
+        if (win) {
+          if (!win.isVisible()) win.show()
+    
+          if (win.isMinimized()) win.restore()
+          
+          win.focus()
+        }
       },
     },
     {
@@ -63,17 +108,20 @@ const createTray = (window) => {
     },
   ]);
 
-  tray.on('click', () => {
-    win.maximize();
-    window.show();
+  winTray.on('click', () => {
+    if (win) {
+      if (!win.isVisible()) win.show()
+
+      if (win.isMinimized()) win.restore()
+      
+      win.focus()
+    }
   });
-  tray.setToolTip('Better ChatGPT');
-  tray.setContextMenu(contextMenu);
+  winTray.setToolTip('Better ChatGPT');
+  winTray.setContextMenu(contextMenu);
 
-  return tray;
+  return winTray;
 };
-
-app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -81,11 +129,45 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
-});
+if (!instanceLock) {
+  app.quit()
+} else {
+  app.on('second-instance', (event, commandLine, workingDirectory) => {
+    if (win) {
+      if (!win.isVisible()) win.show()
+
+      if (win.isMinimized()) win.restore()
+
+      win.focus()
+    }
+  })
+
+  app.whenReady().then(() => {
+    ipcMain.on('set-close-to-tray', handleSetCloseToTray)
+
+    win = createWindow()
+  })
+}
+
+if (!instanceLock) {
+  app.quit()
+} else {
+  app.on('second-instance', (event, commandLine, workingDirectory) => {
+    if (win) {
+      if (!win.isVisible()) win.show()
+
+      if (win.isMinimized()) win.restore()
+
+      win.focus()
+    }
+  })
+
+  app.whenReady().then(() => {
+    ipcMain.on('set-close-to-tray', handleSetCloseToTray)
+
+    win = createWindow()
+  })
+}
 
 const createServer = () => {
   // Dependencies
