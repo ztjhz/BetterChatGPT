@@ -38,6 +38,20 @@ function createWindow() {
     win.webContents.openDevTools({ mode: 'detach' });
   }
 
+  win.on('close', function (event) {
+    if(!app.isQuiting){
+        event.preventDefault();
+        win.hide();
+    }
+  
+    return false;
+  });
+
+  win.on('show', function (event) {
+    win.maximize();
+    win.focus();
+  });
+
   return win;
 }
 
@@ -52,8 +66,13 @@ const createTray = (window) => {
     {
       label: 'Show',
       click: () => {
-        window.maximize();
-        window.show();
+        if (win) {
+          if (!win.isVisible()) win.show()
+    
+          if (win.isMinimized()) win.restore()
+          
+          win.focus()
+        }
       },
     },
     {
@@ -66,8 +85,13 @@ const createTray = (window) => {
   ]);
 
   tray.on('click', () => {
-    window.maximize();
-    window.show();
+    if (win) {
+      if (!win.isVisible()) win.show()
+
+      if (win.isMinimized()) win.restore()
+      
+      win.focus()
+    }
   });
   tray.setToolTip('Better ChatGPT');
   tray.setContextMenu(contextMenu);
@@ -94,7 +118,10 @@ if (!instanceLock) {
 } else {
   app.on('second-instance', (event, commandLine, workingDirectory) => {
     if (win) {
+      if (!win.isVisible()) win.show()
+
       if (win.isMinimized()) win.restore()
+
       win.focus()
     }
   })
