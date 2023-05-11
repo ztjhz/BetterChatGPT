@@ -15,6 +15,7 @@ let win = null;
 let closeToTray = false;
 let winTray = null;
 let trayExists = false;
+
 const instanceLock = app.requestSingleInstanceLock();
 
 if (require('electron-squirrel-startup')) app.quit();
@@ -46,6 +47,7 @@ function createWindow() {
 
   win = new BrowserWindow({
 	  autoHideMenuBar: true,
+
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
@@ -144,6 +146,22 @@ if (!instanceLock) {
   app.whenReady().then(() => {
     ipcMain.on('set-close-to-tray', handleSetCloseToTray)
 
+    win = createWindow()
+  })
+}
+
+
+if (!instanceLock) {
+  app.quit()
+} else {
+  app.on('second-instance', (event, commandLine, workingDirectory) => {
+    if (win) {
+      if (win.isMinimized()) win.restore()
+      win.focus()
+    }
+  })
+
+  app.whenReady().then(() => {
     win = createWindow()
   })
 }
