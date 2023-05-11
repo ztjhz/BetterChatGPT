@@ -24,6 +24,7 @@
   "setting": "Settings",
   "image": "Image",
   "autoTitle": "Auto generate title",
+  "closeToTray": "Minimize to Tray on Close",
   "advancedMode": "Advanced mode",
   "inlineLatex": "Inline Latex",
   "prompt": "Prompt",
