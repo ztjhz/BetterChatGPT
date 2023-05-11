@@ -47,7 +47,6 @@ function createWindow() {
 
   win = new BrowserWindow({
 	  autoHideMenuBar: true,
-
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
@@ -150,18 +149,22 @@ if (!instanceLock) {
   })
 }
 
-
 if (!instanceLock) {
   app.quit()
 } else {
   app.on('second-instance', (event, commandLine, workingDirectory) => {
     if (win) {
+      if (!win.isVisible()) win.show()
+
       if (win.isMinimized()) win.restore()
+
       win.focus()
     }
   })
 
   app.whenReady().then(() => {
+    ipcMain.on('set-close-to-tray', handleSetCloseToTray)
+
     win = createWindow()
   })
 }
