@@ -46,6 +46,7 @@ export const createPartializedState = (state: StoreState) => ({
   apiEndpoint: state.apiEndpoint,
   theme: state.theme,
   autoTitle: state.autoTitle,
+  closeToTray: state.closeToTray,
   advancedMode: state.advancedMode,
   prompts: state.prompts,
   defaultChatConfig: state.defaultChatConfig,
