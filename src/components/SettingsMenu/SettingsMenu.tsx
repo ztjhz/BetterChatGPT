@@ -17,6 +17,9 @@ import ChatConfigMenu from '@components/ChatConfigMenu';
 import EnterToSubmitToggle from './EnterToSubmitToggle';
 import TotalTokenCost, { TotalTokenCostToggle } from './TotalTokenCost';
 import ClearConversation from '@components/Menu/MenuOptions/ClearConversation';
+import ImportExportChat from '@components/ImportExportChat/ImportExportChat';
+import Api from '@components/Menu/MenuOptions/Api';
+
 
 const SettingsMenu = () => {
   const { t } = useTranslation();
@@ -43,10 +46,15 @@ const SettingsMenu = () => {
           title={t('setting') as string}
           cancelButton={false}
         >
-          <div className='p-6 border-b border-gray-200 dark:border-gray-600 flex flex-col items-center gap-4'>
+          <div className='px-10 py-3 mx-5 border-b border-gray-200 dark:border-gray-600 flex flex-col items-center gap-2'>
             <LanguageSelector />
             <ThemeSwitcher />
-            <div className='flex flex-col gap-3'>
+            <ImportExportChat />
+            <Api />
+            <ClearConversation />
+            <PromptLibraryMenu />
+            <ChatConfigMenu />
+            <div className='pt-4 flex flex-col gap-2'>
               {isElectron() && <CloseToTrayToggle />}
               <AutoTitleToggle />
               <EnterToSubmitToggle />
@@ -54,9 +62,6 @@ const SettingsMenu = () => {
               <AdvancedModeToggle />
               <TotalTokenCostToggle />
             </div>
-            <ClearConversation />
-            <PromptLibraryMenu />
-            <ChatConfigMenu />
             <TotalTokenCost />
           </div>
         </PopupModal>
