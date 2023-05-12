@@ -84,7 +84,7 @@ export const limitMessageTokens = (
     }
   }
 
-  return limitedMessages;
+  return limitedMessages.map(({ role, content }) => ({ role, content }));
 };
 
 export const updateTotalTokenUsed = (

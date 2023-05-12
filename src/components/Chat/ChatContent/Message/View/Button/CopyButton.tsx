@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import TickIcon from '@icon/TickIcon';
 import CopyIcon from '@icon/CopyIcon';
 
-import BaseButton from './BaseButton';
+import BaseButton from '../../Button/BaseButton';
 
 const CopyButton = ({
   onClick,

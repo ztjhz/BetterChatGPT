@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import EditIcon2 from '@icon/EditIcon2';
 
-import BaseButton from './BaseButton';
+import BaseButton from '../../Button/BaseButton';
 
 const EditButton = memo(
   ({

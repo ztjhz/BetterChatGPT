@@ -2,7 +2,7 @@ import React from 'react';
 
 import DownChevronArrow from '@icon/DownChevronArrow';
 
-import BaseButton from './BaseButton';
+import BaseButton from '../../Button/BaseButton';
 
 const DownButton = ({
   onClick,

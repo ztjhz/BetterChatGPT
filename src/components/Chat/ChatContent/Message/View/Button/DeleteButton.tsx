@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import DeleteIcon from '@icon/DeleteIcon';
 
-import BaseButton from './BaseButton';
+import BaseButton from '../../Button/BaseButton';
 
 const DeleteButton = memo(
   ({
