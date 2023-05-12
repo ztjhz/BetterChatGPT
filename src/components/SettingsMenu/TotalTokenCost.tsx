@@ -48,7 +48,7 @@ const TotalTokenCost = () => {
   }, [totalTokenUsed]);
 
   return countTotalTokens ? (
-    <div className='flex flex-col items-center gap-2'>
+    <div className='flex flex-col items-center gap-2 pt-2'>
       <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
         <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
           <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>

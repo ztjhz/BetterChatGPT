@@ -9,13 +9,15 @@ import CrossIcon from '@icon/CrossIcon';
 import { v4 as uuidv4 } from 'uuid';
 import ImportPrompt from './ImportPrompt';
 import ExportPrompt from './ExportPrompt';
+import EditIcon from '@icon/EditIcon';
 
 const PromptLibraryMenu = () => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   return (
     <div>
-      <button className='btn btn-neutral' onClick={() => setIsModalOpen(true)}>
+      <button className='btn btn-neutral gap-3' onClick={() => setIsModalOpen(true)}>
+      <EditIcon />
         {t('promptLibrary')}
       </button>
       {isModalOpen && (
