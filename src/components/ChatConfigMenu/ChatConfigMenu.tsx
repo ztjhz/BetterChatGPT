@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
-import SettingIcon from '@icon/SettingIcon';
+import ChatIcon from '@icon/ChatIcon';
 
 import PopupModal from '@components/PopupModal';
 import {
@@ -22,7 +22,7 @@ const ChatConfigMenu = () => {
   return (
     <div>
       <button className='btn btn-neutral gap-3' onClick={() => setIsModalOpen(true)}>
-      <SettingIcon className='w-4 h-4' />
+      <ChatIcon />
         {t('defaultChatConfig')}
       </button>
       {isModalOpen && <ChatConfigPopup setIsModalOpen={setIsModalOpen} />}
