@@ -44,25 +44,18 @@ const ModelConfigBar = React.memo(() => {
   return config ? (
     <>
       <div className='sticky top-0 flex gap-x-4 gap-y-1 flex-wrap w-full items-center justify-center border-b border-black/10 bg-gray-50 p-3 dark:border-gray-900/50 dark:bg-gray-700 text-gray-600 dark:text-gray-300 z-50'>
-        <div className='text-center p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50'>
-            {t('model')}: {config.model}
-        </div>
-
-        <div className='text-center p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50 cursor-pointer'
-          onClick={() => {
+        <div className='text-center p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50 cursor-pointer'onClick={() => {
             if (config) {
-              const updatedConfig = { ...config, model: 'gpt-3.5-turbo' as ModelOptions };
-              setConfig(updatedConfig);
-            }          }}>
-            {t('gpt3swap.label')}
-        </div>
-        <div className='text-center p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50 cursor-pointer'
-          onClick={() => {
-            if (config) {
-              const updatedConfig = { ...config, model: 'gpt-4' as ModelOptions };
-              setConfig(updatedConfig);
-            }          }}>
-            {t('gpt4swap.label')}
+              if(config.model === 'gpt-3.5-turbo') {
+                const updatedConfig = { ...config, model: 'gpt-4' as ModelOptions };
+                setConfig(updatedConfig);
+              } else {
+                const updatedConfig = { ...config, model: 'gpt-3.5-turbo' as ModelOptions };
+                setConfig(updatedConfig);
+              }
+            }
+        }}>
+          {t('model')}: {config.model}
         </div>
         {advancedMode && <div
           className='sticky top-0 flex gap-x-4 gap-y-1 flex-wrap w-full items-center justify-center p-3'>
