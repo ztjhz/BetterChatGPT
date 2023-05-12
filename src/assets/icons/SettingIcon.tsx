@@ -4,7 +4,7 @@ const SettingIcon = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      fill='white'
+      fill='currentColor'
       viewBox='0 0 512 512'
       {...props}
     >
