@@ -13,7 +13,7 @@ const DropDown = ({
 }: {
   selected: string | ReactNode | React.ReactElement;
   selections: Selection[];
-  onClick: React.MouseEventHandler<HTMLElement>;
+  onClick: (value: string) => void;
   icon?: React.ReactElement;
 }) => {
   const {
@@ -55,11 +55,10 @@ const DropDown = ({
           {selections.map((r) => (
             <li
               className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer'
-              onClick={(e) => {
-                onClick(e);
+              onClick={() => {
+                onClick(r.value);
                 setDropDown(false);
               }}
-              data-value={r.value}
               key={r.value}
             >
               {r.label}

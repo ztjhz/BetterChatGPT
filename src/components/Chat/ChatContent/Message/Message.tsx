@@ -107,10 +107,7 @@ const Message = React.memo(
                 <DropDown
                   selected={t(role)}
                   selections={roles.map((r) => ({ value: r, label: t(r) }))}
-                  onClick={(event) => {
-                    const target = event.target as HTMLElement;
-                    const value = target.getAttribute('data-value');
-                    
+                  onClick={(value) => {
                     if (!sticky) {
                       const updatedChats: ChatInterface[] = JSON.parse(
                         JSON.stringify(useStore.getState().chats)

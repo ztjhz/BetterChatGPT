@@ -6,7 +6,7 @@ import PopupModal from '@components/PopupModal';
 
 import { availableEndpoints, defaultAPIEndpoint } from '@constants/auth';
 
-import DropDown from '@components/DropDown'
+import DropDown from '@components/DropDown';
 
 const ApiMenu = ({
   setIsModalOpen,
@@ -128,10 +128,8 @@ const ApiEndpointSelector = ({
       <DropDown
         selected={_apiEndpoint}
         selections={availableEndpoints.map((e) => ({ value: e, label: e }))}
-        onClick={(event) => {
-          const target = event.target as HTMLElement;
-          const value = target.getAttribute('data-value');
-          _setApiEndpoint(value as string);
+        onClick={(value) => {
+          _setApiEndpoint(value);
         }}
       />
     </div>
