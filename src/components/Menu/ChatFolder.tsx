@@ -222,7 +222,7 @@ const ChatFolder = ({
             <>
               <div
                 className='relative md:hidden group-hover/folder:md:inline'
-                ref={paletteRef}
+                ref={paletteRef as React.RefObject<HTMLDivElement>}
               >
                 <button
                   className='p-1 hover:text-white'
