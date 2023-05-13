@@ -127,7 +127,7 @@ const ApiEndpointSelector = ({
     <div className='w-[40vw] relative flex-1'>
       <DropDown
         selected={_apiEndpoint}
-        selections={availableEndpoints}
+        selections={availableEndpoints.map((e) => ({ value: e, label: e }))}
         onClick={(event) => {
           const target = event.target as HTMLElement;
           const value = target.getAttribute('data-value');
