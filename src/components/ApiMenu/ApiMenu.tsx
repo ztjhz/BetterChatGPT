@@ -6,7 +6,7 @@ import PopupModal from '@components/PopupModal';
 
 import { availableEndpoints, defaultAPIEndpoint } from '@constants/auth';
 
-import useDropDown from '@hooks/useDropDown';
+import DropDown from '@components/DropDown'
 
 const ApiMenu = ({
   setIsModalOpen,
@@ -123,8 +123,6 @@ const ApiEndpointSelector = ({
   _apiEndpoint: string;
   _setApiEndpoint: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const DropDown = useDropDown;
-
   return (
     <div className='w-[40vw] relative flex-1'>
       <DropDown
@@ -132,7 +130,8 @@ const ApiEndpointSelector = ({
         selections={availableEndpoints}
         onClick={(event) => {
           const target = event.target as HTMLElement;
-          _setApiEndpoint(target.innerText);
+          const value = target.getAttribute('data-value');
+          _setApiEndpoint(value as string);
         }}
       />
     </div>

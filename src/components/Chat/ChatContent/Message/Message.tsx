@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import DropDown from '../../../DropDown/DropDown';
+import DropDown from '@components/DropDown';
 
 import useStore from '@store/store';
 
@@ -106,18 +106,21 @@ const Message = React.memo(
               {advancedMode && (
                 <DropDown
                   selected={t(role)}
-                  selections={roles.map((r) => t(r))}
-                  onClick={() => {
+                  selections={roles.map((r) => ({ value: r, label: t(r) }))}
+                  onClick={(event) => {
+                    const target = event.target as HTMLElement;
+                    const value = target.getAttribute('data-value');
+                    
                     if (!sticky) {
                       const updatedChats: ChatInterface[] = JSON.parse(
                         JSON.stringify(useStore.getState().chats)
                       );
                       updatedChats[currentChatIndex].messages[
                         messageIndex
-                      ].role = role;
+                      ].role = value as Role;
                       setChats(updatedChats);
                     } else {
-                      setInputRole(role);
+                      setInputRole(value as Role);
                     }
                   }}
                 />

@@ -3,6 +3,8 @@ import useDropDown from '@hooks/useDropDown';
 
 import DownChevronArrow from '@icon/DownChevronArrow';
 
+type Selection = { value: string; label: string; };
+
 const DropDown = ({
   selected,
   selections,
@@ -10,7 +12,7 @@ const DropDown = ({
   icon = <DownChevronArrow />,
 }: {
   selected: string | ReactNode | React.ReactElement;
-  selections: string[];
+  selections: Selection[];
   onClick: React.MouseEventHandler<HTMLElement>;
   icon?: React.ReactElement;
 }) => {
@@ -57,9 +59,10 @@ const DropDown = ({
                 onClick(e);
                 setDropDown(false);
               }}
-              key={r}
+              data-value={r.value}
+              key={r.value}
             >
-              {r}
+              {r.label}
             </li>
           ))}
         </ul>
