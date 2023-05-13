@@ -45,6 +45,28 @@ export const getChatCompletionStream = async (
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
   if (isAzureEndpoint(endpoint) && apiKey) headers['api-key'] = apiKey;
 
+  const source = new EventSource(endpoint, { withCredentials: true });
+  const stream = new ReadableStream({
+    start(controller) {
+      source.onopen = () => console.log('Stream is open');
+      source.onerror = (event) => controller.error(event);
+      source.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          if (data.object === 'chat.completion.chunk') {
+            controller.enqueue(data);
+          }
+        } catch (e) {
+          console.warn('Skipping non-JSON message', event.data);
+        }
+      };
+      source.addEventListener('chat.ended', (event) => controller.close());
+    },
+    cancel() {
+      source.close();
+    },
+  });
+
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
@@ -55,35 +77,11 @@ export const getChatCompletionStream = async (
       stream: true,
     }),
   });
-  if (response.status === 404 || response.status === 405) {
-    const text = await response.text();
-    if (text.includes('model_not_found')) {
-      throw new Error(
-        text +
-          '\nMessage from Better ChatGPT:\nPlease ensure that you have access to the GPT-4 API!'
-      );
-    } else {
-      throw new Error(
-        'Message from Better ChatGPT:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
-      );
-    }
-  }
+  if (!response.ok) throw new Error(await response.text());
 
-  if (response.status === 429 || !response.ok) {
-    const text = await response.text();
-    let error = text;
-    if (text.includes('insufficient_quota')) {
-      error +=
-        '\nMessage from Better ChatGPT:\nWe recommend changing your API endpoint or API key';
-    } else if (response.status === 429) {
-      error += '\nRate limited!';
-    }
-    throw new Error(error);
-  }
-
-  const stream = response.body;
   return stream;
 };
+
 
 export const submitShareGPT = async (body: ShareGPTSubmitBodyInterface) => {
   const request = await fetch('https://sharegpt.com/api/conversations', {
