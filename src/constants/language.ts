@@ -19,7 +19,6 @@ export const i18nLanguages = [
 	'zh-CN',
 	'zh-HK',
 	'zh-TW',
-	,
 	'ro',
 ] as const;
 
