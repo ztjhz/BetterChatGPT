@@ -47,10 +47,13 @@ const useSubmit = () => {
     return data.choices[0].message.content;
   };
 
-  const handleSubmit = async (
-    regeneration: boolean = false,
-    originalMessages: MessageInterface[] = []
-  ) => {
+  const handleSubmit = async ({
+    regeneration = false,
+    originalMessages = [],
+  }: {
+    regeneration?: boolean;
+    originalMessages?: MessageInterface[];
+  } = {}) => {
     const chats = useStore.getState().chats;
     if (generating || !chats) return;
 

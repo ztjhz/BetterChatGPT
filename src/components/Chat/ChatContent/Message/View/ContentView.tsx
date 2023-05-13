@@ -131,7 +131,7 @@ const ContentView = memo(
       setIsModalOpen(false);
 
       // We specify that this is a regeneration and pass the original chat state in case of errors
-      handleSubmit(true, originalMessages);
+      handleSubmit({ regeneration: true, originalMessages });
     };
 
     const handleCopy = () => {
