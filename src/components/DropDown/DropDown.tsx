@@ -9,12 +9,14 @@ const DropDown = ({
   selected,
   selections,
   onClick,
+  dropDownStyles,
   icon = <DownChevronArrow />,
 }: {
   selected: string | ReactNode | React.ReactElement;
   selections: Selection[];
   onClick: (value: string) => void;
   icon?: React.ReactElement;
+  dropDownStyles?: string[];
 }) => {
   const {
     buttonRef,
@@ -29,14 +31,14 @@ const DropDown = ({
     <div className='prose dark:prose-invert relative'>
       <button
         ref={buttonRef}
-        className='btn btn-neutral btn-small flex gap-1'
+        className='btn btn-neutral btn-small flex gap-1 justify-between w-full'
         type='button'
         onClick={() => {
           setDropDown((prev) => !prev);
           setCheckPosition(true);
         }}
       >
-        {selected}
+        <span className="truncate">{selected}</span>
         {icon}
       </button>
       <div
@@ -46,7 +48,9 @@ const DropDown = ({
           dropDown ? '' : 'hidden'
         } absolute z-10 bg-white text-gray-800 group opacity-90 border-b border-black/10 ${
           openDirection === 'down' ? 'top-full' : 'bottom-full'
-        } rounded-lg shadow-xl dark:border-gray-900/50 dark:text-gray-100 dark:bg-gray-800`}
+        } rounded-lg shadow-xl dark:border-gray-900/50 dark:text-gray-100 dark:bg-gray-800 ${
+          dropDownStyles && dropDownStyles.join(' ')
+        }`}
       >
         <ul
           className='text-sm text-gray-700 dark:text-gray-200 p-0 m-0'
@@ -54,7 +58,7 @@ const DropDown = ({
         >
           {selections.map((r) => (
             <li
-              className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer'
+              className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white truncate cursor-pointer'
               onClick={() => {
                 onClick(r.value);
                 setDropDown(false);

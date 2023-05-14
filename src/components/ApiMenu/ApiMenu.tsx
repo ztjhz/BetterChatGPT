@@ -128,6 +128,7 @@ const ApiEndpointSelector = ({
       <DropDown
         selected={_apiEndpoint}
         selections={availableEndpoints.map((e) => ({ value: e, label: e }))}
+        dropDownStyles={['w-32', 'w-full']}
         onClick={(value) => {
           _setApiEndpoint(value);
         }}
