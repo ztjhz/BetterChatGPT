@@ -62,7 +62,7 @@ jobs:
 
       # Builds and pushes an image up to your Azure Container Registry
       - name: Build and push image to ACR
-        with:
+        env:
           VITE_SERVER_API_ENDPOINT: ${{ env.VITE_SERVER_API_ENDPOINT }}
           VITE_OPENAI_API_KEY: ${{ secrets.VITE_OPENAI_API_KEY }}
         run: |
