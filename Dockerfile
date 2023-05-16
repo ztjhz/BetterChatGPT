@@ -13,6 +13,8 @@ WORKDIR /home/appuser/app
 COPY --chown=appuser:appgroup package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 COPY --chown=appuser:appgroup . .
+ENV VITE_SERVER_API_ENDPOINT ${VITE_SERVER_API_ENDPOINT}
+ENV VITE_OPENAI_API_KEY ${VITE_OPENAI_API_KEY}
 RUN yarn build
 
 EXPOSE 3000
