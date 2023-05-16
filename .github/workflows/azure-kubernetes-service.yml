@@ -66,10 +66,7 @@ jobs:
           VITE_SERVER_API_ENDPOINT: ${{ env.VITE_SERVER_API_ENDPOINT }}
           VITE_OPENAI_API_KEY: ${{ secrets.VITE_OPENAI_API_KEY }}
         run: |
-          az acr build 
-          --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} 
-          --registry ${{ env.AZURE_CONTAINER_REGISTRY }} 
-          -g ${{ env.RESOURCE_GROUP }} .
+          az acr build  --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} .
 
   deploy:
     permissions:
