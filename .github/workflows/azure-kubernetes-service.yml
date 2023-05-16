@@ -41,8 +41,8 @@ env:
   RESOURCE_GROUP: "development"
   CLUSTER_NAME: "development"
   DEPLOYMENT_MANIFEST_PATH: "deploy/deploy.yaml"
-  VITE_SERVER_API_ENDPOINT: "${{ env.VITE_SERVER_API_ENDPOINT}}"
-  VITE_OPENAI_API_KEY: "${{ secrets.VITE_OPENAI_API_KEY}}"
+  VITE_SERVER_API_ENDPOINT: "${{ env.VITE_SERVER_API_ENDPOINT }}"
+  VITE_OPENAI_API_KEY: "${{ secrets.VITE_OPENAI_API_KEY }}"
 jobs:
   buildImage:
     permissions:
