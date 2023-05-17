@@ -1,7 +1,7 @@
 {
   "name": "better-chatgpt",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "homepage": "./",
   "main": "electron/index.cjs",
@@ -24,7 +24,10 @@
     },
     "dmg": {
       "title": "${productName} ${version}",
-      "icon": "dist/favicon-516x516.png"
+      "icon": "dist/icon-rounded.png"
+    },
+    "mac": {
+      "icon": "dist/icon-rounded.png"
     },
     "linux": {
       "target": [
@@ -32,15 +35,16 @@
         "AppImage"
       ],
       "category": "Chat",
-      "icon": "dist/favicon-516x516.png"
+      "icon": "dist/icon-rounded.png"
     },
     "win": {
       "target": "NSIS",
-      "icon": "dist/favicon-516x516.png"
+      "icon": "dist/icon-rounded.png"
     }
   },
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.2",
+    "@react-oauth/google": "^0.9.0",
     "electron-is-dev": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^5.3.0",
@@ -49,6 +53,7 @@
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.1.1",
     "jspdf": "^2.5.1",
+    "katex": "^0.16.4",
     "lodash": "^4.17.21",
     "match-sorter": "^6.3.1",
     "papaparse": "^5.4.1",

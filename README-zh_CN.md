@@ -54,7 +54,8 @@ Better ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 
 - 支持使用内置代理解決 ChatGPT 地区限制
 - 支持自定义提示词资料库
-- 支持使用文件夹整理聊天
+- 支持使用文件夹（且带颜色）整理聊天
+- 支持筛选聊天和文件夹
 - 支持实时计算 token 数量和价格
 - 支持使用 ShareGPT 分享聊天
 - 支持自定义 API 参数（例如存在惩罚）
@@ -64,6 +65,8 @@ Better ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 - 支持自动保存聊天记录
 - 支持导入/导出聊天记录
 - 支持将聊天保存为 Markdown/图片/JSON
+- 支持与 Google Drive 同步
+- 支持 Azure OpenAI 终端
 - 支持多语言 (i18n)
 
 # 🛠️ 使用方法
@@ -157,10 +160,11 @@ Better ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 
 如果您想支持我们的团队，请考虑通过以下方法之一赞助我们。每一份贡献，无论多小，都有助于我们维护和改善我们的服务。
 
-| 付款方式       | 链接                                                                                     |
-| -------------- | ---------------------------------------------------------------------------------------- |
-| 支付宝 (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/alipay.jpg" width=150 />                  |
-| 微信 (Ayaka)   | <img src="https://ayaka14732.github.io/sponsor/wechat.png" width=150 />                  |
-| KoFi           | [![support](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/betterchatgpt) |
+| 付款方式       | 链接                                                                                                                                                 |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 支付宝 (Ayaka) | <img src="https://ayaka14732.github.io/sponsor/alipay.jpg" width=150 />                                                                              |
+| 微信 (Ayaka)   | <img src="https://ayaka14732.github.io/sponsor/wechat.png" width=150 />                                                                              |
+| GitHub         | [![GitHub Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/ztjhz) |
+| KoFi           | [![support](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/betterchatgpt)                                                             |
 
 感谢您成为我们社区的一员，我们期待着在未来为您提供更好的服务。

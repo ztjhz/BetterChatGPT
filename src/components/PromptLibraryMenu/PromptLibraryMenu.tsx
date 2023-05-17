@@ -67,6 +67,10 @@ const PromptLibraryMenuPopUp = ({
     _setPrompts(updatedPrompts);
   };
 
+  const clearPrompts = () => {
+    _setPrompts([]);
+  };
+
   const handleOnFocus = (e: React.FocusEvent<HTMLTextAreaElement, Element>) => {
     e.target.style.height = 'auto';
     e.target.style.height = `${e.target.scrollHeight}px`;
@@ -148,6 +152,14 @@ const PromptLibraryMenuPopUp = ({
         </div>
         <div className='flex justify-center cursor-pointer' onClick={addPrompt}>
           <PlusIcon />
+        </div>
+        <div className='flex justify-center mt-2'>
+          <div
+            className='btn btn-neutral cursor-pointer text-xs'
+            onClick={clearPrompts}
+          >
+            {t('clearPrompts')}
+          </div>
         </div>
         <div className='mt-6 px-2'>
           {t('morePrompts')}

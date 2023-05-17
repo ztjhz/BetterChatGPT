@@ -6,7 +6,7 @@
   "warning": "Warning",
   "clearMessageWarning": "Please be advised that by submitting this message, all subsequent messages will be deleted!",
   "clearConversationWarning": "Please be advised that by confirming this action, all messages will be deleted!",
-  "clearConversation": "Clear Conversation",
+  "clearConversation": "Clear Conversation History",
   "import": "Import",
   "export": "Export",
   "author": "Made by Jing Hua",
@@ -24,11 +24,17 @@
   "setting": "Settings",
   "image": "Image",
   "autoTitle": "Auto generate title",
+  "advancedMode": "Advanced mode",
+  "inlineLatex": "Inline Latex",
   "prompt": "Prompt",
   "promptLibrary": "Prompt Library",
   "name": "Name",
   "search": "Search",
+  "total": "Total",
+  "resetCost": "Reset Costs",
+  "countTotalTokens": "Count total tokens",
   "morePrompts": "You can find more prompts here: ",
+  "clearPrompts": "Clear prompts",
   "postOnShareGPT": {
     "title": "Post on ShareGPT",
     "warning": "Please be aware that by posting your conversation on ShareGPT, it will become publicly accessible and viewable to anyone. Once posted, the conversation cannot be hidden or deleted, and may be archived or shared by others. We advise you to consider carefully and avoid sharing sensitive or private information on this platform."
@@ -37,5 +43,5 @@
   "cloneChat": "Clone Chat",
   "cloned": "Cloned",
   "enterToSubmit": "Enter to submit",
-  "submitPlaceholder": "Type a message or select [/] for a predefined prompt..."
+  "submitPlaceholder": "Type a message or click [/] for prompts..."
 }

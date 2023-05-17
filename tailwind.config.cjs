@@ -32,7 +32,14 @@ module.exports = {
         'Segoe UI Symbol',
         'Noto Color Emoji',
       ],
-      mono: ['Söhne Mono', 'Monaco', 'Andale Mono', 'Ubuntu Mono', 'monospace'],
+      mono: [
+        'Söhne Mono',
+        'Monaco',
+        'Andale Mono',
+        'Ubuntu Mono',
+        'Consolas',
+        'monospace',
+      ],
     },
     extend: {
       typography: {

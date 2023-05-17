@@ -38,12 +38,30 @@ export const modelMaxToken = {
 };
 
 export const modelCost = {
-  'gpt-3.5-turbo': { price: 0.002, unit: 1000 },
-  'gpt-3.5-turbo-0301': { price: 0.002, unit: 1000 },
-  'gpt-4': { price: 0.03, unit: 1000 },
-  'gpt-4-0314': { price: 0.03, unit: 1000 },
-  'gpt-4-32k': { price: 0.06, unit: 1000 },
-  'gpt-4-32k-0314': { price: 0.06, unit: 1000 },
+  'gpt-3.5-turbo': {
+    prompt: { price: 0.002, unit: 1000 },
+    completion: { price: 0.002, unit: 1000 },
+  },
+  'gpt-3.5-turbo-0301': {
+    prompt: { price: 0.002, unit: 1000 },
+    completion: { price: 0.002, unit: 1000 },
+  },
+  'gpt-4': {
+    prompt: { price: 0.03, unit: 1000 },
+    completion: { price: 0.06, unit: 1000 },
+  },
+  'gpt-4-0314': {
+    prompt: { price: 0.03, unit: 1000 },
+    completion: { price: 0.06, unit: 1000 },
+  },
+  'gpt-4-32k': {
+    prompt: { price: 0.06, unit: 1000 },
+    completion: { price: 0.12, unit: 1000 },
+  },
+  'gpt-4-32k-0314': {
+    prompt: { price: 0.06, unit: 1000 },
+    completion: { price: 0.12, unit: 1000 },
+  },
 };
 
 export const defaultUserMaxToken = 4000;
@@ -57,7 +75,10 @@ export const _defaultChatConfig: ConfigInterface = {
   frequency_penalty: 0,
 };
 
-export const generateDefaultChat = (title?: string, folder?: string): ChatInterface => ({
+export const generateDefaultChat = (
+  title?: string,
+  folder?: string
+): ChatInterface => ({
   id: uuidv4(),
   title: title ? title : 'New Chat',
   messages:
@@ -66,7 +87,7 @@ export const generateDefaultChat = (title?: string, folder?: string): ChatInterf
       : [],
   config: { ...useStore.getState().defaultChatConfig },
   titleSet: false,
-  folder
+  folder,
 });
 
 export const codeLanguageSubset = [
