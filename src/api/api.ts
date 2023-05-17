@@ -17,14 +17,20 @@ export const getChatCompletion = async (
   if (isAzureEndpoint(endpoint) && apiKey) {
     headers['api-key'] = apiKey;
 
-    let gpt3forAzure = 'gpt-35-turbo'
-    if (config.model === 'gpt-3.5-turbo') {
-      endpoint = endpoint + `openai/deployments/${gpt3forAzure}/chat/completions?api-version=2023-03-15-preview`
-    } else {
-      endpoint = endpoint + `openai/deployments/${config.model}/chat/completions?api-version=2023-03-15-preview`
+    const gpt3forAzure = 'gpt-35-turbo';
+    const model =
+      config.model === 'gpt-3.5-turbo' ? gpt3forAzure : config.model;
+    const apiVersion = '2023-03-15-preview';
+
+    const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
+
+    if (!endpoint.endsWith(path)) {
+      if (!endpoint.endsWith('/')) {
+        endpoint += '/';
+      }
+      endpoint += path;
     }
   }
-   
 
   const response = await fetch(endpoint, {
     method: 'POST',
@@ -55,15 +61,18 @@ export const getChatCompletionStream = async (
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
   if (isAzureEndpoint(endpoint) && apiKey) {
     headers['api-key'] = apiKey;
-    
-    let gpt3forAzure = 'gpt-35-turbo'
+
+    let gpt3forAzure = 'gpt-35-turbo';
     if (config.model === 'gpt-3.5-turbo') {
-      endpoint = endpoint + `openai/deployments/${gpt3forAzure}/chat/completions?api-version=2023-03-15-preview`
+      endpoint =
+        endpoint +
+        `openai/deployments/${gpt3forAzure}/chat/completions?api-version=2023-03-15-preview`;
     } else {
-      endpoint = endpoint + `openai/deployments/${config.model}/chat/completions?api-version=2023-03-15-preview`
+      endpoint =
+        endpoint +
+        `openai/deployments/${config.model}/chat/completions?api-version=2023-03-15-preview`;
     }
   }
-   
 
   const response = await fetch(endpoint, {
     method: 'POST',
