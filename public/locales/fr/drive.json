@@ -1,16 +1,16 @@
 {
   "name": "Google Sync",
-  "tagline": "Effortlessly synchronize your chats and settings with Google Drive.",
+  "tagline": "Synchronisez vos discussions et paramètres sans effort avec Google Drive.",
   "button": {
-    "sync": "Sync your chats",
-    "stop": "Stop syncing",
-    "create": "Create new file",
-    "confirm": "Confirm selection"
+    "sync": "Synchroniser vos discussions",
+    "stop": "Arrêter la synchronisation",
+    "create": "Créer un nouveau fichier",
+    "confirm": "Confirmer la sélection"
   },
-  "notice": "Note: You will need to re-login on every visit or every hour. To avoid your cloud data being overwritten, do not use BetterChatGPT on more than one device at the same time.",
-  "privacy": "Your privacy is important to us, and to ensure it, Better ChatGPT only has non-sensitive access, meaning it can only create, view, and manage its own files and folders.",
+  "notice": "Note: Vous devrez vous reconnecter à chaque visite ou toutes les heures. Pour éviter que vos données cloud soient écrasées, n'utilisez pas BetterChatGPT sur plus d'un appareil en même temps.",
+  "privacy": "Votre vie privée est importante pour nous et pour la garantir, BetterChatGPT n'a que des accès non sensibles, c'est-à-dire qu'il peut seulement créer, visualiser et gérer ses propres fichiers et dossiers.",
   "toast": {
-    "sync": "Sync successful!",
-    "stop": "Syncing stopped"
+    "sync": "Synchronisation réussie!",
+    "stop": "Synchronisation arrêtée"
   }
 }

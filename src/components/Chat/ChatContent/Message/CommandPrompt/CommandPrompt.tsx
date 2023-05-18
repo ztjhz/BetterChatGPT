@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useStore from '@store/store';
+
 import { useTranslation } from 'react-i18next';
 import { matchSorter } from 'match-sorter';
 import { Prompt } from '@type/prompt';
+
+import useHideOnOutsideClick from '@hooks/useHideOnOutsideClick';
 
 const CommandPrompt = ({
   _setContent,
@@ -11,11 +14,20 @@ const CommandPrompt = ({
 }) => {
   const { t } = useTranslation();
   const prompts = useStore((state) => state.prompts);
-  const [dropDown, setDropDown] = useState<boolean>(false);
   const [_prompts, _setPrompts] = useState<Prompt[]>(prompts);
   const [input, setInput] = useState<string>('');
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
+  const [dropDown, setDropDown, dropDownRef] = useHideOnOutsideClick();
+
+
+  useEffect(() => {
+    if (dropDown && inputRef.current) {
+      // When dropdown is visible, focus the input
+      inputRef.current.focus();
+    }
+  }, [dropDown]);
+  
   useEffect(() => {
     const filteredPrompts = matchSorter(useStore.getState().prompts, input, {
       keys: ['name'],
@@ -28,29 +40,8 @@ const CommandPrompt = ({
     setInput('');
   }, [prompts]);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setDropDown(false);
-      }
-    };
-
-    if (dropDown) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [dropdownRef, dropDown]);
-
   return (
-    <div className='relative max-wd-sm' ref={dropdownRef}>
+    <div className='relative max-wd-sm' ref={dropDownRef}>
       <button
         className='btn btn-neutral btn-small'
         onClick={() => setDropDown(!dropDown)}
@@ -64,6 +55,7 @@ const CommandPrompt = ({
       >
         <div className='text-sm px-4 py-2 w-max'>{t('promptLibrary')}</div>
         <input
+          ref={inputRef}
           type='text'
           className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 m-0 w-full mr-0 h-8 focus:outline-none'
           value={input}

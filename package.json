@@ -26,6 +26,9 @@
       "title": "${productName} ${version}",
       "icon": "dist/icon-rounded.png"
     },
+    "mac": {
+      "icon": "dist/icon-rounded.png"
+    },
     "linux": {
       "target": [
         "tar.gz",

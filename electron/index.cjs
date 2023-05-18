@@ -1,8 +1,10 @@
 const path = require('path');
 
-const { app, BrowserWindow, Tray, Menu } = require('electron');
+const {dialog,  app, BrowserWindow, Tray, Menu } = require('electron');
 const isDev = require('electron-is-dev');
 const { autoUpdater } = require('electron-updater');
+let win = null;
+const instanceLock = app.requestSingleInstanceLock();
 
 if (require('electron-squirrel-startup')) app.quit();
 
@@ -17,17 +19,13 @@ function createWindow() {
   }
   autoUpdater.checkForUpdatesAndNotify();
 
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
+	autoHideMenuBar: true,
     show: false,
     icon: iconPath,
   });
 
   createTray(win);
-
-  win.on('minimize', (event) => {
-    event.preventDefault();
-    win.hide();
-  });
 
   win.maximize();
   win.show();
@@ -51,7 +49,13 @@ const createTray = (window) => {
     )
   );
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'Show', click: () => window.show() },
+    {
+      label: 'Show',
+      click: () => {
+        win.maximize();
+        window.show();
+      },
+    },
     {
       label: 'Exit',
       click: () => {
@@ -61,14 +65,15 @@ const createTray = (window) => {
     },
   ]);
 
-  tray.on('click', () => window.show());
+  tray.on('click', () => {
+    win.maximize();
+    window.show();
+  });
   tray.setToolTip('Better ChatGPT');
   tray.setContextMenu(contextMenu);
 
   return tray;
 };
-
-app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -76,11 +81,28 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
+process.on('uncaughtException', (error) => {
+  // Perform any necessary cleanup tasks here
+  dialog.showErrorBox('An error occurred', error.stack);
+
+  // Exit the app
+  process.exit(1);
 });
+
+if (!instanceLock) {
+  app.quit()
+} else {
+  app.on('second-instance', (event, commandLine, workingDirectory) => {
+    if (win) {
+      if (win.isMinimized()) win.restore()
+      win.focus()
+    }
+  })
+
+  app.whenReady().then(() => {
+    win = createWindow()
+  })
+}
 
 const createServer = () => {
   // Dependencies
