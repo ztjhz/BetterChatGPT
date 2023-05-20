@@ -1,0 +1,16 @@
+{
+  "tools": {
+    "auto": {
+      "name": "自动选择"
+    },
+    "knowledge": {
+      "name": "知识"
+    },
+    "news": {
+      "name": "新闻"
+    },
+    "data": {
+      "name": "实时数据"
+    }
+  }
+}

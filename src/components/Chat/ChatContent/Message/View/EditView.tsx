@@ -1,14 +1,10 @@
 import React, { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
-
 import useSubmit from '@hooks/useSubmit';
-
 import { ChatInterface } from '@type/chat';
-
 import PopupModal from '@components/PopupModal';
-import TokenCount from '@components/TokenCount';
-import CommandPrompt from '../CommandPrompt';
+import { t } from 'i18next';
 
 const EditView = ({
   content,
@@ -22,13 +18,14 @@ const EditView = ({
   sticky?: boolean;
 }) => {
   const inputRole = useStore((state) => state.inputRole);
+  const dataSources = useStore((state) => state.sources);
+  const setDataSources = useStore((state) => state.setSouces);
   const setChats = useStore((state) => state.setChats);
   const currentChatIndex = useStore((state) => state.currentChatIndex);
-
+  
   const [_content, _setContent] = useState<string>(content);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const textareaRef = React.createRef<HTMLTextAreaElement>();
-
   const { t } = useTranslation();
 
   const resetTextAreaHeight = () => {
@@ -101,7 +98,7 @@ const EditView = ({
       setIsEdit(false);
     }
     setChats(updatedChats);
-    handleSubmit();
+    handleSubmit(dataSources);
   };
 
   useEffect(() => {
@@ -120,6 +117,26 @@ const EditView = ({
 
   return (
     <>
+      <DataSourcesSelector 
+        dataSources={dataSources} 
+        onChange={(e: any, value:string) => {
+          if (e.target.checked) {
+            if(value === 'auto'){
+              setDataSources(['auto'])
+              return
+            }else{
+              setDataSources([...dataSources.filter((item: string) => item !== 'auto'), value])
+            }
+          }else{
+            const afterValue = dataSources.filter((item: string) => item !== value)
+            if(afterValue.length === 0){
+              setDataSources(['auto'])
+              return
+            }
+            setDataSources(afterValue)
+          }
+        }}
+      />
       <div
         className={`w-full ${
           sticky
@@ -158,7 +175,39 @@ const EditView = ({
     </>
   );
 };
-
+const DataSourcesSelector = ({dataSources, onChange}: any) => {
+  const sources = [{
+    name: t('tools.auto.name', {ns: 'source'}),
+    value: 'auto'
+  },{
+    name: t('tools.knowledge.name', {ns: 'source'}),
+    value: 'Knowledge search'
+  },{
+    name:  t('tools.news.name', {ns: 'source'}),
+    value: 'News query'
+  },{
+    name: t('tools.data.name', {ns: 'source'}),
+    value: 'Data statistics'
+  }]
+  return (
+    <div className='flex gap-2'>
+      {sources.map((source, idx) => (
+        <div key={source.name} className="flex cursor-pointer items-center pl-4 pr-4 border border-gray-200 rounded dark:border-gray-700 hover:bg-gray-700">
+          <input 
+            id={`bordered-checkbox-${idx}`} 
+            type="checkbox" 
+            onChange={(e) => onChange(e, source.value)}
+            checked={dataSources.includes(source.value)}
+            name="bordered-checkbox" 
+            className="w-4 h-4 outline-0 text-blue-600 bg-gray-100 border-gray-300 rounded  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" 
+          />
+          <label htmlFor={`bordered-checkbox-${idx}`} className="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{source.name}</label>
+        </div>
+      ))}
+      
+    </div>
+  )
+}
 const EditViewButtons = memo(
   ({
     sticky = false,
@@ -234,8 +283,6 @@ const EditViewButtons = memo(
             </button>
           )}
         </div>
-        {sticky && advancedMode && <TokenCount />}
-        <CommandPrompt _setContent={_setContent} />
       </div>
     );
   }

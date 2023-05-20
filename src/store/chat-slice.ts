@@ -8,12 +8,14 @@ export interface ChatSlice {
   generating: boolean;
   error: string;
   folders: FolderCollection;
+  sources: string[];
   setMessages: (messages: MessageInterface[]) => void;
   setChats: (chats: ChatInterface[]) => void;
   setCurrentChatIndex: (currentChatIndex: number) => void;
   setGenerating: (generating: boolean) => void;
   setError: (error: string) => void;
   setFolders: (folders: FolderCollection) => void;
+  setSouces: (sources: string[]) => void;
 }
 
 export const createChatSlice: StoreSlice<ChatSlice> = (set, get) => ({
@@ -21,7 +23,14 @@ export const createChatSlice: StoreSlice<ChatSlice> = (set, get) => ({
   currentChatIndex: -1,
   generating: false,
   error: '',
+  sources: ['auto'],
   folders: {},
+  setSouces: (sources: string[]) => {
+    set((prev: ChatSlice) => ({
+      ...prev,
+      sources: sources,
+    }));
+  },
   setMessages: (messages: MessageInterface[]) => {
     set((prev: ChatSlice) => ({
       ...prev,

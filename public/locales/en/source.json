@@ -1,0 +1,16 @@
+{
+  "tools": {
+    "auto": {
+      "name": "Automatic"
+    },
+    "knowledge": {
+      "name": "Web3 Knowledge"
+    },
+    "news": {
+      "name": "Web3 News"
+    },
+    "data": {
+      "name": "Web3 Realtime Data"
+    }
+  }
+}

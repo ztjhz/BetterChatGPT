@@ -27,7 +27,7 @@ export const i18nLanguages = [
   'zh-TW',
 ];
 
-const namespace = ['main', 'api', 'about', 'model'];
+const namespace = ['main', 'api', 'about', 'model', 'source'];
 if (googleClientId) namespace.push('drive');
 
 i18n

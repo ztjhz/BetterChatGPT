@@ -7,6 +7,7 @@ import { isAzureEndpoint } from '@utils/api';
 export const getChatServerResponse = async (
   messages: MessageInterface[],
   conversationId: string,
+  sources: any
 ) => {
   const response = await fetch(`${server_api_endpoint}/chat`, {
     method: 'POST',
@@ -15,7 +16,8 @@ export const getChatServerResponse = async (
     },
     body: JSON.stringify({
       messages,
-      conversationId
+      conversationId,
+      sources
     })
   })
 

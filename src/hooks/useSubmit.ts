@@ -47,7 +47,7 @@ const useSubmit = () => {
     return data.choices[0].message.content;
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (sources: any) => {
     const chats = useStore.getState().chats;
     if (generating || !chats) return;
 
@@ -76,7 +76,8 @@ const useSubmit = () => {
 
       stream = await getChatServerResponse(
           messages,
-          chats[currentChatIndex].id
+          chats[currentChatIndex].id,
+          sources
       );
  
       const updatedChats: ChatInterface[] = JSON.parse(
