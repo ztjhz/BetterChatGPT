@@ -23,9 +23,7 @@
 ## 🛠️ UI Tweaks
 
 <p align="center">
-    <a href="https://bettergpt.chat" target="_blank">
-        <img src="https://cdn.discordapp.com/attachments/446426925209092098/1105203400334909550/image.png" alt="landing" width=500 />
-    </a>
+    <img src="https://cdn.discordapp.com/attachments/446426925209092098/1105203400334909550/image.png" alt="landing" width=500 />
 </p>
 
 - Mobile menu bar always shown, can open new chats even with menu bar minimized
@@ -38,9 +36,7 @@
 - Easily quickswap between GPT 3.5 and GPT4, saving money on easier questions
 
 <p align="center">
-    <a href="https://bettergpt.chat" target="_blank">
-        <img src="https://cdn.discordapp.com/attachments/446426925209092098/1105209104147959819/quickswapdemo.gif" alt="landing" width=500 />
-    </a>
+    <img src="https://cdn.discordapp.com/attachments/446426925209092098/1105209104147959819/quickswapdemo.gif" alt="landing" width=500 />
 </p>
 
 
