@@ -4,7 +4,7 @@
     <a href="https://gpt.koaladev.io" target="_blank"><img src="public/apple-touch-icon.png" alt="Better ChatGPT Icon" width="100" /></a>
 </p>
 
-<h4 align="center"><b>Free, Powerful, Limitless, Intelligent, Engaging</b></h4>
+<h4 align="center"><b>A Better ChatGPT fork with a focus on desktop experience and utility</b></h4>
 
 <p align="center">
 <a href="https://github.com/jackschedel/BetterChatGPT/blob/main/LICENSE" target="_blank">
@@ -17,8 +17,6 @@
 <img src="https://img.shields.io/github/issues-pr/jackschedel/BetterChatGPT?style=flat-square" alt="pull-requests"/>
 </a>
 
-
-<b>!!! This repo is primarily a mirror of ztjhz/BetterChatGPT, with some minor UI and utility tweaks for personal preference. It can be found at https://gpt.koaladev.io/. !!!</b>
 
 ## 🛠️ UI Tweaks
 
