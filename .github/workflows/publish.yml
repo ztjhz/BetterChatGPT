@@ -49,6 +49,7 @@ jobs:
           key: ${{ runner.os }}-release-${{github.sha}}
           restore-keys: |
             ${{ runner.os }}-release-
+            
       - name: Build
         run: yarn make
         env:
@@ -128,6 +129,23 @@ jobs:
           asset_path: ./release-Windows/win-better-chatgpt-1.0.3-x64.exe
           asset_name: win-better-chatgpt-1.0.3-x64.exe
           asset_content_type: application
+          
+      - name: Zip Unpacked Release - Windows
+        run: |
+          # Zip the folder
+          cd ./release-Windows
+          7z a win-unpacked.zip win-unpacked/
+          cd ..
+          
+      - name: Upload Unpacked Release - Windows
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./release-Windows/win-unpacked.zip
+          asset_name: win-unpacked.zip
+          asset_content_type: zip
 
       - name: Upload Release Asset - Windows
         uses: actions/upload-release-asset@v1
