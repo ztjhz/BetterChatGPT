@@ -4,7 +4,7 @@
       "title": "选择数据源："
     },
     "auto": {
-      "name": "自动选择",
+      "name": "自动",
       "description": "AI 自动选择数据源"
     },
     "knowledge": {
