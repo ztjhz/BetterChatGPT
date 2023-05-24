@@ -1,16 +1,23 @@
 {
   "tools": {
+    "selector": {
+      "title": "Select data source:"
+    },
     "auto": {
-      "name": "Automatic"
+      "name": "Automatic",
+      "description": "AI automatically selected"
     },
     "knowledge": {
-      "name": "Web3 Knowledge"
+      "name": "Web3 Knowledge",
+      "description": "Web3 reports/documents/blogs"
     },
     "news": {
-      "name": "Web3 News"
+      "name": "Web3 News",
+      "description": "Web3 News/Twitter"
     },
     "data": {
-      "name": "Web3 Realtime Data"
+      "name": "Web3 Realtime Data",
+      "description": "On-chain data/market data/financing data"
     }
   }
 }

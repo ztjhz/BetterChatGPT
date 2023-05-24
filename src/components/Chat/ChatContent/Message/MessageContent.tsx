@@ -19,8 +19,7 @@ const MessageContent = ({
   const advancedMode = useStore((state) => state.advancedMode);
 
   return (
-    <div className='relative flex flex-col gap-1 md:gap-3 lg:w-[calc(100%-115px)]'>
-      {advancedMode && <div className='flex flex-grow flex-col gap-3'></div>}
+    <div className='relative flex flex-col gap-1 md:gap-3 lg:w-[calc(100%)]'>
       {isEdit ? (
         <EditView
           content={content}

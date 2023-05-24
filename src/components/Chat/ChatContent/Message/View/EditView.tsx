@@ -5,7 +5,7 @@ import useSubmit from '@hooks/useSubmit';
 import { ChatInterface } from '@type/chat';
 import PopupModal from '@components/PopupModal';
 import { t } from 'i18next';
-
+import {CheckCircleIcon} from '@heroicons/react/20/solid'
 const EditView = ({
   content,
   setIsEdit,
@@ -119,8 +119,8 @@ const EditView = ({
     <>
       <DataSourcesSelector 
         dataSources={dataSources} 
-        onChange={(e: any, value:string) => {
-          if (e.target.checked) {
+        onChange={(checked: Boolean, value:string) => {
+          if (checked) {
             if(value === 'auto'){
               setDataSources(['auto'])
               return
@@ -134,13 +134,14 @@ const EditView = ({
               return
             }
             setDataSources(afterValue)
+            console.log('afterValue',afterValue)
           }
         }}
       />
       <div
         className={`w-full ${
           sticky
-            ? 'py-2 md:py-3 px-2 md:px-4 border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-md shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:shadow-[0_0_15px_rgba(0,0,0,0.10)]'
+            ? 'flex align-top gap-2 py-2 md:py-3 px-2 md:px-4 border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-md shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:shadow-[0_0_15px_rgba(0,0,0,0.10)]'
             : ''
         }`}
       >
@@ -155,8 +156,7 @@ const EditView = ({
           onKeyDown={handleKeyDown}
           rows={1}
         ></textarea>
-      </div>
-      <EditViewButtons
+        <EditViewButtons
         sticky={sticky}
         handleSaveAndSubmit={handleSaveAndSubmit}
         handleSave={handleSave}
@@ -164,6 +164,8 @@ const EditView = ({
         setIsEdit={setIsEdit}
         _setContent={_setContent}
       />
+      </div>
+      
       {isModalOpen && (
         <PopupModal
           setIsModalOpen={setIsModalOpen}
@@ -178,44 +180,53 @@ const EditView = ({
 const DataSourcesSelector = ({dataSources, onChange}: any) => {
   const sources = [{
     name: t('tools.auto.name', {ns: 'source'}),
-    value: 'auto'
+    value: 'auto',
+    description: t('tools.auto.description', {ns: 'source'})
   },{
     name: t('tools.knowledge.name', {ns: 'source'}),
-    value: 'Knowledge search'
+    value: 'Knowledge search',
+    description: t('tools.knowledge.description', {ns: 'source'})
   },{
     name:  t('tools.news.name', {ns: 'source'}),
-    value: 'News query'
+    value: 'News query',
+    description: t('tools.news.description', {ns: 'source'})
   },{
     name: t('tools.data.name', {ns: 'source'}),
-    value: 'Data statistics'
+    value: 'Data statistics',
+    description: t('tools.data.description', {ns: 'source'})
   }]
   return (
-    <div className='flex gap-2'>
-      {sources.map((source, idx) => (
-        <div key={source.name} className="flex cursor-pointer items-center pl-4 pr-4 border border-gray-200 rounded dark:border-gray-700 hover:bg-gray-700">
-          <input 
-            id={`bordered-checkbox-${idx}`} 
-            type="checkbox" 
-            onChange={(e) => onChange(e, source.value)}
-            checked={dataSources.includes(source.value)}
-            name="bordered-checkbox" 
-            className="w-4 h-4 outline-0 text-blue-600 bg-gray-100 border-gray-300 rounded  dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" 
-          />
-          <label htmlFor={`bordered-checkbox-${idx}`} className="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{source.name}</label>
-        </div>
-      ))}
-      
+    <div>
+      <p className='text-xs text-gray-300 mb-2'>{t('tools.selector.title', {ns: 'source'})}</p>
+      <div className='flex gap-2 w-full overflow-y-scroll overflow-x-visible lg:overflow-y-visible  lg:overflow-x-visible items-stretch'>
+        {sources.map((source, idx) => {
+          const checked = dataSources.includes(source.value)
+          return (
+            <div className='shrink-0 flex-1'>
+              <div key={source.name} className={` h-full cursor-pointer p-2 border hover:ring-2 ${checked ? 'text-emerald-600 border-emerald-600 dark:text-emerald-300' : 'text-gray-900 dark:text-gray-300'} rounded ring-offset-1 ring-emerald-600 transition-all `} onClick={() => {
+                onChange(!checked, source.value)
+              }}>
+                <div className='flex gap-1  items-center'>
+                  <div>
+                    <CheckCircleIcon className={`${checked ? 'text-emerald-600' : 'text-gray-400'} w-4 h-4`}/>
+                  </div>
+                  <div className="w-full text-xs font-medium"  >{source.name}</div>
+                </div>
+                <div className='ml-5 mt-1 text-xs text-gray-400 hidden sm:block'>
+                  {source.description}
+                </div>
+              </div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
 const EditViewButtons = memo(
   ({
-    sticky = false,
+    sticky = true,
     handleSaveAndSubmit,
-    handleSave,
-    setIsModalOpen,
-    setIsEdit,
-    _setContent,
   }: {
     sticky?: boolean;
     handleSaveAndSubmit: () => void;
@@ -226,59 +237,19 @@ const EditViewButtons = memo(
   }) => {
     const { t } = useTranslation();
     const generating = useStore.getState().generating;
-    const advancedMode = useStore((state) => state.advancedMode);
 
     return (
-      <div className='flex'>
-        <div className='flex-1 text-center mt-2 flex justify-center'>
+      <div className='flex shrink-0 self-end'>
+        <div className='flex-1 text-center flex justify-center'>
           {sticky && (
             <button
-              className={`btn relative mr-2 btn-primary ${
+              className={`btn relative btn-primary ${
                 generating ? 'cursor-not-allowed opacity-40' : ''
               }`}
               onClick={handleSaveAndSubmit}
             >
               <div className='flex items-center justify-center gap-2'>
                 {t('saveAndSubmit')}
-              </div>
-            </button>
-          )}
-
-          <button
-            className={`btn relative mr-2 ${
-              sticky
-                ? `btn-neutral ${
-                    generating ? 'cursor-not-allowed opacity-40' : ''
-                  }`
-                : 'btn-primary'
-            }`}
-            onClick={handleSave}
-          >
-            <div className='flex items-center justify-center gap-2'>
-              {t('save')}
-            </div>
-          </button>
-
-          {sticky || (
-            <button
-              className='btn relative mr-2 btn-neutral'
-              onClick={() => {
-                !generating && setIsModalOpen(true);
-              }}
-            >
-              <div className='flex items-center justify-center gap-2'>
-                {t('saveAndSubmit')}
-              </div>
-            </button>
-          )}
-
-          {sticky || (
-            <button
-              className='btn relative btn-neutral'
-              onClick={() => setIsEdit(false)}
-            >
-              <div className='flex items-center justify-center gap-2'>
-                {t('cancel')}
               </div>
             </button>
           )}

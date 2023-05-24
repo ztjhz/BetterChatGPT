@@ -1,16 +1,23 @@
 {
   "tools": {
+    "selector": {
+      "title": "选择数据源："
+    },
     "auto": {
-      "name": "自动选择"
+      "name": "自动选择",
+      "description": "AI 自动选择数据源"
     },
     "knowledge": {
-      "name": "知识"
+      "name": "知识",
+      "description": "Web3 研报、技术文档、技术博客"
     },
     "news": {
-      "name": "新闻"
+      "name": "新闻",
+      "description": "Web3 新闻、Twitter"
     },
     "data": {
-      "name": "实时数据"
+      "name": "实时数据",
+      "description": "链上数据、市场数据、融资数据"
     }
   }
 }

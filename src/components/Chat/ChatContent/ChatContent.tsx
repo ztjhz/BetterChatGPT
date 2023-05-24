@@ -9,9 +9,6 @@ import NewMessageButton from './Message/NewMessageButton';
 import CrossIcon from '@icon/CrossIcon';
 
 import useSubmit from '@hooks/useSubmit';
-import DownloadChat from './DownloadChat';
-import CloneChat from './CloneChat';
-import ShareGPT from '@components/ShareGPT';
 
 const ChatContent = () => {
   const inputRole = useStore((state) => state.inputRole);
