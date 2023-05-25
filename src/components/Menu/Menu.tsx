@@ -10,9 +10,11 @@ import MenuOptions from './MenuOptions';
 import CrossIcon2 from '@icon/CrossIcon2';
 import DownArrow from '@icon/DownArrow';
 import MenuIcon from '@icon/MenuIcon';
-
+import TextColorLogo from '@logo/textColor'
+import TextColorLogoDark from '@logo/textColorDark'
 const Menu = () => {
   const hideSideMenu = useStore((state) => state.hideSideMenu);
+  const theme = useStore((state) => state.theme);
   const setHideSideMenu = useStore((state) => state.setHideSideMenu);
 
   const windowWidthRef = useRef<number>(window.innerWidth);
@@ -32,20 +34,23 @@ const Menu = () => {
     <>
       <div
         id='menu'
-        className={`group/menu dark bg-gray-900 fixed md:inset-y-0 md:flex md:w-[260px] md:flex-col transition-transform z-[999] top-0 left-0 h-full max-md:w-3/4 ${
+        className={`group/menu bg-white dark:bg-gray-700 fixed md:inset-y-0 md:flex md:w-[260px] md:flex-col transition-transform border-r z-[999] top-0 left-0 h-full max-md:w-3/4 ${
           hideSideMenu ? 'translate-x-[-100%]' : 'translate-x-[0%]'
         }`}
       >
-        <div className='flex h-full min-h-0 flex-col'>
-          <div className='flex h-full w-full flex-1 items-start border-white/20'>
-            <nav className='flex h-full flex-1 flex-col space-y-1 px-2 pt-2'>
-              <div className='flex gap-2'>
-                <NewChat />
-                <NewFolder />
-              </div>
-              <ChatHistoryList />
-              <MenuOptions />
-            </nav>
+        <div className="h-12 ml-2">
+          {theme === 'dark' ? <TextColorLogoDark className="h-12"/> : <TextColorLogo className="h-12"/>}
+        </div>
+        <div className="p-2 pt-0 bg-white dark:bg-gray-700 h-full min-h-0">
+          <div className='flex h-full min-h-0 flex-col dark:bg-gray-500 rounded-md'>
+            <div className='flex h-full w-full flex-1 items-start border-white/20'>
+              <nav className='flex h-full flex-1 flex-col space-y-1 px-2 '>
+                <div className='flex gap-2'>
+                  <NewChat />
+                </div>
+                <ChatHistoryList />
+              </nav>
+            </div>
           </div>
         </div>
         <div

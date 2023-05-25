@@ -11,9 +11,9 @@ import useStore from '@store/store';
 
 const ChatHistoryClass = {
   normal:
-    'flex py-2 px-2 items-center gap-3 relative rounded-md bg-gray-900 hover:bg-gray-850 break-all hover:pr-4 group transition-opacity',
+    'flex py-2 px-2 items-center text-black gap-3 relative rounded-md dark:hover:bg-gray-850 break-all hover:pr-4 group transition-opacity',
   active:
-    'flex py-2 px-2 items-center gap-3 relative rounded-md break-all pr-14 bg-gray-800 hover:bg-gray-800 group transition-opacity',
+    'flex py-2 px-2 items-center text-black gap-3 relative rounded-md break-all pr-14 bg-gray-100 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-800 group transition-opacity',
   normalGradient:
     'absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-gray-900 group-hover:from-gray-850',
   activeGradient:
@@ -100,7 +100,7 @@ const ChatHistory = React.memo(
         draggable
         onDragStart={handleDragStart}
       >
-        <ChatIcon />
+        <div className={`rounded-full w-2 h-2 ${active ? 'bg-green-600' : 'bg-gray-400'}`}></div>
         <div className='flex-1 text-ellipsis max-h-5 overflow-hidden break-all relative'>
           {isEdit ? (
             <input
@@ -116,38 +116,28 @@ const ChatHistory = React.memo(
           ) : (
             _title
           )}
-
-          {isEdit || (
-            <div
-              className={
-                active
-                  ? ChatHistoryClass.activeGradient
-                  : ChatHistoryClass.normalGradient
-              }
-            />
-          )}
         </div>
         {active && (
           <div className='absolute flex right-1 z-10 text-gray-300 visible'>
             {isDelete || isEdit ? (
               <>
-                <button className='p-1 hover:text-white' onClick={handleTick}>
+                <button className='p-1 text-black dark:hover:text-white' onClick={handleTick}>
                   <TickIcon />
                 </button>
-                <button className='p-1 hover:text-white' onClick={handleCross}>
+                <button className='p-1 text-black dark:hover:text-white' onClick={handleCross}>
                   <CrossIcon />
                 </button>
               </>
             ) : (
               <>
                 <button
-                  className='p-1 hover:text-white'
+                  className='p-1 text-black dark:hover:text-white'
                   onClick={() => setIsEdit(true)}
                 >
                   <EditIcon />
                 </button>
                 <button
-                  className='p-1 hover:text-white'
+                  className='p-1 text-black dark:hover:text-white'
                   onClick={() => setIsDelete(true)}
                 >
                   <DeleteIcon />

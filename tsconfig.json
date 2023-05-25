@@ -17,6 +17,7 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
+      "@logo/*": ["./src/assets/logo/*"],
       "@icon/*": ["./src/assets/icons/*"],
       "@type/*": ["./src/types/*"],
       "@store/*": ["./src/store/*"],

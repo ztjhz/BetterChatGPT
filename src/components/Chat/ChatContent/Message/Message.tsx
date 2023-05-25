@@ -12,7 +12,7 @@ import RoleSelector from './RoleSelector';
 //   assistant: 'bg-gray-50 dark:bg-gray-650',
 //   system: 'bg-gray-50 dark:bg-gray-650',
 // };
-const backgroundStyle = ['dark:bg-gray-800', 'bg-gray-50 dark:bg-gray-650'];
+const backgroundStyle = ['dark:bg-gray-800', 'bg-gray-50 dark:bg-gray-350'];
 
 const Message = React.memo(
   ({
@@ -31,12 +31,12 @@ const Message = React.memo(
 
     return (
       <div
-        className={`w-full border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group ${
+        className={`w-full text-gray-800 dark:text-gray-100 group ${
           backgroundStyle[messageIndex % 2]
         }`}
       >
         <div
-          className={`text-base gap-4 md:gap-6 m-auto p-4 md:py-6 flex align-middle transition-all ease-in-out ${
+          className={`text-base ${sticky ? '' : 'gap-4'} md:gap-4 m-auto p-4 md:py-6 flex align-middle transition-all ease-in-out ${
             hideSideMenu
               ? 'md:max-w-5xl lg:max-w-5xl xl:max-w-6xl'
               : 'md:max-w-3xl lg:max-w-3xl xl:max-w-4xl'
@@ -45,8 +45,8 @@ const Message = React.memo(
           <div className='mt-12'>
             
           </div>
-          <Avatar role={role} />
-          <div className='w-[calc(100%-50px)] '>
+          { sticky ? null : <Avatar role={role} />}
+          <div className='w-full '>
             <MessageContent
               role={role}
               content={content}

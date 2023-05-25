@@ -9,6 +9,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@icon/': new URL('./src/assets/icons/', import.meta.url).pathname,
+      '@logo/': new URL('./src/assets/logo/', import.meta.url).pathname,
       '@type/': new URL('./src/types/', import.meta.url).pathname,
       '@store/': new URL('./src/store/', import.meta.url).pathname,
       '@hooks/': new URL('./src/hooks/', import.meta.url).pathname,

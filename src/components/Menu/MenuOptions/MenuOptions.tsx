@@ -24,7 +24,6 @@ const MenuOptions = () => {
           hideMenuOptions ? 'max-h-0' : 'max-h-full'
         } overflow-hidden transition-all`}
       >
-        <SettingsMenu />
       </div>
     </>
   );
