@@ -38,8 +38,9 @@ const Menu = () => {
           hideSideMenu ? 'translate-x-[-100%]' : 'translate-x-[0%]'
         }`}
       >
-        <div className="h-12 ml-2">
+        <div className="h-12 ml-2 flex items-end">
           {theme === 'dark' ? <TextColorLogoDark className="h-12"/> : <TextColorLogo className="h-12"/>}
+          <div className="text-xs border border-emerald-600 rounded-full px-1 text-emerald-600 mb-3 scale-75 -ml-2">DEMO</div>
         </div>
         <div className="p-2 pt-0 bg-white dark:bg-gray-700 h-full min-h-0">
           <div className='flex h-full min-h-0 flex-col dark:bg-gray-500 rounded-md'>

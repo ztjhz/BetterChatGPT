@@ -12,8 +12,8 @@ const useSubmit = () => {
   const { t, i18n } = useTranslation('api');
   const error = useStore((state) => state.error);
   const setError = useStore((state) => state.setError);
-  const apiEndpoint = useStore((state) => state.apiEndpoint);
-  const apiKey = useStore((state) => state.apiKey);
+  const apiEndpoint: string = '';
+  const apiKey: string = '';
   const setGenerating = useStore((state) => state.setGenerating);
   const generating = useStore((state) => state.generating);
   const currentChatIndex = useStore((state) => state.currentChatIndex);
@@ -31,14 +31,14 @@ const useSubmit = () => {
 
       // other endpoints
       data = await getChatCompletion(
-        useStore.getState().apiEndpoint,
+        apiEndpoint,
         message,
         _defaultChatConfig
       );
     } else if (apiKey) {
       // own apikey
       data = await getChatCompletion(
-        useStore.getState().apiEndpoint,
+        apiEndpoint,
         message,
         _defaultChatConfig,
         apiKey

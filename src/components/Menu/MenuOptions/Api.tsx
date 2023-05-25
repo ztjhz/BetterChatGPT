@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import PersonIcon from '@icon/PersonIcon';
-import ApiMenu from '@components/ApiMenu';
 
 const Config = () => {
   const { t } = useTranslation();
@@ -18,7 +17,6 @@ const Config = () => {
         <PersonIcon />
         {t('api')}
       </a>
-      {isModalOpen && <ApiMenu setIsModalOpen={setIsModalOpen} />}
     </>
   );
 };

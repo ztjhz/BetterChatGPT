@@ -8,14 +8,12 @@ import Menu from '@components/Menu';
 import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 import { ChatInterface } from '@type/chat';
 import { Theme } from '@type/theme';
-import ApiPopup from '@components/ApiPopup';
 import Toast from '@components/Toast';
 
 function App() {
   const initialiseNewChat = useInitialiseNewChat();
   const setChats = useStore((state) => state.setChats);
   const setTheme = useStore((state) => state.setTheme);
-  const setApiKey = useStore((state) => state.setApiKey);
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
 
   useEffect(() => {
@@ -28,14 +26,7 @@ function App() {
   useEffect(() => {
     // legacy local storage
     const oldChats = localStorage.getItem('chats');
-    const apiKey = localStorage.getItem('apiKey');
     const theme = localStorage.getItem('theme');
-
-    if (apiKey) {
-      // legacy local storage
-      setApiKey(apiKey);
-      localStorage.removeItem('apiKey');
-    }
 
     if (theme) {
       // legacy local storage
