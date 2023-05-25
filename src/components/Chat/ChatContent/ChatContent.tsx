@@ -45,9 +45,10 @@ const ChatContent = () => {
   const { error } = useSubmit();
 
   return (
-    <div className='flex-1 overflow-hidden'>
+    <div className='h-screen flex-1 flex flex-col justify-between overflow-hidden'>
+      {<ChatTitle />}
       <ScrollToBottom
-        className='h-full dark:bg-gray-800'
+        className='flex-1 dark:bg-gray-800 overflow-hidden'
         followButtonClassName='hidden'
       >
         <ScrollToBottomButton />
@@ -55,7 +56,7 @@ const ChatContent = () => {
           <div
             className='flex flex-col items-center text-sm dark:bg-gray-800 w-full' ref={saveRef}
           >
-            {<ChatTitle />}
+            
             {!generating && advancedMode && messages?.length === 0 && (
               <NewMessageButton messageIndex={-1} />
             )}
@@ -71,29 +72,16 @@ const ChatContent = () => {
             ))}
           </div>
 
-          <Message
-            role={inputRole}
-            content=''
-            messageIndex={stickyIndex}
-            sticky
-          />
-          {error !== '' && (
-            <div className='relative py-2 px-3 w-3/5 mt-3 max-md:w-11/12 border rounded-md border-red-500 bg-red-500/10'>
-              <div className='text-gray-600 dark:text-gray-100 text-sm whitespace-pre-wrap'>
-                {error}
-              </div>
-              <div
-                className='text-white absolute top-1 right-1 cursor-pointer'
-                onClick={() => {
-                  setError('');
-                }}
-              >
-                <CrossIcon />
-              </div>
-            </div>
-          )}
         </div>
       </ScrollToBottom>
+      <div className='shrink-0 justify-self-end'>
+      <Message
+        role={inputRole}
+        content=''
+        messageIndex={stickyIndex}
+        sticky
+      />
+      </div>
     </div>
   );
 };
