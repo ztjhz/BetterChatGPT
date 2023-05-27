@@ -13,28 +13,13 @@ const NewChat = ({ folder }: { folder?: string }) => {
 
   return (
     <a
-      className={`flex flex-1 items-center rounded-md hover:bg-gray-500/10 transition-all duration-200 dark:text-white text-sm flex-shrink-0 ${
-        generating
-          ? 'cursor-not-allowed opacity-40'
-          : 'cursor-pointer opacity-100'
-      } ${
-        folder ? 'justify-start' : 'py-2 px-2 gap-3 mb-2 border dark:border-white/20'
-      }`}
+      className={`p-2 flex text-xs cursor-pointer items-center justify-center rounded-md bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors`}
       onClick={() => {
         if (!generating) addChat(folder);
       }}
       title={folder ? String(t('newChat')) : ''}
     >
-      {folder ? (
-        <div className='max-h-0 parent-sibling-hover:max-h-10 hover:max-h-10 parent-sibling-hover:py-2 hover:py-2 px-2 overflow-hidden transition-all duration-200 delay-500 text-sm flex gap-3 items-center dark:text-gray-100'>
-          <PlusIcon /> {t('newChat')}
-        </div>
-      ) : (
-        <>
-          <PlusIcon />
-          <span className='inline-flex dark:text-white text-sm'>{t('newChat')}</span>
-        </>
-      )}
+      <PlusIcon />{t('newChat')}
     </a>
   );
 };

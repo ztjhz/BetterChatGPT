@@ -18,7 +18,7 @@ export const getChatServerResponse = async (
       messages,
       conversationId,
       sources
-    })
+    }),
   })
 
   return await response.json();
