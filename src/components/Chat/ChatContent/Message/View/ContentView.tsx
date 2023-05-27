@@ -49,7 +49,7 @@ const ContentView = memo(
     const [isDelete, setIsDelete] = useState<boolean>(false);
     const dataSources = useStore((state) => state.sources);
     const setDataSources = useStore((state) => state.setSouces);
-  
+
     const currentChatIndex = useStore((state) => state.currentChatIndex);
     const setChats = useStore((state) => state.setChats);
     const lastMessageIndex = useStore((state) =>
@@ -106,11 +106,21 @@ const ContentView = memo(
 
     const renderLoading = () => {
       return (
-        <div>Loading...</div>
+        <div role="status" className="space-y-2.5 animate-pulse w-full">
+          <div className="flex items-center w-full space-x-2">
+            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
+          </div>
+          <div className="flex items-center w-full space-x-2 w-full">
+            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
+          </div>
+          <div className="flex items-center w-full space-x-2 max-w-[480px]">
+            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
+          </div>
+        </div>
       )
     }
-   
-    if(!content) {
+
+    if (!content) {
       return renderLoading();
     }
     return (

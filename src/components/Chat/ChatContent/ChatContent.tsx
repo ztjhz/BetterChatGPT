@@ -9,10 +9,12 @@ import NewMessageButton from './Message/NewMessageButton';
 import CrossIcon from '@icon/CrossIcon';
 import Introduce from './Introduce';
 import useSubmit from '@hooks/useSubmit';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ChatContent = () => {
   const inputRole = useStore((state) => state.inputRole);
   const setError = useStore((state) => state.setError);
+  const { error, handleSubmit, insertMessage } = useSubmit();
   const messages = useStore((state) =>
     state.chats &&
       state.chats.length > 0 &&
@@ -42,7 +44,18 @@ const ChatContent = () => {
     }
   }, [generating]);
 
-  const { error, handleSubmit, insertMessage } = useSubmit();
+  useEffect(() => {
+    if (error) {
+      toast.error(error, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true
+      });
+    }
+  }, [error])
+
 
   return (
     <div className='h-screen m-2 mt-0 bg-white rounded-md flex-1 flex flex-col justify-between overflow-hidden'>
@@ -87,6 +100,7 @@ const ChatContent = () => {
           sticky
         />
       </div>
+      <ToastContainer />
     </div>
   );
 };

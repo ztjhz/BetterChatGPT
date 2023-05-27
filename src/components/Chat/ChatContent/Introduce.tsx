@@ -95,8 +95,8 @@ export default ({ onClickDefaultQuestion }: any) => {
       <div>
         {questions.map((item: string) => {
           return (
-            <div key={item} onClick={() => onClickDefaultQuestion(item)}>
-              <div className='text-xs max-w-max min-w-0 px-2 rounded-full border border-emerald-600 text-emerald-600 hover:text-emerald-800 mb-2 cursor-pointer'>{item}</div>
+            <div key={item} >
+              <div onClick={() => onClickDefaultQuestion(item)} className='text-xs max-w-max min-w-0 px-2 rounded-full border border-emerald-600 text-emerald-600 hover:text-emerald-800 mb-2 cursor-pointer'>{item}</div>
             </div>
           )
         })}
