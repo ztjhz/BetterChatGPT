@@ -4,6 +4,7 @@ import useStore from '@store/store';
 import ChatContent from './ChatContent';
 import MobileBar from '../MobileBar';
 import StopGeneratingButton from '@components/StopGeneratingButton/StopGeneratingButton';
+import HorizontalMenu from '@components/HorizontalMenu/menu';
 
 const Chat = () => {
   const hideSideMenu = useStore((state) => state.hideSideMenu);
@@ -16,6 +17,7 @@ const Chat = () => {
     >
       <MobileBar />
       <main className='relative bg-gray-50 h-full w-full transition-width flex flex-col overflow-hidden items-stretch flex-1'>
+        <HorizontalMenu />
         <ChatContent />
         <StopGeneratingButton />
       </main>
