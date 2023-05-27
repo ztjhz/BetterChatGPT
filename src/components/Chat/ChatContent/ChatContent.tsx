@@ -7,7 +7,7 @@ import ChatTitle from './ChatTitle';
 import Message from './Message';
 import NewMessageButton from './Message/NewMessageButton';
 import CrossIcon from '@icon/CrossIcon';
-
+import Introduce from './Introduce';
 import useSubmit from '@hooks/useSubmit';
 
 const ChatContent = () => {
@@ -15,17 +15,17 @@ const ChatContent = () => {
   const setError = useStore((state) => state.setError);
   const messages = useStore((state) =>
     state.chats &&
-    state.chats.length > 0 &&
-    state.currentChatIndex >= 0 &&
-    state.currentChatIndex < state.chats.length
+      state.chats.length > 0 &&
+      state.currentChatIndex >= 0 &&
+      state.currentChatIndex < state.chats.length
       ? state.chats[state.currentChatIndex].messages
       : []
   );
   const stickyIndex = useStore((state) =>
     state.chats &&
-    state.chats.length > 0 &&
-    state.currentChatIndex >= 0 &&
-    state.currentChatIndex < state.chats.length
+      state.chats.length > 0 &&
+      state.currentChatIndex >= 0 &&
+      state.currentChatIndex < state.chats.length
       ? state.chats[state.currentChatIndex].messages.length
       : 0
   );
@@ -42,7 +42,7 @@ const ChatContent = () => {
     }
   }, [generating]);
 
-  const { error } = useSubmit();
+  const { error, handleSubmit, insertMessage } = useSubmit();
 
   return (
     <div className='h-screen m-2 mt-0 bg-white rounded-md flex-1 flex flex-col justify-between overflow-hidden'>
@@ -55,9 +55,15 @@ const ChatContent = () => {
           <div
             className='flex flex-col items-center text-sm dark:bg-gray-800 w-full' ref={saveRef}
           >
-            
+
             {!generating && advancedMode && messages?.length === 0 && (
               <NewMessageButton messageIndex={-1} />
+            )}
+            {!messages?.length && (
+              <Introduce onClickDefaultQuestion={async (q: string) => {
+                await insertMessage(q)
+                handleSubmit(['auto'])
+              }} />
             )}
             {messages?.map((message, index) => (
               <React.Fragment key={index}>
@@ -74,12 +80,12 @@ const ChatContent = () => {
         </div>
       </ScrollToBottom>
       <div className='shrink-0 justify-self-end'>
-      <Message
-        role={inputRole}
-        content=''
-        messageIndex={stickyIndex}
-        sticky
-      />
+        <Message
+          role={inputRole}
+          content=''
+          messageIndex={stickyIndex}
+          sticky
+        />
       </div>
     </div>
   );

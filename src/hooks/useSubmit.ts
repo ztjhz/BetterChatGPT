@@ -46,7 +46,18 @@ const useSubmit = () => {
     }
     return data.choices[0].message.content;
   };
+  const insertMessage = async (message: string) => {
+    const chats = useStore.getState().chats;
+    if (generating || !chats) return;
 
+    const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
+    updatedChats[currentChatIndex].messages.push({
+      role: 'user',
+      content: message,
+    });
+    setChats(updatedChats);
+    setGenerating(true);
+  }
   const handleSubmit = async (sources: any) => {
     const chats = useStore.getState().chats;
     if (generating || !chats) return;
@@ -75,11 +86,11 @@ const useSubmit = () => {
 
 
       stream = await getChatServerResponse(
-          messages,
-          chats[currentChatIndex].id,
-          sources
+        messages,
+        chats[currentChatIndex].id,
+        sources
       );
- 
+
       const updatedChats: ChatInterface[] = JSON.parse(
         JSON.stringify(useStore.getState().chats)
       );
@@ -87,7 +98,7 @@ const useSubmit = () => {
       updatedMessages[updatedMessages.length - 1].content += stream;
       setChats(updatedChats);
       setGenerating(false);
-      
+
       // update tokens used in chatting
       const currChats = useStore.getState().chats;
       const countTotalTokens = useStore.getState().countTotalTokens;
@@ -147,7 +158,7 @@ const useSubmit = () => {
     setGenerating(false);
   };
 
-  return { handleSubmit, error };
+  return { handleSubmit, error, insertMessage };
 };
 
 export default useSubmit;
