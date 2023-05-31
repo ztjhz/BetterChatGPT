@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import useStore from '@store/store';
-import i18n from './i18n';
+import i18n from '../../i18n';
 
 import Chat from '@components/Chat';
 import Menu from '@components/Menu';
@@ -10,7 +10,7 @@ import { ChatInterface } from '@type/chat';
 import { Theme } from '@type/theme';
 import Toast from '@components/Toast';
 
-function App() {
+function ChatPage() {
   const initialiseNewChat = useInitialiseNewChat();
   const setChats = useStore((state) => state.setChats);
   const setTheme = useStore((state) => state.setTheme);
@@ -74,4 +74,4 @@ function App() {
   );
 }
 
-export default App;
+export default ChatPage;

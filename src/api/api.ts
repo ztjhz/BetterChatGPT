@@ -2,7 +2,110 @@ import { server_api_endpoint } from '@constants/auth';
 import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface } from '@type/chat';
 import { isAzureEndpoint } from '@utils/api';
+import { split } from 'lodash';
+import { fetchEventSource } from '@microsoft/fetch-event-source';
+function parseSSEMessage(message: string): string {
+  const regex = /data:(.+?)\n\n/g;
+  let match;
+  let result = '';
 
+  while ((match = regex.exec(message)) !== null) {
+    if (match[1]) {
+      result += match[1];
+    }
+  }
+
+  return result;
+}
+const handleStreamResponse = async ({body, callback, onError, url}: any) => {
+  const controller = new AbortController();
+  let text = "";
+  let done = false;
+  const response = await fetchEventSource(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    signal: controller.signal,
+    body: JSON.stringify(body),
+    onmessage: (event: any) => {
+      if(done){
+        return
+      }
+      if(event.data.includes("Sorry")){
+        done = true
+        onError();
+        controller.abort();
+        return
+      }
+      text += event.data
+      callback(text, false)
+    },
+    onclose: () => {
+      callback(text, true)
+    }
+  });
+}
+export const searchChat = async (keyword: string, callback: any, onError?: any) => {
+  return await handleStreamResponse({
+    url: `${server_api_endpoint}/search/chat`,
+    body: {
+      query: keyword
+    },
+    callback,
+    onError: onError
+  })
+}
+export const searchNews = async (keyword: string, callback: any, onError?: any) => {
+  return await handleStreamResponse({
+    url: `${server_api_endpoint}/search/news`,
+    body: {
+      query:keyword
+    },
+    callback,
+    onError: onError
+  })
+}
+export const searchSocial = async (keyword: string, callback: any, onError?: any) => {
+  return await handleStreamResponse({
+    url: `${server_api_endpoint}/search/social`,
+    body: {
+      query:keyword
+    },
+    callback,
+    onError: onError
+  })
+}
+export const searchBlog = async (keyword: string, callback: any, onError?: any) => {
+  return await handleStreamResponse({
+    url: `${server_api_endpoint}/search/blog`,
+    body: {
+      query:keyword
+    },
+    callback,
+    onError: onError
+  })
+}
+export const searchReport = async (keyword: string, callback: any, onError?: any) => {
+  return await handleStreamResponse({
+    url: `${server_api_endpoint}/search/report`,
+    body: {
+      query: keyword
+    },
+    callback,
+    onError: onError
+  })
+}
+export const searchDatabase = async (keyword: string, callback: any, onError?: any) => {
+  return await handleStreamResponse({
+    url: `${server_api_endpoint}/search/database`,
+    body: {
+      query:keyword
+    },
+    callback,
+    onError: onError
+  })
+}
 
 export const getChatServerResponse = async (
   messages: MessageInterface[],
