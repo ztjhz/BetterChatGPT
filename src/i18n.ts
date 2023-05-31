@@ -19,6 +19,7 @@ export const i18nLanguages = [
   'ja',
   'ms',
   'nb',
+  'ro',
   'sv',
   // 'ug',
   'yue',
