@@ -19,13 +19,13 @@ export const i18nLanguages = [
   'ja',
   'ms',
   'nb',
+  'ro',
   'sv',
   // 'ug',
   'yue',
   'zh-CN',
   'zh-HK',
   'zh-TW',
-  'ro',
 ];
 
 const namespace = ['main', 'api', 'about', 'model'];

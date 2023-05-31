@@ -12,6 +12,7 @@ export const i18nLanguages = [
   'ja',
   'ms',
   'nb',
+  'ro',
   'sv',
   // 'ug',
   'yue',
@@ -19,7 +20,6 @@ export const i18nLanguages = [
   'zh-CN',
   'zh-HK',
   'zh-TW',
-  'ro',
 ] as const;
 
 // languages that are selectable on the web page
@@ -36,6 +36,7 @@ export const selectableLanguages = [
   'ja',
   'ms',
   'nb',
+  'ro',
   'sv',
   // 'ug',
   'yue',
@@ -43,8 +44,6 @@ export const selectableLanguages = [
   'zh-CN',
   // 'zh-HK',
   'zh-TW',
-  // 'ro',
-  'ro',
 ] as const;
 
 export const languageCodeToName = {
@@ -56,11 +55,11 @@ export const languageCodeToName = {
   'es': 'Español',
   'fr': 'Français',
   'fr-FR': 'Français', // Français (France). no need to include "France" at this time, as there is currently only one variant
-  'ro': 'Romanian',
   'it': 'Italiano',
   'ja': '日本語',
   'ms': 'Bahasa Melayu',
   'nb': 'Norsk bokmål',
+  'ro': 'Română',
   'sv': 'Svenska',
   // 'ug': 'ئۇيغۇرچە',
   'yue': '廣東話',
