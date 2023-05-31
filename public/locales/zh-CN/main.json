@@ -44,5 +44,7 @@
   "cloned": "已创建副本",
   "enterToSubmit": "按回车键提交",
   "submitPlaceholder": "请输入消息",
-  "history": "历史记录"
+  "history": "历史记录",
+  "askToFAQ": "问问 0xFAQ",
+  "mainSearchPlaceholder": "提问任何有关于 Web3 的问题，让 0xFAQ 帮你解答"
 }

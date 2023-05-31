@@ -4,10 +4,12 @@ import { ChatSlice, createChatSlice } from './chat-slice';
 import { InputSlice, createInputSlice } from './input-slice';
 import { ConfigSlice, createConfigSlice } from './config-slice';
 import { ToastSlice, createToastSlice } from './toast-slice';
+import { SearchSlice, createSearchSlice } from './search-slice';
 
 export type StoreState = ChatSlice &
   InputSlice &
   ConfigSlice &
+  SearchSlice &
   ToastSlice;
 
 export type StoreSlice<T> = (
@@ -41,6 +43,7 @@ const useStore = create<StoreState>()(
       ...createInputSlice(set, get),
       ...createConfigSlice(set, get),
       ...createToastSlice(set, get),
+      ...createSearchSlice(set, get),
     }),
     {
       name: '0xfaq',
