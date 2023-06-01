@@ -41,6 +41,7 @@ env:
   RESOURCE_GROUP: "development"
   CLUSTER_NAME: "development"
   DEPLOYMENT_MANIFEST_PATH: "deploy/deploy.yaml"
+  VITE_PUBLIC_PATH: '/'
   
 jobs:
   buildImage:
@@ -69,6 +70,7 @@ jobs:
           az acr build \
           --build-arg VITE_SERVER_API_ENDPOINT=${{ vars.VITE_SERVER_API_ENDPOINT }} \
           --build-arg VITE_OPENAI_API_KEY=${{ secrets.VITE_OPENAI_API_KEY }} \
+          --build-arg VITE_PUBLIC_PATH='\' \
           --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} \
           --registry ${{ env.AZURE_CONTAINER_REGISTRY }} \
           -g ${{ env.RESOURCE_GROUP }} .
