@@ -6,6 +6,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="manifest.json" />
     <meta property="og:image" content="https://bettergpt.chat/social.png" />
     <meta name="twitter:image" content="https://bettergpt.chat/social.png" />
     <meta
@@ -19,6 +20,13 @@
     <meta name="twitter:title" content="Better ChatGPT" />
     <meta name="twitter:card" content="summary_large_image" />
     <title>Better ChatGPT</title>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js');
+        });
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
