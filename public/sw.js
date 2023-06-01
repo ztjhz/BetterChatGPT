@@ -12,9 +12,13 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-    event.respondWith(
-        caches.match(event.request).then((response) => {
-            return response || fetch(event.request);
-        })
-    );
+    const requestURL = new URL(event.request.url);
+    // 缓存 /assets/ 下的文件
+    if (requestURL.pathname.startsWith('/assets/')) {
+        event.respondWith(
+            caches.match(event.request).then(response => {
+                return response || fetch(event.request);
+            })
+        );
+    }
 });
