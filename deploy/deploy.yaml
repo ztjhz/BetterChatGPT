@@ -56,6 +56,10 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
 spec:
+  tls:
+  - hosts:
+    - demo.0xfaq.ai
+    secretName: demo-tls
   rules:
     - host: demo.0xfaq.ai
       http:
