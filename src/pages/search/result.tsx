@@ -234,7 +234,7 @@ const MemoryMarkdown = memo(({data}: any) => {
           table({ children }) {
             return (
               <div className='w-full overflow-x-scroll'>
-                <table className="border-solid">
+                <table className="border-solid mt-0">
                   {children}
                 </table>
               </div>
