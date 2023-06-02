@@ -30,7 +30,6 @@
   .markdown table {
     --tw-border-spacing-x: 0px;
     --tw-border-spacing-y: 0px;
-    border-collapse: separate;
     border-spacing: var(--tw-border-spacing-x) var(--tw-border-spacing-y);
     width: 100%;
   }

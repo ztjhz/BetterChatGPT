@@ -43,7 +43,7 @@ export default ({value, setValue, handleSubmit}: any) => {
   
   return (
     <div
-        className={`w-full flex items-start gap-2 rounded-md py-1 md:py-1 px-4 pr-1 md:pr-1 md:px-4 border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700`}
+        className={`w-full flex items-start gap-2 rounded-md py-1 md:py-1 px-4 pr-1 md:pr-1 md:px-4 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700`}
       >
     <textarea
           ref={textareaRef}

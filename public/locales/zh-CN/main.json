@@ -46,5 +46,6 @@
   "submitPlaceholder": "请输入消息",
   "history": "历史记录",
   "askToFAQ": "问问 0xFAQ",
-  "mainSearchPlaceholder": "提问任何有关于 Web3 的问题，让 0xFAQ 帮你解答"
+  "mainSearchPlaceholder": "提问任何有关于 Web3 的问题，让 0xFAQ 帮你解答",
+  "noAnswer": "抱歉，我现在无法回答这个问题。 0xFAQ仍处于早期版本，我们仍在努力改进。"
 }

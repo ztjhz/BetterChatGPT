@@ -3499,6 +3499,11 @@ react-scroll-to-bottom@^4.2.0:
     prop-types "15.7.2"
     simple-update-in "2.2.0"
 
+react-simple-typewriter@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/react-simple-typewriter/-/react-simple-typewriter-5.0.1.tgz#cfdb896c868a55ed4d5f1f06d62b3a9d0f5ad9d7"
+  integrity sha512-vA5HkABwJKL/DJ4RshSlY/igdr+FiVY4MLsSQYJX6FZG/f1/VwN4y1i3mPXRyfaswrvI8xii1kOVe1dYtO2Row==
+
 react-syntax-highlighter@^15.5.0:
   version "15.5.0"
   resolved "https://registry.yarnpkg.com/react-syntax-highlighter/-/react-syntax-highlighter-15.5.0.tgz#4b3eccc2325fa2ec8eff1e2d6c18fa4a9e07ab20"
@@ -3516,6 +3521,11 @@ react-toastify@^9.1.3:
   integrity sha512-fPfb8ghtn/XMxw3LkxQBk3IyagNpF/LIKjOBflbexr2AWxAH1MJgvnESwEwBn9liLFXgTKWgBSdZpw9m4OTHTg==
   dependencies:
     clsx "^1.1.1"
+
+react-typewriter-hook@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-typewriter-hook/-/react-typewriter-hook-1.0.1.tgz#f16d7ce6fb2b5b131c345bf38ad34ccc6d69b8d3"
+  integrity sha512-XOBBkI1fuZRH5OBpJ9qZuXxMZ1T8EgU2VsbKwR+2mvA5rMVjMtbTg2iRNFxpiYY3ClNQ5fBegAaCqRLsNNsvfg==
 
 react@^18.2.0:
   version "18.2.0"

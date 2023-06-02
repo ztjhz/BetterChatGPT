@@ -17,10 +17,13 @@ function parseSSEMessage(message: string): string {
 
   return result;
 }
-const handleStreamResponse = async ({body, callback, onError, url}: any) => {
+class FatalError extends Error { }
+
+const handleStreamResponse = async ({body, callback, onError, url, eventHandler}: any) => {
   const controller = new AbortController();
   let text = "";
   let done = false;
+  eventHandler('start', true)
   const response = await fetchEventSource(url, {
     method: "POST",
     headers: {
@@ -28,82 +31,56 @@ const handleStreamResponse = async ({body, callback, onError, url}: any) => {
     },
     signal: controller.signal,
     body: JSON.stringify(body),
-    onmessage: (event: any) => {
+    onerror: (event: any) => {
       if(done){
         return
       }
-      if(event.data.includes("Sorry")){
+      done = true
+      onError();
+      controller.abort();
+      throw new FatalError();
+    },
+    onmessage: (event: any) => {
+      if(done){
+        eventHandler('done', true)
+        return
+      }
+      console.log(url, ':', event.data)
+
+      if(event.data.includes("Action Input")){
+        const input_value = event.data.split(':')[1]
+        eventHandler('action', input_value)
+        return
+      }
+
+      if(event.data.includes("Sorry") || event.data.includes("抱歉")){
         done = true
         onError();
         controller.abort();
+        eventHandler('done', true)
         return
       }
+
+      eventHandler('message')
       text += event.data
       callback(text, false)
     },
     onclose: () => {
+      eventHandler('done', true)
       callback(text, true)
     }
   });
 }
-export const searchChat = async (keyword: string, callback: any, onError?: any) => {
+
+export const getSearchByType = async({type, query, callback, onError,eventHandler}: any) => {
   return await handleStreamResponse({
-    url: `${server_api_endpoint}/search/chat`,
+    url: `${server_api_endpoint}/search/${type}`,
     body: {
-      query: keyword
+      query
     },
     callback,
-    onError: onError
-  })
-}
-export const searchNews = async (keyword: string, callback: any, onError?: any) => {
-  return await handleStreamResponse({
-    url: `${server_api_endpoint}/search/news`,
-    body: {
-      query:keyword
-    },
-    callback,
-    onError: onError
-  })
-}
-export const searchSocial = async (keyword: string, callback: any, onError?: any) => {
-  return await handleStreamResponse({
-    url: `${server_api_endpoint}/search/social`,
-    body: {
-      query:keyword
-    },
-    callback,
-    onError: onError
-  })
-}
-export const searchBlog = async (keyword: string, callback: any, onError?: any) => {
-  return await handleStreamResponse({
-    url: `${server_api_endpoint}/search/blog`,
-    body: {
-      query:keyword
-    },
-    callback,
-    onError: onError
-  })
-}
-export const searchReport = async (keyword: string, callback: any, onError?: any) => {
-  return await handleStreamResponse({
-    url: `${server_api_endpoint}/search/report`,
-    body: {
-      query: keyword
-    },
-    callback,
-    onError: onError
-  })
-}
-export const searchDatabase = async (keyword: string, callback: any, onError?: any) => {
-  return await handleStreamResponse({
-    url: `${server_api_endpoint}/search/database`,
-    body: {
-      query:keyword
-    },
-    callback,
-    onError: onError
+    onError: onError,
+    eventHandler: eventHandler
   })
 }
 
