@@ -45,7 +45,6 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
         eventHandler('done', true)
         return
       }
-      console.log(url, ':', event.data)
 
       if(event.data.includes("Action Input")){
         const input_value = event.data.split(':')[1]
@@ -53,8 +52,10 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
         return
       }
 
-      if(event.data.includes("Sorry") || event.data.includes("抱歉")){
+      if(event.data.includes("Sorry") || event.data.includes("抱歉") || text.includes("抱歉")){
         done = true
+        text = ''
+        callback(text, true)
         onError();
         controller.abort();
         eventHandler('done', true)
