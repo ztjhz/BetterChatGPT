@@ -37,6 +37,7 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
       }
       done = true
       onError();
+      eventHandler('done', true)
       controller.abort();
       throw new FatalError();
     },
@@ -52,7 +53,7 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
         return
       }
 
-      if(event.data.includes("Sorry") || event.data.includes("抱歉") || text.includes("抱歉")){
+      if(text.length < 5 && (event.data.includes("Sorry") || event.data.includes("抱歉") || text.includes("抱歉"))){
         done = true
         text = ''
         callback(text, true)
@@ -73,11 +74,27 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
   });
 }
 
-export const getSearchByType = async({type, query, callback, onError,eventHandler}: any) => {
+export const simplifyQuestion = async(query: string) => {
+  const response = await fetch(`${server_api_endpoint}/search`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      query,
+      originalQuery: query
+    }),
+  })
+
+  return await response.json();
+}
+
+export const getSearchByType = async({type, query, callback, originalQuestion, onError,eventHandler}: any) => {
   return await handleStreamResponse({
     url: `${server_api_endpoint}/search/${type}`,
     body: {
-      query
+      query,
+      originalQuery: originalQuestion
     },
     callback,
     onError: onError,

@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from 'react'
 import HorizontalMenu from '@components/HorizontalMenu/menu';
 import SearchInput from '@components/Search/searchInput';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getSearchByType } from '@api/api';
+import { getSearchByType, simplifyQuestion } from '@api/api';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm'
 import rehypeKatex from 'rehype-katex';
@@ -44,39 +44,32 @@ const searchFuncions:any = [
   }, 
 ]
 
-const statusStyles: any = {
-  'unUseful': 'bg-gray-500',
-  'loading': 'bg-emerald-700',
-  'message': 'bg-yellow-500',
-  'done': 'bg-green-500'
-}
-
 const SearchResultPage = () => {
   let { question } = useParams();
   const clear = useStore((state) => state.clear)
   const response = useStore((state) => state.response)
   const searchStatus = useStore((state) => state.searchStatus)
   const setSearchStatus = useStore((state) => state.setSearchStatus)
-  const responseOrder = useStore((state) => state.responseOrder)
-  const searchLoading = useStore((state) => state.searchLoading)
   const getStatusByKey = useStore((state) => state.getStatusByKey)
   const setReponse = useStore((state) => state.setResponse)
   const setLoading = useStore((state) => state.setSearchLoading)
   const setResponseOrder = useStore((state) => state.setResponseOrder)
   const [searchText, setSearchText] = useState(question)
   const navigate = useNavigate();
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     clear()
 
     if(searchText){
       navigate('/search/' + searchText, {
         replace: true
       })
+      const {data: question } = await simplifyQuestion(searchText)
       searchFuncions.forEach((item: any) => {
         setLoading(item.name, true)
         getSearchByType({
           type: item.name,
-          query: searchText,
+          query: question,
+          originalQuestion: searchText,
           callback: (data: any, isDone: any) => {
             setResponseOrder(item.name)
             setReponse(item.name, data)
@@ -190,7 +183,7 @@ const MemoryMarkdown = memo(({data}: any) => {
   return (
       <ReactMarkdown
         linkTarget='_new'
-        className="markdown prose prose prose-slate prose-sm dark:prose-invert flex-1"
+        className="markdown prose prose-slate prose-sm dark:prose-invert flex-1"
         remarkPlugins={[
           remarkGfm
         ]}
@@ -239,7 +232,7 @@ const MemoryMarkdown = memo(({data}: any) => {
           td({ children }) {
             return (
               <td className="break-words border border-gray-400 px-3 py-1 dark:border-white">
-                {children}
+                 <div dangerouslySetInnerHTML={{__html: children as string}} />
               </td>
             );
           },
