@@ -95,9 +95,9 @@ const SearchResultPage = () => {
     }
   }
  
-  // useEffect(() => {
-  //   handleSubmit()
-  // }, [])
+  useEffect(() => {
+    handleSubmit()
+  }, [])
   const closeLoading = searchFuncions.some((item: any) => {
     const s = getStatusByKey(item.name)
     return s === 'message' || s === 'done'
@@ -122,7 +122,7 @@ const SearchResultPage = () => {
             )
           })}
         </div>
-        <div className={`gap-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6`}>
+        <div className={`gap-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5`}>
           {searchFuncions.map((item: any, index: number) => {
             const status=getStatusByKey(item.name)
             return (
@@ -164,7 +164,7 @@ const SearchResultPage = () => {
           <div className='px-2 md:px-4'>
             {renderLoading()}
           </div>
-          <div className={`${closeLoading ? 'mt-4' : 'hidden'} transition-all`}>
+          <div className={`${closeLoading ? 'mt-4' : 'hidden'} transition-all lg:max-w-fit`}>
             {searchFuncions.map((item: any) => {
               if(!response[item.name]){
                 return null

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
+import MagnifyingGlassIcon from '@heroicons/react/24/outline/MagnifyingGlassIcon'
 
 export default ({value, setValue, handleSubmit}: any) => {
   const textareaRef = React.createRef<HTMLTextAreaElement>();
@@ -17,7 +17,6 @@ export default ({value, setValue, handleSubmit}: any) => {
       );
 
     if (e.key === 'Enter' && !isMobile && !e.nativeEvent.isComposing) {
-      console.log(e.shiftKey, e.ctrlKey)
       if (e.shiftKey) {
         resetTextAreaHeight();
       } else {
@@ -43,11 +42,11 @@ export default ({value, setValue, handleSubmit}: any) => {
   
   return (
     <div
-        className={`w-full flex items-start gap-2 rounded-md py-1 md:py-1 px-4 pr-1 md:pr-1 md:px-4 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700`}
+        className={`w-full flex items-center gap-2 rounded-md py-2 md:py-2 lg:py-4 px-4 pr-1 md:pr-1 md:px-4 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700`}
       >
     <textarea
           ref={textareaRef}
-          className='m-0 resize-none bg-transparent overflow-y-hidden w-full placeholder:text-gray-500/40 text-sm mt-2'
+          className='m-0 resize-none bg-transparent overflow-y-hidden w-full placeholder:text-gray-500/40 text-sm'
           onChange={(e) => {
             setValue(e.target.value);
           }}
@@ -57,17 +56,8 @@ export default ({value, setValue, handleSubmit}: any) => {
           onKeyDown={handleKeyDown}
           rows={1}
     ></textarea>
-    <div className='flex shrink-0'>
-      <div className='flex-1 text-center flex justify-center'>
-        <button
-            className={`btn rounded-md relative btn-primary`}
-            onClick={handleSubmit}
-          >
-            <div className='flex items-center justify-center gap-2'>
-              {t('askToFAQ')}
-            </div>
-          </button>
-      </div>
+    <div onClick={() => handleSubmit()}>
+      <MagnifyingGlassIcon className="w-5 h-5 mr-1 text-gray-500" />
     </div>
   </div>
   )
