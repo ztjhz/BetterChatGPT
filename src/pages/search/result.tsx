@@ -10,6 +10,7 @@ import { CodeBlock } from '@components/Chat/CodeBlock';
 import useStore from '@store/store';
 import Logo from '@logo/color';
 import { t } from 'i18next';
+import { LoadingBlock } from '@components/LoadingBlock';
 const searchFuncions:any = [
   {
     name: 'chat', 
@@ -58,6 +59,7 @@ const SearchResultPage = () => {
   const setSearchStatus = useStore((state) => state.setSearchStatus)
   const responseOrder = useStore((state) => state.responseOrder)
   const searchLoading = useStore((state) => state.searchLoading)
+  const getStatusByKey = useStore((state) => state.getStatusByKey)
   const setReponse = useStore((state) => state.setResponse)
   const setLoading = useStore((state) => state.setSearchLoading)
   const setResponseOrder = useStore((state) => state.setResponseOrder)
@@ -93,17 +95,25 @@ const SearchResultPage = () => {
     }
   }
  
-  useEffect(() => {
-    handleSubmit()
-  }, [])
+  // useEffect(() => {
+  //   handleSubmit()
+  // }, [])
+  const closeLoading = searchFuncions.some((item: any) => {
+    const s = getStatusByKey(item.name)
+    return s === 'message' || s === 'done'
+  })
+
   const renderLoading = () => {
     const loadingText = "After analysis, we will provide you with answers from the following data:"
-    const noAnwser = Object.values(searchStatus).every((item: any) => {
+    const noAnwser = Object.keys(searchStatus).length && Object.values(searchStatus).every((item: any) => {
       return item.currentEvent === 'done' && response[item.name] === ''
     })
+    
     return (
       <div>
-        <div className='flex gap-1 flex-wrap'>
+        <div className={`flex gap-1 flex-wrap mb-3 text-sm transition-all ${closeLoading ? 'hidden h-0' : ''}`} style={{
+          lineHeight: '1'
+        }}>
           {loadingText.split(' ').map((word: string, idx: number) => {
             return (
               <DelayedElement timeout={idx * 300}>
@@ -112,40 +122,21 @@ const SearchResultPage = () => {
             )
           })}
         </div>
-        <div className='flex gap-3 flex-wrap'>
+        <div className={`gap-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6`}>
           {searchFuncions.map((item: any, index: number) => {
-            const status = searchStatus[item.name]?.currentEvent
-            const unUsefulState = status === 'done' && response[item.name] === ''
-            const doneState = status === 'done' && response[item.name] !== ''
-            const loadingState = status === 'start'
-            const messageState = status === 'message'
-            let currentState = 'loading'
-            if(unUsefulState){
-              currentState = 'unUseful'
-            }else if(doneState){
-              currentState = 'done'
-            }else if(loadingState){
-              currentState = 'loading'
-            }else if(messageState){
-              currentState = 'message'
-            }
-
+            const status=getStatusByKey(item.name)
             return (
               <DelayedElement timeout={(loadingText.split(' ').length * 300) + index * 600}>
-                  <div className={`my-2`}>
-                    <div className={`flex gap-2 ${statusStyles[currentState]} text-white text-xs rounded-full px-2 items-center max-w-fit`}>
-                        <span className="relative flex h-2 w-2">
-                          <span className={`${currentState === 'done' || currentState === 'unUseful' ? 'hidden' : '' }animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-200 opacity-75`}></span>
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow-400 "></span>
-                        </span>
-                          {item.label} {item.emoji}
-                    </div>
-                  </div>
+                  <LoadingBlock 
+                    title={item.label}
+                    status={status}
+                    open={!closeLoading}
+                  />
               </DelayedElement>
             )
           })}
         </div>
-        {noAnwser && (
+        {noAnwser === true && (
           <DelayedElement timeout={1}>
             <div className='mt-2 text-sm'>
               {t('noAnswer')}
@@ -169,27 +160,25 @@ const SearchResultPage = () => {
           setValue={setSearchText}
           handleSubmit={handleSubmit}
         />
-        <div className='text-gray-800 w-full bg-white p-4 mt-4 rounded-md'>
-          <div className='mb-4'>
+        <div className='text-gray-800 w-full bg-white py-4 mt-4 rounded-md'>
+          <div className='px-2 md:px-4'>
             {renderLoading()}
           </div>
-          {searchFuncions.map((item: any) => {
-            return (
-              <div className={`mb-6`} key={item.name}>
-                <div className={`flex gap-x-3 align-top ${!response[item.name] && 'hidden'}`}>
-                  <div
-                    className='relative h-[30px] w-[30px] p-1 rounded-sm bg-gray-50 text-white flex items-center justify-center'
-                  >
-                    <Logo />
+          <div className={`${closeLoading ? 'mt-4' : 'hidden'} transition-all`}>
+            {searchFuncions.map((item: any) => {
+              if(!response[item.name]){
+                return null
+              }
+              return (
+                <div className={`py-2 px-4`} key={item.name}>
+                  <div className='px-2 py-1 text-gray-600 text-sm bg-gray-50 max-w-fit my-2 rounded-md'>
+                    {item.emoji} {item.label}:
                   </div>
-                  :
-                  <div className='flex-1'>
-                    <MemoryMarkdown data={response[item.name]}/>
-                  </div>
+                  <MemoryMarkdown data={response[item.name]}/>
                 </div>
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
         </div>
       </div>
       

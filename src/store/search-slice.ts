@@ -16,6 +16,7 @@ export interface SearchSlice {
   setSearchLoading: (key: string, value: boolean) => void;
   clear: () => void;
   setSearchStatus: (key: string, event: string, value: string|boolean) => void
+  getStatusByKey: (key: string) => string;
 }
 
 export const createSearchSlice: StoreSlice<SearchSlice> = (set, get) => ({
@@ -23,6 +24,25 @@ export const createSearchSlice: StoreSlice<SearchSlice> = (set, get) => ({
   responseOrder:[],
   searchLoading: {},
   searchStatus: {},
+  getStatusByKey: (key: string) => {
+    const status = get().searchStatus[key]?.currentEvent
+    const responseText = get().response[key]
+    const unUsefulState = status === 'done' && responseText === ''
+    const doneState = status === 'done' && responseText !== '' 
+    const loadingState = status === 'start' || responseText?.length < 5
+    const messageState = status === 'message' && responseText && responseText?.length > 5
+    let currentState = 'loading'
+    if(unUsefulState){
+      currentState = 'unUseful'
+    }else if(doneState){
+      currentState = 'done'
+    }else if(loadingState){
+      currentState = 'loading'
+    }else if(messageState){
+      currentState = 'message'
+    }
+    return currentState
+  },
   setSearchStatus: (key: string, event: string, value: string|boolean) => {
     set((prev: SearchSlice) => ({
       ...prev,
