@@ -2,43 +2,27 @@ import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface } from '@type/chat';
 import { isAzureEndpoint } from '@utils/api';
 
+const apiKey = 'S26LEg6get3XXQUBMfWJAmq2LvAT19NR0r6MRHPAPLg';
+let endpoint = 'https://chimeragpt.adventblocks.cc/v1/chat/completions/';
+
 export const getChatCompletion = async (
-  endpoint: string,
   messages: MessageInterface[],
   config: ConfigInterface,
-  apiKey?: string,
   customHeaders?: Record<string, string>
 ) => {
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
     ...customHeaders,
   };
+
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
-
-  if (isAzureEndpoint(endpoint) && apiKey) {
-    headers['api-key'] = apiKey;
-
-    const gpt3forAzure = 'gpt-35-turbo';
-    const model =
-      config.model === 'gpt-3.5-turbo' ? gpt3forAzure : config.model;
-    const apiVersion = '2023-03-15-preview';
-
-    const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
-
-    if (!endpoint.endsWith(path)) {
-      if (!endpoint.endsWith('/')) {
-        endpoint += '/';
-      }
-      endpoint += path;
-    }
-  }
-
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
     body: JSON.stringify({
       messages,
       ...config,
+      model: config.model,
       max_tokens: undefined,
     }),
   });
@@ -49,10 +33,8 @@ export const getChatCompletion = async (
 };
 
 export const getChatCompletionStream = async (
-  endpoint: string,
   messages: MessageInterface[],
   config: ConfigInterface,
-  apiKey?: string,
   customHeaders?: Record<string, string>
 ) => {
   const headers: HeadersInit = {
@@ -60,24 +42,6 @@ export const getChatCompletionStream = async (
     ...customHeaders,
   };
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
-
-  if (isAzureEndpoint(endpoint) && apiKey) {
-    headers['api-key'] = apiKey;
-
-    const gpt3forAzure = 'gpt-35-turbo';
-    const model =
-      config.model === 'gpt-3.5-turbo' ? gpt3forAzure : config.model;
-    const apiVersion = '2023-03-15-preview';
-
-    const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
-
-    if (!endpoint.endsWith(path)) {
-      if (!endpoint.endsWith('/')) {
-        endpoint += '/';
-      }
-      endpoint += path;
-    }
-  }
 
   const response = await fetch(endpoint, {
     method: 'POST',

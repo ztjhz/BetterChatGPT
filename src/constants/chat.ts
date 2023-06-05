@@ -19,22 +19,26 @@ Respond using Markdown.`;
 
 export const modelOptions: ModelOptions[] = [
   'gpt-3.5-turbo',
+  'gpt-3.5-turbo-poe',
   'gpt-4',
-  'gpt-4-32k',
-  // 'gpt-3.5-turbo-0301',
-  // 'gpt-4-0314',
-  // 'gpt-4-32k-0314',
+  'gpt-4-poe',
+  'claude+',
+  'claude-instant',
+  'claude-instant-100k',
+  'sage',
 ];
 
 export const defaultModel = 'gpt-3.5-turbo';
 
 export const modelMaxToken = {
-  'gpt-3.5-turbo': 4096,
-  'gpt-3.5-turbo-0301': 4096,
-  'gpt-4': 8192,
-  'gpt-4-0314': 8192,
-  'gpt-4-32k': 32768,
-  'gpt-4-32k-0314': 32768,
+  'gpt-4': 8000,
+  'gpt-3.5-turbo': 4097,
+  'gpt-4-poe': 2100,
+  'gpt-3.5-turbo-poe': 2800,
+  'sage': 5200,
+  'claude-instant': 11000,
+  'claude+': 11000,
+  'claude-instant-100k': 100000,
 };
 
 export const modelCost = {
@@ -42,25 +46,37 @@ export const modelCost = {
     prompt: { price: 0.002, unit: 1000 },
     completion: { price: 0.002, unit: 1000 },
   },
-  'gpt-3.5-turbo-0301': {
-    prompt: { price: 0.002, unit: 1000 },
-    completion: { price: 0.002, unit: 1000 },
-  },
+
   'gpt-4': {
     prompt: { price: 0.03, unit: 1000 },
     completion: { price: 0.06, unit: 1000 },
   },
-  'gpt-4-0314': {
+  'gpt-3.5-turbo-poe': {
+    prompt: { price: 0.002, unit: 1000 },
+    completion: { price: 0.002, unit: 1000 },
+  },
+
+  'gpt-4-poe': {
     prompt: { price: 0.03, unit: 1000 },
     completion: { price: 0.06, unit: 1000 },
   },
-  'gpt-4-32k': {
-    prompt: { price: 0.06, unit: 1000 },
-    completion: { price: 0.12, unit: 1000 },
+  'sage': {
+    prompt: { price: 0.002, unit: 1000 },
+    completion: { price: 0.002, unit: 1000 },
   },
-  'gpt-4-32k-0314': {
-    prompt: { price: 0.06, unit: 1000 },
-    completion: { price: 0.12, unit: 1000 },
+
+  'claude-instant': {
+    prompt: { price: 0.002, unit: 1000 },
+    completion: { price: 0.002, unit: 1000 },
+  },
+  'claude+': {
+    prompt: { price: 0.002, unit: 1000 },
+    completion: { price: 0.002, unit: 1000 },
+  },
+
+  'claude-instant-100k': {
+    prompt: { price: 0.002, unit: 1000 },
+    completion: { price: 0.002, unit: 1000 },
   },
 };
 
