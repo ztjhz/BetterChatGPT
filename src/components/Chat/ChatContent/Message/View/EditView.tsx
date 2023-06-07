@@ -188,6 +188,7 @@ const EditViewButtons = memo(
                 generating ? 'cursor-not-allowed opacity-40' : ''
               }`}
               onClick={handleSaveAndSubmit}
+              aria-label={t('saveAndSubmit') as string}
             >
               <div className='flex items-center justify-center gap-2'>
                 {t('saveAndSubmit')}
@@ -204,6 +205,7 @@ const EditViewButtons = memo(
                 : 'btn-primary'
             }`}
             onClick={handleSave}
+            aria-label={t('save') as string}
           >
             <div className='flex items-center justify-center gap-2'>
               {t('save')}
@@ -216,6 +218,7 @@ const EditViewButtons = memo(
               onClick={() => {
                 !generating && setIsModalOpen(true);
               }}
+              aria-label={t('saveAndSubmit') as string}
             >
               <div className='flex items-center justify-center gap-2'>
                 {t('saveAndSubmit')}
@@ -227,6 +230,7 @@ const EditViewButtons = memo(
             <button
               className='btn relative btn-neutral'
               onClick={() => setIsEdit(false)}
+              aria-label={t('cancel') as string}
             >
               <div className='flex items-center justify-center gap-2'>
                 {t('cancel')}

@@ -211,10 +211,18 @@ const ChatFolder = ({
         >
           {isDelete || isEdit ? (
             <>
-              <button className='p-1 hover:text-white' onClick={handleTick}>
+              <button
+                className='p-1 hover:text-white'
+                onClick={handleTick}
+                aria-label='confirm'
+              >
                 <TickIcon />
               </button>
-              <button className='p-1 hover:text-white' onClick={handleCross}>
+              <button
+                className='p-1 hover:text-white'
+                onClick={handleCross}
+                aria-label='cancel'
+              >
                 <CrossIcon />
               </button>
             </>
@@ -229,6 +237,7 @@ const ChatFolder = ({
                   onClick={() => {
                     setShowPalette((prev) => !prev);
                   }}
+                  aria-label='folder color'
                 >
                   <ColorPaletteIcon />
                 </button>
@@ -243,12 +252,14 @@ const ChatFolder = ({
                           onClick={() => {
                             updateColor(c);
                           }}
+                          aria-label={c}
                         />
                       ))}
                       <button
                         onClick={() => {
                           updateColor();
                         }}
+                        aria-label='default color'
                       >
                         <RefreshIcon />
                       </button>
@@ -260,16 +271,22 @@ const ChatFolder = ({
               <button
                 className='p-1 hover:text-white md:hidden group-hover/folder:md:inline'
                 onClick={() => setIsEdit(true)}
+                aria-label='edit folder title'
               >
                 <EditIcon />
               </button>
               <button
                 className='p-1 hover:text-white md:hidden group-hover/folder:md:inline'
                 onClick={() => setIsDelete(true)}
+                aria-label='delete folder'
               >
                 <DeleteIcon />
               </button>
-              <button className='p-1 hover:text-white' onClick={toggleExpanded}>
+              <button
+                className='p-1 hover:text-white'
+                onClick={toggleExpanded}
+                aria-label='expand folder'
+              >
                 <DownChevronArrow
                   className={`${
                     isExpanded ? 'rotate-180' : ''

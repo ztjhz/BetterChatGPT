@@ -20,14 +20,13 @@ const CommandPrompt = ({
 
   const [dropDown, setDropDown, dropDownRef] = useHideOnOutsideClick();
 
-
   useEffect(() => {
     if (dropDown && inputRef.current) {
       // When dropdown is visible, focus the input
       inputRef.current.focus();
     }
   }, [dropDown]);
-  
+
   useEffect(() => {
     const filteredPrompts = matchSorter(useStore.getState().prompts, input, {
       keys: ['name'],
@@ -44,6 +43,7 @@ const CommandPrompt = ({
     <div className='relative max-wd-sm' ref={dropDownRef}>
       <button
         className='btn btn-neutral btn-small'
+        aria-label='prompt library'
         onClick={() => setDropDown(!dropDown)}
       >
         /

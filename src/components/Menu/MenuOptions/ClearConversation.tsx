@@ -21,10 +21,12 @@ const ClearConversation = () => {
 
   return (
     <>
-      <button className='btn btn-neutral'
+      <button
+        className='btn btn-neutral'
         onClick={() => {
           setIsModalOpen(true);
         }}
+        aria-label={t('clearConversation') as string}
       >
         <DeleteIcon />
         {t('clearConversation')}

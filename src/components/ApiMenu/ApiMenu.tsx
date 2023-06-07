@@ -132,6 +132,7 @@ const ApiEndpointSelector = ({
       <button
         className='btn btn-neutral btn-small flex justify-between w-full'
         type='button'
+        aria-label='expand api menu'
         onClick={() => setDropDown((prev) => !prev)}
       >
         <span className='truncate'>{_apiEndpoint}</span>

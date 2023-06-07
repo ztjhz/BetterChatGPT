@@ -11,7 +11,11 @@ const DeleteButton = memo(
     setIsDelete: React.Dispatch<React.SetStateAction<boolean>>;
   }) => {
     return (
-      <BaseButton icon={<DeleteIcon />} onClick={() => setIsDelete(true)} />
+      <BaseButton
+        icon={<DeleteIcon />}
+        buttonProps={{ 'aria-label': 'delete message' }}
+        onClick={() => setIsDelete(true)}
+      />
     );
   }
 );
