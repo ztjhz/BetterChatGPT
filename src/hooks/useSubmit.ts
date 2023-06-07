@@ -189,7 +189,7 @@ const useSubmit = () => {
 
         // update tokens used for generating title
         if (countTotalTokens) {
-          const model = currChats[currentChatIndex].config.model;
+          const model = _defaultChatConfig.model;
           updateTotalTokenUsed(model, [message], {
             role: 'assistant',
             content: title,
