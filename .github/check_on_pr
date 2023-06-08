@@ -1,0 +1,62 @@
+name: Build Check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: releases
+  cancel-in-progress: false
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache yarn dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+            
+      - name: Install dependencies
+        run: yarn
+        
+      - name: Cache release assets
+        uses: actions/cache@v3
+        with:
+          path: ./release
+          key: ${{ runner.os }}-release-${{github.sha}}
+          restore-keys: |
+            ${{ runner.os }}-release-
+            
+      - name: Build
+        run: yarn make
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VITE_GOOGLE_CLIENT_ID: ${{ secrets.GCLIENT }}
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: release-${{ runner.os }}
+          path: ./release
