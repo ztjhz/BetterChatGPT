@@ -72,7 +72,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
         with:
-          tag_name: ${{ github.sha }}-${{ github.run_id }}
+          tag_name: Automated Release for Commit ${{ github.sha }}-${{ github.run_id }}
           release_name: Release ${{ github.sha }}-${{ github.run_id }}
           draft: false
           prerelease: false
@@ -87,7 +87,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./release-Linux/linux-better-chatgpt-1.0.3-x86_64.AppImage
-          asset_name: linux-better-chatgpt-1.0.3-x86_64.AppImage
+          asset_name: linux-koaladev-x86_64-${{ github.sha }}.AppImage
           asset_content_type: application
 
       - name: Upload Release Asset - Ubuntu
@@ -107,7 +107,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./release-macOS/mac-better-chatgpt-1.0.3-x64.dmg
-          asset_name: mac-better-chatgpt-1.0.3-x64.dmg
+          asset_name: mac-koaladev-x64-${{ github.sha }}.dmg
           asset_content_type: application
 
       - name: Upload Release Asset - MacOS
@@ -127,7 +127,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./release-Windows/win-better-chatgpt-1.0.3-x64.exe
-          asset_name: win-better-chatgpt-1.0.3-x64.exe
+          asset_name: win-koaladev-x64-${{ github.sha }}.exe
           asset_content_type: application
           
       - name: Zip Unpacked Release - Windows
@@ -144,7 +144,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./release-Windows/win-unpacked.zip
-          asset_name: win-unpacked.zip
+          asset_name: unpacked-win-better-chatgpt-1.0.3-x64-${{ github.sha }}.zip
           asset_content_type: zip
 
       - name: Upload Release Asset - Windows
