@@ -46,8 +46,8 @@ const ChatTitle = React.memo(() => {
   return config ? (
     <>
       <div
-        className={`sticky top-0 z-10 flex gap-x-4 gap-y-1 flex-wrap w-full items-center justify-center border-b border-black/10 bg-gray-50 p-3 dark:border-gray-900/50 dark:bg-gray-700 text-gray-600 dark:text-gray-300
-          ${isElectron && isMacOS ? 'drag' : 'cursor-pointer'}`}
+        className={`flex gap-x-4 gap-y-1 flex-wrap w-full items-center justify-center border-b border-black/10 bg-gray-50 p-3 dark:border-gray-900/50 dark:bg-gray-700 text-gray-600 dark:text-gray-300
+          ${isElectron && isMacOS ? 'drag sticky top-0 z-10' : 'cursor-pointer'}`}
         onClick={() => {
           setIsModalOpen(true);
         }}
