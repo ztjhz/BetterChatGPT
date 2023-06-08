@@ -24,10 +24,10 @@
     },
     "dmg": {
       "title": "${productName} ${version}",
-      "icon": "dist/icon-rounded.png"
+      "icon": "dist/icon-rounded-macos.png"
     },
     "mac": {
-      "icon": "dist/icon-rounded.png"
+      "icon": "dist/icon-rounded-macos.png"
     },
     "linux": {
       "target": [

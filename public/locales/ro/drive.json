@@ -1,0 +1,16 @@
+{
+   "name": "Google Sync",
+   "tagline": "Sincronizați fără efort chaturile și setările cu Google Drive.",
+   "buton": {
+     "sync": "Sincronizează-ți chaturile",
+     "stop": "Opriți sincronizarea",
+     "create": "Creați un fișier nou",
+     "confirm": "Confirmați selecția"
+   },
+   "notice": "Notă: va trebui să vă reconectați la fiecare vizită sau la fiecare oră. Pentru a evita suprascrierea datelor din cloud, nu utilizați BetterChatGPT pe mai multe dispozitive în același timp.",
+   "privacy": "Confidențialitatea ta este importantă pentru noi și, pentru a o asigura, Better ChatGPT are doar acces non-sensibil, ceea ce înseamnă că poate crea, vizualiza și gestiona doar propriile fișiere și foldere.",
+   "toast": {
+     "sync": "Sincronizare reușită!",
+     "stop": "Sincronizare oprită"
+   }
+}

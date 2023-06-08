@@ -23,26 +23,30 @@ const useSubmit = () => {
     message: MessageInterface[]
   ): Promise<string> => {
     let data;
-    if (!apiKey || apiKey.length === 0) {
-      // official endpoint
-      if (apiEndpoint === officialAPIEndpoint) {
-        throw new Error(t('noApiKeyWarning') as string);
-      }
+    try {
+      if (!apiKey || apiKey.length === 0) {
+        // official endpoint
+        if (apiEndpoint === officialAPIEndpoint) {
+          throw new Error(t('noApiKeyWarning') as string);
+        }
 
-      // other endpoints
-      data = await getChatCompletion(
-        useStore.getState().apiEndpoint,
-        message,
-        _defaultChatConfig
-      );
-    } else if (apiKey) {
-      // own apikey
-      data = await getChatCompletion(
-        useStore.getState().apiEndpoint,
-        message,
-        _defaultChatConfig,
-        apiKey
-      );
+        // other endpoints
+        data = await getChatCompletion(
+          useStore.getState().apiEndpoint,
+          message,
+          _defaultChatConfig
+        );
+      } else if (apiKey) {
+        // own apikey
+        data = await getChatCompletion(
+          useStore.getState().apiEndpoint,
+          message,
+          _defaultChatConfig,
+          apiKey
+        );
+      }
+    } catch (error: unknown) {
+      throw new Error(`Error generating title!\n${(error as Error).message}`);
     }
     return data.choices[0].message.content;
   };
@@ -185,7 +189,7 @@ const useSubmit = () => {
 
         // update tokens used for generating title
         if (countTotalTokens) {
-          const model = currChats[currentChatIndex].config.model;
+          const model = _defaultChatConfig.model;
           updateTotalTokenUsed(model, [message], {
             role: 'assistant',
             content: title,
