@@ -2,6 +2,7 @@
 export const i18nLanguages = [
   // 'ar',
   'da',
+  'de',
   'en',
   'en-GB',
   'en-US',
@@ -26,6 +27,7 @@ export const i18nLanguages = [
 export const selectableLanguages = [
   // 'ar',
   'da',
+  'de',
   // 'en',
   'en-GB',
   'en-US',
@@ -49,6 +51,7 @@ export const selectableLanguages = [
 export const languageCodeToName = {
   // 'ar': 'العربية',
   'da': 'Dansk',
+  'de': 'Deutsch',
   'en': 'English',
   'en-GB': 'English (UK)',
   'en-US': 'English (US)',
