@@ -25,7 +25,7 @@ const searchFuncions:any = [
     label:'Q&A3 LLM',
   }, 
   {
-    name: 'news', 
+    name: 'vector_news', 
     emoji: '📰',
     label:'Web3 News',
   }, 
@@ -64,7 +64,8 @@ const SearchResultPage = () => {
   const setReponse = useStore((state) => state.setResponse)
   const setLoading = useStore((state) => state.setSearchLoading)
   const setResponseOrder = useStore((state) => state.setResponseOrder)
-  const [searchText, setSearchText] = useState(question)
+  const fetchCredit = useStore((state) => state.fetchCredit)
+  const [searchText, setSearchText] = useState(decodeURIComponent(question as string))
   const [loginModalOpen, setLoginModalOpen] = useState(false)
   const [voteType, setVoteType] = useState('')
   const navigate = useNavigate();
@@ -72,10 +73,11 @@ const SearchResultPage = () => {
     clear()
     setVoteType('')
     if(searchText){
-      navigate('/search/' + searchText, {
+      navigate('/search/' + encodeURIComponent(searchText), {
         replace: true
       })
       const {data: question } = await simplifyQuestion(searchText)
+      fetchCredit()
       searchFuncions.forEach((item: any) => {
         setLoading(item.name, true)
         getSearchByType({
@@ -293,7 +295,7 @@ const MemoryMarkdown = memo(({data}: any) => {
           td({ children }) {
             return (
               <td className="break-words border border-gray-400 px-3 py-1 dark:border-white">
-                 <div dangerouslySetInnerHTML={{__html: children as string}} />
+                 {children}
               </td>
             );
           },

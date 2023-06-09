@@ -37,6 +37,7 @@ export const createPartializedState = (state: StoreState) => ({
   countTotalTokens: state.countTotalTokens,
   sources: state.sources,
   wallet_address: state.wallet_address,
+  credit: state.credit,
 });
 
 const useStore = create<StoreState>()(

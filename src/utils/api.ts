@@ -1,6 +1,7 @@
 import { request, setRequestHeader } from "@api/request";
 import { GetTokenSilentlyOptions } from "@auth0/auth0-react";
 import { bsc } from "./bsc";
+import store from "@store/store";
 
 export const getUserToken = () => {
   const token = localStorage.getItem('@@auth0spajs@@::d2lXoGguxROpIsbBChdHbJzqvwkhPnj6::https://dev-tfcpxeutlsld1wm0.us.auth0.com/api/v2/::openid profile email');
@@ -35,6 +36,7 @@ export const initUser = async () => {
       'Authorization': access_token ? `Bearer ${access_token}` : null
     }
   })
+  store.getState().fetchCredit();
   if(data?.id){
     localStorage.setItem('qna3_user_id', data.id);
   }

@@ -203,12 +203,12 @@ const DataSourcesSelector = ({dataSources, onChange}: any) => {
           const checked = dataSources.includes(source.value)
           return (
             <div className='shrink-0 lg:flex-1'>
-              <div key={source.name} className={` lg:h-full cursor-pointer p-2 border hover:ring-2 ${checked ? 'text-emerald-600 border-emerald-600 dark:text-emerald-300' : 'text-gray-900 dark:text-gray-300'} rounded ring-offset-1 ring-emerald-600 transition-all `} onClick={() => {
+              <div key={source.name} className={` lg:h-full cursor-pointer p-2 border hover:ring-2 ${checked ? 'text-violet-600 border-violet-600 dark:text-violet-300' : 'text-gray-900 dark:text-gray-300'} rounded ring-offset-1 ring-violet-600 transition-all `} onClick={() => {
                 onChange(!checked, source.value)
               }}>
                 <div className='flex gap-1  items-center'>
                   <div>
-                    <CheckCircleIcon className={`${checked ? 'text-emerald-600' : 'text-gray-400'} w-4 h-4`}/>
+                    <CheckCircleIcon className={`${checked ? 'text-violet-600' : 'text-gray-400'} w-4 h-4`}/>
                   </div>
                   <div className="w-full text-xs font-medium"  >{source.name}</div>
                 </div>

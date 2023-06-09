@@ -16,7 +16,7 @@ const SearchPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    navigate('/search/' + searchText)
+    navigate('/search/' + encodeURIComponent(searchText))
   }
   return (
     <div className="w-full min-h-full bg-gradient-to-t from-gray-100 to-gray-100/10">
