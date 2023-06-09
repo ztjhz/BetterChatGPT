@@ -63,7 +63,16 @@ export const TransparentHeader = () => {
         </div>
       )}
     </div>
-    <Modal
+    
+    </>        
+  )
+}
+
+ export const SignInModal = ({isOpen, setIsOpen}: any) => {
+    const { user, loginWithRedirect, logout, isLoading, isAuthenticated } = useAuth0();
+
+    return (
+      <Modal
         isOpen={isOpen}
         onRequestClose={() => setIsOpen(false)}
         contentLabel="Get Started!"
@@ -88,8 +97,5 @@ export const TransparentHeader = () => {
           </div>
         </div>
       </Modal>
-    </>        
-  )
-}
-
- 
+    )
+ }

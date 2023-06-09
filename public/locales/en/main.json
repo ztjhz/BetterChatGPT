@@ -53,5 +53,7 @@
     "done": "Finshed!",
     "unUseful": "Useless answers",
     "message": "Typing..."
-  }
+  },
+  "voteSuccess": "Thank you for your feedback!",
+  "requestFailed": "Sorry, request failed"
 }

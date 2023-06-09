@@ -1,4 +1,4 @@
-import { request } from '@api/request';
+import { request, setRequestHeader } from '@api/request';
 import MetaMaskSDK, {MetaMaskSDKOptions} from '@metamask/sdk';
 import useStore from '@store/store';
 
@@ -14,6 +14,7 @@ export const connect = async () => {
     
     const address = bsc?.selectedAddress;
     if(address){
+      setRequestHeader('x-address', address);
       useStore.getState().setWalletAddress(address as string);
     }
 

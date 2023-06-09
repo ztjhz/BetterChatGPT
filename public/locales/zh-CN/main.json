@@ -53,5 +53,7 @@
     "done": "完成!",
     "unUseful": "无用答案",
     "message": "打字中..."
-  }
+  },
+  "voteSuccess": "感谢您的反馈!",
+  "requestFailed": "很抱歉，反馈失败，请稍后再试。"
 }

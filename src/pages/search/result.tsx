@@ -11,6 +11,13 @@ import useStore from '@store/store';
 import Logo from '@logo/color';
 import { t } from 'i18next';
 import { LoadingBlock } from '@components/LoadingBlock';
+import HandThumbUpIcon from '@heroicons/react/24/outline/HandThumbUpIcon'
+import HandThumbDownIcon from '@heroicons/react/24/outline/HandThumbDownIcon'
+import { request } from '@api/request';
+import { useAuth0 } from '@auth0/auth0-react';
+import { bsc } from '@utils/bsc';
+import { SignInModal, TransparentHeader } from '@components/Header/transparent';
+import { toast, ToastContainer } from 'react-toastify';
 const searchFuncions:any = [
   {
     name: 'chat', 
@@ -46,6 +53,9 @@ const searchFuncions:any = [
 
 const SearchResultPage = () => {
   let { question } = useParams();
+  const { user, loginWithRedirect, logout, isLoading, isAuthenticated } = useAuth0();
+  const walletIsConnected = !!bsc?.selectedAddress
+  const isSignedIn = isAuthenticated || walletIsConnected
   const clear = useStore((state) => state.clear)
   const response = useStore((state) => state.response)
   const searchStatus = useStore((state) => state.searchStatus)
@@ -55,10 +65,12 @@ const SearchResultPage = () => {
   const setLoading = useStore((state) => state.setSearchLoading)
   const setResponseOrder = useStore((state) => state.setResponseOrder)
   const [searchText, setSearchText] = useState(question)
+  const [loginModalOpen, setLoginModalOpen] = useState(false)
+  const [voteType, setVoteType] = useState('')
   const navigate = useNavigate();
   const handleSubmit = async () => {
     clear()
-
+    setVoteType('')
     if(searchText){
       navigate('/search/' + searchText, {
         replace: true
@@ -95,6 +107,36 @@ const SearchResultPage = () => {
     const s = getStatusByKey(item.name)
     return s === 'message' || s === 'done'
   })
+
+  const onVote = async (type: string) => {
+    console.log('isSignedIn', isSignedIn, isAuthenticated, walletIsConnected)
+    if(isSignedIn){
+      const answerJSON:any = {}
+      searchFuncions.map((item: any) => {
+        answerJSON[item.name] = response[item.name]
+      })
+      try{
+        const votePromise =  request.post('/search/vote', {
+          vote_type: type,
+          question: searchText,
+          answer: JSON.stringify(answerJSON),
+        })
+        setVoteType(type)
+        toast.promise(
+          votePromise,
+          {
+            pending: 'Voting...',
+            success: t('voteSuccess') as string,
+            error: t('voteFailed')
+          }
+        )
+      }catch{
+        toast.error(t('voteFailed'))
+      }
+    }else{
+      setLoginModalOpen(true)
+    }
+  }
 
   const renderLoading = () => {
     const loadingText = "After analysis, we will provide you with answers from the following data:"
@@ -140,12 +182,23 @@ const SearchResultPage = () => {
     )
   }
 
+  const renderVoteButton = () => {
+    return (
+      <div className='flex gap-4 px-4 justify-end'>
+        <button onClick={() => onVote('upvote')}>
+          <HandThumbUpIcon className={`w-5 h-5 text-${voteType === 'upvote' ? 'green' : 'gray'}-500`}/>
+        </button>
+        <button onClick={() => onVote('downvote')}>
+          <HandThumbDownIcon className={`w-5 h-5 text-${voteType === 'downvote' ? 'yellow' : 'gray'}-500`}/>
+        </button>
+      </div>
+    )
+  }
+
   return (
     <div className='flex min-h-full w-full flex-1 flex-col bg-gradient-to-t from-gray-200 to-gray-50'>
       <div>
-        <main className='relative bg-white opacity-70 h-full w-full transition-width flex flex-col overflow-hidden items-stretch flex-1'>
-        <HorizontalMenu />
-        </main>
+      <TransparentHeader />
       </div>
       <div className='p-4 flex w-full h-full flex-1 flex-col m-auto max-w-3xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl`'>
         <SearchInput
@@ -172,9 +225,18 @@ const SearchResultPage = () => {
               )
             })}
           </div>
+          <div className='mt-2'>
+            {renderVoteButton()}
+          </div>
         </div>
       </div>
-      
+      <SignInModal 
+        isOpen={loginModalOpen}
+        setIsOpen={setLoginModalOpen}
+      />
+      <ToastContainer 
+        autoClose={3000}
+      />
     </div>
   )
 }
