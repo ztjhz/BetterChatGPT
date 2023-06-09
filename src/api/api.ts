@@ -78,7 +78,7 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
 }
 
 export const simplifyQuestion = async(query: string) => {
-  const {data} = await request.post('/search', {
+  const {data} = await request.post('/search/', {
     query,
     originalQuery: query
   })
