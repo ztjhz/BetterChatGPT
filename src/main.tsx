@@ -41,13 +41,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       clientId="d2lXoGguxROpIsbBChdHbJzqvwkhPnj6"
       cacheLocation="localstorage"
       onRedirectCallback={async () => {
-        const {access_token, id_token} = await getUserToken();
-        if(access_token){
-          setRequestHeader('Authorization', `Bearer ${access_token}`)
-        }
-        if(id_token){
-          setRequestHeader('x-id-token', `${id_token}`)
-        }
+        initUser()
       }}
       authorizationParams={{
         redirect_uri: window.location.origin,
