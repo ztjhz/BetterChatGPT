@@ -2,7 +2,7 @@ import React from 'react';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
 import { ChatInterface, MessageInterface } from '@type/chat';
-import { getChatCompletion, getChatCompletionStream, getChatServerResponse } from '@api/api';
+import { getChatCompletion, getChatServerResponse } from '@api/api';
 import { parseEventSource } from '@api/helper';
 import { limitMessageTokens, updateTotalTokenUsed } from '@utils/messageUtils';
 import { _defaultChatConfig } from '@constants/chat';

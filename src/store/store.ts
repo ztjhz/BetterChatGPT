@@ -5,11 +5,13 @@ import { InputSlice, createInputSlice } from './input-slice';
 import { ConfigSlice, createConfigSlice } from './config-slice';
 import { ToastSlice, createToastSlice } from './toast-slice';
 import { SearchSlice, createSearchSlice } from './search-slice';
+import { AuthSlice, createAuthSlice } from './auth-slice';
 
 export type StoreState = ChatSlice &
   InputSlice &
   ConfigSlice &
   SearchSlice &
+  AuthSlice &
   ToastSlice;
 
 export type StoreSlice<T> = (
@@ -33,7 +35,8 @@ export const createPartializedState = (state: StoreState) => ({
   markdownMode: state.markdownMode,
   totalTokenUsed: state.totalTokenUsed,
   countTotalTokens: state.countTotalTokens,
-  sources: state.sources
+  sources: state.sources,
+  wallet_address: state.wallet_address,
 });
 
 const useStore = create<StoreState>()(
@@ -44,11 +47,12 @@ const useStore = create<StoreState>()(
       ...createConfigSlice(set, get),
       ...createToastSlice(set, get),
       ...createSearchSlice(set, get),
+      ...createAuthSlice(set, get),
     }),
     {
-      name: '0xfaq',
+      name: 'Q&A3',
       partialize: (state) => createPartializedState(state),
-      version: 9
+      version: 11
     }
   )
 );

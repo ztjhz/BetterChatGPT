@@ -16,8 +16,8 @@
     "make": "yarn build && electron-builder"
   },
   "build": {
-    "appId": "0xFAQ",
-    "productName": "0xFAQ",
+    "appId": "Q&A3",
+    "productName": "Q&A3",
     "artifactName": "${os}-${name}-${version}-${arch}.${ext}",
     "directories": {
       "output": "release"
@@ -43,12 +43,17 @@
     }
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.1.0",
     "@dqbd/tiktoken": "^1.0.2",
+    "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
+    "@metamask/sdk": "^0.3.2",
     "@microsoft/fetch-event-source": "^2.0.1",
     "@react-oauth/google": "^0.9.0",
     "@tabler/icons-react": "^2.20.0",
+    "@types/react-modal": "^3.16.0",
     "@types/react-syntax-highlighter": "^15.5.7",
+    "axios": "^1.4.0",
     "electron-is-dev": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^5.3.0",
@@ -67,6 +72,7 @@
     "react-dom": "^18.2.0",
     "react-i18next": "^12.2.0",
     "react-markdown": "^8.0.5",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^6.11.2",
     "react-scroll-to-bottom": "^4.2.0",
     "react-simple-typewriter": "^5.0.1",

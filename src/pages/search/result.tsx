@@ -15,7 +15,7 @@ const searchFuncions:any = [
   {
     name: 'chat', 
     emoji: '📝',
-    label:'0xFAQ LLM',
+    label:'Q&A3 LLM',
   }, 
   {
     name: 'news', 

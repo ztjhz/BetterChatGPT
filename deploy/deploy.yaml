@@ -58,10 +58,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - demo.0xfaq.ai
+    - demo.Q&A3.ai
     secretName: demo-tls
   rules:
-    - host: demo.0xfaq.ai
+    - host: demo.Q&A3.ai
       http:
         paths:
           - path: /

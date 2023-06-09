@@ -45,9 +45,9 @@
   "enterToSubmit": "Enter to submit",
   "submitPlaceholder": "Type a message",
   "history": "History",
-  "askToFAQ": "Ask to 0xFAQ",
-  "mainSearchPlaceholder": "Ask any questions about Web3 and let 0xFAQ help you answer them.",
-  "noAnswer": "Sorry, I am unable to answer this question at the moment. 0xFAQ is still in its early version and we are working hard to improve it.",
+  "askToFAQ": "Ask to Q&A3",
+  "mainSearchPlaceholder": "Ask any questions about Web3 and let Q&A3 help you answer them.",
+  "noAnswer": "Sorry, I am unable to answer this question at the moment. Q&A3 is still in its early version and we are working hard to improve it.",
   "searchStatus": {
     "loading": "Preparing...",
     "done": "Finshed!",

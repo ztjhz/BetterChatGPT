@@ -5,6 +5,7 @@ import useStore from '@store/store';
 import SearchInput from "@components/Search/searchInput";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { TransparentHeader } from "@components/Header/transparent";
 
 
 const SearchPage = () => {
@@ -17,12 +18,10 @@ const SearchPage = () => {
     navigate('/search/' + searchText)
   }
   return (
-    <div className="w-full h-full bg-gradient-to-t from-gray-200 to-gray-50">
+    <div className="w-full min-h-full bg-gradient-to-t from-gray-100 to-gray-100/10">
+      <TransparentHeader />
       <div
         className={`flex h-full flex-1 px-4 flex-col justify-center m-auto max-w-3xl md:max-w-3xl lg:max-w-3xl xl:max-w-5xl`}
-        style={{
-          paddingBottom: '30vh'
-        }}
       >
         <div className="w-full h-12 flex justify-center align-middle mb-6">
             {theme === 'dark' ? <TextColorLogoDark className="h-16"/> : <TextColorLogo className="h-16"/>}

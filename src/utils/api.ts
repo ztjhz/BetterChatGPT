@@ -1,3 +1,36 @@
-export const isAzureEndpoint = (endpoint: string) => {
-  return endpoint.includes('openai.azure.com');
-};
+import { request, setRequestHeader } from "@api/request";
+import { GetTokenSilentlyOptions } from "@auth0/auth0-react";
+
+export const getUserToken = () => {
+  const token = localStorage.getItem('@@auth0spajs@@::d2lXoGguxROpIsbBChdHbJzqvwkhPnj6::https://dev-tfcpxeutlsld1wm0.us.auth0.com/api/v2/::openid profile email');
+  const id_token_storage = localStorage.getItem('@@auth0spajs@@::d2lXoGguxROpIsbBChdHbJzqvwkhPnj6::@@user@@');
+  return {
+    access_token: JSON.parse(token || '{}')?.body?.access_token,
+    id_token: JSON.parse(id_token_storage || '{}')?.id_token
+  }
+}
+export const initUser = async () => {
+  const {access_token, id_token} = getUserToken()
+  const user_id = localStorage.getItem('qna3_user_id');
+  console.log('initUser', access_token, id_token, user_id)
+  if(access_token){
+    setRequestHeader('Authorization', `Bearer ${access_token}`)
+  }
+  if(id_token){
+    setRequestHeader('x-id-token', id_token)
+  }
+  if(user_id){
+    setRequestHeader('x-id', user_id as string)
+  }
+
+  const {data} = await request.get('/init', {
+    headers: {
+      'x-id-token': id_token || null,
+      'x-id': user_id || null,
+      'Authorization': access_token ? `Bearer ${access_token}` : null
+    }
+  })
+  if(data?.id){
+    localStorage.setItem('qna3_user_id', data.id);
+  }
+}
