@@ -100,16 +100,15 @@ const SearchResultPage = () => {
     }
   }
  
-  useEffect(() => {
-    handleSubmit()
-  }, [])
+  // useEffect(() => {
+  //   handleSubmit()
+  // }, [])
   const closeLoading = searchFuncions.some((item: any) => {
     const s = getStatusByKey(item.name)
     return s === 'message' || s === 'done'
   })
 
   const onVote = async (type: string) => {
-    console.log('isSignedIn', isSignedIn, isAuthenticated, walletIsConnected)
     if(isSignedIn){
       const answerJSON:any = {}
       searchFuncions.map((item: any) => {
@@ -198,9 +197,9 @@ const SearchResultPage = () => {
   return (
     <div className='flex min-h-full w-full flex-1 flex-col bg-gradient-to-t from-gray-200 to-gray-50'>
       <div>
-      <TransparentHeader />
+      <TransparentHeader showLogo />
       </div>
-      <div className='p-4 flex w-full h-full flex-1 flex-col m-auto max-w-3xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl`'>
+      <div className='p-4 flex w-full h-full flex-1 flex-col m-auto max-w-3xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl'>
         <SearchInput
           value={searchText}
           setValue={setSearchText}
