@@ -102,9 +102,9 @@ const SearchResultPage = () => {
     }
   }
  
-  // useEffect(() => {
-  //   handleSubmit()
-  // }, [])
+  useEffect(() => {
+    handleSubmit()
+  }, [])
   const closeLoading = searchFuncions.some((item: any) => {
     const s = getStatusByKey(item.name)
     return s === 'message' || s === 'done'
