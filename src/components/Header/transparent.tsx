@@ -1,16 +1,15 @@
 import ArrowLongRightIcon from '@heroicons/react/24/outline/ArrowRightIcon'
 import { useAuth0 } from "@auth0/auth0-react";
-import MetaMaskSDK, {MetaMaskSDKOptions} from '@metamask/sdk';
 import useStore from '@store/store';
-import { connect } from '@utils/bsc';
 import { Fragment, useState } from 'react';
 import Modal from 'react-modal';
 import { WalletIcon, UserIcon } from '@heroicons/react/20/solid';
 import QNALogo from '@logo/qnaLogo';
 import { Link } from 'react-router-dom';
+import { useAccount, useConnect } from 'wagmi';
+import { InjectedConnector } from 'wagmi/connectors/injected'
+import { onConnect, onDisConnect } from '@utils/bsc';
 
-const MMSDK = new MetaMaskSDK();
-const bsc = MMSDK.getProvider();
 
 interface TransparentHeaderProps {
   showLogo?: boolean;
@@ -19,8 +18,15 @@ interface TransparentHeaderProps {
 
 export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps) => {
   let [isOpen, setIsOpen] = useState(false)
+  const { address, isConnected } = useAccount({
+    onConnect: ({address}) => {
+      onConnect(address as string)
+    },
+    onDisconnect: () => {
+      onDisConnect()
+    }
+  })
   const { user, loginWithRedirect, logout, isLoading, isAuthenticated } = useAuth0();
-  const walletAddress = useStore((state) => state.wallet_address);
   const credit = useStore((state) => state.credit);
   const handleLogout = () => {
     if(user){
@@ -38,12 +44,12 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
         )}
       </div>
       <div className='flex gap-4 justify-end p-4'>
-        {(user || walletAddress) ? (
+        {(user || isConnected) ? (
           <>
           <button 
           className="flex overflow-hidden items-center text-violet-600 text-xs border border-violet-600 hover:border-violet-700 rounded-full">
             <div className="text-xs md:text-sm px-2 md:px-4 py-2 text-ellipsis w-40 overflow-hidden">
-              {user?.email || walletAddress}
+              {user?.email || address}
             </div>
             <div className="flex h-full gap-x-1 px-2 md:px-4 py-2 bg-violet-600 items-center">
               <svg fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 text-white">
@@ -80,14 +86,17 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
         )}
       </div>
     </div>
-    
+    <SignInModal isOpen={isOpen} setIsOpen={setIsOpen}/>
     </>        
   )
 }
 
  export const SignInModal = ({isOpen, setIsOpen}: any) => {
     const { user, loginWithRedirect, logout, isLoading, isAuthenticated } = useAuth0();
-
+    const { connect } = useConnect({
+      connector: new InjectedConnector(),
+    })
+    console.log(isOpen)
     return (
       <Modal
         isOpen={isOpen}

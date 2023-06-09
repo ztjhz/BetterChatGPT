@@ -15,9 +15,9 @@ import HandThumbUpIcon from '@heroicons/react/24/outline/HandThumbUpIcon'
 import HandThumbDownIcon from '@heroicons/react/24/outline/HandThumbDownIcon'
 import { request } from '@api/request';
 import { useAuth0 } from '@auth0/auth0-react';
-import { bsc } from '@utils/bsc';
 import { SignInModal, TransparentHeader } from '@components/Header/transparent';
 import { toast, ToastContainer } from 'react-toastify';
+import { useAccount } from 'wagmi';
 const searchFuncions:any = [
   {
     name: 'chat', 
@@ -54,8 +54,8 @@ const searchFuncions:any = [
 const SearchResultPage = () => {
   let { question } = useParams();
   const { user, loginWithRedirect, logout, isLoading, isAuthenticated } = useAuth0();
-  const walletIsConnected = !!bsc?.selectedAddress
-  const isSignedIn = isAuthenticated || walletIsConnected
+  const { address, isConnected } = useAccount()
+  const isSignedIn = isAuthenticated || isConnected
   const clear = useStore((state) => state.clear)
   const response = useStore((state) => state.response)
   const searchStatus = useStore((state) => state.searchStatus)
