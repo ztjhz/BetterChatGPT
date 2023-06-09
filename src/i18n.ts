@@ -24,7 +24,6 @@ i18n
     },
     ns: namespace,
     defaultNS: 'main',
-    debug: true
   });
 
 export default i18n;

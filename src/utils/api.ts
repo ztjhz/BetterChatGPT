@@ -15,7 +15,6 @@ export const initUser = async () => {
   const {access_token, id_token} = getUserToken()
   const user_id = localStorage.getItem('qna3_user_id');
   const walletAddress = BSCConfig?.data?.account
-  console.log('initUser', access_token, id_token, user_id)
   if(access_token){
     setRequestHeader('Authorization', `Bearer ${access_token}`)
   }

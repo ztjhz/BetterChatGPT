@@ -96,7 +96,6 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
     const { connect } = useConnect({
       connector: new InjectedConnector(),
     })
-    console.log(isOpen)
     return (
       <Modal
         isOpen={isOpen}
