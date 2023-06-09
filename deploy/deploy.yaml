@@ -55,13 +55,15 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/use-gzip: "true"
+    nginx.ingress.kubernetes.io/use-http2: "true"
 spec:
   tls:
   - hosts:
-    - demo.0xfaq.ai
-    secretName: demo-tls
+    - qna3.ai
+    secretName: qna3-web-tls
   rules:
-    - host: demo.0xfaq.ai
+    - host: qna3.ai
       http:
         paths:
           - path: /

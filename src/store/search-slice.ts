@@ -92,6 +92,7 @@ export const createSearchSlice: StoreSlice<SearchSlice> = (set, get) => ({
       ...prev,
       response: {},
       responseOrder: [],
+      searchStatus: {},
     }));
   }
 });

@@ -51,8 +51,8 @@ export const LoadingBlock = ({
       break;
     case 'done':
       lottieOptions = <Lottie {...checkOptions} />
-      loadingColor = 'bg-emerald-500'
-      bgColor = 'bg-emerald-100'
+      loadingColor = 'bg-violet-500'
+      bgColor = 'bg-violet-100'
       break;
     case 'unUseful':
       lottieOptions = <NoIdeaIcon className="w-3 h-3" />

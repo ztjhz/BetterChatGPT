@@ -8,10 +8,16 @@ import {
 } from "react-router-dom";
 import './main.css';
 await import('katex/dist/katex.min.css');
-
+import {setRequestHeader} from '@api/request';
 import './i18n';
 import SearchResultPage from "./pages/search/result";
+import { Auth0Provider } from '@auth0/auth0-react';
+import { getUserToken, initUser } from "@utils/api";
+import { WagmiConfig, createConfig, mainnet } from 'wagmi'
+import useStore from "@store/store";
+import { BSCConfig } from "@utils/bsc";
 
+initUser();
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,5 +35,27 @@ const router = createBrowserRouter([
 
 //@ts-ignore
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <WagmiConfig config={BSCConfig}>
+    <Auth0Provider
+      domain="dev-tfcpxeutlsld1wm0.us.auth0.com"
+      clientId="d2lXoGguxROpIsbBChdHbJzqvwkhPnj6"
+      cacheLocation="localstorage"
+      onRedirectCallback={async () => {
+        const {access_token, id_token} = await getUserToken();
+        if(access_token){
+          setRequestHeader('Authorization', `Bearer ${access_token}`)
+        }
+        if(id_token){
+          setRequestHeader('x-id-token', `${id_token}`)
+        }
+      }}
+      authorizationParams={{
+        redirect_uri: window.location.origin,
+        audience: 'https://dev-tfcpxeutlsld1wm0.us.auth0.com/api/v2/',
+      }}
+    >
+      <RouterProvider router={router} />
+    </Auth0Provider>
+  </WagmiConfig>
 );
+

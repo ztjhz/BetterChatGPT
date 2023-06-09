@@ -64,7 +64,7 @@ const Menu = () => {
         <div
           className={`${
             hideSideMenu ? 'opacity-100' : 'opacity-0'
-          } group/menu md:group-hover/menu:opacity-100 rounded-md max-md:hidden transition-opacity absolute z-[999] -right-2 translate-x-full -top-10 bg-emerald-600 p-2 cursor-pointer hover:bg-emerald-800 text-white ${
+          } group/menu md:group-hover/menu:opacity-100 rounded-md max-md:hidden transition-opacity absolute z-[999] -right-2 translate-x-full -top-10 bg-violet-600 p-2 cursor-pointer hover:bg-violet-800 text-white ${
             hideSideMenu ? '' : 'rotate-90'
           }`}
           onClick={() => {

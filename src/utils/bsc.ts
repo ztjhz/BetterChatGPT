@@ -1,0 +1,53 @@
+import { request, setRequestHeader } from '@api/request';
+import useStore from '@store/store';
+import { WagmiConfig, configureChains, createConfig } from 'wagmi'
+import {publicProvider} from 'wagmi/providers/public'
+import { bsc } from 'wagmi/chains';
+import { createPublicClient, http } from 'viem'
+ 
+
+const { publicClient, webSocketPublicClient } = configureChains(
+  [bsc],
+  [publicProvider()]
+);
+
+export const BSCConfig = createConfig({
+  autoConnect: true,
+  publicClient,
+  webSocketPublicClient,
+});
+ 
+export const onConnect = (address: string) => {
+  if(address){
+    setRequestHeader('x-address', address);
+    request.post('/users/wallet_login', {
+      wallet_address: address
+    })
+    
+  }
+
+}
+
+export const onDisConnect = () => {
+  setRequestHeader('x-address', '');
+}
+
+
+
+// const MMSDK = new MetaMaskSDK();
+// // export const bsc = MMSDK.getProvider();
+
+// export const connect = async () => {
+//   try {
+//     const chainId = '0x38'; // Binance Smart Chain Mainnet Chain ID
+//     await bsc?.request({ method: 'wallet_switchEthereumChain', params: [{ chainId }] });
+//     await bsc?.request({ method: 'eth_requestAccounts' });
+    
+//     const address = bsc?.selectedAddress;
+
+
+
+//   } catch (error) {
+//     console.error('Error connecting to Binance Smart Chain:', error);
+//   }
+// };

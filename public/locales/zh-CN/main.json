@@ -45,13 +45,15 @@
   "enterToSubmit": "按回车键提交",
   "submitPlaceholder": "请输入消息",
   "history": "历史记录",
-  "askToFAQ": "问问 0xFAQ",
-  "mainSearchPlaceholder": "提问任何有关于 Web3 的问题，让 0xFAQ 帮你解答",
-  "noAnswer": "抱歉，我现在无法回答这个问题。 0xFAQ仍处于早期版本，我们仍在努力改进。",
+  "askToFAQ": "问问 Q&A3",
+  "mainSearchPlaceholder": "提问任何有关于 Web3 的问题，让 Q&A3 帮你解答",
+  "noAnswer": "抱歉，我现在无法回答这个问题。 Q&A3仍处于早期版本，我们仍在努力改进。",
   "searchStatus": {
     "loading": "准备中...",
     "done": "完成!",
     "unUseful": "无用答案",
     "message": "打字中..."
-  }
+  },
+  "voteSuccess": "感谢您的反馈!",
+  "requestFailed": "很抱歉，反馈失败，请稍后再试。"
 }

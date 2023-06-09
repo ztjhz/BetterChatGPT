@@ -4,9 +4,9 @@ import ReactMarkdown from 'react-markdown';
 import { hr, p } from '../markdown';
 
 const introduce_cn = `
-  欢迎来到 0xFAQ ! 🎉 \n\n
+  欢迎来到 Q&A3 ! 🎉 \n\n
 
-  0xFAQ 是一个集成了 web3 数据的人工智能聊天机器人。在这里，你能以交谈的形式探索以下信息🔍：
+  Q&A3 是一个集成了 web3 数据的人工智能聊天机器人。在这里，你能以交谈的形式探索以下信息🔍：
 
   📘 **Web3 知识**：我们汇总了大量的研报、技术文档、博客内容，用于帮助你更深入地理解 Web3 的世界。
 
@@ -16,29 +16,29 @@ const introduce_cn = `
   
   --- 
   
-  如何开启你的 0xFAQ 之旅呢？ \n\n
+  如何开启你的 Q&A3 之旅呢？ \n\n
 
-  1️⃣ 只需将你想要了解的问题通过自然语言描述出来，0xFAQ 就能帮你找到答案。 \n\n
+  1️⃣ 只需将你想要了解的问题通过自然语言描述出来，Q&A3 就能帮你找到答案。 \n\n
 
   2️⃣ 如果你清楚想要查询的数据具体来自哪个数据源，可以在数据源中点击多选项进行选择。 \n\n
 
-  3️⃣ 如果选择了 "自动" 选项，0xFAQ 将根据你的语言和上下文内容，智能地帮你选择最匹配的数据源。 \n\n
+  3️⃣ 如果选择了 "自动" 选项，Q&A3 将根据你的语言和上下文内容，智能地帮你选择最匹配的数据源。 \n\n
 
   ---
 
   **请注意**
   
-  💡 目前的 0xFAQ 仍处于最初的 Demo 阶段，我们热切欢迎你随时提出反馈和建议，这对我们完善产品非常有帮助。📝
+  💡 目前的 Q&A3 仍处于最初的 Demo 阶段，我们热切欢迎你随时提出反馈和建议，这对我们完善产品非常有帮助。📝
 
-  💡 另外，0xFAQ 的知识库还在建设中，目前主要提供**Layer2**相关公司的数据。在你测试使用时，如果能尽可能地提问关于 Layer2 的问题，我们将非常感激。这将对我们优化知识库和提升服务质量有极大的帮助。
+  💡 另外，Q&A3 的知识库还在建设中，目前主要提供**Layer2**相关公司的数据。在你测试使用时，如果能尽可能地提问关于 Layer2 的问题，我们将非常感激。这将对我们优化知识库和提升服务质量有极大的帮助。
 
   ---
-  开始使用 0xFAQ，尽享 web3 世界的无限魅力吧！🚀 \n\n
+  开始使用 Q&A3，尽享 web3 世界的无限魅力吧！🚀 \n\n
 `
 const introduce_en = `
-  Welcome to 0xFAQ ! 🎉
+  Welcome to Q&A3 ! 🎉
 
-  0xFAQ is an AI chatbot integrated with web3 data. Here, you can explore the following information through conversation🔍:
+  Q&A3 is an AI chatbot integrated with web3 data. Here, you can explore the following information through conversation🔍:
 
   📘 **Web3 Knowledge**: We have collected a wealth of reports, technical documents, and blog content to help you delve deeper into the world of Web3.
 
@@ -49,23 +49,23 @@ const introduce_en = `
   --- 
 
 
-  So, how do you start your journey with 0xFAQ?
+  So, how do you start your journey with Q&A3?
 
-  1️⃣ Simply describe the problem you want to understand in natural language, and 0xFAQ can help you find the answer.
+  1️⃣ Simply describe the problem you want to understand in natural language, and Q&A3 can help you find the answer.
 
   2️⃣ If you know exactly from which data source you want to query, you can select from the multi-options in the data source.
 
-  3️⃣ If you choose the "automatic" option, 0xFAQ will intelligently help you choose the most matching data source based on your language and context.
+  3️⃣ If you choose the "automatic" option, Q&A3 will intelligently help you choose the most matching data source based on your language and context.
 
   ---
 
-  💡 Please note that the current 0xFAQ is still in the early Demo stage, and we warmly welcome you to provide feedback and suggestions at any time, which is of great help to us to improve the product.📝
+  💡 Please note that the current Q&A3 is still in the early Demo stage, and we warmly welcome you to provide feedback and suggestions at any time, which is of great help to us to improve the product.📝
 
-  💡 In addition, the 0xFAQ knowledge base is still under construction, currently mainly providing data from **Layer2 related companies**. When you test it, if you can ask as many questions about Layer2 as possible, we would greatly appreciate it. This will be of great help to us to optimize the knowledge base and improve service quality.
+  💡 In addition, the Q&A3 knowledge base is still under construction, currently mainly providing data from **Layer2 related companies**. When you test it, if you can ask as many questions about Layer2 as possible, we would greatly appreciate it. This will be of great help to us to optimize the knowledge base and improve service quality.
 
   ---
   
-  Start using 0xFAQ and enjoy the endless charm of the web3 world!🚀
+  Start using Q&A3 and enjoy the endless charm of the web3 world!🚀
 
 `
 
@@ -90,7 +90,7 @@ export default ({ onClickDefaultQuestion }: any) => {
         {questions.map((item: string) => {
           return (
             <div key={item} >
-              <div onClick={() => onClickDefaultQuestion(item)} className='text-xs max-w-max min-w-0 px-2 rounded-full border border-emerald-600 text-emerald-600 hover:text-emerald-800 mb-2 cursor-pointer'>{item}</div>
+              <div onClick={() => onClickDefaultQuestion(item)} className='text-xs max-w-max min-w-0 px-2 rounded-full border border-violet-600 text-violet-600 hover:text-violet-800 mb-2 cursor-pointer'>{item}</div>
             </div>
           )
         })}
