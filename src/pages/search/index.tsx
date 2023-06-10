@@ -4,10 +4,21 @@ import TextColorLogoDark from '@logo/textColorDark'
 import useStore from '@store/store';
 import SearchInput from "@components/Search/searchInput";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TransparentHeader } from "@components/Header/transparent";
 import QNALogo from "@logo/qnaLogo";
 
+const hotQuestion = [
+  'What Layer 2 projects received investment in 2023?',
+  'How to analyze the long-term investment potential of a blockchain project?',
+  'What will change after EIP-4844?',
+  'What is the relationship between Immutable X and Polygon?',
+  'What strategies or technologies does BSC have for addressing network congestion and scalability issues?',
+  'What projects have the top crypto funds invested in over the past month?',
+  'I own a GameFi company with an expected 500 users. Which layer2 should I choose?',
+  'What are some recommended coins and reasons for investing with 1000 USD?',
+  'Compare with ERC20、721、1155 and 3525'
+]
 
 const SearchPage = () => {
   const [searchText, setSearchText] = useState('')
@@ -24,9 +35,9 @@ const SearchPage = () => {
         <TransparentHeader />
       </div>
       <div
-        className={`flex h-full flex-1 px-4 flex-col w-full mt-8 md:mt-0 m-auto max-w-3xl md:max-w-3xl lg:max-w-3xl xl:max-w-5xl`}
+        className={`flex h-full flex-1 px-4 flex-col w-full  md:mt-0 m-auto max-w-3xl md:max-w-3xl lg:max-w-3xl xl:max-w-5xl`}
       >
-        <div className="w-full flex justify-center align-middle mb-6">
+          <div className="w-full flex justify-center align-middle mb-6">
             <QNALogo className="w-20 h-20 md:w-40 md:h-40"/>
           </div>
           <SearchInput 
@@ -34,6 +45,29 @@ const SearchPage = () => {
             setValue={setSearchText}
             handleSubmit={handleSubmit}
           />
+          <div className="mt-4">
+            <div className="text-sm text-gray-500 mb-2">
+              Hot Questions
+            </div>
+              {hotQuestion.map((item, index) => {
+                return (
+                  <Link key={item} to={`/search/${encodeURIComponent(item)}`}>
+                    <div className="flex items-center justify-start gap-4 py-2 px-4 mb-2 rounded-md border border-violet-400 hover:bg-violet-800 hover:text-white bg-violet-200/10 text-gray-600 text-sm">
+                      <div className="w-2 h-2 bg-violet-700 parent-sibling-hover:bg-white rounded-full"></div>
+                      <div className="flex-1">
+                        {item}
+                      </div>
+                    </div>
+                  </Link>
+                )
+              })}
+          </div>
+          <div className="mt-4">
+            <div className="text-sm text-gray-500 mb-2">
+              积分说明
+            </div>
+              
+          </div>
       </div>
     </div>
   )

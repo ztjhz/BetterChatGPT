@@ -30,16 +30,6 @@ const searchFuncions:any = [
     label:'Web3 News',
   }, 
   {
-    name: 'social', 
-    emoji: '📎',
-    label:'Social Media',
-  }, 
-  {
-    name: 'report', 
-    emoji: '📚',
-    label:'Research Report',
-  }, 
-  {
     name: 'sql', 
     emoji: '📊',
     label:'Structured data',
@@ -48,6 +38,16 @@ const searchFuncions:any = [
     name: 'knowledge', 
     emoji: '📌',
     label:'Knowledge Graph',
+  }, 
+  {
+    name: 'report', 
+    emoji: '📚',
+    label:'Research Report',
+  }, 
+  {
+    name: 'social', 
+    emoji: '📎',
+    label:'Social Media',
   }, 
 ]
 
