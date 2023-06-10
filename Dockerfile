@@ -1,24 +1,29 @@
 FROM node:alpine
+WORKDIR /app
+COPY package*.json ./
 
-RUN addgroup -S appgroup && \
-  adduser -S appuser -G appgroup && \
-  mkdir -p /home/appuser/app && \
-  chown appuser:appgroup /home/appuser/app
-USER appuser
+# ---- Dependencies ----
+FROM base AS dependencies
+RUN npm ci
+
+# ---- Build ----
+FROM dependencies AS build
+COPY . .
+RUN npm run build
+
+FROM node:19-alpine AS production
+WORKDIR /app
+COPY --from=dependencies /app/node_modules ./node_modules
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/public ./public
+COPY --from=build /app/package*.json ./
 
 RUN yarn config set prefix ~/.yarn && \
   yarn global add serve
-
-WORKDIR /home/appuser/app
-COPY --chown=appuser:appgroup package.json package-lock.json yarn.lock ./
-RUN npm ci
-RUN npm install
-COPY --chown=appuser:appgroup . .
 ARG VITE_SERVER_API_ENDPOINT
 ARG VITE_OPENAI_API_KEY
 ENV VITE_SERVER_API_ENDPOINT ${VITE_SERVER_API_ENDPOINT}
 ENV VITE_OPENAI_API_KEY ${VITE_OPENAI_API_KEY}
-RUN yarn build
 
 EXPOSE 3000
 CMD ["/home/appuser/.yarn/bin/serve", "-s", "dist", "-l", "3000"]
