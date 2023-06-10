@@ -11,7 +11,7 @@ RUN yarn config set prefix ~/.yarn && \
 
 WORKDIR /home/appuser/app
 COPY --chown=appuser:appgroup package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+RUN npm install
 COPY --chown=appuser:appgroup . .
 ARG VITE_SERVER_API_ENDPOINT
 ARG VITE_OPENAI_API_KEY
