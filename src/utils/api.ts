@@ -37,6 +37,7 @@ export const initUser = async () => {
   })
   store.getState().fetchCredit();
   if(data?.id){
-    localStorage.setItem('qna3_user_id', data.id);
+    localStorage.setItem('qna3_user_id', data?.id);
+    setRequestHeader('x-id', data?.id as string)
   }
 }

@@ -40,7 +40,7 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
       }
       done = true
       onError();
-      eventHandler('done', true)
+      eventHandler('unUseful', true)
       controller.abort();
       throw new FatalError();
     },
@@ -62,7 +62,7 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
         callback(text, true)
         onError();
         controller.abort();
-        eventHandler('done', true)
+        eventHandler('unUseful', true)
         return
       }
 
