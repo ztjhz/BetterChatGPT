@@ -10285,10 +10285,10 @@
     "isomorphic-ws" "5.0.0"
     "ws" "8.12.0"
 
-"vite-plugin-top-level-await@^1.3.0":
-  "integrity" "sha512-owIfsgWudMlQODWJSwp0sQB3AZZu3qsMygeBjZy8CyjEk6OB9AGd8lHqmgwrcEqgvy9N58lYxSBLVk3/4ejEiA=="
-  "resolved" "https://registry.npmjs.org/vite-plugin-top-level-await/-/vite-plugin-top-level-await-1.3.0.tgz"
-  "version" "1.3.0"
+"vite-plugin-top-level-await@^1.3.1":
+  "integrity" "sha512-55M1h4NAwkrpxPNOJIBzKZFihqLUzIgnElLSmPNPMR2Fn9+JHKaNg3sVX1Fq+VgvuBksQYxiD3OnwQAUu7kaPQ=="
+  "resolved" "https://registry.npmjs.org/vite-plugin-top-level-await/-/vite-plugin-top-level-await-1.3.1.tgz"
+  "version" "1.3.1"
   dependencies:
     "@rollup/plugin-virtual" "^3.0.1"
     "@swc/core" "^1.3.10"
