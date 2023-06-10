@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { useAccount, useConnect } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { onConnect, onDisConnect } from '@utils/bsc';
-
+import { Web3Button } from '@web3modal/react'
 
 interface TransparentHeaderProps {
   showLogo?: boolean;
@@ -114,10 +114,7 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
               <UserIcon className='w-5 h-5'/>
               <span>Signin</span>
             </button>
-            <button className='inline-flex justify-center gap-2 rounded-md border border-transparent bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2' onClick={() => connect()}>
-              <WalletIcon className='w-5 h-5'/>
-              <span>Connect With Wallet</span>
-            </button>
+            <Web3Button />
             <button className='inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 mt-6' onClick={() => setIsOpen(false)}>Cancel</button>
           </div>
         </div>

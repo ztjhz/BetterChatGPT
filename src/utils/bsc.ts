@@ -3,27 +3,27 @@ import useStore from '@store/store';
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import {publicProvider} from 'wagmi/providers/public'
 import { bsc } from 'wagmi/chains';
-import { createPublicClient, http } from 'viem'
- 
+import {  } from 'viem'
+import { InjectedConnector } from 'wagmi/connectors/injected'
+import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 
-const { publicClient, webSocketPublicClient } = configureChains(
-  [bsc],
-  [publicProvider()]
-);
+const chains = [bsc]
+export const projectId = 'b07dfe8b6ba7abcb519809d89b923367'
+const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 
 export const BSCConfig = createConfig({
   autoConnect: true,
-  publicClient,
-  webSocketPublicClient,
-});
- 
+  connectors: w3mConnectors({ projectId, version: 1, chains }),
+  publicClient
+})
+export const BSCClient = new EthereumClient(BSCConfig, chains)
+
 export const onConnect = (address: string) => {
   if(address){
     setRequestHeader('x-address', address);
     request.post('/users/wallet_login', {
       wallet_address: address
     })
-    
   }
 
 }

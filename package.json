@@ -52,6 +52,8 @@
     "@tabler/icons-react": "^2.20.0",
     "@types/react-modal": "^3.16.0",
     "@types/react-syntax-highlighter": "^15.5.7",
+    "@web3modal/ethereum": "^2.4.5",
+    "@web3modal/react": "^2.4.5",
     "axios": "^1.4.0",
     "electron-is-dev": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",

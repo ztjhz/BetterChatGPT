@@ -2854,7 +2854,7 @@
     "abitype" "0.8.7"
     "eventemitter3" "^4.0.7"
 
-"@wagmi/core@1.1.1":
+"@wagmi/core@>=1", "@wagmi/core@1.1.1":
   "integrity" "sha512-nEg/TIfX8youSBU+qmecIQVyVCOJxPaOHoavr3lbXTa6LZd/PvJ9jEPbl1Ho//KoAI4pqoE59wky0vydgygF0g=="
   "resolved" "https://registry.npmjs.org/@wagmi/core/-/core-1.1.1.tgz"
   "version" "1.1.1"
@@ -3200,6 +3200,27 @@
     "buffer" "6.0.3"
     "valtio" "1.10.5"
 
+"@web3modal/core@2.4.5":
+  "integrity" "sha512-iulOIW2irVaq+xWTzzM2xbRI4TCR0yTnV2Yz+ifIFl+r3OF3ZOC1jsy4jJnKL7/6e7p4NmmKJk0/w951KzCF5g=="
+  "resolved" "https://registry.npmjs.org/@web3modal/core/-/core-2.4.5.tgz"
+  "version" "2.4.5"
+  dependencies:
+    "buffer" "6.0.3"
+    "valtio" "1.10.5"
+
+"@web3modal/ethereum@^2.4.5":
+  "integrity" "sha512-IXz2xWwQvdnwyd0pJjhdYXdmYmrzvPnRH1MtapcX9+a0SyqRkCOovjc9vu2YsLLX/+eFRL9810KJzbjV8FCLJw=="
+  "resolved" "https://registry.npmjs.org/@web3modal/ethereum/-/ethereum-2.4.5.tgz"
+  "version" "2.4.5"
+
+"@web3modal/react@^2.4.5":
+  "integrity" "sha512-FHvpPFkZxag3p58GZygyxHjSnyw5YQTdQNIGYNb38WozltIcI/2QT3aMNcAjBt580/ZBLs3HzJYiFyJaQrG7lw=="
+  "resolved" "https://registry.npmjs.org/@web3modal/react/-/react-2.4.5.tgz"
+  "version" "2.4.5"
+  dependencies:
+    "@web3modal/core" "2.4.5"
+    "@web3modal/ui" "2.4.5"
+
 "@web3modal/standalone@^2.4.3", "@web3modal/standalone@>=2":
   "integrity" "sha512-5ATXBoa4GGm+TIUSsKWsfWCJunv1XevOizpgTFhqyeGgRDmWhqsz9UIPzH/1mk+g0iJ/xqMKs5F6v9D2QeKxag=="
   "resolved" "https://registry.npmjs.org/@web3modal/standalone/-/standalone-2.4.3.tgz"
@@ -3214,6 +3235,16 @@
   "version" "2.4.3"
   dependencies:
     "@web3modal/core" "2.4.3"
+    "lit" "2.7.5"
+    "motion" "10.16.2"
+    "qrcode" "1.5.3"
+
+"@web3modal/ui@2.4.5":
+  "integrity" "sha512-LvGjGL7vyQrUrrQOtFAK0SyxJs1yozOnJjP7s7gWXJa7wFWCE+kVjrhE8VrKbwx7nHe78IFA1rs7V1ncCirqVQ=="
+  "resolved" "https://registry.npmjs.org/@web3modal/ui/-/ui-2.4.5.tgz"
+  "version" "2.4.5"
+  dependencies:
+    "@web3modal/core" "2.4.5"
     "lit" "2.7.5"
     "motion" "10.16.2"
     "qrcode" "1.5.3"
@@ -8535,7 +8566,7 @@
     "shell-quote" "^1.6.1"
     "ws" "^7"
 
-"react-dom@^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18", "react-dom@^16 || ^17 || ^18", "react-dom@^16.11.0 || ^17 || ^18", "react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", "react-dom@^18.2.0", "react-dom@>=16", "react-dom@>=16.8", "react-dom@>=16.8.0", "react-dom@>=18.0.0":
+"react-dom@^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18", "react-dom@^16 || ^17 || ^18", "react-dom@^16.11.0 || ^17 || ^18", "react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", "react-dom@^18.2.0", "react-dom@>=16", "react-dom@>=16.8", "react-dom@>=16.8.0", "react-dom@>=17", "react-dom@>=18.0.0":
   "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   "version" "18.2.0"
@@ -8726,7 +8757,7 @@
   "resolved" "https://registry.npmjs.org/react-typewriter-hook/-/react-typewriter-hook-1.0.1.tgz"
   "version" "1.0.1"
 
-"react@^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18", "react@^16 || ^17 || ^18", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.11.0 || ^17 || ^18", "react@^16.5.1 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^18.2.0", "react@>= 0.14.0", "react@>= 16", "react@>= 16.8.0", "react@>= 16.8.6", "react@>=16", "react@>=16.8", "react@>=16.8.0", "react@>=17.0.0", "react@>=18.0.0", "react@18.2.0":
+"react@^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18", "react@^16 || ^17 || ^18", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.11.0 || ^17 || ^18", "react@^16.5.1 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^18.2.0", "react@>= 0.14.0", "react@>= 16", "react@>= 16.8.0", "react@>= 16.8.6", "react@>=16", "react@>=16.8", "react@>=16.8.0", "react@>=17", "react@>=17.0.0", "react@>=18.0.0", "react@18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
@@ -10239,7 +10270,7 @@
     "unist-util-stringify-position" "^3.0.0"
     "vfile-message" "^3.0.0"
 
-"viem@^1.0.2", "viem@>=0.3.35":
+"viem@^1.0.2", "viem@>=0.3.35", "viem@>=1":
   "integrity" "sha512-3Bn+CuInU8zsdKqqzFDWL018x4B9HDjPIISztReGcBjikY+04tP7CrQQCf1lbinK3wWrEoFU9VDiptCciNjUQA=="
   "resolved" "https://registry.npmjs.org/viem/-/viem-1.0.2.tgz"
   "version" "1.0.2"

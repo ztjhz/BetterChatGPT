@@ -15,8 +15,8 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import { getUserToken, initUser } from "@utils/api";
 import { WagmiConfig, createConfig, mainnet } from 'wagmi'
 import useStore from "@store/store";
-import { BSCConfig } from "@utils/bsc";
-
+import { BSCConfig, BSCClient, projectId } from "@utils/bsc";
+import { Web3Modal } from '@web3modal/react'
 initUser();
 const router = createBrowserRouter([
   {
@@ -49,6 +49,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       }}
     >
       <RouterProvider router={router} />
+      <Web3Modal projectId={projectId} ethereumClient={BSCClient} />
     </Auth0Provider>
   </WagmiConfig>
 );

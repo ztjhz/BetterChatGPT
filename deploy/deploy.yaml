@@ -57,6 +57,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
     nginx.ingress.kubernetes.io/use-gzip: "true"
     nginx.ingress.kubernetes.io/use-http2: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   tls:
   - hosts:
