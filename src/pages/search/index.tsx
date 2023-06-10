@@ -52,7 +52,7 @@ const SearchPage = () => {
               {hotQuestion.map((item, index) => {
                 return (
                   <Link key={item} to={`/search/${encodeURIComponent(item)}`}>
-                    <div className="flex items-center justify-start gap-4 py-2 px-4 mb-2 rounded-md border border-violet-400 hover:bg-violet-800 hover:text-white bg-violet-200/10 text-gray-600 text-sm">
+                    <div className="flex items-center justify-start gap-4 py-2 md:py-2 px-2 md:px-4 mb-2 rounded-md border border-violet-400 hover:bg-violet-800 hover:text-white bg-violet-200/10 text-gray-600 text-xs md:text-sm">
                       <div className="w-2 h-2 bg-violet-700 parent-sibling-hover:bg-white rounded-full"></div>
                       <div className="flex-1">
                         {item}
@@ -63,9 +63,6 @@ const SearchPage = () => {
               })}
           </div>
           <div className="mt-4">
-            <div className="text-sm text-gray-500 mb-2">
-              积分说明
-            </div>
               
           </div>
       </div>
