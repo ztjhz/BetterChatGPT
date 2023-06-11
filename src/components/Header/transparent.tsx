@@ -6,10 +6,11 @@ import Modal from 'react-modal';
 import { WalletIcon, UserIcon } from '@heroicons/react/20/solid';
 import QNALogo from '@logo/qnaLogo';
 import { Link } from 'react-router-dom';
-import { useAccount, useConnect } from 'wagmi';
+import { useAccount, useConnect, useTransaction } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { onConnect, onDisConnect } from '@utils/bsc';
 import { Web3Button } from '@web3modal/react'
+import { t } from 'i18next';
 
 interface TransparentHeaderProps {
   showLogo?: boolean;
@@ -76,8 +77,8 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
           <div className='flex gap-2'>
             <button 
             onClick={() => setIsOpen(true)}
-            className="p-2 px-4 flex items-center gap-2 font-bold bg-violet-600 hover:bg-violet-700 text-white rounded-full transition-all">
-              <span className="shrink-0">{"Get Started"}</span>
+            className="p-1 px-4 flex items-center gap-2 font-bold text-xs border border-violet-600 hover:border-violet-700 text-violet-700 rounded-full transition-all">
+              <span className="shrink-0">{t("signin", {ns: "auth"})}</span>
               <ArrowLongRightIcon className="w-4 h-4" style={{
                 marginBottom: '3px'
               }} />
@@ -110,12 +111,18 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
       >
         <div className="w-full h-full flex items-center justify-center">
           <div className="flex flex-col gap-2 w-full md:max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-            <button className='inline-flex justify-center gap-2 rounded-md border border-transparent bg-violet-500 px-4 py-2 text-sm font-medium text-white hover:bg-violet-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 ' onClick={() => loginWithRedirect()}>
-              <UserIcon className='w-5 h-5'/>
-              <span>Signin</span>
-            </button>
-            <Web3Button />
-            <button className='inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 mt-6' onClick={() => setIsOpen(false)}>Cancel</button>
+            <div className='text-sm text-gray-400 mb-3'>
+              {t('chooseWay', {ns: "auth"})}:
+            </div>
+            <div className='flex gap-2'>
+              <button className='flex-1 flex w-0.5 justify-center gap-2 rounded-md border border-transparent bg-sky-800 px-4 py-2 text-sm font-medium text-white hover:bg-sky-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-900 focus-visible:ring-offset-2 ' onClick={() => loginWithRedirect()}>
+                <UserIcon className='w-5 h-5'/>
+                <span>{t('signin', {ns: 'auth'})}</span>
+              </button>
+              <Web3Button />
+            </div>
+            <div className='w-full border-b border-gray-50 my-2'></div>
+            <button className='inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2' onClick={() => setIsOpen(false)}>{t('cancel', {ns: 'auth'})}</button>
           </div>
         </div>
       </Modal>

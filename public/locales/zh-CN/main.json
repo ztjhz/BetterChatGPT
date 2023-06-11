@@ -55,5 +55,6 @@
     "message": "打字中..."
   },
   "voteSuccess": "感谢您的反馈!",
-  "requestFailed": "很抱歉，反馈失败，请稍后再试。"
+  "requestFailed": "很抱歉，反馈失败，请稍后再试。",
+  "hotQuestion": "热门问题"
 }

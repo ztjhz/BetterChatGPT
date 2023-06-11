@@ -11,6 +11,9 @@ export interface SearchSlice {
       [key: string]: string|boolean;
     }
   },
+  currentControllers: any[],
+  setController: (controller: any) => void;
+  clearController: () => void;
   setResponse: (key: string, value: string) => void;
   setResponseOrder: (name: string) => void;
   setSearchLoading: (key: string, value: boolean) => void;
@@ -24,6 +27,22 @@ export const createSearchSlice: StoreSlice<SearchSlice> = (set, get) => ({
   responseOrder:[],
   searchLoading: {},
   searchStatus: {},
+  currentControllers: [],
+  setController: (controller: any) => {
+    set((prev: SearchSlice) => ({
+      ...prev,
+      currentControllers: [...prev.currentControllers, controller]
+    }));
+  },
+  clearController: () => {
+    get().currentControllers.forEach((controller: any) => {
+      controller.abort();
+    })
+    set((prev: SearchSlice) => ({
+      ...prev,
+      currentControllers: []
+    }));
+  },
   getStatusByKey: (key: string) => {
     const status = get().searchStatus[key]?.currentEvent
     const responseText = get().response[key]

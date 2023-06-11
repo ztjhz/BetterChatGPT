@@ -61,6 +61,8 @@ const SearchResultPage = () => {
   const searchStatus = useStore((state) => state.searchStatus)
   const setSearchStatus = useStore((state) => state.setSearchStatus)
   const getStatusByKey = useStore((state) => state.getStatusByKey)
+  const setController = useStore((state) => state.setController)
+  const clearController = useStore((state) => state.clearController)
   const setReponse = useStore((state) => state.setResponse)
   const setLoading = useStore((state) => state.setSearchLoading)
   const setResponseOrder = useStore((state) => state.setResponseOrder)
@@ -78,9 +80,9 @@ const SearchResultPage = () => {
       })
       const {data: question } = await simplifyQuestion(searchText)
       fetchCredit()
-      searchFuncions.forEach((item: any) => {
+      searchFuncions.forEach(async (item: any) => {
         setLoading(item.name, true)
-        getSearchByType({
+        const controller = await getSearchByType({
           type: item.name,
           query: question,
           originalQuestion: searchText,
@@ -98,12 +100,19 @@ const SearchResultPage = () => {
             setLoading(item.name, false)
           }
         })
+        setController(controller)
       })
     }
   }
  
   useEffect(() => {
     handleSubmit()
+
+    return () =>{
+      clear()
+      setVoteType('')
+      clearController()
+    }
   }, [])
   const closeLoading = searchFuncions.some((item: any) => {
     const s = getStatusByKey(item.name)

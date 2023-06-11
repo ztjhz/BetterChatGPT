@@ -26,7 +26,7 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
   let text = "";
   let done = false;
   eventHandler('start', true)
-  const response = await fetchEventSource(url, {
+  await fetchEventSource(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -75,6 +75,7 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
       callback(text, true)
     }
   });
+  return controller
 }
 
 export const simplifyQuestion = async(query: string) => {

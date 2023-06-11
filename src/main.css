@@ -282,3 +282,7 @@
 .color-primary{
   background-color: rgba(16, 163, 127, var(--tw-bg-opacity));
 }
+
+.w3m-core-button::shadow {
+  width: 100%;
+}

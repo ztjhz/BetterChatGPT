@@ -49,7 +49,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       }}
     >
       <RouterProvider router={router} />
-      <Web3Modal projectId={projectId} ethereumClient={BSCClient} />
+      <Web3Modal projectId={projectId} ethereumClient={BSCClient} themeMode="light" themeVariables={{
+        "--w3m-button-border-radius": "0.375rem",
+        "--w3m-accent-color": "rgb(139, 92, 246)"
+      }} />
     </Auth0Provider>
   </WagmiConfig>
 );

@@ -55,5 +55,6 @@
     "message": "Typing..."
   },
   "voteSuccess": "Thank you for your feedback!",
-  "requestFailed": "Sorry, request failed"
+  "requestFailed": "Sorry, request failed",
+  "hotQuestion": "Trending User Queries"
 }
