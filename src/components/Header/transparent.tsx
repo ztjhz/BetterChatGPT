@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { useAccount, useConnect, useTransaction } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { onConnect, onDisConnect } from '@utils/bsc';
-import { Web3Button } from '@web3modal/react'
+import { Web3Button, useWeb3Modal } from '@web3modal/react'
 import { t } from 'i18next';
 
 interface TransparentHeaderProps {
@@ -97,6 +97,8 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
     const { connect } = useConnect({
       connector: new InjectedConnector(),
     })
+    const { open } = useWeb3Modal();
+
     return (
       <Modal
         isOpen={isOpen}
@@ -105,7 +107,7 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
         style={{
           content: {
             border: 'none',
-            background: 'transparent'
+            background: 'transparent',
           }
         }}
       >
@@ -114,12 +116,15 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
             <div className='text-sm text-gray-400 mb-3'>
               {t('chooseWay', {ns: "auth"})}:
             </div>
-            <div className='flex gap-2'>
-              <button className='flex-1 flex w-0.5 justify-center gap-2 rounded-md border border-transparent bg-sky-800 px-4 py-2 text-sm font-medium text-white hover:bg-sky-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-900 focus-visible:ring-offset-2 ' onClick={() => loginWithRedirect()}>
+            <div className='flex flex-col md:flex-row gap-2'>
+              <button className='flex-1 flex w-full md:w-0.5  justify-center gap-2 rounded-md border border-transparent bg-violet-800 px-4 py-2 text-sm font-medium text-white hover:bg-violet-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-900 focus-visible:ring-offset-2 ' onClick={() => loginWithRedirect()}>
                 <UserIcon className='w-5 h-5'/>
-                <span>{t('signin', {ns: 'auth'})}</span>
+                <span>{t('username&password', {ns: 'auth'})}</span>
               </button>
-              <Web3Button />
+              <button className='flex-1 flex w-full md:w-0.5  justify-center gap-2 rounded-md border border-transparent bg-violet-800 px-4 py-2 text-sm font-medium text-white hover:bg-violet-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-900 focus-visible:ring-offset-2 ' onClick={() => open()}>
+                <WalletIcon className='w-5 h-5'/>
+                <span>{t('connect', {ns: 'auth'})}</span>
+              </button>
             </div>
             <div className='w-full border-b border-gray-50 my-2'></div>
             <button className='inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2' onClick={() => setIsOpen(false)}>{t('cancel', {ns: 'auth'})}</button>
