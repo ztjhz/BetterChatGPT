@@ -12,7 +12,6 @@ const hotQuestion = [
   'What Layer 2 projects received investment in 2023?',
   'What is LSDfi and what value does it provide to users?',
   'How to analyze the long-term investment potential of a blockchain project?',
-  'What are the three transitions Vitalik talks about?',
   'What will change after EIP-4844?',
   'What are the four types of zkEVM?',
   'What projects have the top crypto funds invested in over the past month?',
