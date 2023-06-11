@@ -1,0 +1,27 @@
+{
+  "description": "Better ChatGPT ist eine großartige open-source web app, welche es ermöglicht mit der ChatGPT API von OpenAI zu interagieren!",
+  "sourceCode": "Sieh dir den <0>source code</0> auf GitHub an und ⭐️ das Projekt!",
+  "initiative": {
+    "description": "Schau dir die <0><i>Open ChatGPT Initiative</i></0> an!",
+    "link": "https://medium.com/@ayaka_45434/the-open-chatgpt-initiative-e76b0b62a3ae"
+  },
+  "support": {
+    "title": "Support",
+    "paragraph1": "Unser Team arbeitet rund um die Uhr an neuen Features und Funktionen. Und wie bei jedem Projekt wird deine Unterstützung und Motivation entscheidend dazu beitragen, uns vorwärts zu bringen!",
+    "paragraph2": "Wenn dir Nutzen und Gefallen an Better ChatGPT findest, dann bitte gib unserem <0>Projekt</0> einen ⭐️. Deine Unterstützung bedeutet uns viel und motiviert uns dazu, noch härter zu arbeiten, um das Projekt voran zu bringen.",
+    "paragraph3": "Wenn du das Team unterstützen möchtest, wäre es super, uns durch eine der unten aufgeführten Methoden zu sponsern. Jeder Beitrag, egal wie klein, hilft uns dabei, unseren Service zu erhalten und zu verbessern.",
+    "paragraph4": "Vielen Dank, dass du ein Teil unserer Community bist. Wir freuen uns darauf, bald mehr Features zu präsentieren und das Projekt zu erweitern.",
+    "alipay": "Alipay",
+    "wechatPay": "WeChat"
+  },
+  "discordServer": {
+    "title": "Discord Server",
+    "paragraph1": "Tritt unserer Discord-Community bei! Unser Server ist ein großartiger Ort, um Ideen und Tipps für ChatGPT auszutauschen und Feature-Anfragen für Better ChatGPT einzureichen. Du hast die Möglichkeit, mit den Entwicklern hinter Better ChatGPT sowie anderen KI-Enthusiasten zu interagieren, die deine und unsere Leidenschaft teilen.",
+    "paragraph2": "Um dem Server beizutreten, klick auf den folgenden Link: <0>https://discord.gg/g3Qnwy4V6A</0>. Wir freuen uns auf dich!"
+  },
+  "privacyStatement": {
+    "title": "Datenschutzerklärung",
+    "paragraph1": "Wir legen großen Wert auf deine Privatsphäre und verpflichten uns, die Privatsphäre all unserer Benutzer zu schützen. Weder sammeln noch speichern wir die Texte die du eingibst oder von den OpenAI-Servern empfängst. Unsere Quellcode ist öffentlich einsehbar, damit du das auch überprüfen kannst.",
+    "paragraph2": "Die Sicherheit deines API-Schlüssels ist unsere höchste Priorität. Dieser wird ausschließlich lokal in deinem Browser gespeichert und niemals mit irgendeiner Drittpartei geteilt. Er wird ausschließlich für den vorgesehenen Zweck des Zugriffs auf die OpenAI-API verwendet und nicht für andere Zwecke."
+  }
+}
