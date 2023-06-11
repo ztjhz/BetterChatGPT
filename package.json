@@ -24,10 +24,10 @@
     },
     "dmg": {
       "title": "${productName} ${version}",
-      "icon": "dist/icon-rounded.png"
+      "icon": "dist/ms-icon-150x150.png"
     },
     "mac": {
-      "icon": "dist/icon-rounded.png"
+      "icon": "dist/ms-icon-150x150.png"
     },
     "linux": {
       "target": [
@@ -35,11 +35,11 @@
         "AppImage"
       ],
       "category": "Chat",
-      "icon": "dist/icon-rounded.png"
+      "icon": "dist/ms-icon-150x150.png"
     },
     "win": {
       "target": "NSIS",
-      "icon": "dist/icon-rounded.png"
+      "icon": "dist/ms-icon-150x150.png"
     }
   },
   "dependencies": {

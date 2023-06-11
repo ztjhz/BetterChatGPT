@@ -11,9 +11,9 @@ const PORT = isDev ? '5173' : '51735';
 function createWindow() {
   let iconPath = '';
   if (isDev) {
-    iconPath = path.join(__dirname, '../public/icon-rounded.png');
+    iconPath = path.join(__dirname, '../public/ms-icon-150x150.png');
   } else {
-    iconPath = path.join(__dirname, '../dist/icon-rounded.png');
+    iconPath = path.join(__dirname, '../dist/ms-icon-150x150.png');
   }
   autoUpdater.checkForUpdatesAndNotify();
 
@@ -42,7 +42,7 @@ const createTray = (window) => {
   const tray = new Tray(
     path.join(
       __dirname,
-      isDev ? '../public/icon-rounded.png' : '../dist/icon-rounded.png'
+      isDev ? '../public/ms-icon-150x150.png' : '../dist/ms-icon-150x150.png'
     )
   );
   const contextMenu = Menu.buildFromTemplate([
