@@ -17,7 +17,9 @@ import { WagmiConfig, createConfig, mainnet } from 'wagmi'
 import useStore from "@store/store";
 import { BSCConfig, BSCClient, projectId } from "@utils/bsc";
 import { Web3Modal } from '@web3modal/react'
-initUser();
+
+await initUser();
+
 const router = createBrowserRouter([
   {
     path: "/",

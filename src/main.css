@@ -286,3 +286,8 @@
 .w3m-core-button::shadow {
   width: 100%;
 }
+
+.prose {
+  width: 100%;
+  max-width: max-content;
+}
