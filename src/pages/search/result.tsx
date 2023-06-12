@@ -20,14 +20,14 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useAccount } from 'wagmi';
 const searchFuncions:any = [
   {
+    name: 'knowledge', 
+    emoji: '📌',
+    label:'Knowledge Graph',
+  }, 
+  {
     name: 'chat', 
     emoji: '📝',
     label:'Q&A3 LLM',
-  }, 
-  {
-    name: 'vector_news', 
-    emoji: '📰',
-    label:'Web3 News',
   }, 
   {
     name: 'sql', 
@@ -35,14 +35,14 @@ const searchFuncions:any = [
     label:'Structured data',
   }, 
   {
-    name: 'knowledge', 
-    emoji: '📌',
-    label:'Knowledge Graph',
-  }, 
-  {
     name: 'report', 
     emoji: '📚',
     label:'Research Report',
+  }, 
+  {
+    name: 'vector_news', 
+    emoji: '📰',
+    label:'Web3 News',
   }, 
   {
     name: 'social', 
