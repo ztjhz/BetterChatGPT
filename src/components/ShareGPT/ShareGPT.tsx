@@ -9,6 +9,7 @@ import { ShareGPTSubmitBodyInterface } from '@type/api';
 const ShareGPT = React.memo(() => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const isAvailable = useStore((state) => state.shareGPT);
 
   const handleConfirm = async () => {
     const chats = useStore.getState().chats;
@@ -40,14 +41,14 @@ const ShareGPT = React.memo(() => {
 
   return (
     <>
-      <button
+      { isAvailable && (<button
         className='btn btn-neutral'
         onClick={() => {
           setIsModalOpen(true);
         }}
       >
         {t('postOnShareGPT.title')}
-      </button>
+      </button>) }
       {isModalOpen && (
         <PopupModal
           setIsModalOpen={setIsModalOpen}
