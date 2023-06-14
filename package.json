@@ -49,6 +49,7 @@
     "@heroicons/react": "^2.0.18",
     "@microsoft/fetch-event-source": "^2.0.1",
     "@react-oauth/google": "^0.9.0",
+    "@sentry/react": "^7.55.0",
     "@tabler/icons-react": "^2.20.0",
     "@types/react-modal": "^3.16.0",
     "@types/react-syntax-highlighter": "^15.5.7",
