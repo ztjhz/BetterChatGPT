@@ -61,5 +61,9 @@
     "title": "活动",
     "award": "奖励"
   },
-  "freetip": "限时免费"
+  "freetip": "限时免费",
+  "voteTip": {
+    "title": "您对答案满意吗？",
+    "content": "您的赞成或反对能助我们不断优化，为此，我们会回馈您 Q&A3 Credit，未来将可用于兑换 Token。"
+  }
 }

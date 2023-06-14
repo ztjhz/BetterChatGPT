@@ -26,7 +26,7 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
   let text = "";
   let done = false;
   eventHandler('start', true)
-  await fetchEventSource(url, {
+  fetchEventSource(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

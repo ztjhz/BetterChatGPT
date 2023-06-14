@@ -47,7 +47,7 @@
   "history": "History",
   "askToFAQ": "Ask to Q&A3",
   "mainSearchPlaceholder": "Ask any questions about Web3 and let Q&A3 help you answer them.",
-  "noAnswer": "Sorry, I am unable to answer this question at the moment. Q&A3 is still in its early version and we are working hard to improve it.",
+  "noAnswer": "Apologies, I'm currently unable to address this question. Q&A3 is still in its initial stages, and we're diligently honing its capabilities. Please bear with us during this exciting evolution.",
   "searchStatus": {
     "loading": "Preparing...",
     "done": "Finshed!",
@@ -61,5 +61,9 @@
     "title": "Activity",
     "award": "AWARD"
   },
-  "freetip": "Limited Time Free"
+  "freetip": "Limited Time Free",
+  "voteTip": {
+    "title": "Are you satisfied with the answer?",
+    "content": "Your upvotes or downvotes help us continually improve. In return, we'll reward you with Q&A3 Credit, which you'll be able to exchange for Tokens in the future."
+  }
 }
