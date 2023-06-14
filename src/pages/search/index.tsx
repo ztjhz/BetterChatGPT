@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { TransparentHeader } from "@components/Header/transparent";
 import QNALogo from "@logo/qnaLogo";
 import { ActivityContainer } from "@components/Activities/ActivityContainer";
+import { QNAFooter } from "@components/Footer";
 
 const hotQuestion = [
   'What Layer 2 projects received investment in 2023?',
@@ -50,7 +51,7 @@ const SearchPage = () => {
           />
           <div className="flex  flex-col md:flex-row gap-2">
             <div className="mt-4 bg-white rounded-md p-4">
-              <div className="text-sm text-gray-500 mb-2">
+              <div className="text-sm text-gray-500 mb-4">
                 {t('hotQuestion')}
               </div>
                 {hotQuestion.map((item, index) => {
@@ -68,6 +69,9 @@ const SearchPage = () => {
             </div>
             <div className="mt-2 md:mt-4 md:w-5/12">
                 <ActivityContainer />
+                <div className="mt-4">
+                  <QNAFooter />
+                </div>
             </div>
           </div>
           
