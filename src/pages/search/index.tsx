@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { TransparentHeader } from "@components/Header/transparent";
 import QNALogo from "@logo/qnaLogo";
+import { ActivityContainer } from "@components/Activities/ActivityContainer";
 
 const hotQuestion = [
   'What Layer 2 projects received investment in 2023?',
@@ -47,26 +48,29 @@ const SearchPage = () => {
             setValue={setSearchText}
             handleSubmit={handleSubmit}
           />
-          <div className="mt-4">
-            <div className="text-sm text-gray-500 mb-2">
-              {t('hotQuestion')}
-            </div>
-              {hotQuestion.map((item, index) => {
-                return (
-                  <Link key={item} to={`/search/${encodeURIComponent(item)}`}>
-                    <div className="flex items-center justify-start gap-4 py-2 md:py-2 px-2 md:px-4 mb-2 rounded-md border border-violet-400 hover:bg-violet-800 hover:text-white bg-violet-200/10 text-gray-600 text-xs md:text-sm">
-                      <div className="w-2 h-2 bg-violet-700 parent-sibling-hover:bg-white rounded-full"></div>
-                      <div className="flex-1">
-                        {item}
+          <div className="flex  flex-col md:flex-row gap-2">
+            <div className="mt-4 bg-white rounded-md p-4">
+              <div className="text-sm text-gray-500 mb-2">
+                {t('hotQuestion')}
+              </div>
+                {hotQuestion.map((item, index) => {
+                  return (
+                    <Link key={item} to={`/search/${encodeURIComponent(item)}`}>
+                      <div className="flex items-center justify-start gap-4 py-2 md:py-2 px-2 md:px-4 mb-2 rounded-md border border-violet-400 hover:bg-violet-800 hover:text-white bg-violet-200/10 text-gray-600 text-xs md:text-sm">
+                        <div className="w-2 h-2 bg-violet-700 parent-sibling-hover:bg-white rounded-full"></div>
+                        <div className="flex-1">
+                          {item}
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                )
-              })}
+                    </Link>
+                  )
+                })}
+            </div>
+            <div className="mt-2 md:mt-4 md:w-5/12">
+                <ActivityContainer />
+            </div>
           </div>
-          <div className="mt-4">
-              
-          </div>
+          
       </div>
     </div>
   )

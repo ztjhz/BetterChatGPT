@@ -56,5 +56,9 @@
   },
   "voteSuccess": "Thank you for your feedback!",
   "requestFailed": "Sorry, request failed",
-  "hotQuestion": "Trending User Queries"
+  "hotQuestion": "Trending User Queries",
+  "activity": {
+    "title": "Activity",
+    "award": "AWARD"
+  }
 }
