@@ -42,8 +42,9 @@ export default ({value, setValue, handleSubmit}: any) => {
   
   return (
     <div
-        className={`w-full flex items-center gap-2 rounded-md py-2 md:py-2 lg:py-4 px-4 pr-1 md:pr-1 md:px-4 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700`}
+        className={`w-full flex items-center gap-2 rounded-md rounded-tl-none py-2 md:py-2 lg:py-4 px-4 pr-1 md:pr-1 md:px-4 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 relative`}
       >
+        <div className="absolute left-0 -top-7 rounded-md rounded-b-none bg-violet-400 text-white text-sm p-2 py-1">{t('freetip')}</div>
     <textarea
           ref={textareaRef}
           className='m-0 resize-none bg-transparent overflow-y-hidden w-full placeholder:text-gray-500/40 text-sm'
