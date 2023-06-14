@@ -3,7 +3,6 @@ import useStore from '@store/store';
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import {publicProvider} from 'wagmi/providers/public'
 import { bsc } from 'wagmi/chains';
-import {  } from 'viem'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 
