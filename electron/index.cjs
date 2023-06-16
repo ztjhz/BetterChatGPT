@@ -23,10 +23,13 @@ function createWindow() {
 	autoHideMenuBar: true,
     show: false,
     icon: iconPath,
+    titleBarStyle: process.platform == 'darwin' ? 'hidden' : 'default',
+    trafficLightPosition: { x: 23, y: 20},
   });
 
   createTray(win);
 
+  win.setMinimumSize(1020, 768); // to avoid overlapping ChatTitle items with traffic lights
   win.maximize();
   win.show();
 
