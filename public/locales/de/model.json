@@ -22,7 +22,7 @@
     "label": "Frequency Penalty",
     "description": "Eine Zahl zwischen -2,0 und 2,0. Positive Werte bestrafen neue Tokens basierend auf ihrer bestehenden Häufigkeit im Text und verringern die Wahrscheinlichkeit des Modells, dieselbe Zeile wörtlich zu wiederholen. (Standardwert: 0)"
   },
-  "defaultChatConfig": "Standart Chat Konfiguration",
-  "defaultSystemMessage": "Standart System Nachricht",
-  "resetToDefault": "Auf Standartkonfiguration zurücksetzen"
+  "defaultChatConfig": "Standard Chat Konfiguration",
+  "defaultSystemMessage": "Standard System Nachricht",
+  "resetToDefault": "Auf Standardkonfiguration zurücksetzen"
 }
