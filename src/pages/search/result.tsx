@@ -69,11 +69,11 @@ const SearchResultPage = () => {
   const fetchCredit = useStore((state) => state.fetchCredit)
   const [searchText, setSearchText] = useState(decodeURIComponent(question as string))
   const [loginModalOpen, setLoginModalOpen] = useState(false)
-  const [voteType, setVoteType] = useState('')
+  const [voteType, setVoteType] = useState<any>({})
   const navigate = useNavigate();
   const handleSubmit = async () => {
     clear()
-    setVoteType('')
+    setVoteType({})
     if(searchText){
       navigate('/search/' + encodeURIComponent(searchText), {
         replace: true
@@ -110,7 +110,7 @@ const SearchResultPage = () => {
 
     return () =>{
       clear()
-      setVoteType('')
+      setVoteType({})
       clearController()
     }
   }, [])
@@ -119,32 +119,29 @@ const SearchResultPage = () => {
     return s === 'message' || s === 'done'
   })
 
-  const onVote = async (type: string) => {
-    if(isSignedIn){
-      const answerJSON:any = {}
-      searchFuncions.map((item: any) => {
-        answerJSON[item.name] = response[item.name]
+  const onVote = async (type: string, func: string, content: string) => {
+    try{
+      const votePromise =  request.post('/search/vote', {
+        vote_type: type,
+        question: searchText,
+        answer: JSON.stringify({
+          [func]: content
+        }),
       })
-      try{
-        const votePromise =  request.post('/search/vote', {
-          vote_type: type,
-          question: searchText,
-          answer: JSON.stringify(answerJSON),
-        })
-        setVoteType(type)
-        toast.promise(
-          votePromise,
-          {
-            pending: 'Voting...',
-            success: t('voteSuccess') as string,
-            error: t('voteFailed')
-          }
-        )
-      }catch{
-        toast.error(t('voteFailed'))
-      }
-    }else{
-      setLoginModalOpen(true)
+      setVoteType({
+        ...voteType,
+        [func]: type
+      })
+      toast.promise(
+        votePromise,
+        {
+          pending: 'Voting...',
+          success: t('voteSuccess') as string,
+          error: t('voteFailed')
+        }
+      )
+    }catch{
+      toast.error(t('voteFailed'))
     }
   }
 
@@ -191,15 +188,14 @@ const SearchResultPage = () => {
       </div>
     )
   }
-  console.log(!closeLoading || !noAnwser)
-  const renderVoteButton = () => {
+  const renderVoteButton = (func: string, content: string) => {
     return (
       <div className='flex gap-4  justify-end'>
-        <button onClick={() => onVote('upvote')}>
-          <HandThumbUpIcon className={`w-6 h-6  text-${voteType === 'upvote' ? 'white fill-white' : 'white'}`}/>
+        <button onClick={() => onVote('upvote', func, content)}>
+          <HandThumbUpIcon className={`w-5 h-5  text-${voteType[func] === 'upvote' ? 'emerald-400 fill-emerald-400' : 'emerald-400'}`}/>
         </button>
-        <button onClick={() => onVote('downvote')}>
-          <HandThumbDownIcon className={`w-6 h-6 text-${voteType === 'downvote' ? 'white fill-white ' : 'white'}`}/>
+        <button onClick={() => onVote('downvote', func, content)}>
+          <HandThumbDownIcon className={`w-5 h-5 text-${voteType[func] === 'downvote' ? 'emerald-400 fill-emerald-400' : 'emerald-400'}`}/>
         </button>
       </div>
     )
@@ -231,20 +227,18 @@ const SearchResultPage = () => {
                     {item.emoji} {item.label}:
                   </div>
                   <MemoryMarkdown data={response[item.name]}/>
+                  <div className={`flex mt-2 justify-between border-emerald-400 border rounded-lg p-2 transition-all ${(response[item.name]) ? '' : "hidden"}`}>
+                    <div className="flex text-sm text-emerald-900" role="alert">
+                        <svg className="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                        <div>
+                            <span className="font-medium">{t('voteTip.title')}</span> {t('voteTip.content')}
+                        </div>
+                    </div>
+                    {renderVoteButton(item.name, response[item.name])}
+                  </div>
                 </div>
               )
             })}
-          </div>
-          <div>
-          <div className={`flex mt-2 justify-between bg-emerald-400 p-4 transition-all ${closeLoading ? '' : "hidden"}`}>
-            <div className="flex text-sm text-emerald-900" role="alert">
-                <svg className="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                <div>
-                    <span className="font-medium">{t('voteTip.title')}</span>{t('voteTip.content')}
-                </div>
-            </div>
-            {renderVoteButton()}
-          </div>
           </div>
         </div>
       </div>
