@@ -8,7 +8,7 @@ const activityList = [{
   rules: `
   📣 Got a pressing query about web3 (Layer2) that you're eager to get addressed? Hop onto our event and stand a chance to bag a reward! All you need to do is retweet the tweet linked above, @ three pals, and share that burning question you're dying to have answered about web3 (Layer2). The top 5 users with the most 'likes' on their comments will walk away with 10 USDT each! Don't wait – jump in now!
   `,
-  award: 'Q&A3 Credit and 10 USDT',
+  award: 'QnA3 Credit and 10 USDT',
   url: 'https://twitter.com/qnaweb3/status/1668937240842760192'
 }]
 export const ActivityContainer = () => {

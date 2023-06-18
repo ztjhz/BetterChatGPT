@@ -16,8 +16,8 @@
     "make": "yarn build && electron-builder"
   },
   "build": {
-    "appId": "Q&A3",
-    "productName": "Q&A3",
+    "appId": "QnA3",
+    "productName": "QnA3",
     "artifactName": "${os}-${name}-${version}-${arch}.${ext}",
     "directories": {
       "output": "release"

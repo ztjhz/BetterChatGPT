@@ -45,9 +45,9 @@
   "enterToSubmit": "按回车键提交",
   "submitPlaceholder": "请输入消息",
   "history": "历史记录",
-  "askToFAQ": "问问 Q&A3",
-  "mainSearchPlaceholder": "提问任何有关于 Web3 的问题，让 Q&A3 帮你解答",
-  "noAnswer": "抱歉，我现在无法回答这个问题。 Q&A3仍处于早期版本，我们仍在努力改进。",
+  "askToFAQ": "问问 QnA3",
+  "mainSearchPlaceholder": "提问任何有关于 Web3 的问题，让 QnA3 帮你解答",
+  "noAnswer": "抱歉，我现在无法回答这个问题。 QnA3仍处于早期版本，我们仍在努力改进。",
   "searchStatus": {
     "loading": "准备中...",
     "done": "完成!",
@@ -64,6 +64,6 @@
   "freetip": "限时免费",
   "voteTip": {
     "title": "您对答案满意吗？",
-    "content": "您的赞成或反对能助我们不断优化，为此，我们会回馈您 Q&A3 Credit，未来将可用于兑换 Token。"
+    "content": "您的赞成或反对能助我们不断优化，为此，我们会回馈您 QnA3 Credit，未来将可用于兑换 Token。"
   }
 }
