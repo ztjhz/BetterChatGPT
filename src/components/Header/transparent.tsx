@@ -42,11 +42,11 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
           <QNALogo />
         </Link>
       </div>
-      <div className='flex gap-4 justify-end p-4'>
+      <div className='flex justify-end py-4'>
         {(user || isConnected) ? (
           <>
           <button 
-          className="flex overflow-hidden items-center text-violet-600 text-xs border border-violet-600 hover:border-violet-700 rounded-full">
+          className="flex overflow-hidden items-center bg-primary rounded-full">
             <div className="text-xs md:text-sm px-2 md:px-4 py-2 text-ellipsis w-40 overflow-hidden">
               {user?.email || address}
             </div>
@@ -72,14 +72,11 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
           </div>
           </div>
         ): (
-          <div className='flex gap-2'>
+          <div className='flex'>
             <button 
             onClick={() => setIsOpen(true)}
-            className="p-1 px-4 flex items-center gap-2 font-bold text-xs border border-violet-600 hover:border-violet-700 text-violet-700 rounded-full transition-all">
+            className="p-1 px-4 text-white text-md bg-primary rounded-full transition-all">
               <span className="shrink-0">{t("signin", {ns: "auth"})}</span>
-              <ArrowLongRightIcon className="w-4 h-4" style={{
-                marginBottom: '3px'
-              }} />
             </button>
           </div>
         )}
