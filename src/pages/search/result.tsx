@@ -132,14 +132,15 @@ const SearchResultPage = () => {
         ...voteType,
         [func]: type
       })
-      toast.promise(
-        votePromise,
-        {
-          pending: 'Voting...',
-          success: t('voteSuccess') as string,
-          error: t('voteSuccess') as string
-        }
-      )
+      toast.success(t('voteSuccess') as string)
+      // toast.promise(
+      //   votePromise,
+      //   {
+      //     pending: 'Voting...',
+      //     success: t('voteSuccess') as string,
+      //     error: t('voteSuccess') as string
+      //   }
+      // )
     }catch{
       toast.success(t('voteSuccess') as string)
       // toast.error(t('voteFailed'))
