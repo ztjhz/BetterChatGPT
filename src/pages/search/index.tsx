@@ -32,7 +32,7 @@ const SearchPage = () => {
     navigate('/search/' + encodeURIComponent(searchText))
   }
   return (
-    <div className="w-full flex flex-col min-h-full bg-gradient-to-t from-gray-100 to-gray-100/10">
+    <div className="w-full flex flex-col min-h-full bg-gray-1000">
       <div>
         <TransparentHeader />
       </div>

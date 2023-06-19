@@ -36,13 +36,11 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
   }
   return (
     <>
-    <div className={`${background} flex items-center justify-between pt-2 md:p-4 m-auto max-w-3xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl`}>
+    <div className={`bg-black flex items-center justify-between p-1 px-4 w-full`}>
       <div>
-        {showLogo && (
-          <Link to="/">
-            <QNALogo className="w-20 h-20"/>
-          </Link>
-        )}
+        <Link to="/">
+          <QNALogo />
+        </Link>
       </div>
       <div className='flex gap-4 justify-end p-4'>
         {(user || isConnected) ? (
