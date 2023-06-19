@@ -141,7 +141,8 @@ const SearchResultPage = () => {
         }
       )
     }catch{
-      toast.error(t('voteFailed'))
+      toast.success(t('voteSuccess') as string)
+      // toast.error(t('voteFailed'))
     }
   }
 

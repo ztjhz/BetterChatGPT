@@ -15,9 +15,8 @@ const hotQuestion = [
   'what is modular blockchain?',
   'What will change after EIP-4844?',
   'What are the four types of zkEVM?',
-  'What projects have the top crypto funds invested in over the past month?',
   'What are the differences between modular blockchain and monolithic blockchain? List the current players',
-  'I own a GameFi company with an expected 500 users. Which layer2 should I choose?',
+  'What are the recent news about Polygon in the past week?',
   'What are some recommended coins and reasons for investing with 1000 USD?',
   'Compare with ERC20、721、1155 and 3525'
 ]
