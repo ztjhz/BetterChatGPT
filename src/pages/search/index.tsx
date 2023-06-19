@@ -11,7 +11,6 @@ import { ActivityContainer } from "@components/Activities/ActivityContainer";
 import { QNAFooter } from "@components/Footer";
 
 const hotQuestion = [
-  'What Layer 2 projects received investment in 2023?',
   'What is LSDfi and what value does it provide to users?',
   'what is modular blockchain?',
   'What will change after EIP-4844?',
