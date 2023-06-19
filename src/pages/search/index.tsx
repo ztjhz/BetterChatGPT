@@ -14,6 +14,7 @@ const hotQuestion = [
   'What is LSDfi and what value does it provide to users?',
   'what is modular blockchain?',
   'What will change after EIP-4844?',
+  'Why is Maverick more capital efficient than Uniswap?',
   'What are the four types of zkEVM?',
   'What are the differences between modular blockchain and monolithic blockchain? List the current players',
   'What are the recent news about Polygon in the past week?',
