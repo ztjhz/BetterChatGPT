@@ -30,7 +30,8 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${access_token}`
+      "Authorization": `Bearer ${access_token}`,
+      'Connection': 'keep-alive'
     },
     signal: controller.signal,
     body: JSON.stringify(body),
