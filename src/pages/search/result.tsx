@@ -137,7 +137,7 @@ const SearchResultPage = () => {
         {
           pending: 'Voting...',
           success: t('voteSuccess') as string,
-          error: t('voteFailed')
+          error: t('voteSuccess') as string
         }
       )
     }catch{
