@@ -90,10 +90,10 @@ const SearchResultPage = () => {
             handleSubmit={handleSubmit}
           />
         </div>
-        <div className={`mt-8 ${!closeLoading ? 'mb-4' : ''}`}>
-            <SimpleLoading ref={simpleLoadingRef} query={question}/>
+        <div className='px-2 md:px-0'>
+          <SimpleLoading ref={simpleLoadingRef} query={question}/>
         </div>
-        <div className='w-full mt-4'>
+        <div className='w-full mt-0 md:mt-4'>
           <div className={`${closeLoading ? 'mt-4' : 'hidden'} transition-all lg:max-w-fit`}>
             {searchFuncions.map((item: any) => {
               if(!response[item.name]){

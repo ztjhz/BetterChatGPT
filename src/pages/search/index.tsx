@@ -74,12 +74,11 @@ const SearchPage = () => {
             </div>
             <div className="mt-2 md:mt-10 w-full">
                 <ActivityContainer />
-                <div className="mt-4 md:mt-12">
+                <div className="px-4 md:px-0 mt-4 md:mt-12">
                   <QNAFooter />
                 </div>
             </div>
           </div>
-          
       </div>
     </div>
   )

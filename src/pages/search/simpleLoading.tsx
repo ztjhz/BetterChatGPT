@@ -26,7 +26,7 @@ export const SimpleLoading = React.forwardRef((props: any, ref: any) => {
       setWidth('1%')
     }
   }));
-  
+
   useEffect(() => {
     if(!leastOneDone){
       timeoutIds.current.push(setTimeout(() => {
@@ -54,7 +54,7 @@ export const SimpleLoading = React.forwardRef((props: any, ref: any) => {
   }, [leastOneDone])
  
   return (
-    <div className={`w-full h-2 bg-bg-200 rounded-full relative transition-all ${hide ? 'opacity-0' : ''}`}>
+    <div className={`w-full h-2 bg-bg-200 rounded-full mt-8 mb-4 relative transition-all ${hide ? 'hidden' : ''}`}>
       <div className="animate-pulse absolute h-2 rounded-full left-0 top-0 transition-all" style={{width: width, backgroundColor: '#7074E9'}}></div>
     </div>
   )

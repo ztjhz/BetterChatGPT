@@ -12,7 +12,7 @@ interface AnswerBlockProps {
 }
 export const AnswerBlock = ({funcDefination: item, response, status, searchText}: AnswerBlockProps) => {
   return (
-    <div className={`p-4 bg-bg-50 border border-bg-200 rounded-xl mb-6`} key={item.name}>
+    <div className={`p-4 bg-bg-50 border border-bg-200 rounded-none md:rounded-xl mb-6`} key={item.name}>
       <div className='flex gap-4'>
         <div>
           <LetterAvatar name={item.label} size={30} radius={15}/>
