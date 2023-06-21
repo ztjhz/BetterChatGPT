@@ -1,0 +1,27 @@
+run = "npm run start"
+hidden = [".build", ".config"]
+
+[packager]
+language = "nodejs"
+
+[packager.features]
+enabledForHosting = false
+packageSearch = true
+guessImports = true
+
+[nix]
+channel = "stable-22_11"
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", ".config"]
+
+[languages]
+
+[languages.typescript]
+pattern = "**/{*.ts,*.js,*.tsx,*.jsx}"
+
+[languages.typescript.languageServer]
+start = "typescript-language-server --stdio"
+
+[deployment]
+run = ["sh", "-c", "npm run start"]
