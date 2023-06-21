@@ -25,6 +25,7 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
   const {access_token} = await getUserToken()
   let text = "";
   let done = false;
+  let test_text = ""
   eventHandler('start', true)
   fetchEventSource(url, {
     method: "POST",
@@ -46,6 +47,8 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
       throw new FatalError();
     },
     onmessage: (event: any) => {
+      // test_text += event.data
+      // console.log(url, test_text)
       if(done){
         eventHandler('done', true)
         return

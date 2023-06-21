@@ -27,6 +27,7 @@
     height: 100%;
   }
 
+
   .markdown table {
     --tw-border-spacing-x: 0px;
     --tw-border-spacing-y: 0px;
@@ -290,4 +291,5 @@
 .prose {
   width: 100%;
   max-width: max-content;
+  color: rgba(255, 255, 255, .8)
 }
