@@ -93,8 +93,9 @@ export const resolveWebLinks = async (messages: MessageInterface[]): Promise<Mes
 
   const fetchWebContent = async (link: string): Promise<string> => {
     try {
-      const response = await axios.get(link);
-      return response.data;
+      const response = await fetch(link);
+      const resolvedContent = await response.text();
+      return resolvedContent;
     } catch (error) {
       console.error(`Failed to fetch web content from ${link}:`, error);
       return '';
