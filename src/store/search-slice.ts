@@ -46,7 +46,7 @@ export const createSearchSlice: StoreSlice<SearchSlice> = (set, get) => ({
   getStatusByKey: (key: string) => {
     const status = get().searchStatus[key]?.currentEvent
     const responseText = get().response[key]
-    const unUsefulState = status === 'done' && responseText === ''
+    const unUsefulState = status === 'unUseful' || (status === 'done' && responseText === '')
     const doneState = status === 'done' && responseText !== '' 
     const loadingState = status === 'start' || responseText?.length < 5
     const messageState = status === 'message' && responseText && responseText?.length > 5

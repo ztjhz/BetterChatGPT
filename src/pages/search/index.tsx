@@ -9,17 +9,17 @@ import { TransparentHeader } from "@components/Header/transparent";
 import QNALogo from "@logo/qnaLogo";
 import { ActivityContainer } from "@components/Activities/ActivityContainer";
 import { QNAFooter } from "@components/Footer";
+import { FreeTip } from "@components/FreeTip";
 
 const hotQuestion = [
-  'What is LSDfi and what value does it provide to users?',
+  'What value does LSDfi provide to users and what exactly is it?',
   'what is modular blockchain?',
   'What will change after EIP-4844?',
   'Why is Maverick more capital efficient than Uniswap?',
   'What are the four types of zkEVM?',
   'What are the differences between modular blockchain and monolithic blockchain? List the current players',
-  'What are the recent news about Polygon in the past week?',
-  'What are some recommended coins and reasons for investing with 1000 USD?',
-  'Compare with ERC20、721、1155 and 3525'
+  'Which coins do you recommend for an investment of 1000 USD?',
+  'What are the differences between ERC20, ERC721, ERC1155, and ERC3525?'
 ]
 
 const SearchPage = () => {
@@ -32,47 +32,44 @@ const SearchPage = () => {
     navigate('/search/' + encodeURIComponent(searchText))
   }
   return (
-    <div className="w-full flex flex-col min-h-full bg-gradient-to-t from-gray-100 to-gray-100/10">
+    <div className="w-full flex flex-col min-h-full bg-gray-1000">
       <div>
         <TransparentHeader />
       </div>
+      <FreeTip />
       <div
-        className={`flex h-full flex-1 px-4 flex-col w-full  md:mt-0 m-auto max-w-3xl md:max-w-3xl lg:max-w-3xl xl:max-w-5xl`}
+        className={`flex h-full flex-1 md:px-4 flex-col w-full m-auto max-w-3xl md:max-w-3xl lg:max-w-3xl xl:max-w-5xl`}
       >
-          <div className="w-full flex justify-center align-middle mb-6">
-            <QNALogo className="w-20 h-20 md:w-40 md:h-40"/>
+          <div className="p-4 md:p-0 md:mt-10 bg-bg-50 md:bg-transparent">
+            <SearchInput 
+              value={searchText}
+              setValue={setSearchText}
+              handleSubmit={handleSubmit}
+            />
           </div>
-          <SearchInput 
-            value={searchText}
-            setValue={setSearchText}
-            handleSubmit={handleSubmit}
-          />
-          <div className="flex  flex-col md:flex-row gap-2">
-            <div className="mt-4 bg-white rounded-md p-4">
-              <div className="text-sm text-gray-500 mb-4">
+          
+          <div className="flex flex-col">
+            <div className="mt-2 md:mt-10 bg-bg-50 md:rounded-2xl p-4 md:px-6 border border-bg-200">
+              <div className="text-md text-white mb-4">
                 {t('hotQuestion')}
               </div>
                 {hotQuestion.map((item, index) => {
                   return (
                     <Link key={item} to={`/search/${encodeURIComponent(item)}`}>
-                      <div className="flex items-center justify-start gap-4 py-2 md:py-2 px-2 md:px-4 mb-2 rounded-md border border-violet-400 hover:bg-violet-800 hover:text-white bg-violet-200/10 text-gray-600 text-xs md:text-sm">
-                        <div className="w-2 h-2 bg-violet-700 parent-sibling-hover:bg-white rounded-full"></div>
-                        <div className="flex-1">
-                          {item}
-                        </div>
+                      <div className="justify-start border-b border-bg-100 py-4 md:py-4 hover:text-white text-bg-800 text-sm md:text-sm">
+                        {item}
                       </div>
                     </Link>
                   )
                 })}
             </div>
-            <div className="mt-2 md:mt-4 md:w-5/12">
+            <div className="mt-2 md:mt-10 w-full">
                 <ActivityContainer />
-                <div className="mt-4">
+                <div className="px-4 md:px-0 mt-4 md:mt-12">
                   <QNAFooter />
                 </div>
             </div>
           </div>
-          
       </div>
     </div>
   )

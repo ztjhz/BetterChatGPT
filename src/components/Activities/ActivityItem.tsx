@@ -4,19 +4,24 @@ import { Link } from "react-router-dom"
 
 export const AcitivityItem = ({data}: any) => {
   return (
-    <div className="mb-2">
-      <div className="text-md font-bold flex gap-2 items-center">
-        <span>
-          <Link className="text-violet-600 visited:text-violet-600" to={data.url} target="_blank">{data.title}</Link>
-        </span>
+    <Link className="text-white" to={data.url} target="_blank">
+      <div className="flex gap-2 mb-2 p-4 rounded-xl text-md font-bold " style={{
+        background: 'linear-gradient(84.26deg, #B946FF -14.68%, #7074E9 84.01%)'
+      }}>
+        <div>
+          <img src={data.icon} width="50px" height="50px" />
+        </div>
+        <div>
+          <div className="flex gap-2 items-center">
+            <span>
+              {data.title}
+            </span>
+          </div>
+          <div className="text-md rounded-full">
+            <span>{data.award}</span>
+          </div>
+        </div>
       </div>
-      <div className="text-xs flex items-center gap-1 max-w-fit bg-yellow-100 rounded-full p-1 px-3 mt-2">
-        <span>💰</span>
-        <span>{data.award}</span>
-      </div>
-      <div className="text-sm text-gray-800 mt-2">
-        {data.rules}
-      </div>
-    </div>
+    </Link>
   )
 }

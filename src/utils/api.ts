@@ -28,16 +28,18 @@ export const initUser = async () => {
     setRequestHeader('x-address', walletAddress)
   }
 
-  const {data} = await request.get('/init', {
-    headers: {
-      'x-id-token': id_token || null,
-      'x-id': user_id || null,
-      'Authorization': access_token ? `Bearer ${access_token}` : null
+  if(!user_id){
+    const {data} = await request.get('/init', {
+      headers: {
+        'x-id-token': id_token || null,
+        'x-id': user_id || null,
+        'Authorization': access_token ? `Bearer ${access_token}` : null
+      }
+    })
+    store.getState().fetchCredit();
+    if(data?.id){
+      localStorage.setItem('qna3_user_id', data?.id);
+      setRequestHeader('x-id', data?.id as string)
     }
-  })
-  store.getState().fetchCredit();
-  if(data?.id){
-    localStorage.setItem('qna3_user_id', data?.id);
-    setRequestHeader('x-id', data?.id as string)
   }
 }

@@ -15,7 +15,6 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: [
-        'Söhne',
         'ui-sans-serif',
         'system-ui',
         '-apple-system',
@@ -33,7 +32,7 @@ module.exports = {
         'Noto Color Emoji',
       ],
       mono: [
-        'Söhne Mono',
+        'ui-monospace',
         'Monaco',
         'Andale Mono',
         'Ubuntu Mono',
@@ -53,6 +52,22 @@ module.exports = {
         },
       },
       colors: {
+        primary: '#7074E9',
+        bgColor: 'rgba(112, 116, 233, 0.6)',
+        bg5: 'rgba(255, 255, 255, 0.05)',
+        bg: {
+          50: 'rgba(255, 255, 255, 0.05)',
+          80: 'rgba(255, 255, 255, 0.08)',
+          100: 'rgba(255, 255, 255, 0.1)',
+          200: 'rgba(255, 255, 255, 0.2)',
+          400: 'rgba(255, 255, 255, 0.4)',
+          800: 'rgba(255, 255, 255, 0.8)',
+        },
+        txt: {
+          50: 'rgba(255, 255, 255, 0.5)',
+          60: 'rgba(255, 255, 255, 0.6)',
+          70: 'rgba(255, 255, 255, 0.7)',
+        },
         gray: {
           50: '#f7f7f8',
           100: '#ececf1',
@@ -66,6 +81,7 @@ module.exports = {
           800: '#343541',
           850: '#2A2B32',
           900: '#202123',
+          1000: '#171717'
         },
       },
     },

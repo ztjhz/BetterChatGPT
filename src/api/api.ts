@@ -46,8 +46,10 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
       throw new FatalError();
     },
     onmessage: (event: any) => {
+      console.log(url, event.data)
       if(done){
         eventHandler('done', true)
+        controller.abort();
         return
       }
 
@@ -57,7 +59,7 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
         return
       }
 
-      if(text.length < 5 && (event.data.includes("Sorry") || event.data.includes("抱歉") || text.includes("抱歉"))){
+      if(event.data.includes("Sorry") || event.data.includes("抱歉") || text.includes("抱歉")){
         done = true
         text = ''
         callback(text, true)
@@ -76,6 +78,7 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
       callback(text, true)
     }
   });
+
   return controller
 }
 
