@@ -19,6 +19,8 @@ import { BSCConfig, BSCClient, projectId } from "@utils/bsc";
 import { Web3Modal } from '@web3modal/react'
 import * as Sentry from "@sentry/react";
 
+await initUser();
+
 Sentry.init({
   dsn: "https://d9452a5428a248c3ad894113e05c8508@o4505355934892032.ingest.sentry.io/4505356060721152",
   integrations: [
@@ -37,7 +39,6 @@ Sentry.init({
 });
 
 
-await initUser();
 
 const router = createBrowserRouter([
   {

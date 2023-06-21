@@ -17,7 +17,7 @@ export const AnswerBlock = ({funcDefination: item, response, status, searchText}
         <div>
           <LetterAvatar name={item.label} size={30} radius={15}/>
         </div>
-        <div className='mt-1'>
+        <div className='mt-1 min-w-0'>
           <div className='flex gap-2 items-center mb-4'>
             <div className='text-md text-white'>
               {item.label}
@@ -50,19 +50,19 @@ let avatarColors = [
   [69, 208, 226],// H
   [72, 182, 172],// I
   [82, 188, 137],// J
-  [155, 206, 95],// K
-  [212, 227, 74],// L
+  [141, 71, 230],// K
+  [200, 146, 96],// L
   [254, 218, 16],// M
   [247, 192, 0],// N
   [255, 168, 0],// O
   [255, 138, 96],// P
   [194, 194, 194],// Q
   [143, 164, 175],// R
-  [162, 136, 126],// S
+  [56, 136, 237],// S
   [163, 163, 163],// T
   [175, 181, 226],// U
   [179, 155, 221],// V
-  [194, 194, 194],// W
+  [250, 88, 53],// W
   [124, 222, 235],// X
   [188, 170, 164],// Y
   [173, 214, 125]// Z
@@ -115,14 +115,14 @@ const MemoryMarkdown = memo(({data}: any) => {
           },
           th({ children }) {
             return (
-              <th className="break-words border border-gray-400 bg-gray-700 px-3 py-1 dark:border-white">
+              <th className="break-words border border-gray-200 bg-gray-500 text-txt-60 px-3 py-1 dark:border-white text-sm">
                 {children}
               </th>
             );
           },
           td({ children }) {
             return (
-              <td className="break-words border border-gray-400 px-3 py-1 dark:border-white">
+              <td className="break-words border border-gray-200 px-3 py-1 text-txt-60 text-sm">
                  {children}
               </td>
             );

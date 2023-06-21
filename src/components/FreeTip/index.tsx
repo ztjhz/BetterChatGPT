@@ -1,6 +1,8 @@
-import { t } from 'i18next';
+import { useTranslation } from "react-i18next";
 
 export const FreeTip = ()=> {
+  const { t } = useTranslation();
+
   return (
     <div className="w-full flex justify-center text-white bg-bgColor items-center py-1 gap-2">
         <span>

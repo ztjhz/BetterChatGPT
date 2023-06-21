@@ -291,5 +291,16 @@
 .prose {
   width: 100%;
   max-width: max-content;
-  color: rgba(255, 255, 255, .8)
+  color: rgba(255, 255, 255, .8);
+  font-size: 14px;
+
+
+}
+
+.markdown ul li{
+  margin-bottom: 10px;
+}
+
+.markdown ul li:last-child{
+  margin-bottom: 0;
 }
