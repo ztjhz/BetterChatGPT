@@ -5,11 +5,6 @@ export const searchFuncions:any = [
     label:'Knowledge Graph',
   }, 
   {
-    name: 'chat', 
-    emoji: '📝',
-    label:'QnA3 LLM',
-  }, 
-  {
     name: 'sql', 
     emoji: '📊',
     label:'Structured data',
@@ -25,8 +20,13 @@ export const searchFuncions:any = [
     label:'Web3 News',
   }, 
   {
-    name: 'social', 
+    name: 'vector_tweets', 
     emoji: '📎',
     label:'Social Media',
   }, 
+  // {
+  //   name: 'chat', 
+  //   emoji: '📝',
+  //   label:'QnA3 LLM',
+  // }, 
 ]

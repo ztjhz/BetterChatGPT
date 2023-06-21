@@ -12,15 +12,14 @@ import { QNAFooter } from "@components/Footer";
 import { FreeTip } from "@components/FreeTip";
 
 const hotQuestion = [
-  'What is LSDfi and what value does it provide to users?',
+  'What value does LSDfi provide to users and what exactly is it?',
   'what is modular blockchain?',
   'What will change after EIP-4844?',
   'Why is Maverick more capital efficient than Uniswap?',
   'What are the four types of zkEVM?',
   'What are the differences between modular blockchain and monolithic blockchain? List the current players',
-  'What are the recent news about Polygon in the past week?',
-  'What are some recommended coins and reasons for investing with 1000 USD?',
-  'Compare with ERC20、721、1155 and 3525'
+  'Which coins do you recommend for an investment of 1000 USD?',
+  'What are the differences between ERC20, ERC721, ERC1155, and ERC3525?'
 ]
 
 const SearchPage = () => {

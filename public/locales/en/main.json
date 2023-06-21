@@ -47,7 +47,7 @@
   "history": "History",
   "askToFAQ": "Ask to QnA3",
   "mainSearchPlaceholder": "Ask any questions about Web3 and let QnA3 help you answer them.",
-  "noAnswer": "Apologies, I'm currently unable to address this question. QnA3 is still in its initial stages, and we're diligently honing its capabilities. Please bear with us during this exciting evolution.",
+  "noAnswer": "Apologies,I am unable to answer this question at the moment. QnA3 is still in its early stages, and we are diligently working on improvements.",
   "searchStatus": {
     "loading": "Preparing...",
     "done": "Finshed!",
