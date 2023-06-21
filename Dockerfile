@@ -10,7 +10,7 @@ RUN yarn config set prefix ~/.yarn && \
   yarn global add serve
 
 WORKDIR /home/appuser/app
-COPY --chown=appuser:appgroup package.json yarn.lock ./
+COPY --chown=appuser:appgroup package.json package-lock.json yarn.lock ./
 RUN npm install
 COPY --chown=appuser:appgroup . .
 ARG VITE_SERVER_API_ENDPOINT
