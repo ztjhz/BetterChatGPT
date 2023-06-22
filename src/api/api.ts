@@ -3,7 +3,7 @@ import { ConfigInterface, MessageInterface } from '@type/chat';
 import { isAzureEndpoint } from '@utils/api';
 
 const apiKey = '';
-let endpoint = 'https://openai.ylokh.xyz/v1/chat/completions';
+let endpoint = 'https://free-openai-api.vercel.app/v1/chat/completions';
 
 export const getChatCompletion = async (
   messages: MessageInterface[],

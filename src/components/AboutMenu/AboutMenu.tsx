@@ -28,118 +28,47 @@ const AboutMenu = () => {
         >
           <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
             <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm flex flex-col gap-3 leading-relaxed'>
-              <p>{t('description', { ns: 'about' })}</p>
+              <h2 className='text-lg font-bold'>About</h2>
               <p>
-                <Trans
-                  i18nKey='sourceCode'
-                  ns='about'
-                  components={[
-                    <a
-                      href='https://github.com/ztjhz/BetterChatGPT'
-                      target='_blank'
-                      className='link'
-                    />,
-                  ]}
-                />
-              </p>
-
-              <p>
-                <Trans
-                  i18nKey='initiative.description'
-                  ns='about'
-                  components={[
-                    <a
-                      href={t('initiative.link', { ns: 'about' }) as string}
-                      target='_blank'
-                      className='link'
-                    />,
-                  ]}
-                />
-              </p>
-
-              <h2 className='text-lg font-bold'>
-                {t('discordServer.title', { ns: 'about' })}
-              </h2>
-              <p>{t('discordServer.paragraph1', { ns: 'about' })}</p>
-
-              <p>
-                <Trans
-                  i18nKey='discordServer.paragraph2'
-                  ns='about'
-                  components={[
-                    <a
-                      className='link'
-                      href='https://discord.gg/g3Qnwy4V6A'
-                      target='_blank'
-                    />,
-                  ]}
-                />
+                BetterGPT is an upgraded ChatGPT interface with more AI models
+                and free access to GPT-4 and no sign up is required!
               </p>
 
               <>
                 <h2 className='text-lg font-bold'>
                   {t('support.title', { ns: 'about' })}
                 </h2>
-                <p>{t('support.paragraph1', { ns: 'about' })}</p>
+
                 <p>
-                  <Trans
-                    i18nKey='support.paragraph2'
-                    ns='about'
-                    components={[
-                      <a
-                        href='https://github.com/ztjhz/BetterChatGPT'
-                        target='_blank'
-                        className='link'
-                      />,
-                    ]}
-                  />
+                  Without donations, this site would have to rely on ads. Who
+                  likes seeing ads?
                 </p>
-                <p>{t('support.paragraph3', { ns: 'about' })}</p>
+
+                <p>
+                  Maintaining a service like this is expensive with OpenAI API
+                  costs and web-hosting costs. Every little donation helps!
+                </p>
+
+                <p>
+                  If you'd like to contribute, all sponsors will be shown and
+                  recognised on the page. DM me @chromed.exe on Discord to
+                  notify me.
+                </p>
 
                 <div className='flex flex-col items-center gap-4 my-4'>
-                  <a href='https://github.com/sponsors/ztjhz' target='_blank'>
-                    <img
-                      src='https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86'
-                      width='120px'
-                      alt='Support us through GitHub Sponsors'
-                    />
-                  </a>
-                  <a href='https://ko-fi.com/betterchatgpt' target='_blank'>
-                    <img
-                      src='./kofi.svg'
-                      alt='Support us through the Ko-fi platform.'
-                    />
-                  </a>
                   <div className='flex gap-x-10 gap-y-4 flex-wrap justify-center'>
                     <div className='flex flex-col items-center justify-center gap-1'>
-                      <div>{t('support.alipay', { ns: 'about' })} (Ayaka)</div>
+                      <div>Crypto Address</div>
                       <img
                         className='rounded-md w-32 h-32'
-                        src='https://ayaka14732.github.io/sponsor/alipay.jpg'
-                        alt='Support us through Alipay'
+                        src='https://storage.googleapis.com/openscreenshot/G%2FN%2F3/ebFwj53NG.png'
+                        alt='Support me with Ethereum'
                       />
-                    </div>
-                    <div className='flex flex-col items-center justify-center gap-1'>
-                      <div>
-                        {t('support.wechatPay', { ns: 'about' })} (Ayaka)
-                      </div>
-                      <img
-                        className='rounded-md w-32 h-32'
-                        src='https://ayaka14732.github.io/sponsor/wechat.png'
-                        alt='Support us through WeChat Pay'
-                      />
+                      <p>0xFA29D00BA9F64C9a5eb2F1153e7Df37161AF3c97</p>
                     </div>
                   </div>
                 </div>
-                <p>{t('support.paragraph4', { ns: 'about' })}</p>
               </>
-
-              <h2 className='text-lg font-bold'>
-                {t('privacyStatement.title', { ns: 'about' })}
-              </h2>
-              <p>{t('privacyStatement.paragraph1', { ns: 'about' })}</p>
-
-              <p>{t('privacyStatement.paragraph2', { ns: 'about' })}</p>
             </div>
           </div>
         </PopupModal>
