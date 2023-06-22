@@ -41,7 +41,7 @@
 </p>
 <p align="center"><i>Did you enjoy using Better ChatGPT? Give it some love with a star! 🌟</i></p>
 
-## 👋🏻 Introducing Better ChatGPT
+## 👋🏻 Introducing Better GPT
 
 <p align="center">
     <a href="https://bettergpt.chat" target="_blank">
