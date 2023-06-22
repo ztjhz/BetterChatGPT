@@ -1,5 +1,15 @@
 export const searchFuncions:any = [
   {
+    name: 'vector_news', 
+    emoji: '📰',
+    label:'Web3 News',
+  }, 
+  {
+    name: 'vector_tweets', 
+    emoji: '📎',
+    label:'Social Media',
+  }, 
+  {
     name: 'knowledge', 
     emoji: '📌',
     label:'Knowledge Graph',
@@ -13,16 +23,6 @@ export const searchFuncions:any = [
     name: 'report', 
     emoji: '📚',
     label:'Research Report',
-  }, 
-  {
-    name: 'vector_news', 
-    emoji: '📰',
-    label:'Web3 News',
-  }, 
-  {
-    name: 'vector_tweets', 
-    emoji: '📎',
-    label:'Social Media',
   }, 
   // {
   //   name: 'chat', 
