@@ -18,14 +18,17 @@ Carefully heed the user's instructions.
 Respond using Markdown.`;
 
 export const modelOptions: ModelOptions[] = [
-  'gpt-3.5-turbo',
-  'gpt-3.5-turbo-poe',
   'gpt-4',
-  'gpt-4-poe',
-  'claude+',
-  'claude-instant',
-  'claude-instant-100k',
+  'gpt-3.5-turbo',
+  'gpt-3.5-turbo-0613',
+  'gpt-3.5-turbo-16k',
+  //'bard',
   'sage',
+  'claude-instant',
+  'claude+',
+  'claude-instant-100k',
+  'gpt-4-poe',
+  'gpt-3.5-turbo-poe',
 ];
 
 export const defaultModel = 'gpt-3.5-turbo';
@@ -33,12 +36,15 @@ export const defaultModel = 'gpt-3.5-turbo';
 export const modelMaxToken = {
   'gpt-4': 8000,
   'gpt-3.5-turbo': 4097,
-  'gpt-4-poe': 2100,
-  'gpt-3.5-turbo-poe': 2800,
+  'gpt-3.5-turbo-0613': 4000,
+  'gpt-3.5-turbo-16k': 16000,
+  //'bard': 10000,
   'sage': 5200,
   'claude-instant': 11000,
   'claude+': 11000,
   'claude-instant-100k': 100000,
+  'gpt-4-poe': 2100,
+  'gpt-3.5-turbo-poe': 2800,
 };
 
 export const modelCost = {
@@ -52,6 +58,14 @@ export const modelCost = {
     completion: { price: 0.06, unit: 1000 },
   },
   'gpt-3.5-turbo-poe': {
+    prompt: { price: 0.002, unit: 1000 },
+    completion: { price: 0.002, unit: 1000 },
+  },
+  'gpt-3.5-turbo-0613': {
+    prompt: { price: 0.002, unit: 1000 },
+    completion: { price: 0.002, unit: 1000 },
+  },
+  'gpt-3.5-turbo-16k': {
     prompt: { price: 0.002, unit: 1000 },
     completion: { price: 0.002, unit: 1000 },
   },
@@ -78,6 +92,10 @@ export const modelCost = {
     prompt: { price: 0.002, unit: 1000 },
     completion: { price: 0.002, unit: 1000 },
   },
+  // 'bard': {
+  //   prompt: { price: 0.002, unit: 1000 },
+  //   completion: { price: 0.002, unit: 1000 },
+  // },
 };
 
 export const defaultUserMaxToken = 4000;

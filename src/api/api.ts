@@ -2,8 +2,8 @@ import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface } from '@type/chat';
 import { isAzureEndpoint } from '@utils/api';
 
-const apiKey = 'S26LEg6get3XXQUBMfWJAmq2LvAT19NR0r6MRHPAPLg';
-let endpoint = 'https://chimeragpt.adventblocks.cc/v1/chat/completions/';
+const apiKey = '';
+let endpoint = 'https://openai.ylokh.xyz/v1/chat/completions';
 
 export const getChatCompletion = async (
   messages: MessageInterface[],

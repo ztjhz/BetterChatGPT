@@ -59,7 +59,6 @@ const useSubmit = () => {
         messages,
         chats[currentChatIndex].config
       );
-
       if (stream) {
         if (stream.locked)
           throw new Error(
@@ -104,7 +103,12 @@ const useSubmit = () => {
         reader.releaseLock();
         stream.cancel();
       }
-
+      // if (chats[currentChatIndex].config.model === 'bard') {
+      //   bard = await getChatCompletion(
+      //     messages,
+      //     chats[currentChatIndex].config
+      //   );
+      // }
       // update tokens used in chatting
       const currChats = useStore.getState().chats;
       const countTotalTokens = useStore.getState().countTotalTokens;

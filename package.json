@@ -46,6 +46,8 @@
     "@dqbd/tiktoken": "^1.0.2",
     "@react-oauth/google": "^0.9.0",
     "@vercel/analytics": "^1.0.1",
+    "axios": "^1.4.0",
+    "csv-parser": "^3.0.0",
     "dotenv": "^16.1.4",
     "electron-is-dev": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
