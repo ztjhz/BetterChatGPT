@@ -46,7 +46,6 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
       throw new FatalError();
     },
     onmessage: (event: any) => {
-      console.log(url, event.data)
       if(done){
         eventHandler('done', true)
         controller.abort();
@@ -83,11 +82,22 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
 }
 
 export const simplifyQuestion = async(query: string) => {
-  const {data} = await request.post(`/search/?t=${Date.now()}`, {
-    query,
-    originalQuery: query
-  })
-  return data;
+  try {
+    const {data} = await request.post(`/search/?t=${Date.now()}`, {
+      query,
+      originalQuery: query
+    }, {
+      timeout: 4000
+    })
+    return data;
+  }catch(e){
+    console.log('simplifyQuestion error')
+    console.log(e)
+    return {
+      data: query
+    }
+  }
+ 
 }
 
 export const getSearchByType = async({type, query, callback, originalQuestion, onError,eventHandler}: any) => {
