@@ -30,6 +30,7 @@ const SearchResultPage = () => {
   const navigate = useNavigate();
   const simpleLoadingRef = useRef<any>();
   const handleSubmit = async () => {
+    clearController()
     clear()
     if(searchText){
       navigate('/search/' + encodeURIComponent(searchText), {
