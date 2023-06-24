@@ -8,9 +8,7 @@ const AutoTitleToggle = () => {
 
   const setAutoTitle = useStore((state) => state.setAutoTitle);
 
-  const [isChecked, setIsChecked] = useState<boolean>(
-    useStore.getState().autoTitle
-  );
+  const [isChecked, setIsChecked] = useState<boolean>(true);
 
   useEffect(() => {
     setAutoTitle(isChecked);

@@ -52,8 +52,7 @@ export interface Folder {
 export type ModelOptions =
   | 'gpt-4'
   | 'gpt-3.5-turbo'
-  | 'gpt-4-poe'
-  | 'gpt-3.5-turbo-poe'
+  | 'gpt-4-0613'
   | 'gpt-3.5-turbo-0613'
   | 'gpt-3.5-turbo-16k'
   //| 'bard'

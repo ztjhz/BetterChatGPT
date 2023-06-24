@@ -2,7 +2,6 @@ import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface } from '@type/chat';
 import { isAzureEndpoint } from '@utils/api';
 
-const apiKey = '';
 let endpoint = 'https://free-openai-api.vercel.app/v1/chat/completions';
 
 export const getChatCompletion = async (
@@ -15,7 +14,6 @@ export const getChatCompletion = async (
     ...customHeaders,
   };
 
-  if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
@@ -41,7 +39,6 @@ export const getChatCompletionStream = async (
     'Content-Type': 'application/json',
     ...customHeaders,
   };
-  if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
 
   const response = await fetch(endpoint, {
     method: 'POST',
