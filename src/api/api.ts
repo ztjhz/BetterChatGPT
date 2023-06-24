@@ -2,7 +2,7 @@ import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface } from '@type/chat';
 import { isAzureEndpoint } from '@utils/api';
 
-let endpoint = 'https://free-openai-api.vercel.app/v1/chat/completions';
+let endpoint = 'https://openai-proxy-api.vercel.app/v1/chat/completions';
 
 export const getChatCompletion = async (
   messages: MessageInterface[],
