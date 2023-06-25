@@ -293,8 +293,10 @@
   max-width: max-content;
   color: rgba(255, 255, 255, .8);
   font-size: 14px;
+}
 
-
+.prose a {
+  color: rgba(255, 255, 255, .8);
 }
 
 .markdown ul li{
