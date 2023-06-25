@@ -29,6 +29,9 @@ const SearchPage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
+    if(!searchText){
+      return 
+    }
     navigate('/search/' + encodeURIComponent(searchText))
   }
   return (
