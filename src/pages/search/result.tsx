@@ -38,6 +38,11 @@ const SearchResultPage = () => {
       })
       simpleLoadingRef?.current?.restart();
       const {data: question } = await simplifyQuestion(searchText)
+      //@ts-ignore
+      window?.gtag("event", "search", {
+        event_category: "user_action",
+        event_label: searchText,
+      })
       fetchCredit()
       searchFuncions.forEach(async (item: any) => {
         setLoading(item.name, true)
