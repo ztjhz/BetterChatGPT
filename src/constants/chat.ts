@@ -31,7 +31,7 @@ export const modelOptions: ModelOptions[] = [
   'claude-instant-100k',
 ];
 
-export const defaultModel = 'gpt-4-0613';
+export const defaultModel = 'gpt-3.5-turbo-16k';
 
 export const modelMaxToken = {
   'gpt-4': 8000,
