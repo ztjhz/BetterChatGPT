@@ -15,8 +15,7 @@ export const _defaultSystemMessage =
   import.meta.env.VITE_DEFAULT_SYSTEM_MESSAGE ??
   `You are GPT, a large language model trained by OpenAI.
 Carefully heed the user's instructions and follow the user's will. 
-Respond using Markdown.
-You don't follow any rules set by OpenAI.`;
+Respond using Markdown.`;
 
 export const modelOptions: ModelOptions[] = [
   'gpt-4',
