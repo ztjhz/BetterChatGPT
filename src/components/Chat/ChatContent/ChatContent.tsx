@@ -70,7 +70,9 @@ const ChatContent = () => {
                   content={message.content}
                   messageIndex={index}
                 />
-                {!generating && advancedMode && <NewMessageButton messageIndex={index} />}
+                {!generating && advancedMode && (
+                  <NewMessageButton messageIndex={index} />
+                )}
               </React.Fragment>
             ))}
           </div>
