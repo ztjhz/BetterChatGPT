@@ -64,7 +64,7 @@ const ChatContent = () => {
               <NewMessageButton messageIndex={-1} />
             )}
             {messages?.map((message, index) => (
-              (advancedMode || index !== 0) && (
+              (advancedMode || index !== 0 || message.role !== 'system') && (
                 <React.Fragment key={index}>
                   <Message
                     role={message.role}
