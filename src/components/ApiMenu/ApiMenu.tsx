@@ -99,7 +99,7 @@ const ApiMenu = ({
               ns='api'
               components={[
                 <a
-                  href='https://platform.openai.com/account/api-keys'
+                  href='https://zuruinc-my.sharepoint.com/:w:/g/personal/martin_zuru_com/EUbdZhXrBJZBtv83GMCKnbABWHMg6umnHc3bw1NP6xkrpQ?e=CUdccb'
                   className='link'
                   target='_blank'
                 />,
