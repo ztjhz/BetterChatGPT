@@ -6,7 +6,7 @@
     "warn": "此外，如果您提供自定义 API 端点并授予免费访问 OpenAI API 的权限，您可以通过留空 API 密钥字段来使用 ChatGPT，而无需提供API密钥。但是，使用第三方 API 端点时务必谨慎，因为不可信的端点可能会在对话中记录您的个人信息。使用之前请始终验证 API 端点的可靠性以保护您的隐私和安全。"
   },
   "apiKey": {
-    "howTo": "在<0>此处</0>获取您的个人 API 密钥。",
+    "howTo": "在<0>这里</0>获取 ZURU API 密钥。",
     "inputLabel": "API 密钥"
   },
   "customEndpoint": "使用自定义 API 端点",
