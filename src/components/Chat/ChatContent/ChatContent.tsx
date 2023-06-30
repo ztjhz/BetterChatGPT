@@ -8,6 +8,7 @@ import Message from './Message';
 import NewMessageButton from './Message/NewMessageButton';
 import CrossIcon from '@icon/CrossIcon';
 
+import { limitMessageTokens } from '@utils/messageUtils';
 import useSubmit from '@hooks/useSubmit';
 import DownloadChat from './DownloadChat';
 import CloneChat from './CloneChat';
@@ -23,6 +24,18 @@ const ChatContent = () => {
     state.currentChatIndex < state.chats.length
       ? state.chats[state.currentChatIndex].messages
       : []
+  );
+  const [_, tokenCount, messagesInContext] = useStore((state) =>
+    state.chats &&
+    state.chats.length > 0 &&
+    state.currentChatIndex >= 0 &&
+    state.currentChatIndex < state.chats.length
+      ? limitMessageTokens(
+          state.chats[state.currentChatIndex].messages,
+          state.chats[state.currentChatIndex].config.max_tokens,
+          state.chats[state.currentChatIndex].config.model
+        )
+      : [[], 0, []]
   );
   const stickyIndex = useStore((state) =>
     state.chats &&
@@ -69,8 +82,13 @@ const ChatContent = () => {
                   role={message.role}
                   content={message.content}
                   messageIndex={index}
+                  tokenCount={tokenCount}
+                  inContext={messagesInContext.includes(index)}
+                  preserve={message.preserve ? true : false}
                 />
-                {!generating && advancedMode && <NewMessageButton messageIndex={index} />}
+                {!generating && advancedMode && (
+                  <NewMessageButton messageIndex={index} />
+                )}
               </React.Fragment>
             ))}
           </div>
@@ -79,6 +97,9 @@ const ChatContent = () => {
             role={inputRole}
             content=''
             messageIndex={stickyIndex}
+            tokenCount={tokenCount}
+            preserve={false}
+            inContext={true}
             sticky
           />
           {error !== '' && (

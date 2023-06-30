@@ -7,6 +7,7 @@ export const roles: Role[] = ['user', 'assistant', 'system'];
 export interface MessageInterface {
   role: Role;
   content: string;
+  preserve?: boolean;
 }
 
 export interface ChatInterface {

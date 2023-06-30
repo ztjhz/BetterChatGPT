@@ -29,6 +29,8 @@ import DownButton from './Button/DownButton';
 import CopyButton from './Button/CopyButton';
 import EditButton from './Button/EditButton';
 import DeleteButton from './Button/DeleteButton';
+import ThumbsUpButton from './Button/ThumbsUpButton';
+import ThumbsDownButton from './Button/ThumbsDownButton';
 import MarkdownModeButton from './Button/MarkdownModeButton';
 
 import CodeBlock from '../CodeBlock';
@@ -39,16 +41,20 @@ const ContentView = memo(
     content,
     setIsEdit,
     messageIndex,
+    // tokenCount,
+    inContext,
+    preserve,
   }: {
     role: string;
     content: string;
     setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
     messageIndex: number;
+    // tokenCount: number;
+    inContext: boolean;
+    preserve: boolean;
   }) => {
     const { handleSubmit } = useSubmit();
-
     const [isDelete, setIsDelete] = useState<boolean>(false);
-
     const currentChatIndex = useStore((state) => state.currentChatIndex);
     const setChats = useStore((state) => state.setChats);
     const lastMessageIndex = useStore((state) =>
@@ -56,6 +62,17 @@ const ContentView = memo(
     );
     const inlineLatex = useStore((state) => state.inlineLatex);
     const markdownMode = useStore((state) => state.markdownMode);
+
+    const togglePreserve = () => {
+      const updatedChats: ChatInterface[] = JSON.parse(
+        JSON.stringify(useStore.getState().chats)
+      );
+      const updatedMessages = updatedChats[currentChatIndex].messages;
+      const temp = updatedMessages[messageIndex];
+      temp.preserve = !updatedMessages[messageIndex].preserve;
+      updatedMessages[messageIndex] = temp;
+      setChats(updatedChats);
+    };
 
     const handleDelete = () => {
       const updatedChats: ChatInterface[] = JSON.parse(
@@ -135,13 +152,19 @@ const ContentView = memo(
             <span className='whitespace-pre-wrap'>{content}</span>
           )}
         </div>
+        <div className='flex w-full justify-between mt-2'>
+          <div className='flex justify-start items-center gap-2'>
+            {preserve ? (
+              <ThumbsDownButton onClick={togglePreserve} />
+            ) : (
+              <ThumbsUpButton onClick={togglePreserve} />
+            )}
+          </div>
         <div className='flex justify-end gap-2 w-full mt-2'>
           {isDelete || (
             <>
-              {!useStore.getState().generating &&
-                role === 'assistant' &&
-                messageIndex === lastMessageIndex && (
-                  <RefreshButton onClick={handleRefresh} />
+              {role === 'assistant' && messageIndex === lastMessageIndex && (
+                  <RefreshButton onClick={handleRefresh} spin={useStore.getState().generating} />
                 )}
               {messageIndex !== 0 && <UpButton onClick={handleMoveUp} />}
               {messageIndex !== lastMessageIndex && (
@@ -167,6 +190,7 @@ const ContentView = memo(
               </button>
             </>
           )}
+        </div>
         </div>
       </>
     );
