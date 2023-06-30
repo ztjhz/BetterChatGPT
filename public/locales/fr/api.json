@@ -6,7 +6,7 @@
     "warn": "De plus, si vous fournissez un point d'accès personnalisé à l'API qui offre un accès gratuit à l'API OpenAI, vous pouvez utiliser ChatGPT sans avoir besoin de fournir une clé API en laissant simplement le champ de clé API vide. Cependant, il est crucial de faire preuve de prudence lors de l'utilisation de points d'accès de l'API tiers, car ceux qui ne sont pas fiables peuvent enregistrer vos informations personnelles dans les conversations. Vérifiez toujours la fiabilité d'un point d'accès de l'API avant de l'utiliser pour protéger votre vie privée et votre sécurité."
   },
   "apiKey": {
-    "howTo": "Obtenez votre clé API personnelle <0>ici</0>.",
+    "howTo": "Obtenez votre clé API ZURU <0>ici</0>.",
     "inputLabel": "Clé API"
   },
   "customEndpoint": "Utiliser un point d'accès personnalisé à l'API",
