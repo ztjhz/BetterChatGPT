@@ -7,7 +7,7 @@
 
   },
   "apiKey": {
-    "howTo": "Obtén tu clave personal <0>aquí</0>.",
+    "howTo": "Obtén la clave ZURU <0>aquí</0>.",
     "inputLabel": "Clave API"
   },
   "customEndpoint": "Usar un punto final de acceso personalizado",
