@@ -47,7 +47,7 @@ const SearchResultPage = () => {
       searchFuncions.forEach(async (item: any) => {
         setLoading(item.name, true)
         const controller = await getSearchByType({
-          type: item.name,
+          type: item.api || item.name,
           query: question,
           originalQuestion: searchText,
           callback: (data: any, isDone: any) => {

@@ -1,9 +1,6 @@
 import { request, setRequestHeader } from '@api/request';
-import useStore from '@store/store';
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
-import {publicProvider} from 'wagmi/providers/public'
 import { bsc } from 'wagmi/chains';
-import { InjectedConnector } from 'wagmi/connectors/injected'
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 
 const chains = [bsc]
@@ -12,7 +9,7 @@ const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 
 export const BSCConfig = createConfig({
   autoConnect: true,
-  connectors: w3mConnectors({ projectId, version: 1, chains }),
+  connectors: w3mConnectors({ projectId, chains }),
   publicClient
 })
 export const BSCClient = new EthereumClient(BSCConfig, chains)

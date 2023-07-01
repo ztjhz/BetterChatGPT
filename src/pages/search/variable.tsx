@@ -3,6 +3,7 @@ export const searchFuncions:any = [
     name: 'vector_news', 
     emoji: '📰',
     label:'Web3 News',
+    api: 'vector_news_v2'
   }, 
   {
     name: 'vector_tweets', 
