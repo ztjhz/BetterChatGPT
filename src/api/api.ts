@@ -36,6 +36,7 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
     signal: controller.signal,
     body: JSON.stringify(body),
     onerror: (event: any) => {
+      console.log(url, 'onerror', event)
       if(done){
         return
       }
@@ -73,6 +74,7 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
       callback(text, false)
     },
     onclose: () => {
+      console.log(url, 'close')
       eventHandler('done', true)
       callback(text, true)
     }
