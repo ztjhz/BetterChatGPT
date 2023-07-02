@@ -51,30 +51,49 @@ const useSubmit = () => {
     return data.choices[0].message.content;
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async ({
+    regeneration = false,
+    originalMessages = [],
+  }: {
+    regeneration?: boolean;
+    originalMessages?: MessageInterface[];
+  } = {}) => {
     const chats = useStore.getState().chats;
     if (generating || !chats) return;
 
     const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
+    const tempMessages = updatedChats[currentChatIndex].messages;
 
-    updatedChats[currentChatIndex].messages.push({
-      role: 'assistant',
-      content: '',
-    });
+    if (regeneration) {
+      let regenerating = tempMessages[tempMessages.length - 1];
+      const versions: string[] =
+        regenerating.versions !== undefined ? regenerating.versions : [];
+      regenerating.content = '';
+      regenerating.versions = versions;
+      regenerating.versionIndex = versions.length;
+    } else {
+      tempMessages.push({
+        role: 'assistant',
+        content: '',
+        versions: [],
+        versionIndex: 0,
+      });
+    }
 
     setChats(updatedChats);
     setGenerating(true);
 
     try {
       let stream;
-      if (chats[currentChatIndex].messages.length === 0)
+      if (updatedChats[currentChatIndex].messages.length === 0)
         throw new Error('No messages submitted!');
 
       const messages = limitMessageTokens(
-        chats[currentChatIndex].messages,
-        chats[currentChatIndex].config.max_tokens,
-        chats[currentChatIndex].config.model
+        updatedChats[currentChatIndex].messages,
+        updatedChats[currentChatIndex].config.max_tokens,
+        updatedChats[currentChatIndex].config.model
       );
+
       if (messages.length === 0) throw new Error('Message exceed max token!');
 
       // no api key (free)
@@ -108,6 +127,8 @@ const useSubmit = () => {
         const reader = stream.getReader();
         let reading = true;
         let partial = '';
+        let hasVersion = false;
+
         while (reading && useStore.getState().generating) {
           const { done, value } = await reader.read();
           const result = parseEventSource(
@@ -131,8 +152,25 @@ const useSubmit = () => {
             const updatedChats: ChatInterface[] = JSON.parse(
               JSON.stringify(useStore.getState().chats)
             );
+
             const updatedMessages = updatedChats[currentChatIndex].messages;
-            updatedMessages[updatedMessages.length - 1].content += resultString;
+            let inference = updatedMessages[updatedMessages.length - 1];
+
+            inference.content += resultString;
+
+            if (inference.versions !== undefined) {
+              if (!hasVersion) {
+                inference.versions.push(resultString);
+                hasVersion = true;
+              } else {
+                inference.versions[inference.versions.length - 1] +=
+                  resultString;
+              }
+            } else {
+              inference.versions = [resultString];
+              hasVersion = true;
+            }
+
             setChats(updatedChats);
           }
         }
@@ -200,7 +238,16 @@ const useSubmit = () => {
       const err = (e as Error).message;
       console.log(err);
       setError(err);
+
+      if (regeneration && originalMessages.length) {
+        updatedChats[currentChatIndex].messages = originalMessages;
+      } else {
+        updatedChats[currentChatIndex].messages.pop();
+      }
+
+      setChats(updatedChats);
     }
+
     setGenerating(false);
   };
 

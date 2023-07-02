@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import useStore from '@store/store';
 
-import BaseButton from './BaseButton';
+import BaseButton from '../../Button/BaseButton';
 
 import MarkdownIcon from '@icon/MarkdownIcon';
 import FileTextIcon from '@icon/FileTextIcon';

@@ -69,8 +69,13 @@ const ChatContent = () => {
                   role={message.role}
                   content={message.content}
                   messageIndex={index}
+                  generating={generating}
+                  versions={message.versions}
+                  versionIdx={message.versionIndex}
                 />
-                {!generating && advancedMode && <NewMessageButton messageIndex={index} />}
+                {!generating && advancedMode && (
+                  <NewMessageButton messageIndex={index} />
+                )}
               </React.Fragment>
             ))}
           </div>
@@ -79,6 +84,7 @@ const ChatContent = () => {
             role={inputRole}
             content=''
             messageIndex={stickyIndex}
+            generating={generating}
             sticky
           />
           {error !== '' && (
@@ -103,7 +109,7 @@ const ChatContent = () => {
                 : 'md:max-w-3xl lg:max-w-3xl xl:max-w-4xl'
             }`}
           >
-            {useStore.getState().generating || (
+            {generating || (
               <div className='md:w-[calc(100%-50px)] flex gap-4 flex-wrap justify-center'>
                 <DownloadChat saveRef={saveRef} />
                 <ShareGPT />

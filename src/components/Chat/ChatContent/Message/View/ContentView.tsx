@@ -5,6 +5,8 @@ import React, {
   useState,
 } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import ReactMarkdown from 'react-markdown';
 import { CodeProps, ReactMarkdownProps } from 'react-markdown/lib/ast-to-react';
 
@@ -22,6 +24,8 @@ import useSubmit from '@hooks/useSubmit';
 import { ChatInterface } from '@type/chat';
 
 import { codeLanguageSubset } from '@constants/chat';
+
+import PopupModal from '@components/PopupModal';
 
 import RefreshButton from './Button/RefreshButton';
 import UpButton from './Button/UpButton';
@@ -48,6 +52,7 @@ const ContentView = memo(
     const { handleSubmit } = useSubmit();
 
     const [isDelete, setIsDelete] = useState<boolean>(false);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     const currentChatIndex = useStore((state) => state.currentChatIndex);
     const setChats = useStore((state) => state.setChats);
@@ -56,6 +61,8 @@ const ContentView = memo(
     );
     const inlineLatex = useStore((state) => state.inlineLatex);
     const markdownMode = useStore((state) => state.markdownMode);
+
+    const { t } = useTranslation();
 
     const handleDelete = () => {
       const updatedChats: ChatInterface[] = JSON.parse(
@@ -89,14 +96,42 @@ const ContentView = memo(
       handleMove('down');
     };
 
-    const handleRefresh = () => {
+    const handleRefresh = (force: boolean = false) => {
       const updatedChats: ChatInterface[] = JSON.parse(
         JSON.stringify(useStore.getState().chats)
       );
       const updatedMessages = updatedChats[currentChatIndex].messages;
-      updatedMessages.splice(updatedMessages.length - 1, 1);
+
+      let subsequentMessages = updatedMessages.reduce(
+        (result: number[], _, index: number) => {
+          if (index > messageIndex) {
+            result.push(index);
+          }
+          return result;
+        },
+        []
+      );
+
+      const originalMessages = updatedChats[currentChatIndex].messages.map(
+        (message) => ({ ...message })
+      );
+
+      if (subsequentMessages.length) {
+        if (force) {
+          for (let i of subsequentMessages.sort((a, b) => b - a)) {
+            updatedChats[currentChatIndex].messages.splice(i, 1);
+          }
+        } else {
+          setIsModalOpen(true);
+          return;
+        }
+      }
+
       setChats(updatedChats);
-      handleSubmit();
+      setIsModalOpen(false);
+
+      // We specify that this is a regeneration and pass the original chat state in case of errors
+      handleSubmit({ regeneration: true, originalMessages });
     };
 
     const handleCopy = () => {
@@ -140,8 +175,8 @@ const ContentView = memo(
             <>
               {!useStore.getState().generating &&
                 role === 'assistant' &&
-                messageIndex === lastMessageIndex && (
-                  <RefreshButton onClick={handleRefresh} />
+                messageIndex == lastMessageIndex && (
+                  <RefreshButton onClick={() => handleRefresh()} />
                 )}
               {messageIndex !== 0 && <UpButton onClick={handleMoveUp} />}
               {messageIndex !== lastMessageIndex && (
@@ -168,6 +203,14 @@ const ContentView = memo(
             </>
           )}
         </div>
+        {isModalOpen && (
+          <PopupModal
+            setIsModalOpen={setIsModalOpen}
+            title={t('warning') as string}
+            message={t('clearMessageWarning') as string}
+            handleConfirm={() => handleRefresh(true)}
+          />
+        )}
       </>
     );
   }

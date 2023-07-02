@@ -2,7 +2,7 @@ import React from 'react';
 
 import RefreshIcon from '@icon/RefreshIcon';
 
-import BaseButton from './BaseButton';
+import BaseButton from '../../Button/BaseButton';
 
 const RefreshButton = ({
   onClick,
