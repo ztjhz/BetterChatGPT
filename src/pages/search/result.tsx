@@ -33,6 +33,10 @@ const SearchResultPage = () => {
     clearController()
     clear()
     if(searchText){
+      if(searchText.length > 150){
+        simpleLoadingRef?.current?.hide();
+        return toast.error('Question is too long')
+      }
       navigate('/search/' + encodeURIComponent(searchText), {
         replace: true
       })

@@ -27,6 +27,10 @@ export const SimpleLoading = React.forwardRef((props: any, ref: any) => {
       console.log('restart')
       setHide(false)
       setWidth('1%')
+    },
+    hide: () => {
+      setHide(true)
+      setWidth('1%')
     }
   }));
 
