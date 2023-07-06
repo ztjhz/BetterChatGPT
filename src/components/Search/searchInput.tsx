@@ -55,6 +55,7 @@ export default ({value, setValue, handleSubmit}: any) => {
           placeholder={t('mainSearchPlaceholder') as string}
           onKeyDown={handleKeyDown}
           rows={1}
+          maxLength={150}
     ></textarea>
     <div onClick={() => handleSubmit()}>
       <MagnifyingGlassIcon className="w-6 h-6 mr-3 md:mr-6 cursor-pointer text-primary" />
