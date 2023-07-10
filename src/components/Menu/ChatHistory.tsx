@@ -101,7 +101,7 @@ const ChatHistory = React.memo(
         onDragStart={handleDragStart}
       >
         <ChatIcon />
-        <div className='flex-1 text-ellipsis max-h-5 overflow-hidden break-all relative'>
+        <div className='flex-1 text-ellipsis max-h-5 overflow-hidden break-all relative' title={title}>
           {isEdit ? (
             <input
               type='text'
