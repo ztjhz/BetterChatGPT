@@ -14,6 +14,7 @@ import { AnswerBlock } from './answerBlock';
 
 const SearchResultPage = () => {
   let { question } = useParams();
+  console.log('question', question)
   const clear = useStore((state) => state.clear)
   const response = useStore((state) => state.response)
   const searchStatus = useStore((state) => state.searchStatus)
@@ -25,7 +26,7 @@ const SearchResultPage = () => {
   const setLoading = useStore((state) => state.setSearchLoading)
   const setResponseOrder = useStore((state) => state.setResponseOrder)
   const fetchCredit = useStore((state) => state.fetchCredit)
-  const [searchText, setSearchText] = useState(decodeURIComponent(question as string))
+  const [searchText, setSearchText] = useState(question)
   const [loginModalOpen, setLoginModalOpen] = useState(false)
   const navigate = useNavigate();
   const simpleLoadingRef = useRef<any>();

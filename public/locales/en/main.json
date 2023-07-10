@@ -57,6 +57,9 @@
   "voteSuccess": "Thank you for your feedback!",
   "requestFailed": "Sorry, request failed",
   "hotQuestion": "Trending User Queries",
+  "trendingEvent": "Trending Events Digging ",
+  "event": "Event",
+  "question": "Question",
   "activity": {
     "title": "Activity",
     "award": "AWARD"

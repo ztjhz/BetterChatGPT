@@ -54,7 +54,7 @@ const router = createBrowserRouter([
     element: <ChatPage />,
   },
 ]);
-console.log('BSCClient', BSCClient)
+
 //@ts-ignore
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
