@@ -32,7 +32,7 @@ const SearchPage = () => {
     if(!searchText){
       return 
     }
-    navigate('/search/' + encodeURIComponent(searchText))
+    navigate('/search/' + encodeURIComponent(searchText) + '/?t=1')
   }
   return (
     <div className="w-full flex flex-col min-h-full bg-gray-1000">

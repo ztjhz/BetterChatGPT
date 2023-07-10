@@ -25,7 +25,7 @@ const SearchResultPage = () => {
   const setLoading = useStore((state) => state.setSearchLoading)
   const setResponseOrder = useStore((state) => state.setResponseOrder)
   const fetchCredit = useStore((state) => state.fetchCredit)
-  const [searchText, setSearchText] = useState(decodeURIComponent(question as string))
+  const [searchText, setSearchText] = useState(unescape(question as string))
   const [loginModalOpen, setLoginModalOpen] = useState(false)
   const navigate = useNavigate();
   const simpleLoadingRef = useRef<any>();
@@ -37,7 +37,7 @@ const SearchResultPage = () => {
         simpleLoadingRef?.current?.hide();
         return toast.error('Question is too long')
       }
-      navigate('/search/' + encodeURIComponent(searchText), {
+      navigate('/search/' + encodeURIComponent(searchText) + '/?t=1', {
         replace: true
       })
       simpleLoadingRef?.current?.restart();

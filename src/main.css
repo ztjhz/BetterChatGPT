@@ -306,3 +306,7 @@
 .markdown ul li:last-child{
   margin-bottom: 0;
 }
+
+.prose :where(strong):not(:where([class~="not-prose"] *)){
+  color: white !important;
+}
