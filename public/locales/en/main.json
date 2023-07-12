@@ -60,6 +60,10 @@
   "trendingEvent": "Trending Events Digging ",
   "event": "Event",
   "question": "Question",
+  "trendingNews":{
+    "title": "What happend to crypto market?",
+    "question": "Whales' question: "
+  },
   "activity": {
     "title": "Activity",
     "award": "AWARD"

@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useRef, useState } from 'react'
 import SearchInput from '@components/Search/searchInput';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useMatches, useNavigate, useParams } from 'react-router-dom';
 import { getSearchByType, simplifyQuestion } from '@api/api';
 import useStore from '@store/store';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -29,6 +29,7 @@ const SearchResultPage = () => {
   const [loginModalOpen, setLoginModalOpen] = useState(false)
   const navigate = useNavigate();
   const simpleLoadingRef = useRef<any>();
+
   const handleSubmit = async () => {
     clearController()
     clear()
@@ -37,11 +38,22 @@ const SearchResultPage = () => {
         simpleLoadingRef?.current?.hide();
         return toast.error('Question is too long')
       }
-      navigate('/search/' + encodeURIComponent(searchText) + '/?t=1', {
-        replace: true
-      })
+      if(searchText !== question){
+        navigate('/search/' + encodeURIComponent(searchText), {
+          replace: true
+        })
+      }
+      let query = '';
       simpleLoadingRef?.current?.restart();
-      const {data: question } = await simplifyQuestion(searchText)
+      let params = (new URL(document.location as any)).searchParams;
+      let originQuestion = params.get('origin_question');
+      console.log('originQuestion', originQuestion)
+      if(originQuestion){
+        query = originQuestion
+      }else{
+        const {data: _query } = await simplifyQuestion(searchText)
+        query = _query
+      }
       //@ts-ignore
       window?.gtag("event", "search", {
         event_category: "user_action",
@@ -52,7 +64,7 @@ const SearchResultPage = () => {
         setLoading(item.name, true)
         const controller = await getSearchByType({
           type: item.api || item.name,
-          query: question,
+          query: query,
           originalQuestion: searchText,
           callback: (data: any, isDone: any) => {
             setResponseOrder(item.name)

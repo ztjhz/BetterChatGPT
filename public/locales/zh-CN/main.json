@@ -57,12 +57,16 @@
   "voteSuccess": "感谢您的反馈!",
   "requestFailed": "很抱歉，反馈失败，请稍后再试。",
   "hotQuestion": "热门问题",
-  "trendingEvent": "热点事件挖掘",
+  "trendingEvent": "市场上发生了什么？",
   "event": "事件",
-  "question": "问题",
+  "question": "巨鲸在问：",
   "activity": {
     "title": "活动",
     "award": "奖励"
+  },
+  "trendingNews":{
+    "title": "What happend to crypto market?",
+    "question": "巨鲸在问："
   },
   "freetip": "限时免费",
   "voteTip": {

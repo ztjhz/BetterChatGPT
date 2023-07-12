@@ -12,11 +12,16 @@ export const EventItem = ({event}: any) => {
                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                 </svg>
             </span>
-            <Link to={`/search/${encodeURI(event?.question)}`}>
-              <h3 className="text-lg underline underline-offset-4 font-semibold text-white">{event?.question}</h3>
+            <div className="flex justify-between">
+              <p className="text-base font-normal mb-2 text-gray-400 ">{event?.event_title}</p>
+              <time className=" text-sm font-normal leading-none text-gray-500 ">{moment(event?.event_date).utcOffset(0).format('HH:mm')}</time>
+            </div>
+            
+            <p className="text-base font-normal mb-2 text-gray-400 ">{event?.event_text}</p>
+            <Link to={`/search/${encodeURIComponent(event?.question)}/?origin_question=${encodeURIComponent(event?.origin_question)}`}>
+              <h3 className="text-lg underline underline-offset-4 font-semibold text-white">{t('trendingNews.question')}{event?.question}</h3>
             </Link>
-            <time className=" text-sm font-normal leading-none text-gray-500 ">{moment(event?.event_date).utcOffset(0).format('HH:mm')}</time>
-            <p className="text-base font-normal mb-2 text-gray-400 ">{t("event")}：{event?.event_title}</p>
+            
       </li>
   )
 }
