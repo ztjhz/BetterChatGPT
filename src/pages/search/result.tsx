@@ -14,7 +14,6 @@ import { AnswerBlock } from './answerBlock';
 
 const SearchResultPage = () => {
   let { question } = useParams();
-  console.log('question', question)
   const clear = useStore((state) => state.clear)
   const response = useStore((state) => state.response)
   const searchStatus = useStore((state) => state.searchStatus)
@@ -26,7 +25,7 @@ const SearchResultPage = () => {
   const setLoading = useStore((state) => state.setSearchLoading)
   const setResponseOrder = useStore((state) => state.setResponseOrder)
   const fetchCredit = useStore((state) => state.fetchCredit)
-  const [searchText, setSearchText] = useState(question)
+  const [searchText, setSearchText] = useState(unescape(question as string))
   const [loginModalOpen, setLoginModalOpen] = useState(false)
   const navigate = useNavigate();
   const simpleLoadingRef = useRef<any>();
@@ -38,7 +37,7 @@ const SearchResultPage = () => {
         simpleLoadingRef?.current?.hide();
         return toast.error('Question is too long')
       }
-      navigate('/search/' + encodeURIComponent(searchText), {
+      navigate('/search/' + encodeURIComponent(searchText) + '/?t=1', {
         replace: true
       })
       simpleLoadingRef?.current?.restart();
