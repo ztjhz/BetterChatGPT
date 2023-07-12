@@ -1,7 +1,7 @@
 import ArrowLongRightIcon from '@heroicons/react/24/outline/ArrowRightIcon'
 import { useAuth0 } from "@auth0/auth0-react";
 import useStore from '@store/store';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { WalletIcon, UserIcon } from '@heroicons/react/20/solid';
 import QNALogo from '@logo/qnaLogo';
@@ -14,7 +14,9 @@ import { t } from 'i18next';
 import { I18NSelector } from './i18nSelector';
 import { RandomAvatar } from "react-random-avatars";
 import { QNADialog } from '@components/Dialog';
-
+import { useTranslation } from 'react-i18next';
+import {useCopyToClipboard} from 'react-use'
+import { ToastContainer, toast } from 'react-toastify';
 
 interface TransparentHeaderProps {
   showLogo?: boolean;
@@ -23,9 +25,11 @@ interface TransparentHeaderProps {
 
 export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps) => {
   let [isOpen, setIsOpen] = useState(false)
+  const fetchUser = useStore((state) => state.fetchUser);
   let [isOpenUserMenu, setIsOpenUserMenu] = useState(false)
   const { address, isConnected } = useAccount({
     onConnect: ({address}) => {
+      fetchUser();
       onConnect(address as string)
       setIsOpen(false)
     },
@@ -100,17 +104,44 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
     </div>
     <SignInModal isOpen={isOpen} setIsOpen={setIsOpen}/>
     <UserMenu isOpen={isOpenUserMenu} setIsOpen={setIsOpenUserMenu} />
+    <ToastContainer />
     </>        
   )
 }
 
 export const UserMenu = ({isOpen, setIsOpen}: any) => {
   const { logout, isAuthenticated } = useAuth0();
+  const user = useStore((state) => state.user);
+  const fetchUser = useStore((state) => state.fetchUser);
   const { isConnected } = useAccount()
   const { disconnect } = useDisconnect()
+  const { t, i18n } = useTranslation();
+  const [state, copyToClipboard] = useCopyToClipboard();
+
+  useEffect(() => {
+    fetchUser()
+  }, [1])
   return (
     <QNADialog isOpen={isOpen} onClose={() => setIsOpen(false)} title="">
       <div className='flex flex-col gap-4 p-4'>
+        <div hidden={!user} className='flex flex-col bg-bg-100 p-4 rounded-md text-txt-70'>
+          <div className='font-bold mb-2'>
+            {t('internal_address', {ns: 'auth'})}
+          </div>
+          <div className='flex gap-2 items-center'>
+            <div className='text-txt-100 text-ellipsis overflow-hidden'>
+              {user?.internal_address || t('internal_address_loading', {ns: 'auth'})}
+            </div>
+            <div className='cursor-pointer' onClick={() => {
+              copyToClipboard(user?.internal_address);
+              toast.success(t('copied', {ns: 'auth'}))
+            }}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
+              </svg>
+            </div>
+          </div>
+        </div>
         <button className='flex-1 flex w-full items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none' onClick={() => {
           if(isAuthenticated){
             logout()
