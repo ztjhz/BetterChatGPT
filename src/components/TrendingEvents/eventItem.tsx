@@ -15,7 +15,7 @@ export const EventItem = ({event}: any) => {
             </span>
             <div className="flex justify-between">
               <p className="text-base font-normal mb-2 text-gray-400 ">{event?.event_title}</p>
-              <time className=" text-sm font-normal leading-none text-gray-500 ">{moment(event?.event_date).utcOffset(0).format('HH:mm')}</time>
+              <time className=" text-sm font-normal leading-none text-gray-500 ">{moment(event?.event_date).utcOffset(-4).format('HH:mm')}</time>
             </div>
             
             <p className="text-base font-normal mb-2 text-gray-400 ">{event?.event_text}</p>
