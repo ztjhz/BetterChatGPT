@@ -64,14 +64,16 @@ const ChatContent = () => {
               <NewMessageButton messageIndex={-1} />
             )}
             {messages?.map((message, index) => (
-              <React.Fragment key={index}>
-                <Message
-                  role={message.role}
-                  content={message.content}
-                  messageIndex={index}
-                />
-                {!generating && advancedMode && <NewMessageButton messageIndex={index} />}
-              </React.Fragment>
+              (advancedMode || index !== 0 || message.role !== 'system') && (
+                <React.Fragment key={index}>
+                  <Message
+                    role={message.role}
+                    content={message.content}
+                    messageIndex={index}
+                  />
+                  {!generating && advancedMode && <NewMessageButton messageIndex={index} />}
+                </React.Fragment>
+              )
             ))}
           </div>
 
