@@ -8,7 +8,7 @@
   "author": "Jing Hua <betterchatgpt@mail.tjh.sg>",
   "description": "Play and chat smarter with BetterChatGPT - an amazing open-source web app with a better UI for exploring OpenAI's ChatGPT API!",
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
+    "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "electron": "concurrently -k \"BROWSER=none yarn dev\" \"wait-on tcp:5173 && electron .\"",
@@ -54,8 +54,8 @@
     "@types/mixpanel-browser": "^2.47.1",
     "@types/react-modal": "^3.16.0",
     "@types/react-syntax-highlighter": "^15.5.7",
-    "@web3modal/ethereum": "^2.6.2",
-    "@web3modal/react": "^2.6.2",
+    "@web3modal/ethereum": "^2.7.0",
+    "@web3modal/react": "^2.7.0",
     "axios": "^1.4.0",
     "electron-is-dev": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
@@ -92,8 +92,8 @@
     "remark-math": "^5.1.1",
     "sort-by": "^1.2.0",
     "uuid": "^9.0.0",
-    "viem": "^1.2.7",
-    "wagmi": "^1.3.3",
+    "viem": "^1.2.14",
+    "wagmi": "^1.3.8",
     "zustand": "^4.3.6"
   },
   "devDependencies": {

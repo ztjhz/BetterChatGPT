@@ -8,9 +8,11 @@ import topLevelAwait from 'vite-plugin-top-level-await';
 export default defineConfig(({mode}) => {
   const root = process.cwd();
   const env = loadEnv(mode, root);
-
   return {
     plugins: [react(), wasm(), topLevelAwait()],
+    define: {
+      'process.env': env
+    },
     resolve: {
       alias: {
         '@icon/': new URL('./src/assets/icons/', import.meta.url).pathname,
