@@ -1,16 +1,14 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import ChatPage from "./pages/chat";
-import SearchPage from "./pages/search";
 import {
   createBrowserRouter,
   RouterProvider,
+  BrowserRouter
 } from "react-router-dom";
 import './main.css';
 await import('katex/dist/katex.min.css');
 import {setRequestHeader} from '@api/request';
 import './i18n';
-import SearchResultPage from "./pages/search/result";
 import { Auth0Provider } from '@auth0/auth0-react';
 import { getUserToken, initUser } from "@utils/api";
 import { WagmiConfig, createConfig, mainnet } from 'wagmi'
@@ -19,6 +17,8 @@ import { BSCConfig, BSCClient, projectId } from "@utils/bsc";
 import { Web3Modal } from '@web3modal/react'
 import * as Sentry from "@sentry/react";
 import mixpanel from 'mixpanel-browser';
+import { App } from "./app";
+import { Auth0ProviderWithNavigate } from "@utils/auth0";
 
 Sentry.init({
   dsn: "https://d9452a5428a248c3ad894113e05c8508@o4505355934892032.ingest.sentry.io/4505356060721152",
@@ -39,43 +39,18 @@ Sentry.init({
 
 mixpanel.init('659a614d94fd41baff409729aeef12b7', { debug: true, track_pageview: true, persistence: 'localStorage' });
 
-await initUser();
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <SearchPage />,
-  },
-  {
-    path: "/search/:question",
-    element: <SearchResultPage />,
-  },
-  {
-    path: "/chat",
-    element: <ChatPage />,
-  },
-]);
 
 //@ts-ignore
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <>
-    <WagmiConfig config={BSCConfig}>
-    <Auth0Provider
-      domain="dev-tfcpxeutlsld1wm0.us.auth0.com"
-      clientId="d2lXoGguxROpIsbBChdHbJzqvwkhPnj6"
-      cacheLocation="localstorage"
-      onRedirectCallback={async () => {
-        initUser()
-      }}
-      authorizationParams={{
-        redirect_uri: window.location.origin,
-        audience: 'https://dev-tfcpxeutlsld1wm0.us.auth0.com/api/v2/',
-      }}
-    >
-      <RouterProvider router={router} />
-    </Auth0Provider>
-  </WagmiConfig>
+  <React.StrictMode>
+    <BrowserRouter>
+      <WagmiConfig config={BSCConfig}>
+        <Auth0ProviderWithNavigate>
+          <App />
+        </Auth0ProviderWithNavigate>
+    </WagmiConfig>
+   </BrowserRouter>
    <Web3Modal projectId={projectId} ethereumClient={BSCClient}/>
-  </>
+  </React.StrictMode>
 );
 
