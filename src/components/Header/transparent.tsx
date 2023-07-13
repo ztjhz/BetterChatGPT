@@ -18,6 +18,7 @@ import { useTranslation } from 'react-i18next';
 import {useCopyToClipboard} from 'react-use'
 import { ToastContainer, toast } from 'react-toastify';
 import mixpanel from 'mixpanel-browser';
+import { formatWalletAddress } from '@utils/wallet';
 
 
 interface TransparentHeaderProps {
@@ -80,7 +81,7 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
               >
                 <RandomAvatar size={18} />
                 <div className="text-ellipsis w-40 overflow-hidden hidden md:block text-white">
-                  {user?.email || address}
+                  {user?.email || formatWalletAddress(address as string)}
                 </div>
               </div>
             </div>
@@ -135,7 +136,7 @@ export const UserMenu = ({isOpen, setIsOpen}: any) => {
           </div>
           <div className='flex gap-2 items-center'>
             <div className='text-txt-100 text-ellipsis overflow-hidden'>
-              {user?.internal_address || t('internal_address_loading', {ns: 'auth'})}
+              {formatWalletAddress(user?.internal_address) || t('internal_address_loading', {ns: 'auth'})}
             </div>
             <div className='cursor-pointer' onClick={() => {
               copyToClipboard(user?.internal_address);
