@@ -73,7 +73,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       }}
     >
       <RouterProvider router={router} />
-     
     </Auth0Provider>
   </WagmiConfig>
    <Web3Modal projectId={projectId} ethereumClient={BSCClient}/>

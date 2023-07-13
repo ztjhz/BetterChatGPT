@@ -7,9 +7,8 @@ import { WalletIcon, UserIcon } from '@heroicons/react/20/solid';
 import QNALogo from '@logo/qnaLogo';
 import { Link } from 'react-router-dom';
 import { useAccount, useDisconnect } from 'wagmi';
-import { InjectedConnector } from 'wagmi/connectors/injected'
-import { onConnect, onDisConnect } from '@utils/bsc';
-import { Web3Button, useWeb3Modal } from '@web3modal/react'
+import { onConnect, onDisConnect, BSCClient } from '@utils/bsc';
+import { useWeb3Modal, useWeb3ModalEvents } from '@web3modal/react'
 import { t } from 'i18next';
 import { I18NSelector } from './i18nSelector';
 import { RandomAvatar } from "react-random-avatars";
@@ -187,7 +186,13 @@ export const SignInModal = ({isOpen, setIsOpen}: any) => {
             </div>
             <span>{t('username&password', {ns: 'auth'})}</span>
           </button>
-          <button className='flex-1 flex w-full items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none' onClick={() => open()}>
+          <button className='flex-1 flex w-full items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none' onClick={() =>{
+            const connectors = BSCClient?.getConnectors()
+            if(!connectors?.length || (!(connectors || [])[0]?.ready)){
+              toast.error(t('bsc_error'))
+            }
+            open()
+          }}>
             <img style={{
               width: '24px',
               height: '24px'
