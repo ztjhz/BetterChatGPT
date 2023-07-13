@@ -29,8 +29,8 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
   let [isOpenUserMenu, setIsOpenUserMenu] = useState(false)
   const { address, isConnected } = useAccount({
     onConnect: ({address}) => {
-      fetchUser();
       onConnect(address as string)
+      fetchUser();
       setIsOpen(false)
     },
     onDisconnect: () => {
