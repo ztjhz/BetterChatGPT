@@ -18,8 +18,7 @@ import useStore from "@store/store";
 import { BSCConfig, BSCClient, projectId } from "@utils/bsc";
 import { Web3Modal } from '@web3modal/react'
 import * as Sentry from "@sentry/react";
-
-await initUser();
+import mixpanel from 'mixpanel-browser';
 
 Sentry.init({
   dsn: "https://d9452a5428a248c3ad894113e05c8508@o4505355934892032.ingest.sentry.io/4505356060721152",
@@ -38,7 +37,9 @@ Sentry.init({
   environment: process.env.VITE_SENTRY_ENV
 });
 
+mixpanel.init('659a614d94fd41baff409729aeef12b7', { debug: true, track_pageview: true, persistence: 'localStorage' });
 
+await initUser();
 
 const router = createBrowserRouter([
   {

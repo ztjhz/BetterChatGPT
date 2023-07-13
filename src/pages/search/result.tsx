@@ -11,6 +11,7 @@ import { searchFuncions } from './variable';
 import { SimpleLoading } from './simpleLoading';
 import { FreeTip } from '@components/FreeTip';
 import { AnswerBlock } from './answerBlock';
+import mixpanel from 'mixpanel-browser';
 
 const SearchResultPage = () => {
   let { question } = useParams();
@@ -34,6 +35,10 @@ const SearchResultPage = () => {
     clearController()
     clear()
     if(searchText){
+      mixpanel.track('Search', {
+        'question': searchText
+      })
+
       if(searchText.length > 150){
         simpleLoadingRef?.current?.hide();
         return toast.error('Question is too long')

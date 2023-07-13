@@ -5,17 +5,17 @@ import { EventItem } from "./eventItem";
 
 
 export const TrendingEvents = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
   useEffect(() => {
-    (async () => {
+    setTimeout(async () => {
       setLoading(true)
-      const {data} = await request.get<any>("/trending/daily_events")
+      const {data} = await request.get<any>("/trending/daily_events?lang=" + (i18n.language === 'en' ? 'english' : 'chinese'))
       setData(data?.data)
       setLoading(false)
-    })()
-  }, [1])
+    }, 200)
+  }, [i18n?.language])
 
   return (
     <div className="mt-2 md:mt-10 bg-bg-50 md:rounded-2xl p-4 md:px-6 border border-bg-200">

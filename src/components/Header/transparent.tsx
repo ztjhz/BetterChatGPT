@@ -17,6 +17,8 @@ import { QNADialog } from '@components/Dialog';
 import { useTranslation } from 'react-i18next';
 import {useCopyToClipboard} from 'react-use'
 import { ToastContainer, toast } from 'react-toastify';
+import mixpanel from 'mixpanel-browser';
+
 
 interface TransparentHeaderProps {
   showLogo?: boolean;
@@ -32,6 +34,9 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
       onConnect(address as string)
       fetchUser();
       setIsOpen(false)
+      mixpanel.track('connect', {
+        'address': address
+      })
     },
     onDisconnect: () => {
       onDisConnect()
@@ -170,7 +175,10 @@ export const SignInModal = ({isOpen, setIsOpen}: any) => {
       <QNADialog isOpen={isOpen} onClose={() => setIsOpen(false)} title={t('chooseWay', {ns: "auth"})} >
        
         <div className='flex flex-col gap-4 p-4'>
-          <button className='flex-1 flex w-full items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none' onClick={() => loginWithRedirect()}>
+          <button className='flex-1 flex w-full items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none' onClick={() => {
+            mixpanel.track('trigger_login_web2')
+            loginWithRedirect()}
+          }>
             <div>
               <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M3.15 3C2.23873 3 1.5 3.73873 1.5 4.65V21.15C1.5 22.0613 2.23873 22.8 3.15 22.8H21.85C22.7613 22.8 23.5 22.0613 23.5 21.15V4.65C23.5 3.73873 22.7613 3 21.85 3H3.15ZM3.7 20.6V5.2H21.3V20.6H3.7ZM5.97613 8.14558L12.5 12.6621L19.0239 8.14558L20.2761 9.9544L13.4392 14.6877C12.8742 15.0788 12.1258 15.0788 11.5608 14.6877L4.72386 9.9544L5.97613 8.14558Z" fill="#F3BD3B"/>

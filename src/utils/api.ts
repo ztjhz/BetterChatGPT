@@ -2,6 +2,7 @@ import { request, setRequestHeader } from "@api/request";
 import { GetTokenSilentlyOptions } from "@auth0/auth0-react";
 import store from "@store/store";
 import { BSCConfig } from "./bsc";
+import mixpanel from 'mixpanel-browser';
 
 export const getUserToken = () => {
   const token = localStorage.getItem('@@auth0spajs@@::d2lXoGguxROpIsbBChdHbJzqvwkhPnj6::https://dev-tfcpxeutlsld1wm0.us.auth0.com/api/v2/::openid profile email');
@@ -23,10 +24,16 @@ export const initUser = async () => {
   }
   if(user_id){
     setRequestHeader('x-id', user_id as string)
+    try{
+      mixpanel.identify(user_id as string)
+    }catch(e){
+      console.log(e)
+    }
   }
   if(walletAddress){
     setRequestHeader('x-address', walletAddress)
   }
+
 
   if(!user_id){
     const {data} = await request.get('/init', {

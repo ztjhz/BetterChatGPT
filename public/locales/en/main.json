@@ -57,12 +57,12 @@
   "voteSuccess": "Thank you for your feedback!",
   "requestFailed": "Sorry, request failed",
   "hotQuestion": "Trending User Queries",
-  "trendingEvent": "Trending Events Digging ",
+  "trendingEvent": "What Happend Today?",
   "event": "Event",
   "question": "Question",
   "trendingNews":{
     "title": "What happend to crypto market?",
-    "question": "Whales' question: "
+    "question": "Whales asking: "
   },
   "activity": {
     "title": "Activity",

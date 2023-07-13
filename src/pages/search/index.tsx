@@ -11,15 +11,21 @@ import { ActivityContainer } from "@components/Activities/ActivityContainer";
 import { QNAFooter } from "@components/Footer";
 import { FreeTip } from "@components/FreeTip";
 import { TrendingEvents } from "@components/TrendingEvents";
+import mixpanel from 'mixpanel-browser';
 
 const SearchPage = () => {
   const [searchText, setSearchText] = useState('')
   const navigate = useNavigate();
-
+  
   const handleSubmit = () => {
     if(!searchText){
       return 
     }
+
+    mixpanel.track('Search', {
+      'question': searchText
+    })
+    
     navigate('/search/' + encodeURIComponent(searchText))
   }
   return (

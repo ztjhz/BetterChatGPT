@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import mixpanel from 'mixpanel-browser';
 
 export const EventItem = ({event}: any) => {
   const { t } = useTranslation();
@@ -18,7 +19,11 @@ export const EventItem = ({event}: any) => {
             </div>
             
             <p className="text-base font-normal mb-2 text-gray-400 ">{event?.event_text}</p>
-            <Link to={`/search/${encodeURIComponent(event?.question)}/?origin_question=${encodeURIComponent(event?.origin_question)}`}>
+            <Link to={`/search/${encodeURIComponent(event?.question)}/?origin_question=${encodeURIComponent(event?.origin_question)}`} onClick={() => {
+              mixpanel.track('trending_news_click', {
+                'question': event?.question
+              })
+            }}>
               <h3 className="text-lg underline underline-offset-4 font-semibold text-white">{t('trendingNews.question')}{event?.question}</h3>
             </Link>
             
