@@ -45,13 +45,16 @@ const SearchPage = () => {
             />
           </div>
           <div className="flex flex-col">
-            <TrendingEvents />
-            <div className="mt-2 md:mt-10 w-full">
-                <ActivityContainer />
+            <div className="mt-4">
+              <ActivityContainer />
+            </div>
+            <div className="mt-4 w-full">
+                <TrendingEvents />
                 <div className="px-4 md:px-0 mt-4 md:mt-12">
                   <QNAFooter />
                 </div>
             </div>
+           
           </div>
       </div>
     </div>

@@ -18,7 +18,7 @@ export const TrendingEvents = () => {
   }, [i18n?.language])
 
   return (
-    <div className="mt-2 md:mt-10 bg-bg-50 md:rounded-2xl p-4 md:px-6 border border-bg-200">
+    <div className="bg-bg-50 md:rounded-2xl p-4 md:px-6 border border-x-0 md:border-x border-bg-200">
       <div className="text-md text-white mb-4">
         {t('trendingEvent')}
       </div> 

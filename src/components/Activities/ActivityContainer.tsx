@@ -14,7 +14,7 @@ const activityList = [{
 }]
 export const ActivityContainer = () => {
   return (
-    <div className=' bg-bg-50 md:rounded-2xl p-4 md:px-6 border border-bg-200'>
+    <div className=' bg-bg-50 md:rounded-2xl border-x-0 md:border-x p-4 md:px-6 border border-bg-200'>
       <div className='text-md text-white mb-4'>{t('activity.title')}</div>
       {activityList.map((i) => (
         <AcitivityItem data={i}/>
