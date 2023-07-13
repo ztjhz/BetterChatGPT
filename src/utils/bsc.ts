@@ -21,7 +21,6 @@ export const onConnect = (address: string) => {
       wallet_address: address
     })
   }
-
 }
 
 export const onDisConnect = () => {

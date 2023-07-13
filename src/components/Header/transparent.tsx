@@ -19,7 +19,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import mixpanel from 'mixpanel-browser';
 import { formatWalletAddress } from '@utils/wallet';
 
-
 interface TransparentHeaderProps {
   showLogo?: boolean;
   background?: string;
@@ -27,11 +26,13 @@ interface TransparentHeaderProps {
 
 export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps) => {
   let [isOpen, setIsOpen] = useState(false)
+  const fetchCredit = useStore((state) => state.fetchCredit);
   const fetchUser = useStore((state) => state.fetchUser);
   let [isOpenUserMenu, setIsOpenUserMenu] = useState(false)
   const { address, isConnected } = useAccount({
     onConnect: ({address}) => {
       onConnect(address as string)
+      fetchCredit();
       fetchUser();
       setIsOpen(false)
       mixpanel.track('connect', {
