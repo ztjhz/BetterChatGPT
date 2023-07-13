@@ -188,7 +188,7 @@ export const SignInModal = ({isOpen, setIsOpen}: any) => {
           </button>
           <button className='flex-1 flex w-full items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none' onClick={() =>{
             const connectors = BSCClient?.getConnectors()
-            if(!connectors?.length || (!(connectors || [])[0]?.ready)){
+            if(!connectors?.length){
               toast.error(t('bsc_error'))
             }
             open()
