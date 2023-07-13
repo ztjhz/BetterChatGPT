@@ -43,11 +43,11 @@ export const initUser = async () => {
         'Authorization': access_token ? `Bearer ${access_token}` : null
       }
     })
-    store.getState().fetchCredit();
-    store.getState().fetchUser();
     if(data?.id){
       localStorage.setItem('qna3_user_id', data?.id);
       setRequestHeader('x-id', data?.id as string)
     }
   }
+  store.getState().fetchCredit();
+  store.getState().fetchUser();
 }
