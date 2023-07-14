@@ -54,6 +54,7 @@ const SearchResultPage = () => {
       let originQuestion = params.get('origin_question');
       console.log('originQuestion', originQuestion)
       if(originQuestion){
+        simplifyQuestion(originQuestion)
         query = originQuestion
       }else{
         const {data: _query } = await simplifyQuestion(searchText)
