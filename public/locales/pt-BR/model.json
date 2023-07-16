@@ -1,0 +1,28 @@
+{
+  "configuration": "Configuração",
+  "model": "Modelo",
+  "token": {
+    "label": "Máximo de Tokens",
+    "description": "O número máximo de tokens a serem gerados na conclusão do chat. O comprimento total dos tokens de entrada e dos tokens gerados é limitado pelo comprimento de contexto do modelo."
+  },
+  "default": "Padrão",
+  "temperature": {
+    "label": "Temperatura",
+    "description": "Qual temperatura de amostragem usar, entre 0 e 2. Valores mais altos como 0.8 tornarão a saída mais aleatória, enquanto valores mais baixos como 0.2 a tornarão mais focada e determinística. Normalmente recomendamos ajustar isso ou top p, mas não ambos. (Padrão: 1)"
+  },
+  "presencePenalty": {
+    "label": "Penalidade de Presença",
+    "description": "Número entre -2.0 e 2.0. Valores positivos penalizam novos tokens com base em sua presença no texto até o momento, aumentando a probabilidade do modelo de falar sobre novos tópicos. (Padrão: 0)"
+  },
+  "topP": {
+    "label": "Top-p",
+    "description": "Número entre 0 e 1. Uma alternativa à amostragem com temperatura, chamada amostragem de núcleo, onde o modelo considera os resultados dos tokens com maior massa de probabilidade p. Portanto, 0.1 significa que apenas os tokens que compõem os 10% superiores da massa de probabilidade são considerados. Normalmente recomendamos ajustar isso ou a temperatura, mas não ambos. (Padrão: 1)"
+  },
+  "frequencyPenalty": {
+    "label": "Penalidade de Frequência",
+    "description": "Número entre -2.0 e 2.0. Valores positivos penalizam novos tokens com base em sua frequência existente no texto até o momento, diminuindo a probabilidade do modelo repetir a mesma linha literalmente. (Padrão: 0)"
+  },
+  "defaultChatConfig": "Configuração de Chat Padrão",
+  "defaultSystemMessage": "Mensagem do Sistema Padrão",
+  "resetToDefault": "Redefinir para o Padrão"
+}

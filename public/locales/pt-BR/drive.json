@@ -1,0 +1,16 @@
+{
+  "name": "Google Sync",
+  "tagline": "Sincronize facilmente suas conversas e configurações com o Google Drive.",
+  "button": {
+    "sync": "Sincronizar suas conversas",
+    "stop": "Parar de sincronizar",
+    "create": "Criar novo arquivo",
+    "confirm": "Confirmar seleção"
+  },
+  "notice": "Observação: Você precisará fazer login novamente a cada visita ou a cada hora. Para evitar que seus dados na nuvem sejam sobrescritos, não use o BetterChatGPT em mais de um dispositivo ao mesmo tempo.",
+  "privacy": "Sua privacidade é importante para nós e, para garantir isso, o Better ChatGPT só possui acesso a informações não sensíveis, ou seja, ele apenas pode criar, visualizar e gerenciar seus próprios arquivos e pastas.",
+  "toast": {
+    "sync": "Sincronização realizada com sucesso!",
+    "stop": "Sincronização interrompida"
+  }
+}
