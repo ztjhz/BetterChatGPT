@@ -50,6 +50,7 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
       logout()
     }
   }
+  console.log(user, isAuthenticated)
   return (
     <>
     <div className={`bg-black flex items-center justify-between p-1 px-4 w-full`}>
