@@ -6,6 +6,7 @@ import useStore from '@store/store';
 import { useAuth0 } from '@auth0/auth0-react';
 import { SignInModal, TransparentHeader } from '@components/Header/transparent';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useAccount } from 'wagmi';
 import { searchFuncions } from './variable';
 import { SimpleLoading } from './simpleLoading';
