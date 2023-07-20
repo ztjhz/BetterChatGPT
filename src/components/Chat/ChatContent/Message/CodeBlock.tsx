@@ -38,6 +38,7 @@ const CodeBar = React.memo(
         <span className=''>{lang}</span>
         <button
           className='flex ml-auto gap-2'
+          aria-label='copy codeblock'
           onClick={async () => {
             const codeString = codeRef.current?.textContent;
             if (codeString)

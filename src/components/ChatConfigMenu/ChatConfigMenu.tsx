@@ -20,7 +20,11 @@ const ChatConfigMenu = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   return (
     <div>
-      <button className='btn btn-neutral' onClick={() => setIsModalOpen(true)}>
+      <button
+        className='btn btn-neutral'
+        onClick={() => setIsModalOpen(true)}
+        aria-label={t('defaultChatConfig') as string}
+      >
         {t('defaultChatConfig')}
       </button>
       {isModalOpen && <ChatConfigPopup setIsModalOpen={setIsModalOpen} />}

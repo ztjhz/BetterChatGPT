@@ -27,6 +27,7 @@ const MobileBar = () => {
         onClick={() => {
           setHideSideMenu(false);
         }}
+        aria-label='open sidebar'
       >
         <span className='sr-only'>Open sidebar</span>
         <MenuIcon />
@@ -44,6 +45,7 @@ const MobileBar = () => {
         onClick={() => {
           if (!generating) addChat();
         }}
+        aria-label='new chat'
       >
         <PlusIcon className='h-6 w-6' />
       </button>

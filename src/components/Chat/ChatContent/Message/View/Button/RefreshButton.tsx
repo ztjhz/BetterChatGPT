@@ -9,7 +9,13 @@ const RefreshButton = ({
 }: {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
-  return <BaseButton icon={<RefreshIcon />} onClick={onClick} />;
+  return (
+    <BaseButton
+      icon={<RefreshIcon />}
+      buttonProps={{ 'aria-label': 'regenerate message' }}
+      onClick={onClick}
+    />
+  );
 };
 
 export default RefreshButton;

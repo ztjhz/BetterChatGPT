@@ -15,6 +15,7 @@ const CopyButton = ({
   return (
     <BaseButton
       icon={isCopied ? <TickIcon /> : <CopyIcon />}
+      buttonProps={{ 'aria-label': 'copy message' }}
       onClick={(e) => {
         onClick(e);
         setIsCopied(true);

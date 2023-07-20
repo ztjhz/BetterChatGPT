@@ -52,11 +52,19 @@ const GoogleSyncButton = ({ loginHandler }: { loginHandler?: () => void }) => {
 
   return (
     <div className='flex gap-4 flex-wrap justify-center'>
-      <button className='btn btn-primary' onClick={() => login()}>
+      <button
+        className='btn btn-primary'
+        onClick={() => login()}
+        aria-label={t('button.sync') as string}
+      >
         {t('button.sync')}
       </button>
       {cloudSync && (
-        <button className='btn btn-neutral' onClick={logout}>
+        <button
+          className='btn btn-neutral'
+          onClick={logout}
+          aria-label={t('button.stop') as string}
+        >
           {t('button.stop')}
         </button>
       )}
