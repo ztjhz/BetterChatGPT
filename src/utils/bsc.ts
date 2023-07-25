@@ -2,6 +2,7 @@ import { request, setRequestHeader } from '@api/request';
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import { bsc } from 'wagmi/chains';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+import { signMessage } from '@wagmi/core'
 
 const chains = [bsc]
 export const projectId = 'b07dfe8b6ba7abcb519809d89b923367'
@@ -14,9 +15,12 @@ export const BSCConfig = createConfig({
 })
 export const BSCClient = new EthereumClient(BSCConfig, chains)
 
-export const onConnect = (address: string) => {
+export const onConnect = async (address: string) => {
   if(address){
     setRequestHeader('x-address', address);
+    // const signature = await signMessage({
+    //   message: 'AI + DYOR = Ultimate Answer to Unlock Web3 Universe',
+    // })
     request.post('/users/wallet_login', {
       wallet_address: address
     })

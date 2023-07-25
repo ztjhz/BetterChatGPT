@@ -18,6 +18,7 @@ import {useCopyToClipboard} from 'react-use'
 import { ToastContainer, toast } from 'react-toastify';
 import mixpanel from 'mixpanel-browser';
 import { formatWalletAddress } from '@utils/wallet';
+import { CopyIcon } from '@components/CopyIcon';
 
 interface TransparentHeaderProps {
   showLogo?: boolean;
@@ -45,12 +46,6 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
   })
   const { user, loginWithRedirect, logout, isLoading, isAuthenticated } = useAuth0();
   const credit = useStore((state) => state.credit);
-  const handleLogout = () => {
-    if(user){
-      logout()
-    }
-  }
-  console.log(user, isAuthenticated)
   return (
     <>
     <div className={`bg-black flex items-center justify-between p-1 px-4 w-full`}>
@@ -66,16 +61,17 @@ export const TransparentHeader = ({showLogo, background}: TransparentHeaderProps
         <div className='flex justify-end py-4'>
           {(user || isConnected) ? (
             <>
-            <div 
-            className="flex overflow-hidden items-center text-sm md:text-sm ">
-               <div className="flex h-full gap-x-2 px-2 md:px-4 py-2 items-center">
-               <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6.83518 6.52405C8.94331 6.52405 11.1358 6.06045 12.4526 5.17639V6.7857H13.6725V3.26211C13.6725 1.14377 10.1508 0 6.83729 0C3.52376 0 0 1.14377 0 3.26211V12.8793C0 14.9976 3.52165 16.1414 6.83518 16.1414V14.9236C3.35473 14.9236 1.21772 13.7325 1.21772 12.8794V9.9883C2.53458 10.8703 4.72511 11.336 6.83518 11.336V10.116C3.35473 10.116 1.21772 8.92499 1.21772 8.07192V5.17868C2.53458 6.06045 4.72722 6.52405 6.83518 6.52405ZM6.83518 1.2179C10.3158 1.2179 12.4526 2.40904 12.4526 3.26211C12.4526 4.11519 10.3156 5.30633 6.83518 5.30633C3.35473 5.30633 1.21772 4.11519 1.21772 3.26211C1.2179 2.40904 3.35684 1.2179 6.83518 1.2179ZM12.3001 7.19172C9.27309 7.19172 7.69036 8.3561 7.69036 9.50586V15.6859C7.69036 16.8356 9.27503 18 12.3001 18C15.3047 18 16.8851 16.8522 16.9098 15.7105H16.9119V9.50604C16.9098 8.3561 15.3272 7.19172 12.3001 7.19172ZM12.3001 8.40963C14.538 8.40963 15.692 9.17819 15.692 9.50586C15.692 9.83353 14.538 10.6021 12.3001 10.6021C10.0623 10.6021 8.90827 9.83353 8.90827 9.50586C8.90827 9.17819 10.0623 8.40963 12.3001 8.40963ZM12.3001 16.7821C10.0623 16.7821 8.90827 16.0135 8.90827 15.6859V14.2104C9.68105 14.6308 10.8166 14.9111 12.3001 14.9111C13.7837 14.9111 14.9171 14.631 15.692 14.2104V15.6859C15.692 16.0135 14.538 16.7821 12.3001 16.7821ZM12.3001 13.6911C10.0623 13.6911 8.90827 12.9224 8.90827 12.5949V11.1194C9.68105 11.5399 10.8166 11.82 12.3001 11.82C13.7837 11.82 14.9171 11.5399 15.692 11.1194V12.5949C15.692 12.9224 14.538 13.6911 12.3001 13.6911Z" fill="white"/>
-                </svg>
-                <div className="text-white ">
-                  {credit}
-                </div>
-              </div>
+              <div className="flex overflow-hidden items-center text-sm md:text-sm ">
+                <Link to="/user/credit">
+                  <div className="flex h-full gap-x-2 px-2 md:px-4 py-2 items-center">
+                    <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6.83518 6.52405C8.94331 6.52405 11.1358 6.06045 12.4526 5.17639V6.7857H13.6725V3.26211C13.6725 1.14377 10.1508 0 6.83729 0C3.52376 0 0 1.14377 0 3.26211V12.8793C0 14.9976 3.52165 16.1414 6.83518 16.1414V14.9236C3.35473 14.9236 1.21772 13.7325 1.21772 12.8794V9.9883C2.53458 10.8703 4.72511 11.336 6.83518 11.336V10.116C3.35473 10.116 1.21772 8.92499 1.21772 8.07192V5.17868C2.53458 6.06045 4.72722 6.52405 6.83518 6.52405ZM6.83518 1.2179C10.3158 1.2179 12.4526 2.40904 12.4526 3.26211C12.4526 4.11519 10.3156 5.30633 6.83518 5.30633C3.35473 5.30633 1.21772 4.11519 1.21772 3.26211C1.2179 2.40904 3.35684 1.2179 6.83518 1.2179ZM12.3001 7.19172C9.27309 7.19172 7.69036 8.3561 7.69036 9.50586V15.6859C7.69036 16.8356 9.27503 18 12.3001 18C15.3047 18 16.8851 16.8522 16.9098 15.7105H16.9119V9.50604C16.9098 8.3561 15.3272 7.19172 12.3001 7.19172ZM12.3001 8.40963C14.538 8.40963 15.692 9.17819 15.692 9.50586C15.692 9.83353 14.538 10.6021 12.3001 10.6021C10.0623 10.6021 8.90827 9.83353 8.90827 9.50586C8.90827 9.17819 10.0623 8.40963 12.3001 8.40963ZM12.3001 16.7821C10.0623 16.7821 8.90827 16.0135 8.90827 15.6859V14.2104C9.68105 14.6308 10.8166 14.9111 12.3001 14.9111C13.7837 14.9111 14.9171 14.631 15.692 14.2104V15.6859C15.692 16.0135 14.538 16.7821 12.3001 16.7821ZM12.3001 13.6911C10.0623 13.6911 8.90827 12.9224 8.90827 12.5949V11.1194C9.68105 11.5399 10.8166 11.82 12.3001 11.82C13.7837 11.82 14.9171 11.5399 15.692 11.1194V12.5949C15.692 12.9224 14.538 13.6911 12.3001 13.6911Z" fill="white"/>
+                      </svg>
+                    <div className="text-white ">
+                      {credit}
+                    </div>
+                  </div>
+                </Link>
               <div 
               className='flex gap-2 justify-center items-center cursor-pointer p-2 hover:bg-bg-50 rounded-lg'
               onClick={() => setIsOpenUserMenu(true)}
@@ -139,14 +135,7 @@ export const UserMenu = ({isOpen, setIsOpen}: any) => {
             <div className='text-txt-100 text-ellipsis overflow-hidden'>
               {formatWalletAddress(user?.internal_address) || t('internal_address_loading', {ns: 'auth'})}
             </div>
-            <div className='cursor-pointer' onClick={() => {
-              copyToClipboard(user?.internal_address);
-              toast.success(t('copied', {ns: 'auth'}))
-            }}>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
-              </svg>
-            </div>
+            <CopyIcon text={user?.internal_address} />
           </div>
         </div>
         <button className='flex-1 flex w-full items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none' onClick={() => {

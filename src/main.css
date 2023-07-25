@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+[hidden] {
+  display: none !important;
+}
 @layer base {
   * {
     box-sizing: border-box;

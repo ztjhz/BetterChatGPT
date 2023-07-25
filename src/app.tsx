@@ -5,6 +5,7 @@ import ChatPage from "./pages/chat";
 import SearchPage from "./pages/search";
 import SearchResultPage from "./pages/search/result";
 import { CallbackPage } from "./pages/callback";
+import { CreditPage } from "./pages/credit";
 import { TransparentHeader } from "@components/Header/transparent";
 import { initUser } from "@utils/api";
 
@@ -33,6 +34,7 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<SearchPage />} />
       <Route path="/search/:question" element={<SearchResultPage />} />
+      <Route path="/user/credit" element={<CreditPage />} />
       <Route
         path="/chat"
         element={<SearchResultPage />}
