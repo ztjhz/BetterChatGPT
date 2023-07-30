@@ -5,6 +5,7 @@ import Api from './Api';
 import Me from './Me';
 import AboutMenu from '@components/AboutMenu';
 import ImportExportChat from '@components/ImportExportChat';
+import DefaultChatConfig from './DefaultChatConfig';
 import SettingsMenu from '@components/SettingsMenu';
 import CollapseOptions from './CollapseOptions';
 import GoogleSync from '@components/GoogleSync';
@@ -28,6 +29,7 @@ const MenuOptions = () => {
         <AboutMenu />
         <ImportExportChat />
         <Api />
+        <DefaultChatConfig />
         <SettingsMenu />
         <Me />
       </div>

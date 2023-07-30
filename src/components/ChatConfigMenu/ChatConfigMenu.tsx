@@ -32,7 +32,7 @@ const ChatConfigMenu = () => {
   );
 };
 
-const ChatConfigPopup = ({
+export const ChatConfigPopup = ({
   setIsModalOpen,
 }: {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
