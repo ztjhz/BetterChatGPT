@@ -1,11 +1,22 @@
 import { request, setRequestHeader } from '@api/request';
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
-import { bsc } from 'wagmi/chains';
+import { bsc, bscTestnet } from 'wagmi/chains';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { signMessage } from '@wagmi/core'
 import { initUser } from './api';
 
-const chains = [bsc]
+const VITE_SENTRY_ENV = import.meta.env.VITE_SENTRY_ENV
+
+export const bscConfigMap = VITE_SENTRY_ENV === 'development' ? {
+  chain: bscTestnet,
+  contractAddress: '0x91fA94E903bA414df622575B7a4ecF37a53639C5'
+} : {
+  chain: bsc,
+  contractAddress: '0x91fA94E903bA414df622575B7a4ecF37a53639C5'
+}
+
+const chains = [bscConfigMap.chain]
+// const chains = [bsc]
 export const projectId = 'b07dfe8b6ba7abcb519809d89b923367'
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 

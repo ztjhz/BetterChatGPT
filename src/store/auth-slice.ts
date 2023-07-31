@@ -9,8 +9,10 @@ interface checkinStatus {
 export interface AuthSlice {
   wallet_address: string;
   credit: number;
+  external_credit: number;
   checkinStatus: checkinStatus;
   fetchCredit: () => Promise<void>;
+  fetchExternalCredit: () => Promise<void>;
   fetchUser: () => Promise<void>;
   setWalletAddress: (wallet_addres: string) => void;
   unsetWalletAddress: () => void;
@@ -21,6 +23,7 @@ export interface AuthSlice {
 export const createAuthSlice: StoreSlice<AuthSlice> = (set, get) => ({
   wallet_address: '',
   credit:0,
+  external_credit: 0,
   user: {},
   checkinStatus: {},
   fetchUser: async () => {
@@ -56,4 +59,7 @@ export const createAuthSlice: StoreSlice<AuthSlice> = (set, get) => ({
       checkinStatus: data?.data
     }));
   },
+  fetchExternalCredit: async () => {
+    const {data} = await request.get('/user/external_credit')
+  }
 });
