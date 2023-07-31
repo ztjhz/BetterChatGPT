@@ -46,7 +46,7 @@
   "submitPlaceholder": "Type a message",
   "history": "History",
   "askToFAQ": "Ask to QnA3",
-  "mainSearchPlaceholder": "Ask any questions about Web3 and let QnA3 help you answer them.",
+  "mainSearchPlaceholder": "Not sure about web3 market? Ask AI",
   "noAnswer": "Apologies,I am unable to answer this question at the moment. QnA3 is still in its early stages, and we are diligently working on improvements.",
   "searchStatus": {
     "loading": "Preparing...",
@@ -60,7 +60,7 @@
   "trendingEvent": "What Happend Today?",
   "event": "Event",
   "question": "Question",
-  "trendingNews":{
+  "trendingNews": {
     "title": "What happend to crypto market?",
     "question": "Whales asking: "
   },

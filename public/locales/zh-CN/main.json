@@ -46,7 +46,7 @@
   "submitPlaceholder": "请输入消息",
   "history": "历史记录",
   "askToFAQ": "问问 QnA3",
-  "mainSearchPlaceholder": "提问任何有关于 Web3 的问题，让 QnA3 帮你解答",
+  "mainSearchPlaceholder": "摸不准行情或者看不懂项目?向AI提问",
   "noAnswer": "抱歉，我现在无法回答这个问题。 QnA3仍处于早期版本，我们仍在努力改进。",
   "searchStatus": {
     "loading": "准备中...",
@@ -64,7 +64,7 @@
     "title": "活动",
     "award": "奖励"
   },
-  "trendingNews":{
+  "trendingNews": {
     "title": "What happend to crypto market?",
     "question": "巨鲸在问："
   },

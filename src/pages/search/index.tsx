@@ -14,6 +14,7 @@ import { TrendingEvents } from '@components/TrendingEvents';
 import mixpanel from 'mixpanel-browser';
 import { CreditSummary } from '@components/Credit/summary';
 import { RankPage } from '../activities/rank';
+import { CheckInModal } from '@components/Search/checkInModal';
 
 const SearchPage = () => {
   const [searchText, setSearchText] = useState('');
@@ -46,6 +47,9 @@ const SearchPage = () => {
             setValue={setSearchText}
             handleSubmit={handleSubmit}
           />
+          <div>
+            <CheckInModal />
+          </div>
         </div>
         <div className='flex flex-col'>
           {/* <div className="mt-4">

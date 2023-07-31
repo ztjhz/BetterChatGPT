@@ -3,12 +3,14 @@ import { useState } from 'react';
 
 interface RankItemProps {
   rank: number;
+  question: string;
+  score: number;
 }
-const RankItem = ({ rank }: RankItemProps) => {
+const RankItem = ({ rank, question, score }: RankItemProps) => {
   const rankText = ['🥇', '🥈', '🥉'];
 
   return (
-    <div className='flex flex-col items-center justify-between md:flex-row'>
+    <div className='flex flex-col items-start  justify-start md:flex-row md:justify-between'>
       <div className='flex flex-row items-center gap-2'>
         <div
           className={`
@@ -19,14 +21,12 @@ const RankItem = ({ rank }: RankItemProps) => {
           {rank <= 3 ? rankText[rank - 1] : rank}
         </div>
         <div className='flex flex-col'>
-          <div className='text-md font-bold underline'>
-            What is the introduction of the Worldcoin project?
-          </div>
+          <div className='text-md font-bold underline'>{question}</div>
         </div>
       </div>
-      <div className='flex gap-2 self-end rounded-full bg-indigo-600 p-2 py-1 text-sm hover:bg-indigo-700 md:self-center'>
+      <div className='mt-4 flex gap-2 self-end rounded-full bg-indigo-600 p-2 py-1 text-sm hover:bg-indigo-700 md:self-center'>
         <div>🔥</div>
-        <div className='cursor-pointer font-bold'>Vote (376)</div>
+        <div className='cursor-pointer font-bold'>Vote ({score})</div>
       </div>
     </div>
   );
@@ -85,11 +85,56 @@ export const RankPage = () => {
         </div>
       </div>
       <div className='flex flex-col gap-4'>
-        <RankItem rank={1} />
-        <RankItem rank={2} />
-        <RankItem rank={3} />
-        <RankItem rank={4} />
-        <RankItem rank={5} />
+        <RankItem
+          rank={1}
+          score={1221}
+          question='What is the Worldcoin and how is its tokenomics?'
+        />
+        <RankItem
+          rank={2}
+          score={970}
+          question='What is the tokenomics of Polygon 2.0?'
+        />
+        <RankItem
+          rank={3}
+          score={660}
+          question='What are the important features of Lens V2?'
+        />
+        <RankItem
+          rank={4}
+          score={302}
+          question='What is project LayerZero and its token economics?'
+        />
+        <RankItem
+          rank={5}
+          score={127}
+          question="What tokens are affected by the outcome of SEC's lawsuit against Ripple?"
+        />
+        <RankItem
+          rank={6}
+          score={70}
+          question='What impact will the deployment of Uniswap on Avalanche have on both of them?'
+        />
+        <RankItem
+          rank={7}
+          score={30}
+          question='What roles can Web3 play in empowering individuals and communities?'
+        />
+        <RankItem
+          rank={8}
+          score={21}
+          question='Is Blockchain and Ai the future to the new generation?'
+        />
+        <RankItem
+          rank={9}
+          score={7}
+          question="What's arbitrage trading and how it works?"
+        />
+        <RankItem
+          rank={10}
+          score={1}
+          question='What is the difference between web2 and web3?'
+        />
       </div>
       <QNADialog
         isOpen={openRules}

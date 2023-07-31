@@ -29,7 +29,7 @@ export const QNADialog = ({
       }}
     >
       <div className='flex h-full w-full items-center justify-center'>
-        <div className='flex w-full transform flex-col gap-2 overflow-hidden rounded-xl bg-gray-850 text-left align-middle shadow-xl transition-all md:max-w-md'>
+        <div className='flex w-full transform flex-col  overflow-hidden rounded-xl bg-gray-850 text-left align-middle shadow-xl transition-all md:max-w-md'>
           <div className='flex items-center justify-between border-b border-bg-100 p-4 py-3 text-sm text-white'>
             <span>{title}</span>
             <div className='cursor-pointer p-2' onClick={() => onClose()}>
