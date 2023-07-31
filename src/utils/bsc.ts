@@ -4,7 +4,6 @@ import { bsc, bscTestnet } from 'wagmi/chains';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { signMessage } from '@wagmi/core'
 import { initUser } from './api';
-
 const VITE_SENTRY_ENV = import.meta.env.VITE_SENTRY_ENV
 
 export const bscConfigMap = VITE_SENTRY_ENV === 'development' ? {
@@ -16,7 +15,6 @@ export const bscConfigMap = VITE_SENTRY_ENV === 'development' ? {
 }
 
 const chains = [bscConfigMap.chain]
-// const chains = [bsc]
 export const projectId = 'b07dfe8b6ba7abcb519809d89b923367'
 const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
 
@@ -46,23 +44,3 @@ export const onConnect = async (address: string) => {
 export const onDisConnect = () => {
   localStorage.removeItem('qna3_wallet_token')
 }
-
-
-
-// const MMSDK = new MetaMaskSDK();
-// // export const bsc = MMSDK.getProvider();
-
-// export const connect = async () => {
-//   try {
-//     const chainId = '0x38'; // Binance Smart Chain Mainnet Chain ID
-//     await bsc?.request({ method: 'wallet_switchEthereumChain', params: [{ chainId }] });
-//     await bsc?.request({ method: 'eth_requestAccounts' });
-    
-//     const address = bsc?.selectedAddress;
-
-
-
-//   } catch (error) {
-//     console.error('Error connecting to Binance Smart Chain:', error);
-//   }
-// };

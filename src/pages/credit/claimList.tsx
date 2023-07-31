@@ -1,6 +1,10 @@
+import { request } from '@api/request';
 import useStore from '@store/store';
+import { bscConfigMap } from '@utils/bsc';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAccount, useContractWrite, useSwitchNetwork } from 'wagmi';
+import VoteABI from '@abi/QnaVote.json';
 
 interface ClaimItemProps {
   data: ClaimItem;
@@ -23,6 +27,22 @@ export const ClaimItem = ({ data: item }: ClaimItemProps) => {
   const extra = i18n.language === 'en' ? item?.extra?.en : item?.extra?.zh;
   const title = extra?.title;
   const desc = extra?.description;
+  const { address } = useAccount();
+  const { data, isLoading, isSuccess, write } = useContractWrite({
+    address: bscConfigMap.contractAddress as any,
+    abi: VoteABI,
+    functionName: 'claimCredit',
+  });
+
+  const claimCredit = async (id: number) => {
+    const { data } = await request.post('/credit/my/claim', { id });
+    const amount = data?.data?.amount;
+    const signature = data?.data?.signature;
+    write({
+      value: BigInt(0),
+      args: [amount, signature?.nonce, signature?.signature],
+    });
+  };
 
   return (
     <div
@@ -44,6 +64,11 @@ export const ClaimItem = ({ data: item }: ClaimItemProps) => {
               : 'cursor-default bg-gray-500'
           }
         `}
+          onClick={() => {
+            if (available) {
+              claimCredit(item.id);
+            }
+          }}
         >
           {available
             ? `${t('claim', { ns: 'credit' })} ${item.score} ${t('credits', {

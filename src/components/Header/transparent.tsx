@@ -7,7 +7,13 @@ import { WalletIcon, UserIcon } from '@heroicons/react/20/solid';
 import QNALogo from '@logo/qnaLogo';
 import { Link } from 'react-router-dom';
 import { useAccount, useDisconnect } from 'wagmi';
-import { onConnect, onDisConnect, BSCClient } from '@utils/bsc';
+import {
+  onConnect,
+  onDisConnect,
+  BSCClient,
+  BSCConfig,
+  bscConfigMap,
+} from '@utils/bsc';
 import { useWeb3Modal, useWeb3ModalEvents } from '@web3modal/react';
 import { t } from 'i18next';
 import { I18NSelector } from './i18nSelector';
@@ -19,6 +25,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import mixpanel from 'mixpanel-browser';
 import { formatWalletAddress } from '@utils/wallet';
 import { CopyIcon } from '@components/CopyIcon';
+import { switchNetwork } from '@wagmi/core';
 
 interface TransparentHeaderProps {
   showLogo?: boolean;
@@ -140,6 +147,17 @@ export const TransparentHeader = ({
   );
 };
 
+const beforeConnect = async () => {
+  const connectors = BSCClient?.getConnectors();
+  if (!connectors?.length) {
+    toast.error(t('bsc_error'));
+  }
+  await BSCClient?.connectConnector(connectors[0]?.id);
+  await BSCClient.switchNetwork({
+    chainId: bscConfigMap.chain.id,
+  });
+};
+
 export const UserMenu = ({ isOpen, setIsOpen }: any) => {
   const { logout, isAuthenticated } = useAuth0();
   const user = useStore((state) => state.user);
@@ -186,11 +204,8 @@ export const UserMenu = ({ isOpen, setIsOpen }: any) => {
         ) : (
           <button
             className='flex w-full flex-1 items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
-            onClick={() => {
-              const connectors = BSCClient?.getConnectors();
-              if (!connectors?.length) {
-                toast.error(t('bsc_error'));
-              }
+            onClick={async () => {
+              await beforeConnect();
               open();
             }}
           >
@@ -277,11 +292,8 @@ export const SignInModal = ({ isOpen, setIsOpen }: any) => {
         </button>
         <button
           className='flex w-full flex-1 items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
-          onClick={() => {
-            const connectors = BSCClient?.getConnectors();
-            if (!connectors?.length) {
-              toast.error(t('bsc_error'));
-            }
+          onClick={async () => {
+            await beforeConnect();
             open();
           }}
         >
