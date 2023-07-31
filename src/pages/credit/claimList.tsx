@@ -1,7 +1,29 @@
+import useStore from '@store/store';
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+
 interface ClaimItemProps {
-  available?: boolean;
+  data: ClaimItem;
 }
-export const ClaimItem = ({ available }: ClaimItemProps) => {
+
+interface ClaimItem {
+  id: number;
+  user_id: string;
+  typ: string;
+  sign_day: number;
+  sign_in_id: number;
+  score: number;
+  extra: any | null;
+  claimed: boolean;
+  created_at: Date;
+}
+export const ClaimItem = ({ data: item }: ClaimItemProps) => {
+  const available = !item.claimed;
+  const { t, i18n } = useTranslation();
+  const extra = i18n.language === 'en' ? item?.extra?.en : item?.extra?.zh;
+  const title = extra?.title;
+  const desc = extra?.description;
+
   return (
     <div
       className={`
@@ -10,8 +32,8 @@ export const ClaimItem = ({ available }: ClaimItemProps) => {
     `}
     >
       <div className='p-4 pb-0 md:pb-4'>
-        <p className='mb-2 font-bold'>Daily Activity：2023-06-07</p>
-        <p>Ask 3 question to earn credits!</p>
+        <p className='mb-2 font-bold'>{title}</p>
+        <p>{desc}</p>
       </div>
       <div className='p-4'>
         <div
@@ -23,7 +45,11 @@ export const ClaimItem = ({ available }: ClaimItemProps) => {
           }
         `}
         >
-          {available ? `Claim 10 Credits` : 'CLAIMED'}
+          {available
+            ? `${t('claim', { ns: 'credit' })} ${item.score} ${t('credits', {
+                ns: 'credit',
+              })}`
+            : 'CLAIMED'}
         </div>
       </div>
     </div>
@@ -31,13 +57,20 @@ export const ClaimItem = ({ available }: ClaimItemProps) => {
 };
 
 export const ClaimList = () => {
+  const claimHistory = useStore((state) => state.claimHistory);
+  const getClaimHistory = useStore((state) => state.fetchCreditClaimHistory);
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    getClaimHistory();
+  }, [1]);
   return (
     <div>
-      <div className='mb-4 font-bold text-white'>CREDITS CLAIM</div>
+      <div className='mb-4 font-bold text-white'>
+        {t('credits_claim', { ns: 'credit' })}
+      </div>
       <div className='flex flex-col gap-4'>
-        <ClaimItem available />
-        <ClaimItem available />
-        <ClaimItem available={false} />
+        {claimHistory?.map((claim) => <ClaimItem data={claim} />)}
       </div>
     </div>
   );

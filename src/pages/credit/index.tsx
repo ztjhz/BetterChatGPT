@@ -10,11 +10,14 @@ import { ClaimList } from './claimList';
 import { useContractRead } from 'wagmi';
 import VoteABI from '@abi/QnaVote.json';
 import { bscConfigMap } from '@utils/bsc';
+import { useTranslation } from 'react-i18next';
 
 export const CreditPage = () => {
   const { address } = useAccount();
   const credit = useStore((state) => state.credit);
   const user = useStore((state) => state.user);
+  const { t, i18n } = useTranslation();
+
   const [isCustodianDialogOpen, setIsCustodianDialogOpen] = useState(false);
   const [isWalletDialogOpen, setIsWalletDialogOpen] = useState(false);
   const { data: contractBalance } = useContractRead({
@@ -30,12 +33,14 @@ export const CreditPage = () => {
         <TransparentHeader />
       </div>
       <div className='m-auto h-full w-full max-w-3xl flex-1 flex-col p-4 md:max-w-3xl md:px-4 lg:max-w-3xl xl:max-w-5xl'>
-        <div className='mb-4 font-bold text-white'>MY CREDIT</div>
+        <div className='mb-4 font-bold text-white'>
+          {t('my_credit', { ns: 'credit' })}
+        </div>
         <div className='mb-4 flex flex-col gap-4 md:flex-row'>
           <div className='rounded-md bg-gradient-to-r from-gray-800 to-gray-900 p-4 md:flex-1'>
             <div className='mb-2 flex items-center gap-2'>
               <p className='text-md text-left font-bold text-white'>
-                Custodian Wallet
+                {t('custodian_wallet', { ns: 'credit' })}
               </p>
               <InformationIcon
                 className='h-4 w-4 cursor-pointer text-white'
@@ -54,7 +59,8 @@ export const CreditPage = () => {
               </div>
               <div>
                 <p className='text-left text-sm text-white'>
-                  <strong className='text-lg'>{credit}</strong> Credit
+                  <strong className='text-lg'>{credit}</strong>{' '}
+                  {t('credits', { ns: 'credit' })}
                 </p>
               </div>
             </div>
@@ -62,7 +68,7 @@ export const CreditPage = () => {
           <div className='relative rounded-md bg-gradient-to-r from-violet-400 to-fuchsia-400 p-4 md:flex-1'>
             <div className='mb-2 flex items-center  gap-2'>
               <p className='text-md text-left font-bold text-white'>
-                External Wallet
+                {t('external_wallet', { ns: 'credit' })}
               </p>
               <InformationIcon
                 className='h-4 w-4 cursor-pointer text-white'
@@ -84,7 +90,7 @@ export const CreditPage = () => {
                   <strong className='text-lg'>
                     {contractBalance?.toString() as string}
                   </strong>{' '}
-                  Credit
+                  {t('credits', { ns: 'credit' })}
                 </p>
               </div>
             </div>
@@ -94,25 +100,30 @@ export const CreditPage = () => {
         <QNADialog
           isOpen={isCustodianDialogOpen}
           onClose={() => setIsCustodianDialogOpen(false)}
-          title='托管钱包的积分怎么用？'
+          title={t('custodian_tips.title', { ns: 'credit' })}
         >
           <div className='p-4 pb-6 text-white'>
             <ul className='flex flex-col gap-2 text-sm'>
-              <li>1. 提问消耗 1 积分</li>
-              <li>2. 对答案的 Vote 获得 1 积分</li>
-              <li>3. 免 Gas 费</li>
+              {t('custodian_tips.description', { ns: 'credit' })
+                .split('\n')
+                .map((item, index) => {
+                  return <li key={index}>{item}</li>;
+                })}
             </ul>
           </div>
         </QNADialog>
         <QNADialog
           isOpen={isWalletDialogOpen}
           onClose={() => setIsWalletDialogOpen(false)}
-          title='外部钱包的积分怎么用？'
+          title={t('external_tips.title', { ns: 'credit' })}
         >
           <div className='p-4 pb-6 text-white'>
             <ul className='flex flex-col gap-2 text-sm'>
-              <li>1. 参加 QnA3 官方网站的活动可获得积分</li>
-              <li>2. 后续将支持将托管钱包中的积分转移到外部钱包中</li>
+              {t('external_tips.description', { ns: 'credit' })
+                .split('\n')
+                .map((item, index) => {
+                  return <li key={index}>{item}</li>;
+                })}
             </ul>
           </div>
         </QNADialog>

@@ -11,8 +11,10 @@ export interface AuthSlice {
   credit: number;
   external_credit: number;
   checkinStatus: checkinStatus;
+  claimHistory: any[];
   fetchCredit: () => Promise<void>;
   fetchExternalCredit: () => Promise<void>;
+  fetchCreditClaimHistory: () => Promise<void>;
   fetchUser: () => Promise<void>;
   setWalletAddress: (wallet_addres: string) => void;
   unsetWalletAddress: () => void;
@@ -26,6 +28,7 @@ export const createAuthSlice: StoreSlice<AuthSlice> = (set, get) => ({
   external_credit: 0,
   user: {},
   checkinStatus: {},
+  claimHistory: [],
   fetchUser: async () => {
     const {data} = await request.get('/user/me')
     set((prev: AuthSlice) => ({
@@ -61,5 +64,12 @@ export const createAuthSlice: StoreSlice<AuthSlice> = (set, get) => ({
   },
   fetchExternalCredit: async () => {
     const {data} = await request.get('/user/external_credit')
-  }
+  },
+  fetchCreditClaimHistory: async() => {
+    const {data} = await request.get('/credit/my/history')
+    set((prev: AuthSlice) => ({
+      ...prev,
+      claimHistory: data?.data
+    }));
+  },
 });

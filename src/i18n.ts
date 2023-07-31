@@ -9,7 +9,7 @@ export const i18nLanguages = [
   'zh-CN',
 ];
 
-const namespace = ['main', 'api', 'about', 'model', 'source', 'auth'];
+const namespace = ['main', 'api', 'about', 'model', 'source', 'auth', 'credit'];
 
 i18n
   .use(Backend)

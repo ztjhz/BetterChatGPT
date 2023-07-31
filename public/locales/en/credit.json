@@ -1,0 +1,18 @@
+{
+  "my_credit": "MY CREDIT",
+  "custodian_wallet": "Custodian Wallet",
+  "external_wallet": "External Wallet",
+  "custodian_tips": {
+    "title": "How to use credits in custodian wallet?",
+    "description": "1. Asking a question costs 1 credit.\n 2. Upvoting or downvoting an answer earns 1 credit.\n 3. No Gas fee."
+  },
+  "external_tips": {
+    "title": "How to use credits in external wallet?",
+    "description": "1. Participating in QnA3 official activities can earn credits, and may receive airdrops in the future.\n2. Transferring from custodian wallet to external wallet will be supported soon."
+  },
+  "claim": "Claim",
+  "credits": "credits",
+  "credits_claim": "CREDITS CLAIM",
+  "connect_tips": "Connect your wallet and receive 20 credits instantly",
+  "claimed": "Claimed"
+}

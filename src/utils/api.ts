@@ -24,9 +24,8 @@ export const initUser = async (access_token?: string, id_token?: string) => {
         setRequestHeader('x-id', data?.data?.id as string)
       }
     }else{
-      console.log('wallet_jwt', wallet_jwt)
-
       setRequestHeader('Authorization', `Bearer ${wallet_jwt}`)
+      setRequestHeader('x-id', user_id as string)
     }
 
     // 更新用户基本信息
