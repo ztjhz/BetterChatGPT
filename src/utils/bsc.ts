@@ -17,12 +17,15 @@ export const BSCConfig = createConfig({
 export const BSCClient = new EthereumClient(BSCConfig, chains)
 
 export const onConnect = async (address: string) => {
-  if(address){
-    // const signature = await signMessage({
-    //   message: 'AI + DYOR = Ultimate Answer to Unlock Web3 Universe',
-    // })
+  const walletToken = localStorage.getItem('qna3_wallet_token')
+
+  if(address && !walletToken){
+    const signature = await signMessage({
+      message: 'AI + DYOR = Ultimate Answer to Unlock Web3 Universe',
+    })
     const {data} = await request.post('/user/wallet_login', {
-      wallet_address: address
+      wallet_address: address,
+      signature: signature
     })
     localStorage.setItem('qna3_wallet_token', data?.access_token)
     await initUser();
