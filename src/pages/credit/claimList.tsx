@@ -1,7 +1,7 @@
 import { request } from '@api/request';
 import useStore from '@store/store';
 import { bscConfigMap } from '@utils/bsc';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAccount, useContractWrite, useSwitchNetwork } from 'wagmi';
 import VoteABI from '@abi/QnaVote.json';
@@ -24,24 +24,28 @@ interface ClaimItem {
 export const ClaimItem = ({ data: item }: ClaimItemProps) => {
   const available = !item.claimed;
   const { t, i18n } = useTranslation();
+  const [claiming, setClaiming] = useState(false);
   const extra = i18n.language === 'en' ? item?.extra?.en : item?.extra?.zh;
   const title = extra?.title;
   const desc = extra?.description;
   const { address } = useAccount();
-  const { data, isLoading, isSuccess, write } = useContractWrite({
-    address: bscConfigMap.contractAddress as any,
-    abi: VoteABI,
-    functionName: 'claimCredit',
-  });
+  const { data, isLoading, isSuccess, isError, write, writeAsync } =
+    useContractWrite({
+      address: bscConfigMap.contractAddress as any,
+      abi: VoteABI,
+      functionName: 'claimCredit',
+    });
 
   const claimCredit = async (id: number) => {
+    setClaiming(true);
     const { data } = await request.post('/credit/my/claim', { id });
     const amount = data?.data?.amount;
     const signature = data?.data?.signature;
-    write({
+    await writeAsync({
       value: BigInt(0),
       args: [amount, signature?.nonce, signature?.signature],
     });
+    setClaiming(false);
   };
 
   return (
@@ -71,9 +75,11 @@ export const ClaimItem = ({ data: item }: ClaimItemProps) => {
           }}
         >
           {available
-            ? `${t('claim', { ns: 'credit' })} ${item.score} ${t('credits', {
-                ns: 'credit',
-              })}`
+            ? claiming
+              ? 'claiming...'
+              : `${t('claim', { ns: 'credit' })} ${item.score} ${t('credits', {
+                  ns: 'credit',
+                })}`
             : 'CLAIMED'}
         </div>
       </div>

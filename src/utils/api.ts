@@ -1,10 +1,12 @@
 import { request, setRequestHeader } from "@api/request";
-import { GetTokenSilentlyOptions } from "@auth0/auth0-react";
 import store from "@store/store";
 import { BSCConfig } from "./bsc";
 import mixpanel from 'mixpanel-browser';
+import { auth0Client } from "./auth0";
 
-export const initUser = async (access_token?: string, id_token?: string) => {
+
+
+export const initUser = async (access_token?: string,) => {
   const user_id = localStorage.getItem('qna3_user_id');
   const wallet_jwt = localStorage.getItem('qna3_wallet_token');
   const walletAddress = BSCConfig?.data?.account
@@ -12,17 +14,12 @@ export const initUser = async (access_token?: string, id_token?: string) => {
   if(user_id) {
     mixpanel.identify(user_id as string)
   }
+  setRequestHeader('x-id', user_id as string)
 
   // 已登录用户
   if(wallet_jwt || access_token){
     if(access_token){
       setRequestHeader('Authorization', `Bearer ${access_token}`)
-      setRequestHeader('x-id-token', id_token as string)
-      const {data} = await request.get('/user/web2_login')
-      if(data?.data?.id){
-        localStorage.setItem('qna3_user_id', data?.data?.id);
-        setRequestHeader('x-id', data?.data?.id as string)
-      }
     }else{
       setRequestHeader('Authorization', `Bearer ${wallet_jwt}`)
       setRequestHeader('x-id', user_id as string)
@@ -36,7 +33,6 @@ export const initUser = async (access_token?: string, id_token?: string) => {
 
   const {data} = await request.get('/init', {
     headers: {
-      'x-id-token': id_token || null,
       'x-id': user_id || null,
       'Authorization': access_token ? `Bearer ${access_token}` : null
     }

@@ -3,10 +3,10 @@ import { useAuth0 } from '@auth0/auth0-react';
 import useStore from '@store/store';
 import { Fragment, useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import { WalletIcon, UserIcon } from '@heroicons/react/20/solid';
+
 import QNALogo from '@logo/qnaLogo';
 import { Link } from 'react-router-dom';
-import { useAccount, useDisconnect } from 'wagmi';
+import { useAccount, useConnect, useDisconnect, useSwitchNetwork } from 'wagmi';
 import {
   onConnect,
   onDisConnect,
@@ -26,6 +26,9 @@ import mixpanel from 'mixpanel-browser';
 import { formatWalletAddress } from '@utils/wallet';
 import { CopyIcon } from '@components/CopyIcon';
 import { switchNetwork } from '@wagmi/core';
+import { connect } from '@wagmi/core';
+import MetaMaskIcon from '@icon/MetaMaskIcon';
+import WalletConnectIcon from '@icon/WalletConnectIcon';
 
 interface TransparentHeaderProps {
   showLogo?: boolean;
@@ -147,26 +150,29 @@ export const TransparentHeader = ({
   );
 };
 
-const beforeConnect = async () => {
-  const connectors = BSCClient?.getConnectors();
-  if (!connectors?.length) {
-    toast.error(t('bsc_error'));
+const beforeConnect = async (connector: any) => {
+  try {
+    await BSCClient?.connectConnector(connector.id);
+    await BSCClient.switchNetwork({
+      chainId: bscConfigMap.chain.id,
+    });
+  } catch (e) {
+    throw e;
   }
-  await BSCClient?.connectConnector(connectors[0]?.id);
-  await BSCClient.switchNetwork({
-    chainId: bscConfigMap.chain.id,
-  });
 };
 
 export const UserMenu = ({ isOpen, setIsOpen }: any) => {
   const { logout, isAuthenticated } = useAuth0();
   const user = useStore((state) => state.user);
-  const fetchUser = useStore((state) => state.fetchUser);
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
-  const { t, i18n } = useTranslation();
-  const [state, copyToClipboard] = useCopyToClipboard();
-  const { open } = useWeb3Modal();
+  const { t } = useTranslation();
+  const { connect, connectors, error, isLoading, pendingConnector } =
+    useConnect();
+  const iconMap: any = {
+    MetaMask: MetaMaskIcon,
+    WalletConnect: WalletConnectIcon,
+  };
   return (
     <QNADialog isOpen={isOpen} onClose={() => setIsOpen(false)} title=''>
       <div className='flex flex-col gap-4 p-4'>
@@ -202,22 +208,28 @@ export const UserMenu = ({ isOpen, setIsOpen }: any) => {
             </div>
           </div>
         ) : (
-          <button
-            className='flex w-full flex-1 items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
-            onClick={async () => {
-              await beforeConnect();
-              open();
-            }}
-          >
-            <img
-              style={{
-                width: '24px',
-                height: '24px',
+          connectors.map((connector) => (
+            <button
+              disabled={!connector.ready}
+              key={connector.id}
+              className='flex w-full flex-1 items-center justify-start gap-4 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
+              onClick={async () => {
+                await beforeConnect(connector);
+                connect({ connector });
               }}
-              src='https://0xfaqstorage.blob.core.windows.net/web-static/wallet_connect_logo.png'
-            />
-            <span>{t('connect', { ns: 'auth' })}</span>
-          </button>
+            >
+              {iconMap[connector.name]({
+                className: 'h-6 w-6',
+              })}
+              <div>
+                {connector.name}
+                {!connector.ready && ' (unsupported)'}
+                {isLoading &&
+                  connector.id === pendingConnector?.id &&
+                  ' (connecting)'}
+              </div>
+            </button>
+          ))
         )}
         <button
           className='flex w-full flex-1 items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
@@ -254,9 +266,45 @@ export const UserMenu = ({ isOpen, setIsOpen }: any) => {
   );
 };
 
+const web3Modal = () => {
+  const { connect, connectors, error, isLoading, pendingConnector } =
+    useConnect();
+  const iconMap: any = {
+    MetaMask: MetaMaskIcon,
+    WalletConnect: WalletConnectIcon,
+  };
+  return (
+    <>
+      {connectors.map((connector) => (
+        <button
+          disabled={!connector.ready}
+          key={connector.id}
+          className='flex w-full flex-1 items-center justify-start gap-4 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
+          onClick={async () => {
+            await beforeConnect(connector);
+            connect({ connector });
+          }}
+        >
+          {iconMap[connector.name]({
+            className: 'h-6 w-6',
+          })}
+          <div>
+            {connector.name}
+            {!connector.ready && ' (unsupported)'}
+            {isLoading &&
+              connector.id === pendingConnector?.id &&
+              ' (connecting)'}
+          </div>
+        </button>
+      ))}
+
+      {error && <div>{error.message}</div>}
+    </>
+  );
+};
+
 export const SignInModal = ({ isOpen, setIsOpen }: any) => {
   const { loginWithRedirect } = useAuth0();
-  const { open } = useWeb3Modal();
 
   return (
     <QNADialog
@@ -266,7 +314,7 @@ export const SignInModal = ({ isOpen, setIsOpen }: any) => {
     >
       <div className='flex flex-col gap-4 p-4'>
         <button
-          className='flex w-full flex-1 items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
+          className='flex w-full flex-1 items-center justify-start gap-4 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
           onClick={() => {
             mixpanel.track('trigger_login_web2');
             loginWithRedirect();
@@ -290,22 +338,7 @@ export const SignInModal = ({ isOpen, setIsOpen }: any) => {
           </div>
           <span>{t('username&password', { ns: 'auth' })}</span>
         </button>
-        <button
-          className='flex w-full flex-1 items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
-          onClick={async () => {
-            await beforeConnect();
-            open();
-          }}
-        >
-          <img
-            style={{
-              width: '24px',
-              height: '24px',
-            }}
-            src='https://0xfaqstorage.blob.core.windows.net/web-static/wallet_connect_logo.png'
-          />
-          <span>{t('connect', { ns: 'auth' })}</span>
-        </button>
+        {web3Modal()}
       </div>
     </QNADialog>
   );

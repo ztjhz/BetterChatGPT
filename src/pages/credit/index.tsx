@@ -20,7 +20,11 @@ export const CreditPage = () => {
 
   const [isCustodianDialogOpen, setIsCustodianDialogOpen] = useState(false);
   const [isWalletDialogOpen, setIsWalletDialogOpen] = useState(false);
-  const { data: contractBalance } = useContractRead({
+  const {
+    data: contractBalance,
+    error,
+    isLoading,
+  } = useContractRead({
     address: bscConfigMap.contractAddress as any,
     abi: VoteABI,
     functionName: 'getCredit',

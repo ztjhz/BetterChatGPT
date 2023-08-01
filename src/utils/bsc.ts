@@ -4,6 +4,9 @@ import { bsc, bscTestnet } from 'wagmi/chains';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { signMessage } from '@wagmi/core'
 import { initUser } from './api';
+import { MetaMaskConnector } from '@wagmi/core/connectors/metaMask'
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+import { publicProvider } from 'wagmi/providers/public'
 const VITE_SENTRY_ENV = import.meta.env.VITE_SENTRY_ENV
 
 export const bscConfigMap = VITE_SENTRY_ENV === 'development' ? {
@@ -15,16 +18,29 @@ export const bscConfigMap = VITE_SENTRY_ENV === 'development' ? {
 }
 
 const chains = [bscConfigMap.chain]
+
+// wallet connect
 export const projectId = 'b07dfe8b6ba7abcb519809d89b923367'
-const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
+const { publicClient, webSocketPublicClient } = configureChains(chains, [publicProvider()])
 
 export const BSCConfig = createConfig({
   autoConnect: true,
-  connectors: w3mConnectors({ projectId, chains }),
-  publicClient
+  connectors: [
+    new MetaMaskConnector({ chains }),
+    new WalletConnectConnector({
+      chains,
+      options: {
+        projectId: projectId,
+      },
+    })
+  ],
+  publicClient,
+  webSocketPublicClient
 })
 export const BSCClient = new EthereumClient(BSCConfig, chains)
 
+ 
+// connect callback
 export const onConnect = async (address: string) => {
   const walletToken = localStorage.getItem('qna3_wallet_token')
 
