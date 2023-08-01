@@ -42,7 +42,6 @@ const bindWeb2UserEmail = async (token: string, user: User) => {
 
 export const Auth0ProviderWithNavigate = ({ children }: any) => {
   const navigate = useNavigate();
-  const { isLoading, getAccessTokenSilently, getIdTokenClaims } = useAuth0();
 
   const onRedirectCallback = async (appState: any) => {
     const newToken = await auth0Client.getTokenSilently();

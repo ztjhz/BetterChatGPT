@@ -5,9 +5,11 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAccount, useContractWrite, useSwitchNetwork } from 'wagmi';
 import VoteABI from '@abi/QnaVote.json';
+import { UserMenu } from '@components/Header/transparent';
 
 interface ClaimItemProps {
   data: ClaimItem;
+  onClaimed: () => void;
 }
 
 interface ClaimItem {
@@ -21,22 +23,27 @@ interface ClaimItem {
   claimed: boolean;
   created_at: Date;
 }
-export const ClaimItem = ({ data: item }: ClaimItemProps) => {
+export const ClaimItem = ({ data: item, onClaimed }: ClaimItemProps) => {
   const available = !item.claimed;
   const { t, i18n } = useTranslation();
   const [claiming, setClaiming] = useState(false);
+  const [openLoginModal, setLoginModal] = useState(false);
   const extra = i18n.language === 'en' ? item?.extra?.en : item?.extra?.zh;
   const title = extra?.title;
   const desc = extra?.description;
   const { address } = useAccount();
-  const { data, isLoading, isSuccess, isError, write, writeAsync } =
-    useContractWrite({
-      address: bscConfigMap.contractAddress as any,
-      abi: VoteABI,
-      functionName: 'claimCredit',
-    });
+  const { writeAsync } = useContractWrite({
+    address: bscConfigMap.contractAddress as any,
+    abi: VoteABI,
+    functionName: 'claimCredit',
+  });
 
   const claimCredit = async (id: number) => {
+    if (claiming) return;
+    if (!address) {
+      setLoginModal(true);
+      return;
+    }
     setClaiming(true);
     const { data } = await request.post('/credit/my/claim', { id });
     const amount = data?.data?.amount;
@@ -45,6 +52,8 @@ export const ClaimItem = ({ data: item }: ClaimItemProps) => {
       value: BigInt(0),
       args: [amount, signature?.nonce, signature?.signature],
     });
+    await request.put(`/credit/my/claim/${id}`);
+    onClaimed();
     setClaiming(false);
   };
 
@@ -62,11 +71,11 @@ export const ClaimItem = ({ data: item }: ClaimItemProps) => {
       <div className='p-4'>
         <div
           className={`
-          cursor-pointer rounded-lg  p-2 text-center font-bold text-black ${
-            available
-              ? 'bg-indigo-200 hover:bg-indigo-300'
-              : 'cursor-default bg-gray-500'
-          }
+           rounded-lg  p-2 text-center font-bold text-black ${
+             available
+               ? 'cursor-pointer bg-indigo-200 hover:bg-indigo-300'
+               : 'cursor-default bg-gray-500'
+           }
         `}
           onClick={() => {
             if (available) {
@@ -80,9 +89,10 @@ export const ClaimItem = ({ data: item }: ClaimItemProps) => {
               : `${t('claim', { ns: 'credit' })} ${item.score} ${t('credits', {
                   ns: 'credit',
                 })}`
-            : 'CLAIMED'}
+            : t('claimed', { ns: 'credit' })}
         </div>
       </div>
+      <UserMenu isOpen={openLoginModal} setIsOpen={setLoginModal} />
     </div>
   );
 };
@@ -101,7 +111,9 @@ export const ClaimList = () => {
         {t('credits_claim', { ns: 'credit' })}
       </div>
       <div className='flex flex-col gap-4'>
-        {claimHistory?.map((claim) => <ClaimItem data={claim} />)}
+        {claimHistory?.map((claim) => (
+          <ClaimItem data={claim} onClaimed={getClaimHistory} />
+        ))}
       </div>
     </div>
   );

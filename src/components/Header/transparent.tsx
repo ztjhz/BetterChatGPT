@@ -266,7 +266,7 @@ export const UserMenu = ({ isOpen, setIsOpen }: any) => {
   );
 };
 
-const web3Modal = () => {
+export const web3Modal = () => {
   const { connect, connectors, error, isLoading, pendingConnector } =
     useConnect();
   const iconMap: any = {

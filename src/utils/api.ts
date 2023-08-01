@@ -28,6 +28,8 @@ export const initUser = async (access_token?: string,) => {
     // 更新用户基本信息
     store.getState().fetchCredit();
     store.getState().fetchUser();
+    store.getState().fetchCreditClaimHistory();
+    store.getState().getCheckinStatus();
     return
   }
 
