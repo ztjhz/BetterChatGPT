@@ -7,7 +7,7 @@ export const CreditSummary = () => {
   const shouldShowNew = claimHistory.some((item) => !item.claimed);
   const navigate = useNavigate();
   return (
-    <div className='mb-4 hidden flex-col gap-4 bg-bg-50 p-4 md:flex'>
+    <div className='mb-4 hidden w-full flex-col gap-4 bg-bg-50 p-4 md:flex'>
       {renderInternalWallet()}
       <div className='relative'>
         {shouldShowNew && (

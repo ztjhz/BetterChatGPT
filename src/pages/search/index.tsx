@@ -40,7 +40,7 @@ const SearchPage = () => {
       </div>
       {/* <FreeTip /> */}
       <div
-        className={`m-auto flex h-full w-full max-w-3xl flex-1 flex-col md:max-w-3xl md:px-4 lg:max-w-3xl xl:max-w-6xl`}
+        className={`m-auto flex h-full w-full max-w-3xl flex-1 flex-col md:max-w-6xl md:px-4 `}
       >
         <div className='bg-bg-50 p-4 md:mt-10 md:bg-transparent md:p-0'>
           <SearchInput
@@ -100,7 +100,7 @@ const SearchPage = () => {
                 </div>
               </div>
               <div
-                className='w-1/4 flex-1 shrink-0'
+                className='hidden w-1/3 shrink-0 md:block'
                 style={{
                   marginTop: '53px',
                 }}
