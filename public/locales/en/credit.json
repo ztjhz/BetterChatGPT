@@ -14,5 +14,10 @@
   "credits": "credits",
   "credits_claim": "CREDITS CLAIM",
   "connect_tips": "Connect your wallet and receive 20 credits instantly",
-  "claimed": "Claimed"
+  "claimed": "Claimed",
+  "claim_link": "Claim Credits",
+  "activities": {
+    "title": "Ask 3 questions to earn credits",
+    "state": "Today's Questions Asked:"
+  }
 }

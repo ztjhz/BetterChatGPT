@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useAccount, useContractWrite, useSwitchNetwork } from 'wagmi';
 import VoteABI from '@abi/QnaVote.json';
 import { UserMenu } from '@components/Header/transparent';
+import { toast } from 'react-toastify';
 
 interface ClaimItemProps {
   data: ClaimItem;
@@ -48,13 +49,17 @@ export const ClaimItem = ({ data: item, onClaimed }: ClaimItemProps) => {
     const { data } = await request.post('/credit/my/claim', { id });
     const amount = data?.data?.amount;
     const signature = data?.data?.signature;
-    await writeAsync({
-      value: BigInt(0),
-      args: [amount, signature?.nonce, signature?.signature],
-    });
-    await request.put(`/credit/my/claim/${id}`);
-    onClaimed();
-    setClaiming(false);
+    try {
+      await writeAsync({
+        value: BigInt(0),
+        args: [amount, signature?.nonce, signature?.signature],
+      });
+      await request.put(`/credit/my/claim/${id}`);
+      onClaimed();
+      setClaiming(false);
+    } catch (e) {
+      setClaiming(false);
+    }
   };
 
   return (

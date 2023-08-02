@@ -40,18 +40,12 @@ export const TransparentHeader = ({
   background,
 }: TransparentHeaderProps) => {
   let [isOpen, setIsOpen] = useState(false);
-  const fetchCredit = useStore((state) => state.fetchCredit);
-  const fetchUser = useStore((state) => state.fetchUser);
   let [isOpenUserMenu, setIsOpenUserMenu] = useState(false);
   const { address, isConnected } = useAccount({
     onConnect: ({ address }) => {
+      console.log('already connect');
       onConnect(address as string);
-      fetchCredit();
-      fetchUser();
       setIsOpen(false);
-      mixpanel.track('connect', {
-        address: address,
-      });
     },
     onDisconnect: () => {
       onDisConnect();
@@ -60,6 +54,8 @@ export const TransparentHeader = ({
   const { user, loginWithRedirect, logout, isLoading, isAuthenticated } =
     useAuth0();
   const credit = useStore((state) => state.credit);
+  const walletToken = useStore((state) => state.wallet_token);
+
   return (
     <>
       <div
@@ -75,7 +71,7 @@ export const TransparentHeader = ({
             <I18NSelector />
           </div>
           <div className='flex justify-end py-4'>
-            {user || isConnected ? (
+            {user || walletToken ? (
               <>
                 <div className='flex items-center overflow-hidden text-sm md:text-sm '>
                   <Link to='/user/credit'>
@@ -165,6 +161,7 @@ export const UserMenu = ({ isOpen, setIsOpen }: any) => {
   const { logout, isAuthenticated } = useAuth0();
   const user = useStore((state) => state.user);
   const { address, isConnected } = useAccount();
+  const walletToken = useStore((state) => state.wallet_token);
   const { disconnect } = useDisconnect();
   const { t } = useTranslation();
   const { connect, connectors, error, isLoading, pendingConnector } =
@@ -191,7 +188,7 @@ export const UserMenu = ({ isOpen, setIsOpen }: any) => {
             <CopyIcon text={user?.internal_address} />
           </div>
         </div>
-        {isConnected ? (
+        {!!walletToken ? (
           <div
             hidden={!user}
             className='flex flex-col rounded-md bg-bg-100 p-4 text-txt-70'
@@ -237,7 +234,7 @@ export const UserMenu = ({ isOpen, setIsOpen }: any) => {
             if (isAuthenticated) {
               logout();
             }
-            if (isConnected) {
+            if (!!walletToken) {
               disconnect();
             }
             setIsOpen(false);

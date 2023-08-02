@@ -14,5 +14,10 @@
   "credits": "积分",
   "credits_claim": "积分领取",
   "connect_tips": "连接钱包即送 20 积分",
-  "claimed": "已领取"
+  "claimed": "已领取",
+  "claim_link": "去领取积分",
+  "activities": {
+    "title": "每日提问打卡得积分",
+    "state": "今日已提问："
+  }
 }

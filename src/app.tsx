@@ -9,18 +9,21 @@ import { CreditPage } from './pages/credit';
 import { TransparentHeader } from '@components/Header/transparent';
 import { initUser } from '@utils/api';
 
-export const App = () => {
+export const App = React.memo(() => {
   const { isLoading, getAccessTokenSilently, getIdTokenClaims } = useAuth0();
   const [loadingUser, setLoadingUser] = React.useState(true);
   useEffect(() => {
+    console.log('app start');
+    // 初始化用户信息
     (async () => {
       try {
         const access_token = await getAccessTokenSilently();
-        const id_token = (await getIdTokenClaims())?.__raw;
-        await initUser(access_token, id_token as string);
-      } catch (e) {
-        console.log(e);
-        await initUser();
+        await initUser(access_token);
+      } catch (e: any) {
+        // 新用户自动 init user
+        if (e?.message === 'Login required') {
+          await initUser();
+        }
       }
       setLoadingUser(false);
     })();
@@ -45,4 +48,4 @@ export const App = () => {
       <Route path='/callback' element={<CallbackPage />} />
     </Routes>
   );
-};
+});

@@ -6,12 +6,24 @@ import { useEffect, useState } from 'react';
 import CrystalIcon from '@icon/crystals.png';
 import CoinIcon from '@icon/CoinIcon';
 import CheckIcon from '@icon/CheckIcon';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { useAccount } from 'wagmi';
+import { useAuth0 } from '@auth0/auth0-react';
+import { SignInModal, UserMenu } from '@components/Header/transparent';
 
 export const CheckInModal = () => {
   const [open, setOpen] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
+  const [openUserMenu, setOpenUserMenu] = useState(false);
   const getCheckinStatus = useStore((state) => state.getCheckinStatus);
   const checkinStatus = useStore((state) => state.checkinStatus);
+  const { t } = useTranslation();
+  const { user } = useAuth0();
+  const walletToken = useStore((state) => state.wallet_token);
 
+  const notBindWallet = user && !walletToken;
+  console.log('notBindWallet', notBindWallet);
   useEffect(() => {
     getCheckinStatus();
   }, [1]);
@@ -146,26 +158,58 @@ export const CheckInModal = () => {
       </div>
     );
   };
+  const renderConnectButton = () => {
+    return (
+      <div>
+        <button
+          className='rounded-full bg-indigo-900 py-2 px-4 text-sm font-bold text-white hover:bg-indigo-800'
+          onClick={() => {
+            if (user) {
+              return setOpenUserMenu(true);
+            }
+            setOpenLogin(true);
+          }}
+        >
+          {t('wallet_connect', { ns: 'auth' })}
+        </button>
+      </div>
+    );
+  };
   return (
     <>
       <div
         className='flex cursor-pointer items-center justify-between gap-2 rounded-md rounded-tl-none rounded-tr-none border border-t-0 border-bg-200 bg-indigo-800 p-2 text-sm text-white hover:bg-indigo-900'
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          if (!user && !walletToken) {
+            return setOpenLogin(true);
+          }
+
+          if (notBindWallet) {
+            return setOpenUserMenu(true);
+          }
+
+          setOpen(true);
+        }}
       >
         <div className='flex items-center gap-2'>
           <div>✨</div>
-          <div>
-            Ask 3 questions to earn credits: {checkinStatus.today_count}/3
+          <div className='flex items-center gap-2'>
+            {t('activities.title', { ns: 'credit' })}:{' '}
+            {!!walletToken
+              ? `${checkinStatus.today_count}/3`
+              : renderConnectButton()}
           </div>
         </div>
         <div>
           <InformationIcon className='h-5 w-5' />
         </div>
       </div>
+      <SignInModal isOpen={openLogin} setIsOpen={setOpenLogin} />
+      <UserMenu isOpen={openUserMenu} setIsOpen={setOpenUserMenu} />
       <QNADialog
         isOpen={open}
         onClose={() => setOpen(false)}
-        title='每日提问挑战'
+        title={t('activities.title', { ns: 'credit' })}
         dialogClassName='md:max-w-xl'
       >
         <div>
@@ -176,8 +220,15 @@ export const CheckInModal = () => {
             {renderLastDay()}
           </div>
           <div className='flex items-center justify-between border-t border-t-gray-700 p-4 py-2 text-sm text-white'>
-            <div>✨ 今日提问挑战，已完成：{checkinStatus.today_count}/3</div>
-            <div className='rounded-full border p-2 py-1 text-sm'>CLAIM</div>
+            <div>
+              ✨ {t('activities.state', { ns: 'credit' })}
+              {checkinStatus.today_count}/3
+            </div>
+            <Link to='/user/credit'>
+              <div className='rounded-full border p-2 py-1 text-sm'>
+                {t('claim_link', { ns: 'credit' })}
+              </div>
+            </Link>
           </div>
         </div>
       </QNADialog>

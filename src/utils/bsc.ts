@@ -7,6 +7,8 @@ import { initUser } from './api';
 import { MetaMaskConnector } from '@wagmi/core/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { publicProvider } from 'wagmi/providers/public'
+import mixpanel from 'mixpanel-browser';
+import store from '@store/store';
 const VITE_SENTRY_ENV = import.meta.env.VITE_SENTRY_ENV
 
 export const bscConfigMap = VITE_SENTRY_ENV === 'development' ? {
@@ -40,6 +42,7 @@ export const BSCConfig = createConfig({
 export const BSCClient = new EthereumClient(BSCConfig, chains)
 
  
+
 // connect callback
 export const onConnect = async (address: string) => {
   const walletToken = localStorage.getItem('qna3_wallet_token')
@@ -53,10 +56,16 @@ export const onConnect = async (address: string) => {
       signature: signature
     })
     localStorage.setItem('qna3_wallet_token', data?.access_token)
+
+    mixpanel.track('connect', {
+      address: address,
+    });
+    store.getState().setWalletToken(data?.access_token)
     await initUser();
   }
 }
 
 export const onDisConnect = () => {
   localStorage.removeItem('qna3_wallet_token')
+  store.getState().clearWalletToken()
 }
