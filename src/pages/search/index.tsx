@@ -15,6 +15,7 @@ import mixpanel from 'mixpanel-browser';
 import { CreditSummary } from '@components/Credit/summary';
 import { RankPage } from '../activities/rank';
 import { CheckInModal } from '@components/Search/checkInModal';
+import { CheckInWidget } from '@components/Search/checkInWidget';
 
 const SearchPage = () => {
   const [searchText, setSearchText] = useState('');
@@ -39,7 +40,7 @@ const SearchPage = () => {
       </div>
       {/* <FreeTip /> */}
       <div
-        className={`m-auto flex h-full w-full max-w-3xl flex-1 flex-col md:max-w-3xl md:px-4 lg:max-w-3xl xl:max-w-5xl`}
+        className={`m-auto flex h-full w-full max-w-3xl flex-1 flex-col md:max-w-3xl md:px-4 lg:max-w-3xl xl:max-w-6xl`}
       >
         <div className='bg-bg-50 p-4 md:mt-10 md:bg-transparent md:p-0'>
           <SearchInput
@@ -47,7 +48,7 @@ const SearchPage = () => {
             setValue={setSearchText}
             handleSubmit={handleSubmit}
           />
-          <div>
+          <div className='block md:hidden'>
             <CheckInModal />
           </div>
         </div>
@@ -56,46 +57,59 @@ const SearchPage = () => {
               <ActivityContainer />
             </div> */}
           <div className='w-full'>
-            <CreditSummary />
-            <div className=' dark:border-gray-700'>
-              <ul className='-mb-px flex flex-wrap text-center text-sm font-medium text-gray-500 dark:text-gray-400'>
-                <li className='mr-2'>
-                  <a
-                    href='#'
-                    onClick={() => setCurrentTab(0)}
-                    className={`group inline-flex items-center justify-center rounded-t-lg border-b-2 border-transparent p-4 ${
-                      currentTab == 0
-                        ? 'border-blue-600 font-bold text-indigo-400'
-                        : ' border-b hover:text-gray-600 dark:hover:text-gray-300'
-                    }`}
-                  >
-                    Voting
-                  </a>
-                </li>
-                <li className='mr-2'>
-                  <a
-                    href='#'
-                    onClick={() => setCurrentTab(1)}
-                    className={`group inline-flex items-center justify-center rounded-t-lg border-b-2 border-transparent p-4 
+            <div className='flex gap-4'>
+              <div>
+                <div className=' dark:border-gray-700'>
+                  <ul className='-mb-px flex flex-wrap text-center text-sm font-medium text-gray-500 dark:text-gray-400'>
+                    <li className='mr-2'>
+                      <a
+                        href='#'
+                        onClick={() => setCurrentTab(0)}
+                        className={`group inline-flex items-center justify-center rounded-t-lg border-b-2 border-transparent p-4 ${
+                          currentTab == 0
+                            ? 'border-blue-600 font-bold text-indigo-400'
+                            : ' border-b hover:text-gray-600 dark:hover:text-gray-300'
+                        }`}
+                      >
+                        Voting
+                      </a>
+                    </li>
+                    <li className='mr-2'>
+                      <a
+                        href='#'
+                        onClick={() => setCurrentTab(1)}
+                        className={`group inline-flex items-center justify-center rounded-t-lg border-b-2 border-transparent p-4 
                     ${
                       currentTab === 1
                         ? 'border-blue-600 font-bold text-indigo-400'
                         : ' hover:text-gray-600 dark:hover:text-gray-300'
                     }
                     `}
-                    aria-current='page'
-                  >
-                    Trending
-                  </a>
-                </li>
-              </ul>
+                        aria-current='page'
+                      >
+                        Trending
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div hidden={currentTab === 1}>
+                  <RankPage />
+                </div>
+                <div hidden={currentTab === 0}>
+                  <TrendingEvents />
+                </div>
+              </div>
+              <div
+                className='w-1/4 flex-1 shrink-0'
+                style={{
+                  marginTop: '53px',
+                }}
+              >
+                <CreditSummary />
+                <CheckInWidget />
+              </div>
             </div>
-            <div hidden={currentTab === 1}>
-              <RankPage />
-            </div>
-            <div hidden={currentTab === 0}>
-              <TrendingEvents />
-            </div>
+
             <div className='mt-4 px-4 md:mt-12 md:px-0'>
               <QNAFooter />
             </div>

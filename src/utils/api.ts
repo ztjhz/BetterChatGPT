@@ -6,26 +6,28 @@ import { auth0Client } from "./auth0";
 
 
 
-export const initUser = async (access_token?: string,) => {
-  const user_id = localStorage.getItem('qna3_user_id');
-  const wallet_jwt = localStorage.getItem('qna3_wallet_token');
+export const initUser = async (access_token?: string, wallet_token?: string, userID?: string) => {
+  const user_id = userID || localStorage.getItem('qna3_user_id');
+  const wallet_jwt = wallet_token || localStorage.getItem('qna3_wallet_token');
   const walletAddress = BSCConfig?.data?.account
   // 设定 mixpanel 的 user_id
   if(user_id) {
     mixpanel.identify(user_id as string)
   }
-  setRequestHeader('x-id', user_id as string)
+  console.log("--------")
+  console.log(user_id, wallet_jwt, access_token, walletAddress)
+  await setRequestHeader('x-id', user_id as string)
 
   // 已登录用户
   if(wallet_jwt || access_token){
     if(access_token){
-      setRequestHeader('Authorization', `Bearer ${access_token}`)
+      await setRequestHeader('Authorization', `Bearer ${access_token}`)
     }else{
-      setRequestHeader('Authorization', `Bearer ${wallet_jwt}`)
-      setRequestHeader('x-id', user_id as string)
+      await setRequestHeader('Authorization', `Bearer ${wallet_jwt}`)
     }
-
     // 更新用户基本信息
+    store.getState().setWalletAddress(walletAddress as string);
+    store.getState().setWalletToken(wallet_jwt as string);
     store.getState().fetchCredit();
     store.getState().fetchUser();
     store.getState().fetchCreditClaimHistory();

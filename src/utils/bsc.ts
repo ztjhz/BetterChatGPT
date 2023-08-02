@@ -55,13 +55,16 @@ export const onConnect = async (address: string) => {
       wallet_address: address,
       signature: signature
     })
+
     localStorage.setItem('qna3_wallet_token', data?.access_token)
+    localStorage.setItem('qna3_user_id', data?.user?.id);
+
+    store.getState().setWalletToken(data?.access_token)
 
     mixpanel.track('connect', {
       address: address,
     });
-    store.getState().setWalletToken(data?.access_token)
-    await initUser();
+    await initUser(undefined, data?.access_token, data?.user?.id);
   }
 }
 

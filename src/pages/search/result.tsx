@@ -121,7 +121,7 @@ const SearchResultPage = () => {
             setValue={setSearchText}
             handleSubmit={handleSubmit}
           />
-          <div>
+          <div className='block md:hidden'>
             <CheckInModal />
           </div>
         </div>

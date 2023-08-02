@@ -42,7 +42,7 @@ export default ({ value, setValue, handleSubmit }: any) => {
 
   return (
     <div
-      className={`flex w-full items-center gap-2 rounded-lg rounded-br-none rounded-bl-none border border-b-0 border-bg-200 py-4 px-4 pr-1 md:py-2 md:px-6 md:pr-1 lg:py-4`}
+      className={`flex w-full items-center gap-2 rounded-lg rounded-br-none rounded-bl-none border border-b-0 border-bg-200 py-4 px-4 pr-1 md:rounded-br-lg md:rounded-bl-lg md:border-b-2 md:py-2 md:px-6 md:pr-1 lg:py-4`}
     >
       <textarea
         ref={textareaRef}

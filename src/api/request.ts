@@ -10,9 +10,15 @@ export const request = axios.create({
   }
 });
 
-export const setRequestHeader = (key: string, v: string) => {
-  request.interceptors.request.use((value) => {
-    value.headers[key] = v;
-    return value;
+const headersMapping: any = {}
+request.interceptors.request.use((value) => {
+  Object.keys(headersMapping).forEach(key => {
+    value.headers[key] = headersMapping[key];
   })
+  console.log(value.url, value.headers)
+  return value;
+})
+
+export const setRequestHeader = async (key: string, v: string) => {
+  headersMapping[key] = v;
 }

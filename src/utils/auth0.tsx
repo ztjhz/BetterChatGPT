@@ -37,7 +37,7 @@ const bindWeb2UserEmail = async (token: string, user: User) => {
   );
 
   localStorage.setItem('qna3_user_id', data?.data?.id);
-  await initUser();
+  await initUser(token, undefined, data?.data?.id);
 };
 
 export const Auth0ProviderWithNavigate = ({ children }: any) => {

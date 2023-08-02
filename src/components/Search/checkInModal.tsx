@@ -23,7 +23,6 @@ export const CheckInModal = () => {
   const walletToken = useStore((state) => state.wallet_token);
 
   const notBindWallet = user && !walletToken;
-  console.log('notBindWallet', notBindWallet);
   useEffect(() => {
     getCheckinStatus();
   }, [1]);
@@ -160,9 +159,9 @@ export const CheckInModal = () => {
   };
   const renderConnectButton = () => {
     return (
-      <div>
+      <div className='shrink-0'>
         <button
-          className='rounded-full bg-indigo-900 py-2 px-4 text-sm font-bold text-white hover:bg-indigo-800'
+          className='rounded-full bg-indigo-900 py-2 px-4 text-xs font-bold text-white hover:bg-indigo-800'
           onClick={() => {
             if (user) {
               return setOpenUserMenu(true);
@@ -200,7 +199,7 @@ export const CheckInModal = () => {
               : renderConnectButton()}
           </div>
         </div>
-        <div>
+        <div className={walletToken ? '' : 'hidden'}>
           <InformationIcon className='h-5 w-5' />
         </div>
       </div>
@@ -224,7 +223,7 @@ export const CheckInModal = () => {
               ✨ {t('activities.state', { ns: 'credit' })}
               {checkinStatus.today_count}/3
             </div>
-            <Link to='/user/credit'>
+            <Link to='/user/credit' className='shrink-0'>
               <div className='rounded-full border p-2 py-1 text-sm'>
                 {t('claim_link', { ns: 'credit' })}
               </div>

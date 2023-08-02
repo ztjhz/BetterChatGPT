@@ -35,16 +35,15 @@ Sentry.init({
   replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
   environment: process.env.VITE_SENTRY_ENV,
 });
-
 mixpanel.init('659a614d94fd41baff409729aeef12b7', {
-  debug: true,
+  debug: process.env.VITE_SENTRY_ENV === 'development',
   track_pageview: true,
   persistence: 'localStorage',
 });
 
 //@ts-ignore
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <>
     <BrowserRouter>
       <WagmiConfig config={BSCConfig}>
         <Auth0ProviderWithNavigate>
@@ -53,5 +52,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </WagmiConfig>
     </BrowserRouter>
     <Web3Modal projectId={projectId} ethereumClient={BSCClient} />
-  </React.StrictMode>
+  </>
 );

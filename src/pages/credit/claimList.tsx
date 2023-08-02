@@ -58,6 +58,7 @@ export const ClaimItem = ({ data: item, onClaimed }: ClaimItemProps) => {
       onClaimed();
       setClaiming(false);
     } catch (e) {
+      console.log(e);
       setClaiming(false);
     }
   };
