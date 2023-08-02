@@ -1,5 +1,6 @@
 import { QNADialog } from '@components/Dialog';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface RankItemProps {
   rank: number;
@@ -8,9 +9,10 @@ interface RankItemProps {
 }
 const RankItem = ({ rank, question, score }: RankItemProps) => {
   const rankText = ['🥇', '🥈', '🥉'];
+  const { t } = useTranslation();
 
   return (
-    <div className='flex flex-col items-start justify-start gap-2 md:flex-row md:justify-between'>
+    <div className='flex flex-col items-start justify-start gap-2 md:flex-row md:items-center md:justify-between'>
       <div className='flex flex-row items-center gap-4'>
         <div
           className={`
@@ -25,9 +27,11 @@ const RankItem = ({ rank, question, score }: RankItemProps) => {
           <div className='text-md font-bold underline'>{question}</div>
         </div>
       </div>
-      <div className='mt-4 flex shrink-0 gap-2 self-end rounded-full bg-indigo-600 p-2 py-1 text-sm hover:bg-indigo-700 md:self-center'>
+      <div className='mt-4 flex shrink-0 gap-2 self-end rounded-full bg-indigo-600 p-2 py-1 text-sm hover:bg-indigo-700 md:mt-0 md:self-center'>
         <div>🔥</div>
-        <div className='cursor-pointer font-bold'>Vote ({score})</div>
+        <div className='cursor-pointer font-bold'>
+          {t('vote', { ns: 'vote' })} ({score})
+        </div>
       </div>
     </div>
   );
@@ -36,6 +40,8 @@ const RankItem = ({ rank, question, score }: RankItemProps) => {
 export const RankPage = () => {
   const [openRules, setOpenRules] = useState(false);
   const [showTitle, setShowTitle] = useState(true);
+  const { t } = useTranslation();
+
   return (
     <div className='flex flex-col gap-2 bg-bg-50 p-4 text-white'>
       <div
@@ -52,18 +58,15 @@ export const RankPage = () => {
         </div>
         <div>
           <h3 className='z-1 relative mt-3 mb-3 text-xl font-extrabold tracking-tight text-white '>
-            Vote for your favorite question!
+            {t('title', { ns: 'vote' })}
           </h3>
-          <div className='z-1 relative'>
-            The supporters of the <strong>top 3</strong> questions will share
-            the credits pool.
-          </div>
+          <div className='z-1 relative'>{t('description', { ns: 'vote' })}</div>
         </div>
         <div
           className='z-1 relative mt-4 max-w-fit cursor-pointer self-end rounded-full border p-2 py-1 md:self-start'
           onClick={() => setOpenRules(true)}
         >
-          Check the rules
+          {t('rules_title', { ns: 'vote' })}
         </div>
         <div
           className='absolute right-2 top-2 cursor-pointer p-2'
@@ -140,25 +143,15 @@ export const RankPage = () => {
       <QNADialog
         isOpen={openRules}
         onClose={() => setOpenRules(false)}
-        title='Voting Rules'
+        title={t('rules_title', { ns: 'vote' })}
       >
         <div className='p-4 pb-6 text-white'>
           <ul className='flex flex-col gap-2 text-sm'>
-            <li>
-              1. The above questions are the top 10 most popular questions from
-              last week.
-            </li>
-            <li>
-              2. You can vote for all the questions you like. You can vote
-              multiple times for a single question. Each vote costs 5 credits
-              from your external wallet.
-            </li>
-            <li>
-              3. The voting deadline is fixed weekly. After the deadline, the
-              voters of the 1st question can share 10,000 credits equally, the
-              voters of the 2nd question can share 5,000 credits, and the voters
-              of the 3rd question can share 1,000 credits.
-            </li>
+            {t('rules', { ns: 'vote' })
+              .split('\n')
+              .map((item, index) => {
+                return <li key={index}>{item}</li>;
+              })}
           </ul>
         </div>
       </QNADialog>
