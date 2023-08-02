@@ -9,7 +9,7 @@ export const CreditSummary = () => {
   return (
     <div className='mb-4 hidden w-full flex-col gap-4 bg-bg-50 p-4 md:flex'>
       {renderInternalWallet()}
-      <div className='relative'>
+      <div className='relative z-0'>
         {shouldShowNew && (
           <span
             onClick={() => {

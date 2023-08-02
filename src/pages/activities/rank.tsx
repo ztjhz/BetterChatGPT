@@ -10,12 +10,13 @@ const RankItem = ({ rank, question, score }: RankItemProps) => {
   const rankText = ['🥇', '🥈', '🥉'];
 
   return (
-    <div className='flex flex-col items-start  justify-start md:flex-row md:justify-between'>
-      <div className='flex flex-row items-center gap-2'>
+    <div className='flex flex-col items-start justify-start gap-2 md:flex-row md:justify-between'>
+      <div className='flex flex-row items-center gap-4'>
         <div
           className={`
+          ${rank === 10 ? '-ml-2 text-3xl' : 'text-4xl'}
           ${rank <= 3 ? '-ml-2 w-8' : ''}
-          text-center text-4xl font-bold text-gray-700
+          text-center  font-bold text-gray-700
           `}
         >
           {rank <= 3 ? rankText[rank - 1] : rank}
@@ -24,7 +25,7 @@ const RankItem = ({ rank, question, score }: RankItemProps) => {
           <div className='text-md font-bold underline'>{question}</div>
         </div>
       </div>
-      <div className='mt-4 flex gap-2 self-end rounded-full bg-indigo-600 p-2 py-1 text-sm hover:bg-indigo-700 md:self-center'>
+      <div className='mt-4 flex shrink-0 gap-2 self-end rounded-full bg-indigo-600 p-2 py-1 text-sm hover:bg-indigo-700 md:self-center'>
         <div>🔥</div>
         <div className='cursor-pointer font-bold'>Vote ({score})</div>
       </div>
