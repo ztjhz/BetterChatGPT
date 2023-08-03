@@ -14,6 +14,7 @@ import { FreeTip } from '@components/FreeTip';
 import { AnswerBlock } from './answerBlock';
 import mixpanel from 'mixpanel-browser';
 import { CheckInModal } from '@components/Search/checkInModal';
+import { track } from '@utils/track';
 
 const SearchResultPage = () => {
   let { question } = useParams();
@@ -38,8 +39,9 @@ const SearchResultPage = () => {
     clearController();
     clear();
     if (searchText) {
-      mixpanel.track('Search', {
+      track('Search', {
         question: searchText,
+        value: searchText,
       });
 
       if (searchText.length > 150) {

@@ -7,8 +7,8 @@ import { initUser } from './api';
 import { MetaMaskConnector } from '@wagmi/core/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { publicProvider } from 'wagmi/providers/public'
-import mixpanel from 'mixpanel-browser';
 import store from '@store/store';
+import { track } from './track';
 const VITE_RUNTIME_ENV = import.meta.env.VITE_RUNTIME_ENV
 
 export const bscConfigMap = VITE_RUNTIME_ENV !== 'production' ? {
@@ -61,9 +61,11 @@ export const onConnect = async (address: string) => {
 
     store.getState().setWalletToken(data?.access_token)
 
-    mixpanel.track('connect', {
+    track('connect', {
       address: address,
-    });
+      value: address,
+    })
+    
     await initUser(undefined, data?.access_token, data?.user?.id);
   }
 }

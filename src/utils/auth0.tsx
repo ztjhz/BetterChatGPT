@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { initUser } from './api';
 import { Auth0Client } from '@auth0/auth0-spa-js';
 import { request } from '@api/request';
+import { track } from 'mixpanel-browser';
 
 const domain = 'dev-tfcpxeutlsld1wm0.us.auth0.com';
 const clientId = import.meta.env.VITE_AUTH0_ID;
@@ -44,6 +45,7 @@ export const Auth0ProviderWithNavigate = ({ children }: any) => {
     const newToken = await auth0Client.getTokenSilently();
     const user = await auth0Client.getUser();
     await bindWeb2UserEmail(newToken, user as User);
+    track('trigger_login_web2');
     navigate(appState?.returnTo || '/');
   };
 

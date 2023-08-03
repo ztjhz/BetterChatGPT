@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { web3Modal } from '@components/Header/transparent';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { track } from '@utils/track';
 
 interface RankItemProps {
   rank: number;
@@ -60,12 +61,14 @@ const RankItem = ({
     if (voting) return;
     setVoting(true);
     try {
+      track('click_vote');
       await writeAsync({
         value: BigInt(0),
         args: [activityID, questionID, 5],
       });
       callback();
       setVoting(false);
+      track('voted');
       toast.success(t('voteSuccess', { ns: 'vote' }));
     } catch (e) {
       setVoting(false);

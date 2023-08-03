@@ -22,13 +22,13 @@ import { QNADialog } from '@components/Dialog';
 import { useTranslation } from 'react-i18next';
 import { useCopyToClipboard } from 'react-use';
 import { ToastContainer, toast } from 'react-toastify';
-import mixpanel from 'mixpanel-browser';
 import { formatWalletAddress } from '@utils/wallet';
 import { CopyIcon } from '@components/CopyIcon';
 import { switchNetwork } from '@wagmi/core';
 import { connect } from '@wagmi/core';
 import MetaMaskIcon from '@icon/MetaMaskIcon';
 import WalletConnectIcon from '@icon/WalletConnectIcon';
+import { track } from '@utils/track';
 
 interface TransparentHeaderProps {
   showLogo?: boolean;
@@ -205,38 +205,43 @@ export const UserMenu = ({ isOpen, setIsOpen }: any) => {
             </div>
           </div>
         ) : (
-          connectors.map((connector) => (
-            <button
-              disabled={!connector.ready}
-              key={connector.id}
-              className='flex w-full flex-1 items-center justify-start gap-4 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
-              onClick={async () => {
-                await beforeConnect(connector);
-                connect({ connector });
-              }}
-            >
-              {iconMap[connector.name]({
-                className: 'h-6 w-6',
-              })}
-              <div>
-                {connector.name}
-                {!connector.ready && ' (unsupported)'}
-                {isLoading &&
-                  connector.id === pendingConnector?.id &&
-                  ' (connecting)'}
-              </div>
-            </button>
-          ))
+          connectors
+            .filter((c) => c.ready)
+            .map((connector) => (
+              <button
+                disabled={!connector.ready}
+                key={connector.id}
+                className='flex w-full flex-1 items-center justify-start gap-4 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
+                onClick={async () => {
+                  track('start_connect_wallet');
+                  await beforeConnect(connector);
+                  connect({ connector });
+                }}
+              >
+                {iconMap[connector.name]({
+                  className: 'h-6 w-6',
+                })}
+                <div>
+                  {connector.name}
+                  {isLoading &&
+                    connector.id === pendingConnector?.id &&
+                    ' (connecting)'}
+                </div>
+              </button>
+            ))
         )}
         <button
           className='flex w-full flex-1 items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
           onClick={() => {
+            track('logout');
+
             if (isAuthenticated) {
               logout();
             }
             if (!!walletToken) {
               disconnect();
             }
+
             setIsOpen(false);
           }}
         >
@@ -282,6 +287,7 @@ export const web3Modal = (props?: Web3LoginModalProps) => {
           key={connector.id}
           className='flex w-full flex-1 items-center justify-start gap-4 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
           onClick={async () => {
+            track('start_connect_wallet');
             await beforeConnect(connector);
             connect({ connector });
             props?.afterConnect && props?.afterConnect();
@@ -317,7 +323,7 @@ export const SignInModal = ({ isOpen, setIsOpen }: any) => {
         <button
           className='flex w-full flex-1 items-center justify-start gap-4 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
           onClick={() => {
-            mixpanel.track('trigger_login_web2');
+            track('trigger_login_web2');
             loginWithRedirect();
           }}
         >

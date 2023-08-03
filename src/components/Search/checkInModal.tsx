@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { useAccount } from 'wagmi';
 import { useAuth0 } from '@auth0/auth0-react';
 import { SignInModal, UserMenu } from '@components/Header/transparent';
+import { track } from '@utils/track';
 
 export const CheckInModal = () => {
   const [open, setOpen] = useState(false);
@@ -43,7 +44,7 @@ export const CheckInModal = () => {
         };
     return (
       <div
-        className={`relative flex h-full flex-col overflow-hidden rounded-lg border ${
+        className={`relative flex flex-col overflow-hidden rounded-lg border ${
           isCurrentDay ? 'border-2 border-violet-100' : ''
         } border-${styleMap.color}-400  bg-opacity-20 ${
           styleMap.gradient
@@ -179,15 +180,17 @@ export const CheckInModal = () => {
       <div
         className='flex cursor-pointer items-center justify-between gap-2 rounded-md rounded-tl-none rounded-tr-none border border-t-0 border-bg-200 bg-indigo-800 p-2 text-sm text-white hover:bg-indigo-900'
         onClick={() => {
-          if (!user && !walletToken) {
-            return setOpenLogin(true);
-          }
+          // if (!user && !walletToken) {
+          //   return setOpenLogin(true);
+          // }
 
-          if (notBindWallet) {
-            return setOpenUserMenu(true);
-          }
+          // if (notBindWallet) {
+          //   return setOpenUserMenu(true);
+          // }
 
           setOpen(true);
+
+          track('mobile_open_checkin_dialog');
         }}
       >
         <div className='flex items-center gap-2'>

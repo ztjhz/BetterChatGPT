@@ -16,6 +16,7 @@ import { CreditSummary } from '@components/Credit/summary';
 import { RankPage } from '../activities/rank';
 import { CheckInModal } from '@components/Search/checkInModal';
 import { CheckInWidget } from '@components/Search/checkInWidget';
+import { track } from '@utils/track';
 
 const SearchPage = () => {
   const [searchText, setSearchText] = useState('');
@@ -27,10 +28,10 @@ const SearchPage = () => {
       return;
     }
 
-    mixpanel.track('Search', {
+    track('Search', {
       question: searchText,
+      value: searchText,
     });
-
     navigate('/search/' + encodeURIComponent(searchText));
   };
   return (
@@ -64,7 +65,10 @@ const SearchPage = () => {
                     <li className='mr-2'>
                       <a
                         href='#'
-                        onClick={() => setCurrentTab(0)}
+                        onClick={() => {
+                          setCurrentTab(0);
+                          track('change_index_tab', 0);
+                        }}
                         className={`group inline-flex items-center justify-center rounded-t-lg border-b-2 border-transparent p-4 ${
                           currentTab == 0
                             ? 'border-blue-600 font-bold text-indigo-400'
@@ -77,7 +81,10 @@ const SearchPage = () => {
                     <li className='mr-2'>
                       <a
                         href='#'
-                        onClick={() => setCurrentTab(1)}
+                        onClick={() => {
+                          setCurrentTab(1);
+                          track('change_index_tab', 1);
+                        }}
                         className={`group inline-flex items-center justify-center rounded-t-lg border-b-2 border-transparent p-4 
                     ${
                       currentTab === 1
