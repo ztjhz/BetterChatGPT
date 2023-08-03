@@ -43,6 +43,9 @@ env:
   DEPLOYMENT_MANIFEST_PATH: "deploy/staging-deploy.yaml"
   VITE_PUBLIC_PATH: "/"
   VITE_SERVER_API_ENDPOINT: "https://staging-api.qna3.ai"
+  VITE_RUNTIME_ENV: "staging"
+  VITE_AUTH0_ID: "X8AK61I6S8eaHIMxAXWyP7qph1WBTV3T"
+  
   
 jobs:
   buildImage:
@@ -72,6 +75,8 @@ jobs:
           --build-arg VITE_SERVER_API_ENDPOINT=${{ env.VITE_SERVER_API_ENDPOINT }} \
           --build-arg VITE_OPENAI_API_KEY=${{ secrets.VITE_OPENAI_API_KEY }} \
           --build-arg VITE_PUBLIC_PATH=${{env.VITE_PUBLIC_PATH}} \
+          --build-arg VITE_AUTH0_ID=${{env.VITE_AUTH0_ID}} \
+          --build-arg VITE_RUNTIME_ENV=${{env.VITE_RUNTIME_ENV}} \
           --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} \
           --registry ${{ env.AZURE_CONTAINER_REGISTRY }} \
           -g ${{ env.RESOURCE_GROUP }} .
