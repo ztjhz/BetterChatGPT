@@ -14,16 +14,16 @@ export const searchFuncions:any = [
     emoji: '📌',
     label:'Knowledge Graph',
   }, 
-  {
-    name: 'sql', 
-    emoji: '📊',
-    label:'Structured data',
-  }, 
-  {
-    name: 'report', 
-    emoji: '📚',
-    label:'Research Report',
-  }, 
+  // {
+  //   name: 'sql', 
+  //   emoji: '📊',
+  //   label:'Structured data',
+  // }, 
+  // {
+  //   name: 'report', 
+  //   emoji: '📚',
+  //   label:'Research Report',
+  // }, 
   // {
   //   name: 'chat', 
   //   emoji: '📝',

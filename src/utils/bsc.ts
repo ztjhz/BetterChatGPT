@@ -1,52 +1,74 @@
 import { request, setRequestHeader } from '@api/request';
-import useStore from '@store/store';
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
-import {publicProvider} from 'wagmi/providers/public'
-import { bsc } from 'wagmi/chains';
-import { InjectedConnector } from 'wagmi/connectors/injected'
+import { bsc, bscTestnet } from 'wagmi/chains';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
+import { signMessage } from '@wagmi/core'
+import { initUser } from './api';
+import { MetaMaskConnector } from '@wagmi/core/connectors/metaMask'
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
+import { publicProvider } from 'wagmi/providers/public'
+import mixpanel from 'mixpanel-browser';
+import store from '@store/store';
+const VITE_SENTRY_ENV = import.meta.env.VITE_SENTRY_ENV
 
-const chains = [bsc]
+export const bscConfigMap = VITE_SENTRY_ENV === 'development' ? {
+  chain: bscTestnet,
+  contractAddress: '0x91fA94E903bA414df622575B7a4ecF37a53639C5'
+} : {
+  chain: bsc,
+  contractAddress: '0x91fA94E903bA414df622575B7a4ecF37a53639C5'
+}
+
+const chains = [bscConfigMap.chain]
+
+// wallet connect
 export const projectId = 'b07dfe8b6ba7abcb519809d89b923367'
-const { publicClient } = configureChains(chains, [w3mProvider({ projectId })])
+const { publicClient, webSocketPublicClient } = configureChains(chains, [publicProvider()])
 
 export const BSCConfig = createConfig({
   autoConnect: true,
-  connectors: w3mConnectors({ projectId, version: 1, chains }),
-  publicClient
+  connectors: [
+    new MetaMaskConnector({ chains }),
+    new WalletConnectConnector({
+      chains,
+      options: {
+        projectId: projectId,
+      },
+    })
+  ],
+  publicClient,
+  webSocketPublicClient
 })
 export const BSCClient = new EthereumClient(BSCConfig, chains)
 
-export const onConnect = (address: string) => {
-  if(address){
-    setRequestHeader('x-address', address);
-    request.post('/users/wallet_login', {
-      wallet_address: address
-    })
-  }
+ 
 
+// connect callback
+export const onConnect = async (address: string) => {
+  const walletToken = localStorage.getItem('qna3_wallet_token')
+
+  if(address && !walletToken){
+    const signature = await signMessage({
+      message: 'AI + DYOR = Ultimate Answer to Unlock Web3 Universe',
+    })
+    const {data} = await request.post('/user/wallet_login', {
+      wallet_address: address,
+      signature: signature
+    })
+
+    localStorage.setItem('qna3_wallet_token', data?.access_token)
+    localStorage.setItem('qna3_user_id', data?.user?.id);
+
+    store.getState().setWalletToken(data?.access_token)
+
+    mixpanel.track('connect', {
+      address: address,
+    });
+    await initUser(undefined, data?.access_token, data?.user?.id);
+  }
 }
 
 export const onDisConnect = () => {
-  setRequestHeader('x-address', '');
+  localStorage.removeItem('qna3_wallet_token')
+  store.getState().clearWalletToken()
 }
-
-
-
-// const MMSDK = new MetaMaskSDK();
-// // export const bsc = MMSDK.getProvider();
-
-// export const connect = async () => {
-//   try {
-//     const chainId = '0x38'; // Binance Smart Chain Mainnet Chain ID
-//     await bsc?.request({ method: 'wallet_switchEthereumChain', params: [{ chainId }] });
-//     await bsc?.request({ method: 'eth_requestAccounts' });
-    
-//     const address = bsc?.selectedAddress;
-
-
-
-//   } catch (error) {
-//     console.error('Error connecting to Binance Smart Chain:', error);
-//   }
-// };

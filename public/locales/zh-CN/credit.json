@@ -1,0 +1,23 @@
+{
+  "my_credit": "我的积分",
+  "custodian_wallet": "托管钱包",
+  "external_wallet": "外部钱包",
+  "custodian_tips": {
+    "title": "托管钱包的积分怎么用？",
+    "description": "1. 提问消耗 1 积分 \n 2. 对答案的点赞或点踩获得 1 积分 \n 3. 免 Gas 费"
+  },
+  "external_tips": {
+    "title": "外部钱包的积分怎么用？",
+    "description": "1. 参加 QnA3 官方网站的活动可获得积分 \n2. 后续将支持将托管钱包中的积分转移到外部钱包中"
+  },
+  "claim": "领取",
+  "credits": "积分",
+  "credits_claim": "积分领取",
+  "connect_tips": "连接钱包即送 20 积分",
+  "claimed": "已领取",
+  "claim_link": "去领取积分",
+  "activities": {
+    "title": "每日提问打卡得积分",
+    "state": "今日已提问："
+  }
+}

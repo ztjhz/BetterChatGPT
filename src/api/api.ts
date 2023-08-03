@@ -1,7 +1,6 @@
 import { server_api_endpoint } from '@constants/auth';
 import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface } from '@type/chat';
-import { getUserToken } from '@utils/api';
 import { split } from 'lodash';
 import { fetchEventSource } from '@microsoft/fetch-event-source';
 import { request } from './request';
@@ -22,7 +21,6 @@ class FatalError extends Error { }
 
 const handleStreamResponse = async ({body, callback, onError, url, eventHandler}: any) => {
   const controller = new AbortController();
-  const {access_token} = await getUserToken()
   let text = "";
   let done = false;
   eventHandler('start', true)
@@ -30,12 +28,12 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${access_token}`,
       'Connection': 'keep-alive'
     },
     signal: controller.signal,
     body: JSON.stringify(body),
     onerror: (event: any) => {
+      console.log(url, 'onerror', event)
       if(done){
         return
       }
@@ -73,6 +71,7 @@ const handleStreamResponse = async ({body, callback, onError, url, eventHandler}
       callback(text, false)
     },
     onclose: () => {
+      console.log(url, 'close')
       eventHandler('done', true)
       callback(text, true)
     }

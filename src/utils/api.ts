@@ -1,45 +1,48 @@
 import { request, setRequestHeader } from "@api/request";
-import { GetTokenSilentlyOptions } from "@auth0/auth0-react";
 import store from "@store/store";
 import { BSCConfig } from "./bsc";
+import mixpanel from 'mixpanel-browser';
+import { auth0Client } from "./auth0";
 
-export const getUserToken = () => {
-  const token = localStorage.getItem('@@auth0spajs@@::d2lXoGguxROpIsbBChdHbJzqvwkhPnj6::https://dev-tfcpxeutlsld1wm0.us.auth0.com/api/v2/::openid profile email');
-  const id_token_storage = localStorage.getItem('@@auth0spajs@@::d2lXoGguxROpIsbBChdHbJzqvwkhPnj6::@@user@@');
-  return {
-    access_token: JSON.parse(token || '{}')?.body?.access_token,
-    id_token: JSON.parse(id_token_storage || '{}')?.id_token
-  }
-}
-export const initUser = async () => {
-  const {access_token, id_token} = getUserToken()
-  const user_id = localStorage.getItem('qna3_user_id');
+
+
+export const initUser = async (access_token?: string, wallet_token?: string, userID?: string) => {
+  const user_id = userID || localStorage.getItem('qna3_user_id');
+  const wallet_jwt = wallet_token || localStorage.getItem('qna3_wallet_token');
   const walletAddress = BSCConfig?.data?.account
-  if(access_token){
-    setRequestHeader('Authorization', `Bearer ${access_token}`)
+  // 设定 mixpanel 的 user_id
+  if(user_id) {
+    mixpanel.identify(user_id as string)
   }
-  if(id_token){
-    setRequestHeader('x-id-token', id_token)
-  }
-  if(user_id){
-    setRequestHeader('x-id', user_id as string)
-  }
-  if(walletAddress){
-    setRequestHeader('x-address', walletAddress)
+  console.log("--------")
+  console.log(user_id, wallet_jwt, access_token, walletAddress)
+  await setRequestHeader('x-id', user_id as string)
+
+  // 已登录用户
+  if(wallet_jwt || access_token){
+    if(access_token){
+      await setRequestHeader('Authorization', `Bearer ${access_token}`)
+    }else{
+      await setRequestHeader('Authorization', `Bearer ${wallet_jwt}`)
+    }
+    // 更新用户基本信息
+    store.getState().setWalletAddress(walletAddress as string);
+    store.getState().setWalletToken(wallet_jwt as string);
+    store.getState().fetchCredit();
+    store.getState().fetchUser();
+    store.getState().fetchCreditClaimHistory();
+    store.getState().getCheckinStatus();
+    return
   }
 
-  if(!user_id){
-    const {data} = await request.get('/init', {
-      headers: {
-        'x-id-token': id_token || null,
-        'x-id': user_id || null,
-        'Authorization': access_token ? `Bearer ${access_token}` : null
-      }
-    })
-    store.getState().fetchCredit();
-    if(data?.id){
-      localStorage.setItem('qna3_user_id', data?.id);
-      setRequestHeader('x-id', data?.id as string)
+  const {data} = await request.get('/init', {
+    headers: {
+      'x-id': user_id || null,
+      'Authorization': access_token ? `Bearer ${access_token}` : null
     }
+  })
+  if(data?.id){
+    localStorage.setItem('qna3_user_id', data?.id);
+    setRequestHeader('x-id', data?.id as string)
   }
 }

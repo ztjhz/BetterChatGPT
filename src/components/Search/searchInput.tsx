@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import MagnifyingGlassIcon from '@heroicons/react/24/outline/MagnifyingGlassIcon'
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import MagnifyingGlassIcon from '@heroicons/react/24/outline/MagnifyingGlassIcon';
 
-export default ({value, setValue, handleSubmit}: any) => {
+export default ({ value, setValue, handleSubmit }: any) => {
   const textareaRef = React.createRef<HTMLTextAreaElement>();
   const { t } = useTranslation();
 
@@ -39,26 +39,27 @@ export default ({value, setValue, handleSubmit}: any) => {
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
   }, []);
-  
+
   return (
     <div
-        className={`w-full border border-bg-200 flex items-center gap-2 rounded-full py-2 md:py-2 lg:py-4 px-4 pr-1 md:pr-1 md:px-6`}
-      >
-    <textarea
-          ref={textareaRef}
-          className='m-0 resize-none bg-transparent overflow-y-hidden w-full placeholder:text-bg-400 text-md text-white'
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-          autoFocus
-          value={value}
-          placeholder={t('mainSearchPlaceholder') as string}
-          onKeyDown={handleKeyDown}
-          rows={1}
-    ></textarea>
-    <div onClick={() => handleSubmit()}>
-      <MagnifyingGlassIcon className="w-6 h-6 mr-3 md:mr-6 cursor-pointer text-primary" />
+      className={`flex w-full items-center gap-2 rounded-lg rounded-br-none rounded-bl-none border border-b-0 border-bg-200 py-4 px-4 pr-1 md:rounded-br-lg md:rounded-bl-lg md:border-b-2 md:py-2 md:px-6 md:pr-1 lg:py-4`}
+    >
+      <textarea
+        ref={textareaRef}
+        className='text-md m-0 w-full resize-none overflow-y-hidden bg-transparent text-white placeholder:text-bg-400'
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
+        autoFocus
+        value={value}
+        placeholder={t('mainSearchPlaceholder') as string}
+        onKeyDown={handleKeyDown}
+        rows={1}
+        maxLength={150}
+      ></textarea>
+      <div onClick={() => handleSubmit()}>
+        <MagnifyingGlassIcon className='mr-3 h-6 w-6 cursor-pointer text-primary md:mr-6' />
+      </div>
     </div>
-  </div>
-  )
-}
+  );
+};

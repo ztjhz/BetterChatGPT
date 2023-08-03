@@ -1,6 +1,6 @@
 import React from 'react'
 import { AcitivityItem } from './ActivityItem'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next';
 
 const activityList = [{
   title: 'MVQ - Most Valuable Question ',
@@ -13,8 +13,10 @@ const activityList = [{
   icon: 'https://0xfaqstorage.blob.core.windows.net/web-static/mvq_logo.png'
 }]
 export const ActivityContainer = () => {
+  const { t, i18n } = useTranslation();
+
   return (
-    <div className=' bg-bg-50 md:rounded-2xl p-4 md:px-6 border border-bg-200'>
+    <div className=' bg-bg-50 md:rounded-2xl border-x-0 md:border-x p-4 md:px-6 border border-bg-200'>
       <div className='text-md text-white mb-4'>{t('activity.title')}</div>
       {activityList.map((i) => (
         <AcitivityItem data={i}/>

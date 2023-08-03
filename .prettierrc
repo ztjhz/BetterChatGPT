@@ -9,5 +9,6 @@
   "bracketSpacing": true,
   "jsxBracketSameLine": false,
   "arrowParens": "always",
-  "quoteProps": "consistent"
+  "quoteProps": "consistent",
+  "plugins": ["prettier-plugin-tailwindcss"]
 }

@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { useTranslation } from 'react-i18next';
+import { setRequestHeader } from '@api/request';
 const langs = [
   {
     id: 1,
@@ -22,6 +23,10 @@ export const I18NSelector = () => {
   const [selected, setSelected] = useState(i18n.language === 'en' ? 'English' : '简体中文')
   useEffect(() => {
     if(selected){
+      setRequestHeader(
+        'x-lang',
+        selected === 'English' ? 'english' : 'chinese'
+      )
       i18n.changeLanguage(selected === 'English' ? 'en' : 'zh-CN')
     }
   }, [selected])
