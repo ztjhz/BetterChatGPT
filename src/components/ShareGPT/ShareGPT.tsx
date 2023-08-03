@@ -45,6 +45,7 @@ const ShareGPT = React.memo(() => {
         onClick={() => {
           setIsModalOpen(true);
         }}
+        aria-label={t('postOnShareGPT.title') as string}
       >
         {t('postOnShareGPT.title')}
       </button>

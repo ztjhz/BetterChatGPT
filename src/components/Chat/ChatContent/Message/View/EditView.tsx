@@ -189,6 +189,7 @@ const EditViewButtons = memo(
                 generating ? 'cursor-not-allowed opacity-40' : ''
               }`}
               onClick={handleGenerate}
+              aria-label={t('generate') as string}
             >
               <div className='flex items-center justify-center gap-2'>
                 {t('generate')}
@@ -218,6 +219,7 @@ const EditViewButtons = memo(
                 : 'btn-neutral'
             }`}
             onClick={handleSave}
+            aria-label={t('save') as string}
           >
             <div className='flex items-center justify-center gap-2'>
               {t('save')}
@@ -228,6 +230,7 @@ const EditViewButtons = memo(
             <button
               className='btn relative btn-neutral'
               onClick={() => setIsEdit(false)}
+              aria-label={t('cancel') as string}
             >
               <div className='flex items-center justify-center gap-2'>
                 {t('cancel')}

@@ -12,6 +12,7 @@ const UpButton = ({
   return (
     <BaseButton
       icon={<DownChevronArrow className='rotate-180' />}
+      buttonProps={{ 'aria-label': 'shift message up' }}
       onClick={onClick}
     />
   );

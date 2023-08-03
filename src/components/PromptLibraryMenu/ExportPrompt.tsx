@@ -17,6 +17,7 @@ const ExportPrompt = () => {
         onClick={() => {
           exportPrompts(prompts);
         }}
+        aria-label={t('export') as string}
       >
         {t('export')}
       </button>

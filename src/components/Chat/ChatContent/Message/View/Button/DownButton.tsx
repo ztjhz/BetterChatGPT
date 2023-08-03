@@ -9,7 +9,13 @@ const DownButton = ({
 }: {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
-  return <BaseButton icon={<DownChevronArrow />} onClick={onClick} />;
+  return (
+    <BaseButton
+      icon={<DownChevronArrow />}
+      buttonProps={{ 'aria-label': 'shift message down' }}
+      onClick={onClick}
+    />
+  );
 };
 
 export default DownButton;
