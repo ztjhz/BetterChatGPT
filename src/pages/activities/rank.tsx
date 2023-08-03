@@ -86,12 +86,14 @@ const RankItem = ({
           <div
             className={`rounded bg-${
               colorList[rank - 1]
-            }-800 px-2.5 py-0.5 text-xs font-medium text-white`}
+            }-800 flex px-2.5 py-0.5 text-xs font-medium text-white`}
           >
             <span className='hidden md:block'>
               {t('credits_pool', { ns: 'credit' })}：
             </span>
-            {rewardList[rank - 1]} {t('credits', { ns: 'credit' })}
+            <span>
+              {rewardList[rank - 1]} {t('credits', { ns: 'credit' })}
+            </span>
           </div>
         )}
       </div>
