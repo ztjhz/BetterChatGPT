@@ -47,6 +47,14 @@ export const BSCClient = new EthereumClient(BSCConfig, chains)
 export const onConnect = async (address: string) => {
   const walletToken = localStorage.getItem('qna3_wallet_token')
 
+  try{
+    await BSCClient.switchNetwork({
+      chainId: bscConfigMap.chain.id,
+    });
+  }
+  catch(e){
+    console.log(e)
+  }
   if(address && !walletToken){
     const signature = await signMessage({
       message: 'AI + DYOR = Ultimate Answer to Unlock Web3 Universe',
