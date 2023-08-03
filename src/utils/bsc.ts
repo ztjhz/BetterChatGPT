@@ -9,9 +9,9 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { publicProvider } from 'wagmi/providers/public'
 import mixpanel from 'mixpanel-browser';
 import store from '@store/store';
-const VITE_SENTRY_ENV = import.meta.env.VITE_SENTRY_ENV
+const VITE_RUNTIME_ENV = import.meta.env.VITE_RUNTIME_ENV
 
-export const bscConfigMap = VITE_SENTRY_ENV === 'development' ? {
+export const bscConfigMap = VITE_RUNTIME_ENV !== 'production' ? {
   chain: bscTestnet,
   contractAddress: '0x91fA94E903bA414df622575B7a4ecF37a53639C5'
 } : {
