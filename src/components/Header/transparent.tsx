@@ -263,9 +263,13 @@ export const UserMenu = ({ isOpen, setIsOpen }: any) => {
   );
 };
 
-export const web3Modal = () => {
+interface Web3LoginModalProps {
+  afterConnect?: () => void;
+}
+export const web3Modal = (props?: Web3LoginModalProps) => {
   const { connect, connectors, error, isLoading, pendingConnector } =
     useConnect();
+  const { t } = useTranslation();
   const iconMap: any = {
     MetaMask: MetaMaskIcon,
     WalletConnect: WalletConnectIcon,
@@ -280,6 +284,7 @@ export const web3Modal = () => {
           onClick={async () => {
             await beforeConnect(connector);
             connect({ connector });
+            props?.afterConnect && props?.afterConnect();
           }}
         >
           {iconMap[connector.name]({
@@ -294,7 +299,6 @@ export const web3Modal = () => {
           </div>
         </button>
       ))}
-
       {error && <div>{error.message}</div>}
     </>
   );

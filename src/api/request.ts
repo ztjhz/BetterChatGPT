@@ -15,7 +15,6 @@ request.interceptors.request.use((value) => {
   Object.keys(headersMapping).forEach(key => {
     value.headers[key] = headersMapping[key];
   })
-  console.log(value.url, value.headers)
   return value;
 })
 

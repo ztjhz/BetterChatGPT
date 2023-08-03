@@ -6,13 +6,14 @@ import { ConfigSlice, createConfigSlice } from './config-slice';
 import { ToastSlice, createToastSlice } from './toast-slice';
 import { SearchSlice, createSearchSlice } from './search-slice';
 import { AuthSlice, createAuthSlice } from './auth-slice';
+import { ActivitySlice, createActivitySlice } from './activity-slice';
 
 export type StoreState = ChatSlice &
   InputSlice &
   ConfigSlice &
   SearchSlice &
   AuthSlice &
-  ToastSlice;
+  ToastSlice & ActivitySlice;
 
 export type StoreSlice<T> = (
   set: StoreApi<StoreState>['setState'],
@@ -49,6 +50,7 @@ const useStore = create<StoreState>()(
       ...createToastSlice(set, get),
       ...createSearchSlice(set, get),
       ...createAuthSlice(set, get),
+      ...createActivitySlice(set, get),
     }),
     {
       name: 'Q&A3',

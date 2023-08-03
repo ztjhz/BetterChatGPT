@@ -1,14 +1,17 @@
-import { renderExternalWallet, renderInternalWallet } from '@src/pages/credit';
+import { ExternalWallet } from '@components/Wallet/external';
+import { InternalWallet } from '@components/Wallet/internal';
 import useStore from '@store/store';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 export const CreditSummary = () => {
   const claimHistory = useStore((state) => state.claimHistory);
   const shouldShowNew = claimHistory.some((item) => !item.claimed);
   const navigate = useNavigate();
+  const { t } = useTranslation();
   return (
     <div className='mb-4 hidden w-full flex-col gap-4 bg-bg-50 p-4 md:flex'>
-      {renderInternalWallet()}
+      <InternalWallet />
       <div className='relative z-0'>
         {shouldShowNew && (
           <span
@@ -20,7 +23,9 @@ export const CreditSummary = () => {
             New
           </span>
         )}
-        <div className='relative z-10'>{renderExternalWallet()}</div>
+        <div className='relative z-10'>
+          <ExternalWallet />
+        </div>
       </div>
     </div>
   );

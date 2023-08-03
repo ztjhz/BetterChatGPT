@@ -74,5 +74,7 @@
     "content": "您的赞成或反对能助我们不断优化，为此，我们会回馈您 QnA3 Credit，未来将可用于兑换 Token。"
   },
   "typing": "正在输入...",
-  "bsc_error": "抱歉，网络连接失败"
+  "bsc_error": "抱歉，网络连接失败",
+  "have_no_wallet": "如何创建钱包？",
+  "create_wallet_question": "如何使用 MetaMask 创建一个钱包？"
 }

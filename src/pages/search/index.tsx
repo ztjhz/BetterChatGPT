@@ -58,7 +58,7 @@ const SearchPage = () => {
             </div> */}
           <div className='w-full'>
             <div className='flex gap-4'>
-              <div>
+              <div className='flex-1'>
                 <div className=' dark:border-gray-700'>
                   <ul className='-mb-px flex flex-wrap text-center text-sm font-medium text-gray-500 dark:text-gray-400'>
                     <li className='mr-2'>

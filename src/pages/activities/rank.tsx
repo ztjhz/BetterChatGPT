@@ -1,15 +1,61 @@
 import { QNADialog } from '@components/Dialog';
-import { useState } from 'react';
+import useStore from '@store/store';
+import { bscConfigMap } from '@utils/bsc';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useContractWrite } from 'wagmi';
+import VoteABI from '@abi/QnaVote.json';
+import { toast } from 'react-toastify';
+import { web3Modal } from '@components/Header/transparent';
+import { Link } from 'react-router-dom';
 
 interface RankItemProps {
   rank: number;
   question: string;
   score: number;
+  activityID: number;
+  questionID: number;
+  callback: () => void;
+  onOpenLogin: () => void;
 }
-const RankItem = ({ rank, question, score }: RankItemProps) => {
+const RankItem = ({
+  rank,
+  question,
+  score,
+  activityID,
+  questionID,
+  callback,
+  onOpenLogin,
+}: RankItemProps) => {
   const rankText = ['🥇', '🥈', '🥉'];
   const { t } = useTranslation();
+  const [voting, setVoting] = useState(false);
+  const wallet_token = useStore((state) => state.wallet_token);
+  const { writeAsync } = useContractWrite({
+    address: bscConfigMap.contractAddress as any,
+    abi: VoteABI,
+    functionName: 'vote',
+  });
+
+  const onVote = async () => {
+    if (!wallet_token) {
+      onOpenLogin();
+      return;
+    }
+    if (voting) return;
+    setVoting(true);
+    try {
+      await writeAsync({
+        value: BigInt(0),
+        args: [activityID, questionID, 5],
+      });
+      callback();
+      setVoting(false);
+      toast.success(t('voteSuccess', { ns: 'vote' }));
+    } catch (e) {
+      setVoting(false);
+    }
+  };
 
   return (
     <div className='flex flex-col items-start justify-start gap-2 md:flex-row md:items-center md:justify-between'>
@@ -24,13 +70,21 @@ const RankItem = ({ rank, question, score }: RankItemProps) => {
           {rank <= 3 ? rankText[rank - 1] : rank}
         </div>
         <div className='flex flex-col'>
-          <div className='text-md font-bold underline'>{question}</div>
+          <Link
+            to={`/search/${encodeURIComponent(question)}`}
+            className='text-white'
+          >
+            <div className='text-md font-bold underline'>{question}</div>
+          </Link>
         </div>
       </div>
-      <div className='mt-4 flex shrink-0 gap-2 self-end rounded-full bg-indigo-600 p-2 py-1 text-sm hover:bg-indigo-700 md:mt-0 md:self-center'>
+      <div
+        onClick={() => onVote()}
+        className='mt-4 flex shrink-0 gap-2 self-end rounded-full bg-indigo-600 p-2 py-1 text-sm hover:bg-indigo-700 md:mt-0 md:self-center'
+      >
         <div>🔥</div>
         <div className='cursor-pointer font-bold'>
-          {t('vote', { ns: 'vote' })} ({score})
+          {voting ? '...' : `${t('vote', { ns: 'vote' })}(${score})`}
         </div>
       </div>
     </div>
@@ -40,7 +94,19 @@ const RankItem = ({ rank, question, score }: RankItemProps) => {
 export const RankPage = () => {
   const [openRules, setOpenRules] = useState(false);
   const [showTitle, setShowTitle] = useState(true);
+  const getCurrentActivity = useStore((state) => state.getCurrentActivity);
+  const currentActivity = useStore((state) => state.currentActivity);
   const { t } = useTranslation();
+  const [openLogin, setOpenLogin] = useState(false);
+  const LoginEle = web3Modal({
+    afterConnect: () => {
+      setOpenLogin(false);
+    },
+  });
+
+  useEffect(() => {
+    getCurrentActivity();
+  }, [1]);
 
   return (
     <div className='flex flex-col gap-2 bg-bg-50 p-4 text-white'>
@@ -89,57 +155,40 @@ export const RankPage = () => {
         </div>
       </div>
       <div className='flex flex-col gap-4'>
-        <RankItem
-          rank={1}
-          score={1221}
-          question='What is the Worldcoin and how is its tokenomics?'
-        />
-        <RankItem
-          rank={2}
-          score={970}
-          question='What is the tokenomics of Polygon 2.0?'
-        />
-        <RankItem
-          rank={3}
-          score={660}
-          question='What are the important features of Lens V2?'
-        />
-        <RankItem
-          rank={4}
-          score={302}
-          question='What is project LayerZero and its token economics?'
-        />
-        <RankItem
-          rank={5}
-          score={127}
-          question="What tokens are affected by the outcome of SEC's lawsuit against Ripple?"
-        />
-        <RankItem
-          rank={6}
-          score={70}
-          question='What impact will the deployment of Uniswap on Avalanche have on both of them?'
-        />
-        <RankItem
-          rank={7}
-          score={30}
-          question='What roles can Web3 play in empowering individuals and communities?'
-        />
-        <RankItem
-          rank={8}
-          score={21}
-          question='Is Blockchain and Ai the future to the new generation?'
-        />
-        <RankItem
-          rank={9}
-          score={7}
-          question="What's arbitrage trading and how it works?"
-        />
-        <RankItem
-          rank={10}
-          score={1}
-          question='What is the difference between web2 and web3?'
-        />
+        {currentActivity?.activity?.questions?.map((question, index) => {
+          return (
+            <RankItem
+              rank={index + 1}
+              score={question.vote_num}
+              question={question.query}
+              activityID={currentActivity?.id}
+              questionID={question.id}
+              callback={getCurrentActivity}
+              onOpenLogin={() => setOpenLogin(true)}
+            />
+          );
+        })}
       </div>
+      <QNADialog
+        isOpen={openLogin}
+        onClose={() => setOpenLogin(false)}
+        title={t('connect_tips', { ns: 'credit' })}
+      >
+        <div className=' p-4 '>
+          <div className='flex flex-col gap-2 md:flex-row '>{LoginEle}</div>
+          <div className='mt-4 flex justify-end text-xs'>
+            <Link
+              to={`/search/${encodeURIComponent(
+                t('create_wallet_question') as string
+              )}`}
+              onClick={() => setOpenLogin(false)}
+              className='text-white'
+            >
+              {t('have_no_wallet')}
+            </Link>
+          </div>
+        </div>
+      </QNADialog>
       <QNADialog
         isOpen={openRules}
         onClose={() => setOpenRules(false)}
