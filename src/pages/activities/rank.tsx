@@ -182,7 +182,7 @@ export const RankPage = () => {
               rank={index + 1}
               score={question.vote_num}
               question={question.query}
-              activityStatus={currentActivity?.activity?.actived}
+              activityStatus={currentActivity?.activity?.active}
               activityID={currentActivity?.id}
               startAt={currentActivity?.activity?.start_at}
               endAt={currentActivity?.activity?.end_at}
