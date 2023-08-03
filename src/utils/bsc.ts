@@ -40,19 +40,21 @@ export const BSCConfig = createConfig({
   webSocketPublicClient
 })
 export const BSCClient = new EthereumClient(BSCConfig, chains)
-
  
-
-// connect callback
-export const onConnect = async (address: string) => {
-  const walletToken = localStorage.getItem('qna3_wallet_token')
-  
+export const checkNetwork = async () => {
   const network = BSCClient.getNetwork()
   if(network?.chain?.id !== bscConfigMap.chain.id){
     await switchNetwork({
       chainId: bscConfigMap.chain.id,
     })
   }
+}
+
+// connect callback
+export const onConnect = async (address: string) => {
+  const walletToken = localStorage.getItem('qna3_wallet_token')
+  
+  await checkNetwork();
 
   if(address && !walletToken){
     try{

@@ -1,6 +1,6 @@
 import { request } from '@api/request';
 import useStore from '@store/store';
-import { bscConfigMap } from '@utils/bsc';
+import { bscConfigMap, checkNetwork } from '@utils/bsc';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAccount, useContractWrite, useSwitchNetwork } from 'wagmi';
@@ -29,6 +29,7 @@ export const ClaimItem = ({ data: item, onClaimed }: ClaimItemProps) => {
   const available = !item.claimed;
   const { t, i18n } = useTranslation();
   const [claiming, setClaiming] = useState(false);
+  const wallet_token = useStore((state) => state.wallet_token);
   const [openLoginModal, setLoginModal] = useState(false);
   const extra = i18n.language === 'en' ? item?.extra?.en : item?.extra?.zh;
   const title = extra?.title;
@@ -42,7 +43,7 @@ export const ClaimItem = ({ data: item, onClaimed }: ClaimItemProps) => {
 
   const claimCredit = async (id: number) => {
     if (claiming) return;
-    if (!address) {
+    if (!wallet_token) {
       setLoginModal(true);
       return;
     }
@@ -52,6 +53,7 @@ export const ClaimItem = ({ data: item, onClaimed }: ClaimItemProps) => {
     const amount = data?.data?.amount;
     const signature = data?.data?.signature;
     try {
+      await checkNetwork();
       await writeAsync({
         value: BigInt(0),
         args: [amount, signature?.nonce, signature?.signature],

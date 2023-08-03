@@ -1,6 +1,6 @@
 import { QNADialog } from '@components/Dialog';
 import useStore from '@store/store';
-import { bscConfigMap } from '@utils/bsc';
+import { bscConfigMap, checkNetwork } from '@utils/bsc';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useContractWrite } from 'wagmi';
@@ -64,6 +64,7 @@ const RankItem = ({
     setVoting(true);
     try {
       track('click_vote');
+      await checkNetwork();
       await writeAsync({
         value: BigInt(0),
         args: [activityID, questionID, 5],
