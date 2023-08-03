@@ -1,6 +1,6 @@
 const path = require('path');
 
-const {dialog,  app, BrowserWindow, Tray, Menu } = require('electron');
+const {dialog,  app, BrowserWindow, Tray, Menu, MenuItem } = require('electron');
 const isDev = require('electron-is-dev');
 const { autoUpdater } = require('electron-updater');
 let win = null;
@@ -102,6 +102,33 @@ if (!instanceLock) {
 
   app.whenReady().then(() => {
     win = createWindow()
+
+    win.webContents.on('context-menu', (event, params) =>
+    {
+      const menu = new Menu();
+
+      // Add each spelling suggestion
+      for (const suggestion of params.dictionarySuggestions)
+      {
+        menu.append(new MenuItem({
+          label: suggestion,
+          click: () => win.webContents.replaceMisspelling(suggestion)
+        }));
+      }
+
+      // Allow users to add the misspelled word to the dictionary
+      if (params.misspelledWord)
+      {
+        menu.append(
+          new MenuItem({
+            label: 'Add to dictionary',
+            click: () => win.webContents.session.addWordToSpellCheckerDictionary(params.misspelledWord)
+          })
+        );
+      }
+
+      menu.popup();
+    });  
   })
 }
 
