@@ -57,7 +57,9 @@ export const onConnect = async (address: string) => {
     })
 
     localStorage.setItem('qna3_wallet_token', data?.access_token)
-    localStorage.setItem('qna3_user_id', data?.user?.id);
+    if(data?.user){
+      localStorage.setItem('qna3_user_id', data?.user?.id);
+    }
 
     store.getState().setWalletToken(data?.access_token)
 

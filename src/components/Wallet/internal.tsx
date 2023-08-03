@@ -38,7 +38,11 @@ export const InternalWallet = () => {
         </p>
         <InformationIcon
           className='h-4 w-4 cursor-pointer text-white'
-          onClick={() => setIsCustodianDialogOpen(true)}
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            setIsCustodianDialogOpen(true);
+          }}
         />
       </div>
       <div className='flex items-center justify-between'>

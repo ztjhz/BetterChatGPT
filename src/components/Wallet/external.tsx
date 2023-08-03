@@ -33,7 +33,11 @@ export const ExternalWallet = () => {
         </p>
         <InformationIcon
           className='h-4 w-4 cursor-pointer text-white'
-          onClick={() => setIsWalletDialogOpen(true)}
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            setIsWalletDialogOpen(true);
+          }}
         />
       </div>
       <div className='flex items-center justify-between'>

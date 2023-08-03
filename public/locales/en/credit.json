@@ -1,5 +1,5 @@
 {
-  "my_credit": "MY CREDIT",
+  "my_credit": "My Credits",
   "custodian_wallet": "Custodian Wallet",
   "external_wallet": "External Wallet",
   "custodian_tips": {
@@ -12,10 +12,13 @@
   },
   "claim": "Claim",
   "credits": "credits",
-  "credits_claim": "CREDITS CLAIM",
+  "credits_pool": "Prize pool",
+  "credits_claim": "Credits List",
   "connect_tips": "Connect your wallet and receive 20 credits instantly",
   "claimed": "Claimed",
   "claim_link": "Claim Credits",
+  "daily_checkin": "Daily Check-in",
+  "votes": "Votes",
   "activities": {
     "title": "Ask 3 questions to earn credits",
     "state": "Today's Questions:"

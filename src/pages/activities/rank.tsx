@@ -36,6 +36,8 @@ const RankItem = ({
   onOpenLogin,
 }: RankItemProps) => {
   const rankText = ['🥇', '🥈', '🥉'];
+  const rewardList = ['10,000', '5,000', '1,000'];
+  const colorList = ['red', 'yellow', 'gray'];
   const { t } = useTranslation();
   const [voting, setVoting] = useState(false);
   const wallet_token = useStore((state) => state.wallet_token);
@@ -74,7 +76,27 @@ const RankItem = ({
       setVoting(false);
     }
   };
-
+  const renderQuestionStatus = () => {
+    return (
+      <div className='flex gap-2'>
+        <div className='rounded bg-indigo-200 px-2.5 py-0.5 text-xs font-medium text-indigo-800'>
+          {score} {t('votes', { ns: 'credit' })}
+        </div>
+        {rank <= 3 && (
+          <div
+            className={`rounded bg-${
+              colorList[rank - 1]
+            }-800 px-2.5 py-0.5 text-xs font-medium text-white`}
+          >
+            <span className='hidden md:block'>
+              {t('credits_pool', { ns: 'credit' })}：
+            </span>
+            {rewardList[rank - 1]} {t('credits', { ns: 'credit' })}
+          </div>
+        )}
+      </div>
+    );
+  };
   return (
     <div className='flex flex-col items-start justify-start gap-2 md:flex-row md:items-center md:justify-between'>
       <div className='flex flex-row items-center gap-4'>
@@ -87,30 +109,34 @@ const RankItem = ({
         >
           {rank <= 3 ? rankText[rank - 1] : rank}
         </div>
-        <div className='flex flex-col'>
+        <div className='flex flex-col gap-2'>
           <Link
             to={`/search/${encodeURIComponent(question)}`}
             className='text-white'
           >
             <div className='text-md font-bold underline'>{question}</div>
           </Link>
+          <div className='hidden md:block'>{renderQuestionStatus()}</div>
         </div>
       </div>
-      {activityStatus ? (
-        <div
-          onClick={() => onVote()}
-          className='mt-4 flex shrink-0 gap-2 self-end rounded-full bg-indigo-600 p-2 py-1 text-sm hover:bg-indigo-700 md:mt-0 md:self-center'
-        >
-          <div>🔥</div>
-          <div className='cursor-pointer font-bold'>
-            {voting ? '...' : `${t('vote', { ns: 'vote' })}(${score})`}
+      <div className='mt-1 flex w-full shrink-0 justify-between gap-2 self-end md:mt-0 md:max-w-fit md:self-center'>
+        <div className='ml-10 block md:hidden'>{renderQuestionStatus()}</div>
+        {activityStatus ? (
+          <div
+            onClick={() => onVote()}
+            className='flex shrink-0 gap-2 rounded-full bg-indigo-600 p-3 py-1 text-sm hover:bg-indigo-700 '
+          >
+            <div>🔥</div>
+            <div className='cursor-pointer font-bold'>
+              {voting ? '...' : `${t('vote', { ns: 'vote' })}`}
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className='mt-4 flex shrink-0 cursor-default gap-2 self-end rounded-full bg-gray-600 p-2 py-1 text-xs  text-gray-400 md:mt-0 md:self-center'>
-          {unvotableButtonText}
-        </div>
-      )}
+        ) : (
+          <div className='flex shrink-0 cursor-default gap-2 rounded-full bg-gray-600 p-2 py-1 text-xs  text-gray-400 '>
+            {unvotableButtonText}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
@@ -120,6 +146,9 @@ export const RankPage = () => {
   const [showTitle, setShowTitle] = useState(true);
   const getCurrentActivity = useStore((state) => state.getCurrentActivity);
   const currentActivity = useStore((state) => state.currentActivity);
+  const loadingCurrentActivity = useStore(
+    (state) => state.loadingCurrentActivity
+  );
   const { t } = useTranslation();
   const [openLogin, setOpenLogin] = useState(false);
   const LoginEle = web3Modal({
@@ -133,7 +162,7 @@ export const RankPage = () => {
   }, [1]);
 
   return (
-    <div className='flex flex-col gap-2 bg-bg-50 p-4 text-white'>
+    <div className='flex flex-col gap-2  rounded-none bg-bg-50 p-4 text-white md:rounded-lg'>
       <div
         hidden={!showTitle}
         className={`relative mb-2 flex flex-col overflow-hidden  rounded-lg bg-gradient-to-b from-pink-600 to-purple-500 p-4 text-sm text-gray-50`}
@@ -158,44 +187,40 @@ export const RankPage = () => {
         >
           {t('rules_title', { ns: 'vote' })}
         </div>
-        <div
-          className='absolute right-2 top-2 cursor-pointer p-2'
-          onClick={() => setShowTitle(false)}
-        >
-          <svg
-            width='15'
-            height='15'
-            viewBox='0 0 11 12'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <path
-              fill-rule='evenodd'
-              clip-rule='evenodd'
-              d='M4.55709 5.9999L0.314454 1.75726L1.25726 0.814453L5.4999 5.05709L9.74254 0.814453L10.6854 1.75726L6.44271 5.9999L10.6854 10.2425L9.74254 11.1854L5.4999 6.94271L1.25726 11.1854L0.314453 10.2425L4.55709 5.9999Z'
-              fill='white'
-            />
-          </svg>
+      </div>
+      {loadingCurrentActivity ? (
+        <div role='status' className='w-full flex-1 animate-pulse'>
+          <div className='mb-4 h-4 bg-gray-800'></div>
+          <div className='mb-4 h-4 bg-gray-800'></div>
+          <div className='mb-4 h-4 bg-gray-800'></div>
+          <div className='mb-4 h-4 bg-gray-800'></div>
+          <div className='mb-4 h-4 bg-gray-800'></div>
+          <div className='mb-4 h-4 bg-gray-800'></div>
+          <div className='mb-4 h-4 bg-gray-800'></div>
+          <div className='mb-4 h-4 bg-gray-800'></div>
+          <div className='mb-4 h-4 bg-gray-800'></div>
         </div>
-      </div>
-      <div className='flex flex-col gap-4'>
-        {currentActivity?.activity?.questions?.map((question, index) => {
-          return (
-            <RankItem
-              rank={index + 1}
-              score={question.vote_num}
-              question={question.query}
-              activityStatus={currentActivity?.activity?.active}
-              activityID={currentActivity?.id}
-              startAt={currentActivity?.activity?.start_at}
-              endAt={currentActivity?.activity?.end_at}
-              questionID={question.id}
-              callback={getCurrentActivity}
-              onOpenLogin={() => setOpenLogin(true)}
-            />
-          );
-        })}
-      </div>
+      ) : (
+        <div className='flex flex-col gap-4'>
+          {currentActivity?.activity?.questions?.map((question, index) => {
+            return (
+              <RankItem
+                rank={index + 1}
+                score={question.vote_num}
+                question={question.query}
+                activityStatus={currentActivity?.activity?.active}
+                activityID={currentActivity?.id}
+                startAt={currentActivity?.activity?.start_at}
+                endAt={currentActivity?.activity?.end_at}
+                questionID={question.id}
+                callback={getCurrentActivity}
+                onOpenLogin={() => setOpenLogin(true)}
+              />
+            );
+          })}
+        </div>
+      )}
+
       <QNADialog
         isOpen={openLogin}
         onClose={() => setOpenLogin(false)}

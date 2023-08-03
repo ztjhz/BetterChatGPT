@@ -112,8 +112,11 @@ export const CheckInWidget = () => {
     );
   };
   return (
-    <div className='hidden w-full bg-bg-50 md:block'>
-      <div className='p-4 text-sm text-white'>
+    <div className='hidden w-full rounded-lg bg-bg-50 md:block'>
+      <div className='p-4 pb-1 font-bold text-white'>
+        {t('daily_checkin', { ns: 'credit' })}
+      </div>
+      <div className='mb-4 px-4 text-sm text-white'>
         {t('activities.title', { ns: 'credit' })}
       </div>
       <div className='flex flex-col md:flex-row'>

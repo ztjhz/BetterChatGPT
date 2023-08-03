@@ -76,5 +76,7 @@
   "typing": "Typing...",
   "bsc_error": "Network connection failed",
   "have_no_wallet": "Don’t have a wallet?",
-  "create_wallet_question": "How to create a wallet in MetaMask?"
+  "create_wallet_question": "How to create a wallet in MetaMask?",
+  "vote_rank": "Vote to Earn",
+  "trending": "Trending Events"
 }

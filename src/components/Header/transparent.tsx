@@ -70,11 +70,11 @@ export const TransparentHeader = ({
           <div>
             <I18NSelector />
           </div>
-          <div className='flex justify-end py-4'>
+          <div className='flex justify-end py-4 '>
             {user || walletToken ? (
               <>
                 <div className='flex items-center overflow-hidden text-sm md:text-sm '>
-                  <Link to='/user/credit'>
+                  <Link to='/user/credit' className='block md:hidden'>
                     <div className='flex h-full items-center gap-x-2 px-2 py-2 md:px-4'>
                       <svg
                         width='17'
@@ -88,7 +88,9 @@ export const TransparentHeader = ({
                           fill='white'
                         />
                       </svg>
-                      <div className='text-white '>{credit}</div>
+                      <div className='text-white '>
+                        {t('my_credit', { ns: 'credit' })}
+                      </div>
                     </div>
                   </Link>
                   <div

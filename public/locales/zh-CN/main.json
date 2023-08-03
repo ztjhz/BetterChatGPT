@@ -76,5 +76,7 @@
   "typing": "正在输入...",
   "bsc_error": "抱歉，网络连接失败",
   "have_no_wallet": "如何创建钱包？",
-  "create_wallet_question": "如何使用 MetaMask 创建一个钱包？"
+  "create_wallet_question": "如何使用 MetaMask 创建一个钱包？",
+  "vote_rank": "打榜",
+  "trending": "热门"
 }

@@ -98,7 +98,7 @@ export const ClaimItem = ({ data: item, onClaimed }: ClaimItemProps) => {
               : `${t('claim', { ns: 'credit' })} ${item.score} ${t('credits', {
                   ns: 'credit',
                 })}`
-            : t('claimed', { ns: 'credit' })}
+            : `${t('claimed', { ns: 'credit' })} +${item.score}`}
         </div>
       </div>
       <UserMenu isOpen={openLoginModal} setIsOpen={setLoginModal} />

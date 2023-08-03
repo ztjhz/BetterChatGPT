@@ -20,7 +20,7 @@ export const TrendingEvents = () => {
   }, [i18n?.language]);
 
   return (
-    <div className='bg-bg-50 p-4 md:px-6'>
+    <div className=' rounded-none bg-bg-50 p-4 md:rounded-lg md:px-6'>
       <div className='text-md mb-4 text-white'>{t('trendingEvent')}</div>
 
       <ol className='relative border-l border-gray-200 dark:border-gray-700'>
