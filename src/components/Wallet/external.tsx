@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 export const ExternalWallet = () => {
   const { address } = useAccount();
   const { t } = useTranslation();
+  const walletToken = useStore((state) => state.wallet_token);
 
   const [isWalletDialogOpen, setIsWalletDialogOpen] = useState(false);
   const { data: contractBalance } = useContractRead({
@@ -41,7 +42,7 @@ export const ExternalWallet = () => {
         />
       </div>
       <div className='flex items-center justify-between'>
-        {address ? (
+        {walletToken ? (
           <>
             <div className='flex items-center gap-2'>
               <p className='text-left text-sm text-white'>

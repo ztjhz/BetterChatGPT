@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { initUser } from './api';
 import { Auth0Client } from '@auth0/auth0-spa-js';
 import { request } from '@api/request';
-import { track } from 'mixpanel-browser';
+import { track } from './track';
 
 const domain = 'dev-tfcpxeutlsld1wm0.us.auth0.com';
 const clientId = import.meta.env.VITE_AUTH0_ID;

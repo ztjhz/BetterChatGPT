@@ -3,6 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import useStore from '@store/store';
 import { Fragment, useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import { signMessage } from '@wagmi/core';
 
 import QNALogo from '@logo/qnaLogo';
 import { Link } from 'react-router-dom';
@@ -43,7 +44,6 @@ export const TransparentHeader = ({
   let [isOpenUserMenu, setIsOpenUserMenu] = useState(false);
   const { address, isConnected } = useAccount({
     onConnect: ({ address }) => {
-      console.log('already connect');
       onConnect(address as string);
       setIsOpen(false);
     },
@@ -155,7 +155,7 @@ const beforeConnect = async (connector: any) => {
       chainId: bscConfigMap.chain.id,
     });
   } catch (e) {
-    throw e;
+    console.log(e);
   }
 };
 
@@ -216,8 +216,12 @@ export const UserMenu = ({ isOpen, setIsOpen }: any) => {
                 className='flex w-full flex-1 items-center justify-start gap-4 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
                 onClick={async () => {
                   track('start_connect_wallet');
-                  await beforeConnect(connector);
-                  connect({ connector });
+                  if (isConnected) {
+                    await onConnect(address as string);
+                  } else {
+                    await beforeConnect(connector);
+                    connect({ connector });
+                  }
                 }}
               >
                 {iconMap[connector.name]({
@@ -236,12 +240,11 @@ export const UserMenu = ({ isOpen, setIsOpen }: any) => {
           className='flex w-full flex-1 items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
           onClick={() => {
             track('logout');
-
+            if (walletToken || isConnected) {
+              disconnect();
+            }
             if (isAuthenticated) {
               logout();
-            }
-            if (!!walletToken) {
-              disconnect();
             }
 
             setIsOpen(false);
@@ -274,8 +277,9 @@ interface Web3LoginModalProps {
   afterConnect?: () => void;
 }
 export const web3Modal = (props?: Web3LoginModalProps) => {
-  const { connect, connectors, error, isLoading, pendingConnector } =
+  const { connect, connectors, error, isLoading, pendingConnector, isSuccess } =
     useConnect();
+  const { address, isConnected } = useAccount();
   const { t } = useTranslation();
   const iconMap: any = {
     MetaMask: MetaMaskIcon,
@@ -290,8 +294,13 @@ export const web3Modal = (props?: Web3LoginModalProps) => {
           className='flex w-full flex-1 items-center justify-start gap-4 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
           onClick={async () => {
             track('start_connect_wallet');
-            await beforeConnect(connector);
-            connect({ connector });
+            if (isConnected) {
+              await onConnect(address as string);
+            } else {
+              await beforeConnect(connector);
+              connect({ connector });
+            }
+
             props?.afterConnect && props?.afterConnect();
           }}
         >
@@ -307,7 +316,6 @@ export const web3Modal = (props?: Web3LoginModalProps) => {
           </div>
         </button>
       ))}
-      {error && <div>{error.message}</div>}
     </>
   );
 };

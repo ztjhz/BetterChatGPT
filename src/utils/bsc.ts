@@ -2,7 +2,7 @@ import { request, setRequestHeader } from '@api/request';
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import { bsc, bscTestnet } from 'wagmi/chains';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
-import { signMessage } from '@wagmi/core'
+import { signMessage, switchNetwork } from '@wagmi/core'
 import { initUser } from './api';
 import { MetaMaskConnector } from '@wagmi/core/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
@@ -46,37 +46,42 @@ export const BSCClient = new EthereumClient(BSCConfig, chains)
 // connect callback
 export const onConnect = async (address: string) => {
   const walletToken = localStorage.getItem('qna3_wallet_token')
-
-  try{
-    await BSCClient.switchNetwork({
+  
+  const network = BSCClient.getNetwork()
+  if(network?.chain?.id !== bscConfigMap.chain.id){
+    await switchNetwork({
       chainId: bscConfigMap.chain.id,
-    });
+    })
   }
-  catch(e){
-    console.log(e)
-  }
+
   if(address && !walletToken){
-    const signature = await signMessage({
-      message: 'AI + DYOR = Ultimate Answer to Unlock Web3 Universe',
-    })
-    const {data} = await request.post('/user/wallet_login', {
-      wallet_address: address,
-      signature: signature
-    })
-
-    localStorage.setItem('qna3_wallet_token', data?.access_token)
-    if(data?.user){
-      localStorage.setItem('qna3_user_id', data?.user?.id);
+    try{
+      const signature = await signMessage({
+        message: 'AI + DYOR = Ultimate Answer to Unlock Web3 Universe',
+      })
+  
+      const {data} = await request.post('/user/wallet_login', {
+        wallet_address: address,
+        signature: signature
+      })
+  
+      localStorage.setItem('qna3_wallet_token', data?.access_token)
+      if(data?.user){
+        localStorage.setItem('qna3_user_id', data?.user?.id);
+      }
+  
+      store.getState().setWalletToken(data?.access_token)
+  
+      track('connect', {
+        address: address,
+        value: address,
+      })
+      
+      await initUser(undefined, data?.access_token, data?.user?.id);
+    }catch(e){
+      console.log(e)
     }
-
-    store.getState().setWalletToken(data?.access_token)
-
-    track('connect', {
-      address: address,
-      value: address,
-    })
     
-    await initUser(undefined, data?.access_token, data?.user?.id);
   }
 }
 

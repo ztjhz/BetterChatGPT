@@ -30,12 +30,16 @@ export const trackingToolsInit = () => {
 }
 
 export const track = (event: string, properties?: any) => {
-  mixpanel.track(event, properties);
-  ReactGA.event({
-    category: 'User',
-    action: event,
-    label: properties?.value
-  });
+  try{
+    mixpanel.track(event, properties);
+    ReactGA.event({
+      category: 'User',
+      action: event,
+      label: properties?.value
+    });
+  }catch(e){
+    console.log(e)
+  }
 }
 
 export const setTrackingUser = (id: string) => {

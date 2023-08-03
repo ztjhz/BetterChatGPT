@@ -17,27 +17,28 @@ export const CreditSummary = () => {
           {t('my_credit', { ns: 'credit' })}
         </div>
       </div>
-      <Link to='/user/credit'>
-        <InternalWallet />
-      </Link>
-      <Link to='/user/credit'>
-        <div className='relative z-0'>
-          {shouldShowNew && (
-            <span
-              onClick={() => {
-                track('click_credit_badge');
-                navigate('/user/credit');
-              }}
-              className='absolute top-5 right-1 z-20 mr-2 animate-pulse cursor-pointer rounded-full bg-red-800 px-2.5 py-0.5 text-xs font-medium text-red-100 duration-1000 '
-            >
-              New
-            </span>
-          )}
-          <div className='relative z-10'>
-            <ExternalWallet />
-          </div>
+      <InternalWallet />
+      <div className='relative z-0'>
+        {shouldShowNew && (
+          <span
+            onClick={() => {
+              track('click_credit_badge');
+              navigate('/user/credit');
+            }}
+            className='absolute top-5 right-1 z-20 mr-2 animate-pulse cursor-pointer rounded-full bg-red-800 px-2.5 py-0.5 text-xs font-medium text-red-100 duration-1000 '
+          >
+            New
+          </span>
+        )}
+        <div className='relative z-10'>
+          <ExternalWallet />
         </div>
-      </Link>
+        <Link to='/user/credit'>
+          <button className='mt-4 w-full rounded-full bg-indigo-600 py-2 px-4 text-sm font-bold text-white hover:bg-indigo-800'>
+            {t('my_credit_detail')}
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
