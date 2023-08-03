@@ -22,9 +22,6 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - name: staging-faq-frontend
-        image: oxfaq.azurecr.io/faq-frontend:091ad4074782530f4c52554f3ddaa1fe23351750
-        envFrom:
-            - secretRef:
-                name: openai-secret
+        image: oxfaq.azurecr.io/faq-frontend:befdb6c049fea16b508cd1597d838b6da535300c
         ports:
         - containerPort: 3000

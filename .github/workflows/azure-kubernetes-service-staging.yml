@@ -42,6 +42,7 @@ env:
   CLUSTER_NAME: "development"
   DEPLOYMENT_MANIFEST_PATH: "deploy/staging-deploy.yaml"
   VITE_PUBLIC_PATH: "/"
+  VITE_SERVER_API_ENDPOINT: "https://staging-api.qna3.ai"
   
 jobs:
   buildImage:
@@ -64,11 +65,11 @@ jobs:
       # Builds and pushes an image up to your Azure Container Registry
       - name: Build and push image to ACR
         env:
-          VITE_SERVER_API_ENDPOINT: ${{ vars.VITE_SERVER_API_ENDPOINT }}
+          VITE_SERVER_API_ENDPOINT: ${{ env.VITE_SERVER_API_ENDPOINT }}
           VITE_OPENAI_API_KEY: ${{ secrets.VITE_OPENAI_API_KEY }}
         run: |
           az acr build \
-          --build-arg VITE_SERVER_API_ENDPOINT=${{ vars.VITE_SERVER_API_ENDPOINT }} \
+          --build-arg VITE_SERVER_API_ENDPOINT=${{ env.VITE_SERVER_API_ENDPOINT }} \
           --build-arg VITE_OPENAI_API_KEY=${{ secrets.VITE_OPENAI_API_KEY }} \
           --build-arg VITE_PUBLIC_PATH=${{env.VITE_PUBLIC_PATH}} \
           --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} \
