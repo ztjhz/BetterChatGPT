@@ -196,24 +196,9 @@ const EditViewButtons = memo(
             </button>
           )}
 
-          <button
-            className={`btn relative mr-2 ${
-              sticky
-                ? `btn-neutral ${
-                    generating ? 'cursor-not-allowed opacity-40' : ''
-                  }`
-                : 'btn-primary'
-            }`}
-            onClick={handleSave}
-          >
-            <div className='flex items-center justify-center gap-2'>
-              {t('save')}
-            </div>
-          </button>
-
           {sticky || (
             <button
-              className='btn relative mr-2 btn-neutral'
+              className='btn relative mr-2 btn-primary'
               onClick={() => {
                 !generating && setIsModalOpen(true);
               }}
@@ -223,6 +208,21 @@ const EditViewButtons = memo(
               </div>
             </button>
           )}
+
+          <button
+            className={`btn relative mr-2 ${
+              sticky
+                ? `btn-neutral ${
+                    generating ? 'cursor-not-allowed opacity-40' : ''
+                  }`
+                : 'btn-neutral'
+            }`}
+            onClick={handleSave}
+          >
+            <div className='flex items-center justify-center gap-2'>
+              {t('save')}
+            </div>
+          </button>
 
           {sticky || (
             <button
