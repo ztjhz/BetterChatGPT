@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: faq-frontend
-  namespace: default
+  name: staging-faq-frontend
+  namespace: staging
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: faq-frontend
+      app: staging-faq-frontend
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -16,62 +16,15 @@ spec:
   template:
     metadata:
       labels:
-        app: faq-frontend
+        app: staging-faq-frontend
     spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
       containers:
-      - name: faq-frontend
+      - name: staging-faq-frontend
         image: oxfaq.azurecr.io/faq-frontend:091ad4074782530f4c52554f3ddaa1fe23351750
         envFrom:
             - secretRef:
                 name: openai-secret
         ports:
         - containerPort: 3000
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: faq-frontend-service
-  namespace: default
-spec:
-  ports:
-  - name: http
-    port: 80
-    protocol: TCP
-    targetPort: 3000
-  selector:
-    app: faq-frontend
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: faq-frontend-ingress
-  namespace: default
-  annotations:
-    kubernetes.io/ingress.class: azure/application-gateway
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/proxy-body-size: "30M"
-    nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
-    nginx.ingress.kubernetes.io/use-gzip: "true"
-    nginx.ingress.kubernetes.io/use-http2: "true"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    appgw.ingress.kubernetes.io/ssl-redirect: "true"
-spec:
-  tls:
-  - hosts:
-    - qna3.ai
-    secretName: qna3-web-tls
-  rules:
-    - host: qna3.ai
-      http:
-        paths:
-          - path: /
-            pathType: Exact
-            backend:
-              service:
-                name: faq-frontend-service
-                port:
-                  name: http

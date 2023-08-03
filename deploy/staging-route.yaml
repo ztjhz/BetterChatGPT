@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: staging-faq-frontend-service
+  namespace: staging
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: staging-faq-frontend
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: staging-faq-frontend-ingress
+  namespace: staging
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: "30M"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/use-gzip: "true"
+    nginx.ingress.kubernetes.io/use-http2: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  tls:
+  - hosts:
+    - staging.qna3.ai
+    secretName: staging-web-tls
+  rules:
+    - host: staging.qna3.ai
+      http:
+        paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: staging-faq-frontend-service
+                port:
+                  name: http
