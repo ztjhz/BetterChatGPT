@@ -180,13 +180,13 @@ export const CheckInModal = () => {
       <div
         className='flex cursor-pointer items-center justify-between gap-2 rounded-md rounded-tl-none rounded-tr-none border border-t-0 border-bg-200 bg-indigo-800 p-2 text-sm text-white hover:bg-indigo-900'
         onClick={() => {
-          // if (!user && !walletToken) {
-          //   return setOpenLogin(true);
-          // }
+          if (!user && !walletToken) {
+            return setOpenLogin(true);
+          }
 
-          // if (notBindWallet) {
-          //   return setOpenUserMenu(true);
-          // }
+          if (notBindWallet) {
+            return setOpenUserMenu(true);
+          }
 
           setOpen(true);
 
