@@ -16,6 +16,7 @@ interface Question {
 interface Activity{
   start_at: Date;
   end_at: Date;
+  actived: boolean;
   questions: Question[];
 }
 

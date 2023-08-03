@@ -5,5 +5,7 @@
   "rules_title": "Voting Rules",
   "vote": "Vote",
   "voteSuccess": "Vote successfully!",
-  "voteTip": "After the end of this week’s event, the prize pool will be distributed!"
+  "voteTip": "After the end of this week’s event, the prize pool will be distributed!",
+  "voteNotStart": "Not Started Yet",
+  "voteEnd": "Ended"
 }

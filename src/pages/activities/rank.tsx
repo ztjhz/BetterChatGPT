@@ -8,13 +8,17 @@ import VoteABI from '@abi/QnaVote.json';
 import { toast } from 'react-toastify';
 import { web3Modal } from '@components/Header/transparent';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 interface RankItemProps {
   rank: number;
   question: string;
   score: number;
+  activityStatus: boolean;
   activityID: number;
   questionID: number;
+  startAt: Date;
+  endAt: Date;
   callback: () => void;
   onOpenLogin: () => void;
 }
@@ -24,6 +28,9 @@ const RankItem = ({
   score,
   activityID,
   questionID,
+  activityStatus,
+  startAt,
+  endAt,
   callback,
   onOpenLogin,
 }: RankItemProps) => {
@@ -36,8 +43,16 @@ const RankItem = ({
     abi: VoteABI,
     functionName: 'vote',
   });
+  let unvotableButtonText = t('voteNotStart', { ns: 'vote' });
+  if (moment().isBefore(moment(startAt))) {
+    unvotableButtonText = t('voteNotStart', { ns: 'vote' });
+  }
+  if (moment().isAfter(moment(endAt))) {
+    unvotableButtonText = t('voteEnd', { ns: 'vote' });
+  }
 
   const onVote = async () => {
+    if (!activityStatus) return;
     if (!wallet_token) {
       onOpenLogin();
       return;
@@ -78,15 +93,21 @@ const RankItem = ({
           </Link>
         </div>
       </div>
-      <div
-        onClick={() => onVote()}
-        className='mt-4 flex shrink-0 gap-2 self-end rounded-full bg-indigo-600 p-2 py-1 text-sm hover:bg-indigo-700 md:mt-0 md:self-center'
-      >
-        <div>🔥</div>
-        <div className='cursor-pointer font-bold'>
-          {voting ? '...' : `${t('vote', { ns: 'vote' })}(${score})`}
+      {activityStatus ? (
+        <div
+          onClick={() => onVote()}
+          className='mt-4 flex shrink-0 gap-2 self-end rounded-full bg-indigo-600 p-2 py-1 text-sm hover:bg-indigo-700 md:mt-0 md:self-center'
+        >
+          <div>🔥</div>
+          <div className='cursor-pointer font-bold'>
+            {voting ? '...' : `${t('vote', { ns: 'vote' })}(${score})`}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className='mt-4 flex shrink-0 cursor-default gap-2 self-end rounded-full bg-gray-600 p-2 py-1 text-xs  text-gray-400 md:mt-0 md:self-center'>
+          {unvotableButtonText}
+        </div>
+      )}
     </div>
   );
 };
@@ -161,7 +182,10 @@ export const RankPage = () => {
               rank={index + 1}
               score={question.vote_num}
               question={question.query}
+              activityStatus={currentActivity?.activity?.actived}
               activityID={currentActivity?.id}
+              startAt={currentActivity?.activity?.start_at}
+              endAt={currentActivity?.activity?.end_at}
               questionID={question.id}
               callback={getCurrentActivity}
               onOpenLogin={() => setOpenLogin(true)}
