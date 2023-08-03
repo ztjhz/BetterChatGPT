@@ -20,10 +20,7 @@ export const App = React.memo(() => {
         const access_token = await getAccessTokenSilently();
         await initUser(access_token);
       } catch (e: any) {
-        // 新用户自动 init user
-        if (e?.message === 'Login required') {
-          await initUser();
-        }
+        await initUser();
       }
       setLoadingUser(false);
     })();
