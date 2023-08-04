@@ -50,7 +50,6 @@ export default ({ value, setValue, handleSubmit }: any) => {
         onChange={(e) => {
           setValue(e.target.value);
         }}
-        autoFocus
         value={value}
         placeholder={t('mainSearchPlaceholder') as string}
         onKeyDown={handleKeyDown}
