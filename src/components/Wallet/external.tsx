@@ -64,7 +64,7 @@ export const ExternalWallet = () => {
           </>
         ) : (
           <>
-            <div>
+            <div className='w-full'>
               <div className='flex gap-2 md:flex-wrap'>{LoginEle}</div>
               <div className='mt-4 flex justify-end text-xs'>
                 <Link

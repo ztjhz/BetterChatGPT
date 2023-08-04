@@ -2,28 +2,35 @@ import { request, setRequestHeader } from '@api/request';
 import { WagmiConfig, configureChains, createConfig } from 'wagmi'
 import { bsc, bscTestnet } from 'wagmi/chains';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
-import { signMessage, switchNetwork } from '@wagmi/core'
+import { signMessage, switchNetwork, InjectedConnector } from '@wagmi/core'
 import { initUser } from './api';
 import { MetaMaskConnector } from '@wagmi/core/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { publicProvider } from 'wagmi/providers/public'
 import store from '@store/store';
 import { track } from './track';
+import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc'
 const VITE_RUNTIME_ENV = import.meta.env.VITE_RUNTIME_ENV
 
 export const bscConfigMap = VITE_RUNTIME_ENV !== 'production' ? {
   chain: bscTestnet,
-  contractAddress: '0x91fA94E903bA414df622575B7a4ecF37a53639C5'
+  contractAddress: '0x91fA94E903bA414df622575B7a4ecF37a53639C5',
+  rpc: 'https://bsc-testnet.nodereal.io/v1/132d52c330424e7896bdc25a5d6ef5fc'
 } : {
   chain: bsc,
-  contractAddress: '0x91fA94E903bA414df622575B7a4ecF37a53639C5'
+  contractAddress: '0x91fA94E903bA414df622575B7a4ecF37a53639C5',
+  rcp: 'https://bsc-mainnet.nodereal.io/v1/132d52c330424e7896bdc25a5d6ef5fc'
 }
 
 const chains = [bscConfigMap.chain]
 
 // wallet connect
 export const projectId = 'b07dfe8b6ba7abcb519809d89b923367'
-const { publicClient, webSocketPublicClient } = configureChains(chains, [publicProvider()])
+const { publicClient, webSocketPublicClient } = configureChains(chains, [jsonRpcProvider({
+  rpc: (chain) => ({
+    http: bscConfigMap.rpc as string,
+  })
+}), publicProvider()])
 
 export const BSCConfig = createConfig({
   autoConnect: true,

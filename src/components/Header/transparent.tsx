@@ -217,7 +217,7 @@ export const UserMenu = ({ isOpen, setIsOpen }: any) => {
                   if (isConnected) {
                     await onConnect(address as string);
                   } else {
-                    await beforeConnect(connector);
+                    // await beforeConnect(connector);
                     connect({ connector });
                   }
                 }}
@@ -285,35 +285,38 @@ export const web3Modal = (props?: Web3LoginModalProps) => {
   };
   return (
     <>
-      {connectors.map((connector) => (
-        <button
-          disabled={!connector.ready}
-          key={connector.id}
-          className='flex w-full flex-1 items-center justify-start gap-4 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
-          onClick={async () => {
-            track('start_connect_wallet');
-            if (isConnected) {
-              await onConnect(address as string);
-            } else {
-              await beforeConnect(connector);
-              connect({ connector });
-            }
+      {connectors
+        .filter((c) => c.ready)
+        .map((connector) => (
+          <button
+            disabled={!connector.ready}
+            key={connector.id}
+            className='flex w-full flex-1 items-center justify-start gap-4 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
+            onClick={async () => {
+              console.log('connect wallet', isConnected);
+              track('start_connect_wallet');
+              if (isConnected) {
+                await onConnect(address as string);
+              } else {
+                // await beforeConnect(connector);
+                connect({ connector });
+              }
 
-            props?.afterConnect && props?.afterConnect();
-          }}
-        >
-          {iconMap[connector.name]({
-            className: 'h-6 w-6',
-          })}
-          <div>
-            {connector.name}
-            {!connector.ready && ' (unsupported)'}
-            {isLoading &&
-              connector.id === pendingConnector?.id &&
-              ' (connecting)'}
-          </div>
-        </button>
-      ))}
+              props?.afterConnect && props?.afterConnect();
+            }}
+          >
+            {iconMap[connector.name]({
+              className: 'h-6 w-6',
+            })}
+            <div>
+              {connector.name}
+              {!connector.ready && ' (unsupported)'}
+              {isLoading &&
+                connector.id === pendingConnector?.id &&
+                ' (connecting)'}
+            </div>
+          </button>
+        ))}
     </>
   );
 };
