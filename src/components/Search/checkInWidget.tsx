@@ -98,7 +98,7 @@ export const CheckInWidget = () => {
     return (
       <div className='w-full'>
         <button
-          className='w-full rounded-full bg-indigo-600 py-2 px-4 text-sm font-bold text-white hover:bg-indigo-800'
+          className='w-full rounded-md bg-violet-600 py-2 px-4 text-sm font-bold text-white hover:bg-indigo-800'
           onClick={() => {
             if (user) {
               return setOpenUserMenu(true);

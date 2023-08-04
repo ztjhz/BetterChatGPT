@@ -1,3 +1,4 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import { ExternalWallet } from '@components/Wallet/external';
 import { InternalWallet } from '@components/Wallet/internal';
 import useStore from '@store/store';
@@ -9,6 +10,9 @@ export const CreditSummary = () => {
   const claimHistory = useStore((state) => state.claimHistory);
   const shouldShowNew = claimHistory.some((item) => !item.claimed);
   const navigate = useNavigate();
+  const walletToken = useStore((state) => state.wallet_token);
+  const { user } = useAuth0();
+
   const { t } = useTranslation();
   return (
     <div className='mb-4 hidden w-full flex-col gap-4 rounded-lg bg-bg-50 p-4 md:flex'>
@@ -19,7 +23,7 @@ export const CreditSummary = () => {
       </div>
       <InternalWallet />
       <div className='relative z-0'>
-        {shouldShowNew && (
+        {shouldShowNew && walletToken && (
           <span
             onClick={() => {
               track('click_credit_badge');
@@ -33,11 +37,13 @@ export const CreditSummary = () => {
         <div className='relative z-10'>
           <ExternalWallet />
         </div>
-        <Link to='/user/credit'>
-          <button className='mt-4 w-full rounded-full bg-indigo-600 py-2 px-4 text-sm font-bold text-white hover:bg-indigo-800'>
-            {t('my_credit_detail')}
-          </button>
-        </Link>
+        {(user || walletToken) && (
+          <Link to='/user/credit'>
+            <button className='mt-4 w-full rounded-md bg-violet-600 py-2 px-4 text-sm font-bold text-white hover:bg-indigo-800'>
+              {t('my_credit_detail')}
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );

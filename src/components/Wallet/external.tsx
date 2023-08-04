@@ -27,7 +27,7 @@ export const ExternalWallet = () => {
 
   const LoginEle = web3Modal();
   return (
-    <div className='relative rounded-md bg-gradient-to-r from-violet-400 to-fuchsia-400 p-4 md:flex-1'>
+    <div className='relative rounded-md bg-gradient-to-b from-violet-500 to-violet-700 p-4 md:flex-1'>
       <div className='mb-2 flex items-center  gap-2'>
         <p className='text-md text-left font-bold text-white'>
           {t('external_wallet', { ns: 'credit' })}

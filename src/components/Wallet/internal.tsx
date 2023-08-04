@@ -31,7 +31,7 @@ export const InternalWallet = () => {
   });
 
   return (
-    <div className='rounded-md bg-gradient-to-r from-gray-800 to-gray-900 p-4 md:flex-1'>
+    <div className='rounded-md bg-gradient-to-b from-violet-500 to-violet-700 p-4 md:flex-1'>
       <div className='mb-2 flex items-center gap-2'>
         <p className='text-md text-left font-bold text-white'>
           {t('custodian_wallet', { ns: 'credit' })}
