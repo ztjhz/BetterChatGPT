@@ -59,11 +59,13 @@ export const ClaimItem = ({ data: item, onClaimed }: ClaimItemProps) => {
     const signature = data?.data?.signature;
     try {
       await checkNetwork();
-      await writeAsync({
+      const { hash } = await writeAsync({
         value: BigInt(0),
         args: [amount, signature?.nonce, signature?.signature],
       });
-      await request.put(`/credit/my/claim/${id}`);
+      await request.put(`/credit/my/claim/${id}`, {
+        hash: hash,
+      });
       onClaimed();
       setClaiming(false);
       track('claimed');

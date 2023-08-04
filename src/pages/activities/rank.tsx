@@ -10,6 +10,7 @@ import { web3Modal } from '@components/Header/transparent';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { track } from '@utils/track';
+import { request } from '@api/request';
 
 interface RankItemProps {
   rank: number;
@@ -59,7 +60,9 @@ const RankItem = ({
   }
 
   const onVote = async () => {
-    if (!unvotable) return;
+    console.log(wallet_token);
+
+    if (unvotable) return;
     if (!wallet_token) {
       onOpenLogin();
       return;
@@ -69,9 +72,14 @@ const RankItem = ({
     try {
       track('click_vote');
       await checkNetwork();
-      await writeAsync({
+      const { hash } = await writeAsync({
         value: BigInt(0),
         args: [activityID, questionID, 5],
+      });
+      await request.post('/activity/vote', {
+        activityId: activityID,
+        qsId: questionID,
+        hash: hash,
       });
       callback();
       setVoting(false);
@@ -220,7 +228,7 @@ export const RankPage = () => {
                 activityID={currentActivity?.id}
                 startAt={currentActivity?.activity?.start_at}
                 endAt={currentActivity?.activity?.end_at}
-                questionID={question.id}
+                questionID={question.qs_id}
                 callback={getCurrentActivity}
                 onOpenLogin={() => setOpenLogin(true)}
               />
