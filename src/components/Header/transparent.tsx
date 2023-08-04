@@ -22,7 +22,6 @@ import { RandomAvatar } from 'react-random-avatars';
 import { QNADialog } from '@components/Dialog';
 import { useTranslation } from 'react-i18next';
 import { useCopyToClipboard } from 'react-use';
-import { ToastContainer, toast } from 'react-toastify';
 import { formatWalletAddress } from '@utils/wallet';
 import { CopyIcon } from '@components/CopyIcon';
 import { switchNetwork } from '@wagmi/core';
@@ -143,7 +142,6 @@ export const TransparentHeader = ({
       </div>
       <SignInModal isOpen={isOpen} setIsOpen={setIsOpen} />
       <UserMenu isOpen={isOpenUserMenu} setIsOpen={setIsOpenUserMenu} />
-      <ToastContainer />
     </>
   );
 };

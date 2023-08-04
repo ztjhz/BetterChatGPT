@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useCopyToClipboard } from 'react-use';
 
 interface CopyIconProps {

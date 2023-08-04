@@ -8,6 +8,11 @@ import VoteABI from '@abi/QnaVote.json';
 import { UserMenu } from '@components/Header/transparent';
 import { toast } from 'react-toastify';
 import { track } from '@utils/track';
+import {
+  prepareWriteContract,
+  waitForTransaction,
+  writeContract,
+} from '@wagmi/core';
 
 interface ClaimItemProps {
   data: ClaimItem;
@@ -62,6 +67,21 @@ export const ClaimItem = ({ data: item, onClaimed }: ClaimItemProps) => {
       onClaimed();
       setClaiming(false);
       track('claimed');
+      // TODO: Check transaction
+      // waitForTransaction({
+      //   hash,
+      // })
+      //   .then(async (data) => {
+      //     console.log('data, ', data);
+      //     if(data.status === 'success') {
+
+      //     }
+
+      //   })
+      //   .catch((e) => {
+      //     console.log(e);
+      //     track('claim_failed');
+      //   });
     } catch (e) {
       console.log(e);
       setClaiming(false);

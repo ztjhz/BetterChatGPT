@@ -5,8 +5,7 @@ import { getSearchByType, simplifyQuestion } from '@api/api';
 import useStore from '@store/store';
 import { useAuth0 } from '@auth0/auth0-react';
 import { SignInModal, TransparentHeader } from '@components/Header/transparent';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import { useAccount } from 'wagmi';
 import { searchFuncions } from './variable';
 import { SimpleLoading } from './simpleLoading';
@@ -154,7 +153,6 @@ const SearchResultPage = () => {
         </div>
       </div>
       <SignInModal isOpen={loginModalOpen} setIsOpen={setLoginModalOpen} />
-      <ToastContainer autoClose={3000} />
     </div>
   );
 };
