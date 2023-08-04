@@ -46,6 +46,10 @@ const RankItem = ({
     abi: VoteABI,
     functionName: 'vote',
   });
+  const unvotable =
+    moment().isBefore(moment(startAt)) ||
+    moment().isAfter(moment(endAt)) ||
+    !activityStatus;
   let unvotableButtonText = t('voteNotStart', { ns: 'vote' });
   if (moment().isBefore(moment(startAt))) {
     unvotableButtonText = t('voteNotStart', { ns: 'vote' });
@@ -55,7 +59,7 @@ const RankItem = ({
   }
 
   const onVote = async () => {
-    if (!activityStatus) return;
+    if (!unvotable) return;
     if (!wallet_token) {
       onOpenLogin();
       return;
@@ -74,6 +78,7 @@ const RankItem = ({
       track('voted');
       toast.success(t('voteSuccess', { ns: 'vote' }));
     } catch (e) {
+      console.log(e);
       setVoting(false);
     }
   };
@@ -124,7 +129,7 @@ const RankItem = ({
       </div>
       <div className='mt-1 flex w-full shrink-0 justify-between gap-2 self-end md:mt-0 md:max-w-fit md:self-center'>
         <div className='ml-10 block md:hidden'>{renderQuestionStatus()}</div>
-        {activityStatus ? (
+        {!unvotable ? (
           <div
             onClick={() => onVote()}
             className='flex shrink-0 gap-2 rounded-full bg-indigo-600 p-3 py-1 text-sm hover:bg-indigo-700 '
