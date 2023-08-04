@@ -29,6 +29,7 @@ const ThemeSwitcher = () => {
     <button
       className='items-center gap-3 btn btn-neutral'
       onClick={switchTheme}
+      aria-label='toggle dark/light mode'
     >
       {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
       {t(getOppositeTheme(theme) + 'Mode')}

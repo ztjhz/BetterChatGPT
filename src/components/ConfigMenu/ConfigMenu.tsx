@@ -86,6 +86,7 @@ export const ModelSelector = ({
         className='btn btn-neutral btn-small flex gap-1'
         type='button'
         onClick={() => setDropDown((prev) => !prev)}
+        aria-label='model'
       >
         {_model}
         <DownChevronArrow />

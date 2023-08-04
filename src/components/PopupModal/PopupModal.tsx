@@ -49,6 +49,7 @@ const PopupModal = ({
                 type='button'
                 className='text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white'
                 onClick={_handleClose}
+                aria-label='close modal'
               >
                 <CrossIcon2 />
               </button>
@@ -70,6 +71,7 @@ const PopupModal = ({
                   type='button'
                   className='btn btn-primary'
                   onClick={handleConfirm}
+                  aria-label='confirm'
                 >
                   {t('confirm')}
                 </button>
@@ -79,6 +81,7 @@ const PopupModal = ({
                   type='button'
                   className='btn btn-neutral'
                   onClick={_handleClose}
+                  aria-label='cancel'
                 >
                   {t('cancel')}
                 </button>

@@ -63,6 +63,7 @@ const ImportPrompt = () => {
       <button
         className='btn btn-small btn-primary mt-3'
         onClick={handleFileUpload}
+        aria-label={t('import') as string}
       >
         {t('import')}
       </button>

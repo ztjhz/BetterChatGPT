@@ -10,7 +10,13 @@ const EditButton = memo(
   }: {
     setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   }) => {
-    return <BaseButton icon={<EditIcon2 />} onClick={() => setIsEdit(true)} />;
+    return (
+      <BaseButton
+        icon={<EditIcon2 />}
+        buttonProps={{ 'aria-label': 'edit message' }}
+        onClick={() => setIsEdit(true)}
+      />
+    );
   }
 );
 

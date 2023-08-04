@@ -158,11 +158,16 @@ const ContentView = memo(
             <>
               <button
                 className='p-1 hover:text-white'
+                aria-label='cancel'
                 onClick={() => setIsDelete(false)}
               >
                 <CrossIcon />
               </button>
-              <button className='p-1 hover:text-white' onClick={handleDelete}>
+              <button
+                className='p-1 hover:text-white'
+                aria-label='confirm'
+                onClick={handleDelete}
+              >
                 <TickIcon />
               </button>
             </>
