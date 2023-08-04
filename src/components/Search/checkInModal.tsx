@@ -107,11 +107,31 @@ export const CheckInModal = () => {
         };
     return (
       <div
-        className={`relative m-4 mt-0 flex flex-col overflow-hidden rounded-lg border border-violet-400 bg-opacity-20 ${styleMap.gradient} pt-4 md:mt-4 md:ml-0 md:flex-1`}
+        className={`relative m-4 mt-0 flex overflow-hidden rounded-lg border border-violet-400 bg-opacity-20 ${styleMap.gradient} justify-between p-4 py-2`}
       >
-        <div className='flex-1'>
+        <div
+          className='flex items-center justify-center text-sm text-white'
+          style={{
+            fontFamily: 'RussoOne',
+          }}
+        >
+          {isDone ? (
+            <CheckIcon className={`h-12 w-12 text-lime-200 `} />
+          ) : (
+            <div
+              className='text-2xl'
+              style={{
+                fontFamily: 'RussoOne',
+              }}
+            >
+              Day 7
+            </div>
+          )}
+        </div>
+
+        <div>
           <div className='mb-2 flex items-center justify-center'>
-            <img src={CrystalIcon} className='w-24 md:w-36' />
+            <img src={CrystalIcon} className='w-12 md:w-36' />
           </div>
           <div className='px-2'>
             <div className='relative w-full rounded-full bg-slate-700 bg-opacity-40 text-center text-xs text-white'>
@@ -122,11 +142,11 @@ export const CheckInModal = () => {
                   left: '-4px',
                 }}
               >
-                <CoinIcon className='h-10 w-10' />
+                <CoinIcon className='h-8 w-8' />
               </div>
               <div className='px-4'>
                 <div
-                  className='ml-3 text-2xl'
+                  className='ml-3 text-xl'
                   style={{
                     fontFamily: 'RussoOne',
                   }}
@@ -136,24 +156,6 @@ export const CheckInModal = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div
-          className='flex items-center justify-center py-1 text-sm text-white'
-          style={{
-            fontFamily: 'RussoOne',
-          }}
-        >
-          {isDone ? (
-            <CheckIcon className={`h-12 w-12 text-lime-200 `} />
-          ) : (
-            <div
-              style={{
-                fontFamily: 'RussoOne',
-              }}
-            >
-              Day 7
-            </div>
-          )}
         </div>
       </div>
     );
