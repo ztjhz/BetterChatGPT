@@ -19,6 +19,7 @@ export const auth0Client = new Auth0Client({
     redirect_uri: redirectUri,
     audience,
   },
+  cacheLocation: 'localstorage',
 });
 
 const bindWeb2UserEmail = async (token: string, user: User) => {
