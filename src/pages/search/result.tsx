@@ -57,19 +57,35 @@ const SearchResultPage = () => {
       let params = new URL(document.location as any).searchParams;
       let originQuestion = params.get('origin_question');
       console.log('originQuestion', originQuestion);
-      if (originQuestion) {
-        simplifyQuestion(originQuestion);
-        query = originQuestion;
-      } else {
-        const { data: _query } = await simplifyQuestion(searchText);
-        query = _query;
+      try {
+        if (originQuestion) {
+          simplifyQuestion(originQuestion);
+          query = originQuestion;
+        } else {
+          const { data: _query } = await simplifyQuestion(searchText);
+          query = _query;
+        }
+        track('after_simplify');
+      } catch (e) {
+        track('simplify_error');
+        console.log(e);
       }
+
       getCheckinStatus();
-      //@ts-ignore
-      window?.gtag('event', 'search', {
-        event_category: 'user_action',
-        event_label: searchText,
-      });
+      try {
+        //@ts-ignore
+        window?.gtag('event', 'search', {
+          event_category: 'user_action',
+          event_label: searchText,
+        });
+        //@ts-ignore
+        window?.gtag('event', 'conversion', {
+          send_to: 'AW-11282287324/5gN0CPL0vs0YENyV6IMq',
+        });
+      } catch (e) {
+        console.log(e);
+      }
+
       fetchCredit();
       searchFuncions.forEach(async (item: any) => {
         setLoading(item.name, true);
