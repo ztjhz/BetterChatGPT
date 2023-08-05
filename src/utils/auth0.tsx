@@ -7,7 +7,7 @@ import { Auth0Client } from '@auth0/auth0-spa-js';
 import { request } from '@api/request';
 import { track } from './track';
 
-const domain = 'dev-tfcpxeutlsld1wm0.us.auth0.com';
+const domain = 'auth.qna3.ai';
 const clientId = import.meta.env.VITE_AUTH0_ID;
 const redirectUri = window.location.origin + '/callback';
 const audience = 'https://dev-tfcpxeutlsld1wm0.us.auth0.com/api/v2/';
