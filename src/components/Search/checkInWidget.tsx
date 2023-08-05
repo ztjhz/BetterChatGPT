@@ -139,7 +139,11 @@ export const CheckInWidget = () => {
           </Link>
         </div>
       )}
-      <SignInModal isOpen={openLogin} setIsOpen={setOpenLogin} />
+      <SignInModal
+        isOpen={openLogin}
+        setIsOpen={setOpenLogin}
+        buttons={['web3']}
+      />
       <UserMenu isOpen={openUserMenu} setIsOpen={setOpenUserMenu} />
     </div>
   );

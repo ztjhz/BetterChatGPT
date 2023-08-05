@@ -12,6 +12,7 @@ import { useAccount } from 'wagmi';
 import { useAuth0 } from '@auth0/auth0-react';
 import { SignInModal, UserMenu } from '@components/Header/transparent';
 import { track } from '@utils/track';
+import ChevronDownIcon from '@icon/chevronDownIcon';
 
 export const CheckInModal = () => {
   const [open, setOpen] = useState(false);
@@ -205,10 +206,14 @@ export const CheckInModal = () => {
           </div>
         </div>
         <div className={walletToken ? '' : 'hidden'}>
-          <InformationIcon className='h-5 w-5' />
+          <ChevronDownIcon className='h-4 w-4' />
         </div>
       </div>
-      <SignInModal isOpen={openLogin} setIsOpen={setOpenLogin} />
+      <SignInModal
+        isOpen={openLogin}
+        setIsOpen={setOpenLogin}
+        buttons={['web3']}
+      />
       <UserMenu isOpen={openUserMenu} setIsOpen={setOpenUserMenu} />
       <QNADialog
         isOpen={open}

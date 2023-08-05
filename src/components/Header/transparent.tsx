@@ -321,7 +321,11 @@ export const web3Modal = (props?: Web3LoginModalProps) => {
   );
 };
 
-export const SignInModal = ({ isOpen, setIsOpen }: any) => {
+export const SignInModal = ({
+  isOpen,
+  setIsOpen,
+  buttons = ['web2', 'web3'],
+}: any) => {
   const { loginWithRedirect } = useAuth0();
 
   return (
@@ -332,7 +336,9 @@ export const SignInModal = ({ isOpen, setIsOpen }: any) => {
     >
       <div className='flex flex-col gap-4 p-4'>
         <button
-          className='flex w-full flex-1 items-center justify-start gap-4 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
+          className={`flex w-full flex-1 items-center justify-start gap-4 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none
+            ${buttons.includes('web2') ? '' : 'hidden'}
+            `}
           onClick={() => {
             track('trigger_login_web2');
             loginWithRedirect();
@@ -356,7 +362,7 @@ export const SignInModal = ({ isOpen, setIsOpen }: any) => {
           </div>
           <span>{t('username&password', { ns: 'auth' })}</span>
         </button>
-        {web3Modal()}
+        {buttons.includes('web3') && web3Modal()}
       </div>
     </QNADialog>
   );
