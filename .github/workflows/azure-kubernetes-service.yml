@@ -45,6 +45,7 @@ env:
   VITE_SERVER_API_ENDPOINT: "https://api.qna3.ai"
   VITE_RUNTIME_ENV: "production"
   VITE_AUTH0_ID: "d2lXoGguxROpIsbBChdHbJzqvwkhPnj6"
+  VITE_SENTRY_AUTH_TOKEN: "ffa19fe74ae918ee3a116514970275f74d0ae46902eeaf1076d01d7107c44c2d"
 
 
   
@@ -78,6 +79,7 @@ jobs:
           --build-arg VITE_PUBLIC_PATH=${{env.VITE_PUBLIC_PATH}} \
           --build-arg VITE_AUTH0_ID=${{env.VITE_AUTH0_ID}} \
           --build-arg VITE_RUNTIME_ENV=${{env.VITE_RUNTIME_ENV}} \
+          --build-arg VITE_SENTRY_AUTH_TOKEN=${{env.VITE_SENTRY_AUTH_TOKEN}} \
           --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }} \
           --registry ${{ env.AZURE_CONTAINER_REGISTRY }} \
           -g ${{ env.RESOURCE_GROUP }} .

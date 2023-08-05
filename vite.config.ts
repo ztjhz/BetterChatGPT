@@ -2,16 +2,23 @@ import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import wasm from 'vite-plugin-wasm';
 import topLevelAwait from 'vite-plugin-top-level-await';
-
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 
 // https://vitejs.dev/config/
 export default defineConfig(({mode}) => {
   const root = process.cwd();
   const env = loadEnv(mode, root);
   return {
-    plugins: [react(), wasm(), topLevelAwait()],
+    plugins: [react(), wasm(), topLevelAwait(), sentryVitePlugin({
+      authToken: process.env.VITE_SENTRY_AUTH_TOKEN,
+      org: "qa3",
+      project: "qna3-website",
+    }),],
     define: {
       'process.env': env
+    },
+    build: {
+      sourcemap: true, // Source map generation must be turned on
     },
     resolve: {
       alias: {

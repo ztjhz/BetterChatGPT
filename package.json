@@ -50,6 +50,7 @@
     "@microsoft/fetch-event-source": "^2.0.1",
     "@react-oauth/google": "^0.9.0",
     "@sentry/react": "^7.55.0",
+    "@sentry/vite-plugin": "^2.5.0",
     "@tabler/icons-react": "^2.20.0",
     "@types/mixpanel-browser": "^2.47.1",
     "@types/react-modal": "^3.16.0",

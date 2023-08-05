@@ -10,6 +10,7 @@ import { publicProvider } from 'wagmi/providers/public'
 import store from '@store/store';
 import { track } from './track';
 import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc'
+import { auth0Client } from './auth0';
 const VITE_RUNTIME_ENV = import.meta.env.VITE_RUNTIME_ENV
 
 export const bscConfigMap = VITE_RUNTIME_ENV !== 'production' ? {
@@ -85,8 +86,16 @@ export const onConnect = async (address: string) => {
         address: address,
         value: address,
       })
+      try{
+        const currentUser = await auth0Client.getUser()
+        if(currentUser?.email !== data?.user?.email){
+          await auth0Client.logout()
+        }
+      }catch(e){
+        console.log(e)
+      }
       
-      await initUser(undefined, data?.access_token, data?.user?.id);
+      // await initUser(undefined, data?.access_token, data?.user?.id);
     }catch(e){
       console.log(e)
     }
