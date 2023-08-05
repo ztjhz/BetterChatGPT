@@ -27,6 +27,7 @@ export const trackingToolsInit = () => {
   });
 
   ReactGA.initialize("G-JMGPY90EF8");
+  ReactGA.gtag('config', 'AW-11282287324');
 }
 
 export const track = (event: string, properties?: any) => {

@@ -20,7 +20,7 @@ export const bscConfigMap = VITE_RUNTIME_ENV !== 'production' ? {
 } : {
   chain: bsc,
   contractAddress: '0xB342e7D33b806544609370271A8D074313B7bc30',
-  rcp: 'https://bsc-mainnet.nodereal.io/v1/132d52c330424e7896bdc25a5d6ef5fc'
+  rpc: 'https://bsc-mainnet.nodereal.io/v1/132d52c330424e7896bdc25a5d6ef5fc'
 }
 
 const chains = [bscConfigMap.chain]
