@@ -23,6 +23,7 @@ export const auth0Client = new Auth0Client({
 });
 
 const bindWeb2UserEmail = async (token: string, user: User) => {
+  const browser_user_id = localStorage.getItem('qna3_user_id');
   const { data } = await request.post(
     '/user/bind_email',
     {
@@ -30,7 +31,8 @@ const bindWeb2UserEmail = async (token: string, user: User) => {
     },
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`,
+        'x-id': browser_user_id,
       },
     }
   );
