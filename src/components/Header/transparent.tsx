@@ -283,6 +283,12 @@ export const web3Modal = (props?: Web3LoginModalProps) => {
     MetaMask: MetaMaskIcon,
     WalletConnect: WalletConnectIcon,
   };
+
+  useEffect(() => {
+    if (error) {
+      track('connect_wallet_error', { error });
+    }
+  }, [error]);
   return (
     <>
       {connectors
