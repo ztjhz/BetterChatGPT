@@ -26,6 +26,7 @@ const ExportChat = () => {
           };
           downloadFile(fileData, getToday());
         }}
+        aria-label={t('export') as string}
       >
         {t('export')}
       </button>
