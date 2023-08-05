@@ -79,5 +79,6 @@
   "create_wallet_question": "How to create a wallet in MetaMask?",
   "vote_rank": "Vote to Earn",
   "trending": "Trending Events",
-  "my_credit_detail": "View My Credit"
+  "my_credit_detail": "View My Credit",
+  "loading": "loading..."
 }

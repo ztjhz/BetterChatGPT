@@ -201,7 +201,9 @@ export const CheckInModal = () => {
           <div className='flex items-center gap-2'>
             {t('activities.title', { ns: 'credit' })}:{' '}
             {!!walletToken
-              ? `${checkinStatus.today_count}/3`
+              ? checkinStatus
+                ? `${checkinStatus.today_count}/3`
+                : t('loading')
               : renderConnectButton()}
           </div>
         </div>

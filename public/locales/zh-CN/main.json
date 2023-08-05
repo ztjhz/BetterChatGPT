@@ -79,5 +79,6 @@
   "create_wallet_question": "如何使用 MetaMask 创建一个钱包？",
   "vote_rank": "打榜",
   "trending": "热门",
-  "my_credit_detail": "查看我的积分"
+  "my_credit_detail": "查看我的积分",
+  "loading": "加载中..."
 }
