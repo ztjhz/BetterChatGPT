@@ -22,7 +22,7 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - name: faq-frontend
-        image: oxfaq.azurecr.io/faq-frontend:091ad4074782530f4c52554f3ddaa1fe23351750
+        image: oxfaq.azurecr.io/faq-frontend:5f1f8250be2ddfdffe4d3410262ca1b6f71f34e7
         envFrom:
             - secretRef:
                 name: openai-secret
