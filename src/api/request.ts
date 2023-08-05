@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { server_api_endpoint } from '@constants/auth';
-import { getUserToken } from '@utils/api';
 
 console.log('server_api_endpoint', server_api_endpoint)
 export const request = axios.create({
@@ -11,9 +10,14 @@ export const request = axios.create({
   }
 });
 
-export const setRequestHeader = (key: string, v: string) => {
-  request.interceptors.request.use((value) => {
-    value.headers[key] = v;
-    return value;
+const headersMapping: any = {}
+request.interceptors.request.use((value) => {
+  Object.keys(headersMapping).forEach(key => {
+    value.headers[key] = headersMapping[key];
   })
+  return value;
+})
+
+export const setRequestHeader = async (key: string, v: string) => {
+  headersMapping[key] = v;
 }

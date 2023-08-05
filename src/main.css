@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'RussoOne';
+  font-style: normal;
+  font-weight: normal;
+  src: local('RussoOne-Regular'), url(/RussoOne-Regular.ttf);
+}
+
+[hidden] {
+  display: none !important;
+}
 @layer base {
   * {
     box-sizing: border-box;

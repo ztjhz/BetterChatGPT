@@ -46,7 +46,7 @@
   "submitPlaceholder": "请输入消息",
   "history": "历史记录",
   "askToFAQ": "问问 QnA3",
-  "mainSearchPlaceholder": "提问任何有关于 Web3 的问题，让 QnA3 帮你解答",
+  "mainSearchPlaceholder": "摸不准行情或者看不懂项目?向AI提问",
   "noAnswer": "抱歉，我现在无法回答这个问题。 QnA3仍处于早期版本，我们仍在努力改进。",
   "searchStatus": {
     "loading": "准备中...",
@@ -64,7 +64,7 @@
     "title": "活动",
     "award": "奖励"
   },
-  "trendingNews":{
+  "trendingNews": {
     "title": "What happend to crypto market?",
     "question": "巨鲸在问："
   },
@@ -74,5 +74,11 @@
     "content": "您的赞成或反对能助我们不断优化，为此，我们会回馈您 QnA3 Credit，未来将可用于兑换 Token。"
   },
   "typing": "正在输入...",
-  "bsc_error": "抱歉，网络连接失败"
+  "bsc_error": "抱歉，网络连接失败",
+  "have_no_wallet": "如何创建钱包？",
+  "create_wallet_question": "如何使用 MetaMask 创建一个钱包？",
+  "vote_rank": "打榜",
+  "trending": "热门",
+  "my_credit_detail": "查看我的积分",
+  "loading": "加载中..."
 }

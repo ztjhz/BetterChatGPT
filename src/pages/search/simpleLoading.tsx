@@ -20,7 +20,7 @@ export const SimpleLoading = React.forwardRef((props: any, ref: any) => {
   }) && Object.values(response).some((item: any) => item !== '');
 
   const noAnswer = searchFuncions.every((item: any) => {
-    return getStatusByKey(item.name) === 'unUseful' || (getStatusByKey(item.name) === 'Done' && response[item.name] === '')
+    return getStatusByKey(item.name) === 'unUseful' || (getStatusByKey(item.name) === 'done' && response[item.name] === '')
   })
   useImperativeHandle(ref, () => ({
     restart: () => {

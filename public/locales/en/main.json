@@ -46,7 +46,7 @@
   "submitPlaceholder": "Type a message",
   "history": "History",
   "askToFAQ": "Ask to QnA3",
-  "mainSearchPlaceholder": "Ask any questions about Web3 and let QnA3 help you answer them.",
+  "mainSearchPlaceholder": "Not sure about web3 market? Ask AI",
   "noAnswer": "Apologies,I am unable to answer this question at the moment. QnA3 is still in its early stages, and we are diligently working on improvements.",
   "searchStatus": {
     "loading": "Preparing...",
@@ -60,7 +60,7 @@
   "trendingEvent": "What Happend Today?",
   "event": "Event",
   "question": "Question",
-  "trendingNews":{
+  "trendingNews": {
     "title": "What happend to crypto market?",
     "question": "Whales asking: "
   },
@@ -74,5 +74,11 @@
     "content": "Help us improve by voting. You'll earn QnA3 Credit, eligible for future airdrops."
   },
   "typing": "Typing...",
-  "bsc_error": "Network connection failed"
+  "bsc_error": "Network connection failed",
+  "have_no_wallet": "Don’t have a wallet?",
+  "create_wallet_question": "How to create a wallet in MetaMask?",
+  "vote_rank": "Vote to Earn",
+  "trending": "Trending Events",
+  "my_credit_detail": "View My Credit",
+  "loading": "loading..."
 }
