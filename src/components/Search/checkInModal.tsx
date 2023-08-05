@@ -139,7 +139,7 @@ export const CheckInModal = () => {
               <div
                 className='absolute'
                 style={{
-                  top: '-4px',
+                  top: '-2px',
                   left: '-4px',
                 }}
               >
