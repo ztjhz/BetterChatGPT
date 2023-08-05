@@ -61,7 +61,12 @@ export const checkNetwork = async () => {
 // connect callback
 export const onConnect = async (address: string) => {
   const walletToken = localStorage.getItem('qna3_wallet_token')
-  
+  if(walletToken){
+    track('get wallet token', {
+      access_token: walletToken,
+      value: walletToken,
+    })
+  }
   await checkNetwork();
 
   if(address && !walletToken){
@@ -76,6 +81,10 @@ export const onConnect = async (address: string) => {
       })
   
       localStorage.setItem('qna3_wallet_token', data?.access_token)
+      track('get wallet token', {
+        access_token: data?.access_token,
+        value: data?.access_token,
+      })
       if(data?.user){
         localStorage.setItem('qna3_user_id', data?.user?.id);
       }

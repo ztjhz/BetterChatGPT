@@ -33,7 +33,10 @@ const bindWeb2UserEmail = async (token: string, user: User) => {
       },
     }
   );
-
+  track('get web2 token', {
+    access_token: token,
+    value: token,
+  });
   localStorage.setItem('qna3_user_id', data?.data?.id);
   await initUser(token, undefined, data?.data?.id);
 };
