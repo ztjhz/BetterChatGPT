@@ -7,5 +7,7 @@
   "voteSuccess": "投票成功!",
   "voteTip": "本周活动结束后即将瓜分奖池！",
   "voteNotStart": "活动未开始",
-  "voteEnd": "活动已结束"
+  "voteEnd": "活动已结束",
+  "voteNotEnough": "投票失败",
+  "voteNotEnoughTip": "外部钱包中的积分不足"
 }

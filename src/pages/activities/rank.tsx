@@ -3,7 +3,7 @@ import useStore from '@store/store';
 import { bscConfigMap, checkNetwork } from '@utils/bsc';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useContractWrite } from 'wagmi';
+import { useAccount, useContractRead, useContractWrite } from 'wagmi';
 import VoteABI from '@abi/QnaVote.json';
 import { toast } from 'react-toastify';
 import { web3Modal } from '@components/Header/transparent';
@@ -41,7 +41,14 @@ const RankItem = ({
   const colorList = ['red', 'yellow', 'gray'];
   const { t } = useTranslation();
   const [voting, setVoting] = useState(false);
+  const { address } = useAccount();
   const wallet_token = useStore((state) => state.wallet_token);
+  const { data: contractBalance } = useContractRead({
+    address: bscConfigMap.contractAddress as any,
+    abi: VoteABI,
+    functionName: 'getCredit',
+    args: [address],
+  });
   const { writeAsync } = useContractWrite({
     address: bscConfigMap.contractAddress as any,
     abi: VoteABI,
@@ -65,9 +72,15 @@ const RankItem = ({
     if (unvotable) return;
     if (!wallet_token) {
       onOpenLogin();
+      track('click_vote_not_login');
       return;
     }
     if (voting) return;
+    if ((contractBalance as bigint) < 5) {
+      toast.error(t('voteNotEnoughTip', { ns: 'vote' }));
+      track('vote_credit_not_enough');
+      return;
+    }
     setVoting(true);
     try {
       track('click_vote');

@@ -7,5 +7,7 @@
   "voteSuccess": "Vote successfully!",
   "voteTip": "After the end of this week’s event, the prize pool will be distributed!",
   "voteNotStart": "Not Started Yet",
-  "voteEnd": "Ended"
+  "voteEnd": "Ended",
+  "voteNotEnough": "Vote Failed",
+  "voteNotEnoughTip": "External Wallet doesn't have enough Credits."
 }
