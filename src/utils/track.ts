@@ -49,3 +49,30 @@ export const setTrackingUser = (id: string) => {
     'user_id': id
   })
 }
+
+
+export const conversionWeb3Tracking = () => {
+  try{
+    //@ts-ignore
+    window?.gtag('event', 'conversion', {
+      send_to: 'AW-11282287324/5gN0CPL0vs0YENyV6IMq',
+    });
+    //@ts-ignore
+    window?.twq('event', 'tw-ofs73-ofs7e')
+  }catch(e){
+    console.log(e)
+  }
+}
+
+export const conversionWeb2Tracking = () => {
+  try{
+    //@ts-ignore
+    window?.gtag('event', 'conversion', {
+      send_to: 'AW-11282287324/5gN0CPL0vs0YENyV6IMq',
+    });
+    //@ts-ignore
+    window?.twq('event', 'tw-ofs73-ofs7d')
+  }catch(e){
+    console.log(e)
+  }
+}

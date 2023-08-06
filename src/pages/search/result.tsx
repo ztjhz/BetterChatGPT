@@ -13,7 +13,11 @@ import { FreeTip } from '@components/FreeTip';
 import { AnswerBlock } from './answerBlock';
 import mixpanel from 'mixpanel-browser';
 import { CheckInModal } from '@components/Search/checkInModal';
-import { track } from '@utils/track';
+import {
+  conversionWeb2Tracking,
+  conversionWeb3Tracking,
+  track,
+} from '@utils/track';
 
 const SearchResultPage = () => {
   let { question } = useParams();
@@ -78,10 +82,7 @@ const SearchResultPage = () => {
           event_category: 'user_action',
           event_label: searchText,
         });
-        //@ts-ignore
-        window?.gtag('event', 'conversion', {
-          send_to: 'AW-11282287324/5gN0CPL0vs0YENyV6IMq',
-        });
+        conversionWeb2Tracking();
       } catch (e) {
         console.log(e);
       }

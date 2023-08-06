@@ -8,7 +8,7 @@ import { MetaMaskConnector } from '@wagmi/core/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { publicProvider } from 'wagmi/providers/public'
 import store from '@store/store';
-import { track } from './track';
+import { conversionWeb3Tracking, track } from './track';
 import { jsonRpcProvider } from '@wagmi/core/providers/jsonRpc'
 import { auth0Client } from './auth0';
 const VITE_RUNTIME_ENV = import.meta.env.VITE_RUNTIME_ENV
@@ -95,6 +95,7 @@ export const onConnect = async (address: string) => {
         address: address,
         value: address,
       })
+      conversionWeb3Tracking();
       try{
         const currentUser = await auth0Client.getUser()
         if(currentUser?.email !== data?.user?.email){
