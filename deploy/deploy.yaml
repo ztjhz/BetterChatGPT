@@ -12,12 +12,13 @@ spec:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
-  minReadySeconds: 5 
+  minReadySeconds: 60
   template:
     metadata:
       labels:
         app: faq-frontend
     spec:
+      terminationGracePeriodSeconds: 60
       nodeSelector:
         "beta.kubernetes.io/os": linux
       containers:
