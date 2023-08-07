@@ -71,14 +71,14 @@
   "freetip": "限时免费",
   "voteTip": {
     "title": "您对答案满意吗？",
-    "content": "您的赞成或反对能助我们不断优化，为此，我们会回馈您 QnA3 Credit，未来将可用于兑换 Token。"
+    "content": "您对该答案的赞成或反对能助我们不断优化，为此，我们会回馈您 QnA3 Credit，未来将可用于兑换 Token。"
   },
   "typing": "正在输入...",
   "bsc_error": "抱歉，网络连接失败",
   "have_no_wallet": "如何创建钱包？",
   "create_wallet_question": "如何使用 MetaMask 创建一个钱包？",
   "vote_rank": "打榜",
-  "trending": "热门",
+  "trending": "快讯",
   "my_credit_detail": "查看我的积分",
   "loading": "加载中..."
 }

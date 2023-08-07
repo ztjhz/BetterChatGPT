@@ -62,7 +62,7 @@ export const conversionWeb3Tracking = () => {
 
     //@ts-ignore
     window?._VTM.push({
-      action_type: 'reach',
+      action_type: 'web3_login',
       active_id: '24481',
       action_param: {}
     })
@@ -82,7 +82,7 @@ export const conversionWeb2Tracking = () => {
 
     //@ts-ignore
     window?._VTM.push({
-      action_type: 'reach',
+      action_type: 'web2_login',
       active_id: '24481',
       action_param: {}
     })
