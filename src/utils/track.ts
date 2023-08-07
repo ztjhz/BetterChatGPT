@@ -59,6 +59,13 @@ export const conversionWeb3Tracking = () => {
     });
     //@ts-ignore
     window?.twq('event', 'tw-ofs73-ofs7e')
+
+    //@ts-ignore
+    window?._VTM.push({
+      action_type: 'reach',
+      active_id: '24481',
+      action_param: {}
+    })
   }catch(e){
     console.log(e)
   }
@@ -72,6 +79,13 @@ export const conversionWeb2Tracking = () => {
     });
     //@ts-ignore
     window?.twq('event', 'tw-ofs73-ofs7d')
+
+    //@ts-ignore
+    window?._VTM.push({
+      action_type: 'reach',
+      active_id: '24481',
+      action_param: {}
+    })
   }catch(e){
     console.log(e)
   }
