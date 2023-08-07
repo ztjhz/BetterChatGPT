@@ -2,7 +2,7 @@ import { QNADialog } from '@components/Dialog';
 import useStore from '@store/store';
 import { bscConfigMap, checkNetwork } from '@utils/bsc';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useAccount, useContractRead, useContractWrite } from 'wagmi';
 import VoteABI from '@abi/QnaVote.json';
 import { toast } from 'react-toastify';
@@ -277,11 +277,11 @@ export const RankPage = () => {
       >
         <div className='p-4 pb-6 text-white'>
           <ul className='flex flex-col gap-2 text-sm'>
-            {t('rules', { ns: 'vote' })
-              .split('\n')
-              .map((item, index) => {
-                return <li key={index}>{item}</li>;
-              })}
+            <Trans
+              i18nKey='rules' // optional -> fallbacks to defaults if not provided
+              ns='vote' // optional -> fallbacks to defaultNS value if not provided
+              components={{ div: <div />, li: <li />, strong: <strong /> }}
+            />
           </ul>
         </div>
       </QNADialog>

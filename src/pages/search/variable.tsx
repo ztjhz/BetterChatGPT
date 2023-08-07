@@ -1,32 +1,32 @@
-export const searchFuncions:any = [
+export const searchFuncions: any = [
   {
-    name: 'vector_news', 
-    emoji: '📰',
-    label:'Web3 News',
-  }, 
-  {
-    name: 'vector_tweets', 
-    emoji: '📎',
-    label:'Social Media',
-  }, 
-  {
-    name: 'knowledge', 
+    name: 'knowledge',
     emoji: '📌',
-    label:'Knowledge Graph',
-  }, 
+    label: 'Knowledge Graph',
+  },
+  {
+    name: 'vector_news',
+    emoji: '📰',
+    label: 'Web3 News',
+  },
+  {
+    name: 'vector_tweets',
+    emoji: '📎',
+    label: 'Social Media',
+  },
   // {
-  //   name: 'sql', 
+  //   name: 'sql',
   //   emoji: '📊',
   //   label:'Structured data',
-  // }, 
+  // },
   // {
-  //   name: 'report', 
+  //   name: 'report',
   //   emoji: '📚',
   //   label:'Research Report',
-  // }, 
+  // },
   // {
-  //   name: 'chat', 
+  //   name: 'chat',
   //   emoji: '📝',
   //   label:'QnA3 LLM',
-  // }, 
-]
+  // },
+];
