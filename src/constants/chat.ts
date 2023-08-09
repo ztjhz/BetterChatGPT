@@ -16,7 +16,14 @@ export const _defaultSystemMessage =
   `You are ChatGPT, a large language model trained by OpenAI.
 Carefully heed the user's instructions. 
 Respond using Markdown.`;
-
+export const _generateTitleConfig:ConfigInterface = {
+  model: defaultModel,
+  max_tokens: 200,//Only 6 words in title according to the prompt
+  temperature: 0,//for stable titles
+  presence_penalty: 0,
+  top_p: 1,
+  frequency_penalty: 0,
+};
 export const modelOptions: ModelOptions[] = [
   'gpt-3.5-turbo',
   'gpt-3.5-turbo-16k',
