@@ -31,9 +31,6 @@ export const I18NSelector = () => {
         selected === 'English' ? 'english' : 'chinese'
       );
       i18n.changeLanguage(selected === 'English' ? 'en' : 'zh-CN');
-      track('change_language', {
-        value: selected === 'English' ? 'en' : 'zh-CN',
-      });
     }
   }, [selected]);
   return (

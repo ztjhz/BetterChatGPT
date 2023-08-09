@@ -1,7 +1,9 @@
 import * as Sentry from '@sentry/react';
 import mixpanel from 'mixpanel-browser';
 import ReactGA from "react-ga4";
+import * as amplitude from '@amplitude/analytics-browser';
 
+amplitude.init('ef9fe1ff01e1a23eda0f161527fa783');
 export const trackingToolsInit = () => {
   Sentry.init({
     dsn: 'https://d9452a5428a248c3ad894113e05c8508@o4505355934892032.ingest.sentry.io/4505356060721152',
@@ -38,6 +40,7 @@ export const track = (event: string, properties?: any) => {
       action: event,
       label: properties?.value
     });
+    amplitude.track(event, properties);
   }catch(e){
     console.log(e)
   }
@@ -48,6 +51,7 @@ export const setTrackingUser = (id: string) => {
   ReactGA.gtag('config', "G-JMGPY90EF8", {
     'user_id': id
   })
+  amplitude.setUserId(id);
 }
 
 
