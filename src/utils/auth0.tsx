@@ -19,6 +19,16 @@ const audience = 'https://dev-tfcpxeutlsld1wm0.us.auth0.com/api/v2/';
 
 const localstorageToken = new LocalStorageCache();
 
+export const auth0Client = new Auth0Client({
+  domain,
+  clientId,
+  authorizationParams: {
+    redirect_uri: redirectUri,
+    audience,
+  },
+  cacheLocation: 'localstorage',
+});
+
 export const getCacheToken = async () => {
   try {
     // 旧用户自动登录
@@ -31,7 +41,22 @@ export const getCacheToken = async () => {
       const accessTokenCache: any = await localstorageToken.get(
         tokenStorageKeys[0]
       );
-      return accessTokenCache?.body?.access_token;
+      const token = accessTokenCache?.body?.access_token;
+      if (token) {
+        console.log(accessTokenCache?.expiresAt * 1000, Date.now());
+        if (accessTokenCache?.expiresAt * 1000 < Date.now()) {
+          auth0Client.logout({
+            openUrl(url) {
+              track('token_expired');
+              // window.location.replace(url);
+            },
+          });
+          return null;
+        } else {
+          return token;
+        }
+      }
+      return null;
     }
 
     return null;
@@ -40,16 +65,6 @@ export const getCacheToken = async () => {
     return null;
   }
 };
-
-export const auth0Client = new Auth0Client({
-  domain,
-  clientId,
-  authorizationParams: {
-    redirect_uri: redirectUri,
-    audience,
-  },
-  cacheLocation: 'localstorage',
-});
 
 const bindWeb2UserEmail = async (token: string, user: User) => {
   const browser_user_id = localStorage.getItem('qna3_user_id');
