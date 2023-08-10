@@ -114,6 +114,9 @@ export const onConnect = async (address: string) => {
 }
 
 export const onDisConnect = () => {
+  console.log('disconnect')
+  setRequestHeader('Authorization', undefined)
   localStorage.removeItem('qna3_wallet_token')
   store.getState().clearWalletToken()
+  store.getState().clearUser()
 }

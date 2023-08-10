@@ -238,7 +238,7 @@ export const UserMenu = ({ isOpen, setIsOpen }: any) => {
           className='flex w-full flex-1 items-center justify-center gap-2 rounded-md border border-transparent bg-bg-100 px-4 py-3 text-sm font-medium text-white hover:bg-bg-200 focus:outline-none'
           onClick={() => {
             track('logout');
-            if (walletToken || isConnected) {
+            if (walletToken) {
               disconnect();
             }
             if (isAuthenticated) {

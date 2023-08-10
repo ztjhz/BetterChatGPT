@@ -1,4 +1,9 @@
-import { Auth0Provider, User, useAuth0 } from '@auth0/auth0-react';
+import {
+  Auth0Provider,
+  User,
+  useAuth0,
+  LocalStorageCache,
+} from '@auth0/auth0-react';
 import { divide } from 'lodash';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +16,30 @@ const domain = 'auth.qna3.ai';
 const clientId = import.meta.env.VITE_AUTH0_ID;
 const redirectUri = window.location.origin + '/callback';
 const audience = 'https://dev-tfcpxeutlsld1wm0.us.auth0.com/api/v2/';
+
+const localstorageToken = new LocalStorageCache();
+
+export const getCacheToken = async () => {
+  try {
+    // 旧用户自动登录
+    const tokenStorageKeys = (localstorageToken.allKeys() || []).filter(
+      (i: string) => {
+        return i.indexOf('::http') > -1;
+      }
+    );
+    if (tokenStorageKeys.length > 0) {
+      const accessTokenCache: any = await localstorageToken.get(
+        tokenStorageKeys[0]
+      );
+      return accessTokenCache?.body?.access_token;
+    }
+
+    return null;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+};
 
 export const auth0Client = new Auth0Client({
   domain,

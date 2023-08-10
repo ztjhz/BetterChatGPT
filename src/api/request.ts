@@ -18,6 +18,10 @@ request.interceptors.request.use((value) => {
   return value;
 })
 
-export const setRequestHeader = async (key: string, v: string) => {
+export const setRequestHeader = async (key: string, v: string | undefined) => {
+  if(!v){
+    delete headersMapping[key];
+    return;
+  }
   headersMapping[key] = v;
 }

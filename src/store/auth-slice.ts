@@ -22,6 +22,7 @@ export interface AuthSlice {
   getCheckinStatus: () => void;
   setWalletToken: (wallet_token: string) => void;
   clearWalletToken: () => void;
+  clearUser: () => void;
   user: any;
 }
 
@@ -39,6 +40,7 @@ export const createAuthSlice: StoreSlice<AuthSlice> = (set, get) => ({
       ...prev,
       user: data?.data
     }))
+    return data?.data
   },
   fetchCredit: async () => {
     const {data} = await request.get('/user/credit')
@@ -88,4 +90,10 @@ export const createAuthSlice: StoreSlice<AuthSlice> = (set, get) => ({
       claimHistory: data?.data
     }));
   },
+  clearUser: async() => {
+    set((prev: AuthSlice) => ({
+      ...prev,
+      user: {}
+    }));
+  }
 });

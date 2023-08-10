@@ -23,9 +23,9 @@ export const CheckInWidget = () => {
   const walletToken = useStore((state) => state.wallet_token);
 
   const notBindWallet = !walletToken;
-  useEffect(() => {
-    getCheckinStatus();
-  }, [1]);
+  // useEffect(() => {
+  //   getCheckinStatus();
+  // }, [1]);
 
   const renderF6 = (ind: number) => {
     const isDone = checkinStatus?.check_in_day

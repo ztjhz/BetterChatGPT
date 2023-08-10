@@ -18,18 +18,6 @@ export const InternalWallet = () => {
   const { t, i18n } = useTranslation();
 
   const [isCustodianDialogOpen, setIsCustodianDialogOpen] = useState(false);
-  const [isWalletDialogOpen, setIsWalletDialogOpen] = useState(false);
-  const {
-    data: contractBalance,
-    error,
-    isLoading,
-  } = useContractRead({
-    address: bscConfigMap.contractAddress as any,
-    abi: VoteABI,
-    functionName: 'getCredit',
-    args: [address],
-  });
-
   return (
     <div className='rounded-md bg-gradient-to-b from-violet-500 to-violet-700 p-4 md:flex-1'>
       <div className='mb-2 flex items-center gap-2'>
