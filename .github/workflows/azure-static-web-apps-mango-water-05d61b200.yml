@@ -8,7 +8,13 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - development
-
+env:
+  VITE_PUBLIC_PATH: "/"
+  VITE_SERVER_API_ENDPOINT: "https://staging-api.qna3.ai"
+  VITE_RUNTIME_ENV: "staging"
+  VITE_AUTH0_ID: "X8AK61I6S8eaHIMxAXWyP7qph1WBTV3T"
+  VITE_SENTRY_AUTH_TOKEN: "ffa19fe74ae918ee3a116514970275f74d0ae46902eeaf1076d01d7107c44c2d"
+  
 jobs:
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
@@ -25,6 +31,11 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_WATER_05D61B200 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
+          VITE_PUBLIC_PATH: ${{env.VITE_PUBLIC_PATH}}
+          VITE_SERVER_API_ENDPOINT: ${{env.VITE_SERVER_API_ENDPOINT}}
+          VITE_RUNTIME_ENV: ${{env.VITE_RUNTIME_ENV}}
+          VITE_AUTH0_ID: ${{env.VITE_AUTH0_ID}}
+          VITE_SENTRY_AUTH_TOKEN: ${{env.VITE_SENTRY_AUTH_TOKEN}}
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/" # App source code path
