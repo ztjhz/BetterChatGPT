@@ -1,5 +1,5 @@
 import { request, setRequestHeader } from '@api/request';
-import { WagmiConfig, configureChains, createConfig } from 'wagmi'
+import { Connector, WagmiConfig, configureChains, createConfig } from 'wagmi'
 import { bsc, bscTestnet } from 'wagmi/chains';
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { signMessage, switchNetwork, InjectedConnector } from '@wagmi/core'
@@ -36,7 +36,7 @@ const { publicClient, webSocketPublicClient } = configureChains(chains, [jsonRpc
 export const BSCConfig = createConfig({
   autoConnect: true,
   connectors: [
-    new MetaMaskConnector({ chains }),
+    new MetaMaskConnector({ chains }) as Connector,
     new WalletConnectConnector({
       chains,
       options: {
