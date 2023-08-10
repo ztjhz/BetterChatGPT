@@ -35,7 +35,7 @@ export const getChatCompletion = async (
   }
 
   const tokenCount = countTokens(messages, config.model);
-  const maxTokens = Math.min(config.max_tokens, modelMaxToken[config.model] - tokenCount)-3;
+  const maxTokens = Math.min(config.max_tokens, modelMaxToken[config.model] - tokenCount)-4;
 
   const response = await fetch(endpoint, {
     method: 'POST',
@@ -83,7 +83,7 @@ export const getChatCompletionStream = async (
   }
 
   const tokenCount = countTokens(messages, config.model);
-  const maxTokens = Math.min(config.max_tokens, modelMaxToken[config.model] - tokenCount)-3;
+  const maxTokens = Math.min(config.max_tokens, modelMaxToken[config.model] - tokenCount)-4;
   
   const response = await fetch(endpoint, {
     method: 'POST',
