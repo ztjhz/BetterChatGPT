@@ -42,15 +42,10 @@ export const modelMaxToken = {
   'gpt-4-32k': 32768,
   'gpt-4-32k-0314': 32768,
   'gpt-4-32k-0613': 32768,
-  'openai/gpt-3.5-turbo':4096
 };
 
 export const modelCost = {
   'gpt-3.5-turbo': {
-    prompt: { price: 0.0015, unit: 1000 },
-    completion: { price: 0.002, unit: 1000 },
-  },
-  'openai/gpt-3.5-turbo': {
     prompt: { price: 0.0015, unit: 1000 },
     completion: { price: 0.002, unit: 1000 },
   },
