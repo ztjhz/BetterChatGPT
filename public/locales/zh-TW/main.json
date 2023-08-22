@@ -4,9 +4,9 @@
   "cancel": "取消",
   "confirm": "確認",
   "warning": "警告",
-  "clearMessageWarning": "請注意，透過提交此訊息，所有後續訊息都將被刪除！",
+  "clearMessageWarning": "請注意，透過送出此訊息，所有後續訊息都將被刪除！",
   "clearConversationWarning": "請注意，確認此操作將刪除所有訊息！",
-  "clearConversation": "清除會話",
+  "clearConversation": "清除對話",
   "import": "匯入",
   "export": "匯出",
   "author": "由 Jing Hua 製作",
@@ -16,15 +16,15 @@
   "free": "免費",
   "downloadChat": "下載聊天記錄",
   "user": "使用者",
-  "assistant": "助手",
+  "assistant": "助理",
   "system": "系統",
   "newChat": "新聊天",
   "lightMode": "亮色模式",
   "darkMode": "黑暗模式",
   "setting": "設定",
   "image": "圖片",
-  "autoTitle": "自動生成標題",
-  "advancedMode": "高級模式",
+  "autoTitle": "自動產生標題",
+  "advancedMode": "進階模式",
   "inlineLatex": "行內 Latex",
   "prompt": "提示詞",
   "promptLibrary": "提示詞資料庫",
@@ -37,11 +37,11 @@
   "clearPrompts": "清除提示詞",
   "postOnShareGPT": {
     "title": "發佈至 ShareGPT",
-    "warning": "請注意，將您的對話發佈至 ShareGPT 後，任何人都可以公開訪問和查看。一旦發佈，對話將無法隱藏或刪除，並且可能被他人存檔或分享。我們建議您慎重考慮，並避免在此平台上分享敏感或私人信息。"
+    "warning": "請注意，將您的對話發佈至 ShareGPT 後，任何人都可以公開存取和檢視。一旦發佈，對話將無法隱藏或刪除，並且可能被他人存檔或分享。我們建議您慎重考慮，並避免在此平臺上分享敏感或私人資訊。"
   },
   "newFolder": "新資料夾",
-  "cloneChat": "創建聊天副本",
-  "cloned": "已創建副本",
-  "enterToSubmit": "按回車鍵提交",
-  "submitPlaceholder": "輸入消息或點擊 [/] 以使用提示詞…"
+  "cloneChat": "建立聊天副本",
+  "cloned": "已建立副本",
+  "enterToSubmit": "按 Enter 鍵送出",
+  "submitPlaceholder": "輸入訊息或點選 [/] 以使用提示詞…"
 }
