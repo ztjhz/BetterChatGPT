@@ -120,8 +120,8 @@ export const CheckInWidget = () => {
         {t('activities.title', { ns: 'credit' })}
       </div>
       <div className='flex flex-col md:flex-row'>
-        <div className='grid flex-1 grid-cols-4 gap-2 p-4 pt-0'>
-          {[0, 1, 2, 3, 4, 5, 6].map(renderF6)}
+        <div className='flex-1 p-4 pt-0 card-grid-column'>
+          {[0, 1, 2, 3, 4, 5].map(renderF6)}
         </div>
       </div>
       {notBindWallet ? (
