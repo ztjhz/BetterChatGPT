@@ -7,6 +7,7 @@
   "main": "electron/index.cjs",
   "author": "Tan <github.com/TanGentleman>",
   "description": "Play and chat smarter with BetterChatGPT - an amazing open-source web app with a better UI for exploring OpenAI's ChatGPT API!",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
