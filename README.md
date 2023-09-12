@@ -6,7 +6,7 @@
 * Maintained by Tan.
 
 ### My preferred way to run [MacOS]:
-1. Clone this repository.
+1. Clone this repository. (I renamed the folder TanGPT)
 2. cd into the repo named TanGPT (i.e. `cd Downloads/TanGPT`)
 3. `yarn`
 4. `yarn build`

@@ -5,6 +5,8 @@ import { useTranslation, Trans } from 'react-i18next';
 import PopupModal from '@components/PopupModal';
 import CrossIcon from '@icon/CrossIcon';
 
+const TAN_PROXY = "https://tan-proxy-7io2un3kuq-uw.a.run.app/v1/";
+
 const ApiPopup = () => {
   const { t } = useTranslation(['main', 'api']);
 
@@ -13,9 +15,12 @@ const ApiPopup = () => {
   const firstVisit = useStore((state) => state.firstVisit);
   const setFirstVisit = useStore((state) => state.setFirstVisit);
 
+  const apiEndpoint = useStore((state) => state.apiEndpoint);
+  const isTanProxy = apiEndpoint === TAN_PROXY;
+
   const [_apiKey, _setApiKey] = useState<string>(apiKey || '');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(
-    !apiKey && firstVisit
+    !apiKey && firstVisit && !isTanProxy
   );
   const [error, setError] = useState<string>('');
 

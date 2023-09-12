@@ -69,12 +69,7 @@ export const migrateV5 = (persistedState: LocalStorageInterfaceV5ToV6) => {
 };
 
 export const migrateV6 = (persistedState: LocalStorageInterfaceV6ToV7) => {
-  if (
-    persistedState.apiEndpoint ===
-    'https://sharegpt.churchless.tech/share/v1/chat'
-  ) {
-    persistedState.apiEndpoint = 'https://chatgptapifree-yhuk4sldxq-uw.a.run.app/v1/';
-  }
+
   if (!persistedState.apiKey || persistedState.apiKey.length === 0)
     persistedState.apiKey = '';
 };
