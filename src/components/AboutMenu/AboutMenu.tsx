@@ -33,7 +33,7 @@ const AboutMenu = () => {
                 Source code: <br />
                 <a href='https://github.com/TanGentleman/BetterChatGPT' target='_blank'>https://github.com/TanGentleman/BetterChatGPT</a>
               </p>
-              <h2 className='text-lg font-bold'>My proxy endpoint does not log any messages and the source code of the docker instance can be found on my Github page.</h2>
+              <h2 className='text-lg font-bold'>My proxy endpoint does not log any messages and the source code of the backend can be found on my Github page.</h2>
             </div>
           </div>
         </PopupModal>
