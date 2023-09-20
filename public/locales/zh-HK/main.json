@@ -4,7 +4,7 @@
   "cancel": "取消",
   "confirm": "確認",
   "warning": "警告",
-  "clearMessageWarning": "請注意，提交呢條訊息之後，所有後續訊息都將被刪除！",
+  "clearMessageWarning": "請注意，送出呢條訊息之後，所有後續訊息都將被刪除！",
   "clearConversationWarning": "請注意，呢個操作會刪晒所有訊息！",
   "clearConversation": "清空傾偈",
   "import": "匯入",
@@ -16,15 +16,15 @@
   "free": "免費",
   "downloadChat": "儲存傾偈記錄",
   "user": "用户",
-  "assistant": "助手",
+  "assistant": "助理",
   "system": "系統",
   "newChat": "新傾偈",
   "lightMode": "亮色模式",
   "darkMode": "黑暗模式",
   "setting": "設定",
   "image": "圖片",
-  "autoTitle": "自動生成標題",
-  "advancedMode": "高級模式",
+  "autoTitle": "自動產生標題",
+  "advancedMode": "進階模式",
   "inlineLatex": "行內 Latex",
   "prompt": "Prompt",
   "promptLibrary": "Prompt 資料庫",
@@ -36,12 +36,12 @@
   "morePrompts": "如果你想揾更多 prompt，撳呢度：",
   "clearPrompts": "清空 prompts",
   "postOnShareGPT": {
-    "title": "po 上 ShareGPT",
-    "warning": "請注意，你將呢個傾偈 po 上 ShareGPT 之後，佢會係公開嘅，所有人都可以見到你寫嘅嘢。一旦 po 咗，呢個傾偈將冇得被隱藏或刪除，亦都可能畀人存檔同分享。我哋建議你仔細諗下，唔好喺嗰度分享敏感或私人資料。"
+    "title": "Po 上 ShareGPT",
+    "warning": "請注意，你將呢個傾偈 po 上 ShareGPT 之後，佢會係公開嘅，所有人都可以見到你寫嘅嘢。Po 咗之後，呢個傾偈將冇得被隱藏或刪除，亦都可能畀人存檔同分享。我哋建議你仔細諗下，唔好喺嗰度分享敏感或私人資料。"
   },
   "newFolder": "新資料夾",
   "cloneChat": "建立傾偈副本",
   "cloned": "建立成功",
-  "enterToSubmit": "撳 Enter 鍵提交",
-  "submitPlaceholder": "輸入消息或點擊 [/] 以使用提示詞…"
+  "enterToSubmit": "撳 Enter 鍵送出",
+  "submitPlaceholder": "輸入訊息或撳 [/] 以使用提示詞…"
 }
