@@ -1,16 +1,16 @@
 {
-  "name": "Google Sync",
-  "tagline": "Effortlessly synchronize your chats and settings with Google Drive.",
+  "name": "Google 同步",
+  "tagline": "轻松地将您的聊天和设置与 Google Drive 同步。",
   "button": {
-    "sync": "Sync your chats",
-    "stop": "Stop syncing",
-    "create": "Create new file",
-    "confirm": "Confirm selection"
+    "sync": "同步您的聊天",
+    "stop": "停止同步",
+    "create": "创建新文件",
+    "confirm": "确认选择"
   },
-  "notice": "Note: You will need to re-login on every visit or every hour. To avoid your cloud data being overwritten, do not use BetterChatGPT on more than one device at the same time.",
-  "privacy": "Your privacy is important to us, and to ensure it, Better ChatGPT only has non-sensitive access, meaning it can only create, view, and manage its own files and folders.",
+  "notice": "注意：每次访问或每小时您都需要重新登录。为了避免您的云数据被覆盖，不要在多于一个设备上同时使用 Better ChatGPT。",
+  "privacy": "您的隐私对我们很重要。为了确保安全，Better ChatGPT 只具有非敏感访问权，这意味着它只能创建、查看和管理其自己的文件和文件夹。",
   "toast": {
-    "sync": "Sync successful!",
-    "stop": "Syncing stopped"
+    "sync": "同步成功！",
+    "stop": "已停止同步"
   }
 }

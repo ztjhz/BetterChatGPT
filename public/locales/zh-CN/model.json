@@ -24,5 +24,5 @@
   },
   "defaultChatConfig": "默认聊天配置",
   "defaultSystemMessage": "默认系统消息",
-  "resetToDefault": "重置为默认"
+  "resetToDefault": "重置为默认值"
 }
