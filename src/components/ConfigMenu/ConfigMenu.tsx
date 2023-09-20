@@ -79,6 +79,16 @@ export const ModelSelector = ({
   _setModel: React.Dispatch<React.SetStateAction<ModelOptions>>;
 }) => {
   const [dropDown, setDropDown] = useState<boolean>(false);
+  const [advancedModels, setAdvancedModels] = useState<boolean>(false);
+
+  const filterModelOptions = () => {
+    if (advancedModels) {
+      return modelOptions;
+    } else {
+      return modelOptions.slice(0,modelOptions.indexOf('gpt-4-32k')+1);
+    }
+  };
+  const filteredModelOptions = filterModelOptions();
 
   return (
     <div className='mb-4'>
@@ -101,9 +111,9 @@ export const ModelSelector = ({
           className='text-sm text-gray-700 dark:text-gray-200 p-0 m-0'
           aria-labelledby='dropdownDefaultButton'
         >
-          {modelOptions.map((m) => (
+          {filteredModelOptions.map((m,i) => (
             <li
-              className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer'
+            className={`px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer${i === 0 ? " rounded-t-lg" : ""}${i > modelOptions.indexOf('gpt-4-32k') ? "text-gray-600 dark:text-gray-400" : ""}`}
               onClick={() => {
                 _setModel(m);
                 setDropDown(false);
@@ -112,7 +122,19 @@ export const ModelSelector = ({
             >
               {m}
             </li>
-          ))}
+            ))}
+            <li
+              className='px-4 py-0 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer text-gray-600 dark:text-gray-300 flex justify-center items-center rounded-b-lg'
+              onClick={() => setAdvancedModels(!advancedModels)}
+            >
+              <span
+                className={`ml-2${
+                  advancedModels
+                    ? "text-gray-700 dark:text-gray-300"
+                    : "text-gray-500 dark:text-gray-500"
+                }`}
+              >{advancedModels ? '▲' : '▼'}</span>
+            </li>
         </ul>
       </div>
     </div>
