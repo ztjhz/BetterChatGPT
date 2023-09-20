@@ -22,9 +22,10 @@ export const modelOptions: ModelOptions[] = [
   'gpt-3.5-turbo-16k',
   'gpt-4',
   'gpt-4-32k',
-  // 'gpt-3.5-turbo-0301',
-  // 'gpt-4-0314',
-  // 'gpt-4-32k-0314',
+  'gpt-4-0314',
+  'gpt-4-32k-0314',
+  'gpt-3.5-turbo-0301',
+  'gpt-3.5-turbo-0613',
 ];
 
 export const defaultModel = 'gpt-3.5-turbo';
@@ -100,7 +101,14 @@ export const _defaultChatConfig: ConfigInterface = {
   top_p: 1,
   frequency_penalty: 0,
 };
-
+export const _generateTitleConfig:ConfigInterface = {
+  model: defaultModel,
+  max_tokens: 200,//Only 6 words in title according to the prompt
+  temperature: 0,//for stable titles
+  presence_penalty: 0,
+  top_p: 1,
+  frequency_penalty: 0,
+};
 export const generateDefaultChat = (
   title?: string,
   folder?: string
