@@ -79,6 +79,15 @@ export const ModelSelector = ({
   _setModel: React.Dispatch<React.SetStateAction<ModelOptions>>;
 }) => {
   const [dropDown, setDropDown] = useState<boolean>(false);
+  const [customModel, setCustomModel] = useState<string>('');
+
+  const handleCustomModelSubmit = () => {
+    if (customModel.trim()) {
+      _setModel(customModel);
+      setDropDown(false);
+      setCustomModel(''); // Clear input after setting model
+    }
+  };
 
   return (
     <div className='mb-4'>
@@ -111,8 +120,21 @@ export const ModelSelector = ({
               key={m}
             >
               {m}
-            </li>
+            </li> 
           ))}
+          <li className='px-4 py-2'>
+            <input
+              type="text"
+              value={customModel}
+              placeholder="Enter custom model..."
+              onChange={(e) => setCustomModel(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleCustomModelSubmit()}
+              className="border rounded w-full py-2 px-3"
+            />
+            <button onClick={handleCustomModelSubmit} className="mt-2">
+              Submit
+            </button>
+          </li>
         </ul>
       </div>
     </div>
@@ -150,7 +172,9 @@ export const MaxTokenSlider = ({
           _setMaxToken(Number(e.target.value));
         }}
         min={0}
-        max={modelMaxToken[_model]}
+
+
+        max={modelMaxToken[_model as keyof typeof modelMaxToken]}
         step={1}
         className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
       />

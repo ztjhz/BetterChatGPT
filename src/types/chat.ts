@@ -49,10 +49,15 @@ export interface Folder {
   color?: string;
 }
 
-export type ModelOptions = 'gpt-4' | 'gpt-4-32k' | 'gpt-3.5-turbo' | 'gpt-3.5-turbo-16k' ;
+export type ModelOptions = 'gpt-4' | 'gpt-4-32k' | 'gpt-3.5-turbo' | 'gpt-3.5-turbo-16k' | string;
 // | 'gpt-3.5-turbo-0301';
 // | 'gpt-4-0314'
 // | 'gpt-4-32k-0314'
+
+export type ModelMaxToken = {
+  [key in ModelOptions]: number;
+};
+
 
 export type TotalTokenUsed = {
   [model in ModelOptions]?: {

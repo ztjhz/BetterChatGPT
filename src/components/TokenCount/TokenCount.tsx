@@ -21,11 +21,14 @@ const TokenCount = React.memo(() => {
   );
 
   const cost = useMemo(() => {
-    const price =
-      modelCost[model].prompt.price *
-      (tokenCount / modelCost[model].prompt.unit);
-    return price.toPrecision(3);
+    const currentModelCost = modelCost[model as keyof typeof modelCost];
+    if (currentModelCost && currentModelCost.prompt) {
+      const price = currentModelCost.prompt.price * (tokenCount / currentModelCost.prompt.unit);
+      return price.toPrecision(3);
+    }
+    return "0";
   }, [model, tokenCount]);
+  
 
   useEffect(() => {
     if (!generating) setTokenCount(countTokens(messages, model));

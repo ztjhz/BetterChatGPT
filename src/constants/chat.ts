@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { ChatInterface, ConfigInterface, ModelOptions } from '@type/chat';
+import { ChatInterface, ConfigInterface, ModelOptions, ModelMaxToken  } from '@type/chat';
 import useStore from '@store/store';
 
 const date = new Date();
@@ -29,7 +29,7 @@ export const modelOptions: ModelOptions[] = [
 
 export const defaultModel = 'gpt-3.5-turbo';
 
-export const modelMaxToken = {
+export const modelMaxToken: ModelMaxToken = {
   'gpt-3.5-turbo': 4096,
   'gpt-3.5-turbo-0301': 4096,
   'gpt-3.5-turbo-0613': 4096,
