@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { ChatInterface, ConfigInterface, ModelOptions } from '@type/chat';
+import { ChatInterface, ConfigInterface, ModelOptions, ModelMaxToken  } from '@type/chat';
 import useStore from '@store/store';
 
 const date = new Date();
@@ -29,7 +29,7 @@ export const modelOptions: ModelOptions[] = [
 
 export const defaultModel = 'gpt-3.5-turbo';
 
-export const modelMaxToken = {
+export const modelMaxToken: ModelMaxToken = {
   'gpt-3.5-turbo': 4096,
   'gpt-3.5-turbo-0301': 4096,
   'gpt-3.5-turbo-0613': 4096,
@@ -63,30 +63,6 @@ export const modelCost = {
   'gpt-3.5-turbo-16k-0613': {
     prompt: { price: 0.003, unit: 1000 },
     completion: { price: 0.004, unit: 1000 },
-  },
-  'gpt-4': {
-    prompt: { price: 0.03, unit: 1000 },
-    completion: { price: 0.06, unit: 1000 },
-  },
-  'gpt-4-0314': {
-    prompt: { price: 0.03, unit: 1000 },
-    completion: { price: 0.06, unit: 1000 },
-  },
-  'gpt-4-0613': {
-    prompt: { price: 0.03, unit: 1000 },
-    completion: { price: 0.06, unit: 1000 },
-  },
-  'gpt-4-32k': {
-    prompt: { price: 0.06, unit: 1000 },
-    completion: { price: 0.12, unit: 1000 },
-  },
-  'gpt-4-32k-0314': {
-    prompt: { price: 0.06, unit: 1000 },
-    completion: { price: 0.12, unit: 1000 },
-  },
-  'gpt-4-32k-0613': {
-    prompt: { price: 0.06, unit: 1000 },
-    completion: { price: 0.12, unit: 1000 },
   },
 };
 
