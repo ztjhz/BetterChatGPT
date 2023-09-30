@@ -143,7 +143,8 @@ const EditView = ({
               className="btn btn-neutral flex flex-col items-center justify-between flex-1 h-32 overflow-auto" 
               aria-label={suggestion.name}
               onClick={() => {
-                setInput(suggestion.prompt);
+                setInput(suggestion.prompt); // This sets the input for the default text box
+                _setContent(suggestion.prompt); // This sets the input for the non-default text box
                 const similarPrompts = findSimilarPrompts(suggestion.prompt, prompts);
                 setSuggestions(similarPrompts);
               }}
@@ -155,8 +156,8 @@ const EditView = ({
                 style={{maxWidth: '100%', wordWrap: 'break-word', overflowY: 'auto'}}
                 dangerouslySetInnerHTML={{
                   __html: DOMPurify.sanitize(suggestion.prompt.replace(
-                    new RegExp(suggestion.formattedTerm || '', 'gi'), 
-                    match => `<strong>${match}</strong>`
+                    new RegExp(escape(suggestion.formattedTerm || '').replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi'), 
+                    match => `<strong>${escape(match)}</strong>`
                   ))
                 }}
               />
@@ -175,9 +176,11 @@ const EditView = ({
         ref={textareaRef}
         className='m-0 resize-none rounded-lg bg-transparent overflow-y-hidden focus:ring-0 focus-visible:ring-0 leading-7 w-full placeholder:text-gray-500/40'
         onChange={(e) => {
-          setInput(e.target.value);
+          const newValue = e.target.value;
+          setInput(newValue);
+          _setContent(newValue); // Add this line
         }}
-        value={input}
+        value={_content}
         placeholder={t('submitPlaceholder') as string}
         onKeyDown={handleKeyDown}
         rows={1}
