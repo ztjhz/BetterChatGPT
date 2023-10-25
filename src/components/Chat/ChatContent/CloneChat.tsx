@@ -44,7 +44,11 @@ const CloneChat = React.memo(() => {
   };
 
   return (
-    <button className='btn btn-neutral flex gap-1' onClick={cloneChat}>
+    <button
+      className='btn btn-neutral flex gap-1'
+      aria-label={t('cloneChat') as string}
+      onClick={cloneChat}
+    >
       {cloned ? (
         <>
           <TickIcon /> {t('cloned')}

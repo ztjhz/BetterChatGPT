@@ -1,0 +1,28 @@
+{
+   "configuration": "Configurare",
+   "model": "Model",
+   "token": {
+     "label": "Token maxim",
+     "description": "Numărul maxim de jetoane de generat la finalizarea chat-ului. Lungimea totală a jetoanelor de intrare și a jetoanelor generate este limitată de lungimea contextului modelului."
+   },
+   "default": "Implicit",
+   "temperatura": {
+     "label": "Temperatura",
+     "description": "Ce temperatură de eșantionare să folosiți, între 0 și 2. Valorile mai mari, cum ar fi 0,8, vor face ieșirea mai aleatorie, în timp ce valori mai mici, cum ar fi 0,2, o vor face mai concentrată și deterministă. În general, vă recomandăm să modificați acest lucru sau p superior, dar nu ambele. (Implicit: 1)"
+   },
+   "presencePenalty": {
+     "label": "Penalizare de prezență",
+     "description": "Număr între -2,0 și 2,0. Valorile pozitive penalizează noile jetoane în funcție de faptul dacă acestea apar în text până acum, crescând probabilitatea modelului de a vorbi despre noi subiecte. (Implicit: 0)"
+   },
+   "topP": {
+     "label": "Top-p",
+     "description": "Număr între 0 și 1. O alternativă la eșantionarea cu temperatură, numită eșantionare nucleu, în care modelul ia în considerare rezultatele jetoanelor cu masa de probabilitate maximă p. Deci 0,1 înseamnă doar jetoanele care cuprind masa de top 10% probabilitate sunt luate în considerare. În general, recomandăm modificarea acestei temperaturi sau a temperaturii, dar nu a ambelor. (Implicit: 1)"
+   },
+   "frequencyPenalty": {
+     "label": "Penalizare de frecvență",
+     "description": "Număr între -2,0 și 2,0. Valorile pozitive penalizează noile jetoane pe baza frecvenței lor existente în text până acum, scăzând probabilitatea modelului de a repeta literal același rând. (Implicit: 0)"
+   },
+   "defaultChatConfig": "Configurație implicită de chat",
+   "defaultSystemMessage": "Mesaj implicit de sistem",
+   "resetToDefault": "Resetați la valoarea implicită"
+}

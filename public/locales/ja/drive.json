@@ -7,7 +7,7 @@
     "create": "Create new file",
     "confirm": "Confirm selection"
   },
-  "notice": "Note: You will need to re-login on every visit or every hour. To avoid your cloud data being overwritten, do not use BetterChatGPT on more than one device at the same time.",
+  "notice": "Note: You will need to re-login on every visit or every hour. To avoid your cloud data being overwritten, do not use Better ChatGPT on more than one device at the same time.",
   "privacy": "Your privacy is important to us, and to ensure it, Better ChatGPT only has non-sensitive access, meaning it can only create, view, and manage its own files and folders.",
   "toast": {
     "sync": "Sync successful!",

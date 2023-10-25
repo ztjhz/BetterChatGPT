@@ -101,7 +101,7 @@ const ChatHistory = React.memo(
         onDragStart={handleDragStart}
       >
         <ChatIcon />
-        <div className='flex-1 text-ellipsis max-h-5 overflow-hidden break-all relative'>
+        <div className='flex-1 text-ellipsis max-h-5 overflow-hidden break-all relative' title={title}>
           {isEdit ? (
             <input
               type='text'
@@ -131,10 +131,18 @@ const ChatHistory = React.memo(
           <div className='absolute flex right-1 z-10 text-gray-300 visible'>
             {isDelete || isEdit ? (
               <>
-                <button className='p-1 hover:text-white' onClick={handleTick}>
+                <button
+                  className='p-1 hover:text-white'
+                  onClick={handleTick}
+                  aria-label='confirm'
+                >
                   <TickIcon />
                 </button>
-                <button className='p-1 hover:text-white' onClick={handleCross}>
+                <button
+                  className='p-1 hover:text-white'
+                  onClick={handleCross}
+                  aria-label='cancel'
+                >
                   <CrossIcon />
                 </button>
               </>
@@ -143,12 +151,14 @@ const ChatHistory = React.memo(
                 <button
                   className='p-1 hover:text-white'
                   onClick={() => setIsEdit(true)}
+                  aria-label='edit chat title'
                 >
                   <EditIcon />
                 </button>
                 <button
                   className='p-1 hover:text-white'
                   onClick={() => setIsDelete(true)}
+                  aria-label='delete chat'
                 >
                   <DeleteIcon />
                 </button>

@@ -1,0 +1,16 @@
+{
+  "name": "Google Sync",
+  "tagline": "Synchronisiere deine Chat-Verläufe und Einstellungen einfach mit Google Drive.",
+  "button": {
+    "sync": "Jetzt synchronisieren",
+    "stop": "Synchronisation stoppen",
+    "create": "Neue Datei anlegen",
+    "confirm": "Auswahl bestätigen"
+  },
+  "notice": "Hinweis: Du musst dich bei jedem Besuch oder jede Stunde erneut anmelden. Verwende Better ChatGPT nicht gleichzeitig auf mehr als einem Gerät, um zu vermeiden, dass deine Cloud-Daten überschrieben werden.",
+  "privacy": "Deine Privatsphäre ist uns wichtig und um sie zu schützen, hat Better ChatGPT nur limitierten Zugriff. Das bedeutet, dass Better ChatGPT nur die eigenen Dateien und Ordner erstellen, anzeigen und verwalten kann.",
+  "toast": {
+    "sync": "Synchronisation erfolgreich!",
+    "stop": "Synchronisation angehalten"
+  }
+}

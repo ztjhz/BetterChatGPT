@@ -10,6 +10,6 @@
     "inputLabel": "API 密钥"
   },
   "customEndpoint": "使用自定义 API 端点",
-  "advancedConfig": "在<0>此处</0>查看高级 API 设置",
+  "advancedConfig": "在<0>此处</0>查看进阶 API 设置",
   "noApiKeyWarning": "缺少 API key，请检查 API 设置。"
 }

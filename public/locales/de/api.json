@@ -1,0 +1,15 @@
+{
+  "securityMessage": "Die Sicherheit deines API-Schlüssels ist unsere höchste Priorität. Dieser wird ausschließlich lokal in deinem Browser gespeichert und niemals mit irgendeiner Drittpartei geteilt. Er wird ausschließlich für den vorgesehenen Zweck des Zugriffs auf die OpenAI-API verwendet und nicht für andere Zwecke.",
+  "apiEndpoint": {
+    "inputLabel": "API Endpunkt",
+    "description": "Wenn du einen inoffiziellen API-Endpunkt auswählst, funktioniert er als Proxy. Ein Proxy fungiert als Vermittler zwischen deinem Gerät und dem Zielserver, in diesem Fall der OpenAI-API. Auf diese Weise ist es möglich, auf die OpenAI-API zuzugreifen, auch in Regionen, in denen der Zugriff normalerweise eingeschränkt ist.",
+    "warn": "Wenn du einen benutzerdefinierten API-Endpunkt verwendest, der kostenlosen Zugriff auf die OpenAI-API gewährt, kannst du ChatGPT ohne die Angabe eines API-Schlüssels nutzen, indem du das API-Schlüssel-Feld einfach leer lässt. Es ist jedoch wichtig, bei der Verwendung von API-Endpunkten von Drittanbietern vorsichtig zu sein, da unzuverlässige Endpunkte deine persönlichen Informationen in den Gesprächen protokollieren können. Überprüfe immer die Zuverlässigkeit eines API-Endpunkts, bevor du ihn verwendest, um deine Privatsphäre und Sicherheit zu schützen."
+  },
+  "apiKey": {
+    "howTo": "Besorge dir <0>hier</0> deinen eigenen API-Schlüssel.",
+    "inputLabel": "API-Schlüssel"
+  },
+  "customEndpoint": "Verwende einen benutzerdefinierten API-Endpunkt",
+  "advancedConfig": "Sieh dir die <0>erweiterten API Konfigurationen</0> an",
+  "noApiKeyWarning": "Kein API-Schlüssel angegeben! Überprüfe bitte deine API-Einstellungen."
+}

@@ -16,11 +16,10 @@ module.exports = {
     fontFamily: {
       sans: [
         'Söhne',
+        'Roboto',
         'ui-sans-serif',
         'system-ui',
         '-apple-system',
-        'Segoe UI',
-        'Roboto',
         'Ubuntu',
         'Cantarell',
         'Noto Sans',

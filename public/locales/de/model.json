@@ -1,0 +1,28 @@
+{
+  "configuration": "Konfiguration",
+  "model": "Model",
+  "token": {
+    "label": "Max Token",
+    "description": "Die maximale Anzahl von Tokens, die bei der Chat-Vervollständigung generiert werden. Die Gesamtlänge der Eingabetokens und generierten Tokens wird durch die Kontextlänge des Modells begrenzt."
+  },
+  "default": "Standardwert",
+  "temperature": {
+    "label": "Temperature",
+    "description": "Welche Abtastrate (sampling temmperature) verwendet werden soll. Möglichkeiten liegen zwischen 0 und 2. Höhere Werte wie 0,8 machen die Ausgabe zufälliger, während niedrigere Werte wie 0,2 sie fokussierter und deterministischer machen. Wir empfehlen im Allgemeinen, entweder diesen Wert oder den Top-p-Wert zu ändern, aber nicht beide gleichzeitig. (Standardwert: 1)"
+  },
+  "presencePenalty": {
+    "label": "Presence Penalty",
+    "description": "Eine Zahl zwischen -2,0 und 2,0. Positive Werte bestrafen neue Tokens basierend darauf, ob sie bisher im Text erscheinen sind, und erhöhen die Wahrscheinlichkeit des Modells, über neue Themen zu sprechen. (Standardwert: 0)"
+  },
+  "topP": {
+    "label": "Top-p",
+    "description": "Eine Zahl zwischen 0 und 1. Eine Alternative zum Abtasten mit Temperature (siehe oben), genannt Nukleus-sampling. Dabei berücksichtigt das Modell die Ergebnisse der Tokens mit Top-p-Wahrscheinlichkeitsmasse. Bei einem Wert von 0,1 werden nur die Tokens berücksichtigt, die die oberen 10% der Wahrscheinlichkeitsmasse ausmachen. Wir empfehlen im Allgemeinen, entweder diesen Wert oder die Temperatur zu ändern, aber nicht beide gleichzeitig. (Standardwert: 1)"
+  },
+  "frequencyPenalty": {
+    "label": "Frequency Penalty",
+    "description": "Eine Zahl zwischen -2,0 und 2,0. Positive Werte bestrafen neue Tokens basierend auf ihrer bestehenden Häufigkeit im Text und verringern die Wahrscheinlichkeit des Modells, dieselbe Zeile wörtlich zu wiederholen. (Standardwert: 0)"
+  },
+  "defaultChatConfig": "Standard Chat Konfiguration",
+  "defaultSystemMessage": "Standard System Nachricht",
+  "resetToDefault": "Auf Standardkonfiguration zurücksetzen"
+}
