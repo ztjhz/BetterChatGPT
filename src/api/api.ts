@@ -1,5 +1,5 @@
 import { ShareGPTSubmitBodyInterface } from '@type/api';
-import { ConfigInterface, MessageInterface } from '@type/chat';
+import { ConfigInterface, MessageInterface, ModelOptions } from '@type/chat';
 import { isAzureEndpoint } from '@utils/api';
 
 export const getChatCompletion = async (
@@ -18,18 +18,20 @@ export const getChatCompletion = async (
   if (isAzureEndpoint(endpoint) && apiKey) {
     headers['api-key'] = apiKey;
 
-    const modelmapping = {
-      'gpt-3': 'gpt3',
+    const modelmapping: Partial<Record<ModelOptions, string>> = {
       'gpt-3.5-turbo': 'gpt-35-turbo',
       'gpt-3.5-turbo-16k': 'gpt35-turbo-16k',
       'gpt-4': 'gpt4-4',
       'gpt-4-32k': 'gpt4-4-32k',
-    }
+    };
 
-    const model = modelmapping[config.model] || config.model
+    const model = modelmapping[config.model] || config.model;
 
     // set api version to 2023-07-01-preview for gpt-4 and gpt-4-32k, otherwise use 2023-03-15-preview
-    const apiVersion = model === 'gpt4-4' || model === 'gpt4-4-32k' ? '2023-07-01-preview' : '2023-03-15-preview'
+    const apiVersion =
+      model === 'gpt4-4' || model === 'gpt4-4-32k'
+        ? '2023-07-01-preview'
+        : '2023-03-15-preview';
 
     const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
 
@@ -72,18 +74,20 @@ export const getChatCompletionStream = async (
   if (isAzureEndpoint(endpoint) && apiKey) {
     headers['api-key'] = apiKey;
 
-    const modelmapping = {
-      'gpt-3': 'gpt3',
+    const modelmapping: Partial<Record<ModelOptions, string>> = {
       'gpt-3.5-turbo': 'gpt-35-turbo',
       'gpt-3.5-turbo-16k': 'gpt35-turbo-16k',
       'gpt-4': 'gpt4-4',
       'gpt-4-32k': 'gpt4-4-32k',
-    }
+    };
 
-    const model = modelmapping[config.model] || config.model
+    const model = modelmapping[config.model] || config.model;
 
     // set api version to 2023-07-01-preview for gpt-4 and gpt-4-32k, otherwise use 2023-03-15-preview
-    const apiVersion = model === 'gpt4-4' || model === 'gpt4-4-32k' ? '2023-07-01-preview' : '2023-03-15-preview'
+    const apiVersion =
+      model === 'gpt4-4' || model === 'gpt4-4-32k'
+        ? '2023-07-01-preview'
+        : '2023-03-15-preview';
     const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
 
     if (!endpoint.endsWith(path)) {
@@ -106,7 +110,7 @@ export const getChatCompletionStream = async (
   });
   if (response.status === 404 || response.status === 405) {
     const text = await response.text();
-    
+
     if (text.includes('model_not_found')) {
       throw new Error(
         text +
