@@ -10,10 +10,12 @@ jobs:
     steps:
     - name: Checkout GitHub repository
       uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
     - name: Push to GitLab
       env:
         GITLAB_TOKEN: ${{ secrets.GITLAB_ACCESS_TOKEN }}
       run: |
         git remote add gitlab https://oauth2:${GITLAB_TOKEN}@gitlab.com/zewebdev1337/devGPT-base.git
-        git push gitlab HEAD:main --force
+        git push gitlab HEAD:main
