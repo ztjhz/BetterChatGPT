@@ -69,7 +69,7 @@ const AboutMenu = () => {
                   components={[
                     <a
                       className='link'
-                      href='https://discord.gg/g3Qnwy4V6A'
+                      href='https://discord.gg/imot3k'
                       target='_blank'
                     />,
                   ]}
@@ -103,6 +103,7 @@ const AboutMenu = () => {
                       width='120px'
                       alt='Support us through GitHub Sponsors'
                     />
+                  </a>
                 </div>
                 <p>{t('support.paragraph4', { ns: 'about' })}</p>
               </>
