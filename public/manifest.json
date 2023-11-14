@@ -3,24 +3,70 @@
     "name": "Better ChatGPT",
     "description": "Play and chat smarter with BetterChatGPT - an amazing open-source web app with a better UI for exploring OpenAI's ChatGPT API!",
     "start_url": "/",
+    "scope": "/",
     "display": "standalone",
     "background_color": "#343541",
     "theme_color": "#343541",
+    "orientation": "portrait",
     "icons": [
+        {
+            "src": "icons/icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-152x152.png",
+            "sizes": "152x152",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
         {
             "src": "apple-touch-icon.png",
             "sizes": "180x180",
-            "type": "image/png"
-        },
+            "type": "image/png",
+            "purpose": "maskable any"
+        }
+    ],
+    "shortcuts": [
         {
-            "src": "favicon-32x32.png",
-            "sizes": "32x32",
-            "type": "image/png"
-        },
-        {
-            "src": "favicon-16x16.png",
-            "sizes": "16x16",
-            "type": "image/png"
+            "name": "Direct Access Chat",
+            "description": "Take you straight to the chat interface",
+            "url": "/chat",
+            "icons": [
+                {
+                    "src": "icons/shortcut-icon.png",
+                    "sizes": "192x192"
+                }
+            ]
         }
     ]
 }
