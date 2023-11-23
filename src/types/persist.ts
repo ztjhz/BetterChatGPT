@@ -1,5 +1,5 @@
-import { LocalStorageInterfaceV7oV8 } from './chat';
+import { LocalStorageInterfaceV8toV9 } from './chat';
 
-interface PersistStorageState extends LocalStorageInterfaceV7oV8 {}
+interface PersistStorageState extends LocalStorageInterfaceV8toV9 { }
 
 export default PersistStorageState;

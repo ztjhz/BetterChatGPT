@@ -11,10 +11,12 @@ import {
   LocalStorageInterfaceV5ToV6,
   LocalStorageInterfaceV6ToV7,
   LocalStorageInterfaceV7oV8,
+  LocalStorageInterfaceV8toV9,
 } from '@type/chat';
 import {
   _defaultChatConfig,
   defaultModel,
+  defaultResponseFormat,
   defaultUserMaxToken,
 } from '@constants/chat';
 import { officialAPIEndpoint } from '@constants/auth';
@@ -104,3 +106,7 @@ export const migrateV7 = (persistedState: LocalStorageInterfaceV7oV8) => {
     chat.id = uuidv4();
   });
 };
+
+export const migrateV8 = (persistedState: LocalStorageInterfaceV8toV9) => {
+  persistedState.responseFormat = defaultResponseFormat;
+}
