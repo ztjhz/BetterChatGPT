@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
 import PopupModal from '@components/PopupModal';
-import { ConfigInterface, ModelOptions } from '@type/chat';
+import { ConfigInterface, ModelOptions, ResponseFormatOptions } from '@type/chat';
 import DownChevronArrow from '@icon/DownChevronArrow';
-import { modelMaxToken, modelOptions } from '@constants/chat';
+import { modelMaxToken, modelOptions, responseFormatOptions } from '@constants/chat';
 
 const ConfigMenu = ({
   setIsModalOpen,
@@ -25,6 +25,9 @@ const ConfigMenu = ({
   const [_frequencyPenalty, _setFrequencyPenalty] = useState<number>(
     config.frequency_penalty
   );
+  const [_responseFormat, _setResponseFormat] = useState<ResponseFormatOptions>(
+    config.response_format
+  )
   const { t } = useTranslation('model');
 
   const handleConfirm = () => {
@@ -35,6 +38,7 @@ const ConfigMenu = ({
       presence_penalty: _presencePenalty,
       top_p: _topP,
       frequency_penalty: _frequencyPenalty,
+      response_format: _responseFormat
     });
     setIsModalOpen(false);
   };
@@ -65,6 +69,10 @@ const ConfigMenu = ({
         <FrequencyPenaltySlider
           _frequencyPenalty={_frequencyPenalty}
           _setFrequencyPenalty={_setFrequencyPenalty}
+        />
+        <ResponseFormatSelector
+          _responseFormat={_responseFormat}
+          _setResponseFormat={_setResponseFormat}
         />
       </div>
     </PopupModal>
@@ -288,6 +296,61 @@ export const FrequencyPenaltySlider = ({
       />
       <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
         {t('frequencyPenalty.description')}
+      </div>
+    </div>
+  );
+};
+
+export const ResponseFormatSelector = ({
+  _responseFormat,
+  _setResponseFormat,
+}: {
+  _responseFormat: ResponseFormatOptions;
+  _setResponseFormat: React.Dispatch<React.SetStateAction<ResponseFormatOptions>>;
+}) => {
+  const [dropDown, setDropDown] = useState<boolean>(false);
+  const { t } = useTranslation('model');
+
+  return (
+    <div className='mt-5 pt-5 border-t border-gray-500'>
+      <label className='block text-sm font-medium text-gray-900 dark:text-white'>
+        {t('response_format.label')}: {_responseFormat.type}
+      </label>
+      <button
+        className='btn btn-neutral btn-small flex gap-1'
+        type='button'
+        onClick={() => setDropDown((prev) => !prev)}
+        aria-label='model'
+      >
+        {_responseFormat.type}
+        <DownChevronArrow />
+      </button>
+      <div
+        id='dropdown'
+        className={`${
+          dropDown ? '' : 'hidden'
+        } absolute top-100 bottom-100 z-10 bg-white rounded-lg shadow-xl border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group dark:bg-gray-800 opacity-90`}
+      >
+        <ul
+          className='text-sm text-gray-700 dark:text-gray-200 p-0 m-0'
+          aria-labelledby='dropdownDefaultButton'
+        >
+          {responseFormatOptions.map((f) => (
+            <li
+              className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer'
+              onClick={() => {
+                _setResponseFormat(f);
+                setDropDown(false);
+              }}
+              key={f.type}
+            >
+              {f.type}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
+        {t('response_format.description')}
       </div>
     </div>
   );

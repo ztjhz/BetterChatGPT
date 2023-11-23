@@ -22,6 +22,10 @@
     "label": "Frequency Penalty",
     "description": "Number between -2.0 and 2.0. Positive values penalise new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim. (Default: 0)"
   },
+  "response_format": {
+    "label": "Response Format",
+    "description": "An object specifying the format that the model must output. Setting to { \"type\": \"json_object\" } enables JSON mode, which guarantees the message the model generates is valid JSON. More on https://platform.openai.com/docs/api-reference/chat/create#chat-create-response_format"
+  },
   "defaultChatConfig": "Default Chat Config",
   "defaultSystemMessage": "Default System Message",
   "resetToDefault": "Reset To Default"

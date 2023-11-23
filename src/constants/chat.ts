@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { ChatInterface, ConfigInterface, ModelOptions } from '@type/chat';
+import { ChatInterface, ConfigInterface, ModelOptions, ResponseFormatOptions } from '@type/chat';
 import useStore from '@store/store';
 
 const date = new Date();
@@ -29,7 +29,12 @@ export const modelOptions: ModelOptions[] = [
   // 'gpt-4-32k-0314',
 ];
 
+export const responseFormatOptions: ResponseFormatOptions[] = [
+  { type: 'text' }, { type: 'json_object' }
+]
+
 export const defaultModel = 'gpt-3.5-turbo';
+export const defaultResponseFormat = { type: 'text' } as ResponseFormatOptions;
 
 export const modelMaxToken = {
   'gpt-3.5-turbo': 4096,
@@ -111,6 +116,7 @@ export const _defaultChatConfig: ConfigInterface = {
   presence_penalty: 0,
   top_p: 1,
   frequency_penalty: 0,
+  response_format: defaultResponseFormat
 };
 
 export const generateDefaultChat = (
