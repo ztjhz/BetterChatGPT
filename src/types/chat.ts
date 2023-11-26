@@ -1,12 +1,31 @@
 import { Prompt } from './prompt';
 import { Theme } from './theme';
 
+// The types in this file must mimick the structure of the the API request
+
+export type Content = 'text' | 'image_url';
 export type Role = 'user' | 'assistant' | 'system';
 export const roles: Role[] = ['user', 'assistant', 'system'];
 
+export interface ImageContentInterface extends ContentInterface {
+  type: 'image_url';
+  image_url: {
+    url: string;
+  }
+}
+
+export interface TextContentInterface extends ContentInterface {
+  type: 'text';
+  text: string;
+}
+
+export interface ContentInterface {
+  type: Content;
+}
+
 export interface MessageInterface {
   role: Role;
-  content: string;
+  content: ContentInterface[];
 }
 
 export interface ChatInterface {
@@ -49,7 +68,7 @@ export interface Folder {
   color?: string;
 }
 
-export type ModelOptions = 'gpt-4' | 'gpt-4-32k' | 'gpt-4-1106-preview' | 'gpt-3.5-turbo' | 'gpt-3.5-turbo-16k' | 'gpt-3.5-turbo-1106' ;
+export type ModelOptions = 'gpt-4' | 'gpt-4-32k' | 'gpt-4-1106-preview' | 'gpt-3.5-turbo' | 'gpt-3.5-turbo-16k' | 'gpt-3.5-turbo-1106' | 'gpt-4-vision-preview' ;
 // | 'gpt-3.5-turbo-0301';
 // | 'gpt-4-0314'
 // | 'gpt-4-32k-0314'

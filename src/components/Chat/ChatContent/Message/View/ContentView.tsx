@@ -36,12 +36,14 @@ import CodeBlock from '../CodeBlock';
 const ContentView = memo(
   ({
     role,
-    content,
+    text,
+    image_urls,
     setIsEdit,
     messageIndex,
   }: {
     role: string;
-    content: string;
+    text: string;
+    image_urls: string[];
     setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
     messageIndex: number;
   }) => {
@@ -100,7 +102,7 @@ const ContentView = memo(
     };
 
     const handleCopy = () => {
-      navigator.clipboard.writeText(content);
+      navigator.clipboard.writeText(text);
     };
 
     return (
@@ -129,11 +131,18 @@ const ContentView = memo(
                 p,
               }}
             >
-              {content}
+              {text}
             </ReactMarkdown>
           ) : (
-            <span className='whitespace-pre-wrap'>{content}</span>
+            <span className='whitespace-pre-wrap'>{text}</span>
           )}
+        </div>
+        <div className="flex">
+          {image_urls.map((image, index) => (
+            <div key={index} className="image-container">
+              <img src={image} alt={`uploaded-${index}`} className="mr-2 h-20" />
+            </div>
+          ))}
         </div>
         <div className='flex justify-end gap-2 w-full mt-2'>
           {isDelete || (

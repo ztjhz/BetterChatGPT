@@ -6,12 +6,14 @@ import EditView from './View/EditView';
 
 const MessageContent = ({
   role,
-  content,
+  text,
+  image_urls,
   messageIndex,
   sticky = false,
 }: {
   role: string;
-  content: string;
+  text: string;
+  image_urls: string[];
   messageIndex: number;
   sticky?: boolean;
 }) => {
@@ -23,7 +25,8 @@ const MessageContent = ({
       {advancedMode && <div className='flex flex-grow flex-col gap-3'></div>}
       {isEdit ? (
         <EditView
-          content={content}
+          text={text}
+          image_urls={image_urls}
           setIsEdit={setIsEdit}
           messageIndex={messageIndex}
           sticky={sticky}
@@ -31,7 +34,8 @@ const MessageContent = ({
       ) : (
         <ContentView
           role={role}
-          content={content}
+          text={text}
+          image_urls={image_urls}
           setIsEdit={setIsEdit}
           messageIndex={messageIndex}
         />

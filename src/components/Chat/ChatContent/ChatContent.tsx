@@ -12,6 +12,7 @@ import useSubmit from '@hooks/useSubmit';
 import DownloadChat from './DownloadChat';
 import CloneChat from './CloneChat';
 import ShareGPT from '@components/ShareGPT';
+import { ImageContentInterface, TextContentInterface } from '@type/chat';
 
 const ChatContent = () => {
   const inputRole = useStore((state) => state.inputRole);
@@ -68,7 +69,8 @@ const ChatContent = () => {
                 <React.Fragment key={index}>
                   <Message
                     role={message.role}
-                    content={message.content}
+                    text={(message.content[0] as TextContentInterface).text}
+                    image_urls={message.content[1] ? (message.content.slice(1) as ImageContentInterface[]).map((imageContent) => imageContent.image_url.url) : []}
                     messageIndex={index}
                   />
                   {!generating && advancedMode && <NewMessageButton messageIndex={index} />}
@@ -79,7 +81,8 @@ const ChatContent = () => {
 
           <Message
             role={inputRole}
-            content=''
+            text=''
+            image_urls={[]}
             messageIndex={stickyIndex}
             sticky
           />

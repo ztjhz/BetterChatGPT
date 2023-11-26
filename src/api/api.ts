@@ -1,6 +1,19 @@
 import { ShareGPTSubmitBodyInterface } from '@type/api';
-import { ConfigInterface, MessageInterface, ModelOptions } from '@type/chat';
+import { ConfigInterface, ImageContentInterface, MessageInterface, ModelOptions } from '@type/chat';
 import { isAzureEndpoint } from '@utils/api';
+
+
+// convert message blob urls to base64
+const blobToBase64 = async (blob: Blob) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+    reader.readAsDataURL(blob);
+  });
+};
 
 export const getChatCompletion = async (
   endpoint: string,
@@ -41,11 +54,37 @@ export const getChatCompletion = async (
     }
   }
 
+  // do this for all the messages that have image content
+  const validMessages = await Promise.all(
+    messages.map(async (message) => {
+      return {
+        ...message,
+        content: message.content.map(async (content) => {
+          if ('image_url' in content) {
+            let imageContent = content as ImageContentInterface
+            if (imageContent.image_url.url.startsWith('blob:')) {
+              const blob = await fetch(imageContent.image_url.url).then((r) => r.blob());
+              let base64 = await blobToBase64(blob)
+              let url = `data:image/jpeg;base64,${base64}`
+              console.log(url)
+              return {
+                ...imageContent,
+                image_url: {
+                  url: url
+                }
+              }
+            }
+            return message.content;
+          }
+        })
+      }
+    }))
+
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
     body: JSON.stringify({
-      messages,
+      validImages: validMessages,
       ...config,
       max_tokens: undefined,
     }),
@@ -94,13 +133,41 @@ export const getChatCompletionStream = async (
     }
   }
 
+  const validMessages = await Promise.all(
+    messages.map(async (message) => {
+      return {
+        ...message,
+        content: await Promise.all(message.content.map(async (content) => {
+          if ('image_url' in content) {
+            let imageContent = content as ImageContentInterface
+            if (imageContent.image_url.url.startsWith('blob:')) {
+              const blob = await fetch(imageContent.image_url.url).then((r) => r.blob());
+              let base64 = await blobToBase64(blob)
+              let url = base64
+              console.log(url)
+              return {
+                type: 'image_url',
+                image_url: {
+                  url: url
+                }
+              }
+            }
+            // if not a locally stored image (future we can allow for urls from internet)
+            return content;
+          }
+          // if text and not image_url
+          return content;
+        }))
+      }
+    }))
+
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
     body: JSON.stringify({
-      messages,
+      messages: validMessages,
       ...config,
-      max_tokens: undefined,
+      max_tokens: config.max_tokens,
       stream: true,
     }),
   });
@@ -110,7 +177,7 @@ export const getChatCompletionStream = async (
     if (text.includes('model_not_found')) {
       throw new Error(
         text +
-          '\nMessage from Better ChatGPT:\nPlease ensure that you have access to the GPT-4 API!'
+        '\nMessage from Better ChatGPT:\nPlease ensure that you have access to the GPT-4 API!'
       );
     } else {
       throw new Error(

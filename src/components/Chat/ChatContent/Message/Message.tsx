@@ -17,12 +17,14 @@ const backgroundStyle = ['dark:bg-gray-800', 'bg-gray-50 dark:bg-gray-650'];
 const Message = React.memo(
   ({
     role,
-    content,
+    text,
+    image_urls,
     messageIndex,
     sticky = false,
   }: {
     role: Role;
-    content: string;
+    text: string;
+    image_urls: string[];
     messageIndex: number;
     sticky?: boolean;
   }) => {
@@ -52,7 +54,8 @@ const Message = React.memo(
               />}
             <MessageContent
               role={role}
-              content={content}
+              text={text}
+              image_urls={image_urls}
               messageIndex={messageIndex}
               sticky={sticky}
             />
