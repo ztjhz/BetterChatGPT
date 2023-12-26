@@ -7,8 +7,6 @@ import { parseEventSource } from '@api/helper';
 import { limitMessageTokens, updateTotalTokenUsed } from '@utils/messageUtils';
 import { _defaultChatConfig } from '@constants/chat';
 import { officialAPIEndpoint } from '@constants/auth';
-import { ReadableStream } from 'web-streams-polyfill/ponyfill';
-
 
 const useSubmit = () => {
   const { t, i18n } = useTranslation('api');
@@ -102,32 +100,7 @@ const useSubmit = () => {
         );
       }
 
-      let messageQueue: string[] = []
-      let streamProcessingCompleted = false;
-      async function processMessageQueue() {
-          while (!streamProcessingCompleted || messageQueue.length > 0) {
-          if (messageQueue.length > 0) {
-            let messageContent = messageQueue.shift() || "";
-            const messageLen = messageContent.length;
-            let curChars = ''
-            let speed = streamProcessingCompleted ? messageLen: (Math.max(3, Math.round(messageLen / 30)));
-            while (messageContent) {
-              curChars = messageContent.slice(0, speed);
-              const updatedChats = JSON.parse(
-                JSON.stringify(useStore.getState().chats)
-              );
-              const updatedMessages = updatedChats[currentChatIndex].messages;
-              updatedMessages[updatedMessages.length - 1].content += curChars;
-              setChats(updatedChats);
-              messageContent = messageContent.slice(speed);
-              await new Promise(resolve => setTimeout(resolve, 50));
-            }
-          } else {
-            await new Promise(resolve => setTimeout(resolve, 50));
-          }
-        }
-      }
-      async function readStream(stream: ReadableStream<Uint8Array>) {
+      if (stream) {
         if (stream.locked)
           throw new Error(
             'Oops, the stream is locked right now. Please try again'
@@ -154,7 +127,13 @@ const useSubmit = () => {
               }
               return output;
             }, '');
-            messageQueue.push(resultString);
+
+            const updatedChats: ChatInterface[] = JSON.parse(
+              JSON.stringify(useStore.getState().chats)
+            );
+            const updatedMessages = updatedChats[currentChatIndex].messages;
+            updatedMessages[updatedMessages.length - 1].content += resultString;
+            setChats(updatedChats);
           }
         }
         if (useStore.getState().generating) {
@@ -164,11 +143,6 @@ const useSubmit = () => {
         }
         reader.releaseLock();
         stream.cancel();
-        streamProcessingCompleted = true;
-      }
-
-      if (stream) {
-        await Promise.all([readStream(stream), processMessageQueue()]);
       }
 
       // update tokens used in chatting
