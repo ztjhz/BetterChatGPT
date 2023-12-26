@@ -7,7 +7,7 @@ import { parseEventSource } from '@api/helper';
 import { limitMessageTokens, updateTotalTokenUsed } from '@utils/messageUtils';
 import { _defaultChatConfig } from '@constants/chat';
 import { officialAPIEndpoint } from '@constants/auth';
-import { ReadableStream } from 'web-streams-polyfill/ponyfill/es2018';
+import { ReadableStream } from 'web-streams-polyfill/ponyfill';
 
 
 const useSubmit = () => {
