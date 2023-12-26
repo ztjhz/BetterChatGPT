@@ -43,38 +43,9 @@ const AboutMenu = () => {
                 />
               </p>
 
-              <p>
-                <Trans
-                  i18nKey='initiative.description'
-                  ns='about'
-                  components={[
-                    <a
-                      href={t('initiative.link', { ns: 'about' }) as string}
-                      target='_blank'
-                      className='link'
-                    />,
-                  ]}
-                />
-              </p>
+              
 
-              <h2 className='text-lg font-bold'>
-                {t('discordServer.title', { ns: 'about' })}
-              </h2>
-              <p>{t('discordServer.paragraph1', { ns: 'about' })}</p>
-
-              <p>
-                <Trans
-                  i18nKey='discordServer.paragraph2'
-                  ns='about'
-                  components={[
-                    <a
-                      className='link'
-                      href='https://discord.gg/imot3k'
-                      target='_blank'
-                    />,
-                  ]}
-                />
-              </p>
+            
 
               <>
                 <h2 className='text-lg font-bold'>
@@ -94,7 +65,6 @@ const AboutMenu = () => {
                     ]}
                   />
                 </p>
-                <p>{t('support.paragraph3', { ns: 'about' })}</p>
 
                 <div className='flex flex-col items-center gap-4 my-4'>
                   <a href='https://github.com/sponsors/SlendyMilky' target='_blank'>
@@ -105,7 +75,6 @@ const AboutMenu = () => {
                     />
                   </a>
                 </div>
-                <p>{t('support.paragraph4', { ns: 'about' })}</p>
               </>
 
               <h2 className='text-lg font-bold'>

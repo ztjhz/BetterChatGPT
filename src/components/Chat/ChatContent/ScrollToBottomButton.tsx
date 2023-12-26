@@ -13,7 +13,7 @@ const ScrollToBottomButton = React.memo(() => {
         atBottom ? 'hidden' : ''
       }`}
       aria-label='scroll to bottom'
-      onClick={scrollToBottom}
+      onClick={() => scrollToBottom()}
     >
       <DownArrow />
     </button>
