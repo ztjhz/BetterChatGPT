@@ -100,33 +100,34 @@ const useSubmit = () => {
         );
       }
 
-      let messageQueue = [];
-      let streamProcessingCompleted = false;
-      async function processMessageQueue() {
-        while (!streamProcessingCompleted || messageQueue.length > 0) {
-          if (messageQueue.length > 0) {
-            let messageContent = messageQueue.shift();
-            const messageLen = messageContent.length;
-            let curChars = '';
-            let speed = streamProcessingCompleted
-              ? messageLen
-              : Math.max(3, Math.round(messageLen / 30));
-            while (messageContent) {
-              curChars = messageContent.slice(0, speed);
-              const updatedChats = JSON.parse(
-                JSON.stringify(useStore.getState().chats)
-              );
-              const updatedMessages = updatedChats[currentChatIndex].messages;
-              updatedMessages[updatedMessages.length - 1].content += curChars;
-              setChats(updatedChats);
-              messageContent = messageContent.slice(speed);
-              await new Promise((resolve) => setTimeout(resolve, 50));
-            }
-          } else {
+    let messageQueue: string[] = [];
+    let streamProcessingCompleted = false;
+
+    async function processMessageQueue() {
+      while (!streamProcessingCompleted || messageQueue.length > 0) {
+        if (messageQueue.length > 0) {
+          let messageContent = messageQueue.shift();
+          const messageLen = messageContent.length;
+          let curChars = '';
+          let speed = streamProcessingCompleted
+            ? messageLen
+            : Math.max(3, Math.round(messageLen / 30));
+          while (messageContent) {
+            curChars = messageContent.slice(0, speed);
+            const updatedChats = JSON.parse(
+              JSON.stringify(useStore.getState().chats)
+            );
+            const updatedMessages = updatedChats[currentChatIndex].messages;
+            updatedMessages[updatedMessages.length - 1].content += curChars;
+            setChats(updatedChats);
+            messageContent = messageContent.slice(speed);
             await new Promise((resolve) => setTimeout(resolve, 50));
           }
+        } else {
+          await new Promise((resolve) => setTimeout(resolve, 50));
         }
       }
+    }
       async function readStream(stream) {
         if (stream.locked)
           throw new Error(
