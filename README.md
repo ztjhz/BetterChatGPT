@@ -54,7 +54,7 @@ GPT-CX comes with a bundle of amazing features! Here are some of them:
 
 # 🛠️ Usage
 
-To get started, simply visit our website at <https://bettergpt.chat/>. There are 3 ways for you to start using GPT-CX.
+To get started, simply visit our website at <https://gpt.wemake.cx/>. There are 3 ways for you to start using GPT-CX.
 
 1. Enter into the API menu your OpenAI API Key obtained from [OpenAI API Keys](https://platform.openai.com/account/api-keys).
 2. Utilise the api endpoint proxy provided by [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree) (if you are in a region with no access to ChatGPT)
