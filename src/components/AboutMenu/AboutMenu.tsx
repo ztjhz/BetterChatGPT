@@ -52,6 +52,7 @@ const AboutMenu = () => {
                       href={t('initiative.link', { ns: 'about' }) as string}
                       target='_blank'
                       className='link'
+                      rel="noopener noreferrer"
                     />,
                   ]}
                 />
