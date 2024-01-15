@@ -23,7 +23,10 @@ export const modelOptions: ModelOptions[] = [
   'gpt-3.5-turbo-1106',
   'gpt-4',
   'gpt-4-32k',
-  'gpt-4-1106-preview'
+  'gpt-4-1106-preview',
+  'mistral-tiny',
+  'mistral-small',
+  'mistral-medium'
   // 'gpt-3.5-turbo-0301',
   // 'gpt-4-0314',
   // 'gpt-4-32k-0314',
@@ -45,6 +48,9 @@ export const modelMaxToken = {
   'gpt-4-32k-0314': 32768,
   'gpt-4-32k-0613': 32768,
   'gpt-4-1106-preview': 128000,
+  'mistral-tiny': 8192,
+  'mistral-small': 8192,
+  'mistral-medium': 32000,
 };
 
 export const modelCost = {
@@ -99,6 +105,18 @@ export const modelCost = {
   'gpt-4-1106-preview': {
     prompt: { price: 0.01, unit: 1000 },
     completion: { price: 0.03, unit: 1000 },
+  },
+  'mistral-tiny': {
+    prompt: { price: 0.14, unit: 1000000 },
+    completion: { price: 0.42, unit: 1000000 },
+  },
+  'mistral-small': {
+    prompt: { price: 0.6, unit: 1000000 },
+    completion: { price: 1.8, unit: 1000000 },
+  },
+  'mistral-medium': {
+    prompt: { price: 2.5, unit: 1000000 },
+    completion: { price: 7.5, unit: 1000000 },
   },
 };
 
