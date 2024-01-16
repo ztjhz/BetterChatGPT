@@ -18,12 +18,12 @@ const ConfigMenu = ({
   const [_maxToken, _setMaxToken] = useState<number>(config.max_tokens);
   const [_model, _setModel] = useState<ModelOptions>(config.model);
   const [_temperature, _setTemperature] = useState<number>(config.temperature);
-  // const [_presencePenalty, _setPresencePenalty] = useState<number>(
-  //  config.presence_penalty
+  const [_presencePenalty, _setPresencePenalty] = useState<number>(
+    config.presence_penalty
   );
   const [_topP, _setTopP] = useState<number>(config.top_p);
-  // const [_frequencyPenalty, _setFrequencyPenalty] = useState<number>(
-  //  config.frequency_penalty
+  const [_frequencyPenalty, _setFrequencyPenalty] = useState<number>(
+    config.frequency_penalty
   );
   const { t } = useTranslation('model');
 
