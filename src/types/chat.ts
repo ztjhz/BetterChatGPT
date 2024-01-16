@@ -22,7 +22,9 @@ export interface ConfigInterface {
   model: ModelOptions;
   max_tokens: number;
   temperature: number;
+  presence_penalty: number;
   top_p: number;
+  frequency_penalty: number;
 }
 
 export interface ChatHistoryInterface {
