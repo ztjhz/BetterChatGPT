@@ -41,29 +41,6 @@ export const getChatCompletion = async (
     }
   }
 
-  // Extract presence_penalty and frequency_penalty from config
-  const { presence_penalty, frequency_penalty, ...configWithoutPenalties } = config;
-
-   // Determine if you need to exclude the penalties based on the endpoint
-   const apiEndpoint = getCurrentApiEndpoint(); // This function should return the current API endpoint
-   const shouldExcludePenalties = apiEndpoint === 'https://api.mistral.ai';
-
-   const requestBody = shouldExcludePenalties ? {
-    messages,
-    ...configWithoutPenalties,
-    max_tokens: undefined, // Assuming max_tokens should still be set to undefined
-  } : {
-    messages,
-    ...config,
-    max_tokens: undefined,
-  };
-
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(requestBody),
-  });
-
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
