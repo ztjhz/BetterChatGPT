@@ -18,7 +18,13 @@ const ConfigMenu = ({
   const [_maxToken, _setMaxToken] = useState<number>(config.max_tokens);
   const [_model, _setModel] = useState<ModelOptions>(config.model);
   const [_temperature, _setTemperature] = useState<number>(config.temperature);
+  // const [_presencePenalty, _setPresencePenalty] = useState<number>(
+  //  config.presence_penalty
+  //);
   const [_topP, _setTopP] = useState<number>(config.top_p);
+  // const [_frequencyPenalty, _setFrequencyPenalty] = useState<number>(
+  //  config.frequency_penalty
+  //);
   const { t } = useTranslation('model');
 
   const handleConfirm = () => {
@@ -26,7 +32,9 @@ const ConfigMenu = ({
       max_tokens: _maxToken,
       model: _model,
       temperature: _temperature,
+      // presence_penalty: _presencePenalty,
       top_p: _topP,
+      // frequency_penalty: _frequencyPenalty,
     });
     setIsModalOpen(false);
   };
@@ -50,6 +58,14 @@ const ConfigMenu = ({
           _setTemperature={_setTemperature}
         />
         <TopPSlider _topP={_topP} _setTopP={_setTopP} />
+        <PresencePenaltySlider
+          _presencePenalty={_presencePenalty}
+          _setPresencePenalty={_setPresencePenalty}
+        />
+        <FrequencyPenaltySlider
+          _frequencyPenalty={_frequencyPenalty}
+          _setFrequencyPenalty={_setFrequencyPenalty}
+        />
       </div>
     </PopupModal>
   );
@@ -211,5 +227,71 @@ export const TopPSlider = ({
   );
 };
 
+/* export const PresencePenaltySlider = ({
+  _presencePenalty,
+  _setPresencePenalty,
+}: {
+  _presencePenalty: number;
+  _setPresencePenalty: React.Dispatch<React.SetStateAction<number>>;
+}) => {
+  const { t } = useTranslation('model');
+
+  return (
+    <div className='mt-5 pt-5 border-t border-gray-500'>
+      <label className='block text-sm font-medium text-gray-900 dark:text-white'>
+        {t('presencePenalty.label')}: {_presencePenalty}
+      </label>
+      <input
+        id='default-range'
+        type='range'
+        value={_presencePenalty}
+        onChange={(e) => {
+          _setPresencePenalty(Number(e.target.value));
+        }}
+        min={-2}
+        max={2}
+        step={0.1}
+        className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
+      />
+      <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
+        {t('presencePenalty.description')}
+      </div>
+    </div>
+  );
+}; 
+
+export const FrequencyPenaltySlider = ({
+  _frequencyPenalty,
+  _setFrequencyPenalty,
+}: {
+  _frequencyPenalty: number;
+  _setFrequencyPenalty: React.Dispatch<React.SetStateAction<number>>;
+}) => {
+  const { t } = useTranslation('model');
+
+  return (
+    <div className='mt-5 pt-5 border-t border-gray-500'>
+      <label className='block text-sm font-medium text-gray-900 dark:text-white'>
+        {t('frequencyPenalty.label')}: {_frequencyPenalty}
+      </label>
+      <input
+        id='default-range'
+        type='range'
+        value={_frequencyPenalty}
+        onChange={(e) => {
+          _setFrequencyPenalty(Number(e.target.value));
+        }}
+        min={-2}
+        max={2}
+        step={0.1}
+        className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
+      />
+      <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
+        {t('frequencyPenalty.description')}
+      </div>
+    </div>
+  );
+};
+*/
 
 export default ConfigMenu;
