@@ -126,9 +126,7 @@ export const _defaultChatConfig: ConfigInterface = {
   model: defaultModel,
   max_tokens: defaultUserMaxToken,
   temperature: 1,
-  presence_penalty: 0,
   top_p: 1,
-  frequency_penalty: 0,
 };
 
 export const generateDefaultChat = (
