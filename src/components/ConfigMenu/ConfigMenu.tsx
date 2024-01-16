@@ -227,7 +227,7 @@ export const TopPSlider = ({
   );
 };
 
-/* export const PresencePenaltySlider = ({
+export const PresencePenaltySlider = ({
   _presencePenalty,
   _setPresencePenalty,
 }: {
@@ -258,7 +258,7 @@ export const TopPSlider = ({
       </div>
     </div>
   );
-}; 
+};
 
 export const FrequencyPenaltySlider = ({
   _frequencyPenalty,
@@ -292,6 +292,5 @@ export const FrequencyPenaltySlider = ({
     </div>
   );
 };
-*/
 
 export default ConfigMenu;
