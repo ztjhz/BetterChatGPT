@@ -57,8 +57,6 @@ const ChatConfigPopup = ({
       max_tokens: _maxToken,
       temperature: _temperature,
       top_p: _topP,
-      presence_penalty: _presencePenalty,
-      frequency_penalty: _frequencyPenalty,
     });
     setDefaultSystemMessage(_systemMessage);
     setIsModalOpen(false);
