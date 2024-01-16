@@ -40,6 +40,7 @@ export const migrateV2 = (persistedState: LocalStorageInterfaceV2ToV3) => {
     chat.config = {
       ...chat.config,
       top_p: _defaultChatConfig.top_p,
+      frequency_penalty: _defaultChatConfig.frequency_penalty,
     };
   });
   persistedState.autoTitle = false;
