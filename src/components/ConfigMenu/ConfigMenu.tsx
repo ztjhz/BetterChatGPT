@@ -32,9 +32,9 @@ const ConfigMenu = ({
       max_tokens: _maxToken,
       model: _model,
       temperature: _temperature,
-      // presence_penalty: _presencePenalty,
+      presence_penalty: _presencePenalty,
       top_p: _topP,
-      // frequency_penalty: _frequencyPenalty,
+      frequency_penalty: _frequencyPenalty,
     });
     setIsModalOpen(false);
   };
