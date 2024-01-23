@@ -25,6 +25,7 @@ export interface ConfigInterface {
   presence_penalty: number;
   top_p: number;
   frequency_penalty: number;
+  response_format: ResponseFormatOptions;
 }
 
 export interface ChatHistoryInterface {
@@ -49,10 +50,12 @@ export interface Folder {
   color?: string;
 }
 
-export type ModelOptions = 'gpt-4' | 'gpt-4-32k' | 'gpt-4-1106-preview' | 'gpt-3.5-turbo' | 'gpt-3.5-turbo-16k' | 'gpt-3.5-turbo-1106' ;
+export type ModelOptions = 'gpt-4' | 'gpt-4-32k' | 'gpt-4-1106-preview' | 'gpt-3.5-turbo' | 'gpt-3.5-turbo-16k' | 'gpt-3.5-turbo-1106';
 // | 'gpt-3.5-turbo-0301';
 // | 'gpt-4-0314'
 // | 'gpt-4-32k-0314'
+
+export type ResponseFormatOptions = { 'type': 'text' } | { 'type': 'json_object' };
 
 export type TotalTokenUsed = {
   [model in ModelOptions]?: {
@@ -146,4 +149,9 @@ export interface LocalStorageInterfaceV7oV8
   foldersName: string[];
   foldersExpanded: boolean[];
   folders: FolderCollection;
+}
+
+export interface LocalStorageInterfaceV8toV9
+  extends LocalStorageInterfaceV7oV8 {
+  responseFormat: ResponseFormatOptions;
 }

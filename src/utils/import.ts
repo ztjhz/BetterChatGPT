@@ -11,6 +11,8 @@ import {
   defaultModel,
   modelOptions,
   _defaultChatConfig,
+  defaultResponseFormat,
+  responseFormatOptions,
 } from '@constants/chat';
 import { ExportV1, OpenAIChat } from '@type/export';
 
@@ -61,6 +63,10 @@ const validateAndFixChatConfig = (config: ConfigInterface) => {
 
   if (!config.model) config.model = defaultModel;
   if (!modelOptions.includes(config.model)) return false;
+
+  if (!config.response_format) config.response_format = defaultResponseFormat;
+  if (!responseFormatOptions.includes(config.response_format))
+    return false;
 
   return true;
 };
