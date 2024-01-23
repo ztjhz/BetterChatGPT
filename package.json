@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "./",
   "main": "electron/index.cjs",
-  "author": "Jing Hua <betterchatgpt@mail.tjh.sg>",
+  "author": "💙 WeMake <hey@wemake.cx>",
   "description": "Play and chat smarter with BetterChatGPT - an amazing open-source web app with a better UI for exploring OpenAI's ChatGPT API!",
   "scripts": {
     "dev": "vite",
@@ -17,7 +17,7 @@
   },
   "build": {
     "appId": "better-chatgpt",
-    "productName": "Better ChatGPT",
+    "productName": "GPT-CX",
     "artifactName": "${os}-${name}-${version}-${arch}.${ext}",
     "directories": {
       "output": "release"

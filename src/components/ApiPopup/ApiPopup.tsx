@@ -32,7 +32,9 @@ const ApiPopup = () => {
   useEffect(() => {
     setFirstVisit(false);
   }, []);
-
+  <div className='p-6 border-b border-gray-200 dark:border-gray-600 modal-width'>
+    {/* Your content here */}
+  </div>
   return isModalOpen ? (
     <PopupModal
       title='Setup your API key'
@@ -52,20 +54,6 @@ const ApiPopup = () => {
             onChange={(e) => {
               _setApiKey(e.target.value);
             }}
-          />
-        </div>
-
-        <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm mt-4'>
-          <Trans
-            i18nKey='apiKey.howTo'
-            ns='api'
-            components={[
-              <a
-                href='https://platform.openai.com/account/api-keys'
-                className='link'
-                target='_blank'
-              />,
-            ]}
           />
         </div>
         <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm mt-4'>

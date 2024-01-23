@@ -7,15 +7,15 @@
 <h4 align="center"><b>Free, Powerful, Limitless, Intelligent, Engaging</b></h4>
 
 <p align="center">
-<a href="https://github.com/ztjhz/BetterChatGPT/blob/main/LICENSE" target="_blank">
+<a href="https://github.com/WEMAKE-CX/GPT-CX/blob/main/LICENSE" target="_blank">
 <img src="https://img.shields.io/github/license/ztjhz/BetterChatGPT?style=flat-square" alt="licence" />
 
 <p align="center">
     <a href="https://wemake.cx">Enter Website</a>
     ·
-    <a href="https://github.com/ztjhz/BetterChatGPT/issues/new/choose">Report Bug</a>
+    <a href="https://github.com/WEMAKE-CX/GPT-CX/issues/new/choose">Report Bug</a>
     ·
-    <a href="https://github.com/ztjhz/BetterChatGPT/issues/new/choose">Request Feature</a>
+    <a href="https://github.com/WEMAKE-CX/GPT-CX/issues/new/choose">Request Feature</a>
 </p>
 <p align="center"><i>Did you enjoy using GPT-CX? Give it some love with a star! 🌟</i></p>
 

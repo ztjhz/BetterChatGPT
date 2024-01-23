@@ -13,16 +13,15 @@ const dateString =
 // default system message obtained using the following method: https://twitter.com/DeminDimin/status/1619935545144279040
 export const _defaultSystemMessage =
   import.meta.env.VITE_DEFAULT_SYSTEM_MESSAGE ??
-  `You are ChatGPT, a large language model trained by OpenAI.
-Carefully heed the user's instructions. 
-Respond using Markdown.`;
+  `Hey, 👋
+  WeMake great stuff, and you're part of it. 💙`;
 
 export const modelOptions: ModelOptions[] = [
   'gpt-3.5-turbo',
   'gpt-3.5-turbo-16k',
   'gpt-3.5-turbo-1106',
   'gpt-4',
-  'gpt-4-32k',
+  // 'gpt-4-32k',
   'gpt-4-1106-preview'
   // 'gpt-3.5-turbo-0301',
   // 'gpt-4-0314',

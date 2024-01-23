@@ -1,5 +1,5 @@
 {
-  "securityMessage": "Die Sicherheit deines API-Schlüssels ist unsere höchste Priorität. Dieser wird ausschließlich lokal in deinem Browser gespeichert und niemals mit irgendeiner Drittpartei geteilt. Er wird ausschließlich für den vorgesehenen Zweck des Zugriffs auf die OpenAI-API verwendet und nicht für andere Zwecke.",
+  "securityMessage": "Die Sicherheit deines API-Schlüssels ist unsere höchste Priorität. Dieser wird ausschließlich lokal in deinem Browser gespeichert und niemals mit irgendeiner Drittpartei geteilt. Er wird ausschließlich für den vorgesehenen Zweck des Zugriffs auf die WeMake-API verwendet und nicht für andere Zwecke.",
   "apiEndpoint": {
     "inputLabel": "API Endpunkt",
     "description": "Wenn du einen inoffiziellen API-Endpunkt auswählst, funktioniert er als Proxy. Ein Proxy fungiert als Vermittler zwischen deinem Gerät und dem Zielserver, in diesem Fall der OpenAI-API. Auf diese Weise ist es möglich, auf die OpenAI-API zuzugreifen, auch in Regionen, in denen der Zugriff normalerweise eingeschränkt ist.",
