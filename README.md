@@ -1,29 +1,18 @@
-<h1 align="center"><b>WEMAKE GPT-CX</b></h1>
+# WEMAKE GPT-CX
 
-<p align="center">
-    <a href="https://wemake.cx" target="_blank"><img src="public/logomark.png" alt="WEMAKE GPT-CX" width="100" /></a>
-</p>
+![WEMAKE GPT-CX](public/logomark.png)
 
-<h4 align="center"><b>Free, Powerful, Limitless, Intelligent, Engaging</b></h4>
+Free, Powerful, Limitless, Intelligent, Engaging
 
-<p align="center">
-<a href="https://github.com/WEMAKE-CX/GPT-CX/blob/main/LICENSE" target="_blank">
-<img src="https://img.shields.io/github/license/ztjhz/BetterChatGPT?style=flat-square" alt="licence" />
+[![licence](https://img.shields.io/github/license/ztjhz/BetterChatGPT?style=flat-square)](https://github.com/WEMAKE-CX/GPT-CX/blob/main/LICENSE)
 
-<p align="center">
-    <a href="https://wemake.cx">Enter Website</a>
-    ·
-    <a href="https://github.com/WEMAKE-CX/GPT-CX/issues/new/choose">Report Bug</a>
-    ·
-    <a href="https://github.com/WEMAKE-CX/GPT-CX/issues/new/choose">Request Feature</a>
-</p>
-<p align="center"><i>Did you enjoy using GPT-CX? Give it some love with a star! 🌟</i></p>
+[Enter Website](https://wemake.cx) · [Report Bug](https://github.com/WEMAKE-CX/GPT-CX/issues/new/choose) · [Request Feature](https://github.com/WEMAKE-CX/GPT-CX/issues/new/choose)
 
-## 👋🏻 Introducing GPT-CX
+Did you enjoy using GPT-CX? Give it some love with a star! 🌟
 
-<p align="center">
-    <img src="assets/preview.png" alt="landing" width=500 />
-</p>
+## Introducing GPT-CX
+
+![landing](assets/preview.png)
 
 Are you ready to unlock the full potential of ChatGPT with GPT-CX?
 
@@ -31,7 +20,7 @@ GPT-CX is the ultimate destination for anyone who wants to experience the limitl
 
 Whether you're looking to chat with a virtual assistant, improve your language skills, or simply enjoy a fun and engaging conversation, our app has got you covered. So why wait? Join us today and explore the exciting world of GPT-CX!
 
-# 🔥 Features
+## 🔥 Features
 
 GPT-CX comes with a bundle of amazing features! Here are some of them:
 
@@ -52,7 +41,7 @@ GPT-CX comes with a bundle of amazing features! Here are some of them:
 - Azure OpenAI endpoint support
 - Multiple language support (i18n)
 
-# 🛠️ Usage
+## 🛠️ Usage
 
 To get started, simply visit our website at <https://gpt.wemake.cx/>. There are 3 ways for you to start using GPT-CX.
 
