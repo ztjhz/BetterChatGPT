@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -35,6 +35,22 @@ const PopupModal = ({
     if (handleClickBackdrop) handleClickBackdrop();
     else _handleClose();
   };
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      if (handleClickBackdrop) handleClickBackdrop();
+      else handleClose ? handleClose() : setIsModalOpen(false);
+    } else if (event.key === 'Enter') {
+      if (handleConfirm) handleConfirm();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   if (modalRoot) {
     return ReactDOM.createPortal(
