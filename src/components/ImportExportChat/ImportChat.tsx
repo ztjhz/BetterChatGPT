@@ -1,17 +1,17 @@
-import React, { useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { v4 as uuidv4 } from "uuid";
 
-import useStore from '@store/store';
+import useStore from "@store/store";
 
 import {
   isLegacyImport,
   validateAndFixChats,
   validateExportV1,
-} from '@utils/import';
+} from "@utils/import";
 
-import { ChatInterface, Folder, FolderCollection } from '@type/chat';
-import { ExportBase } from '@type/export';
+import { ChatInterface, Folder, FolderCollection } from "@type/chat";
+import { ExportBase } from "@type/export";
 
 const ImportChat = () => {
   const { t } = useTranslation();
@@ -63,7 +63,7 @@ const ImportChat = () => {
                   };
                   return { [id]: _newFolder, ...acc };
                 },
-                {}
+                {},
               );
 
               // increment the order of existing folders
@@ -78,16 +78,16 @@ const ImportChat = () => {
               const prevChats = useStore.getState().chats;
               if (prevChats) {
                 const updatedChats: ChatInterface[] = JSON.parse(
-                  JSON.stringify(prevChats)
+                  JSON.stringify(prevChats),
                 );
                 setChats(parsedData.concat(updatedChats));
               } else {
                 setChats(parsedData);
               }
-              setAlert({ message: 'Succesfully imported!', success: true });
+              setAlert({ message: "Succesfully imported!", success: true });
             } else {
               setAlert({
-                message: 'Invalid chats data format',
+                message: "Invalid chats data format",
                 success: false,
               });
             }
@@ -102,7 +102,7 @@ const ImportChat = () => {
 
                   const updatedFolders = useStore.getState().folders;
                   Object.values(updatedFolders).forEach(
-                    (f) => (f.order += offset)
+                    (f) => (f.order += offset),
                   );
 
                   setFolders({ ...parsedData.folders, ...updatedFolders });
@@ -112,7 +112,7 @@ const ImportChat = () => {
                   if (parsedData.chats) {
                     if (prevChats) {
                       const updatedChats: ChatInterface[] = JSON.parse(
-                        JSON.stringify(prevChats)
+                        JSON.stringify(prevChats),
                       );
                       setChats(parsedData.chats.concat(updatedChats));
                     } else {
@@ -120,10 +120,10 @@ const ImportChat = () => {
                     }
                   }
 
-                  setAlert({ message: 'Succesfully imported!', success: true });
+                  setAlert({ message: "Succesfully imported!", success: true });
                 } else {
                   setAlert({
-                    message: 'Invalid format',
+                    message: "Invalid format",
                     success: false,
                   });
                 }
@@ -141,27 +141,27 @@ const ImportChat = () => {
 
   return (
     <>
-      <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-        {t('import')} (JSON)
+      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+        {t("import")} (JSON)
       </label>
       <input
-        className='w-full text-sm file:p-2 text-gray-800 file:text-gray-700 dark:text-gray-300 dark:file:text-gray-200 rounded-md cursor-pointer focus:outline-none bg-gray-50 file:bg-gray-100 dark:bg-gray-800 dark:file:bg-gray-700 file:border-0 border border-gray-300 dark:border-gray-600 placeholder-gray-900 dark:placeholder-gray-300 file:cursor-pointer'
-        type='file'
+        className="w-full text-sm file:p-2 text-gray-800 file:text-gray-700 dark:text-gray-300 dark:file:text-gray-200 rounded-md cursor-pointer focus:outline-none bg-gray-50 file:bg-gray-100 dark:bg-gray-800 dark:file:bg-gray-700 file:border-0 border border-gray-300 dark:border-gray-600 placeholder-gray-900 dark:placeholder-gray-300 file:cursor-pointer"
+        type="file"
         ref={inputRef}
       />
       <button
-        className='btn btn-small btn-primary mt-3'
+        className="btn btn-small btn-primary mt-3"
         onClick={handleFileUpload}
-        aria-label={t('import') as string}
+        aria-label={t("import") as string}
       >
-        {t('import')}
+        {t("import")}
       </button>
       {alert && (
         <div
           className={`relative py-2 px-3 w-full mt-3 border rounded-md text-gray-600 dark:text-gray-100 text-sm whitespace-pre-wrap ${
             alert.success
-              ? 'border-green-500 bg-green-500/10'
-              : 'border-red-500 bg-red-500/10'
+              ? "border-green-500 bg-green-500/10"
+              : "border-red-500 bg-red-500/10"
           }`}
         >
           {alert.message}

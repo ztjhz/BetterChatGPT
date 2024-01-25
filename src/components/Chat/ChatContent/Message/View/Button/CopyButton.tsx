@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import TickIcon from '@icon/TickIcon';
-import CopyIcon from '@icon/CopyIcon';
+import TickIcon from "@icon/TickIcon";
+import CopyIcon from "@icon/CopyIcon";
 
-import BaseButton from './BaseButton';
+import BaseButton from "./BaseButton";
 
 const CopyButton = ({
   onClick,
@@ -15,7 +15,7 @@ const CopyButton = ({
   return (
     <BaseButton
       icon={isCopied ? <TickIcon /> : <CopyIcon />}
-      buttonProps={{ 'aria-label': 'copy message' }}
+      buttonProps={{ "aria-label": "copy message" }}
       onClick={(e) => {
         onClick(e);
         setIsCopied(true);

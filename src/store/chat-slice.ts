@@ -1,5 +1,5 @@
-import { StoreSlice } from './store';
-import { ChatInterface, FolderCollection, MessageInterface } from '@type/chat';
+import { StoreSlice } from "./store";
+import { ChatInterface, FolderCollection, MessageInterface } from "@type/chat";
 
 export interface ChatSlice {
   messages: MessageInterface[];
@@ -20,7 +20,7 @@ export const createChatSlice: StoreSlice<ChatSlice> = (set, get) => ({
   messages: [],
   currentChatIndex: -1,
   generating: false,
-  error: '',
+  error: "",
   folders: {},
   setMessages: (messages: MessageInterface[]) => {
     set((prev: ChatSlice) => ({

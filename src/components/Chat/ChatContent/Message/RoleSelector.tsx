@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
-import useStore from '@store/store';
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import useStore from "@store/store";
 
-import DownChevronArrow from '@icon/DownChevronArrow';
-import { ChatInterface, Role, roles } from '@type/chat';
+import DownChevronArrow from "@icon/DownChevronArrow";
+import { ChatInterface, Role, roles } from "@type/chat";
 
-import useHideOnOutsideClick from '@hooks/useHideOnOutsideClick';
+import useHideOnOutsideClick from "@hooks/useHideOnOutsideClick";
 
 const RoleSelector = React.memo(
   ({
@@ -25,11 +25,11 @@ const RoleSelector = React.memo(
     const [dropDown, setDropDown, dropDownRef] = useHideOnOutsideClick();
 
     return (
-      <div className='prose dark:prose-invert relative'>
+      <div className="prose dark:prose-invert relative">
         <button
-          className='btn btn-neutral btn-small flex gap-1'
+          className="btn btn-neutral btn-small flex gap-1"
           aria-label={t(role) as string}
-          type='button'
+          type="button"
           onClick={() => setDropDown((prev) => !prev)}
         >
           {t(role)}
@@ -37,22 +37,22 @@ const RoleSelector = React.memo(
         </button>
         <div
           ref={dropDownRef}
-          id='dropdown'
+          id="dropdown"
           className={`${
-            dropDown ? '' : 'hidden'
+            dropDown ? "" : "hidden"
           } absolute top-100 bottom-100 z-10 bg-white rounded-lg shadow-xl border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group dark:bg-gray-800 opacity-90`}
         >
           <ul
-            className='text-sm text-gray-700 dark:text-gray-200 p-0 m-0'
-            aria-labelledby='dropdownDefaultButton'
+            className="text-sm text-gray-700 dark:text-gray-200 p-0 m-0"
+            aria-labelledby="dropdownDefaultButton"
           >
             {roles.map((r) => (
               <li
-                className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer'
+                className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                 onClick={() => {
                   if (!sticky) {
                     const updatedChats: ChatInterface[] = JSON.parse(
-                      JSON.stringify(useStore.getState().chats)
+                      JSON.stringify(useStore.getState().chats),
                     );
                     updatedChats[currentChatIndex].messages[messageIndex].role =
                       r;
@@ -71,6 +71,6 @@ const RoleSelector = React.memo(
         </div>
       </div>
     );
-  }
+  },
 );
 export default RoleSelector;

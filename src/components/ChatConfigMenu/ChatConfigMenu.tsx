@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import useStore from '@store/store';
-import { useTranslation } from 'react-i18next';
+import React, { useState } from "react";
+import useStore from "@store/store";
+import { useTranslation } from "react-i18next";
 
-import PopupModal from '@components/PopupModal';
+import PopupModal from "@components/PopupModal";
 import {
   FrequencyPenaltySlider,
   MaxTokenSlider,
@@ -10,22 +10,22 @@ import {
   PresencePenaltySlider,
   TemperatureSlider,
   TopPSlider,
-} from '@components/ConfigMenu/ConfigMenu';
+} from "@components/ConfigMenu/ConfigMenu";
 
-import { ModelOptions } from '@type/chat';
-import { _defaultChatConfig, _defaultSystemMessage } from '@constants/chat';
+import { ModelOptions } from "@type/chat";
+import { _defaultChatConfig, _defaultSystemMessage } from "@constants/chat";
 
 const ChatConfigMenu = () => {
-  const { t } = useTranslation('model');
+  const { t } = useTranslation("model");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   return (
     <div>
       <button
-        className='btn btn-neutral'
+        className="btn btn-neutral"
         onClick={() => setIsModalOpen(true)}
-        aria-label={t('defaultChatConfig') as string}
+        aria-label={t("defaultChatConfig") as string}
       >
-        {t('defaultChatConfig')}
+        {t("defaultChatConfig")}
       </button>
       {isModalOpen && <ChatConfigPopup setIsModalOpen={setIsModalOpen} />}
     </div>
@@ -40,24 +40,24 @@ const ChatConfigPopup = ({
   const config = useStore.getState().defaultChatConfig;
   const setDefaultChatConfig = useStore((state) => state.setDefaultChatConfig);
   const setDefaultSystemMessage = useStore(
-    (state) => state.setDefaultSystemMessage
+    (state) => state.setDefaultSystemMessage,
   );
 
   const [_systemMessage, _setSystemMessage] = useState<string>(
-    useStore.getState().defaultSystemMessage
+    useStore.getState().defaultSystemMessage,
   );
   const [_model, _setModel] = useState<ModelOptions>(config.model);
   const [_maxToken, _setMaxToken] = useState<number>(config.max_tokens);
   const [_temperature, _setTemperature] = useState<number>(config.temperature);
   const [_topP, _setTopP] = useState<number>(config.top_p);
   const [_presencePenalty, _setPresencePenalty] = useState<number>(
-    config.presence_penalty
+    config.presence_penalty,
   );
   const [_frequencyPenalty, _setFrequencyPenalty] = useState<number>(
-    config.frequency_penalty
+    config.frequency_penalty,
   );
 
-  const { t } = useTranslation('model');
+  const { t } = useTranslation("model");
 
   const handleSave = () => {
     setDefaultChatConfig({
@@ -84,11 +84,11 @@ const ChatConfigPopup = ({
 
   return (
     <PopupModal
-      title={t('defaultChatConfig') as string}
+      title={t("defaultChatConfig") as string}
       setIsModalOpen={setIsModalOpen}
       handleConfirm={handleSave}
     >
-      <div className='p-6 border-b border-gray-200 dark:border-gray-600 w-[90vw] max-w-full text-sm text-gray-900 dark:text-gray-300'>
+      <div className="p-6 border-b border-gray-200 dark:border-gray-600 w-[90vw] max-w-full text-sm text-gray-900 dark:text-gray-300">
         <DefaultSystemChat
           _systemMessage={_systemMessage}
           _setSystemMessage={_setSystemMessage}
@@ -113,10 +113,10 @@ const ChatConfigPopup = ({
           _setFrequencyPenalty={_setFrequencyPenalty}
         />
         <div
-          className='btn btn-neutral cursor-pointer mt-5'
+          className="btn btn-neutral cursor-pointer mt-5"
           onClick={handleReset}
         >
-          {t('resetToDefault')}
+          {t("resetToDefault")}
         </div>
       </div>
     </PopupModal>
@@ -130,32 +130,32 @@ const DefaultSystemChat = ({
   _systemMessage: string;
   _setSystemMessage: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const { t } = useTranslation('model');
+  const { t } = useTranslation("model");
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    e.target.style.height = 'auto';
+    e.target.style.height = "auto";
     e.target.style.height = `${e.target.scrollHeight}px`;
     e.target.style.maxHeight = `${e.target.scrollHeight}px`;
   };
 
   const handleOnFocus = (e: React.FocusEvent<HTMLTextAreaElement, Element>) => {
-    e.target.style.height = 'auto';
+    e.target.style.height = "auto";
     e.target.style.height = `${e.target.scrollHeight}px`;
     e.target.style.maxHeight = `${e.target.scrollHeight}px`;
   };
 
   const handleOnBlur = (e: React.FocusEvent<HTMLTextAreaElement, Element>) => {
-    e.target.style.height = 'auto';
-    e.target.style.maxHeight = '2.5rem';
+    e.target.style.height = "auto";
+    e.target.style.maxHeight = "2.5rem";
   };
 
   return (
     <div>
-      <div className='block text-sm font-medium text-gray-900 dark:text-white'>
-        {t('defaultSystemMessage')}
+      <div className="block text-sm font-medium text-gray-900 dark:text-white">
+        {t("defaultSystemMessage")}
       </div>
       <textarea
-        className='my-2 mx-0 px-2 resize-none rounded-lg bg-transparent overflow-y-hidden leading-7 p-1 border border-gray-400/50 focus:ring-1 focus:ring-blue w-full max-h-10 transition-all'
+        className="my-2 mx-0 px-2 resize-none rounded-lg bg-transparent overflow-y-hidden leading-7 p-1 border border-gray-400/50 focus:ring-1 focus:ring-blue w-full max-h-10 transition-all"
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
         onChange={(e) => {

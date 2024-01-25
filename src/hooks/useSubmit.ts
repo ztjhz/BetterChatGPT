@@ -1,15 +1,15 @@
-import React from 'react';
-import useStore from '@store/store';
-import { useTranslation } from 'react-i18next';
-import { ChatInterface, MessageInterface } from '@type/chat';
-import { getChatCompletion, getChatCompletionStream } from '@api/api';
-import { parseEventSource } from '@api/helper';
-import { limitMessageTokens, updateTotalTokenUsed } from '@utils/messageUtils';
-import { _defaultChatConfig } from '@constants/chat';
-import { officialAPIEndpoint } from '@constants/auth';
+import React from "react";
+import useStore from "@store/store";
+import { useTranslation } from "react-i18next";
+import { ChatInterface, MessageInterface } from "@type/chat";
+import { getChatCompletion, getChatCompletionStream } from "@api/api";
+import { parseEventSource } from "@api/helper";
+import { limitMessageTokens, updateTotalTokenUsed } from "@utils/messageUtils";
+import { _defaultChatConfig } from "@constants/chat";
+import { officialAPIEndpoint } from "@constants/auth";
 
 const useSubmit = () => {
-  const { t, i18n } = useTranslation('api');
+  const { t, i18n } = useTranslation("api");
   const error = useStore((state) => state.error);
   const setError = useStore((state) => state.setError);
   const apiEndpoint = useStore((state) => state.apiEndpoint);
@@ -20,21 +20,21 @@ const useSubmit = () => {
   const setChats = useStore((state) => state.setChats);
 
   const generateTitle = async (
-    message: MessageInterface[]
+    message: MessageInterface[],
   ): Promise<string> => {
     let data;
     try {
       if (!apiKey || apiKey.length === 0) {
         // official endpoint
         if (apiEndpoint === officialAPIEndpoint) {
-          throw new Error(t('noApiKeyWarning') as string);
+          throw new Error(t("noApiKeyWarning") as string);
         }
 
         // other endpoints
         data = await getChatCompletion(
           useStore.getState().apiEndpoint,
           message,
-          _defaultChatConfig
+          _defaultChatConfig,
         );
       } else if (apiKey) {
         // own apikey
@@ -42,7 +42,7 @@ const useSubmit = () => {
           useStore.getState().apiEndpoint,
           message,
           _defaultChatConfig,
-          apiKey
+          apiKey,
         );
       }
     } catch (error: unknown) {
@@ -58,8 +58,8 @@ const useSubmit = () => {
     const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
 
     updatedChats[currentChatIndex].messages.push({
-      role: 'assistant',
-      content: '',
+      role: "assistant",
+      content: "",
     });
 
     setChats(updatedChats);
@@ -68,27 +68,27 @@ const useSubmit = () => {
     try {
       let stream;
       if (chats[currentChatIndex].messages.length === 0)
-        throw new Error('No messages submitted!');
+        throw new Error("No messages submitted!");
 
       const messages = limitMessageTokens(
         chats[currentChatIndex].messages,
         chats[currentChatIndex].config.max_tokens,
-        chats[currentChatIndex].config.model
+        chats[currentChatIndex].config.model,
       );
-      if (messages.length === 0) throw new Error('Message exceed max token!');
+      if (messages.length === 0) throw new Error("Message exceed max token!");
 
       // no api key (free)
       if (!apiKey || apiKey.length === 0) {
         // official endpoint
         if (apiEndpoint === officialAPIEndpoint) {
-          throw new Error(t('noApiKeyWarning') as string);
+          throw new Error(t("noApiKeyWarning") as string);
         }
 
         // other endpoints
         stream = await getChatCompletionStream(
           useStore.getState().apiEndpoint,
           messages,
-          chats[currentChatIndex].config
+          chats[currentChatIndex].config,
         );
       } else if (apiKey) {
         // own apikey
@@ -96,40 +96,40 @@ const useSubmit = () => {
           useStore.getState().apiEndpoint,
           messages,
           chats[currentChatIndex].config,
-          apiKey
+          apiKey,
         );
       }
 
       if (stream) {
         if (stream.locked)
           throw new Error(
-            'Oops, the stream is locked right now. Please try again'
+            "Oops, the stream is locked right now. Please try again",
           );
         const reader = stream.getReader();
         let reading = true;
-        let partial = '';
+        let partial = "";
         while (reading && useStore.getState().generating) {
           const { done, value } = await reader.read();
           const result = parseEventSource(
-            partial + new TextDecoder().decode(value)
+            partial + new TextDecoder().decode(value),
           );
-          partial = '';
+          partial = "";
 
-          if (result === '[DONE]' || done) {
+          if (result === "[DONE]" || done) {
             reading = false;
           } else {
             const resultString = result.reduce((output: string, curr) => {
-              if (typeof curr === 'string') {
+              if (typeof curr === "string") {
                 partial += curr;
               } else {
                 const content = curr.choices[0]?.delta?.content ?? null;
                 if (content) output += content;
               }
               return output;
-            }, '');
+            }, "");
 
             const updatedChats: ChatInterface[] = JSON.parse(
-              JSON.stringify(useStore.getState().chats)
+              JSON.stringify(useStore.getState().chats),
             );
             const updatedMessages = updatedChats[currentChatIndex].messages;
             updatedMessages[updatedMessages.length - 1].content += resultString;
@@ -137,9 +137,9 @@ const useSubmit = () => {
           }
         }
         if (useStore.getState().generating) {
-          reader.cancel('Cancelled by user');
+          reader.cancel("Cancelled by user");
         } else {
-          reader.cancel('Generation completed');
+          reader.cancel("Generation completed");
         }
         reader.releaseLock();
         stream.cancel();
@@ -155,7 +155,7 @@ const useSubmit = () => {
         updateTotalTokenUsed(
           model,
           messages.slice(0, -1),
-          messages[messages.length - 1]
+          messages[messages.length - 1],
         );
       }
 
@@ -172,7 +172,7 @@ const useSubmit = () => {
           currChats[currentChatIndex].messages[messages_length - 2].content;
 
         const message: MessageInterface = {
-          role: 'user',
+          role: "user",
           content: `Generate a title in less than 6 words for the following message (language: ${i18n.language}):\n"""\nUser: ${user_message}\nAssistant: ${assistant_message}\n"""`,
         };
 
@@ -181,7 +181,7 @@ const useSubmit = () => {
           title = title.slice(1, -1);
         }
         const updatedChats: ChatInterface[] = JSON.parse(
-          JSON.stringify(useStore.getState().chats)
+          JSON.stringify(useStore.getState().chats),
         );
         updatedChats[currentChatIndex].title = title;
         updatedChats[currentChatIndex].titleSet = true;
@@ -191,7 +191,7 @@ const useSubmit = () => {
         if (countTotalTokens) {
           const model = _defaultChatConfig.model;
           updateTotalTokenUsed(model, [message], {
-            role: 'assistant',
+            role: "assistant",
             content: title,
           });
         }

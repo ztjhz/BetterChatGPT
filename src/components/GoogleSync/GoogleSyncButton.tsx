@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-import { useGoogleLogin, googleLogout } from '@react-oauth/google';
-import useGStore from '@store/cloud-auth-store';
-import useStore from '@store/store';
-import { createJSONStorage } from 'zustand/middleware';
+import { useGoogleLogin, googleLogout } from "@react-oauth/google";
+import useGStore from "@store/cloud-auth-store";
+import useStore from "@store/store";
+import { createJSONStorage } from "zustand/middleware";
 
 const GoogleSyncButton = ({ loginHandler }: { loginHandler?: () => void }) => {
-  const { t } = useTranslation(['drive']);
+  const { t } = useTranslation(["drive"]);
 
   const setGoogleAccessToken = useGStore((state) => state.setGoogleAccessToken);
   const setSyncStatus = useGStore((state) => state.setSyncStatus);
@@ -23,49 +23,49 @@ const GoogleSyncButton = ({ loginHandler }: { loginHandler?: () => void }) => {
       setGoogleAccessToken(codeResponse.access_token);
       setCloudSync(true);
       loginHandler && loginHandler();
-      setToastStatus('success');
-      setToastMessage(t('toast.sync'));
+      setToastStatus("success");
+      setToastMessage(t("toast.sync"));
       setToastShow(true);
     },
     onError: (error) => {
-      console.log('Login Failed');
-      setToastStatus('error');
-      setToastMessage(error?.error_description || 'Error in authenticating!');
+      console.log("Login Failed");
+      setToastStatus("error");
+      setToastMessage(error?.error_description || "Error in authenticating!");
       setToastShow(true);
     },
-    scope: 'https://www.googleapis.com/auth/drive.file',
+    scope: "https://www.googleapis.com/auth/drive.file",
   });
 
   const logout = () => {
     setGoogleAccessToken(undefined);
-    setSyncStatus('unauthenticated');
+    setSyncStatus("unauthenticated");
     setCloudSync(false);
     googleLogout();
     useStore.persist.setOptions({
       storage: createJSONStorage(() => localStorage),
     });
     useStore.persist.rehydrate();
-    setToastStatus('success');
-    setToastMessage(t('toast.stop'));
+    setToastStatus("success");
+    setToastMessage(t("toast.stop"));
     setToastShow(true);
   };
 
   return (
-    <div className='flex gap-4 flex-wrap justify-center'>
+    <div className="flex gap-4 flex-wrap justify-center">
       <button
-        className='btn btn-primary'
+        className="btn btn-primary"
         onClick={() => login()}
-        aria-label={t('button.sync') as string}
+        aria-label={t("button.sync") as string}
       >
-        {t('button.sync')}
+        {t("button.sync")}
       </button>
       {cloudSync && (
         <button
-          className='btn btn-neutral'
+          className="btn btn-neutral"
           onClick={logout}
-          aria-label={t('button.stop') as string}
+          aria-label={t("button.stop") as string}
         >
-          {t('button.stop')}
+          {t("button.stop")}
         </button>
       )}
     </div>

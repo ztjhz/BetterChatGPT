@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import useStore from '@store/store';
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import useStore from "@store/store";
 
-import { ChatInterface } from '@type/chat';
+import { ChatInterface } from "@type/chat";
 
-import TickIcon from '@icon/TickIcon';
+import TickIcon from "@icon/TickIcon";
 
 const CloneChat = React.memo(() => {
   const { t } = useTranslation();
@@ -45,16 +45,16 @@ const CloneChat = React.memo(() => {
 
   return (
     <button
-      className='btn btn-neutral flex gap-1'
-      aria-label={t('cloneChat') as string}
+      className="btn btn-neutral flex gap-1"
+      aria-label={t("cloneChat") as string}
       onClick={cloneChat}
     >
       {cloned ? (
         <>
-          <TickIcon /> {t('cloned')}
+          <TickIcon /> {t("cloned")}
         </>
       ) : (
-        <>{t('cloneChat')}</>
+        <>{t("cloneChat")}</>
       )}
     </button>
   );

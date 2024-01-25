@@ -1,1 +1,1 @@
-export { default } from './GoogleSync';
+export { default } from "./GoogleSync";

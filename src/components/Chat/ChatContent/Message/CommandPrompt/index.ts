@@ -1,1 +1,1 @@
-export { default } from './CommandPrompt';
+export { default } from "./CommandPrompt";

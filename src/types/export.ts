@@ -1,4 +1,4 @@
-import { ChatInterface, FolderCollection, Role } from './chat';
+import { ChatInterface, FolderCollection, Role } from "./chat";
 
 export interface ExportBase {
   version: number;

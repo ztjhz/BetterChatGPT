@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
-import DeleteIcon from '@icon/DeleteIcon';
+import DeleteIcon from "@icon/DeleteIcon";
 
-import BaseButton from './BaseButton';
+import BaseButton from "./BaseButton";
 
 const DeleteButton = memo(
   ({
@@ -13,11 +13,11 @@ const DeleteButton = memo(
     return (
       <BaseButton
         icon={<DeleteIcon />}
-        buttonProps={{ 'aria-label': 'delete message' }}
+        buttonProps={{ "aria-label": "delete message" }}
         onClick={() => setIsDelete(true)}
       />
     );
-  }
+  },
 );
 
 export default DeleteButton;

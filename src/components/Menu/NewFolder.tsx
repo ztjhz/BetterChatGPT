@@ -1,10 +1,10 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { v4 as uuidv4 } from 'uuid';
-import useStore from '@store/store';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { v4 as uuidv4 } from "uuid";
+import useStore from "@store/store";
 
-import NewFolderIcon from '@icon/NewFolderIcon';
-import { Folder, FolderCollection } from '@type/chat';
+import NewFolderIcon from "@icon/NewFolderIcon";
+import { Folder, FolderCollection } from "@type/chat";
 
 const NewFolder = () => {
   const { t } = useTranslation();
@@ -23,7 +23,7 @@ const NewFolder = () => {
     }
 
     const updatedFolders: FolderCollection = JSON.parse(
-      JSON.stringify(folders)
+      JSON.stringify(folders),
     );
 
     const id = uuidv4();
@@ -45,8 +45,8 @@ const NewFolder = () => {
     <a
       className={`flex py-3 px-3 items-center gap-3 rounded-md hover:bg-gray-500/10 transition-colors duration-200 text-white text-sm mb-2 flex-shrink-0 border border-white/20 transition-opacity ${
         generating
-          ? 'cursor-not-allowed opacity-40'
-          : 'cursor-pointer opacity-100'
+          ? "cursor-not-allowed opacity-40"
+          : "cursor-pointer opacity-100"
       }`}
       onClick={() => {
         if (!generating) addFolder();

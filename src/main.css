@@ -69,7 +69,7 @@
     @apply inline-block;
   }
 
-  input[type='range']::-webkit-slider-thumb {
+  input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     @apply w-4;
     @apply h-4;
@@ -228,7 +228,7 @@
   }
 
   .markdown ul li:before {
-    content: '•';
+    content: "•";
     font-size: 0.875rem;
     line-height: 1.25rem;
     margin-left: -1rem;
@@ -237,7 +237,7 @@
 }
 
 :not(pre) > code.hljs,
-:not(pre) > code[class*='language-'] {
+:not(pre) > code[class*="language-"] {
   border-radius: 0.3em;
   white-space: normal;
 }

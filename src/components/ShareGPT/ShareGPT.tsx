@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import useStore from '@store/store';
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import useStore from "@store/store";
 
-import PopupModal from '@components/PopupModal';
-import { submitShareGPT } from '@api/api';
-import { ShareGPTSubmitBodyInterface } from '@type/api';
+import PopupModal from "@components/PopupModal";
+import { submitShareGPT } from "@api/api";
+import { ShareGPTSubmitBodyInterface } from "@type/api";
 
 const ShareGPT = React.memo(() => {
   const { t } = useTranslation();
@@ -15,20 +15,20 @@ const ShareGPT = React.memo(() => {
     const currentChatIndex = useStore.getState().currentChatIndex;
     if (chats) {
       try {
-        const items: ShareGPTSubmitBodyInterface['items'] = [];
-        const messages = document.querySelectorAll('.share-gpt-message');
+        const items: ShareGPTSubmitBodyInterface["items"] = [];
+        const messages = document.querySelectorAll(".share-gpt-message");
 
         messages.forEach((message, index) => {
           items.push({
-            from: 'gpt',
+            from: "gpt",
             value: `<p><b>${t(
-              chats[currentChatIndex].messages[index].role
+              chats[currentChatIndex].messages[index].role,
             )}</b></p>${message.innerHTML}`,
           });
         });
 
         await submitShareGPT({
-          avatarUrl: '',
+          avatarUrl: "",
           items,
         });
         setIsModalOpen(false);
@@ -41,19 +41,19 @@ const ShareGPT = React.memo(() => {
   return (
     <>
       <button
-        className='btn btn-neutral'
+        className="btn btn-neutral"
         onClick={() => {
           setIsModalOpen(true);
         }}
-        aria-label={t('postOnShareGPT.title') as string}
+        aria-label={t("postOnShareGPT.title") as string}
       >
-        {t('postOnShareGPT.title')}
+        {t("postOnShareGPT.title")}
       </button>
       {isModalOpen && (
         <PopupModal
           setIsModalOpen={setIsModalOpen}
-          title={t('postOnShareGPT.title') as string}
-          message={t('postOnShareGPT.warning') as string}
+          title={t("postOnShareGPT.title") as string}
+          message={t("postOnShareGPT.warning") as string}
           handleConfirm={handleConfirm}
         />
       )}

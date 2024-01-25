@@ -4,7 +4,6 @@
     "inputLabel": "Punto final de acceso de la API",
     "description": "Cuando eliges un punto final de API no oficial, básicamente funciona como un proxy. Un proxy funciona actuando como intermediario entre tu dispositivo y el servidor de destino, en este caso, la API de OpenAI. Al hacerlo, te permite acceder a la API de OpenAI en regiones donde de otro modo podría estar restringida.",
     "warn": "Además, si proporcionas un punto final de API personalizado que otorga acceso gratuito a la API de OpenAI, puedes usar ChatGPT sin la necesidad de proporcionar una clave de API simplemente dejando en blanco el campo de la clave de API. Sin embargo, es fundamental tener precaución al usar puntos finales de API de terceros, ya que los que no sean confiables pueden registrar tu información personal en las conversaciones. Siempre verifica la fiabilidad de un punto final de API antes de usarlo para proteger tu privacidad y seguridad."
-
   },
   "apiKey": {
     "howTo": "Obtén tu clave personal <0>aquí</0>.",

@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
-import EditIcon2 from '@icon/EditIcon2';
+import EditIcon2 from "@icon/EditIcon2";
 
-import BaseButton from './BaseButton';
+import BaseButton from "./BaseButton";
 
 const EditButton = memo(
   ({
@@ -13,11 +13,11 @@ const EditButton = memo(
     return (
       <BaseButton
         icon={<EditIcon2 />}
-        buttonProps={{ 'aria-label': 'edit message' }}
+        buttonProps={{ "aria-label": "edit message" }}
         onClick={() => setIsEdit(true)}
       />
     );
-  }
+  },
 );
 
 export default EditButton;

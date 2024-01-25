@@ -25,9 +25,9 @@
       "@api/*": ["./src/api/*"],
       "@components/*": ["./src/components/*"],
       "@utils/*": ["./src/utils/*"],
-      "@src/*": ["./src/*"]
-    }
+      "@src/*": ["./src/*"],
+    },
   },
   "include": ["src", "electron/index.cjs"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
 }

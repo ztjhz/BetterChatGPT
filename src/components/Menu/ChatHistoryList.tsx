@@ -1,17 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
-import useStore from '@store/store';
-import { shallow } from 'zustand/shallow';
+import React, { useEffect, useRef, useState } from "react";
+import useStore from "@store/store";
+import { shallow } from "zustand/shallow";
 
-import ChatFolder from './ChatFolder';
-import ChatHistory from './ChatHistory';
-import ChatSearch from './ChatSearch';
+import ChatFolder from "./ChatFolder";
+import ChatHistory from "./ChatHistory";
+import ChatSearch from "./ChatSearch";
 
 import {
   ChatHistoryInterface,
   ChatHistoryFolderInterface,
   ChatInterface,
   FolderCollection,
-} from '@type/chat';
+} from "@type/chat";
 
 const ChatHistoryList = () => {
   const currentChatIndex = useStore((state) => state.currentChatIndex);
@@ -19,17 +19,17 @@ const ChatHistoryList = () => {
   const setFolders = useStore((state) => state.setFolders);
   const chatTitles = useStore(
     (state) => state.chats?.map((chat) => chat.title),
-    shallow
+    shallow,
   );
 
   const [isHover, setIsHover] = useState<boolean>(false);
   const [chatFolders, setChatFolders] = useState<ChatHistoryFolderInterface>(
-    {}
+    {},
   );
   const [noChatFolders, setNoChatFolders] = useState<ChatHistoryInterface[]>(
-    []
+    [],
   );
-  const [filter, setFilter] = useState<string>('');
+  const [filter, setFilter] = useState<string>("");
 
   const chatsRef = useRef<ChatInterface[]>(useStore.getState().chats || []);
   const foldersRef = useRef<FolderCollection>(useStore.getState().folders);
@@ -51,7 +51,7 @@ const ChatHistoryList = () => {
         const _chatTitle = chat.title.toLowerCase();
         const _chatFolderName = chat.folder
           ? folders[chat.folder].name.toLowerCase()
-          : '';
+          : "";
 
         if (
           !_chatTitle.includes(_filterLowerCase) &&
@@ -111,7 +111,7 @@ const ChatHistoryList = () => {
 
         if (folderId) {
           const updatedFolders: FolderCollection = JSON.parse(
-            JSON.stringify(useStore.getState().folders)
+            JSON.stringify(useStore.getState().folders),
           );
 
           updatedFolders[folderId].expanded = true;
@@ -131,9 +131,9 @@ const ChatHistoryList = () => {
       e.stopPropagation();
       setIsHover(false);
 
-      const chatIndex = Number(e.dataTransfer.getData('chatIndex'));
+      const chatIndex = Number(e.dataTransfer.getData("chatIndex"));
       const updatedChats: ChatInterface[] = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
+        JSON.stringify(useStore.getState().chats),
       );
       delete updatedChats[chatIndex].folder;
       setChats(updatedChats);
@@ -156,7 +156,7 @@ const ChatHistoryList = () => {
   return (
     <div
       className={`flex-col flex-1 overflow-y-auto hide-scroll-bar border-b border-white/20 ${
-        isHover ? 'bg-gray-800/40' : ''
+        isHover ? "bg-gray-800/40" : ""
       }`}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
@@ -164,7 +164,7 @@ const ChatHistoryList = () => {
       onDragEnd={handleDragEnd}
     >
       <ChatSearch filter={filter} setFilter={setFilter} />
-      <div className='flex flex-col gap-2 text-gray-100 text-sm'>
+      <div className="flex flex-col gap-2 text-gray-100 text-sm">
         {Object.keys(chatFolders).map((folderId) => (
           <ChatFolder
             folderChats={chatFolders[folderId]}
@@ -176,15 +176,15 @@ const ChatHistoryList = () => {
           <ChatHistory title={title} key={`${title}-${id}`} chatIndex={index} />
         ))}
       </div>
-      <div className='w-full h-10' />
+      <div className="w-full h-10" />
     </div>
   );
 };
 
 const ShowMoreButton = () => {
   return (
-    <button className='btn relative btn-dark btn-small m-auto mb-2'>
-      <div className='flex items-center justify-center gap-2'>Show more</div>
+    <button className="btn relative btn-dark btn-small m-auto mb-2">
+      <div className="flex items-center justify-center gap-2">Show more</div>
     </button>
   );
 };

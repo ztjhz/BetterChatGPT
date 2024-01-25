@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from "react";
 
-import CopyIcon from '@icon/CopyIcon';
-import TickIcon from '@icon/TickIcon';
+import CopyIcon from "@icon/CopyIcon";
+import TickIcon from "@icon/TickIcon";
 
 const CodeBlock = ({
   lang,
@@ -13,9 +13,9 @@ const CodeBlock = ({
   const codeRef = useRef<HTMLElement>(null);
 
   return (
-    <div className='bg-black rounded-md'>
+    <div className="bg-black rounded-md">
       <CodeBar lang={lang} codeRef={codeRef} />
-      <div className='p-4 overflow-y-auto'>
+      <div className="p-4 overflow-y-auto">
         <code ref={codeRef} className={`!whitespace-pre hljs language-${lang}`}>
           {codeChildren}
         </code>
@@ -34,11 +34,11 @@ const CodeBar = React.memo(
   }) => {
     const [isCopied, setIsCopied] = useState<boolean>(false);
     return (
-      <div className='flex items-center relative text-gray-200 bg-gray-800 px-4 py-2 text-xs font-sans'>
-        <span className=''>{lang}</span>
+      <div className="flex items-center relative text-gray-200 bg-gray-800 px-4 py-2 text-xs font-sans">
+        <span className="">{lang}</span>
         <button
-          className='flex ml-auto gap-2'
-          aria-label='copy codeblock'
+          className="flex ml-auto gap-2"
+          aria-label="copy codeblock"
           onClick={async () => {
             const codeString = codeRef.current?.textContent;
             if (codeString)
@@ -62,6 +62,6 @@ const CodeBar = React.memo(
         </button>
       </div>
     );
-  }
+  },
 );
 export default CodeBlock;

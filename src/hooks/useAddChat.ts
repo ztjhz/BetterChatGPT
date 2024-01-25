@@ -1,13 +1,13 @@
-import React from 'react';
-import useStore from '@store/store';
-import { generateDefaultChat } from '@constants/chat';
-import { ChatInterface } from '@type/chat';
+import React from "react";
+import useStore from "@store/store";
+import { generateDefaultChat } from "@constants/chat";
+import { ChatInterface } from "@type/chat";
 
 const useAddChat = () => {
   const setChats = useStore((state) => state.setChats);
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
 
-  const addChat = (folder?:string) => {
+  const addChat = (folder?: string) => {
     const chats = useStore.getState().chats;
     if (chats) {
       const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));

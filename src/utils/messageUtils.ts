@@ -1,30 +1,30 @@
-import { MessageInterface, ModelOptions, TotalTokenUsed } from '@type/chat';
+import { MessageInterface, ModelOptions, TotalTokenUsed } from "@type/chat";
 
-import useStore from '@store/store';
+import useStore from "@store/store";
 
-import { Tiktoken } from '@dqbd/tiktoken/lite';
-const cl100k_base = await import('@dqbd/tiktoken/encoders/cl100k_base.json');
+import { Tiktoken } from "@dqbd/tiktoken/lite";
+const cl100k_base = await import("@dqbd/tiktoken/encoders/cl100k_base.json");
 
 const encoder = new Tiktoken(
   cl100k_base.bpe_ranks,
   {
     ...cl100k_base.special_tokens,
-    '<|im_start|>': 100264,
-    '<|im_end|>': 100265,
-    '<|im_sep|>': 100266,
+    "<|im_start|>": 100264,
+    "<|im_end|>": 100265,
+    "<|im_sep|>": 100266,
   },
-  cl100k_base.pat_str
+  cl100k_base.pat_str,
 );
 
 // https://github.com/dqbd/tiktoken/issues/23#issuecomment-1483317174
 export const getChatGPTEncoding = (
   messages: MessageInterface[],
-  model: ModelOptions
+  model: ModelOptions,
 ) => {
-  const isGpt3 = model === 'gpt-3.5-turbo';
+  const isGpt3 = model === "gpt-3.5-turbo";
 
-  const msgSep = isGpt3 ? '\n' : '';
-  const roleSep = isGpt3 ? '\n' : '<|im_sep|>';
+  const msgSep = isGpt3 ? "\n" : "";
+  const roleSep = isGpt3 ? "\n" : "<|im_sep|>";
 
   const serialized = [
     messages
@@ -35,7 +35,7 @@ export const getChatGPTEncoding = (
     `<|im_start|>assistant${roleSep}`,
   ].join(msgSep);
 
-  return encoder.encode(serialized, 'all');
+  return encoder.encode(serialized, "all");
 };
 
 const countTokens = (messages: MessageInterface[], model: ModelOptions) => {
@@ -46,12 +46,12 @@ const countTokens = (messages: MessageInterface[], model: ModelOptions) => {
 export const limitMessageTokens = (
   messages: MessageInterface[],
   limit: number = 4096,
-  model: ModelOptions
+  model: ModelOptions,
 ): MessageInterface[] => {
   const limitedMessages: MessageInterface[] = [];
   let tokenCount = 0;
 
-  const isSystemFirstMessage = messages[0]?.role === 'system';
+  const isSystemFirstMessage = messages[0]?.role === "system";
   let retainSystemMessage = false;
 
   // Check if the first message is a system message and if it fits within the token limit
@@ -90,11 +90,11 @@ export const limitMessageTokens = (
 export const updateTotalTokenUsed = (
   model: ModelOptions,
   promptMessages: MessageInterface[],
-  completionMessage: MessageInterface
+  completionMessage: MessageInterface,
 ) => {
   const setTotalTokenUsed = useStore.getState().setTotalTokenUsed;
   const updatedTotalTokenUsed: TotalTokenUsed = JSON.parse(
-    JSON.stringify(useStore.getState().totalTokenUsed)
+    JSON.stringify(useStore.getState().totalTokenUsed),
   );
 
   const newPromptTokens = countTokens(promptMessages, model);

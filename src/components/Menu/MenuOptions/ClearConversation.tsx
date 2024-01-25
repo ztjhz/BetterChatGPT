@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import useStore from '@store/store';
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import useStore from "@store/store";
 
-import PopupModal from '@components/PopupModal';
-import DeleteIcon from '@icon/DeleteIcon';
-import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
+import PopupModal from "@components/PopupModal";
+import DeleteIcon from "@icon/DeleteIcon";
+import useInitialiseNewChat from "@hooks/useInitialiseNewChat";
 
 const ClearConversation = () => {
   const { t } = useTranslation();
@@ -22,20 +22,20 @@ const ClearConversation = () => {
   return (
     <>
       <button
-        className='btn btn-neutral'
+        className="btn btn-neutral"
         onClick={() => {
           setIsModalOpen(true);
         }}
-        aria-label={t('clearConversation') as string}
+        aria-label={t("clearConversation") as string}
       >
         <DeleteIcon />
-        {t('clearConversation')}
+        {t("clearConversation")}
       </button>
       {isModalOpen && (
         <PopupModal
           setIsModalOpen={setIsModalOpen}
-          title={t('warning') as string}
-          message={t('clearConversationWarning') as string}
+          title={t("warning") as string}
+          message={t("clearConversationWarning") as string}
           handleConfirm={handleConfirm}
         />
       )}

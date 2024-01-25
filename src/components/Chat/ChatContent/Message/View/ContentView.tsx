@@ -3,35 +3,35 @@ import React, {
   HTMLAttributes,
   memo,
   useState,
-} from 'react';
+} from "react";
 
-import ReactMarkdown from 'react-markdown';
-import { CodeProps, ReactMarkdownProps } from 'react-markdown/lib/ast-to-react';
+import ReactMarkdown from "react-markdown";
+import { CodeProps, ReactMarkdownProps } from "react-markdown/lib/ast-to-react";
 
-import rehypeKatex from 'rehype-katex';
-import rehypeHighlight from 'rehype-highlight';
-import remarkMath from 'remark-math';
-import remarkGfm from 'remark-gfm';
-import useStore from '@store/store';
+import rehypeKatex from "rehype-katex";
+import rehypeHighlight from "rehype-highlight";
+import remarkMath from "remark-math";
+import remarkGfm from "remark-gfm";
+import useStore from "@store/store";
 
-import TickIcon from '@icon/TickIcon';
-import CrossIcon from '@icon/CrossIcon';
+import TickIcon from "@icon/TickIcon";
+import CrossIcon from "@icon/CrossIcon";
 
-import useSubmit from '@hooks/useSubmit';
+import useSubmit from "@hooks/useSubmit";
 
-import { ChatInterface } from '@type/chat';
+import { ChatInterface } from "@type/chat";
 
-import { codeLanguageSubset } from '@constants/chat';
+import { codeLanguageSubset } from "@constants/chat";
 
-import RefreshButton from './Button/RefreshButton';
-import UpButton from './Button/UpButton';
-import DownButton from './Button/DownButton';
-import CopyButton from './Button/CopyButton';
-import EditButton from './Button/EditButton';
-import DeleteButton from './Button/DeleteButton';
-import MarkdownModeButton from './Button/MarkdownModeButton';
+import RefreshButton from "./Button/RefreshButton";
+import UpButton from "./Button/UpButton";
+import DownButton from "./Button/DownButton";
+import CopyButton from "./Button/CopyButton";
+import EditButton from "./Button/EditButton";
+import DeleteButton from "./Button/DeleteButton";
+import MarkdownModeButton from "./Button/MarkdownModeButton";
 
-import CodeBlock from '../CodeBlock';
+import CodeBlock from "../CodeBlock";
 
 const ContentView = memo(
   ({
@@ -52,26 +52,26 @@ const ContentView = memo(
     const currentChatIndex = useStore((state) => state.currentChatIndex);
     const setChats = useStore((state) => state.setChats);
     const lastMessageIndex = useStore((state) =>
-      state.chats ? state.chats[state.currentChatIndex].messages.length - 1 : 0
+      state.chats ? state.chats[state.currentChatIndex].messages.length - 1 : 0,
     );
     const inlineLatex = useStore((state) => state.inlineLatex);
     const markdownMode = useStore((state) => state.markdownMode);
 
     const handleDelete = () => {
       const updatedChats: ChatInterface[] = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
+        JSON.stringify(useStore.getState().chats),
       );
       updatedChats[currentChatIndex].messages.splice(messageIndex, 1);
       setChats(updatedChats);
     };
 
-    const handleMove = (direction: 'up' | 'down') => {
+    const handleMove = (direction: "up" | "down") => {
       const updatedChats: ChatInterface[] = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
+        JSON.stringify(useStore.getState().chats),
       );
       const updatedMessages = updatedChats[currentChatIndex].messages;
       const temp = updatedMessages[messageIndex];
-      if (direction === 'up') {
+      if (direction === "up") {
         updatedMessages[messageIndex] = updatedMessages[messageIndex - 1];
         updatedMessages[messageIndex - 1] = temp;
       } else {
@@ -82,16 +82,16 @@ const ContentView = memo(
     };
 
     const handleMoveUp = () => {
-      handleMove('up');
+      handleMove("up");
     };
 
     const handleMoveDown = () => {
-      handleMove('down');
+      handleMove("down");
     };
 
     const handleRefresh = () => {
       const updatedChats: ChatInterface[] = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
+        JSON.stringify(useStore.getState().chats),
       );
       const updatedMessages = updatedChats[currentChatIndex].messages;
       updatedMessages.splice(updatedMessages.length - 1, 1);
@@ -105,7 +105,7 @@ const ContentView = memo(
 
     return (
       <>
-        <div className='markdown prose w-full md:max-w-full break-words dark:prose-invert dark share-gpt-message'>
+        <div className="markdown prose w-full md:max-w-full break-words dark:prose-invert dark share-gpt-message">
           {markdownMode ? (
             <ReactMarkdown
               remarkPlugins={[
@@ -123,7 +123,7 @@ const ContentView = memo(
                   },
                 ],
               ]}
-              linkTarget='_new'
+              linkTarget="_new"
               components={{
                 code,
                 p,
@@ -132,14 +132,14 @@ const ContentView = memo(
               {content}
             </ReactMarkdown>
           ) : (
-            <span className='whitespace-pre-wrap'>{content}</span>
+            <span className="whitespace-pre-wrap">{content}</span>
           )}
         </div>
-        <div className='flex justify-end gap-2 w-full mt-2'>
+        <div className="flex justify-end gap-2 w-full mt-2">
           {isDelete || (
             <>
               {!useStore.getState().generating &&
-                role === 'assistant' &&
+                role === "assistant" &&
                 messageIndex === lastMessageIndex && (
                   <RefreshButton onClick={handleRefresh} />
                 )}
@@ -157,15 +157,15 @@ const ContentView = memo(
           {isDelete && (
             <>
               <button
-                className='p-1 hover:text-white'
-                aria-label='cancel'
+                className="p-1 hover:text-white"
+                aria-label="cancel"
                 onClick={() => setIsDelete(false)}
               >
                 <CrossIcon />
               </button>
               <button
-                className='p-1 hover:text-white'
-                aria-label='confirm'
+                className="p-1 hover:text-white"
+                aria-label="confirm"
                 onClick={handleDelete}
               >
                 <TickIcon />
@@ -175,18 +175,18 @@ const ContentView = memo(
         </div>
       </>
     );
-  }
+  },
 );
 
 const code = memo((props: CodeProps) => {
   const { inline, className, children } = props;
-  const match = /language-(\w+)/.exec(className || '');
+  const match = /language-(\w+)/.exec(className || "");
   const lang = match && match[1];
 
   if (inline) {
     return <code className={className}>{children}</code>;
   } else {
-    return <CodeBlock lang={lang || 'text'} codeChildren={children} />;
+    return <CodeBlock lang={lang || "text"} codeChildren={children} />;
   }
 });
 
@@ -197,12 +197,12 @@ const p = memo(
         HTMLAttributes<HTMLParagraphElement>,
         HTMLParagraphElement
       >,
-      'ref'
+      "ref"
     > &
-      ReactMarkdownProps
+      ReactMarkdownProps,
   ) => {
-    return <p className='whitespace-pre-wrap'>{props?.children}</p>;
-  }
+    return <p className="whitespace-pre-wrap">{props?.children}</p>;
+  },
 );
 
 export default ContentView;

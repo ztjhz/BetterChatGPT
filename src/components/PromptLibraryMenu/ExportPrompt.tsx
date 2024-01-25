@@ -1,25 +1,25 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import useStore from '@store/store';
-import { exportPrompts } from '@utils/prompt';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import useStore from "@store/store";
+import { exportPrompts } from "@utils/prompt";
 
 const ExportPrompt = () => {
   const { t } = useTranslation();
   const prompts = useStore.getState().prompts;
 
   return (
-    <div className='mt-4'>
-      <div className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-        {t('export')} (CSV)
+    <div className="mt-4">
+      <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+        {t("export")} (CSV)
       </div>
       <button
-        className='btn btn-small btn-primary'
+        className="btn btn-small btn-primary"
         onClick={() => {
           exportPrompts(prompts);
         }}
-        aria-label={t('export') as string}
+        aria-label={t("export") as string}
       >
-        {t('export')}
+        {t("export")}
       </button>
     </div>
   );

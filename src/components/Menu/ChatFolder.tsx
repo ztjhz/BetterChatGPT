@@ -1,26 +1,26 @@
-import React, { useEffect, useRef, useState } from 'react';
-import useStore from '@store/store';
+import React, { useEffect, useRef, useState } from "react";
+import useStore from "@store/store";
 
-import DownChevronArrow from '@icon/DownChevronArrow';
-import FolderIcon from '@icon/FolderIcon';
+import DownChevronArrow from "@icon/DownChevronArrow";
+import FolderIcon from "@icon/FolderIcon";
 import {
   ChatHistoryInterface,
   ChatInterface,
   FolderCollection,
-} from '@type/chat';
+} from "@type/chat";
 
-import ChatHistory from './ChatHistory';
-import NewChat from './NewChat';
-import EditIcon from '@icon/EditIcon';
-import DeleteIcon from '@icon/DeleteIcon';
-import CrossIcon from '@icon/CrossIcon';
-import TickIcon from '@icon/TickIcon';
-import ColorPaletteIcon from '@icon/ColorPaletteIcon';
-import RefreshIcon from '@icon/RefreshIcon';
+import ChatHistory from "./ChatHistory";
+import NewChat from "./NewChat";
+import EditIcon from "@icon/EditIcon";
+import DeleteIcon from "@icon/DeleteIcon";
+import CrossIcon from "@icon/CrossIcon";
+import TickIcon from "@icon/TickIcon";
+import ColorPaletteIcon from "@icon/ColorPaletteIcon";
+import RefreshIcon from "@icon/RefreshIcon";
 
-import { folderColorOptions } from '@constants/color';
+import { folderColorOptions } from "@constants/color";
 
-import useHideOnOutsideClick from '@hooks/useHideOnOutsideClick';
+import useHideOnOutsideClick from "@hooks/useHideOnOutsideClick";
 
 const ChatFolder = ({
   folderChats,
@@ -49,7 +49,7 @@ const ChatFolder = ({
 
   const editTitle = () => {
     const updatedFolders: FolderCollection = JSON.parse(
-      JSON.stringify(useStore.getState().folders)
+      JSON.stringify(useStore.getState().folders),
     );
     updatedFolders[folderId].name = _folderName;
     setFolders(updatedFolders);
@@ -58,7 +58,7 @@ const ChatFolder = ({
 
   const deleteFolder = () => {
     const updatedChats: ChatInterface[] = JSON.parse(
-      JSON.stringify(useStore.getState().chats)
+      JSON.stringify(useStore.getState().chats),
     );
     updatedChats.forEach((chat) => {
       if (chat.folder === folderId) delete chat.folder;
@@ -66,7 +66,7 @@ const ChatFolder = ({
     setChats(updatedChats);
 
     const updatedFolders: FolderCollection = JSON.parse(
-      JSON.stringify(useStore.getState().folders)
+      JSON.stringify(useStore.getState().folders),
     );
     delete updatedFolders[folderId];
     setFolders(updatedFolders);
@@ -76,7 +76,7 @@ const ChatFolder = ({
 
   const updateColor = (_color?: string) => {
     const updatedFolders: FolderCollection = JSON.parse(
-      JSON.stringify(useStore.getState().folders)
+      JSON.stringify(useStore.getState().folders),
     );
     if (_color) updatedFolders[folderId].color = _color;
     else delete updatedFolders[folderId].color;
@@ -85,7 +85,7 @@ const ChatFolder = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
       editTitle();
     }
@@ -110,15 +110,15 @@ const ChatFolder = ({
 
       // expand folder on drop
       const updatedFolders: FolderCollection = JSON.parse(
-        JSON.stringify(useStore.getState().folders)
+        JSON.stringify(useStore.getState().folders),
       );
       updatedFolders[folderId].expanded = true;
       setFolders(updatedFolders);
 
       // update chat folderId to new folderId
-      const chatIndex = Number(e.dataTransfer.getData('chatIndex'));
+      const chatIndex = Number(e.dataTransfer.getData("chatIndex"));
       const updatedChats: ChatInterface[] = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
+        JSON.stringify(useStore.getState().chats),
       );
       updatedChats[chatIndex].folder = folderId;
       setChats(updatedChats);
@@ -137,7 +137,7 @@ const ChatFolder = ({
 
   const toggleExpanded = () => {
     const updatedFolders: FolderCollection = JSON.parse(
-      JSON.stringify(useStore.getState().folders)
+      JSON.stringify(useStore.getState().folders),
     );
     updatedFolders[folderId].expanded = !updatedFolders[folderId].expanded;
     setFolders(updatedFolders);
@@ -150,36 +150,36 @@ const ChatFolder = ({
   return (
     <div
       className={`w-full transition-colors group/folder ${
-        isHover ? 'bg-gray-800/40' : ''
+        isHover ? "bg-gray-800/40" : ""
       }`}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
     >
       <div
-        style={{ background: color || '' }}
+        style={{ background: color || "" }}
         className={`${
-          color ? '' : 'hover:bg-gray-850'
+          color ? "" : "hover:bg-gray-850"
         } transition-colors flex py-2 pl-2 pr-1 items-center gap-3 relative rounded-md break-all cursor-pointer parent-sibling`}
         onClick={toggleExpanded}
         ref={folderRef}
         onMouseEnter={() => {
           if (color && folderRef.current)
             folderRef.current.style.background = `${color}dd`;
-          if (gradientRef.current) gradientRef.current.style.width = '0px';
+          if (gradientRef.current) gradientRef.current.style.width = "0px";
         }}
         onMouseLeave={() => {
           if (color && folderRef.current)
             folderRef.current.style.background = color;
-          if (gradientRef.current) gradientRef.current.style.width = '1rem';
+          if (gradientRef.current) gradientRef.current.style.width = "1rem";
         }}
       >
-        <FolderIcon className='h-4 w-4' />
-        <div className='flex-1 text-ellipsis max-h-5 overflow-hidden break-all relative'>
+        <FolderIcon className="h-4 w-4" />
+        <div className="flex-1 text-ellipsis max-h-5 overflow-hidden break-all relative">
           {isEdit ? (
             <input
-              type='text'
-              className='focus:outline-blue-600 text-sm border-none bg-transparent p-0 m-0 w-full'
+              type="text"
+              className="focus:outline-blue-600 text-sm border-none bg-transparent p-0 m-0 w-full"
               value={_folderName}
               onChange={(e) => {
                 _setFolderName(e.target.value);
@@ -194,34 +194,34 @@ const ChatFolder = ({
           {isEdit || (
             <div
               ref={gradientRef}
-              className='absolute inset-y-0 right-0 w-4 z-10 transition-all'
+              className="absolute inset-y-0 right-0 w-4 z-10 transition-all"
               style={{
                 background:
                   color &&
                   `linear-gradient(to left, ${
-                    color || 'var(--color-900)'
+                    color || "var(--color-900)"
                   }, rgb(32 33 35 / 0))`,
               }}
             />
           )}
         </div>
         <div
-          className='flex text-gray-300'
+          className="flex text-gray-300"
           onClick={(e) => e.stopPropagation()}
         >
           {isDelete || isEdit ? (
             <>
               <button
-                className='p-1 hover:text-white'
+                className="p-1 hover:text-white"
                 onClick={handleTick}
-                aria-label='confirm'
+                aria-label="confirm"
               >
                 <TickIcon />
               </button>
               <button
-                className='p-1 hover:text-white'
+                className="p-1 hover:text-white"
                 onClick={handleCross}
-                aria-label='cancel'
+                aria-label="cancel"
               >
                 <CrossIcon />
               </button>
@@ -229,20 +229,20 @@ const ChatFolder = ({
           ) : (
             <>
               <div
-                className='relative md:hidden group-hover/folder:md:inline'
+                className="relative md:hidden group-hover/folder:md:inline"
                 ref={paletteRef}
               >
                 <button
-                  className='p-1 hover:text-white'
+                  className="p-1 hover:text-white"
                   onClick={() => {
                     setShowPalette((prev) => !prev);
                   }}
-                  aria-label='folder color'
+                  aria-label="folder color"
                 >
                   <ColorPaletteIcon />
                 </button>
                 {showPalette && (
-                  <div className='absolute left-0 bottom-0 translate-y-full p-2 z-20 bg-gray-900 rounded border border-gray-600 flex flex-col gap-2 items-center'>
+                  <div className="absolute left-0 bottom-0 translate-y-full p-2 z-20 bg-gray-900 rounded border border-gray-600 flex flex-col gap-2 items-center">
                     <>
                       {folderColorOptions.map((c) => (
                         <button
@@ -259,7 +259,7 @@ const ChatFolder = ({
                         onClick={() => {
                           updateColor();
                         }}
-                        aria-label='default color'
+                        aria-label="default color"
                       >
                         <RefreshIcon />
                       </button>
@@ -269,27 +269,27 @@ const ChatFolder = ({
               </div>
 
               <button
-                className='p-1 hover:text-white md:hidden group-hover/folder:md:inline'
+                className="p-1 hover:text-white md:hidden group-hover/folder:md:inline"
                 onClick={() => setIsEdit(true)}
-                aria-label='edit folder title'
+                aria-label="edit folder title"
               >
                 <EditIcon />
               </button>
               <button
-                className='p-1 hover:text-white md:hidden group-hover/folder:md:inline'
+                className="p-1 hover:text-white md:hidden group-hover/folder:md:inline"
                 onClick={() => setIsDelete(true)}
-                aria-label='delete folder'
+                aria-label="delete folder"
               >
                 <DeleteIcon />
               </button>
               <button
-                className='p-1 hover:text-white'
+                className="p-1 hover:text-white"
                 onClick={toggleExpanded}
-                aria-label='expand folder'
+                aria-label="expand folder"
               >
                 <DownChevronArrow
                   className={`${
-                    isExpanded ? 'rotate-180' : ''
+                    isExpanded ? "rotate-180" : ""
                   } transition-transform`}
                 />
               </button>
@@ -297,7 +297,7 @@ const ChatFolder = ({
           )}
         </div>
       </div>
-      <div className='ml-3 pl-1 border-l-2 border-gray-700 flex flex-col gap-1 parent'>
+      <div className="ml-3 pl-1 border-l-2 border-gray-700 flex flex-col gap-1 parent">
         {isExpanded && <NewChat folder={folderId} />}
         {isExpanded &&
           folderChats.map((chat) => (

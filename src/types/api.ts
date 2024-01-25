@@ -6,7 +6,7 @@ export interface EventSourceDataInterface {
   object: string;
 }
 
-export type EventSourceData = EventSourceDataInterface | '[DONE]';
+export type EventSourceData = EventSourceDataInterface | "[DONE]";
 
 export interface EventSourceDataChoices {
   delta: {
@@ -20,7 +20,7 @@ export interface EventSourceDataChoices {
 export interface ShareGPTSubmitBodyInterface {
   avatarUrl: string;
   items: {
-    from: 'gpt' | 'human';
+    from: "gpt" | "human";
     value: string;
   }[];
 }

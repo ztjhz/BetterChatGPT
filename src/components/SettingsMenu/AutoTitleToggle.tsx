@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import useStore from '@store/store';
-import Toggle from '@components/Toggle';
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import useStore from "@store/store";
+import Toggle from "@components/Toggle";
 
 const AutoTitleToggle = () => {
   const { t } = useTranslation();
@@ -9,7 +9,7 @@ const AutoTitleToggle = () => {
   const setAutoTitle = useStore((state) => state.setAutoTitle);
 
   const [isChecked, setIsChecked] = useState<boolean>(
-    useStore.getState().autoTitle
+    useStore.getState().autoTitle,
   );
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const AutoTitleToggle = () => {
 
   return (
     <Toggle
-      label={t('autoTitle') as string}
+      label={t("autoTitle") as string}
       isChecked={isChecked}
       setIsChecked={setIsChecked}
     />
