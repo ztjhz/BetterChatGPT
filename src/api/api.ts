@@ -21,6 +21,7 @@ export const getChatCompletion = async (
     const modelmapping: Partial<Record<ModelOptions, string>> = {
       'gpt-3.5-turbo': 'gpt-35-turbo',
       'gpt-3.5-turbo-16k': 'gpt-35-turbo-16k',
+      'gpt-3.5-turbo-1106': 'gpt-35-turbo-1106',
     };
 
     const model = modelmapping[config.model] || config.model;
