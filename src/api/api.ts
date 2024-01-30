@@ -19,8 +19,10 @@ export const getChatCompletion = async (
     headers["api-key"] = apiKey;
 
     const modelmapping: Partial<Record<ModelOptions, string>> = {
-      "gpt-3.5-turbo": "gpt-35-turbo",
-      "gpt-3.5-turbo-16k": "gpt-35-turbo-16k",
+      'gpt-3.5-turbo': 'gpt-35-turbo',
+      'gpt-3.5-turbo-16k': 'gpt-35-turbo-16k',
+      'gpt-3.5-turbo-1106': 'gpt-35-turbo-1106',
+      'gpt-3.5-turbo-0125': 'gpt-35-turbo-0125',
     };
 
     const model = modelmapping[config.model] || config.model;
@@ -110,7 +112,7 @@ export const getChatCompletionStream = async (
     if (text.includes("model_not_found")) {
       throw new Error(
         text +
-          "\nMessage from GPT-CX:\nPlease ensure that you have access to the GPT-4 API!",
+        "\nMessage from GPT-CX:\nPlease ensure that you have access to the GPT-4 API!",
       );
     } else {
       throw new Error(

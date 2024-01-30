@@ -17,33 +17,35 @@ export const _defaultSystemMessage =
   WeMake great stuff, and you're part of it. 💙`;
 
 export const modelOptions: ModelOptions[] = [
-  "gpt-3.5-turbo",
-  "gpt-3.5-turbo-16k",
-  "gpt-3.5-turbo-1106",
-  "gpt-4",
-  // 'gpt-4-32k',
-  "gpt-4-1106-preview",
-  // 'gpt-3.5-turbo-0301',
-  // 'gpt-4-0314',
-  // 'gpt-4-32k-0314',
+  'gpt-3.5-turbo',
+  'gpt-3.5-turbo-16k',
+  'gpt-3.5-turbo-1106',
+  'gpt-3.5-turbo-0125',
+  'gpt-4',
+  'gpt-4-32k',
+  'gpt-4-1106-preview',
+  'gpt-3.5-turbo-0301',
+  'gpt-4-0314',
+  'gpt-4-32k-0314',
 ];
 
 export const defaultModel = "gpt-3.5-turbo";
 
 export const modelMaxToken = {
-  "gpt-3.5-turbo": 4096,
-  "gpt-3.5-turbo-0301": 4096,
-  "gpt-3.5-turbo-0613": 4096,
-  "gpt-3.5-turbo-16k": 16384,
-  "gpt-3.5-turbo-16k-0613": 16384,
-  "gpt-3.5-turbo-1106": 16384,
-  "gpt-4": 8192,
-  "gpt-4-0314": 8192,
-  "gpt-4-0613": 8192,
-  "gpt-4-32k": 32768,
-  "gpt-4-32k-0314": 32768,
-  "gpt-4-32k-0613": 32768,
-  "gpt-4-1106-preview": 128000,
+  'gpt-3.5-turbo': 4096,
+  'gpt-3.5-turbo-0301': 4096,
+  'gpt-3.5-turbo-0613': 4096,
+  'gpt-3.5-turbo-16k': 16384,
+  'gpt-3.5-turbo-16k-0613': 16384,
+  'gpt-3.5-turbo-1106': 16384,
+  'gpt-3.5-turbo-0125': 16384,
+  'gpt-4': 8192,
+  'gpt-4-0314': 8192,
+  'gpt-4-0613': 8192,
+  'gpt-4-32k': 32768,
+  'gpt-4-32k-0314': 32768,
+  'gpt-4-32k-0613': 32768,
+  'gpt-4-1106-preview': 128000,
 };
 
 export const modelCost = {
@@ -71,7 +73,11 @@ export const modelCost = {
     prompt: { price: 0.001, unit: 1000 },
     completion: { price: 0.0015, unit: 1000 },
   },
-  "gpt-4": {
+  'gpt-3.5-turbo-0125': {
+    prompt: { price: 0.0005, unit: 1000 },
+    completion: { price: 0.0015, unit: 1000 },
+  },
+  'gpt-4': {
     prompt: { price: 0.03, unit: 1000 },
     completion: { price: 0.06, unit: 1000 },
   },
