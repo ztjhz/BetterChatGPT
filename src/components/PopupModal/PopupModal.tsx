@@ -50,7 +50,7 @@ const PopupModal = ({
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [handleConfirm, handleClose, handleClickBackdrop]);
 
   if (modalRoot) {
     return ReactDOM.createPortal(
