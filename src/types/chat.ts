@@ -51,12 +51,12 @@ export interface Folder {
 
 export type ModelOptions =
   | 'gpt-4'
-//  | 'gpt-4-32k'
+  //  | 'gpt-4-32k'
   | 'gpt-4-1106-preview'
   | 'gpt-4-0125-preview'
   | 'gpt-3.5-turbo'
-//  | 'gpt-3.5-turbo-16k'
-//  | 'gpt-3.5-turbo-1106'
+  //  | 'gpt-3.5-turbo-16k'
+  //  | 'gpt-3.5-turbo-1106'
   | 'gpt-3.5-turbo-0125'
 //  | 'gpt-3.5-turbo-0301'
 //  | 'gpt-4-0314'
@@ -109,7 +109,7 @@ export interface LocalStorageInterfaceV3ToV4 {
   prompts: Prompt[];
 }
 
-/* export interface LocalStorageInterfaceV4ToV5 {
+export interface LocalStorageInterfaceV4ToV5 {
   chats: ChatInterface[];
   currentChatIndex: number;
   apiKey: string;
@@ -119,9 +119,9 @@ export interface LocalStorageInterfaceV3ToV4 {
   theme: Theme;
   autoTitle: boolean;
   prompts: Prompt[];
-} */
+}
 
-/* export interface LocalStorageInterfaceV5ToV6 {
+export interface LocalStorageInterfaceV5ToV6 {
   chats: ChatInterface[];
   currentChatIndex: number;
   apiKey: string;
@@ -131,9 +131,9 @@ export interface LocalStorageInterfaceV3ToV4 {
   theme: Theme;
   autoTitle: boolean;
   prompts: Prompt[];
-} */
+}
 
-/* export interface LocalStorageInterfaceV6ToV7 {
+export interface LocalStorageInterfaceV6ToV7 {
   chats: ChatInterface[];
   currentChatIndex: number;
   apiFree?: boolean;
@@ -147,10 +147,10 @@ export interface LocalStorageInterfaceV3ToV4 {
   hideMenuOptions: boolean;
   firstVisit: boolean;
   hideSideMenu: boolean;
-} */
+}
 
-export interface LocalStorageInterfaceV4oV5
-  extends LocalStorageInterfaceV3ToV4 {
+export interface LocalStorageInterfaceV7oV8
+  extends LocalStorageInterfaceV6ToV7 {
   foldersName: string[];
   foldersExpanded: boolean[];
   folders: FolderCollection;
