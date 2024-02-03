@@ -102,7 +102,10 @@ const ChatHistoryList = () => {
       currentChatIndex < chatTitles.length
     ) {
       // set title
-      document.title = chatTitles[currentChatIndex];
+      document.title = 'AiNotes'
+
+      //set title of tab based on current chat title
+      //document.title = chatTitles[currentChatIndex];
 
       // expand folder of current chat
       const chats = useStore.getState().chats;
