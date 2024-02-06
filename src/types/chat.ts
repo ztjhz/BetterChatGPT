@@ -16,6 +16,7 @@ export interface ChatInterface {
   messages: MessageInterface[];
   config: ConfigInterface;
   titleSet: boolean;
+  color?: string;
 }
 
 export interface ConfigInterface {
