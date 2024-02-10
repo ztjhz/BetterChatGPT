@@ -48,7 +48,7 @@ export const modelMaxToken = {
   'gpt-4-32k-0314': 32768,
   'gpt-4-32k-0613': 32768,
   'gpt-4-1106-preview': 128000,
-  'gpt-4-0125-preview': 4096,
+  'gpt-4-0125-preview': 128000,
 };
 
 export const modelCost = {
