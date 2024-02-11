@@ -228,6 +228,20 @@ const ChatFolder = ({
             </>
           ) : (
             <>
+              <button
+                className='p-1 hover:text-white md:hidden group-hover/folder:md:inline'
+                onClick={() => setIsEdit(true)}
+                aria-label='edit folder title'
+              >
+                <EditIcon />
+              </button>
+              <button
+                className='p-1 hover:text-white md:hidden group-hover/folder:md:inline'
+                onClick={() => setIsDelete(true)}
+                aria-label='delete folder'
+              >
+                <DeleteIcon />
+              </button>
               <div
                 className='relative md:hidden group-hover/folder:md:inline'
                 ref={paletteRef}
@@ -267,21 +281,6 @@ const ChatFolder = ({
                   </div>
                 )}
               </div>
-
-              <button
-                className='p-1 hover:text-white md:hidden group-hover/folder:md:inline'
-                onClick={() => setIsEdit(true)}
-                aria-label='edit folder title'
-              >
-                <EditIcon />
-              </button>
-              <button
-                className='p-1 hover:text-white md:hidden group-hover/folder:md:inline'
-                onClick={() => setIsDelete(true)}
-                aria-label='delete folder'
-              >
-                <DeleteIcon />
-              </button>
               <button
                 className='p-1 hover:text-white'
                 onClick={toggleExpanded}
