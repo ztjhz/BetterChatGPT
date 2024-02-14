@@ -123,7 +123,7 @@ const ChatHistory = React.memo(
             ? 'cursor-not-allowed opacity-40'
             : 'cursor-pointer opacity-100'
         }`}
-        style={{ backgroundColor: hoverBackground || chat?.color || 'initial' }}
+        style={{ backgroundColor: active && !chat?.color ? '#3A3A3A' : (hoverBackground || chat?.color || 'initial'), }}
         onClick={() => {
           if (!generating) setCurrentChatIndex(chatIndex);
         }}
