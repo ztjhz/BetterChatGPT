@@ -1,8 +1,8 @@
 import { Prompt } from './prompt';
 import { Theme } from './theme';
 
-export type Role = 'user' | 'assistant' | 'system';
-export const roles: Role[] = ['user', 'assistant', 'system'];
+export type Role = 'user' | 'assistant' | 'system' | 'Image';
+export const roles: Role[] = ['user', 'assistant', 'system', 'Image']; // haven't added image for all the locale files
 
 export interface MessageInterface {
   role: Role;
@@ -58,7 +58,8 @@ export type ModelOptions =
   | 'gpt-3.5-turbo'
   | 'gpt-3.5-turbo-16k'
   | 'gpt-3.5-turbo-1106'
-  | 'gpt-3.5-turbo-0125';
+  | 'gpt-3.5-turbo-0125'
+  | 'gpt-4-vision-preview';
 // | 'gpt-3.5-turbo-0301';
 // | 'gpt-4-0314'
 // | 'gpt-4-32k-0314'
