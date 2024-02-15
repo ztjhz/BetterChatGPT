@@ -56,12 +56,12 @@ const ImportPrompt = () => {
         {t('import')} (CSV)
       </label>
       <input
-        className='w-full text-sm file:p-2 text-gray-800 file:text-gray-700 dark:text-gray-300 dark:file:text-gray-200 rounded-md cursor-pointer focus:outline-none bg-gray-50 file:bg-gray-100 dark:bg-gray-800 dark:file:bg-gray-700 file:border-0 border border-gray-300 dark:border-gray-600 placeholder-gray-900 dark:placeholder-gray-300 file:cursor-pointer'
+        className='w-full text-sm file:p-2 text-gray-800 file:text-gray-700 dark:text-gray-300 dark:file:text-gray-200 rounded-md cursor-pointer focus:outline-none bg-gray-50 file:bg-gray-100 dark:new-chat-light dark:file:new-chat-light file:border-0 border border-gray-300 dark:border-gray-600 placeholder-gray-900 dark:placeholder-gray-300 file:cursor-pointer'
         type='file'
         ref={inputRef}
       />
       <button
-        className='btn btn-small btn-primary mt-3'
+        className='new-btn btn-small new-btn-primary mt-3'
         onClick={handleFileUpload}
         aria-label={t('import') as string}
       >

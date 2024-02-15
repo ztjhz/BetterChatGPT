@@ -102,7 +102,7 @@ const ChatHistory = React.memo(
         setHoverBackground(`${chat.color}dd`); // Lighten color on hover
       }
       else {
-        setHoverBackground('rgba(128, 128, 128, 0.2)');
+        setHoverBackground('#263040');
       }
     };
 
@@ -123,7 +123,7 @@ const ChatHistory = React.memo(
             ? 'cursor-not-allowed opacity-40'
             : 'cursor-pointer opacity-100'
         }`}
-        style={{ backgroundColor: active && !chat?.color ? '#3A3A3A' : (hoverBackground || chat?.color || 'initial'), }}
+        style={{ backgroundColor: active && !chat?.color ? '#263040' : (hoverBackground || chat?.color || 'initial'), }}
         onClick={() => {
           if (!generating) setCurrentChatIndex(chatIndex);
         }}

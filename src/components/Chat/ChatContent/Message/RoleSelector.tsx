@@ -27,7 +27,7 @@ const RoleSelector = React.memo(
     return (
       <div className='prose dark:prose-invert relative'>
         <button
-          className='btn btn-neutral btn-small flex gap-1'
+          className='btn btn-neutral dark:new-btn dark:new-btn-neutral btn-small flex gap-1'
           aria-label={t(role) as string}
           type='button'
           onClick={() => setDropDown((prev) => !prev)}

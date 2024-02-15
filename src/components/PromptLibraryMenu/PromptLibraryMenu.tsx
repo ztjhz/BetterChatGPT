@@ -16,7 +16,7 @@ const PromptLibraryMenu = () => {
   return (
     <div>
       <button
-        className='btn btn-neutral'
+        className='new-btn new-btn-neutral'
         onClick={() => setIsModalOpen(true)}
         aria-label={t('promptLibrary') as string}
       >
@@ -159,7 +159,7 @@ const PromptLibraryMenuPopUp = ({
         </div>
         <div className='flex justify-center mt-2'>
           <div
-            className='btn btn-neutral cursor-pointer text-xs'
+            className='new-btn new-btn-neutral cursor-pointer text-xs'
             onClick={clearPrompts}
           >
             {t('clearPrompts')}

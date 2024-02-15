@@ -124,7 +124,7 @@ const EditView = ({
       <div
         className={`w-full ${
           sticky
-            ? 'py-2 md:py-3 px-2 md:px-4 border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-md shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:shadow-[0_0_15px_rgba(0,0,0,0.10)]'
+            ? 'py-2 md:py-3 px-2 md:px-4 border border-black/10 bg-white dark:border-white/20 dark:text-white dark:new-chat-lighter rounded-md shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:shadow-[0_0_15px_rgba(0,0,0,0.10)]'
             : ''
         }`}
       >
@@ -185,7 +185,7 @@ const EditViewButtons = memo(
         <div className='flex-1 text-center mt-2 flex justify-center'>
           {sticky && (
             <button
-              className={`btn relative mr-2 btn-primary ${
+              className={`new-btn relative mr-2 new-btn-primary ${
                 generating ? 'cursor-not-allowed opacity-40' : ''
               }`}
               onClick={handleGenerate}
@@ -199,7 +199,7 @@ const EditViewButtons = memo(
 
           {sticky || (
             <button
-              className='btn relative mr-2 btn-primary'
+              className='new-btn relative mr-2 new-btn-primary'
               onClick={() => {
                 !generating && setIsModalOpen(true);
               }}
@@ -211,12 +211,12 @@ const EditViewButtons = memo(
           )}
 
           <button
-            className={`btn relative mr-2 ${
+            className={`btn dark:new-btn relative mr-2 ${
               sticky
-                ? `btn-neutral ${
+                ? `btn-neutral dark:new-btn-neutral ${
                     generating ? 'cursor-not-allowed opacity-40' : ''
                   }`
-                : 'btn-neutral'
+                : 'btn-neutral dark:new-btn-neutral'
             }`}
             onClick={handleSave}
             aria-label={t('save') as string}
@@ -228,7 +228,7 @@ const EditViewButtons = memo(
 
           {sticky || (
             <button
-              className='btn relative btn-neutral'
+              className='btn dark:new-btn relative btn-neutral dark:new-btn-neutral'
               onClick={() => setIsEdit(false)}
               aria-label={t('cancel') as string}
             >
