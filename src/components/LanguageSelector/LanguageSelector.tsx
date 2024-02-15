@@ -11,7 +11,7 @@ const LanguageSelector = () => {
   return (
     <div className='prose dark:prose-invert relative'>
       <button
-        className='btn btn-neutral btn-small w-36 flex justify-between'
+        className='new-btn new-btn-neutral btn-small w-36 flex justify-between'
         type='button'
         onClick={() => setDropDown((prev) => !prev)}
         aria-label='language selector'

@@ -49,13 +49,13 @@ const ChatContent = () => {
   return (
     <div className='flex-1 overflow-hidden'>
       <ScrollToBottom
-        className='h-full dark:bg-gray-800'
+        className='h-full dark:new-chat-light'
         followButtonClassName='hidden'
       >
         <ScrollToBottomButton />
-        <div className='flex flex-col items-center text-sm dark:bg-gray-800'>
+        <div className='flex flex-col items-center text-sm dark:new-chat-light'>
           <div
-            className='flex flex-col items-center text-sm dark:bg-gray-800 w-full'
+            className='flex flex-col items-center text-sm dark:new-chat-light w-full'
             ref={saveRef}
           >
             {advancedMode && <ChatTitle />}

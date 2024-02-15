@@ -12,7 +12,7 @@ import RoleSelector from './RoleSelector';
 //   assistant: 'bg-gray-50 dark:bg-gray-650',
 //   system: 'bg-gray-50 dark:bg-gray-650',
 // };
-const backgroundStyle = ['dark:bg-gray-800', 'bg-gray-50 dark:bg-gray-650'];
+const backgroundStyle = ['dark:new-chat-dark', 'bg-gray-50 dark:new-chat-light'];
 
 const Message = React.memo(
   ({

@@ -27,7 +27,7 @@ const ThemeSwitcher = () => {
 
   return theme ? (
     <button
-      className='items-center gap-3 btn btn-neutral'
+      className='items-center gap-3 new-btn new-btn-neutral'
       onClick={switchTheme}
       aria-label='toggle dark/light mode'
     >

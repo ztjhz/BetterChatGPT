@@ -42,7 +42,7 @@ const CommandPrompt = ({
   return (
     <div className='relative max-wd-sm' ref={dropDownRef}>
       <button
-        className='btn btn-neutral btn-small'
+        className='btn btn-neutral dark:new-btn dark:new-btn-neutral btn-small'
         aria-label='prompt library'
         onClick={() => setDropDown(!dropDown)}
       >
@@ -51,13 +51,13 @@ const CommandPrompt = ({
       <div
         className={`${
           dropDown ? '' : 'hidden'
-        } absolute top-100 bottom-100 right-0 z-10 bg-white rounded-lg shadow-xl border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group dark:bg-gray-800 opacity-90`}
+        } absolute top-100 bottom-100 right-0 z-10 bg-white rounded-lg shadow-xl border-b border-black/10 dark:border-gray-900/50 text-gray-800 dark:text-gray-100 group dark:new-chat-lighter opacity-90`}
       >
         <div className='text-sm px-4 py-2 w-max'>{t('promptLibrary')}</div>
         <input
           ref={inputRef}
           type='text'
-          className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 m-0 w-full mr-0 h-8 focus:outline-none'
+          className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:new-chat-light-hover m-0 w-full mr-0 h-8 focus:outline-none'
           value={input}
           placeholder={t('search') as string}
           onChange={(e) => {

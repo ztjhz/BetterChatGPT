@@ -83,7 +83,7 @@ export const ModelSelector = ({
   return (
     <div className='mb-4'>
       <button
-        className='btn btn-neutral btn-small flex gap-1'
+        className='new-btn new-btn-neutral btn-small flex gap-1'
         type='button'
         onClick={() => setDropDown((prev) => !prev)}
         aria-label='model'

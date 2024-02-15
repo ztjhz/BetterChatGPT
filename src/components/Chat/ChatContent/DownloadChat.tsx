@@ -23,7 +23,7 @@ const DownloadChat = React.memo(
     return (
       <>
         <button
-          className='btn btn-neutral'
+          className='btn dark:new-btn btn-neutral dark:new-btn-neutral'
           aria-label={t('downloadChat') as string}
           onClick={() => {
             setIsModalOpen(true);

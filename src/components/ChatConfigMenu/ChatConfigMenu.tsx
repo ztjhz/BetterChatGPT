@@ -21,7 +21,7 @@ const ChatConfigMenu = () => {
   return (
     <div>
       <button
-        className='btn btn-neutral'
+        className='new-btn new-btn-neutral'
         onClick={() => setIsModalOpen(true)}
         aria-label={t('defaultChatConfig') as string}
       >
@@ -113,7 +113,7 @@ const ChatConfigPopup = ({
           _setFrequencyPenalty={_setFrequencyPenalty}
         />
         <div
-          className='btn btn-neutral cursor-pointer mt-5'
+          className='new-btn new-btn-neutral cursor-pointer mt-5'
           onClick={handleReset}
         >
           {t('resetToDefault')}

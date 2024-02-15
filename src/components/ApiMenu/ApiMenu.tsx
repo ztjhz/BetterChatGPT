@@ -40,7 +40,7 @@ const ApiMenu = () => {
   return (
   <>
     <button
-      className="btn btn-neutral"
+      className="new-btn new-btn-neutral"
       onClick={() => setIsModalOpen(true)}
     >
       {t('API Settings')}
@@ -137,7 +137,7 @@ const ApiEndpointSelector = ({
   return (
     <div className='w-[40vw] relative flex-1'>
       <button
-        className='btn btn-neutral btn-small flex justify-between w-full'
+        className='new-btn new-btn-neutral btn-small flex justify-between w-full'
         type='button'
         aria-label='expand api menu'
         onClick={() => setDropDown((prev) => !prev)}

@@ -234,6 +234,79 @@
     margin-left: -1rem;
     position: absolute;
   }
+
+  .new-lightblue {
+    background-color: #263040;
+  }
+
+  .new-red {
+    background-color: #A03232;
+  }
+
+  .new-menu-dark {
+    background-color: #1C2128;
+  }
+
+  .new-chat-dark {
+    background-color: #22272E;
+  }
+
+  .new-chat-light {
+    background-color: #2d3641;
+  }
+
+  .new-chat-lighter {
+    background-color: #38414e;
+  }
+
+  .new-chat-light-hover {
+    background-color: #4a5563;
+  }
+
+  .new-bg-transp {
+    background-color: rgba(28, 33, 40, 0.9);
+  }
+
+  .new-btn {
+    align-items: center;
+    border-color: transparent;
+    border-radius: 0.25rem;
+    border-width: 1px;
+    display: inline-flex;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    padding: 0.5rem 0.75rem;
+    pointer-events: auto;
+  }
+
+  .new-btn-neutral {
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    background-color: rgba(45, 54, 65, var(--tw-bg-opacity));
+    border-color: rgba(255, 255, 255, 0.2);
+    border-width: 1px;
+    color: rgba(255, 255, 255, var(--tw-text-opacity));
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .new-btn-neutral:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgba(74, 85, 99);
+  }
+
+  .new-btn-primary {
+    --tw-bg-opacity: 1;
+    --tw-text-opacity: 1;
+    color: white;
+    background-color: #1D93AB
+  }
+
+  .new-btn-primary:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgba(31, 121, 148, var(--tw-bg-opacity));
+    background-color: #1f8194
+  }
 }
 
 :not(pre) > code.hljs,
