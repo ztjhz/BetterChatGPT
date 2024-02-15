@@ -24,6 +24,8 @@ const ChatHistoryClass = {
     'absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-gray-800',
 };
 
+
+
 const ChatHistory = React.memo(
   ({ title, chatIndex }: { title: string; chatIndex: number }) => {
     const initialiseNewChat = useInitialiseNewChat();
@@ -198,7 +200,9 @@ const ChatHistory = React.memo(
                 </button>
 
                 {showPalette && (
-                <div className='absolute right-0 bottom-0 translate-y-full p-2 z-20 bg-gray-900 rounded border border-gray-600 flex flex-col gap-2 items-center'>
+                <div
+                ref={paletteRef} 
+                className='absolute right-0 bottom-0 translate-y-full p-2 z-20 bg-gray-900 rounded border border-gray-600 flex flex-col gap-2 items-center'>
                   {folderColorOptions.map((c) => (
                     <button
                       key={c}

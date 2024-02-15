@@ -13,7 +13,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
 
   return (
     <a
-      className={`flex flex-1 items-center rounded-md hover:bg-gray-500/10 transition-all duration-200 text-white text-sm flex-shrink-0 ${
+      className={`flex flex-1 items-center rounded-md hover:new-lightblue transition-all duration-200 text-white text-sm flex-shrink-0 ${
         generating
           ? 'cursor-not-allowed opacity-40'
           : 'cursor-pointer opacity-100'

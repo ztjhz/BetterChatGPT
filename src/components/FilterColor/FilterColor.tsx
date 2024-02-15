@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import RefreshIcon from '@icon/RefreshIcon';
-import ColorPaletteIcon from '@icon/ColorPaletteIcon'; // Adjust the import path as needed
-import { folderColorOptions } from '@constants/color'; // Assuming this is your desired color options source
+import ColorPaletteIcon from '@icon/ColorPaletteIcon';
+import { folderColorOptions } from '@constants/color'; 
+import useHideOnOutsideClick from '@hooks/useHideOnOutsideClick';
 
 interface FilterColorProps {
-  setFilter: (filter: string) => void; // Removed filter prop as it's not used within FilterColor
+  setFilter: (filter: string) => void;
 }
 
 const FilterColor: React.FC<FilterColorProps> = ({ setFilter }) => {
-  const [showPalette, setShowPalette] = useState(false);
+  const [showPalette, setShowPalette, paletteRef] = useHideOnOutsideClick();
 
   const filterColor = (color: string) => {
     setFilter(color); // Function to set the filter to the selected color
   };
 
   return (
-    <div className="relative group"> {/* Adjusted based on provided snippet */}
+    <div className="relative group">
       <button
         className="p-1 hover:text-white"
         onClick={() => setShowPalette((prev) => !prev)}
@@ -24,7 +25,9 @@ const FilterColor: React.FC<FilterColorProps> = ({ setFilter }) => {
         <ColorPaletteIcon style={{ color: 'white' }} />
       </button>
       {showPalette && (
-        <div className="absolute left-0 bottom-0 translate-y-full p-2 z-20 bg-gray-900 rounded border border-gray-600 flex flex-col gap-2 items-center">
+        <div
+        ref={paletteRef} 
+        className="absolute left-0 bottom-0 translate-y-full p-2 z-20 bg-gray-900 rounded border border-gray-600 flex flex-col gap-2 items-center">
           {folderColorOptions.map((color) => (
             <button
               key={color}
