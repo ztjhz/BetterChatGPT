@@ -123,6 +123,7 @@ type ModelTypes = {
   [x in ModelOptions]: ModelType;
 };
 
+// Types of input the model can support. If image, show an image upload button
 export const modelTypes: ModelTypes = {
   'gpt-3.5-turbo': 'text',
   'gpt-3.5-turbo-16k': 'text',
