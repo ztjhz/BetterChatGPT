@@ -10,6 +10,7 @@ import PopupModal from '@components/PopupModal';
 import TokenCount from '@components/TokenCount';
 import CommandPrompt from '../CommandPrompt';
 import FolderIcon from '@icon/FolderIcon';
+import { modelTypes } from '@constants/chat';
 
 const EditView = ({
   content: content,
@@ -252,7 +253,7 @@ const EditViewButtons = memo(
 
     return (
       <div>
-        {model == 'gpt-4-vision-preview' && (
+        {modelTypes[model] == 'image' && (
           <div className='flex justify-center'>
             <div className="flex gap-5">
               {_content.slice(1).map((image, index) => (

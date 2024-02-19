@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { ChatInterface, ConfigInterface, ModelOptions, TextContentInterface } from '@type/chat';
+import { ChatInterface, ConfigInterface, ModelOptions, ModelType, TextContentInterface } from '@type/chat';
 import useStore from '@store/store';
 
 const date = new Date();
@@ -117,6 +117,22 @@ export const modelCost = {
     prompt: { price: 0.01, unit: 1000 },
     completion: { price: 0.03, unit: 1000 },
   }
+};
+
+type ModelTypes = {
+  [x in ModelOptions]: ModelType;
+};
+
+export const modelTypes: ModelTypes = {
+  'gpt-3.5-turbo': 'text',
+  'gpt-3.5-turbo-16k': 'text',
+  'gpt-3.5-turbo-1106': 'text',
+  'gpt-3.5-turbo-0125': 'text',
+  'gpt-4': 'text',
+  'gpt-4-32k': 'text',
+  'gpt-4-1106-preview': 'text',
+  'gpt-4-0125-preview': 'text',
+  'gpt-4-vision-preview': 'image'
 };
 
 export const defaultUserMaxToken = 4000;

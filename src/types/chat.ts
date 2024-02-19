@@ -86,6 +86,8 @@ export type ModelOptions =
 // | 'gpt-4-0314'
 // | 'gpt-4-32k-0314'
 
+export type ModelType = 'text' | 'image';
+
 export type TotalTokenUsed = {
   [model in ModelOptions]?: {
     promptTokens: number;
