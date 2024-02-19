@@ -4,13 +4,16 @@ import { Theme } from './theme';
 // The types in this file must mimick the structure of the the API request
 
 export type Content = 'text' | 'image_url';
+export type ImageDetail = 'low' | 'high' | 'auto';
+export const imageDetails: ImageDetail[] = ['low', 'high', 'auto'];
 export type Role = 'user' | 'assistant' | 'system';
 export const roles: Role[] = ['user', 'assistant', 'system'];
 
 export interface ImageContentInterface extends ContentInterface {
   type: 'image_url';
   image_url: {
-    url: string;
+    url: string; // base64 or image URL
+    detail: ImageDetail;
   }
 }
 
@@ -20,6 +23,7 @@ export interface TextContentInterface extends ContentInterface {
 }
 
 export interface ContentInterface {
+  [x: string]: any;
   type: Content;
 }
 
@@ -166,3 +170,7 @@ export interface LocalStorageInterfaceV7oV8
   foldersExpanded: boolean[];
   folders: FolderCollection;
 }
+
+// export interface LocalStorageInterfaceV8ToV9
+//   extends LocalStorageInterfaceV7oV8 {
+    

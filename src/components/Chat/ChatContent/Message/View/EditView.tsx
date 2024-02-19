@@ -1,10 +1,10 @@
-import React, { memo, useEffect, useState, useRef } from 'react';
+import React, { memo, useEffect, useState, useRef, ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
 
 import useSubmit from '@hooks/useSubmit';
 
-import { ChatInterface, ContentInterface, ImageContentInterface, TextContentInterface } from '@type/chat';
+import { ChatInterface, Content, ContentInterface, ImageContentInterface, TextContentInterface } from '@type/chat';
 
 import PopupModal from '@components/PopupModal';
 import TokenCount from '@components/TokenCount';
@@ -12,14 +12,12 @@ import CommandPrompt from '../CommandPrompt';
 import FolderIcon from '@icon/FolderIcon';
 
 const EditView = ({
-  text: text,
-  image_urls: image_urls,
+  content: content,
   setIsEdit,
   messageIndex,
   sticky,
 }: {
-  text: string;
-  image_urls: string[];
+  content: ContentInterface[];
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   messageIndex: number;
   sticky?: boolean;
@@ -28,8 +26,7 @@ const EditView = ({
   const setChats = useStore((state) => state.setChats);
   const currentChatIndex = useStore((state) => state.currentChatIndex);
 
-  const [_text, _setText] = useState<string>(text);
-  const [_images, _setImages] = useState<string[]>(image_urls);
+  const [_content, _setContent] = useState<ContentInterface[]>(content);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const textareaRef = React.createRef<HTMLTextAreaElement>();
 
@@ -67,49 +64,65 @@ const EditView = ({
     }
   };
 
-  const handleFileChange = (e) => {
-    const files = e.target.files;
-    const newImages = Array.from(files).map((file) => URL.createObjectURL(file));
-    const updatedImages = [..._images, ...newImages];
-
-    _setImages(updatedImages);
+  // convert message blob urls to base64
+  const blobToBase64 = async (blob: Blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.readAsDataURL(blob);
+    });
   };
 
-  const handleRemoveImage = (index: number) => {
-    const updatedImages = [..._images];
-    updatedImages.splice(index, 1);
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files!;
+    const newImageURLs = Array.from(files).map((file: Blob) => URL.createObjectURL(file));
+    const newImages = await Promise.all(newImageURLs.map(async (url) => {
+      const blob = await fetch(url).then((r) => r.blob());
+      return {
+        type: 'image_url',
+        image_url: {
+          detail: 'auto',
+          url: await blobToBase64(blob) as string
+        }
+      } as ImageContentInterface
+    }));
+    const updatedContent = [..._content, ...newImages];
 
-    _setImages(updatedImages);
+    _setContent(updatedContent);
+  };
+
+  const handleImageDetailChange = (index: number, detail: string) => {
+    const updatedImages = [..._content];
+    updatedImages[index + 1].image_url.detail = detail;
+    _setContent(updatedImages);
+  }
+
+  const handleRemoveImage = (index: number) => {
+    const updatedImages = [..._content];
+    updatedImages.splice(index + 1, 1);
+
+    _setContent(updatedImages);
   };
 
   const handleSave = () => {
-    if (sticky && (_text === '' || useStore.getState().generating)) return;
+    if (sticky && ((_content[0] as TextContentInterface).text === '' || useStore.getState().generating)) return;
     const updatedChats: ChatInterface[] = JSON.parse(
       JSON.stringify(useStore.getState().chats)
     );
     const updatedMessages = updatedChats[currentChatIndex].messages;
 
-    const content: ContentInterface[] = [
-      {
-        type: 'text',
-        text: _text,
-      } as TextContentInterface,
-      ..._images.map((image) => ({
-        type: 'image_url',
-        image_url: {
-          url: image
-        },
-      } as ImageContentInterface)),
-    ]
-
     if (sticky) {
-
-      updatedMessages.push({ role: inputRole, content: content });
-      _setText('');
-      _setImages([]);
+      updatedMessages.push({ role: inputRole, content: _content });
+      _setContent([{
+        type: 'text',
+        text: ''
+      } as TextContentInterface]);
       resetTextAreaHeight();
     } else {
-      updatedMessages[messageIndex].content = content;
+      updatedMessages[messageIndex].content = _content;
       setIsEdit(false);
     }
     setChats(updatedChats);
@@ -123,28 +136,17 @@ const EditView = ({
     );
     const updatedMessages = updatedChats[currentChatIndex].messages;
 
-    const content: ContentInterface[] = [
-      {
-        type: 'text',
-        text: _text,
-      } as TextContentInterface,
-      ..._images.map((image) => ({
-        type: 'image_url',
-        image_url: {
-          url: image
-        },
-      } as ImageContentInterface)),
-    ]
-
     if (sticky) {
-
-      if (_text !== '') {
-        updatedMessages.push({ role: inputRole, content: content });
+      if ((_content[0] as TextContentInterface).text !== '') {
+        updatedMessages.push({ role: inputRole, content: _content });
       }
-      _setText('');
+      _setContent([{
+        type: 'text',
+        text: ''
+      } as TextContentInterface]);
       resetTextAreaHeight();
     } else {
-      updatedMessages[messageIndex].content = content;
+      updatedMessages[messageIndex].content = _content;
       updatedChats[currentChatIndex].messages = updatedMessages.slice(
         0,
         messageIndex + 1
@@ -160,7 +162,7 @@ const EditView = ({
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-  }, [_text]);
+  }, [(_content[0] as TextContentInterface).text]);
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -181,9 +183,9 @@ const EditView = ({
           ref={textareaRef}
           className='m-0 resize-none rounded-lg bg-transparent overflow-y-hidden focus:ring-0 focus-visible:ring-0 leading-7 w-full placeholder:text-gray-500/40'
           onChange={(e) => {
-            _setText(e.target.value);
+            _setContent((prev) => [{ type: 'text', text: e.target.value }, ...prev.slice(1)])
           }}
-          value={_text}
+          value={(_content[0] as TextContentInterface).text}
           placeholder={t('submitPlaceholder') as string}
           onKeyDown={handleKeyDown}
           rows={1}
@@ -192,13 +194,14 @@ const EditView = ({
       <EditViewButtons
         sticky={sticky}
         handleFileChange={handleFileChange}
+        handleImageDetailChange={handleImageDetailChange}
         handleRemoveImage={handleRemoveImage}
         handleGenerate={handleGenerate}
         handleSave={handleSave}
         setIsModalOpen={setIsModalOpen}
         setIsEdit={setIsEdit}
-        _setContent={_setText}
-        _images={_images}
+        _setContent={_setContent}
+        _content={_content}
       />
       {isModalOpen && (
         <PopupModal
@@ -216,129 +219,148 @@ const EditViewButtons = memo(
   ({
     sticky = false,
     handleFileChange,
+    handleImageDetailChange,
     handleRemoveImage,
     handleGenerate,
     handleSave,
     setIsModalOpen,
     setIsEdit,
     _setContent,
-    _images
+    _content
   }: {
     sticky?: boolean;
-    handleFileChange: (e) => void;
+    handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleImageDetailChange: (index: number, e: string) => void;
     handleRemoveImage: (index: number) => void;
     handleGenerate: () => void;
     handleSave: () => void;
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
     setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
-    _setContent: React.Dispatch<React.SetStateAction<string>>;
-    _images: string[];
+    _setContent: React.Dispatch<React.SetStateAction<ContentInterface[]>>;
+    _content: ContentInterface[];
   }) => {
     const { t } = useTranslation();
     const generating = useStore.getState().generating;
     const advancedMode = useStore((state) => state.advancedMode);
+    const model = useStore((state) => state.chats![state.currentChatIndex].config.model);
     const fileInputRef = useRef(null);
 
     const handleUploadButtonClick = () => {
       // Trigger the file input when the custom button is clicked
-      fileInputRef.current.click();
+      (fileInputRef.current! as HTMLInputElement).click();
     };
 
     return (
       <div>
-        <div className='flex justify-center'>
-        <button
-            className='btn relative mr-2 btn-neutral'
-            onClick={handleUploadButtonClick}
-            aria-label={'Upload Images'}
-          >
-            <div className='flex items-center justify-center gap-2'>
-              <FolderIcon />
-            </div>
-          </button>
+        {model == 'gpt-4-vision-preview' && (
+          <div className='flex justify-center'>
+            <div className="flex gap-5">
+              {_content.slice(1).map((image, index) => (
+                <div key={index} className="image-container flex flex-col gap-2">
+                  <img src={image.image_url.url} alt={`uploaded-${index}`} className="h-10" />
+                  <div className='flex flex-row gap-3'>
+                  <select
+                    onChange={(event) => handleImageDetailChange(index, event.target.value)}
+                    title="Select image resolution"
+                    aria-label="Select image resolution"
+                    defaultValue={image.image_url.detail}
+                    style={{ color: 'black' }}
+                  >
+                    <option value="auto">Auto</option>
+                    <option value="high">High</option>
+                    <option value="low">Low</option>
+                  </select>
+                  <button
+                    className="close-button"
+                    onClick={() => handleRemoveImage(index)}
+                    aria-label="Remove Image"
+                  >
+                    &times;
+                  </button>
+                  </div>
+                </div>
+              ))}
 
-          {/* Hidden file input */}
-          <input
-            type="file"
-            ref={fileInputRef}
-            style={{ display: 'none' }}
-            onChange={handleFileChange}
-            accept="image/*"
-            multiple
-          />
-
-          <div className="flex">
-            {_images.map((image, index) => (
-              <div key={index} className="image-container">
-                <img src={image} alt={`uploaded-${index}`} className="mr-2 h-20" />
-                <button
-                  className="close-button"
-                  onClick={() => handleRemoveImage(index)}
-                  aria-label="Remove Image"
-                >
-                  &times;
-                </button>
+            <button
+              className='btn relative btn-neutral h-10'
+              onClick={handleUploadButtonClick}
+              aria-label={'Upload Images'}
+            >
+              <div className='flex items-center justify-center gap-2'>
+                <FolderIcon />
               </div>
-            ))}
+            </button>
+            
+            </div>
+
+            {/* Hidden file input */}
+            <input
+              type="file"
+              ref={fileInputRef}
+              style={{ display: 'none' }}
+              onChange={handleFileChange}
+              accept="image/*"
+              multiple
+            />
           </div>
-        </div>
-      <div className='flex'>
-        <div className='flex-1 text-center mt-2 flex justify-center'>
-          {sticky && (
+        )}
+        <div className='flex'>
+          <div className='flex-1 text-center mt-2 flex justify-center'>
+            {sticky && (
+              <button
+                className={`btn relative mr-2 btn-primary ${generating ? 'cursor-not-allowed opacity-40' : ''
+                  }`}
+                onClick={handleGenerate}
+                aria-label={t('generate') as string}
+              >
+                <div className='flex items-center justify-center gap-2'>
+                  {t('generate')}
+                </div>
+              </button>
+            )}
+
+            {sticky || (
+              <button
+                className='btn relative mr-2 btn-primary'
+                onClick={() => {
+                  !generating && setIsModalOpen(true);
+                }}
+              >
+                <div className='flex items-center justify-center gap-2'>
+                  {t('generate')}
+                </div>
+              </button>
+            )}
+
             <button
-              className={`btn relative mr-2 btn-primary ${generating ? 'cursor-not-allowed opacity-40' : ''
+              className={`btn relative mr-2 ${sticky
+                ? `btn-neutral ${generating ? 'cursor-not-allowed opacity-40' : ''
+                }`
+                : 'btn-neutral'
                 }`}
-              onClick={handleGenerate}
-              aria-label={t('generate') as string}
+              onClick={handleSave}
+              aria-label={t('save') as string}
             >
               <div className='flex items-center justify-center gap-2'>
-                {t('generate')}
+                {t('save')}
               </div>
             </button>
-          )}
 
-          {sticky || (
-            <button
-              className='btn relative mr-2 btn-primary'
-              onClick={() => {
-                !generating && setIsModalOpen(true);
-              }}
-            >
-              <div className='flex items-center justify-center gap-2'>
-                {t('generate')}
-              </div>
-            </button>
-          )}
-
-          <button
-            className={`btn relative mr-2 ${sticky
-              ? `btn-neutral ${generating ? 'cursor-not-allowed opacity-40' : ''
-              }`
-              : 'btn-neutral'
-              }`}
-            onClick={handleSave}
-            aria-label={t('save') as string}
-          >
-            <div className='flex items-center justify-center gap-2'>
-              {t('save')}
-            </div>
-          </button>
-
-          {sticky || (
-            <button
-              className='btn relative btn-neutral'
-              onClick={() => setIsEdit(false)}
-              aria-label={t('cancel') as string}
-            >
-              <div className='flex items-center justify-center gap-2'>
-                {t('cancel')}
-              </div>
-            </button>
-          )}
+            {sticky || (
+              <button
+                className='btn relative btn-neutral'
+                onClick={() => setIsEdit(false)}
+                aria-label={t('cancel') as string}
+              >
+                <div className='flex items-center justify-center gap-2'>
+                  {t('cancel')}
+                </div>
+              </button>
+            )}
+          </div>
+          {sticky && advancedMode && <TokenCount />}
+          <CommandPrompt _setContent={_setContent} />
         </div>
-        {sticky && advancedMode && <TokenCount />}
-        <CommandPrompt _setContent={_setContent} />
-      </div>
       </div>
     );
   }

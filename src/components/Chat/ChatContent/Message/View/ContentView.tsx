@@ -19,7 +19,7 @@ import CrossIcon from '@icon/CrossIcon';
 
 import useSubmit from '@hooks/useSubmit';
 
-import { ChatInterface } from '@type/chat';
+import { ChatInterface, ContentInterface, ImageContentInterface, TextContentInterface } from '@type/chat';
 
 import { codeLanguageSubset } from '@constants/chat';
 
@@ -36,14 +36,12 @@ import CodeBlock from '../CodeBlock';
 const ContentView = memo(
   ({
     role,
-    text,
-    image_urls,
+    content,
     setIsEdit,
     messageIndex,
   }: {
     role: string;
-    text: string;
-    image_urls: string[];
+    content: ContentInterface[],
     setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
     messageIndex: number;
   }) => {
@@ -102,7 +100,7 @@ const ContentView = memo(
     };
 
     const handleCopy = () => {
-      navigator.clipboard.writeText(text);
+      navigator.clipboard.writeText((content[0] as TextContentInterface).text);
     };
 
     return (
@@ -131,16 +129,16 @@ const ContentView = memo(
                 p,
               }}
             >
-              {text}
+              {(content[0] as TextContentInterface).text}
             </ReactMarkdown>
           ) : (
-            <span className='whitespace-pre-wrap'>{text}</span>
+            <span className='whitespace-pre-wrap'>{(content[0] as TextContentInterface).text}</span>
           )}
         </div>
-        <div className="flex">
-          {image_urls.map((image, index) => (
+        <div className="flex gap-4">
+          {(content.slice(1) as ImageContentInterface[]).map((image, index) => (
             <div key={index} className="image-container">
-              <img src={image} alt={`uploaded-${index}`} className="mr-2 h-20" />
+              <img src={image.image_url.url} alt={`uploaded-${index}`} className="h-20" />
             </div>
           ))}
         </div>

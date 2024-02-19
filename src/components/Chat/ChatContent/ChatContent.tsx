@@ -69,8 +69,7 @@ const ChatContent = () => {
                 <React.Fragment key={index}>
                   <Message
                     role={message.role}
-                    text={(message.content[0] as TextContentInterface).text}
-                    image_urls={message.content[1] ? (message.content.slice(1) as ImageContentInterface[]).map((imageContent) => imageContent.image_url.url) : []}
+                    content={message.content}
                     messageIndex={index}
                   />
                   {!generating && advancedMode && <NewMessageButton messageIndex={index} />}
@@ -81,8 +80,10 @@ const ChatContent = () => {
 
           <Message
             role={inputRole}
-            text=''
-            image_urls={[]}
+            // For now we always initizlize a new message with an empty text content.
+            // It is possible to send a message to the API without a TextContentInterface, 
+            // but the UI would need to be modified to allow the user to control the order of text and image content
+            content={[{type: 'text', text: ''} as TextContentInterface]}
             messageIndex={stickyIndex}
             sticky
           />
