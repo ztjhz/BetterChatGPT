@@ -135,8 +135,8 @@ One click deploy with Vercel
 
 1. Ensure that you have the following installed:
 
-   - [node.js](https://nodejs.org/en/)
-   - [yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/)
+   - [node.js](https://nodejs.org/en/) (v14.18.0 or above)
+   - [yarn](https://yarnpkg.com/) or [npm](https://www.npmjs.com/) (6.14.15 or above)
 
 2. Clone this [repository](https://github.com/ztjhz/BetterChatGPT) by running `git clone https://github.com/ztjhz/BetterChatGPT.git`
 3. Navigate into the directory by running `cd BetterChatGPT`
