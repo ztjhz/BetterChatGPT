@@ -12,7 +12,7 @@
   },
   "presencePenalty": {
     "label": "Hình phạt hiện diện",
-    "description": "Số từ -2,0 đến 2,0. Các giá trị tích cực sẽ phạt các mã thông báo mới dựa trên việc chúng có xuất hiện trong văn bản cho đến nay hay không, làm tăng khả năng mô hình nói về các chủ đề mới. (Mặc định: 0)"
+    "description": "Số từ -2,0 đến 2,0. Các giá trị dương sẽ phạt các mã thông báo mới dựa trên việc chúng có xuất hiện trong văn bản cho đến nay hay không, làm tăng khả năng mô hình nói về các chủ đề mới. (Mặc định: 0)"
   },
   "topP": {
     "label": "Top-p",
