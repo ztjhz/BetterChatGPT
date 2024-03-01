@@ -143,6 +143,31 @@ One click deploy with Vercel
 4. Run `yarn` or `npm install`, depending on whether you have yarn or npm installed.
 5. Launch the app by running `yarn dev` or `npm run dev`
 
+### Running it locally using docker compose
+1. Ensure that you have the following installed:
+
+   - [docker](https://www.docker.com/) (v24.0.7 or above)
+      ```bash
+      curl https://get.docker.com | sh \
+      && sudo usermod -aG docker $USER
+      ```
+
+2. Build the docker image
+   ```
+   docker compose build
+   ```
+
+3. Build and start the container using docker compose
+   ```
+   docker compose build
+   docker compose up -d
+   ```
+
+4. Stop the container
+   ```
+   docker compose down
+   ```
+
 # ⭐️ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=ztjhz/BetterChatGPT&type=Date)](https://github.com/ztjhz/BetterChatGPT/stargazers)
