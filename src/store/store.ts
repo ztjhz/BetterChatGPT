@@ -7,6 +7,7 @@ import { ConfigSlice, createConfigSlice } from './config-slice';
 import { PromptSlice, createPromptSlice } from './prompt-slice';
 import { ToastSlice, createToastSlice } from './toast-slice';
 import { ColorFilterSlice, createColorFilterSlice } from './colorFilter-slice';
+import { createBlockFilterSlice, BlockFilterSlice } from './blockFilter-slice';
 import {
   LocalStorageInterfaceV0ToV1,
   LocalStorageInterfaceV1ToV2,
@@ -34,7 +35,8 @@ export type StoreState = ChatSlice &
   ConfigSlice &
   PromptSlice &
   ToastSlice &
-  ColorFilterSlice;
+  ColorFilterSlice & 
+  BlockFilterSlice;
 
 export type StoreSlice<T> = (
   set: StoreApi<StoreState>['setState'],
@@ -73,6 +75,7 @@ const useStore = create<StoreState>()(
       ...createPromptSlice(set, get),
       ...createToastSlice(set, get),
       ...createColorFilterSlice(set, get),
+      ...createBlockFilterSlice(set, get),
     }),
     {
       name: 'free-chat-gpt',

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import useStore from '@store/store';
 
@@ -11,6 +11,7 @@ import CrossIcon from '@icon/CrossIcon';
 import useSubmit from '@hooks/useSubmit';
 // import DownloadChat from './DownloadChat';
 import CloneChat from './CloneChat';
+import BlockFilter from './BlockFilter';
 
 const ChatContent = () => {
   const inputRole = useStore((state) => state.inputRole);
@@ -36,6 +37,10 @@ const ChatContent = () => {
   const hideSideMenu = useStore((state) => state.hideSideMenu);
 
   const saveRef = useRef<HTMLDivElement>(null);
+
+  const blockFilter = useStore((state) => state.blockFilter);
+  const messagesRef = useRef([]);
+  const [filteredMessages, setFilteredMessages] = useState([]);
 
   // clear error at the start of generating new messages
   useEffect(() => {
@@ -107,6 +112,7 @@ const ChatContent = () => {
             {useStore.getState().generating || (
               <div className='md:w-[calc(100%-50px)] flex gap-4 flex-wrap justify-center'>
                 {/* <DownloadChat saveRef={saveRef} /> */}
+                <BlockFilter/>
                 <CloneChat />
               </div>
             )}
