@@ -3,16 +3,15 @@ import RefreshIcon from '@icon/RefreshIcon';
 import ColorPaletteIcon from '@icon/ColorPaletteIcon';
 import { folderColorOptions } from '@constants/color'; 
 import useHideOnOutsideClick from '@hooks/useHideOnOutsideClick';
+import useStore from '@store/store';
 
-interface FilterColorProps {
-  setFilter: (filter: string) => void;
-}
 
-const FilterColor: React.FC<FilterColorProps> = ({ setFilter }) => {
+const FilterColor = () => {
   const [showPalette, setShowPalette, paletteRef] = useHideOnOutsideClick();
-
+  const setColorFilter = useStore((state) => state.setColorFilter);
   const filterColor = (color: string) => {
-    setFilter(color); // Function to set the filter to the selected color
+    console.log("filterColor:", color);
+    setColorFilter(color); // Now correctly using the setColorFilter from the store
   };
 
   return (

@@ -35,11 +35,18 @@ const ChatHistoryList = () => {
   const foldersRef = useRef<FolderCollection>(useStore.getState().folders);
   const filterRef = useRef<string>(filter);
 
-  const updateFolders = useRef(() => {
+  // Add a prop for the color filter
+  const colorFilter = useStore((state) => state.colorFilter);
+  console.log(`Current color filter: ${colorFilter}, Type: ${typeof colorFilter}`);
+
+  // Displays chat folders and chat instances
+  const updateFolders = () => {
     const _folders: ChatHistoryFolderInterface = {};
     const _noFolders: ChatHistoryInterface[] = [];
     const chats = useStore.getState().chats;
     const folders = useStore.getState().folders;
+
+    console.log(`Updating folders with colorFilter: ${colorFilter}`);
 
     Object.values(folders)
       .sort((a, b) => a.order - b.order)
@@ -49,21 +56,21 @@ const ChatHistoryList = () => {
       chats.forEach((chat, index) => {
         const _filterLowerCase = filterRef.current.toLowerCase();
         const _chatTitle = chat.title.toLowerCase();
-        const _chatFolderName = chat.folder
-          ? folders[chat.folder].name.toLowerCase()
-          : '';
-
-        if (
-          !_chatTitle.includes(_filterLowerCase) &&
-          !_chatFolderName.includes(_filterLowerCase) &&
-          index !== useStore.getState().currentChatIndex
-        )
+        const _chatFolderName = chat.folder ? folders[chat.folder].name.toLowerCase() : '';
+  
+        // Check if the chat should be skipped based on the filter and colorFilter
+        const shouldSkip = (!_chatTitle.includes(_filterLowerCase) && !_chatFolderName.includes(_filterLowerCase)) ||
+                            (colorFilter && chat.color !== colorFilter);
+  
+        if (shouldSkip) {
+          console.log("ShouldSkip:", colorFilter);
           return;
-
+        }
+  
         if (!chat.folder) {
           _noFolders.push({ title: chat.title, index: index, id: chat.id });
         } else {
-          if (!_folders[chat.folder]) _folders[_chatFolderName] = [];
+          if (!_folders[chat.folder]) _folders[chat.folder] = [];
           _folders[chat.folder].push({
             title: chat.title,
             index: index,
@@ -72,10 +79,15 @@ const ChatHistoryList = () => {
         }
       });
     }
-
+  
     setChatFolders(_folders);
     setNoChatFolders(_noFolders);
-  }).current;
+  }
+
+  // Call updateFolders in response to colorFilter changes
+  useEffect(() => {
+    updateFolders();
+  }, [colorFilter]); // Dependency array ensures updateFolders is called when colorFilter changes
 
   useEffect(() => {
     updateFolders();
