@@ -42,7 +42,7 @@ const ChatSearch = ({ filter, setFilter }: { filter: string; setFilter: React.Di
           : 'cursor-pointer opacity-100'
       }`}
       >
-        <FilterColor setFilter={setFilter} />
+        <FilterColor/>
       </div>
     </div>
   );
