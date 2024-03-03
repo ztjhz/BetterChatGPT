@@ -9,7 +9,7 @@ import NewMessageButton from './Message/NewMessageButton';
 import CrossIcon from '@icon/CrossIcon';
 
 import useSubmit from '@hooks/useSubmit';
-import DownloadChat from './DownloadChat';
+// import DownloadChat from './DownloadChat';
 import CloneChat from './CloneChat';
 
 const ChatContent = () => {
@@ -106,7 +106,7 @@ const ChatContent = () => {
           >
             {useStore.getState().generating || (
               <div className='md:w-[calc(100%-50px)] flex gap-4 flex-wrap justify-center'>
-                <DownloadChat saveRef={saveRef} />
+                {/* <DownloadChat saveRef={saveRef} /> */}
                 <CloneChat />
               </div>
             )}
