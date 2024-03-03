@@ -200,7 +200,7 @@ const createTray = (win) => {
     win.maximize();
     win.show();
   });
-  tray.setToolTip('Better ChatGPT');
+  tray.setToolTip('AiNotes');
   tray.setContextMenu(contextMenu);
 
   return tray;

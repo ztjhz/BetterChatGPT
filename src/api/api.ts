@@ -113,11 +113,11 @@ export const getChatCompletionStream = async (
     if (text.includes('model_not_found')) {
       throw new Error(
         text +
-          '\nMessage from Better ChatGPT:\nPlease ensure that you have access to the GPT-4 API!'
+          '\nPlease ensure that you have access to the GPT-4 API!'
       );
     } else {
       throw new Error(
-        'Message from Better ChatGPT:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
+        '\nInvalid API endpoint! We recommend you to check your free API endpoint.'
       );
     }
   }
@@ -127,7 +127,7 @@ export const getChatCompletionStream = async (
     let error = text;
     if (text.includes('insufficient_quota')) {
       error +=
-        '\nMessage from Better ChatGPT:\nWe recommend changing your API endpoint or API key';
+        '\nWe recommend changing your API endpoint or API key';
     } else if (response.status === 429) {
       error += '\nRate limited!';
     }

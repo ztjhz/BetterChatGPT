@@ -1,12 +1,12 @@
 {
-  "name": "better-chatgpt",
+  "name": "ai-notes",
   "private": true,
   "version": "1.0.4",
   "type": "module",
   "homepage": "./",
   "main": "electron/index.cjs",
-  "author": "Jing Hua <betterchatgpt@mail.tjh.sg>",
-  "description": "Play and chat smarter with BetterChatGPT - an amazing open-source web app with a better UI for exploring OpenAI's ChatGPT API!",
+  "author": "Jerel Ong <jerelongbx@gmail.com>",
+  "description": "A custom ChatGPT UI for a better learning and documenting experience",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -16,8 +16,8 @@
     "make": "yarn build && electron-builder"
   },
   "build": {
-    "appId": "better-chatgpt",
-    "productName": "Better ChatGPT",
+    "appId": "ai-notes",
+    "productName": "AiNotes",
     "artifactName": "${os}-${name}-${version}-${arch}.${ext}",
     "directories": {
       "output": "release"
