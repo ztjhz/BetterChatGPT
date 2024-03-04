@@ -11,6 +11,7 @@ const NewMessageButton = React.memo(
     const setChats = useStore((state) => state.setChats);
     const currentChatIndex = useStore((state) => state.currentChatIndex);
     const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
+    const blockFilter = useStore((state) => state.blockFilter); // Get the current filter
 
     const addChat = () => {
       const chats = useStore.getState().chats;
@@ -29,21 +30,30 @@ const NewMessageButton = React.memo(
         setCurrentChatIndex(0);
       }
     };
-
+    
     const addMessage = () => {
-      if (currentChatIndex === -1) {
+      const chats = useStore.getState().chats;
+      // Ensure that chats is defined before proceeding
+      if (!chats || chats.length === 0 || currentChatIndex === -1) {
         addChat();
-      } else {
-        const updatedChats: ChatInterface[] = JSON.parse(
-          JSON.stringify(useStore.getState().chats)
-        );
-        updatedChats[currentChatIndex].messages.splice(messageIndex + 1, 0, {
-          content: '',
-          role: 'user',
-        });
-        setChats(updatedChats);
+        return; // Return early to avoid executing the rest of the code since addChat() will handle the necessary logic
       }
+    
+      // At this point, we're guaranteed that chats is not undefined, so we can safely access it
+      const currentChat = chats[currentChatIndex];
+      if (!currentChat) return;
+    
+      const realIndex = messageIndex + 1; // Use the messageIndex prop directly to determine the insertion point
+    
+      const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
+      updatedChats[currentChatIndex].messages.splice(realIndex, 0, {
+        content: '',
+        role: 'user',
+      });
+      setChats(updatedChats);
     };
+    
+ 
 
     return (
       <div

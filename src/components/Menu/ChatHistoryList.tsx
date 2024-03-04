@@ -37,7 +37,6 @@ const ChatHistoryList = () => {
 
   // Add a prop for the color filter
   const colorFilter = useStore((state) => state.colorFilter);
-  console.log(`Current color filter: ${colorFilter}, Type: ${typeof colorFilter}`);
 
   // Displays chat folders and chat instances
   const updateFolders = () => {
@@ -45,8 +44,6 @@ const ChatHistoryList = () => {
     const _noFolders: ChatHistoryInterface[] = [];
     const chats = useStore.getState().chats;
     const folders = useStore.getState().folders;
-
-    console.log(`Updating folders with colorFilter: ${colorFilter}`);
 
     Object.values(folders)
       .sort((a, b) => a.order - b.order)

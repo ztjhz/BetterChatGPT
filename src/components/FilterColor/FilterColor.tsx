@@ -10,7 +10,6 @@ const FilterColor = () => {
   const [showPalette, setShowPalette, paletteRef] = useHideOnOutsideClick();
   const setColorFilter = useStore((state) => state.setColorFilter);
   const filterColor = (color: string) => {
-    console.log("filterColor:", color);
     setColorFilter(color); // Now correctly using the setColorFilter from the store
   };
 

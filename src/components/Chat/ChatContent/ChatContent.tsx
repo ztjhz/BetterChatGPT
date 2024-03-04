@@ -12,6 +12,7 @@ import useSubmit from '@hooks/useSubmit';
 // import DownloadChat from './DownloadChat';
 import CloneChat from './CloneChat';
 import BlockFilter from './BlockFilter';
+import { MessageInterface } from '@type/chat';
 
 const ChatContent = () => {
   const inputRole = useStore((state) => state.inputRole);
@@ -39,8 +40,19 @@ const ChatContent = () => {
   const saveRef = useRef<HTMLDivElement>(null);
 
   const blockFilter = useStore((state) => state.blockFilter);
-  const messagesRef = useRef([]);
-  const [filteredMessages, setFilteredMessages] = useState([]);
+
+  // State to hold filtered messages
+  const [filteredMessages, setFilteredMessages] = useState<MessageInterface[]>([]);
+
+  // Effect to filter messages whenever messages or blockFilter changes
+  useEffect(() => {
+    if (blockFilter === 'all') {
+      setFilteredMessages(messages);
+    } else {
+      const filtered = messages.filter((msg) => msg.role === blockFilter);
+      setFilteredMessages(filtered);
+    }
+  }, [messages, blockFilter]);
 
   // clear error at the start of generating new messages
   useEffect(() => {
@@ -61,23 +73,18 @@ const ChatContent = () => {
         <div className='flex flex-col items-center text-sm dark:new-chat-light'>
           <div
             className='flex flex-col items-center text-sm dark:new-chat-light w-full'
-            ref={saveRef}
           >
             {advancedMode && <ChatTitle />}
-            {!generating && advancedMode && messages?.length === 0 && (
-              <NewMessageButton messageIndex={-1} />
-            )}
-            {messages?.map((message, index) => (
-              (advancedMode || index !== 0 || message.role !== 'system') && (
-                <React.Fragment key={index}>
-                  <Message
-                    role={message.role}
-                    content={message.content}
-                    messageIndex={index}
-                  />
-                  {!generating && advancedMode && <NewMessageButton messageIndex={index} />}
-                </React.Fragment>
-              )
+            {!generating && advancedMode && filteredMessages.length === 0 && <NewMessageButton messageIndex={-1} />}
+            {filteredMessages.map((message, index) => (
+              <React.Fragment key={index}>
+                <Message
+                  role={message.role}
+                  content={message.content}
+                  messageIndex={index}
+                />
+                {!generating && advancedMode && <NewMessageButton messageIndex={index} />}
+              </React.Fragment>
             ))}
           </div>
 

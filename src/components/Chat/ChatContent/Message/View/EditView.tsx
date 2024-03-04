@@ -10,6 +10,7 @@ import PopupModal from '@components/PopupModal';
 import TokenCount from '@components/TokenCount';
 import CommandPrompt from '../CommandPrompt';
 
+
 const EditView = ({
   content,
   setIsEdit,
@@ -65,20 +66,30 @@ const EditView = ({
 
   const handleSave = () => {
     if (sticky && (_content === '' || useStore.getState().generating)) return;
-    const updatedChats: ChatInterface[] = JSON.parse(
-      JSON.stringify(useStore.getState().chats)
-    );
-    const updatedMessages = updatedChats[currentChatIndex].messages;
+  
+    const chats = useStore.getState().chats;
+    if (!chats) return;
+  
+    const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
+    const currentChat = updatedChats[currentChatIndex];
+  
+    if (!currentChat) return;
+  
+    // Directly use messageIndex without recalculating it, assuming messageIndex is correctly passed
     if (sticky) {
-      updatedMessages.push({ role: inputRole, content: _content });
+      updatedChats[currentChatIndex].messages.push({ role: inputRole, content: _content });
       _setContent('');
-      resetTextAreaHeight();
     } else {
-      updatedMessages[messageIndex].content = _content;
+      // Assuming messageIndex is correctly adjusted for filtered views before being passed to EditView
+      updatedChats[currentChatIndex].messages[messageIndex].content = _content;
       setIsEdit(false);
     }
+  
     setChats(updatedChats);
   };
+  
+
+  
 
   const { handleSubmit } = useSubmit();
   const handleGenerate = () => {
