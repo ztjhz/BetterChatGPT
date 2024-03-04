@@ -44,6 +44,11 @@ const ChatContent = () => {
   // State to hold filtered messages
   const [filteredMessages, setFilteredMessages] = useState<MessageInterface[]>([]);
 
+  // Map filtered messages to include their original index
+  const filteredMessagesWithOriginalIndex = messages
+  .map((msg, index) => ({ ...msg, originalIndex: index }))
+  .filter((msg, index) => blockFilter === 'all' || msg.role === blockFilter);
+
   // Effect to filter messages whenever messages or blockFilter changes
   useEffect(() => {
     if (blockFilter === 'all') {
@@ -76,14 +81,14 @@ const ChatContent = () => {
           >
             {advancedMode && <ChatTitle />}
             {!generating && advancedMode && filteredMessages.length === 0 && <NewMessageButton messageIndex={-1} />}
-            {filteredMessages.map((message, index) => (
+            {filteredMessagesWithOriginalIndex.map((message, index) => (
               <React.Fragment key={index}>
                 <Message
                   role={message.role}
                   content={message.content}
-                  messageIndex={index}
+                  messageIndex={message.originalIndex} // Use originalIndex
                 />
-                {!generating && advancedMode && <NewMessageButton messageIndex={index} />}
+                {!generating && advancedMode && <NewMessageButton messageIndex={message.originalIndex} />}
               </React.Fragment>
             ))}
           </div>
