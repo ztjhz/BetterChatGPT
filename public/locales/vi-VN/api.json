@@ -1,5 +1,5 @@
 {
-  "securityMessage": Chúng tôi ưu tiên bảo mật khóa API của bạn và xử lý nó một cách cẩn thận nhất. Khóa của bạn được lưu trữ duy nhất trên trình duyệt của bạn và không bao giờ được chia sẻ với bất kỳ tổ chức bên thứ ba nào. Nó chỉ được sử dụng cho mục đích truy cập API OpenAI chứ không phải cho bất kỳ mục đích sử dụng trái phép nào khác.",
+  "securityMessage": "Chúng tôi ưu tiên bảo mật khóa API của bạn và xử lý nó một cách cẩn thận nhất. Khóa của bạn được lưu trữ duy nhất trên trình duyệt của bạn và không bao giờ được chia sẻ với bất kỳ tổ chức bên thứ ba nào. Nó chỉ được sử dụng cho mục đích truy cập API OpenAI chứ không phải cho bất kỳ mục đích sử dụng trái phép nào khác.",
   "apiEndpoint": {
     "inputLabel": "Điểm cuối API",
     "description": "Khi bạn chọn điểm cuối API không chính thức, nó sẽ hoạt động như một proxy. Proxy hoạt động bằng cách đóng vai trò trung gian giữa thiết bị của bạn và máy chủ đích, trong trường hợp này là API OpenAI. Bằng cách đó, nó cho phép bạn truy cập API OpenAI ở những khu vực có thể bị hạn chế.",
