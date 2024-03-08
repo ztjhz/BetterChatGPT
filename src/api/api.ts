@@ -27,7 +27,7 @@ export const getChatCompletion = async (
 
     const model = modelmapping[config.model] || config.model;
 
-    // set api version to 2023-07-01-preview for gpt-4 and gpt-4-32k, otherwise use 2023-03-15-preview
+    // set api version to 2023-07-01-preview for gpt-4, gpt-4-32k and gpt-4-1106-preview otherwise use 2023-03-15-preview
     const apiVersion =
       model === "gpt-4" || model === "gpt-4-32k" || model === "gpt-4-1106-preview"
         ? "2023-07-01-preview"
