@@ -50,6 +50,7 @@ export interface Folder {
 }
 
 export type ModelOptions =
+  | 'claude-3-opus'
   | 'gpt-4'
   | 'gpt-4-32k'
   | 'gpt-4-1106-preview'
