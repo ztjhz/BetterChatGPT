@@ -43,5 +43,6 @@
   "cloneChat": "建立傾偈副本",
   "cloned": "建立成功",
   "enterToSubmit": "撳 Enter 鍵送出",
-  "submitPlaceholder": "輸入訊息或撳 [/] 以使用提示詞…"
+  "submitPlaceholder": "輸入訊息或撳 [/] 以使用提示詞…",
+  "resetThisConversation": "Reset This Conversation"
 }
