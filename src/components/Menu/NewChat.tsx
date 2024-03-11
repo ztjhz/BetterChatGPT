@@ -84,12 +84,12 @@ const NewChat = ({ folder }: { folder?: string }) => {
                 <tr style={{ paddingTop: '20px', paddingBottom: '20px' }}>
                     <td style={{ paddingTop: '20px' }}>Reliable for general use<br/>16K tokens context<br/></td>
                     <td style={{ paddingTop: '20px' }}>Advanced, more nuanced<br/>8K tokens context<br/></td>
-                    <td style={{ paddingTop: '20px' }}>Latest version of GPT-4 <br/>Up to 128K tokens context</td>
+                    <td style={{ paddingTop: '20px' }}>Latest version of GPT-4 <br/>up to 128K tokens context</td>
                 </tr>
                 <tr style={{ paddingTop: '20px', paddingBottom: '20px', verticalAlign: 'top'}}>
-                    <td style={{ paddingTop: '20px' }}>Cost: Baseline,<br/>inexpensive</td>
-                    <td style={{ paddingTop: '20px' }}>Cost: <b>120x</b> of GPT-3.5<br/>(per token)</td>
-                    <td style={{ paddingTop: '20px' }}>Cost: <b>60x</b> of GPT-3.5<br/>(per token)<br/><br/><span style={{color: 'red'}}>Warning: large model context<br/>quickly becomes expensive<br/>with each message added.</span></td>
+                    <td style={{ paddingTop: '20px' }}>Cost: Very Cheap<br/>(baseline)<br/></td>
+                    <td style={{ paddingTop: '20px' }}>Cost: <b>120x</b> of GPT-3.5<br/>per input/output token</td>
+                    <td style={{ paddingTop: '20px' }}>Cost: <b>60x</b> of GPT-3.5<br/>per input/output token<br/><br/><span style={{color: 'red'}}>Warning: large model context<br/>quickly becomes expensive<br/>with each message added.</span></td>
                 </tr>
                 </tbody>
             </table>
