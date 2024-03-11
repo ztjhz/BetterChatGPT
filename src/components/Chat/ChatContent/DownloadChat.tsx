@@ -13,9 +13,8 @@ import ImageIcon from '@icon/ImageIcon';
 import PdfIcon from '@icon/PdfIcon';
 import MarkdownIcon from '@icon/MarkdownIcon';
 import JsonIcon from '@icon/JsonIcon';
-import DownChevronArrowIcon from '@icon/DownChevronArrow';
-import DownArrowIcon from '@icon/DownArrow';
 
+import DownloadButtonIcon from '@icon/DownloadButtonIcon';
 
 import downloadFile from '@utils/downloadFile';
 
@@ -33,7 +32,7 @@ const DownloadChat = React.memo(
             setIsModalOpen(true);
           }}
         >
-          <DownArrowIcon/>          
+          <DownloadButtonIcon/>          
         </button>
         {isModalOpen && (
           <PopupModal
