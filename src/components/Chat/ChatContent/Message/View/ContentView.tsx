@@ -106,7 +106,8 @@ const ContentView = memo(
     return (
       <>
         <div className='markdown prose w-full md:max-w-full break-words dark:prose-invert dark share-gpt-message'>
-          {markdownMode ? (
+          {/* Only apply Markdown for AI responses (role 'Assistant'); Also only if enabled by the button */}
+          {markdownMode && role === 'assistant'? (
             <ReactMarkdown
               remarkPlugins={[
                 remarkGfm,
