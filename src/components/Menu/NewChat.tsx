@@ -51,17 +51,17 @@ const NewChat = ({ folder }: { folder?: string }) => {
           setIsModalOpen={setIsModelSelectionOpen}
           cancelButton={true}
         >
-        <style>
-        {`
-            .min-w-btn {
-                min-width: 160px; /* Adjust this value based on your needs */
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-        `}
-        </style>
           <>
+            <style>
+            {`
+                .min-w-btn {
+                    min-width: 160px; /* Adjust this value based on your needs */
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            `}
+            </style>
             <table className='w-full text-center'>
                 <tbody>
                 <tr>
