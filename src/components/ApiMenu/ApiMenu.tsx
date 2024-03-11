@@ -17,6 +17,8 @@ const ApiMenu = ({
 }) => {
   const { t } = useTranslation(['main', 'api']);
 
+  const companyName:string = import.meta.env.VITE_COMPANY_NAME || "";
+
   const apiKey = useStore((state) => state.apiKey);
   const setApiKey = useStore((state) => state.setApiKey);
   const apiEndpoint = useStore((state) => state.apiEndpoint);
@@ -61,7 +63,7 @@ const ApiMenu = ({
             value={_customEndpoint ? 'built-in' : 'direct'}
             onChange={(e) => handleToggleCustomEndpoint(e.target.value)}
           >
-            <option value="built-in">T1A-Provided Endpoint</option>
+            <option value="built-in">{companyName}-Provided Endpoint</option>
             <option value="direct">Direct Endpoint</option>
           </select>
         </div>
@@ -126,7 +128,7 @@ const ApiMenu = ({
 
           {_customEndpoint ? 
             (
-            <p>The T1A-Provided API endpoint is an integral part of this application, and does not require an API Key</p>
+            <p>The {companyName}-Provided API endpoint is an integral part of this application, and does not require an API Key</p>
             )
             :
             (

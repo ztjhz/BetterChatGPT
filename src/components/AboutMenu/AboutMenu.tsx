@@ -7,6 +7,9 @@ const AboutMenu = () => {
   const { t } = useTranslation(['main', 'about']);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
+  const companyName:string = import.meta.env.VITE_COMPANY_NAME || "";
+  const supportContact:string = import.meta.env.VITE_SUPPORT_CONTACT || "";
+
   return (
     <>
       <a
@@ -28,19 +31,19 @@ const AboutMenu = () => {
         >
           <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
             <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm flex flex-col gap-3 leading-relaxed'>
-              <p>This is a T1A-provided AI LLM Assistant application. Use it to optimize your work.</p>
-              <p>The UI is based on  the <b>BetterChatGPT project by Jing Hua</b>, customized to <b>T1A needs</b>.<br/>
+              <p>This is a {companyName}-provided AI LLM Assistant application. Use it to optimize your work.</p>
+              <p>The UI is based on  the <b>BetterChatGPT project by Jing Hua</b>, customized to <b>{companyName}</b> needs.<br/>
               Our fork on GitHub: <a href='https://github.com/DmitriyAlergant-T1A/BetterChatGPT-t1a' target='_blank' className='link'>https://github.com/DmitriyAlergant-T1A/BetterChatGPT-t1a</a></p>
               
               <>
                 <h2 className='text-lg font-bold'>
                   {t('support.title', { ns: 'about' })}
                 </h2>
-                <p>For support, contact Dmitriy Alergant (for now).</p>
+                <p>For support, contact <b>{supportContact}</b>.</p>
               </>
 
               <h2 className='text-lg font-bold'>Privacy Policy</h2>
-              <p>This tool is provided strictly for T1A business use</p>
+              <p>This tool is provided strictly for {companyName} business use</p>
               <p>We (<b>do or do not?</b>) retain request logs of your prompts and API model resopnses.</p>
               <p>We do collect statistics on individual usage: number of requests, their sizes, total costs, etc.</p>
               <p>Ther 3rd party API providers (OpenAI) claim not to retain our API requests over 30 days,<br/> and not to use these inputs for future LLM models training.</p>

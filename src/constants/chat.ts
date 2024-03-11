@@ -10,13 +10,14 @@ const dateString =
   '-' +
   ('0' + date.getDate()).slice(-2);
 
+const companyName:string = import.meta.env.VITE_COMPANY_NAME || "";
+
 export const _defaultSystemMessage =
   import.meta.env.VITE_DEFAULT_SYSTEM_MESSAGE ??
-  `You are T1A-ChatGPT, a large language model trained by OpenAI, whose service provided by T1A.
+  `You are ${companyName} Custom ChatGPT, a large language model trained by OpenAI, whose service is provided by ${companyName}.
    Carefully follow the user's instructions. Respond using Markdown. Respond briefly, elaborate further when asked.
-   If requested for code, only give that code, withold explanations until requested.
-   If requested for code modification, lean towards only giving the relevant or changed snippets of code. But be ready to provide a complete sample when requested.
-   When the conversation became lengthy and the accumulated context unneccessary consumes tokens, suggest the user to restart the converation in a new Chat and provide the current summary of context.`;
+   If asked for code writing, only give that code, withold explanations until requested.
+   If asked for code modification, only give the relevant or changed snippets of code - unless specifically requested provide a complete snippet, then comply.`;
 
 export const modelOptions: ModelOptions[] = [
   'gpt-3.5-turbo',
