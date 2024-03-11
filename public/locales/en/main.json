@@ -31,8 +31,8 @@
   "name": "Name",
   "search": "Search",
   "total": "Total",
-  "resetCost": "Reset Costs",
-  "countTotalTokens": "Count total tokens",
+  "resetCost": "Reset Costs Totals",
+  "countTotalTokens": "Track token costs",
   "morePrompts": "You can find more prompts here: ",
   "clearPrompts": "Clear prompts",
   "postOnShareGPT": {
