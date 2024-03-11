@@ -1,5 +1,5 @@
 {
-  "name": "better-chatgpt",
+  "name": "t1a-chatgpt",
   "private": true,
   "version": "1.0.4",
   "type": "module",
@@ -16,8 +16,8 @@
     "make": "yarn build && electron-builder"
   },
   "build": {
-    "appId": "better-chatgpt",
-    "productName": "Better ChatGPT",
+    "appId": "t1a-chatgpt",
+    "productName": "T1A ChatGPT",
     "artifactName": "${os}-${name}-${version}-${arch}.${ext}",
     "directories": {
       "output": "release"
