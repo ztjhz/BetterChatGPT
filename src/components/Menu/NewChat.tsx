@@ -47,7 +47,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
       </a>
       {isModelSelectionOpen && (
         <PopupModal
-          title="New Chat - Select Model"
+          title="New Chat: Select Model"
           setIsModalOpen={setIsModelSelectionOpen}
           cancelButton={true}
         >
@@ -62,28 +62,34 @@ const NewChat = ({ folder }: { folder?: string }) => {
                 }
             `}
             </style>
-            <table className='w-full text-center'>
+            <table className='w-full text-center' style={{ tableLayout: 'fixed' }}>
                 <tbody>
                 <tr>
-                    <td style={{ textAlign: 'center', justifyContent: 'center' }}>
-                        <button className='min-w-btn btn btn-neutral p-4 rounded-lg' onClick={() => handleModelSelect('gpt-3.5-turbo')}>GPT-3.5</button>
+                    <td style={{ paddingTop: '20px' }}>
+                       <div className='flex justify-center'>
+                         <button className='min-w-btn btn btn-neutral p-4 rounded-lg' onClick={() => handleModelSelect('gpt-3.5-turbo')}>GPT-3.5</button>
+                       </div>
                       </td>
-                    <td style={{ textAlign: 'center', justifyContent: 'center' }}>
-                      <button className='min-w-btn btn btn-neutral p-4 rounded-lg' onClick={() => handleModelSelect('gpt-4')}>GPT-4</button>
+                    <td style={{ paddingTop: '20px' }}>
+                      <div className='flex justify-center'>
+                        <button className='min-w-btn btn btn-neutral p-4 rounded-lg' onClick={() => handleModelSelect('gpt-4')}>GPT-4</button>
+                      </div>
                     </td>
-                    <td style={{ textAlign: 'center', justifyContent: 'center' }}>
-                      <button className='min-w-btn btn btn-neutral p-4 rounded-lg' onClick={() => handleModelSelect('gpt-4-turbo-preview')}>GPT-4 Turbo</button>
+                    <td style={{ paddingTop: '20px' }}>
+                      <div className='flex justify-center'>
+                        <button className='min-w-btn btn btn-neutral p-4 rounded-lg' onClick={() => handleModelSelect('gpt-4-turbo-preview')}>GPT-4 Turbo</button>
+                      </div>
                     </td>
                 </tr>
-                <tr>
-                    <td>Fast, Cheap, and reliable for general use<br/></td>
-                    <td>Advanced, more nuanced; Expensive;<br/></td>
-                    <td>Latest version of GPT-4; <br/>Longest context window;<br/></td>
+                <tr style={{ paddingTop: '20px', paddingBottom: '20px' }}>
+                    <td style={{ paddingTop: '20px' }}>Reliable for general use<br/>16K tokens context<br/></td>
+                    <td style={{ paddingTop: '20px' }}>Advanced, more nuanced<br/>8K tokens context<br/></td>
+                    <td style={{ paddingTop: '20px' }}>Latest version of GPT-4 <br/>Up to 128K tokens context</td>
                 </tr>
-                <tr>
-                    <td>$0.50 / $0.15 per 1M tkn</td>
-                    <td>$30.00 / $60.00 per 1M tkn</td>
-                    <td>$15.00 / $30.00 per 1M tkn</td>
+                <tr style={{ paddingTop: '20px', paddingBottom: '20px', verticalAlign: 'top'}}>
+                    <td style={{ paddingTop: '20px' }}>Cost: Baseline,<br/>inexpensive</td>
+                    <td style={{ paddingTop: '20px' }}>Cost: <b>120x</b> of GPT-3.5<br/>(per token)</td>
+                    <td style={{ paddingTop: '20px' }}>Cost: <b>60x</b> of GPT-3.5<br/>(per token)<br/><br/><span style={{color: 'red'}}>Warning: large model context<br/>quickly becomes expensive<br/>with each message added.</span></td>
                 </tr>
                 </tbody>
             </table>
