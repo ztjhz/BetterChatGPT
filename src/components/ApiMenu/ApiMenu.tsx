@@ -34,13 +34,16 @@ const ApiMenu = ({
     setIsModalOpen(false);
   };
 
-  const handleToggleCustomEndpoint = () => {
-    if (_customEndpoint) 
-      _setApiEndpoint(officialAPIEndpoint);
-    else 
+  const handleToggleCustomEndpoint = (value: string) => {
+    const isCustom = value === 'built-in';
+    if (isCustom) {
       _setApiEndpoint(customAPIEndpoint);
-    _setCustomEndpoint((prev) => !prev);
+    } else {
+      _setApiEndpoint(officialAPIEndpoint);
+    }
+    _setCustomEndpoint(isCustom);
   };
+  
 
   return (
     <PopupModal
@@ -49,35 +52,42 @@ const ApiMenu = ({
       handleConfirm={handleSave}
     >
       <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
-        <label className='flex gap-2 text-gray-900 dark:text-gray-300 text-sm items-center mb-4'>
-          <input
-            type='checkbox'
-            checked={_customEndpoint}
-            className='w-4 h-4'
-            onChange={handleToggleCustomEndpoint}
-          />
-          Use T1A-Provided API Endpoint
-        </label>
-
         <div className='flex gap-2 items-center mb-6'>
           <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
-            {t('apiEndpoint.inputLabel', { ns: 'api' })}
+            API Endpoint Type
           </div>
+          <select
+            className='text-gray-800 dark:text-white p-1 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md m-0 w-full mr-0 h-8 focus:outline-none'
+            value={_customEndpoint ? 'built-in' : 'direct'}
+            onChange={(e) => handleToggleCustomEndpoint(e.target.value)}
+          >
+            <option value="built-in">T1A-Provided Endpoint</option>
+            <option value="direct">Direct Endpoint</option>
+          </select>
+        </div>
+
+        <div className='flex gap-2 items-center mb-6'>
           {_customEndpoint ? (
             <input
               type='text'
               className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md m-0 w-full mr-0 h-8 focus:outline-none'
               readOnly
+              hidden
               value={_apiEndpoint}
               onChange={(e) => {
                 _setApiEndpoint(e.target.value);
               }}
             />
           ) : (
-            <ApiEndpointSelector
-              _apiEndpoint={_apiEndpoint}
-              _setApiEndpoint={_setApiEndpoint}
-            />
+            <>
+              <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
+                {t('apiEndpoint.inputLabel', { ns: 'api' })}
+              </div>
+              <ApiEndpointSelector
+                _apiEndpoint={_apiEndpoint}
+                _setApiEndpoint={_setApiEndpoint}
+              />
+            </>
           )}
         </div>
 
@@ -116,7 +126,7 @@ const ApiMenu = ({
 
           {_customEndpoint ? 
             (
-            <p>The T1A-Provided API endpoint is a part of this application deployment. <br/>It serves as a proxy gateway to OpenAI API, and does not require an API Key</p>
+            <p>The T1A-Provided API endpoint is an integral part of this application, and does not require an API Key</p>
             )
             :
             (
