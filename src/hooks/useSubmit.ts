@@ -46,8 +46,13 @@ const useSubmit = () => {
         data = await getChatCompletion(
           useStore.getState().apiEndpoint,
           message,
-          titleGenConfig
-          // No API key is passed
+          titleGenConfig,
+          undefined,
+          {
+            'X-api-model': titleGenConfig.model,
+            'X-messages-count': '1',
+            'X-purpose': 'Title Generation',
+          }
         );
       }
     } catch (error: unknown) {
@@ -101,7 +106,13 @@ const useSubmit = () => {
         stream = await getChatCompletionStream(
           useStore.getState().apiEndpoint,
           messages,
-          chats[currentChatIndex].config
+          chats[currentChatIndex].config,
+          undefined,
+          {
+            'X-api-model': chats[currentChatIndex].config.model,
+            'X-messages-count': messages.length.toString(),
+            'X-purpose': 'Chat Submission',
+          }
           // No API key is passed
         );
       }
