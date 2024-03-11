@@ -5,7 +5,7 @@ import { ChatInterface, MessageInterface } from '@type/chat';
 import { getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
 import { limitMessageTokens, updateTotalTokenUsed } from '@utils/messageUtils';
-import { _defaultChatConfig } from '@constants/chat';
+import { defaultTitleGenModel, _defaultChatConfig } from '@constants/chat';
 import { officialAPIEndpoint } from '@constants/auth';
 
 const useSubmit = () => {
@@ -23,6 +23,9 @@ const useSubmit = () => {
     message: MessageInterface[]
   ): Promise<string> => {
     let data;
+
+    const titleGenConfig = { ..._defaultChatConfig, model: defaultTitleGenModel };
+
     try {
       // Check if using the official API endpoint
       if (apiEndpoint === officialAPIEndpoint) {
@@ -34,7 +37,7 @@ const useSubmit = () => {
           data = await getChatCompletion(
             apiEndpoint,
             message,
-            _defaultChatConfig,
+            titleGenConfig,
             apiKey
           );
         }
@@ -43,7 +46,7 @@ const useSubmit = () => {
         data = await getChatCompletion(
           useStore.getState().apiEndpoint,
           message,
-          _defaultChatConfig
+          titleGenConfig
           // No API key is passed
         );
       }
