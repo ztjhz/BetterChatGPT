@@ -29,7 +29,8 @@ const AboutMenu = () => {
           <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
             <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm flex flex-col gap-3 leading-relaxed'>
               <p>This is a T1A-provided AI LLM Assistant application. Use it to optimize your work.</p>
-              <p>The UI is based on  the BetterChatGPT project, customized to T1A needs.<br/>Check it on GitHub: <a href='https://github.com/ztjhz/BetterChatGPT' target='_blank' className='link'>https://github.com/ztjhz/BetterChatGPT</a></p>
+              <p>The UI is based on  the <b>BetterChatGPT project by Jing Hua</b>, customized to <b>T1A needs</b>.<br/>
+              Our fork on GitHub: <a href='https://github.com/DmitriyAlergant-T1A/BetterChatGPT-t1a' target='_blank' className='link'>https://github.com/DmitriyAlergant-T1A/BetterChatGPT-t1a</a></p>
               
               <>
                 <h2 className='text-lg font-bold'>
