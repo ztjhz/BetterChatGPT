@@ -126,10 +126,10 @@ export const TotalTokenCostDisplay = () => {
   }, [totalTokenUsed]);
 
   return (
-    <a className='flex py-2 px-2 items-center gap-3 rounded-md hover:bg-gray-500/10 transition-colors duration-200 text-white text-sm'>
+    <>
       <CalculatorIcon />
       {`Accumulated Cost: $${totalCost.toFixed(2)}`}
-    </a>
+    </>
   );
 };
 

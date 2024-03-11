@@ -13,6 +13,9 @@ import ImageIcon from '@icon/ImageIcon';
 import PdfIcon from '@icon/PdfIcon';
 import MarkdownIcon from '@icon/MarkdownIcon';
 import JsonIcon from '@icon/JsonIcon';
+import DownChevronArrowIcon from '@icon/DownChevronArrow';
+import DownArrowIcon from '@icon/DownArrow';
+
 
 import downloadFile from '@utils/downloadFile';
 
@@ -25,11 +28,12 @@ const DownloadChat = React.memo(
         <button
           className='btn btn-neutral'
           aria-label={t('downloadChat') as string}
+          title={t('downloadChat') || 'Download Chat'}
           onClick={() => {
             setIsModalOpen(true);
           }}
         >
-          {t('downloadChat')}
+          <DownArrowIcon/>          
         </button>
         {isModalOpen && (
           <PopupModal

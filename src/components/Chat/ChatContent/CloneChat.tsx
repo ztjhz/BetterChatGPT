@@ -6,6 +6,8 @@ import { ChatInterface } from '@type/chat';
 
 import TickIcon from '@icon/TickIcon';
 
+import CloneIcon from '@icon/CloneIcon';
+
 const CloneChat = React.memo(() => {
   const { t } = useTranslation();
 
@@ -48,13 +50,14 @@ const CloneChat = React.memo(() => {
       className='btn btn-neutral flex gap-1'
       aria-label={t('cloneChat') as string}
       onClick={cloneChat}
+      title={t('cloneChat') || "Clone Chat"}
     >
       {cloned ? (
         <>
           <TickIcon /> {t('cloned')}
         </>
       ) : (
-        <>{t('cloneChat')}</>
+        <><CloneIcon/></>
       )}
     </button>
   );
