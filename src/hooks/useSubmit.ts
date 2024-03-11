@@ -24,25 +24,27 @@ const useSubmit = () => {
   ): Promise<string> => {
     let data;
     try {
-      if (!apiKey || apiKey.length === 0) {
-        // official endpoint
-        if (apiEndpoint === officialAPIEndpoint) {
+      // Check if using the official API endpoint
+      if (apiEndpoint === officialAPIEndpoint) {
+        if (!apiKey || apiKey.length === 0) {
+          // If API key is required but missing
           throw new Error(t('noApiKeyWarning') as string);
+        } else {
+          // Use the official API endpoint with the API key
+          data = await getChatCompletion(
+            apiEndpoint,
+            message,
+            _defaultChatConfig,
+            apiKey
+          );
         }
-
-        // other endpoints
+      } else {
+        // For custom API endpoints, call getChatCompletion without an API key (for now)
         data = await getChatCompletion(
           useStore.getState().apiEndpoint,
           message,
           _defaultChatConfig
-        );
-      } else if (apiKey) {
-        // own apikey
-        data = await getChatCompletion(
-          useStore.getState().apiEndpoint,
-          message,
-          _defaultChatConfig,
-          apiKey
+          // No API key is passed
         );
       }
     } catch (error: unknown) {
@@ -77,26 +79,27 @@ const useSubmit = () => {
       );
       if (messages.length === 0) throw new Error('Message exceed max token!');
 
-      // no api key (free)
-      if (!apiKey || apiKey.length === 0) {
-        // official endpoint
-        if (apiEndpoint === officialAPIEndpoint) {
+      // Check if using the official API endpoint
+      if (apiEndpoint === officialAPIEndpoint) {
+        if (!apiKey || apiKey.length === 0) {
+          // If using the official endpoint and API key is missing
           throw new Error(t('noApiKeyWarning') as string);
+        } else {
+          // If API key is provided, use it with the official endpoint
+          stream = await getChatCompletionStream(
+            apiEndpoint,
+            messages,
+            chats[currentChatIndex].config,
+            apiKey
+          );
         }
-
-        // other endpoints
+      } else {
+        // For custom API endpoints, proceed without an API key
         stream = await getChatCompletionStream(
           useStore.getState().apiEndpoint,
           messages,
           chats[currentChatIndex].config
-        );
-      } else if (apiKey) {
-        // own apikey
-        stream = await getChatCompletionStream(
-          useStore.getState().apiEndpoint,
-          messages,
-          chats[currentChatIndex].config,
-          apiKey
+          // No API key is passed
         );
       }
 

@@ -6,7 +6,7 @@ import useHideOnOutsideClick from '@hooks/useHideOnOutsideClick';
 
 import PopupModal from '@components/PopupModal';
 
-import { availableEndpoints, defaultAPIEndpoint } from '@constants/auth';
+import {officialAPIEndpoint, customAPIEndpoint, defaultAPIEndpoint, availableEndpoints} from '@constants/auth'
 
 import DownChevronArrow from '@icon/DownChevronArrow';
 
@@ -35,8 +35,10 @@ const ApiMenu = ({
   };
 
   const handleToggleCustomEndpoint = () => {
-    if (_customEndpoint) _setApiEndpoint(defaultAPIEndpoint);
-    else _setApiEndpoint('');
+    if (_customEndpoint) 
+      _setApiEndpoint(officialAPIEndpoint);
+    else 
+      _setApiEndpoint(customAPIEndpoint);
     _setCustomEndpoint((prev) => !prev);
   };
 
@@ -54,7 +56,7 @@ const ApiMenu = ({
             className='w-4 h-4'
             onChange={handleToggleCustomEndpoint}
           />
-          {t('customEndpoint', { ns: 'api' })}
+          Use T1A-Provided API Endpoint
         </label>
 
         <div className='flex gap-2 items-center mb-6'>
@@ -65,6 +67,7 @@ const ApiMenu = ({
             <input
               type='text'
               className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md m-0 w-full mr-0 h-8 focus:outline-none'
+              readOnly
               value={_apiEndpoint}
               onChange={(e) => {
                 _setApiEndpoint(e.target.value);
@@ -78,6 +81,7 @@ const ApiMenu = ({
           )}
         </div>
 
+        {_customEndpoint || (
         <div className='flex gap-2 items-center justify-center mt-2'>
           <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
             {t('apiKey.inputLabel', { ns: 'api' })}
@@ -91,9 +95,10 @@ const ApiMenu = ({
             }}
           />
         </div>
+        )}
 
         <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm flex flex-col gap-3 leading-relaxed'>
-          <p className='mt-4'>
+          {/* <p className='mt-4'>
             <Trans
               i18nKey='apiKey.howTo'
               ns='api'
@@ -105,13 +110,24 @@ const ApiMenu = ({
                 />,
               ]}
             />
-          </p>
+          </p> */}
 
-          <p>{t('securityMessage', { ns: 'api' })}</p>
+          <p></p>
+
+          {_customEndpoint ? 
+            (
+            <p>The T1A-Provided API endpoint is a part of this application deployment. <br/>It serves as a proxy gateway to OpenAI API, and does not require an API Key</p>
+            )
+            :
+            (
+            <p>You have to provide your own API Key to directly connect to the "official" OpenAI endpoint.<br/>The API Key will only be stored on your browser.</p>
+            )
+          }
+          {/* <p>{t('securityMessage', { ns: 'api' })}</p>
 
           <p>{t('apiEndpoint.description', { ns: 'api' })}</p>
 
-          <p>{t('apiEndpoint.warn', { ns: 'api' })}</p>
+          <p>{t('apiEndpoint.warn', { ns: 'api' })}</p> */}
         </div>
       </div>
     </PopupModal>
