@@ -10,7 +10,7 @@
   "import": "Import",
   "export": "Export",
   "author": "Made by Jing Hua",
-  "about": "About & Sponsor",
+  "about": "About",
   "api": "API",
   "personal": "Personal",
   "free": "Free",
@@ -43,5 +43,5 @@
   "cloneChat": "Clone Chat",
   "cloned": "Cloned",
   "enterToSubmit": "Enter to submit",
-  "submitPlaceholder": "Type a message or click [/] for prompts..."
+  "submitPlaceholder": "Type a message..."
 }

@@ -8,7 +8,7 @@ import Menu from '@components/Menu';
 import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 import { ChatInterface } from '@type/chat';
 import { Theme } from '@type/theme';
-import ApiPopup from '@components/ApiPopup';
+// import ApiPopup from '@components/ApiPopup';
 import Toast from '@components/Toast';
 
 function App() {
@@ -78,7 +78,7 @@ function App() {
     <div className='overflow-hidden w-full h-full relative'>
       <Menu />
       <Chat />
-      <ApiPopup />
+      {/* <ApiPopup /> */}
       <Toast />
     </div>
   );

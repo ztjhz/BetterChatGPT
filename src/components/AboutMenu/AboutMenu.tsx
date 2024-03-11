@@ -28,118 +28,23 @@ const AboutMenu = () => {
         >
           <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
             <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm flex flex-col gap-3 leading-relaxed'>
-              <p>{t('description', { ns: 'about' })}</p>
-              <p>
-                <Trans
-                  i18nKey='sourceCode'
-                  ns='about'
-                  components={[
-                    <a
-                      href='https://github.com/ztjhz/BetterChatGPT'
-                      target='_blank'
-                      className='link'
-                    />,
-                  ]}
-                />
-              </p>
-
-              <p>
-                <Trans
-                  i18nKey='initiative.description'
-                  ns='about'
-                  components={[
-                    <a
-                      href={t('initiative.link', { ns: 'about' }) as string}
-                      target='_blank'
-                      className='link'
-                    />,
-                  ]}
-                />
-              </p>
-
-              <h2 className='text-lg font-bold'>
-                {t('discordServer.title', { ns: 'about' })}
-              </h2>
-              <p>{t('discordServer.paragraph1', { ns: 'about' })}</p>
-
-              <p>
-                <Trans
-                  i18nKey='discordServer.paragraph2'
-                  ns='about'
-                  components={[
-                    <a
-                      className='link'
-                      href='https://discord.gg/g3Qnwy4V6A'
-                      target='_blank'
-                    />,
-                  ]}
-                />
-              </p>
-
+              <p>This is a T1A-provided AI LLM Assistant application. Use it to optimize your work.</p>
+              <p>The UI is based on  the BetterChatGPT project, customized to T1A needs.<br/>Check it on GitHub: <a href='https://github.com/ztjhz/BetterChatGPT' target='_blank' className='link'>https://github.com/ztjhz/BetterChatGPT</a></p>
+              
               <>
                 <h2 className='text-lg font-bold'>
                   {t('support.title', { ns: 'about' })}
                 </h2>
-                <p>{t('support.paragraph1', { ns: 'about' })}</p>
-                <p>
-                  <Trans
-                    i18nKey='support.paragraph2'
-                    ns='about'
-                    components={[
-                      <a
-                        href='https://github.com/ztjhz/BetterChatGPT'
-                        target='_blank'
-                        className='link'
-                      />,
-                    ]}
-                  />
-                </p>
-                <p>{t('support.paragraph3', { ns: 'about' })}</p>
-
-                <div className='flex flex-col items-center gap-4 my-4'>
-                  <a href='https://github.com/sponsors/ztjhz' target='_blank'>
-                    <img
-                      src='https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86'
-                      width='120px'
-                      alt='Support us through GitHub Sponsors'
-                    />
-                  </a>
-                  <a href='https://ko-fi.com/betterchatgpt' target='_blank'>
-                    <img
-                      src='./kofi.svg'
-                      alt='Support us through the Ko-fi platform.'
-                    />
-                  </a>
-                  <div className='flex gap-x-10 gap-y-4 flex-wrap justify-center'>
-                    <div className='flex flex-col items-center justify-center gap-1'>
-                      <div>{t('support.alipay', { ns: 'about' })} (Ayaka)</div>
-                      <img
-                        className='rounded-md w-32 h-32'
-                        src='https://ayaka14732.github.io/sponsor/alipay.jpg'
-                        alt='Support us through Alipay'
-                      />
-                    </div>
-                    <div className='flex flex-col items-center justify-center gap-1'>
-                      <div>
-                        {t('support.wechatPay', { ns: 'about' })} (Ayaka)
-                      </div>
-                      <img
-                        className='rounded-md w-32 h-32'
-                        src='https://ayaka14732.github.io/sponsor/wechat.png'
-                        alt='Support us through WeChat Pay'
-                      />
-                    </div>
-                  </div>
-                </div>
-                <p>{t('support.paragraph4', { ns: 'about' })}</p>
+                <p>For support, contact Dmitriy Alergant (for now).</p>
               </>
 
-              <h2 className='text-lg font-bold'>
-                {t('privacyStatement.title', { ns: 'about' })}
-              </h2>
-              <p>{t('privacyStatement.paragraph1', { ns: 'about' })}</p>
+              <h2 className='text-lg font-bold'>Privacy Policy</h2>
+              <p>This tool is provided strictly for T1A business use</p>
+              <p>We (<b>do or do not?</b>) retain request logs of your prompts and API model resopnses.</p>
+              <p>We do collect statistics on individual usage: number of requests, their sizes, total costs, etc.</p>
+              <p>Ther 3rd party API providers (OpenAI) claim not to retain our API requests over 30 days,<br/> and not to use these inputs for future LLM models training.</p>
 
-              <p>{t('privacyStatement.paragraph2', { ns: 'about' })}</p>
+              {/* <p>{t('privacyStatement.paragraph2', { ns: 'about' })}</p> */}
             </div>
           </div>
         </PopupModal>

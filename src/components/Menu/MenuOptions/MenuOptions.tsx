@@ -23,13 +23,13 @@ const MenuOptions = () => {
           hideMenuOptions ? 'max-h-0' : 'max-h-full'
         } overflow-hidden transition-all`}
       >
-        {countTotalTokens && <TotalTokenCostDisplay />}
-        {googleClientId && <GoogleSync clientId={googleClientId} />}
-        <AboutMenu />
+        {<TotalTokenCostDisplay />}
+        {/* {googleClientId && <GoogleSync clientId={googleClientId} />} */}
         <ImportExportChat />
-        <Api />
+        {/* <Api /> */}
         <SettingsMenu />
-        <Me />
+        {/* <Me /> */}
+        <AboutMenu />
       </div>
     </>
   );
