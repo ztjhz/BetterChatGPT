@@ -10,12 +10,13 @@ const dateString =
   '-' +
   ('0' + date.getDate()).slice(-2);
 
-// default system message obtained using the following method: https://twitter.com/DeminDimin/status/1619935545144279040
 export const _defaultSystemMessage =
   import.meta.env.VITE_DEFAULT_SYSTEM_MESSAGE ??
-  `You are ChatGPT, a large language model trained by OpenAI.
-Carefully heed the user's instructions. 
-Respond using Markdown.`;
+  `You are T1A-ChatGPT, a large language model trained by OpenAI, whose service provided by T1A.
+   Carefully follow the user's instructions. Respond using Markdown. Respond briefly, elaborate further when asked.
+   If requested for code, only give that code, withold explanations until requested.
+   If requested for code modification, lean towards only giving the relevant or changed snippets of code. But be ready to provide a complete sample when requested.
+   When the conversation became lengthy and the accumulated context unneccessary consumes tokens, suggest the user to restart the converation in a new Chat and provide the current summary of context.`;
 
 export const modelOptions: ModelOptions[] = [
   'gpt-3.5-turbo',
@@ -53,10 +54,10 @@ export const defaultUserMaxToken = 8000;
 export const _defaultChatConfig: ConfigInterface = {
   model: defaultModel,
   max_tokens: defaultUserMaxToken,
-  temperature: 0.6,
+  temperature: 0.3,
   presence_penalty: 0,
-  top_p: 0.3,
-  frequency_penalty: 0,
+  top_p: 0.2,
+  frequency_penalty: 0.1,
 };
 
 export const generateDefaultChat = (
