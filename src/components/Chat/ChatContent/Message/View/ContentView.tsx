@@ -144,14 +144,23 @@ const ContentView = memo(
                 messageIndex === lastMessageIndex && (
                   <RefreshButton onClick={handleRefresh} />
                 )}
-              {messageIndex !== 0 && <UpButton onClick={handleMoveUp} />}
+              {messageIndex !== 1 && 
+                <>
+                  <UpButton onClick={handleMoveUp} />
+                </>
+              }
               {messageIndex !== lastMessageIndex && (
-                <DownButton onClick={handleMoveDown} />
+                <>
+                  <DownButton onClick={handleMoveDown} />
+                </>
               )}
 
               <MarkdownModeButton />
               <CopyButton onClick={handleCopy} />
-              <EditButton setIsEdit={setIsEdit} />
+              { 
+                role === 'user' &&
+                <EditButton setIsEdit={setIsEdit} />
+              }
               <DeleteButton setIsDelete={setIsDelete} />
             </>
           )}
