@@ -2,7 +2,7 @@ import React from 'react';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
 import { ChatInterface, MessageInterface } from '@type/chat';
-import { getChatCompletion, getChatCompletionStream } from '@api/api';
+import { isAuthenticated, redirectToLogin, getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
 import { limitMessageTokens, updateTotalTokenUsed } from '@utils/messageUtils';
 import { defaultTitleGenModel, _defaultChatConfig } from '@constants/chat';
@@ -42,7 +42,14 @@ const useSubmit = () => {
           );
         }
       } else {
-        // For custom API endpoints, call getChatCompletion without an API key (for now)
+        // For custom API endpoints, call getChatCompletion without an API key (for now).
+        // First, check for the authentication status
+        if (!(await isAuthenticated())) {
+          console.log("User not authenticated, redirecting to login.");
+          await redirectToLogin();
+          throw new Error(`API Authentication Error, please reload the page`);
+        }
+
         data = await getChatCompletion(
           useStore.getState().apiEndpoint,
           message,
@@ -103,6 +110,14 @@ const useSubmit = () => {
         }
       } else {
         // For custom API endpoints, proceed without an API key
+        // First, check for authentication statis
+
+        if (!(await isAuthenticated())) {
+          console.log("User not authenticated, redirecting to login.");
+          await redirectToLogin();
+          throw new Error(`API Authentication Error, please reload the page`);
+        }
+        
         stream = await getChatCompletionStream(
           useStore.getState().apiEndpoint,
           messages,

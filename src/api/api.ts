@@ -2,6 +2,27 @@ import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface, ModelOptions } from '@type/chat';
 import { isAzureEndpoint } from '@utils/api';
 
+
+export const isAuthenticated = async () => {
+  try {
+    const response = await fetch('/.auth/me');
+    if (response.ok) {
+      const data = await response.json();
+      // Check if the user data exists and has necessary properties
+      return data.clientPrincipal != null;
+    }
+    return false;
+  } catch (error) {
+    console.error('Error checking authentication status:', error);
+    return false;
+  }
+}
+
+export const redirectToLogin = async() => {
+  // Redirect to a login route that triggers AAD authentication
+  window.location.href = '/.auth/login/aad';
+}
+
 export const getChatCompletion = async (
   endpoint: string,
   messages: MessageInterface[],
@@ -92,17 +113,6 @@ export const getChatCompletionStream = async (
         'Invalid API endpoint, or API Gateway is down.\nPlease contact the application administrator...'
       );
     }
-  }
-
-
-  if (response.status === 401) {
-    const text = await response.text();
-
-    console.log("API error code 401, attempting to refresh the window. " + text)
-
-    window.location.reload();
-    
-    throw new Error("API Fetch Unauthorized. Please refresh the page to log in");
   }
 
   if (response.status === 429 || !response.ok) {
