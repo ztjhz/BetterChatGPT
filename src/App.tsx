@@ -10,6 +10,9 @@ import { ChatInterface } from '@type/chat';
 import { Theme } from '@type/theme';
 // import ApiPopup from '@components/ApiPopup';
 import Toast from '@components/Toast';
+import AuthenticationUpdater from '@components/Authentication/AuthenticationUpdater';
+
+import { ClientPrincipalContextProvider } from "@aaronpowell/react-static-web-apps-auth";
 
 function App() {
   const initialiseNewChat = useInitialiseNewChat();
@@ -76,10 +79,15 @@ function App() {
 
   return (
     <div className='overflow-hidden w-full h-full relative'>
-      <Menu />
-      <Chat />
-      {/* <ApiPopup /> */}
-      <Toast />
+      <ClientPrincipalContextProvider>
+        <>
+          <AuthenticationUpdater />
+          <Menu />
+          <Chat />
+          {/* <ApiPopup /> */}
+          <Toast />
+        </>
+      </ClientPrincipalContextProvider>
     </div>
   );
 }
