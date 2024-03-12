@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -32,6 +33,7 @@ jobs:
           output_location: "dist" # Built app content directory - optional
           app_build_command: 'npm run build'
           api_build_command: 'rm -rf ./node_modules/@next/swc-* && rm -rf ./.next/cache'
+          production_branch: "main"
           ###### End of Repository/Build Configurations ######
         env:
           VITE_COMPANY_NAME: ${{ vars.VITE_COMPANY_NAME }} # This line passes the secret to the build process
