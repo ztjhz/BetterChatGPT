@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import useStore from "@store/store";
-import SunIcon from "@icon/SunIcon";
-import MoonIcon from "@icon/MoonIcon";
-import { Theme } from "@type/theme";
+import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import useStore from '@store/store';
+import SunIcon from '@icon/SunIcon';
+import MoonIcon from '@icon/MoonIcon';
+import { Theme } from '@type/theme';
 
 const getOppositeTheme = (theme: Theme): Theme => {
-  if (theme === "dark") {
-    return "light";
+  if (theme === 'dark') {
+    return 'light';
   } else {
-    return "dark";
+    return 'dark';
   }
 };
 const ThemeSwitcher = () => {
@@ -27,12 +27,12 @@ const ThemeSwitcher = () => {
 
   return theme ? (
     <button
-      className="items-center gap-3 btn btn-neutral"
+      className='items-center gap-3 btn btn-neutral'
       onClick={switchTheme}
-      aria-label="toggle dark/light mode"
+      aria-label='toggle dark/light mode'
     >
-      {theme === "dark" ? <SunIcon /> : <MoonIcon />}
-      {t(getOppositeTheme(theme) + "Mode")}
+      {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+      {t(getOppositeTheme(theme) + 'Mode')}
     </button>
   ) : (
     <></>

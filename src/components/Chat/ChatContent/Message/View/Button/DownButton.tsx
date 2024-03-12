@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import DownChevronArrow from "@icon/DownChevronArrow";
+import DownChevronArrow from '@icon/DownChevronArrow';
 
-import BaseButton from "./BaseButton";
+import BaseButton from './BaseButton';
 
 const DownButton = ({
   onClick,
@@ -12,7 +12,7 @@ const DownButton = ({
   return (
     <BaseButton
       icon={<DownChevronArrow />}
-      buttonProps={{ "aria-label": "shift message down" }}
+      buttonProps={{ 'aria-label': 'shift message down' }}
       onClick={onClick}
     />
   );

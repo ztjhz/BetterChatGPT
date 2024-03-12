@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import RefreshIcon from "@icon/RefreshIcon";
+import RefreshIcon from '@icon/RefreshIcon';
 
-import BaseButton from "./BaseButton";
+import BaseButton from './BaseButton';
 
 const RefreshButton = ({
   onClick,
@@ -12,7 +12,7 @@ const RefreshButton = ({
   return (
     <BaseButton
       icon={<RefreshIcon />}
-      buttonProps={{ "aria-label": "regenerate message" }}
+      buttonProps={{ 'aria-label': 'regenerate message' }}
       onClick={onClick}
     />
   );

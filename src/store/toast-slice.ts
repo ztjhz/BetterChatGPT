@@ -1,5 +1,5 @@
-import { ToastStatus } from "@components/Toast/Toast";
-import { StoreSlice } from "./store";
+import { ToastStatus } from '@components/Toast/Toast';
+import { StoreSlice } from './store';
 
 export interface ToastSlice {
   toastShow: boolean;
@@ -12,8 +12,8 @@ export interface ToastSlice {
 
 export const createToastSlice: StoreSlice<ToastSlice> = (set, get) => ({
   toastShow: false,
-  toastMessage: "",
-  toastStatus: "success",
+  toastMessage: '',
+  toastStatus: 'success',
   setToastShow: (toastShow: boolean) => {
     set((prev) => ({ ...prev, toastShow }));
   },

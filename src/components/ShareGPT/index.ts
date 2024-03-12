@@ -1,1 +1,1 @@
-export { default } from "./ShareGPT";
+export { default } from './ShareGPT';

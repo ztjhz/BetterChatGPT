@@ -1,5 +1,5 @@
-import { StoreSlice } from "./store";
-import { Role } from "@type/chat";
+import { StoreSlice } from './store';
+import { Role } from '@type/chat';
 
 export interface InputSlice {
   inputRole: Role;
@@ -7,7 +7,7 @@ export interface InputSlice {
 }
 
 export const createInputSlice: StoreSlice<InputSlice> = (set, get) => ({
-  inputRole: "user",
+  inputRole: 'user',
   setInputRole: (inputRole: Role) => {
     set((prev: InputSlice) => ({
       ...prev,

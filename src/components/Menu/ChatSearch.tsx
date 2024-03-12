@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import { debounce } from "lodash";
-import useStore from "@store/store";
+import React, { useEffect, useRef, useState } from 'react';
+import { debounce } from 'lodash';
+import useStore from '@store/store';
 
-import SearchBar from "@components/SearchBar";
+import SearchBar from '@components/SearchBar';
 
 const ChatSearch = ({
   filter,
@@ -21,7 +21,7 @@ const ChatSearch = ({
   const debouncedUpdateFilter = useRef(
     debounce((f) => {
       setFilter(f);
-    }, 500),
+    }, 500)
   ).current;
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const ChatSearch = ({
     <SearchBar
       value={_filter}
       handleChange={handleChange}
-      className="h-8 mb-2"
+      className='h-8 mb-2'
       disabled={generating}
     />
   );

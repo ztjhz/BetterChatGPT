@@ -1,5 +1,5 @@
-import { SyncStatus } from "@type/google-api";
-import { StoreSlice } from "./cloud-auth-store";
+import { SyncStatus } from '@type/google-api';
+import { StoreSlice } from './cloud-auth-store';
 
 export interface CloudAuthSlice {
   googleAccessToken?: string;
@@ -16,7 +16,7 @@ export interface CloudAuthSlice {
 
 export const createCloudAuthSlice: StoreSlice<CloudAuthSlice> = (set, get) => ({
   cloudSync: false,
-  syncStatus: "unauthenticated",
+  syncStatus: 'unauthenticated',
   setGoogleAccessToken: (googleAccessToken?: string) => {
     set((prev: CloudAuthSlice) => ({
       ...prev,

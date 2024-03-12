@@ -1,5 +1,5 @@
-import ArrowBottom from "@icon/ArrowBottom";
-import useStore from "@store/store";
+import ArrowBottom from '@icon/ArrowBottom';
+import useStore from '@store/store';
 
 const CollapseOptions = () => {
   const setHideMenuOptions = useStore((state) => state.setHideMenuOptions);
@@ -12,7 +12,7 @@ const CollapseOptions = () => {
     >
       <ArrowBottom
         className={`h-3 w-3 transition-all duration-100 ${
-          hideMenuOptions ? "rotate-180" : ""
+          hideMenuOptions ? 'rotate-180' : ''
         }`}
       />
     </div>

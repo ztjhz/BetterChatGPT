@@ -1,22 +1,22 @@
-import { ShareGPTSubmitBodyInterface } from "@type/api";
-import { ConfigInterface, MessageInterface, ModelOptions } from "@type/chat";
-import { isAzureEndpoint } from "@utils/api";
+import { ShareGPTSubmitBodyInterface } from '@type/api';
+import { ConfigInterface, MessageInterface, ModelOptions } from '@type/chat';
+import { isAzureEndpoint } from '@utils/api';
 
 export const getChatCompletion = async (
   endpoint: string,
   messages: MessageInterface[],
   config: ConfigInterface,
   apiKey?: string,
-  customHeaders?: Record<string, string>,
+  customHeaders?: Record<string, string>
 ) => {
   const headers: HeadersInit = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
     ...customHeaders,
   };
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
 
   if (isAzureEndpoint(endpoint) && apiKey) {
-    headers["api-key"] = apiKey;
+    headers['api-key'] = apiKey;
 
     const modelmapping: Partial<Record<ModelOptions, string>> = {
       'gpt-3.5-turbo': 'gpt-35-turbo',
@@ -29,22 +29,24 @@ export const getChatCompletion = async (
 
     // set api version to 2023-07-01-preview for gpt-4, gpt-4-32k and gpt-4-1106-preview otherwise use 2023-03-15-preview
     const apiVersion =
-      model === "gpt-4" || model === "gpt-4-32k" || model === "gpt-4-1106-preview"
-        ? "2023-07-01-preview"
-        : "2023-03-15-preview";
+      model === 'gpt-4' ||
+      model === 'gpt-4-32k' ||
+      model === 'gpt-4-1106-preview'
+        ? '2023-07-01-preview'
+        : '2023-03-15-preview';
 
     const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
 
     if (!endpoint.endsWith(path)) {
-      if (!endpoint.endsWith("/")) {
-        endpoint += "/";
+      if (!endpoint.endsWith('/')) {
+        endpoint += '/';
       }
       endpoint += path;
     }
   }
 
   const response = await fetch(endpoint, {
-    method: "POST",
+    method: 'POST',
     headers,
     body: JSON.stringify({
       messages,
@@ -63,19 +65,19 @@ export const getChatCompletionStream = async (
   messages: MessageInterface[],
   config: ConfigInterface,
   apiKey?: string,
-  customHeaders?: Record<string, string>,
+  customHeaders?: Record<string, string>
 ) => {
   const headers: HeadersInit = {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
     ...customHeaders,
   };
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
 
   if (isAzureEndpoint(endpoint) && apiKey) {
-    headers["api-key"] = apiKey;
+    headers['api-key'] = apiKey;
 
     const modelmapping: Partial<Record<ModelOptions, string>> = {
-      "gpt-3.5-turbo": "gpt-35-turbo",
+      'gpt-3.5-turbo': 'gpt-35-turbo',
       //      "gpt-3.5-turbo-16k": "gpt-35-turbo-16k",
     };
 
@@ -83,21 +85,23 @@ export const getChatCompletionStream = async (
 
     // set api version to 2023-07-01-preview for gpt-4 and gpt-4-32k, otherwise use 2023-03-15-preview
     const apiVersion =
-      model === "gpt-4" || model === "gpt-4-32k" || model === "gpt-4-1106-preview"
-        ? "2023-07-01-preview"
-        : "2023-03-15-preview";
+      model === 'gpt-4' ||
+      model === 'gpt-4-32k' ||
+      model === 'gpt-4-1106-preview'
+        ? '2023-07-01-preview'
+        : '2023-03-15-preview';
     const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
 
     if (!endpoint.endsWith(path)) {
-      if (!endpoint.endsWith("/")) {
-        endpoint += "/";
+      if (!endpoint.endsWith('/')) {
+        endpoint += '/';
       }
       endpoint += path;
     }
   }
 
   const response = await fetch(endpoint, {
-    method: "POST",
+    method: 'POST',
     headers,
     body: JSON.stringify({
       messages,
@@ -109,14 +113,14 @@ export const getChatCompletionStream = async (
   if (response.status === 404 || response.status === 405) {
     const text = await response.text();
 
-    if (text.includes("model_not_found")) {
+    if (text.includes('model_not_found')) {
       throw new Error(
         text +
-        "\nMessage from GPT-CX:\nPlease ensure that you have access to the GPT-4 API!",
+          '\nMessage from GPT-CX:\nPlease ensure that you have access to the GPT-4 API!'
       );
     } else {
       throw new Error(
-        "Message from GPT-CX:\nInvalid API endpoint! We recommend you to check your free API endpoint.",
+        'Message from GPT-CX:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
       );
     }
   }
@@ -124,11 +128,11 @@ export const getChatCompletionStream = async (
   if (response.status === 429 || !response.ok) {
     const text = await response.text();
     let error = text;
-    if (text.includes("insufficient_quota")) {
+    if (text.includes('insufficient_quota')) {
       error +=
-        "\nMessage from GPT-CX:\nWe recommend changing your API endpoint or API key";
+        '\nMessage from GPT-CX:\nWe recommend changing your API endpoint or API key';
     } else if (response.status === 429) {
-      error += "\nRate limited!";
+      error += '\nRate limited!';
     }
     throw new Error(error);
   }
@@ -138,16 +142,16 @@ export const getChatCompletionStream = async (
 };
 
 export const submitShareGPT = async (body: ShareGPTSubmitBodyInterface) => {
-  const request = await fetch("https://sharegpt.com/api/conversations", {
+  const request = await fetch('https://sharegpt.com/api/conversations', {
     body: JSON.stringify(body),
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
-    method: "POST",
+    method: 'POST',
   });
 
   const response = await request.json();
   const { id } = response;
   const url = `https://shareg.pt/${id}`;
-  window.open(url, "_blank");
+  window.open(url, '_blank');
 };

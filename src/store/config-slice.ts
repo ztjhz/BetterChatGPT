@@ -1,7 +1,7 @@
-import { StoreSlice } from "./store";
-import { Theme } from "@type/theme";
-import { ConfigInterface, TotalTokenUsed } from "@type/chat";
-import { _defaultChatConfig, _defaultSystemMessage } from "@constants/chat";
+import { StoreSlice } from './store';
+import { Theme } from '@type/theme';
+import { ConfigInterface, TotalTokenUsed } from '@type/chat';
+import { _defaultChatConfig, _defaultSystemMessage } from '@constants/chat';
 
 export interface ConfigSlice {
   openConfig: boolean;
@@ -34,7 +34,7 @@ export interface ConfigSlice {
 
 export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
   openConfig: false,
-  theme: "dark",
+  theme: 'dark',
   hideMenuOptions: false,
   hideSideMenu: false,
   autoTitle: false,
