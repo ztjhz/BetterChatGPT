@@ -7,19 +7,29 @@ import LogoutIcon from '@icon/LogoutIcon';
 
 import Cookies from 'js-cookie';
 
-const handleSignOut = async () => {   
-    await Cookies.remove('AppServiceAuthSession');
-    await Cookies.remove('AppServiceAuthSession1');
-    await Cookies.remove('StaticWebAppsAuthCookie');
-    
-    window.location.reload();
-  };
-
 const AuthenticatedUserLogout = () => {
 
   const { t } = useTranslation();
   
   const userName = useStore((state) => state.userName);
+
+  const setToastStatus = useStore((state) => state.setToastStatus);
+  const setToastMessage = useStore((state) => state.setToastMessage);
+  const setToastShow = useStore((state) => state.setToastShow);
+
+  const handleSignOut = async () => {   
+    Cookies.remove('AppServiceAuthSession');
+    Cookies.remove('AppServiceAuthSession1');
+    Cookies.remove('StaticWebAppsAuthCookie');
+
+    setToastStatus('warning');
+    setToastMessage('Logged Out. Please reload the page if it does not redirect.');
+    setToastShow(true);
+    
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  };
 
   return (
     <>
