@@ -17,6 +17,7 @@ export interface ConfigSlice {
   inlineLatex: boolean;
   markdownMode: boolean;
   countTotalTokens: boolean;
+  chatNamesAsPageTitles: boolean;
   totalTokenUsed: TotalTokenUsed;
   setOpenConfig: (openConfig: boolean) => void;
   setTheme: (theme: Theme) => void;
@@ -32,6 +33,7 @@ export interface ConfigSlice {
   setMarkdownMode: (markdownMode: boolean) => void;
   setCountTotalTokens: (countTotalTokens: boolean) => void;
   setTotalTokenUsed: (totalTokenUsed: TotalTokenUsed) => void;
+  setChatNamesAsPageTitles: (chatNamesAsPageTitles: boolean) => void;
 }
 
 export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
@@ -48,6 +50,8 @@ export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
   inlineLatex: false,
   markdownMode: true,
   countTotalTokens: true,
+  chatNamesAsPageTitles: false,
+
   totalTokenUsed: {},
   setOpenConfig: (openConfig: boolean) => {
     set((prev: ConfigSlice) => ({
@@ -71,6 +75,12 @@ export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
     set((prev: ConfigSlice) => ({
       ...prev,
       requestTokensCount: requestTokensCount,
+    }));
+  },
+  setChatNamesAsPageTitles: (chatNamesAsPageTitles: boolean) => {
+    set((prev: ConfigSlice) => ({
+      ...prev,
+      chatNamesAsPageTitles: chatNamesAsPageTitles,
     }));
   },
   setAdvancedMode: (advancedMode: boolean) => {

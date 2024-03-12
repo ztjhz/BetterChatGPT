@@ -14,9 +14,11 @@ import InlineLatexToggle from './InlineLatexToggle';
 import PromptLibraryMenu from '@components/PromptLibraryMenu';
 import ChatConfigMenu from '@components/ChatConfigMenu';
 import EnterToSubmitToggle from './EnterToSubmitToggle';
-import { TotalTokenCostToggle } from '../Menu/MenuOptions/TotalTokenCost';
 import RequestTokensCountToggle from './RequestTokensCountToggle'
+import { TotalTokenCostToggle } from '../Menu/MenuOptions/TotalTokenCost';
+import ChatNamesAsPageTitlesToggle from './ChatNamesAsPageTitlesToggle';
 import ClearConversation from '@components/Menu/MenuOptions/ClearConversation';
+
 
 const SettingsMenu = () => {
   const { t } = useTranslation();
@@ -48,11 +50,12 @@ const SettingsMenu = () => {
             <ThemeSwitcher />
             <div className='flex flex-col gap-3'>
               <AutoTitleToggle />
+              <ChatNamesAsPageTitlesToggle/>
               <EnterToSubmitToggle />
-              <InlineLatexToggle />
-              <AdvancedModeToggle />
               <TotalTokenCostToggle />
               <RequestTokensCountToggle />
+              <InlineLatexToggle />
+              <AdvancedModeToggle />
             </div>
             <ClearConversation />
             <PromptLibraryMenu />
