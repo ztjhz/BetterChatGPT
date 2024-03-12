@@ -9,6 +9,7 @@ import SettingsMenu from '@components/SettingsMenu';
 import CollapseOptions from './CollapseOptions';
 import GoogleSync from '@components/GoogleSync';
 import TokensCostMenu from './TokensCostMenu'
+import AuthenticatedUserLogout from './AuthenticatedUserLogout';
 
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || undefined;
 
@@ -30,6 +31,7 @@ const MenuOptions = () => {
         <Api />
         {/* <Me /> */}
         <AboutMenu />
+        <AuthenticatedUserLogout />
       </div>
     </>
   );
