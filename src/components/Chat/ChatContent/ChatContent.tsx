@@ -13,6 +13,9 @@ import DownloadChat from './DownloadChat';
 import CloneChat from './CloneChat';
 import ShareGPT from '@components/ShareGPT';
 
+import StopGeneratingButton from '@components/StopGeneratingButton/StopGeneratingButton';
+import TokensToast from '@components/Toast/TokensToast';
+
 const ChatContent = () => {
   const inputRole = useStore((state) => state.inputRole);
   const setError = useStore((state) => state.setError);
@@ -105,14 +108,24 @@ const ChatContent = () => {
                 : 'md:max-w-3xl lg:max-w-3xl xl:max-w-4xl'
             }`}
           >
-            {useStore.getState().generating || (
-              // <div className='md:w-[calc(100%-50px)] flex gap-4 flex-wrap justify-center'>
+
               <div className='absolute bottom-6 left-8 right-0 m-auto flex md:w-full md:m-auto gap-0 md:gap-2 justify-left'>
-                <DownloadChat saveRef={saveRef} />
-                {/* <ShareGPT /> */}
-                <CloneChat />
+                {
+                  <>
+                      <DownloadChat saveRef={saveRef} />
+                      <CloneChat />
+                      {useStore.getState().generating ?
+                        (
+                          <StopGeneratingButton />
+                        )
+                        :
+                        (
+                          <TokensToast />
+                        )
+                      }
+                  </>
+                }
               </div>
-            )}
           </div>
           <div className='w-full h-36'></div>
         </div>

@@ -99,6 +99,13 @@ export const updateTotalTokenUsed = (
 
   const newPromptTokens = countTokens(promptMessages, model);
   const newCompletionTokens = countTokens([completionMessage], model);
+
+  const { setTokensToastInputTokens, setTokensToastCompletionTokens, setTokensToastShow} = useStore.getState();
+  
+  setTokensToastInputTokens(newPromptTokens.toString())
+  setTokensToastCompletionTokens(newCompletionTokens.toString())
+  setTokensToastShow(true)
+
   const { promptTokens = 0, completionTokens = 0 } =
     updatedTotalTokenUsed[model] ?? {};
 

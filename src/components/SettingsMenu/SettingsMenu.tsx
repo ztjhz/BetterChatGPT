@@ -14,7 +14,8 @@ import InlineLatexToggle from './InlineLatexToggle';
 import PromptLibraryMenu from '@components/PromptLibraryMenu';
 import ChatConfigMenu from '@components/ChatConfigMenu';
 import EnterToSubmitToggle from './EnterToSubmitToggle';
-import TotalTokenCost, { TotalTokenCostToggle } from '../Menu/MenuOptions/TotalTokenCost';
+import { TotalTokenCostToggle } from '../Menu/MenuOptions/TotalTokenCost';
+import RequestTokensCountToggle from './RequestTokensCountToggle'
 import ClearConversation from '@components/Menu/MenuOptions/ClearConversation';
 
 const SettingsMenu = () => {
@@ -51,11 +52,11 @@ const SettingsMenu = () => {
               <InlineLatexToggle />
               <AdvancedModeToggle />
               <TotalTokenCostToggle />
+              <RequestTokensCountToggle />
             </div>
             <ClearConversation />
             <PromptLibraryMenu />
             <ChatConfigMenu />
-            <TotalTokenCost />
           </div>
         </PopupModal>
       )}

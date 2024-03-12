@@ -24,6 +24,7 @@
   "setting": "Settings",
   "image": "Image",
   "autoTitle": "Auto generate title",
+  "requestTokensCount": "Show request tokens count",
   "advancedMode": "Advanced mode",
   "inlineLatex": "Inline Latex",
   "prompt": "Prompt",
@@ -32,7 +33,7 @@
   "search": "Search",
   "total": "Total",
   "resetCost": "Reset Costs Totals",
-  "countTotalTokens": "Track token costs",
+  "countTotalTokens": "Track total token costs",
   "morePrompts": "You can find more prompts here: ",
   "clearPrompts": "Clear prompts",
   "postOnShareGPT": {
