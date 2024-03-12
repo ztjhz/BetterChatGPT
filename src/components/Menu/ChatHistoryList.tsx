@@ -14,7 +14,6 @@ import {
 } from '@type/chat';
 
 const ChatHistoryList = () => {
-  const chatNamesAsPageTitles = useStore((state) => state.chatNamesAsPageTitles);
   const currentChatIndex = useStore((state) => state.currentChatIndex);
   const setChats = useStore((state) => state.setChats);
   const setFolders = useStore((state) => state.setFolders);
@@ -22,8 +21,6 @@ const ChatHistoryList = () => {
     (state) => state.chats?.map((chat) => chat.title),
     shallow
   );
-
-
 
   const [isHover, setIsHover] = useState<boolean>(false);
   const [chatFolders, setChatFolders] = useState<ChatHistoryFolderInterface>(
@@ -104,9 +101,6 @@ const ChatHistoryList = () => {
       currentChatIndex >= 0 &&
       currentChatIndex < chatTitles.length
     ) {
-      // if a switch is enabled, set page title
-      { chatNamesAsPageTitles && 
-      (document.title = chatTitles[currentChatIndex])};
 
       // expand folder of current chat
       const chats = useStore.getState().chats;
