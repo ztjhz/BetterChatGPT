@@ -94,6 +94,17 @@ export const getChatCompletionStream = async (
     }
   }
 
+
+  if (response.status === 401) {
+    const text = await response.text();
+
+    console.log("API error code 401, attempting to refresh the window. " + text)
+
+    window.location.reload();
+    
+    throw new Error("API Fetch Unauthorized. Please refresh the page to log in");
+  }
+
   if (response.status === 429 || !response.ok) {
     const text = await response.text();
     let error = text;
