@@ -8,9 +8,9 @@ import LogoutIcon from '@icon/LogoutIcon';
 import Cookies from 'js-cookie';
 
 const handleSignOut = async () => {   
-    Cookies.remove('language');
-    Cookies.remove('language');
-    Cookies.remove('language');
+    await Cookies.remove('AppServiceAuthSession');
+    await Cookies.remove('AppServiceAuthSession1');
+    await Cookies.remove('StaticWebAppsAuthCookie');
     
     window.location.reload();
   };
