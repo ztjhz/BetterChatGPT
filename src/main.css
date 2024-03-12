@@ -22,7 +22,7 @@
   .dark body,
   .dark html {
     --tw-bg-opacity: 1;
-    background-color: rgba(52, 53, 65, var(--tw-bg-opacity));
+    background-color: rgba(25, 25, 25, var(--tw-bg-opacity));
   }
 
   #root {
@@ -69,7 +69,7 @@
     @apply inline-block;
   }
 
-  input[type="range"]::-webkit-slider-thumb {
+  input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
     @apply w-4;
     @apply h-4;
