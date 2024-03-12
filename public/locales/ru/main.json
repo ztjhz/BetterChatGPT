@@ -10,7 +10,7 @@
   "import": "Импорт",
   "export": "Экспорт",
   "author": "Автор: Jing Hua",
-  "about": "О программе и спонсоре",
+  "about": "О программе",
   "api": "API",
   "personal": "Личный",
   "free": "Бесплатный",
@@ -24,6 +24,7 @@
   "setting": "Настройки",
   "image": "Изображение",
   "autoTitle": "Автоматическое создание заголовка",
+  "chatNamesAsPageTitles": "Называть таб по заголовоку текущего чата",
   "advancedMode": "Расширенный режим",
   "inlineLatex": "Встроенный Latex",
   "prompt": "Подсказка",
@@ -32,7 +33,8 @@
   "search": "Поиск",
   "total": "Всего",
   "resetCost": "Сбросить стоимость",
-  "countTotalTokens": "Посчитать общее количество токенов",
+  "countTotalTokens": "Показывать накопленную стоимость",
+  "requestTokensCount": "Показывать счетчик токенов в запросе",
   "morePrompts": "Больше подсказок вы можете найти здесь: ",
   "clearPrompts": "Очистить подсказки",
   "postOnShareGPT": {
@@ -43,5 +45,7 @@
   "cloneChat": "Клонировать чат",
   "cloned": "Клонировано",
   "enterToSubmit": "Нажмите Enter для отправки",
-  "submitPlaceholder": "Напишите сообщение..."
+  "submitPlaceholder": "Напишите сообщение...",
+  "logout": "Выйти",
+  "accumulatedCost": "Стоимость запросов"
 }

@@ -23,18 +23,21 @@
   "darkMode": "Dark Mode",
   "setting": "Settings",
   "image": "Image",
-  "autoTitle": "Auto generate title",
-  "advancedMode": "Advanced mode",
+  "autoTitle": "Auto Generate Chat Names",
   "inlineLatex": "Inline Latex",
   "prompt": "Prompt",
   "promptLibrary": "Prompt Library",
   "name": "Name",
   "search": "Search",
   "total": "Total",
-  "resetCost": "Reset Costs",
-  "countTotalTokens": "Count total tokens",
+  "enterToSubmit": "Enter to Submit",
+  "advancedMode": "Advanced Mode",
+  "countTotalTokens": "Show Accumulated Costs",
+  "requestTokensCount": "Show Request Tokens Count",
+  "chatNamesAsPageTitles": "Use Chat Names as Page Titles",
   "morePrompts": "You can find more prompts here: ",
-  "clearPrompts": "Clear prompts",
+  "resetCost": "Reset Costs",
+  "clearPrompts": "Clear Prompts",
   "postOnShareGPT": {
     "title": "Post on ShareGPT",
     "warning": "Please be aware that by posting your conversation on ShareGPT, it will become publicly accessible and viewable to anyone. Once posted, the conversation cannot be hidden or deleted, and may be archived or shared by others. We advise you to consider carefully and avoid sharing sensitive or private information on this platform."
@@ -42,6 +45,7 @@
   "newFolder": "New Folder",
   "cloneChat": "Clone Chat",
   "cloned": "Cloned",
-  "enterToSubmit": "Enter to submit",
-  "submitPlaceholder": "Type a message..."
+  "submitPlaceholder": "Type a message...",
+  "logout": "Logout",
+  "accumulatedCost": "Accumulated Cost"
 }

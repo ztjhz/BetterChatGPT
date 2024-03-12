@@ -128,7 +128,7 @@ export const TotalTokenCostDisplay = () => {
   return (
     <>
       <CalculatorIcon />
-      {`Accumulated Cost: $${totalCost.toFixed(2)}`}
+      {t('accumulatedCost') as string}: ${totalCost.toFixed(2)}
     </>
   );
 };
