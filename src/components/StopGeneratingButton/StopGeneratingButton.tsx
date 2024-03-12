@@ -10,10 +10,10 @@ const StopGeneratingButton = () => {
     //   className='flex w-full  bottom-6 left-0 right-0 m-auto flex md:w-full md:m-auto gap-0 md:gap-2 justify-center'
     //   onClick={() => setGenerating(false)}
     // >
-      <div className={`flex w-full justify-center`}>
+      <div className={`flex w-full z-0 justify-start`}>
         <button
-          className='btn relative min-w-[12em] justify-center items-center btn-neutral border-0 md:border'
-          aria-label='stop generating'
+          className='btn relative min-w-[12em] z-1000 justify-center items-center btn-neutral border-0 md:border'
+          aria-label='stop generating' onClick={() => setGenerating(false)}
         >
             <svg
               stroke='currentColor'
@@ -29,7 +29,7 @@ const StopGeneratingButton = () => {
             >
               <rect x='3' y='3' width='18' height='18' rx='2' ry='2'></rect>
             </svg>
-            Stop generating
+            &nbsp;&nbsp;Stop generating
         </button>
       </div>
   ) : (

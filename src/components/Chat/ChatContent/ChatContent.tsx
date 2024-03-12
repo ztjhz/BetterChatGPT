@@ -109,7 +109,9 @@ const ChatContent = () => {
             }`}
           >
 
-              <div className='absolute bottom-6 left-8 right-0 m-auto flex md:w-full md:m-auto gap-0 md:gap-2 justify-left'>
+        {/* right-0  md:w-full*/}
+
+              <div className='absolute bottom-6 left-8 m-auto flex min-w-[12em] gap-0 md:gap-2 justify-left'>
                 {
                   <>
                       <DownloadChat saveRef={saveRef} />

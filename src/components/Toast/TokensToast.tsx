@@ -30,8 +30,8 @@ const TokensToast = () => {
   }, [setTokensToastShow, tokensToastInputTokens, tokensToastCompletionTokens]);
 
   return (tokensToastShow && requestTokensCount) ? (
-        <div className={`flex w-full justify-center`}>
-            <div className={`min-w-[12em] text-gray-500 dark:text-gray-400 rounded-lg md:border border-gray-400/30`}>
+        <div className={`flex z-0 justify-start`}>
+            <div className={`min-w-[12em] z-1000 text-gray-500 dark:text-gray-300 rounded-lg md:border border-gray-400/30 bg-neutral dark:bg-neutral-700`}>
                 <div className='ml-3 mr-3 text-sm font-normal text-center'>
                     Input Tokens: {tokensToastInputTokens}<br/>
                     Completion Tokens: {tokensToastCompletionTokens}
