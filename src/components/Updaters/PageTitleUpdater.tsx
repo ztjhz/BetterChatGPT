@@ -27,6 +27,8 @@ const PageTitleUpdater = () => {
         }
     }, [chatNamesAsPageTitles, chatTitles, currentChatIndex]);
 
+    return null;
+
 };
 
 export default PageTitleUpdater;
