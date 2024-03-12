@@ -1,10 +1,8 @@
 # WEMAKE GPT-CX
 
-![WEMAKE GPT-CX](public/logomark.png)
-
 Free, Powerful, Limitless, Intelligent, Engaging
 
-[![licence](https://img.shields.io/github/license/ztjhz/BetterChatGPT?style=flat-square)](https://github.com/WEMAKE-CX/GPT-CX/blob/main/LICENSE)
+[![licence](https://img.shields.io/github/license/WEMAKE-CX/GPT-CX?style=flat-square)](https://github.com/WEMAKE-CX/GPT-CX/blob/main/LICENSE)
 
 [Enter Website](https://wemake.cx) · [Report Bug](https://github.com/WEMAKE-CX/GPT-CX/issues/new/choose) · [Request Feature](https://github.com/WEMAKE-CX/GPT-CX/issues/new/choose)
 
