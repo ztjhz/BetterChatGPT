@@ -10,8 +10,6 @@ Did you enjoy using GPT-CX? Give it some love with a star! 🌟
 
 ## Introducing GPT-CX
 
-![landing](assets/preview.png)
-
 Are you ready to unlock the full potential of ChatGPT with GPT-CX?
 
 GPT-CX is the ultimate destination for anyone who wants to experience the limitless power of conversational AI. With no limits and completely free to use for all, our app harnesses the full potential of OpenAI's ChatGPT API to offer you an unparalleled chatbot experience.
