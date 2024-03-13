@@ -24,6 +24,7 @@
       "@constants/*": ["./src/constants/*"],
       "@api/*": ["./src/api/*"],
       "@components/*": ["./src/components/*"],
+      "@backgroundcomponents/*": ["./src/background-components/*"],
       "@utils/*": ["./src/utils/*"],
       "@src/*": ["./src/*"]
     }

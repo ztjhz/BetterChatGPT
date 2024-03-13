@@ -11,8 +11,8 @@ import { Theme } from '@type/theme';
 // import ApiPopup from '@components/ApiPopup';
 import Toast from '@components/Toast';
 
-import AuthenticationUpdater from '@components/Updaters/AuthenticationUpdater';
-import PageTitleUpdater from '@components/Updaters/PageTitleUpdater';
+import AuthenticationUpdater from './background-components/AuthenticationUpdater';
+import PageTitleUpdater from './background-components/PageTitleUpdater';
 
 import { ClientPrincipalContextProvider } from "@aaronpowell/react-static-web-apps-auth";
 
