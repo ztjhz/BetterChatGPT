@@ -1,7 +1,7 @@
-import React from "react";
-import useStore from "@store/store";
-import { generateDefaultChat } from "@constants/chat";
-import { ChatInterface } from "@type/chat";
+import React from 'react';
+import useStore from '@store/store';
+import { generateDefaultChat } from '@constants/chat';
+import { ChatInterface } from '@type/chat';
 
 const useAddChat = () => {
   const setChats = useStore((state) => state.setChats);

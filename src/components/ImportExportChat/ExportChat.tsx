@@ -1,23 +1,23 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-import useStore from "@store/store";
+import useStore from '@store/store';
 
-import downloadFile from "@utils/downloadFile";
-import { getToday } from "@utils/date";
+import downloadFile from '@utils/downloadFile';
+import { getToday } from '@utils/date';
 
-import Export from "@type/export";
+import Export from '@type/export';
 
 const ExportChat = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="mt-6">
-      <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-        {t("export")} (JSON)
+    <div className='mt-6'>
+      <div className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+        {t('export')} (JSON)
       </div>
       <button
-        className="btn btn-small btn-primary"
+        className='btn btn-small btn-primary'
         onClick={() => {
           const fileData: Export = {
             chats: useStore.getState().chats,
@@ -26,9 +26,9 @@ const ExportChat = () => {
           };
           downloadFile(fileData, getToday());
         }}
-        aria-label={t("export") as string}
+        aria-label={t('export') as string}
       >
-        {t("export")}
+        {t('export')}
       </button>
     </div>
   );

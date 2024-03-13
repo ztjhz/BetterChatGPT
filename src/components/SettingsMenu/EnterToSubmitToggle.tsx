@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import useStore from "@store/store";
-import Toggle from "@components/Toggle";
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import useStore from '@store/store';
+import Toggle from '@components/Toggle';
 
 const EnterToSubmitToggle = () => {
   const { t } = useTranslation();
@@ -9,7 +9,7 @@ const EnterToSubmitToggle = () => {
   const setEnterToSubmit = useStore((state) => state.setEnterToSubmit);
 
   const [isChecked, setIsChecked] = useState<boolean>(
-    useStore.getState().enterToSubmit,
+    useStore.getState().enterToSubmit
   );
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const EnterToSubmitToggle = () => {
 
   return (
     <Toggle
-      label={t("enterToSubmit") as string}
+      label={t('enterToSubmit') as string}
       isChecked={isChecked}
       setIsChecked={setIsChecked}
     />

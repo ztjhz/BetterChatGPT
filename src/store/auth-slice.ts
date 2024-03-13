@@ -1,5 +1,5 @@
-import { defaultAPIEndpoint } from "@constants/auth";
-import { StoreSlice } from "./store";
+import { defaultAPIEndpoint } from '@constants/auth';
+import { StoreSlice } from './store';
 
 export interface AuthSlice {
   apiKey?: string;

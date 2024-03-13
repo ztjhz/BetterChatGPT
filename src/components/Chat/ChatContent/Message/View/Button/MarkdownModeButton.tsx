@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import useStore from "@store/store";
+import useStore from '@store/store';
 
-import BaseButton from "./BaseButton";
+import BaseButton from './BaseButton';
 
-import MarkdownIcon from "@icon/MarkdownIcon";
-import FileTextIcon from "@icon/FileTextIcon";
+import MarkdownIcon from '@icon/MarkdownIcon';
+import FileTextIcon from '@icon/FileTextIcon';
 
 const MarkdownModeButton = () => {
   const markdownMode = useStore((state) => state.markdownMode);
@@ -14,7 +14,7 @@ const MarkdownModeButton = () => {
   return (
     <BaseButton
       icon={markdownMode ? <MarkdownIcon /> : <FileTextIcon />}
-      buttonProps={{ "aria-label": "toggle markdown mode" }}
+      buttonProps={{ 'aria-label': 'toggle markdown mode' }}
       onClick={() => {
         setMarkdownMode(!markdownMode);
       }}
