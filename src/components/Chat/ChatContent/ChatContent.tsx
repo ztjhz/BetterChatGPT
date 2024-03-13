@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, RefObject } from 'react';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import useStore from '@store/store';
 
@@ -11,12 +11,17 @@ import CrossIcon from '@icon/CrossIcon';
 import useSubmit from '@hooks/useSubmit';
 import DownloadChat from './DownloadChat';
 import CloneChat from './CloneChat';
-import ShareGPT from '@components/ShareGPT';
+
+import { isMobile } from 'react-device-detect';
 
 import StopGeneratingButton from '@components/StopGeneratingButton/StopGeneratingButton';
 import TokensToast from '@components/Toast/TokensToast';
 
-const ChatContent = () => {
+interface ChatContentProps {
+  chatDownloadAreaRef: RefObject<HTMLDivElement>;
+}
+  
+const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
   const inputRole = useStore((state) => state.inputRole);
   const setError = useStore((state) => state.setError);
   const messages = useStore((state) =>
@@ -39,8 +44,6 @@ const ChatContent = () => {
   const generating = useStore.getState().generating;
   const hideSideMenu = useStore((state) => state.hideSideMenu);
 
-  const saveRef = useRef<HTMLDivElement>(null);
-
   // clear error at the start of generating new messages
   useEffect(() => {
     if (generating) {
@@ -60,7 +63,7 @@ const ChatContent = () => {
         <div className='flex flex-col items-center text-sm dark:bg-gray-800'>
           <div
             className='flex flex-col items-center text-sm dark:bg-gray-800 w-full'
-            ref={saveRef}
+            ref={chatDownloadAreaRef}
           >
             {<ChatTitle />}
             {!generating && advancedMode && messages?.length === 0 && (
@@ -114,17 +117,22 @@ const ChatContent = () => {
               <div className='absolute bottom-6 left-8 m-auto flex min-w-[12em] gap-0 md:gap-2 justify-left'>
                 {
                   <>
-                      <DownloadChat saveRef={saveRef} />
-                      <CloneChat />
-                      {useStore.getState().generating ?
-                        (
-                          <StopGeneratingButton />
-                        )
-                        :
-                        (
-                          <TokensToast />
-                        )
-                      }
+                    { 
+                      !isMobile && (
+                          <>
+                            <CloneChat /> 
+                          </>
+                      )
+                    }
+                    {useStore.getState().generating ?
+                      (
+                        <StopGeneratingButton />
+                      )
+                      :
+                      (
+                        <TokensToast />
+                      )
+                    }
                   </>
                 }
               </div>
