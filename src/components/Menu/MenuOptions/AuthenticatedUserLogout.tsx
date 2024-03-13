@@ -18,13 +18,13 @@ const AuthenticatedUserLogout = () => {
   const setToastShow = useStore((state) => state.setToastShow);
 
   const handleSignOut = async () => {   
-    Cookies.remove('AppServiceAuthSession');
-    Cookies.remove('AppServiceAuthSession1');
-    Cookies.remove('StaticWebAppsAuthCookie');
+    // Cookies.remove('AppServiceAuthSession');
+    // Cookies.remove('AppServiceAuthSession1');
+    // Cookies.remove('StaticWebAppsAuthCookie');
 
-    document.cookie = 'AppServiceAuthSession=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
-    document.cookie = 'AppServiceAuthSession1=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
-    document.cookie = 'StaticWebAppsAuthCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
+    // document.cookie = 'AppServiceAuthSession=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
+    // document.cookie = 'AppServiceAuthSession1=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
+    // document.cookie = 'StaticWebAppsAuthCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
 
 
     setToastStatus('warning');
@@ -32,8 +32,8 @@ const AuthenticatedUserLogout = () => {
     setToastShow(true);
     
     setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+      window.location.href = '/logout'
+    }, 2000);
   };
 
   return (
