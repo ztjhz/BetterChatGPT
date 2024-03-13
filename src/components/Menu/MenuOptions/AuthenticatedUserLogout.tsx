@@ -22,13 +22,12 @@ const AuthenticatedUserLogout = () => {
     // Cookies.remove('AppServiceAuthSession1');
     // Cookies.remove('StaticWebAppsAuthCookie');
 
-    // document.cookie = 'AppServiceAuthSession=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
-    // document.cookie = 'AppServiceAuthSession1=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
-    // document.cookie = 'StaticWebAppsAuthCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
-
+    document.cookie = 'AppServiceAuthSession=; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+    document.cookie = 'AppServiceAuthSession1=; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+    document.cookie = 'StaticWebAppsAuthCookie=; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
 
     setToastStatus('warning');
-    setToastMessage('Logged Out. Please reload the page if it does not redirect.');
+    setToastMessage('Logging Out... You will be redirected soon');
     setToastShow(true);
     
     setTimeout(() => {
