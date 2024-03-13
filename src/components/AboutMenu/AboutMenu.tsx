@@ -33,20 +33,21 @@ const AboutMenu = () => {
             <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm flex flex-col gap-3 leading-relaxed'>
               <p>This is a {companyName}-provided AI LLM Assistant application. Use it to optimize your work.</p>
               <p>The UI is based on  the <b>BetterChatGPT project by Jing Hua</b>, customized to <b>{companyName}</b> needs.<br/>
-              Our fork on GitHub: <a href='https://github.com/DmitriyAlergant-T1A/BetterChatGPT-t1a' target='_blank' className='link'>https://github.com/DmitriyAlergant-T1A/BetterChatGPT-t1a</a></p>
-              
+              Our fork on GitHub: <a href='https://github.com/DmitriyAlergant-T1A/BetterChatGPT-t1a' target='_blank' className='link'>https://github.com/DmitriyAlergant-T1A/BetterChatGPT-t1a</a><br/>
+              Issues and GitHub Pull Requests (enhancements) from volunteer contributors are appreciated. </p>
               <>
                 <h2 className='text-lg font-bold'>
                   {t('support.title', { ns: 'about' })}
                 </h2>
-                <p>For support, contact <b>{supportContact}</b>.</p>
+                <p>For technical support (access, errors, etc.), create a {companyName} HelpDesk ticket of the "IT" type<br/>
+                For UI product bugs or defects, consider using the GitHub Issues mechanism (repository link above)</p>
               </>
 
               <h2 className='text-lg font-bold'>Privacy Policy</h2>
               <p>This tool is provided strictly for {companyName} business use</p>
-              <p>We (<b>do or do not?</b>) retain request logs of your prompts and API model resopnses.</p>
-              <p>We do collect statistics on individual usage: number of requests, their sizes, total costs, etc.</p>
-              <p>Ther 3rd party API providers (OpenAI) claim not to retain our API requests over 30 days,<br/> and not to use these inputs for future LLM models training.</p>
+              <p><b>We do not currently</b> retain logs of your prompt requests (<b>what</b> you wrote) or model responses.</p>
+              <p><b>We do</b> collect technical statistics of individual usage: number of requests, timing, sizes, etc.</p>
+              <p>Ther 3rd party LLM API providers (OpenAI, Anthropic) claim not to retain logs of API requests over 30 days, and to never use these inputs for future LLM models training.</p>
 
               {/* <p>{t('privacyStatement.paragraph2', { ns: 'about' })}</p> */}
             </div>

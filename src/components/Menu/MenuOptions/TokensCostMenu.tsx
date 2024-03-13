@@ -40,9 +40,6 @@ const TokensCostMenu = () => {
               <div className='p-3'>
                 <TotalTokenCost />
               </div>
-              <div className='p-3'>
-                If you use it so much that your monthly costs consistently exceed $30 USD per month,<br/>talk to your manager regarding alternative "unmetered" premium access options.
-              </div>  
             </div>
           </>
         </PopupModal>
