@@ -13,7 +13,7 @@ import {
   FolderCollection,
 } from '@type/chat';
 
-const ChatHistoryList = () => {
+const ChatHistoryList = React.memo(({chatDownloadAreaRef}: {chatDownloadAreaRef: React.RefObject<HTMLDivElement>}) => {
   const currentChatIndex = useStore((state) => state.currentChatIndex);
   const setChats = useStore((state) => state.setChats);
   const setFolders = useStore((state) => state.setFolders);
@@ -168,16 +168,17 @@ const ChatHistoryList = () => {
             folderChats={chatFolders[folderId]}
             folderId={folderId}
             key={folderId}
+            chatDownloadAreaRef={chatDownloadAreaRef}
           />
         ))}
         {noChatFolders.map(({ title, index, id }) => (
-          <ChatHistory title={title} key={`${title}-${id}`} chatIndex={index} />
+          <ChatHistory title={title} key={`${title}-${id}`} chatIndex={index} chatDownloadAreaRef={chatDownloadAreaRef} />
         ))}
       </div>
       <div className='w-full h-10' />
     </div>
   );
-};
+});
 
 const ShowMoreButton = () => {
   return (

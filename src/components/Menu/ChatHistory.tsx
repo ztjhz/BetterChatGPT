@@ -8,6 +8,7 @@ import DeleteIcon from '@icon/DeleteIcon';
 import EditIcon from '@icon/EditIcon';
 import TickIcon from '@icon/TickIcon';
 import useStore from '@store/store';
+import DownloadChat from '@components/Chat/ChatContent/DownloadChat';
 
 const ChatHistoryClass = {
   normal:
@@ -21,7 +22,7 @@ const ChatHistoryClass = {
 };
 
 const ChatHistory = React.memo(
-  ({ title, chatIndex }: { title: string; chatIndex: number }) => {
+  ({ title, chatIndex, chatDownloadAreaRef}: { title: string; chatIndex: number, chatDownloadAreaRef: React.RefObject<HTMLDivElement> }) => {
     const initialiseNewChat = useInitialiseNewChat();
     const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
     const setChats = useStore((state) => state.setChats);
@@ -100,7 +101,12 @@ const ChatHistory = React.memo(
         draggable
         onDragStart={handleDragStart}
       >
-        <ChatIcon />
+        {
+          active ? 
+            (<DownloadChat saveRef={chatDownloadAreaRef}/>)
+            :
+            (<ChatIcon />)
+        }
         <div className='flex-1 text-ellipsis max-h-5 overflow-hidden break-all relative' title={title}>
           {isEdit ? (
             <input
@@ -116,7 +122,6 @@ const ChatHistory = React.memo(
           ) : (
             _title
           )}
-
           {isEdit || (
             <div
               className={

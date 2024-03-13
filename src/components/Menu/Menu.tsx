@@ -11,7 +11,7 @@ import CrossIcon2 from '@icon/CrossIcon2';
 import DownArrow from '@icon/DownArrow';
 import MenuIcon from '@icon/MenuIcon';
 
-const Menu = () => {
+const Menu = React.memo(({chatDownloadAreaRef}: {chatDownloadAreaRef: React.RefObject<HTMLDivElement>}) => {
   const hideSideMenu = useStore((state) => state.hideSideMenu);
   const setHideSideMenu = useStore((state) => state.setHideSideMenu);
 
@@ -43,7 +43,7 @@ const Menu = () => {
                 <NewChat />
                 <NewFolder />
               </div>
-              <ChatHistoryList />
+              <ChatHistoryList chatDownloadAreaRef={chatDownloadAreaRef}/>
               <MenuOptions />
             </nav>
           </div>
@@ -87,6 +87,6 @@ const Menu = () => {
       />
     </>
   );
-};
+});
 
 export default Menu;

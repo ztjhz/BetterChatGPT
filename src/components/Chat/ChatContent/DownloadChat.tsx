@@ -24,16 +24,14 @@ const DownloadChat = React.memo(
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     return (
       <>
-        <button
-          className='btn btn-neutral'
-          aria-label={t('downloadChat') as string}
-          title={t('downloadChat') || 'Download Chat'}
-          onClick={() => {
-            setIsModalOpen(true);
-          }}
-        >
-          <DownloadButtonIcon/>          
-        </button>
+        <div 
+            className="hover:text-white"
+            aria-label={t('downloadChat') as string}
+            title={t('downloadChat') || 'Download Chat'}
+            onClick={() => {setIsModalOpen(true);}}
+          >
+            <DownloadButtonIcon />
+        </div>
         {isModalOpen && (
           <PopupModal
             setIsModalOpen={setIsModalOpen}

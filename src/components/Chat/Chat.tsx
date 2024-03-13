@@ -8,7 +8,7 @@ import StopGeneratingButton from '@components/StopGeneratingButton/StopGeneratin
 import TokensToast from '@components/Toast/TokensToast';
 
 
-const Chat = () => {
+const Chat = React.memo(({chatDownloadAreaRef}: {chatDownloadAreaRef: React.RefObject<HTMLDivElement>}) => {
   const hideSideMenu = useStore((state) => state.hideSideMenu);
 
   return (
@@ -19,10 +19,10 @@ const Chat = () => {
     >
       <MobileBar />
       <main className='relative h-full w-full transition-width flex flex-col overflow-hidden items-stretch flex-1'>
-        <ChatContent />
+        <ChatContent chatDownloadAreaRef={chatDownloadAreaRef}/>
       </main>
     </div>
   );
-};
+});
 
 export default Chat;

@@ -25,9 +25,11 @@ import useHideOnOutsideClick from '@hooks/useHideOnOutsideClick';
 const ChatFolder = ({
   folderChats,
   folderId,
+  chatDownloadAreaRef
 }: {
   folderChats: ChatHistoryInterface[];
   folderId: string;
+  chatDownloadAreaRef:React.RefObject<HTMLDivElement>
 }) => {
   const folderName = useStore((state) => state.folders[folderId]?.name);
   const isExpanded = useStore((state) => state.folders[folderId]?.expanded);
@@ -305,6 +307,7 @@ const ChatFolder = ({
               title={chat.title}
               chatIndex={chat.index}
               key={`${chat.title}-${chat.index}`}
+              chatDownloadAreaRef={chatDownloadAreaRef}
             />
           ))}
       </div>

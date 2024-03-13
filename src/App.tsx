@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import useStore from '@store/store';
 import i18n from './i18n';
 
@@ -79,14 +79,16 @@ function App() {
     }
   }, []);
 
+  const chatDownloadAreaRef = useRef<HTMLDivElement>(null);
+
   return (
     <div className='overflow-hidden w-full h-full relative'>
       <ClientPrincipalContextProvider>
         <>
           <AuthenticationUpdater />
           <PageTitleUpdater />
-          <Menu />
-          <Chat />
+          <Menu chatDownloadAreaRef={chatDownloadAreaRef}/>
+          <Chat chatDownloadAreaRef={chatDownloadAreaRef}/>
           {/* <ApiPopup /> */}
           <Toast />
         </>
