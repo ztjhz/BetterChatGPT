@@ -5,19 +5,20 @@ import useCloudAuthStore from '@store/cloud-auth-store';
 
 import PopupModal from '@components/PopupModal';
 import SettingIcon from '@icon/SettingIcon';
-import ThemeSwitcher from '@components/Menu/MenuOptions/ThemeSwitcher';
+import ThemeSwitcher from '@components/SettingsMenu/ThemeSwitcher';
 import LanguageSelector from '@components/LanguageSelector';
 import AutoTitleToggle from './AutoTitleToggle';
 import AdvancedModeToggle from './AdvencedModeToggle';
 import InlineLatexToggle from './InlineLatexToggle';
-
-import PromptLibraryMenu from '@components/PromptLibraryMenu';
-import ChatConfigMenu from '@components/ChatConfigMenu';
 import EnterToSubmitToggle from './EnterToSubmitToggle';
 import RequestTokensCountToggle from './RequestTokensCountToggle'
 import { TotalTokenCostToggle } from '../Menu/MenuOptions/TotalTokenCost';
 import ChatNamesAsPageTitlesToggle from './ChatNamesAsPageTitlesToggle';
+import PromptLibraryMenu from '@components/PromptLibraryMenu';
+import ChatConfigMenu from '@components/ChatConfigMenu';
+import ApiButton from './ApiButton';
 import ClearConversation from '@components/Menu/MenuOptions/ClearConversation';
+import ImportExportChat from '@components/ImportExportChat';
 
 
 const SettingsMenu = () => {
@@ -45,7 +46,7 @@ const SettingsMenu = () => {
           title={t('setting') as string}
           cancelButton={false}
         >
-          <div className='p-6 border-b border-gray-200 dark:border-gray-600 flex flex-col items-center gap-4'>
+          <div className='p-6 border-b border-gray-200 dark:border-gray-600 flex flex-col items-start gap-4'>
             <LanguageSelector />
             <ThemeSwitcher />
             <div className='flex flex-col gap-3'>
@@ -54,12 +55,14 @@ const SettingsMenu = () => {
               <EnterToSubmitToggle />
               <TotalTokenCostToggle />
               <RequestTokensCountToggle />
-              <InlineLatexToggle />
+              {/* <InlineLatexToggle /> */}
               <AdvancedModeToggle />
             </div>
-            <ClearConversation />
             <PromptLibraryMenu />
             <ChatConfigMenu />
+            <ApiButton />
+            <ImportExportChat />
+            <ClearConversation />
           </div>
         </PopupModal>
       )}

@@ -14,6 +14,7 @@ import {
 
 import { ModelOptions } from '@type/chat';
 import { _defaultChatConfig, _defaultSystemMessage } from '@constants/chat';
+import LinkIcon from '@icon/LinkIcon'
 
 const ChatConfigMenu = () => {
   const { t } = useTranslation('model');
@@ -21,10 +22,11 @@ const ChatConfigMenu = () => {
   return (
     <div>
       <button
-        className='btn btn-neutral'
+        className='items-center gap-3 btn btn-neutral'
         onClick={() => setIsModalOpen(true)}
         aria-label={t('defaultChatConfig') as string}
       >
+        <LinkIcon />
         {t('defaultChatConfig')}
       </button>
       {isModalOpen && <ChatConfigPopup setIsModalOpen={setIsModalOpen} />}

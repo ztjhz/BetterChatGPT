@@ -2,25 +2,26 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import PersonIcon from '@icon/PersonIcon';
-import ApiMenu from '@components/ApiMenu';
+import ApiMenu from '@components/SettingsMenu/ApiMenu';
 
-const Config = () => {
+const ApiButton = () => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   return (
     <>
-      <a
-        className='flex py-2 px-2 items-center gap-3 rounded-md hover:bg-gray-500/10 transition-colors duration-200 text-white cursor-pointer text-sm'
+      <button
+        className='items-center gap-3 btn btn-neutral'
         id='api-menu'
         onClick={() => setIsModalOpen(true)}
+        aria-label={t('apiSettings') as string}
       >
         <PersonIcon />
-        {t('api')}
-      </a>
+        {t('apiSettings')}
+      </button>
       {isModalOpen && <ApiMenu setIsModalOpen={setIsModalOpen} />}
     </>
   );
 };
 
-export default Config;
+export default ApiButton;

@@ -14,15 +14,15 @@ const ImportExportChat = () => {
 
   return (
     <>
-      <a
-        className='flex py-2 px-2 items-center gap-3 rounded-md hover:bg-gray-500/10 transition-colors duration-200 text-white cursor-pointer text-sm'
+      <button
+        className='items-center gap-3 btn btn-neutral'
         onClick={() => {
           setIsModalOpen(true);
         }}
       >
         <ExportIcon className='w-4 h-4' />
         {t('import')} / {t('export')}
-      </a>
+      </button>
       {isModalOpen && (
         <PopupModal
           title={`${t('import')} / ${t('export')}`}

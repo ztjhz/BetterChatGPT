@@ -9,6 +9,7 @@ import CrossIcon from '@icon/CrossIcon';
 import { v4 as uuidv4 } from 'uuid';
 import ImportPrompt from './ImportPrompt';
 import ExportPrompt from './ExportPrompt';
+import ChatIcon from '@icon/ChatIcon';
 
 const PromptLibraryMenu = () => {
   const { t } = useTranslation();
@@ -16,10 +17,11 @@ const PromptLibraryMenu = () => {
   return (
     <div>
       <button
-        className='btn btn-neutral'
+        className='items-center gap-3 btn btn-neutral'
         onClick={() => setIsModalOpen(true)}
         aria-label={t('promptLibrary') as string}
       >
+        <ChatIcon />
         {t('promptLibrary')}
       </button>
       {isModalOpen && (
