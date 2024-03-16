@@ -1,0 +1,28 @@
+{
+  "configuration": "Cấu hình",
+  "model": "Mô hình",
+  "token": {
+    "label": "Mã thông báo tối đa",
+    "description": "Số lượng mã thông báo tối đa cần tạo khi hoàn thành trò chuyện. Tổng chiều dài của mã thông báo đầu vào và mã thông báo được tạo bị giới hạn bởi độ dài ngữ cảnh của mô hình."
+  },
+  "default": "Mặc định",
+  "temperature": {
+    "label": "Nhiệt độ",
+    "description": "Nên sử dụng nhiệt độ lấy mẫu nào, trong khoảng từ 0 đến 2. Các giá trị cao hơn như 0,8 sẽ làm cho đầu ra ngẫu nhiên hơn, trong khi các giá trị thấp hơn như 0,2 sẽ làm cho đầu ra tập trung và mang tính quyết định hơn. Chúng tôi thường khuyên bạn nên thay đổi phần này hoặc Top-p nhưng không nên thay đổi cả hai. (Mặc định: 1)"
+  },
+  "presencePenalty": {
+    "label": "Hình phạt hiện diện",
+    "description": "Số từ -2,0 đến 2,0. Các giá trị dương sẽ phạt các mã thông báo mới dựa trên việc chúng có xuất hiện trong văn bản cho đến nay hay không, làm tăng khả năng mô hình nói về các chủ đề mới. (Mặc định: 0)"
+  },
+  "topP": {
+    "label": "Top-p",
+    "description": "Số từ 0 đến 1. Một cách thay thế cho việc lấy mẫu bằng nhiệt độ, được gọi là lấy mẫu hạt nhân, trong đó mô hình xem xét kết quả của các mã thông báo có khối lượng xác suất p cao nhất. Vì vậy, 0,1 có nghĩa là chỉ các Mã thông báo có khối lượng xác suất 10% cao nhất mới được xem xét. Chúng tôi thường khuyên bạn nên thay đổi điều này hoặc nhiệt độ nhưng không nên thay đổi cả hai. (Mặc định: 1)"
+  },
+  "frequencyPenalty": {
+    "label": "Hình phạt tần suất",
+    "description": "Số từ -2,0 đến 2,0. Các giá trị dương sẽ xử phạt các mã thông báo mới dựa trên tần suất hiện có của chúng trong văn bản cho đến nay, làm giảm khả năng mô hình lặp lại nguyên văn cùng một dòng. (Mặc định: 0)"
+  },
+  "defaultChatConfig": "Cấu hình trò chuyện mặc định",
+  "defaultSystemMessage": "Thông báo hệ thống mặc định",
+  "resetToDefault": "Đặt lại về mặc định"
+}

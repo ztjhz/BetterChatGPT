@@ -1,0 +1,16 @@
+{
+  "name": "Đồng bộ với Google",
+  "tagline": "Dễ dàng đồng bộ hóa các cuộc trò chuyện và cài đặt của bạn với Google Drive.",
+  "button": {
+    "sync": "Đồng bộ hóa cuộc trò chuyện của bạn",
+    "stop": "Dừng đồng bộ hóa",
+    "create": "Tạo tập tin mới",
+    "confirm": "Xác nhận lựa chọn của bạn"
+  },
+  "notice": "Lưu ý: Bạn sẽ cần phải đăng nhập lại sau mỗi lần truy cập hoặc mỗi giờ. Để tránh dữ liệu đám mây của bạn bị ghi đè, không sử dụng Better ChatGPT trên nhiều thiết bị cùng một lúc.",
+  "privacy": "Quyền riêng tư của bạn rất quan trọng đối với chúng tôi và để đảm bảo điều đó, Better ChatGPT chỉ có quyền truy cập không nhạy cảm, nghĩa là nó chỉ có thể tạo, xem và quản lý các tệp và thư mục của riêng mình.",
+  "toast": {
+    "sync": "Đồng bộ hóa thành công!",
+    "stop": "Đồng bộ hóa đã dừng"
+  }
+}

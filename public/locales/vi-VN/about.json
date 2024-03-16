@@ -1,0 +1,27 @@
+{
+  "description": "Better ChatGPT là một ứng dụng web nguồn mở tuyệt vời cho phép bạn sử dụng miễn phí với API ChatGPT của OpenAI!",
+  "sourceCode": "Hãy xem <0>mã nguồn</0> trên GitHub và cho nó ⭐️!",
+  "initiative": {
+    "description": "Hãy ghé qua <0><i>Open ChatGPT Initiative</i></0>!",
+    "link": "https://medium.com/@ayaka_45434/the-open-chatgpt-initiative-e76b0b62a3ae"
+  },
+  "support": {
+    "title": "Hỗ trợ",
+    "paragraph1": "Tại Better ChatGPT, chúng tôi cố gắng cung cấp cho bạn các tính năng hữu ích và tuyệt vời suốt ngày đêm. Và cũng giống như bất kỳ dự án nào, sự hỗ trợ và động lực của bạn sẽ là công cụ giúp chúng tôi tiếp tục tiến về phía trước!",
+    "paragraph2": "Nếu bạn thích sử dụng ứng dụng của chúng tôi, chúng tôi vui lòng yêu cầu bạn cho <0>dự án</0> này một ⭐️. Sự chứng thực của bạn có ý nghĩa rất lớn đối với chúng tôi và khuyến khích chúng tôi làm việc chăm chỉ hơn để mang lại trải nghiệm tốt nhất có thể.",
+    "paragraph3": "Nếu bạn muốn hỗ trợ nhóm, hãy cân nhắc tài trợ cho chúng tôi thông qua một trong các phương pháp dưới đây. Mọi đóng góp dù như thế nào cũng đều giúp chúng tôi duy trì và cải thiện dịch vụ của mình.",
+    "paragraph4": "Cảm ơn bạn đã trở thành một phần của cộng đồng chúng tôi và chúng tôi mong muốn được phục vụ bạn tốt hơn trong tương lai.",
+    "alipay": "Alipay",
+    "wechatPay": "WeChat"
+  },
+  "discordServer": {
+    "title": "Máy chủ Discord",
+    "paragraph1": "Chúng tôi mời bạn tham gia cộng đồng Discord của chúng tôi! Máy chủ Discord của chúng tôi là nơi tuyệt vời để trao đổi ý tưởng và mẹo ChatGPT cũng như gửi yêu cầu tính năng cho ChatGPT tốt hơn. Bạn sẽ có cơ hội tương tác với các nhà phát triển đằng sau Better ChatGPT cũng như những người đam mê AI khác có chung niềm đam mê với bạn.",
+    "paragraph2": "Để tham gia máy chủ của chúng tôi, chỉ cần nhấp vào liên kết sau: <0>https://discord.gg/g3Qnwy4V6A</0>. Chúng tôi rất mong được gặp bạn ở đó!"
+  },
+  "privacyStatement": {
+    "title": "Cam kết quyền riêng tư",
+    "paragraph1": "Chúng tôi đánh giá cao quyền riêng tư của bạn và cam kết bảo vệ quyền riêng tư của người dùng. Chúng tôi không thu thập hoặc lưu trữ bất kỳ văn bản nào bạn nhập hoặc nhận từ máy chủ OpenAI dưới mọi hình thức. Mã nguồn của chúng tôi có sẵn để bạn kiểm tra nhằm xác minh tuyên bố này.",
+    "paragraph2": "Chúng tôi ưu tiên bảo mật khóa API của bạn và xử lý nó một cách cẩn thận nhất. Nếu bạn sử dụng khóa API của riêng mình, khóa của bạn sẽ được lưu trữ riêng trên trình duyệt của bạn và không bao giờ được chia sẻ với bất kỳ thực thể bên thứ ba nào. Nó chỉ được sử dụng cho mục đích truy cập API OpenAI chứ không phải cho bất kỳ mục đích sử dụng trái phép nào khác."
+  }
+}
