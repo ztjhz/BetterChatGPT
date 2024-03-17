@@ -3,7 +3,7 @@ import useStore from '@store/store';
 import { shallow } from 'zustand/shallow';
 
 import countTokens from '@utils/messageUtils';
-import { modelCost } from '@constants/chat';
+import { supportedModels } from '@constants/chat';
 
 const TokenCount = React.memo(() => {
   const [tokenCount, setTokenCount] = useState<number>(0);
@@ -17,15 +17,17 @@ const TokenCount = React.memo(() => {
   const model = useStore((state) =>
     state.chats
       ? state.chats[state.currentChatIndex].config.model
-      : 'gpt-4-turbo-preview'
+      : 'gpt-4-turbo-preview' // it should never come to this default
   );
 
-  const cost = useMemo(() => {
-    const price =
-      modelCost[model].prompt.price *
-      (tokenCount / modelCost[model].prompt.unit);
-    return price.toPrecision(3);
-  }, [model, tokenCount]);
+  const modelDetails = supportedModels[model];
+
+  if (!modelDetails) {
+    throw new Error(`Model details not found for: {$model}`);
+  }
+
+  const promptCost = (modelDetails.cost.prompt.price * (tokenCount / modelDetails.cost.prompt.unit))
+        .toPrecision(3);
 
   useEffect(() => {
     if (!generating) setTokenCount(countTokens(messages, model));
@@ -34,7 +36,7 @@ const TokenCount = React.memo(() => {
   return (
     <div className='absolute top-[-16px] right-0'>
       <div className='text-xs italic text-gray-900 dark:text-gray-300'>
-        Tokens: {tokenCount} (${cost})
+        Tokens: {tokenCount} (${promptCost})
       </div>
     </div>
   );

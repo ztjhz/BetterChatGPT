@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import PopupModal from '@components/PopupModal';
 import { ConfigInterface, ModelOptions } from '@type/chat';
 import DownChevronArrow from '@icon/DownChevronArrow';
-import { modelMaxToken, modelOptions } from '@constants/chat';
+import { supportedModels } from '@constants/chat';
 
 const ConfigMenu = ({
   setIsModalOpen,
@@ -101,16 +101,16 @@ export const ModelSelector = ({
           className='text-sm text-gray-700 dark:text-gray-200 p-0 m-0'
           aria-labelledby='dropdownDefaultButton'
         >
-          {modelOptions.map((m) => (
+          {Object.entries(supportedModels).map(([modelKey, modelDetails]) => (
             <li
               className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer'
               onClick={() => {
-                _setModel(m);
+                _setModel(modelKey as ModelOptions);
                 setDropDown(false);
               }}
-              key={m}
+              key={modelKey}
             >
-              {m}
+              {modelDetails.displayName}
             </li>
           ))}
         </ul>
@@ -150,7 +150,7 @@ export const MaxTokenSlider = ({
           _setMaxToken(Number(e.target.value));
         }}
         min={0}
-        max={modelMaxToken[_model]}
+        max={supportedModels[_model as ModelOptions].maxTokens}
         step={1}
         className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
       />

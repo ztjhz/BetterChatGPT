@@ -32,7 +32,10 @@ const TokensCostMenu = () => {
                 Long conversation threads are the primary driver of AI costs creep. With each message in the thread, the app is submitting the <u>entire thread history</u> (from the beginning) to the LLM model to evaluate. We recommend starting a new chat frequently to lighten the load.
               </div>
               <div className='p-3'>
-                Consider smaller model (GPT 3.5) when questions are easy, you may not need full power.
+                Please note the "<b>edit</b>" button for your messages. Often it is more effecient to edit your message and resubmit, then to keep adding new messages with clarifications to the thread. 
+              </div>
+              <div className='p-3'>
+                Consider smaller model (<b>Claude Haiku or GPT 3.5</b>) when questions are easy, you may not need full power.
               </div>
               <div className='p-3'>
                 <b>The AI LLMs are helping us working effeciently; Use it as much as needed!</b>

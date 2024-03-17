@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { ChatInterface, ConfigInterface, ModelOptions } from '@type/chat';
+import { ChatInterface, ConfigInterface, ModelOptions, ModelsList } from '@type/chat';
 import useStore from '@store/store';
 
 const date = new Date();
@@ -19,34 +19,70 @@ export const _defaultSystemMessage =
    If asked for code writing, only give that code, withold explanations until requested.
    If asked for code modification, only give the relevant or changed snippets of code - unless specifically requested provide a complete snippet, then comply.`;
 
-export const modelOptions: ModelOptions[] = [
-  'gpt-3.5-turbo',
-  'gpt-4',
-  'gpt-4-turbo-preview'
-];
-
 export const defaultModel: ModelOptions = 'gpt-4-turbo-preview';
 
 export const defaultTitleGenModel: ModelOptions = 'gpt-3.5-turbo';
 
-export const modelMaxToken = {
-  'gpt-3.5-turbo': 16385,
-  'gpt-4': 8192,
-  'gpt-4-turbo-preview': 128000
-};
-
-export const modelCost = {
+export const supportedModels: ModelsList = {
   'gpt-3.5-turbo': {
-    prompt: { price: 0.0005, unit: 1000 },
-    completion: { price: 0.0015, unit: 1000 },
+    maxTokens: 16385,
+    displayName: 'GPT-3.5',
+    apiAliasCurrent: 'gpt-3.5-turbo',
+    portkeyProvider: 'openai',
+    cost: {
+      prompt: { price: 0.5, unit: 1000000 },
+      completion: { price: 1.5, unit: 1000000 },
+    },
   },
   'gpt-4': {
-    prompt: { price: 0.030, unit: 1000 },
-    completion: { price: 0.060, unit: 1000 },
+    maxTokens: 8192,
+    displayName: 'GPT-4',
+    apiAliasCurrent: 'gpt-4',
+    portkeyProvider: 'openai',
+    cost: {
+      prompt: { price: 30.00, unit: 1000000 },
+      completion: { price: 60.00, unit: 1000000 },
+    },
   },
   'gpt-4-turbo-preview': {
-    prompt: { price: 0.010, unit: 1000 },
-    completion: { price: 0.030, unit: 1000 },
+    maxTokens: 128000,
+    displayName: 'GPT-4 Turbo',
+    apiAliasCurrent: 'gpt-4-turbo-preview',
+    portkeyProvider: 'openai',
+    cost: {
+      prompt: { price: 10.00, unit: 1000000 },
+      completion: { price: 30.00, unit: 1000000 },
+    },
+  },
+  'claude-3-haiku': {
+    maxTokens: 120000,
+    displayName: 'Claude 3 Haiku',
+    apiAliasCurrent: 'claude-3-haiku-20240307',
+    portkeyProvider: 'anthropic',
+    cost: {
+      prompt: { price: 0.25, unit: 1000000 },
+      completion: { price: 1.25, unit: 1000000 },
+    },
+  },
+  'claude-3-sonnet': {
+    maxTokens: 160000,
+    displayName: 'Claude 3 Sonnet',
+    apiAliasCurrent: 'claude-3-sonnet-20240229',
+    portkeyProvider: 'anthropic',
+    cost: {
+      prompt: { price: 3.00, unit: 1000000 },
+      completion: { price: 15.00, unit: 1000000 },
+    },
+  },
+  'claude-3-opus': {
+    maxTokens: 160000,
+    displayName: 'Claude 3 Opus',
+    apiAliasCurrent: 'claude-3-opus-20240229',
+    portkeyProvider: 'anthropic',
+    cost: {
+      prompt: { price: 15.00, unit: 1000000 },
+      completion: { price: 75.00, unit: 1000000 },
+    },
   }
 };
 

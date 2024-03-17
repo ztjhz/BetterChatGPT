@@ -52,7 +52,25 @@ export interface Folder {
 export type ModelOptions =
   'gpt-3.5-turbo'
   | 'gpt-4'
-  | 'gpt-4-turbo-preview';
+  | 'gpt-4-turbo-preview'
+  | 'claude-3-haiku'
+  | 'claude-3-sonnet'
+  | 'claude-3-opus';
+
+export interface ModelDetails {
+  maxTokens: number;
+  displayName: string;
+  apiAliasCurrent: string;
+  portkeyProvider: string;
+  cost: {
+    prompt: { price: number; unit: number };
+    completion: { price: number; unit: number };
+  };
+}
+
+export type ModelsList = {
+  [model in ModelOptions]: ModelDetails;
+};
 
 export type TotalTokenUsed = {
   [model in ModelOptions]?: {
