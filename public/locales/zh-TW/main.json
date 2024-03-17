@@ -43,5 +43,6 @@
   "cloneChat": "建立聊天副本",
   "cloned": "已建立副本",
   "enterToSubmit": "按 Enter 鍵送出",
-  "submitPlaceholder": "輸入訊息或點選 [/] 以使用提示詞…"
+  "submitPlaceholder": "輸入訊息或點選 [/] 以使用提示詞…",
+  "resetThisConversation": "Reset This Conversation"
 }
