@@ -73,7 +73,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
             </style>
             <table className='w-full text-center text-gray-700 dark:text-gray-300' style={{ tableLayout: 'fixed' }}>
                 <tbody>
-                <tr><td className='pt-8 text-lg' colspan="3"><b>OpenAI GPT:</b> the iconic Large Language Models that started it all</td></tr>
+                <tr><td className='pt-8 text-lg' colSpan={3}><b>OpenAI GPT:</b> the iconic Large Language Models that started it all</td></tr>
                 <tr>
                     <td style={{ paddingTop: '20px' }}>
                       <ModelSelectionButton model='gpt-3.5-turbo'/>
@@ -95,7 +95,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
                     <td style={{ paddingTop: '10px' }}>Cost: <b>40-60x</b> of GPT-3.5<br/>per input/output token</td>
                     <td style={{ paddingTop: '10px' }}>Cost: <b>20x</b> of GPT-3.5<br/>per input/output token</td>
                 </tr>
-                <tr><td className='pt-8 text-lg' colspan="3"><b>Anthropic Claude 3:</b> newest models by Anthropic, strongest OpenAI rival</td></tr>
+                <tr><td className='pt-8 text-lg' colSpan={3}><b>Anthropic Claude 3:</b> newest models by Anthropic, strongest OpenAI rival</td></tr>
                 <tr>
                     <td style={{ paddingTop: '20px' }}>
                       <ModelSelectionButton model='claude-3-haiku'/>
@@ -117,7 +117,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
                     <td style={{ paddingTop: '10px' }}>Cost: <b>~8x</b> of GPT-3.5<br/>per input/output token</td>
                     <td style={{ paddingTop: '10px' }}>Cost: <b>~50x</b> of GPT-3.5<br/>per input/output token</td>
                 </tr>
-                <tr><td className='pt-2' colspan="3">See <a className="text-blue-600 hover:text-blue-800 visited:text-purple-800" href="https://www.anthropic.com/news/claude-3-family">https://www.anthropic.com/news/claude-3-family</a> for detailed comparison</td></tr>
+                <tr><td className='pt-2' colSpan={3}>See <a className="text-blue-600 hover:text-blue-800 visited:text-purple-800" href="https://www.anthropic.com/news/claude-3-family">https://www.anthropic.com/news/claude-3-family</a> for detailed comparison</td></tr>
                 </tbody>
             </table>
             
