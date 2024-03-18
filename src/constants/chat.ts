@@ -62,7 +62,7 @@ export const supportedModels: ModelsList = {
     displayName: 'Claude 3 Haiku',
     apiAliasCurrent: 'claude-3-haiku-20240307',
     portkeyProvider: 'anthropic',
-    titleGenModel: 'claude-3-haiku',
+    titleGenModel: 'gpt-3.5-turbo', /*TODO: change to claude-3-haiku after resolving the fetch issue with Apim/Portkey in the dev environment*/
     cost: {
       prompt: { price: 0.25, unit: 1000000 },
       completion: { price: 1.25, unit: 1000000 },
@@ -73,7 +73,7 @@ export const supportedModels: ModelsList = {
     displayName: 'Claude 3 Sonnet',
     apiAliasCurrent: 'claude-3-sonnet-20240229',
     portkeyProvider: 'anthropic',
-    titleGenModel: 'claude-3-haiku',
+    titleGenModel: 'gpt-3.5-turbo', /*TODO: change to claude-3-haiku after resolving the fetch issue with Apim/Portkey in the dev environment*/
     cost: {
       prompt: { price: 3.00, unit: 1000000 },
       completion: { price: 15.00, unit: 1000000 },
@@ -84,7 +84,7 @@ export const supportedModels: ModelsList = {
     displayName: 'Claude 3 Opus',
     apiAliasCurrent: 'claude-3-opus-20240229',
     portkeyProvider: 'anthropic',
-    titleGenModel: 'claude-3-haiku',
+    titleGenModel: 'gpt-3.5-turbo', /*TODO: change to claude-3-haiku after resolving the fetch issue with Apim/Portkey in the dev environment*/
     cost: {
       prompt: { price: 15.00, unit: 1000000 },
       completion: { price: 75.00, unit: 1000000 },
