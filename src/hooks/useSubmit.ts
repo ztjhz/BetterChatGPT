@@ -25,7 +25,7 @@ const useSubmit = () => {
     let data;
 
     const titleGenConfig: OpenAICompletionsConfig = {
-      model: defaultTitleGenModel,
+      model: supportedModels[defaultTitleGenModel].apiAliasCurrent,
       max_tokens: 100,
       temperature: _defaultChatConfig.temperature,
       presence_penalty: _defaultChatConfig.presence_penalty,
@@ -102,7 +102,7 @@ const useSubmit = () => {
       if (messages.length === 0) throw new Error('Message exceeds Max Prompts Token!');
       
       const copletionsConfig: OpenAICompletionsConfig = {
-        model: chats[currentChatIndex].config.model,
+        model: supportedModels[chats[currentChatIndex].config.model].apiAliasCurrent,
         max_tokens: chats[currentChatIndex].config.maxGenerationTokens,
         temperature: chats[currentChatIndex].config.temperature,
         presence_penalty: chats[currentChatIndex].config.presence_penalty,

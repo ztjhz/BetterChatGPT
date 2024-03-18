@@ -24,7 +24,7 @@ export const redirectToLogin = async() => {
 }
 
 export interface OpenAICompletionsConfig {
-  model: ModelOptions;
+  model: string;
   max_tokens: number,
   temperature: number;
   presence_penalty: number;
