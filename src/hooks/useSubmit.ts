@@ -26,7 +26,7 @@ const useSubmit = () => {
   const apiEndpoint = useStore((state) => state.apiEndpoint);
   const apiKey = useStore((state) => state.apiKey);
   const setGenerating = useStore((state) => state.setGenerating);
-  const generating = useStore((state) => state.generating);
+  const generating = useStore((state) => state.generating)
   const currentChatIndex = useStore((state) => state.currentChatIndex);
   const setChats = useStore((state) => state.setChats);
 
@@ -76,14 +76,17 @@ const useSubmit = () => {
     return {headers};
   };
 
-  const generateTitle = async (
-    message: MessageInterface[]
-  ): Promise<string> => {
+  const generateTitle = async ( message: MessageInterface[] ) => {
+    const chats = useStore.getState().chats;
+    if (!chats)
+      return;
     
     let data;
 
+    const titleGenModel = supportedModels[chats[currentChatIndex].config.model].titleGenModel;
+
     const titleGenConfig: OpenAICompletionsConfig = {
-      model: supportedModels[defaultTitleGenModel].apiAliasCurrent,
+      model: supportedModels[titleGenModel].apiAliasCurrent,
       max_tokens: 100,
       temperature: _defaultChatConfig.temperature,
       presence_penalty: _defaultChatConfig.presence_penalty,
@@ -93,7 +96,7 @@ const useSubmit = () => {
 
     try
     {
-      const headers = await prepareApiHeaders(defaultTitleGenModel, message, 'Title Generation');
+      const headers = await prepareApiHeaders(titleGenModel, message, 'Title Generation');
 
       data = await getChatCompletion(
         useStore.getState().apiEndpoint,
@@ -134,7 +137,7 @@ const useSubmit = () => {
       );
       if (messages.length === 0) throw new Error('Message exceeds Max Prompts Token!');
       
-      const copletionsConfig: OpenAICompletionsConfig = {
+      const completionsConfig: OpenAICompletionsConfig = {
         model: supportedModels[chats[currentChatIndex].config.model].apiAliasCurrent,
         max_tokens: chats[currentChatIndex].config.maxGenerationTokens,
         temperature: chats[currentChatIndex].config.temperature,
@@ -148,7 +151,7 @@ const useSubmit = () => {
       stream = await getChatCompletionStream(
         useStore.getState().apiEndpoint,
         messages,
-        copletionsConfig,
+        completionsConfig,
         headers.headers
       );
   
@@ -230,15 +233,19 @@ const useSubmit = () => {
         };
 
         let title = (await generateTitle([message])).trim();
-        if (title.startsWith('"') && title.endsWith('"')) {
-          title = title.slice(1, -1);
+        if (title) // generateTitle function was able to return a non-blank Title
+        {
+          if (title.startsWith('"') && title.endsWith('"')) {
+            title = title.slice(1, -1);
+          }
+
+          const updatedChats: ChatInterface[] = JSON.parse(
+            JSON.stringify(useStore.getState().chats)
+          );
+          updatedChats[currentChatIndex].title = title;
+          updatedChats[currentChatIndex].titleSet = true;
+          setChats(updatedChats);
         }
-        const updatedChats: ChatInterface[] = JSON.parse(
-          JSON.stringify(useStore.getState().chats)
-        );
-        updatedChats[currentChatIndex].title = title;
-        updatedChats[currentChatIndex].titleSet = true;
-        setChats(updatedChats);
 
         // update tokens used for generating title
         if (countTotalTokens) {

@@ -14,6 +14,8 @@ const CloneChat = React.memo(() => {
   const setChats = useStore((state) => state.setChats);
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
 
+  const generating = useStore((state) => state.generating);
+
   const [cloned, setCloned] = useState<boolean>(false);
 
   const setToastStatus = useStore((state) => state.setToastStatus);
@@ -52,7 +54,11 @@ const CloneChat = React.memo(() => {
   return (
     <>
       <button
-        className='btn py-3 px-3 items-center gap-3 rounded-md hover:bg-gray-500/10 transition-colors duration-200 text-white text-sm mb-2 flex-shrink-0 border border-white/20 transition-opacity'
+        className={`flex btn py-3 px-3 items-center gap-3 rounded-md hover:bg-gray-500/10 transition-colors duration-200 text-white text-sm mb-2 flex-shrink-0 border border-white/20 transition-opacity ${
+          generating
+            ? 'cursor-not-allowed opacity-40'
+            : 'cursor-pointer opacity-100'
+        }`}
         aria-label={t('cloneChat') as string}
         onClick={cloneChat}
         title={t('cloneChat') || "Clone Chat"}

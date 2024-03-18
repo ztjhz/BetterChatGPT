@@ -89,7 +89,7 @@ export const limitMessageTokens = (
     }
   }
 
-  console.log(`Prepared messages for submission. Included ${limitedMessages.length} messages including System Prompt`)
+  //console.log(`Prepared messages for submission. Included ${limitedMessages.length} messages including System Prompt`)
 
   return limitedMessages;
 };

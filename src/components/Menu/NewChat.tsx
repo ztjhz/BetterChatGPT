@@ -6,6 +6,7 @@ import PlusIcon from '@icon/PlusIcon';
 import useAddChat from '@hooks/useAddChat';
 import PopupModal from '@components/PopupModal'; // Ensure this is correctly imported
 import { ModelOptions } from '@type/chat';
+import { supportedModels } from '@constants/chat';
 import { min } from 'lodash';
 
 const NewChat = ({ folder }: { folder?: string }) => {
@@ -22,6 +23,14 @@ const NewChat = ({ folder }: { folder?: string }) => {
     // Validate or cast the model string to ModelOptions
     addChat(folder, model as ModelOptions); // Cast to ModelOptions if it's valid
   };
+
+  const ModelSelectionButton = ({ model }: { model: ModelOptions }) => 
+  {
+    return (
+    <div className='flex justify-center'>
+      <button className='min-w-btn btn btn-neutral p-4 rounded-lg md:border border-gray-900 dark:border-gray-200' onClick={() => handleModelSelect(model)}>{supportedModels[model].displayName}</button>
+    </div>);
+  }
 
   return (
     <>
@@ -62,38 +71,53 @@ const NewChat = ({ folder }: { folder?: string }) => {
                 }
             `}
             </style>
-            <div className='grid grid-cols-3 gap-4'>
-              <div className='text-center text-gray-700 dark:text-gray-300'>
-                <button className='min-w-btn btn btn-neutral p-4 rounded-lg mb-4' onClick={() => handleModelSelect('gpt-3.5-turbo')}>GPT-3.5</button>
-                <p>Reliable for general use<br/>16K tokens context</p>
-                <p>Cost: Very Cheap<br/>(baseline)</p>
-              </div>
-              <div className='text-center text-gray-700 dark:text-gray-300'>
-                <button className='min-w-btn btn btn-neutral p-4 rounded-lg mb-4' onClick={() => handleModelSelect('gpt-4')}>GPT-4</button>
-                <p>Advanced, more nuanced<br/>8K tokens context</p>
-                <p>Cost: <b>120x</b> of GPT-3.5<br/>per input/output token</p>
-              </div>
-              <div className='text-center text-gray-700 dark:text-gray-300'>
-                <button className='min-w-btn btn btn-neutral p-4 rounded-lg mb-4' onClick={() => handleModelSelect('gpt-4-turbo-preview')}>GPT-4 Turbo</button>
-                <p>Latest version of GPT-4 <br/>up to 128K tokens context</p>
-                <p>Cost: <b>60x</b> of GPT-3.5<br/>per input/output token</p>
-              </div>
-              <div className='text-center text-gray-700 dark:text-gray-300'>
-                <button className='min-w-btn btn btn-neutral p-4 rounded-lg mb-4' onClick={() => handleModelSelect('claude-3-haiku')}>Claude-3 Haiku</button>
-                <p>Specialized in poetic responses</p>
-                <p>Cost: Comparable to GPT-3.5</p>
-              </div>
-              <div className='text-center text-gray-700 dark:text-gray-300'>
-                <button className='min-w-btn btn btn-neutral p-4 rounded-lg mb-4' onClick={() => handleModelSelect('claude-3-sonnet')}>Claude-3 Sonnet</button>
-                <p>Generates sonnets with ease</p>
-                <p>Cost: Slightly higher than GPT-3.5</p>
-              </div>
-              <div className='text-center text-gray-700 dark:text-gray-300'>
-                <button className='min-w-btn btn btn-neutral p-4 rounded-lg mb-4' onClick={() => handleModelSelect('claude-3-opus')}>Claude-3 Opus</button>
-                <p>Best for long-form content</p>
-                <p>Cost: more then GPT-4 Turbo</p>
-              </div>
-            </div>
+            <table className='w-full text-center text-gray-700 dark:text-gray-300' style={{ tableLayout: 'fixed' }}>
+                <tbody>
+                <tr>
+                    <td style={{ paddingTop: '20px' }}>
+                      <ModelSelectionButton model='gpt-3.5-turbo'/>
+                    </td>
+                    <td style={{ paddingTop: '20px' }}>
+                      <ModelSelectionButton model='gpt-4'/>
+                    </td>
+                    <td style={{ paddingTop: '20px' }}>
+                      <ModelSelectionButton model='gpt-4-turbo-preview'/>
+                    </td>                    
+                </tr>
+                <tr style={{ paddingTop: '20px', paddingBottom: '20px' }}>
+                    <td style={{ paddingTop: '10px' }}>Same as free ChatGPT.com<br/>OK for general use</td>
+                    <td style={{ paddingTop: '10px' }}>Advanced, more nuanced<br/>OpenAI's strongest model<br/></td>
+                    <td style={{ paddingTop: '10px' }}>Nearly as good as GPT-4 <br/>Context up to 128K tokens</td>
+                </tr>
+                <tr style={{ paddingTop: '20px', paddingBottom: '20px', verticalAlign: 'top'}}>
+                    <td style={{ paddingTop: '10px' }}>Very Cheap <b>(baseline)</b><br/>per input/output token</td>
+                    <td style={{ paddingTop: '10px' }}>Cost: <b>40-60x</b> of GPT-3.5<br/>per input/output token</td>
+                    <td style={{ paddingTop: '10px' }}>Cost: <b>20x</b> of GPT-3.5<br/>per input/output token</td>
+                </tr>
+                <tr><td className='py-3'></td></tr>
+                <tr>
+                    <td style={{ paddingTop: '20px' }}>
+                      <ModelSelectionButton model='claude-3-haiku'/>
+                    </td>
+                    <td style={{ paddingTop: '20px' }}>
+                      <ModelSelectionButton model='claude-3-sonnet'/>
+                    </td>
+                    <td style={{ paddingTop: '20px' }}>
+                      <ModelSelectionButton model='claude-3-opus'/>
+                    </td>  
+                </tr>
+                <tr style={{ paddingTop: '20px', paddingBottom: '20px' }}>
+                    <td style={{ paddingTop: '10px' }}>Anthropic's fast&cheap  model<br/>Good! Better then GPT-3.5<br/>Up to 200K Context</td>
+                    <td style={{ paddingTop: '10px' }}>Anthropic's mid-range  model<br/>Approaches GPT-4 levels<br/>Up to 200K Context</td>
+                    <td style={{ paddingTop: '10px' }}>Anthropic's strongest model <br/><b>Beats GPT-4, esp in coding</b><br/>Up to 200K Context</td>
+                </tr>
+                <tr style={{ paddingTop: '20px', paddingBottom: '20px', verticalAlign: 'top'}}>
+                    <td style={{ paddingTop: '10px' }}>Cost: <b>60-80%</b> of GPT-3.5<br/><b>(cheaper!)</b></td>
+                    <td style={{ paddingTop: '10px' }}>Cost: <b>~8x</b> of GPT-3.5<br/>per input/output token</td>
+                    <td style={{ paddingTop: '10px' }}>Cost: <b>~50x</b> of GPT-3.5<br/>per input/output token</td>
+                </tr>
+                </tbody>
+            </table>
 
           </>
         </PopupModal>

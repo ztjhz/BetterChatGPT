@@ -29,6 +29,7 @@ export const supportedModels: ModelsList = {
     displayName: 'GPT-3.5',
     apiAliasCurrent: 'gpt-3.5-turbo',
     portkeyProvider: 'openai',
+    titleGenModel: 'gpt-3.5-turbo',
     cost: {
       prompt: { price: 0.5, unit: 1000000 },
       completion: { price: 1.5, unit: 1000000 },
@@ -39,6 +40,7 @@ export const supportedModels: ModelsList = {
     displayName: 'GPT-4',
     apiAliasCurrent: 'gpt-4',
     portkeyProvider: 'openai',
+    titleGenModel: 'gpt-3.5-turbo',
     cost: {
       prompt: { price: 30.00, unit: 1000000 },
       completion: { price: 60.00, unit: 1000000 },
@@ -49,6 +51,7 @@ export const supportedModels: ModelsList = {
     displayName: 'GPT-4 Turbo',
     apiAliasCurrent: 'gpt-4-turbo-preview',
     portkeyProvider: 'openai',
+    titleGenModel: 'gpt-3.5-turbo',
     cost: {
       prompt: { price: 10.00, unit: 1000000 },
       completion: { price: 30.00, unit: 1000000 },
@@ -59,6 +62,7 @@ export const supportedModels: ModelsList = {
     displayName: 'Claude 3 Haiku',
     apiAliasCurrent: 'claude-3-haiku-20240307',
     portkeyProvider: 'anthropic',
+    titleGenModel: 'claude-3-haiku',
     cost: {
       prompt: { price: 0.25, unit: 1000000 },
       completion: { price: 1.25, unit: 1000000 },
@@ -69,6 +73,7 @@ export const supportedModels: ModelsList = {
     displayName: 'Claude 3 Sonnet',
     apiAliasCurrent: 'claude-3-sonnet-20240229',
     portkeyProvider: 'anthropic',
+    titleGenModel: 'claude-3-haiku',
     cost: {
       prompt: { price: 3.00, unit: 1000000 },
       completion: { price: 15.00, unit: 1000000 },
@@ -79,6 +84,7 @@ export const supportedModels: ModelsList = {
     displayName: 'Claude 3 Opus',
     apiAliasCurrent: 'claude-3-opus-20240229',
     portkeyProvider: 'anthropic',
+    titleGenModel: 'claude-3-haiku',
     cost: {
       prompt: { price: 15.00, unit: 1000000 },
       completion: { price: 75.00, unit: 1000000 },

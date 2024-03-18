@@ -63,6 +63,9 @@ export interface ModelDetails {
   displayName: string;
   apiAliasCurrent: string;
   portkeyProvider: string;
+  titleGenModel: ModelOptions;  
+            /* Which model to use for chats title generation. 
+                Should be cheapest fastest option from the same provider - in case current API Keys situation may not allow to talk to another provider */
   cost: {
     prompt: { price: number; unit: number };
     completion: { price: number; unit: number };
