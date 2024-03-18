@@ -6,7 +6,7 @@ import useHideOnOutsideClick from '@hooks/useHideOnOutsideClick';
 
 import PopupModal from '@components/PopupModal';
 
-import {officialAPIEndpoint, customAPIEndpoint, defaultAPIEndpoint, availableEndpoints} from '@constants/auth'
+import {officialAPIEndpoint, builtinAPIEndpoint, availableEndpoints} from '@constants/auth'
 
 import DownChevronArrow from '@icon/DownChevronArrow';
 
@@ -26,7 +26,7 @@ const ApiMenu = ({
 
   const [_apiKey, _setApiKey] = useState<string>(apiKey || '');
   const [_apiEndpoint, _setApiEndpoint] = useState<string>(apiEndpoint);
-  const [_customEndpoint, _setCustomEndpoint] = useState<boolean>(
+  const [_builtinEndpoint, _setCustomEndpoint] = useState<boolean>(
     !availableEndpoints.includes(apiEndpoint)
   );
 
@@ -39,7 +39,7 @@ const ApiMenu = ({
   const handleToggleCustomEndpoint = (value: string) => {
     const isCustom = value === 'built-in';
     if (isCustom) {
-      _setApiEndpoint(customAPIEndpoint);
+      _setApiEndpoint(builtinAPIEndpoint);
     } else {
       _setApiEndpoint(officialAPIEndpoint);
     }
@@ -60,7 +60,7 @@ const ApiMenu = ({
           </div>
           <select
             className='text-gray-800 dark:text-white p-1 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md m-0 w-full mr-0 h-8 focus:outline-none'
-            value={_customEndpoint ? 'built-in' : 'direct'}
+            value={_builtinEndpoint ? 'built-in' : 'direct'}
             onChange={(e) => handleToggleCustomEndpoint(e.target.value)}
           >
             <option value="built-in">{companyName}-Provided Endpoint</option>
@@ -69,7 +69,7 @@ const ApiMenu = ({
         </div>
 
         <div className='flex gap-2 items-center mb-6'>
-          {_customEndpoint ? (
+          {_builtinEndpoint ? (
             <input
               type='text'
               className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md m-0 w-full mr-0 h-8 focus:outline-none'
@@ -93,7 +93,7 @@ const ApiMenu = ({
           )}
         </div>
 
-        {_customEndpoint || (
+        {_builtinEndpoint || (
         <div className='flex gap-2 items-center justify-center mt-2'>
           <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
             {t('apiKey.inputLabel', { ns: 'api' })}
@@ -126,7 +126,7 @@ const ApiMenu = ({
 
           <p></p>
 
-          {_customEndpoint ? 
+          {_builtinEndpoint ? 
             (
             <p>The {companyName}-Provided API endpoint is an integral part of this application, and does not require an API Key</p>
             )

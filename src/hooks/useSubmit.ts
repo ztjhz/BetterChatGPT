@@ -2,11 +2,22 @@ import React from 'react';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
 import { ChatInterface, MessageInterface, ModelOptions } from '@type/chat';
-import { OpenAICompletionsConfig, isAuthenticated, redirectToLogin, getChatCompletion, getChatCompletionStream } from '@api/api';
+import { isAuthenticated, redirectToLogin, getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
 import { limitMessageTokens, updateTotalTokenUsed } from '@utils/messageUtils';
 import { supportedModels, defaultTitleGenModel, _defaultChatConfig } from '@constants/chat';
-import { officialAPIEndpoint } from '@constants/auth';
+import { officialAPIEndpoint, builtinAPIEndpoint } from '@constants/auth';
+import { isAzureEndpoint } from '@utils/api';
+
+
+export interface OpenAICompletionsConfig {
+  model: string;
+  max_tokens: number,
+  temperature: number;
+  presence_penalty: number;
+  top_p: number;
+  frequency_penalty: number;
+}
 
 const useSubmit = () => {
   const { t, i18n } = useTranslation('api');
@@ -19,9 +30,56 @@ const useSubmit = () => {
   const currentChatIndex = useStore((state) => state.currentChatIndex);
   const setChats = useStore((state) => state.setChats);
 
+  /* Prepare API Request Headers */
+
+  const prepareApiHeaders = async (
+      model: ModelOptions, 
+      messages: MessageInterface[],
+      purpose: string) => {
+
+    const headers: Record<string, string> = {};
+    
+    if (apiEndpoint !== builtinAPIEndpoint){
+
+      if (!apiKey || apiKey.length === 0) {
+        throw new Error('API key is required but missing.');
+      }
+
+      headers['Authorization'] = `Bearer ${apiKey}`;
+    }
+
+    if (isAzureEndpoint(apiEndpoint) && apiKey)
+      headers['api-key'] = apiKey;
+
+    /* If not an "official" API endpoint -> it is assumed to be a PortkeyAI Gateway */
+    if (apiEndpoint !== officialAPIEndpoint)
+    {
+      headers['x-portkey-provider'] = supportedModels[model].portkeyProvider;
+    };
+
+    /* Built-in endpoint (/api/v1/chat/completions) */
+    if (apiEndpoint === builtinAPIEndpoint)
+    {
+      const isAuthenticatedUser = await isAuthenticated();
+      
+      if (!isAuthenticatedUser) {
+        console.log("User not authenticated, redirecting to login.");
+        await redirectToLogin();
+        throw new Error(`API Authentication Error, please reload the page`);
+      }
+
+      headers['X-api-model'] = supportedModels[model].apiAliasCurrent;
+      headers['X-messages-count'] = messages.length.toString();
+      headers['X-purpose'] = purpose;
+    }
+  
+    return {headers};
+  };
+
   const generateTitle = async (
     message: MessageInterface[]
   ): Promise<string> => {
+    
     let data;
 
     const titleGenConfig: OpenAICompletionsConfig = {
@@ -33,42 +91,17 @@ const useSubmit = () => {
       frequency_penalty: _defaultChatConfig.frequency_penalty
     };
 
-    try {
-      // Check if using the official API endpoint
-      if (apiEndpoint === officialAPIEndpoint) {
-        if (!apiKey || apiKey.length === 0) {
-          // If API key is required but missing
-          throw new Error(t('noApiKeyWarning') as string);
-        } else {
-          // Use the official API endpoint with the API key
-          data = await getChatCompletion(
-            apiEndpoint,
-            message,
-            titleGenConfig,
-            apiKey
-          );
-        }
-      } else {
-        // For custom API endpoints, call getChatCompletion without an API key (for now).
-        // First, check for the authentication status
-        if (!(await isAuthenticated())) {
-          console.log("User not authenticated, redirecting to login.");
-          await redirectToLogin();
-          throw new Error(`API Authentication Error, please reload the page`);
-        }
+    try
+    {
+      const headers = await prepareApiHeaders(defaultTitleGenModel, message, 'Title Generation');
 
-        data = await getChatCompletion(
-          useStore.getState().apiEndpoint,
-          message,
-          titleGenConfig,
-          undefined,
-          {
-            'X-api-model': titleGenConfig.model,
-            'X-messages-count': '1',
-            'X-purpose': 'Title Generation',
-          }
-        );
-      }
+      data = await getChatCompletion(
+        useStore.getState().apiEndpoint,
+        message,
+        titleGenConfig,
+        headers.headers
+      );
+
     } catch (error: unknown) {
       throw new Error(`Error generating title!\n${(error as Error).message}`);
     }
@@ -110,42 +143,15 @@ const useSubmit = () => {
         frequency_penalty: chats[currentChatIndex].config.frequency_penalty
       };
 
-      // Check if using the official API endpoint
-      if (apiEndpoint === officialAPIEndpoint) {
-        if (!apiKey || apiKey.length === 0) {
-          // If using the official endpoint and API key is missing
-          throw new Error(t('noApiKeyWarning') as string);
-        } else {
-          // Use api key with the official endpoint
-          stream = await getChatCompletionStream(
-            apiEndpoint,
-            messages,
-            copletionsConfig,
-            apiKey
-          );
-        }
-      } else {
-        // For custom API endpoints, proceed without an API key
-        // First, check for authentication status (we're using Azure SWA)
-        if (!(await isAuthenticated())) {
-          console.log("User not authenticated, redirecting to login.");
-          await redirectToLogin();
-          throw new Error(`API Authentication Error, please reload the page`);
-        }
+      const headers = await prepareApiHeaders(chats[currentChatIndex].config.model, messages, 'Chat Submission');
         
-        stream = await getChatCompletionStream(
-          useStore.getState().apiEndpoint,
-          messages,
-          copletionsConfig,
-          undefined,
-          {
-            'x-portkey-provider': supportedModels[copletionsConfig.model as ModelOptions].portkeyProvider,
-            'X-api-model': copletionsConfig.model,
-            'X-messages-count': messages.length.toString(),
-            'X-purpose': 'Chat Submission',
-          }
-        );
-      }
+      stream = await getChatCompletionStream(
+        useStore.getState().apiEndpoint,
+        messages,
+        copletionsConfig,
+        headers.headers
+      );
+  
 
       if (stream) {
         if (stream.locked)
