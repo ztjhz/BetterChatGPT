@@ -63,16 +63,16 @@ const TotalTokenCost = () => {
                 key={model}
                 className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'
               >
-                <td className='px-4 py-2'>{model}</td>
-                <td className='px-4 py-2'>{cost.toPrecision(3)}</td>
+                <td className='px-4 py-2'>{model ? supportedModels[model as ModelOptions].displayName : '...'}</td>
+                <td className='px-4 py-2'>${cost.toFixed(2)}</td>
               </tr>
             ))}
             <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 font-bold'>
               <td className='px-4 py-2'>{t('total', { ns: 'main' })}</td>
               <td className='px-4 py-2'>
-                {costMapping
+               ${costMapping
                   .reduce((prev, curr) => prev + curr.cost, 0)
-                  .toPrecision(3)}
+                  .toPrecision(2)}
               </td>
             </tr>
           </tbody>

@@ -88,7 +88,7 @@ export const ModelSelector = ({
         onClick={() => setDropDown((prev) => !prev)}
         aria-label='model'
       >
-        {_model}
+        {_model ? supportedModels[_model].displayName : 'Select a model'}
         <DownChevronArrow />
       </button>
       <div
