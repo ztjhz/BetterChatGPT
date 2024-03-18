@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import PopupModal from '@components/PopupModal';
 import { ConfigInterface, ModelOptions } from '@type/chat';
 import DownChevronArrow from '@icon/DownChevronArrow';
-import { modelMaxToken, modelOptions } from '@constants/chat';
+import { supportedModels } from '@constants/chat';
 
 const ConfigMenu = ({
   setIsModalOpen,
@@ -15,7 +15,9 @@ const ConfigMenu = ({
   config: ConfigInterface;
   setConfig: (config: ConfigInterface) => void;
 }) => {
-  const [_maxToken, _setMaxToken] = useState<number>(config.max_tokens);
+  
+  const [_maxPromptTokens, _setMaxPromptToken] = useState<number>(config.maxPromptTokens);
+  const [_maxGenerationTokens, _setMaxGenerationToken] = useState<number>(config.maxGenerationTokens);
   const [_model, _setModel] = useState<ModelOptions>(config.model);
   const [_temperature, _setTemperature] = useState<number>(config.temperature);
   const [_presencePenalty, _setPresencePenalty] = useState<number>(
@@ -29,7 +31,8 @@ const ConfigMenu = ({
 
   const handleConfirm = () => {
     setConfig({
-      max_tokens: _maxToken,
+      maxPromptTokens : _maxPromptTokens,
+      maxGenerationTokens : _maxGenerationTokens,
       model: _model,
       temperature: _temperature,
       presence_penalty: _presencePenalty,
@@ -49,9 +52,16 @@ const ConfigMenu = ({
       <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
         <ModelSelector _model={_model} _setModel={_setModel} />
         <MaxTokenSlider
-          _maxToken={_maxToken}
-          _setMaxToken={_setMaxToken}
+          _maxToken={_maxPromptTokens}
+          _setMaxToken={_setMaxPromptToken}
           _model={_model}
+          _translationItem='maxPromptTokens'
+        />
+        <MaxTokenSlider
+          _maxToken={_maxGenerationTokens}
+          _setMaxToken={_setMaxGenerationToken}
+          _model={_model}
+          _translationItem='maxGenerationTokens'
         />
         <TemperatureSlider
           _temperature={_temperature}
@@ -88,7 +98,7 @@ export const ModelSelector = ({
         onClick={() => setDropDown((prev) => !prev)}
         aria-label='model'
       >
-        {_model}
+        {_model ? supportedModels[_model].displayName : 'Select a model'}
         <DownChevronArrow />
       </button>
       <div
@@ -101,16 +111,16 @@ export const ModelSelector = ({
           className='text-sm text-gray-700 dark:text-gray-200 p-0 m-0'
           aria-labelledby='dropdownDefaultButton'
         >
-          {modelOptions.map((m) => (
+          {Object.entries(supportedModels).map(([modelKey, modelDetails]) => (
             <li
               className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer'
               onClick={() => {
-                _setModel(m);
+                _setModel(modelKey as ModelOptions);
                 setDropDown(false);
               }}
-              key={m}
+              key={modelKey}
             >
-              {m}
+              {modelDetails.displayName}
             </li>
           ))}
         </ul>
@@ -123,10 +133,12 @@ export const MaxTokenSlider = ({
   _maxToken,
   _setMaxToken,
   _model,
+  _translationItem
 }: {
   _maxToken: number;
   _setMaxToken: React.Dispatch<React.SetStateAction<number>>;
   _model: ModelOptions;
+  _translationItem: string
 }) => {
   const { t } = useTranslation('model');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -138,9 +150,9 @@ export const MaxTokenSlider = ({
   }, [_model]);
 
   return (
-    <div>
+    <div className='mt-5 pt-5 border-t border-gray-500'>
       <label className='block text-sm font-medium text-gray-900 dark:text-white'>
-        {t('token.label')}: {_maxToken}
+        {t(`${_translationItem}.label`)}: {_maxToken}
       </label>
       <input
         type='range'
@@ -150,12 +162,12 @@ export const MaxTokenSlider = ({
           _setMaxToken(Number(e.target.value));
         }}
         min={0}
-        max={modelMaxToken[_model]}
+        max={supportedModels[_model as ModelOptions].maxModelTokens}
         step={1}
         className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
       />
       <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
-        {t('token.description')}
+        {t(`${_translationItem}.description`)}
       </div>
     </div>
   );

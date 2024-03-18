@@ -20,7 +20,8 @@ export interface ChatInterface {
 
 export interface ConfigInterface {
   model: ModelOptions;
-  max_tokens: number;
+  maxPromptTokens: number,
+  maxGenerationTokens: number;
   temperature: number;
   presence_penalty: number;
   top_p: number;
@@ -52,7 +53,25 @@ export interface Folder {
 export type ModelOptions =
   'gpt-3.5-turbo'
   | 'gpt-4'
-  | 'gpt-4-turbo-preview';
+  | 'gpt-4-turbo-preview'
+  | 'claude-3-haiku'
+  | 'claude-3-sonnet'
+  | 'claude-3-opus';
+
+export interface ModelDetails {
+  maxModelTokens: number;
+  displayName: string;
+  apiAliasCurrent: string;
+  portkeyProvider: string;
+  cost: {
+    prompt: { price: number; unit: number };
+    completion: { price: number; unit: number };
+  };
+}
+
+export type ModelsList = {
+  [model in ModelOptions]: ModelDetails;
+};
 
 export type TotalTokenUsed = {
   [model in ModelOptions]?: {
@@ -60,6 +79,7 @@ export type TotalTokenUsed = {
     completionTokens: number;
   };
 };
+
 export interface LocalStorageInterfaceV0ToV1 {
   chats: ChatInterface[];
   currentChatIndex: number;
@@ -146,4 +166,9 @@ export interface LocalStorageInterfaceV7oV8
   foldersName: string[];
   foldersExpanded: boolean[];
   folders: FolderCollection;
+}
+
+export interface LocalStorageInterfaceV8oV9
+  extends LocalStorageInterfaceV7oV8 {
+
 }

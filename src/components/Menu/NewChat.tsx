@@ -15,7 +15,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
   const addChat = useAddChat(); 
 
   const handleModelSelect = (model: string) => {
-    console.log(`Model selected: ${model}`);
+    //console.log(`Model selected: ${model}`);
 
     setIsModelSelectionOpen(false); // Close the modal
   
@@ -62,37 +62,39 @@ const NewChat = ({ folder }: { folder?: string }) => {
                 }
             `}
             </style>
-            <table className='w-full text-center text-gray-700 dark:text-gray-300' style={{ tableLayout: 'fixed' }}>
-                <tbody>
-                <tr>
-                    <td style={{ paddingTop: '20px' }}>
-                       <div className='flex justify-center'>
-                         <button className='min-w-btn btn btn-neutral p-4 rounded-lg' onClick={() => handleModelSelect('gpt-3.5-turbo')}>GPT-3.5</button>
-                       </div>
-                      </td>
-                    <td style={{ paddingTop: '20px' }}>
-                      <div className='flex justify-center'>
-                        <button className='min-w-btn btn btn-neutral p-4 rounded-lg' onClick={() => handleModelSelect('gpt-4')}>GPT-4</button>
-                      </div>
-                    </td>
-                    <td style={{ paddingTop: '20px' }}>
-                      <div className='flex justify-center'>
-                        <button className='min-w-btn btn btn-neutral p-4 rounded-lg' onClick={() => handleModelSelect('gpt-4-turbo-preview')}>GPT-4 Turbo</button>
-                      </div>
-                    </td>
-                </tr>
-                <tr style={{ paddingTop: '20px', paddingBottom: '20px' }}>
-                    <td style={{ paddingTop: '20px' }}>Reliable for general use<br/>16K tokens context<br/></td>
-                    <td style={{ paddingTop: '20px' }}>Advanced, more nuanced<br/>8K tokens context<br/></td>
-                    <td style={{ paddingTop: '20px' }}>Latest version of GPT-4 <br/>up to 128K tokens context</td>
-                </tr>
-                <tr style={{ paddingTop: '20px', paddingBottom: '20px', verticalAlign: 'top'}}>
-                    <td style={{ paddingTop: '20px' }}>Cost: Very Cheap<br/>(baseline)<br/></td>
-                    <td style={{ paddingTop: '20px' }}>Cost: <b>120x</b> of GPT-3.5<br/>per input/output token</td>
-                    <td style={{ paddingTop: '20px' }}>Cost: <b>60x</b> of GPT-3.5<br/>per input/output token<br/><br/><span className='dark:text-red-400 text-red-700'>Warning: large model context<br/>quickly becomes expensive<br/>with each message added.</span></td>
-                </tr>
-                </tbody>
-            </table>
+            <div className='grid grid-cols-3 gap-4'>
+              <div className='text-center text-gray-700 dark:text-gray-300'>
+                <button className='min-w-btn btn btn-neutral p-4 rounded-lg mb-4' onClick={() => handleModelSelect('gpt-3.5-turbo')}>GPT-3.5</button>
+                <p>Reliable for general use<br/>16K tokens context</p>
+                <p>Cost: Very Cheap<br/>(baseline)</p>
+              </div>
+              <div className='text-center text-gray-700 dark:text-gray-300'>
+                <button className='min-w-btn btn btn-neutral p-4 rounded-lg mb-4' onClick={() => handleModelSelect('gpt-4')}>GPT-4</button>
+                <p>Advanced, more nuanced<br/>8K tokens context</p>
+                <p>Cost: <b>120x</b> of GPT-3.5<br/>per input/output token</p>
+              </div>
+              <div className='text-center text-gray-700 dark:text-gray-300'>
+                <button className='min-w-btn btn btn-neutral p-4 rounded-lg mb-4' onClick={() => handleModelSelect('gpt-4-turbo-preview')}>GPT-4 Turbo</button>
+                <p>Latest version of GPT-4 <br/>up to 128K tokens context</p>
+                <p>Cost: <b>60x</b> of GPT-3.5<br/>per input/output token</p>
+              </div>
+              <div className='text-center text-gray-700 dark:text-gray-300'>
+                <button className='min-w-btn btn btn-neutral p-4 rounded-lg mb-4' onClick={() => handleModelSelect('claude-3-haiku')}>Claude-3 Haiku</button>
+                <p>Specialized in poetic responses</p>
+                <p>Cost: Comparable to GPT-3.5</p>
+              </div>
+              <div className='text-center text-gray-700 dark:text-gray-300'>
+                <button className='min-w-btn btn btn-neutral p-4 rounded-lg mb-4' onClick={() => handleModelSelect('claude-3-sonnet')}>Claude-3 Sonnet</button>
+                <p>Generates sonnets with ease</p>
+                <p>Cost: Slightly higher than GPT-3.5</p>
+              </div>
+              <div className='text-center text-gray-700 dark:text-gray-300'>
+                <button className='min-w-btn btn btn-neutral p-4 rounded-lg mb-4' onClick={() => handleModelSelect('claude-3-opus')}>Claude-3 Opus</button>
+                <p>Best for long-form content</p>
+                <p>Cost: more then GPT-4 Turbo</p>
+              </div>
+            </div>
+
           </>
         </PopupModal>
       )}

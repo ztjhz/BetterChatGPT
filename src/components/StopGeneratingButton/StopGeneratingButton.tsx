@@ -12,7 +12,7 @@ const StopGeneratingButton = () => {
     // >
       <div className={`flex w-full z-0 justify-start`}>
         <button
-          className='btn relative min-w-[12em] z-1000 justify-center items-center btn-neutral border-0 md:border'
+          className='btn relative min-w-[12em] z-1000 justify-center items-center btn-neutral border-0 md:border border-gray-900 dark:border-gray-200'
           aria-label='stop generating' onClick={() => setGenerating(false)}
         >
             <svg

@@ -5,7 +5,7 @@ import useStore from '@store/store';
 
 const AuthenticationUpdater = () => {
 
-  console.log("AuthenticationUpdater Started");
+  //console.log("AuthenticationUpdater Started");
 
   const setUsername = useStore((state) => state.setUserName);
 

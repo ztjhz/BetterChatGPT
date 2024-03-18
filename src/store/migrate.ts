@@ -11,11 +11,11 @@ import {
   LocalStorageInterfaceV5ToV6,
   LocalStorageInterfaceV6ToV7,
   LocalStorageInterfaceV7oV8,
+  LocalStorageInterfaceV8oV9,
 } from '@type/chat';
 import {
   _defaultChatConfig,
   defaultModel,
-  defaultUserMaxToken,
 } from '@constants/chat';
 import { officialAPIEndpoint } from '@constants/auth';
 import defaultPrompts from '@constants/prompt';
@@ -63,7 +63,7 @@ export const migrateV5 = (persistedState: LocalStorageInterfaceV5ToV6) => {
   persistedState.chats.forEach((chat) => {
     chat.config = {
       ...chat.config,
-      max_tokens: defaultUserMaxToken,
+      // max_tokens: defaultUserMaxToken,      no longer relevant since V9
     };
   });
 };
@@ -103,4 +103,23 @@ export const migrateV7 = (persistedState: LocalStorageInterfaceV7oV8) => {
     if (chat.folder) chat.folder = folderNameToIdMap[chat.folder];
     chat.id = uuidv4();
   });
+};
+
+export const migrateV8 = (persistedState: LocalStorageInterfaceV8oV9) => {
+ 
+  if (persistedState.defaultChatConfig) {
+    persistedState.defaultChatConfig.maxPromptTokens = _defaultChatConfig.maxPromptTokens;
+    persistedState.defaultChatConfig.maxGenerationTokens = _defaultChatConfig.maxGenerationTokens;
+    //delete persistedState.defaultChatConfig.max_tokens; 
+  }
+
+  // Update each chat's tokens settings
+  persistedState.chats.forEach((chat) => {
+    if (chat.config) {
+      chat.config.maxPromptTokens = _defaultChatConfig.maxPromptTokens;
+      chat.config.maxGenerationTokens = _defaultChatConfig.maxGenerationTokens;
+      //delete chat.config.max_tokens; // Remove old setting
+    }
+  });
+
 };
