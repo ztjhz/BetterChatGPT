@@ -73,6 +73,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
             </style>
             <table className='w-full text-center text-gray-700 dark:text-gray-300' style={{ tableLayout: 'fixed' }}>
                 <tbody>
+                <tr><td className='pt-8 text-lg' colspan="3"><b>OpenAI GPT:</b> the iconic Large Language Models that started it all</td></tr>
                 <tr>
                     <td style={{ paddingTop: '20px' }}>
                       <ModelSelectionButton model='gpt-3.5-turbo'/>
@@ -94,7 +95,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
                     <td style={{ paddingTop: '10px' }}>Cost: <b>40-60x</b> of GPT-3.5<br/>per input/output token</td>
                     <td style={{ paddingTop: '10px' }}>Cost: <b>20x</b> of GPT-3.5<br/>per input/output token</td>
                 </tr>
-                <tr><td className='py-3'></td></tr>
+                <tr><td className='pt-8 text-lg' colspan="3"><b>Anthropic Claude 3:</b> newest models by Anthropic, strongest OpenAI rival</td></tr>
                 <tr>
                     <td style={{ paddingTop: '20px' }}>
                       <ModelSelectionButton model='claude-3-haiku'/>
@@ -107,18 +108,19 @@ const NewChat = ({ folder }: { folder?: string }) => {
                     </td>  
                 </tr>
                 <tr style={{ paddingTop: '20px', paddingBottom: '20px' }}>
-                    <td style={{ paddingTop: '10px' }}>Anthropic's fast&cheap  model<br/>Good! Better then GPT-3.5<br/>Up to 200K Context</td>
-                    <td style={{ paddingTop: '10px' }}>Anthropic's mid-range  model<br/>Approaches GPT-4 levels<br/>Up to 200K Context</td>
-                    <td style={{ paddingTop: '10px' }}>Anthropic's strongest model <br/><b>Beats GPT-4, esp in coding</b><br/>Up to 200K Context</td>
+                    <td style={{ paddingTop: '10px' }}>Fast&cheap  model<br/>Much better then GPT-3.5<br/>Up to 200K Context</td>
+                    <td style={{ paddingTop: '10px' }}>Very strong mid-range model<br/>Comparable with GPT-4<br/>Up to 200K Context</td>
+                    <td style={{ paddingTop: '10px' }}>Anthropic's strongest model <br/><b>Beats all GPT-4 benchmarks</b><br/>Up to 200K Context</td>
                 </tr>
                 <tr style={{ paddingTop: '20px', paddingBottom: '20px', verticalAlign: 'top'}}>
                     <td style={{ paddingTop: '10px' }}>Cost: <b>60-80%</b> of GPT-3.5<br/><b>(cheaper!)</b></td>
                     <td style={{ paddingTop: '10px' }}>Cost: <b>~8x</b> of GPT-3.5<br/>per input/output token</td>
                     <td style={{ paddingTop: '10px' }}>Cost: <b>~50x</b> of GPT-3.5<br/>per input/output token</td>
                 </tr>
+                <tr><td className='pt-2' colspan="3">See <a className="text-blue-600 hover:text-blue-800 visited:text-purple-800" href="https://www.anthropic.com/news/claude-3-family">https://www.anthropic.com/news/claude-3-family</a> for detailed comparison</td></tr>
                 </tbody>
             </table>
-
+            
           </>
         </PopupModal>
       )}
