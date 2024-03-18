@@ -55,6 +55,7 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
 
   return (
     <div className='flex-1 overflow-hidden'>
+      <ChatTitle />
       <ScrollToBottom
         className='h-full dark:bg-gray-800'
         followButtonClassName='hidden'
@@ -65,7 +66,7 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
             className='flex flex-col items-center text-sm dark:bg-gray-800 w-full'
             ref={chatDownloadAreaRef}
           >
-            {<ChatTitle />}
+            {/* {<ChatTitle />} */}
             {!generating && advancedMode && messages?.length === 0 && (
               <NewMessageButton messageIndex={-1} />
             )}
