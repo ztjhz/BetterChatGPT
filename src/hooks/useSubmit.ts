@@ -1,7 +1,7 @@
 import React from 'react';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
-import { ChatInterface, MessageInterface } from '@type/chat';
+import { ChatInterface, MessageInterface, ModelOptions } from '@type/chat';
 import { OpenAICompletionsConfig, isAuthenticated, redirectToLogin, getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
 import { limitMessageTokens, updateTotalTokenUsed } from '@utils/messageUtils';
@@ -139,7 +139,7 @@ const useSubmit = () => {
           copletionsConfig,
           undefined,
           {
-            'x-portkey-provider': supportedModels[copletionsConfig.model].portkeyProvider,
+            'x-portkey-provider': supportedModels[copletionsConfig.model as ModelOptions].portkeyProvider,
             'X-api-model': copletionsConfig.model,
             'X-messages-count': messages.length.toString(),
             'X-purpose': 'Chat Submission',
