@@ -2,10 +2,10 @@ import React from 'react';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
 import { ChatInterface, MessageInterface } from '@type/chat';
-import { isAuthenticated, redirectToLogin, getChatCompletion, getChatCompletionStream } from '@api/api';
+import { OpenAICompletionsConfig, isAuthenticated, redirectToLogin, getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
 import { limitMessageTokens, updateTotalTokenUsed } from '@utils/messageUtils';
-import { defaultTitleGenModel, _defaultChatConfig } from '@constants/chat';
+import { supportedModels, defaultTitleGenModel, _defaultChatConfig } from '@constants/chat';
 import { officialAPIEndpoint } from '@constants/auth';
 
 const useSubmit = () => {
@@ -24,7 +24,14 @@ const useSubmit = () => {
   ): Promise<string> => {
     let data;
 
-    const titleGenConfig = { ..._defaultChatConfig, model: defaultTitleGenModel };
+    const titleGenConfig: OpenAICompletionsConfig = {
+      model: defaultTitleGenModel,
+      max_tokens: 100,
+      temperature: _defaultChatConfig.temperature,
+      presence_penalty: _defaultChatConfig.presence_penalty,
+      top_p: _defaultChatConfig.top_p,
+      frequency_penalty: _defaultChatConfig.frequency_penalty
+    };
 
     try {
       // Check if using the official API endpoint
@@ -89,10 +96,19 @@ const useSubmit = () => {
 
       const messages = limitMessageTokens(
         chats[currentChatIndex].messages,
-        chats[currentChatIndex].config.max_tokens,
+        chats[currentChatIndex].config.maxPromptTokens,
         chats[currentChatIndex].config.model
       );
-      if (messages.length === 0) throw new Error('Message exceed max token!');
+      if (messages.length === 0) throw new Error('Message exceeds Max Prompts Token!');
+      
+      const copletionsConfig: OpenAICompletionsConfig = {
+        model: chats[currentChatIndex].config.model,
+        max_tokens: chats[currentChatIndex].config.maxGenerationTokens,
+        temperature: chats[currentChatIndex].config.temperature,
+        presence_penalty: chats[currentChatIndex].config.presence_penalty,
+        top_p: chats[currentChatIndex].config.top_p,
+        frequency_penalty: chats[currentChatIndex].config.frequency_penalty
+      };
 
       // Check if using the official API endpoint
       if (apiEndpoint === officialAPIEndpoint) {
@@ -100,18 +116,17 @@ const useSubmit = () => {
           // If using the official endpoint and API key is missing
           throw new Error(t('noApiKeyWarning') as string);
         } else {
-          // If API key is provided, use it with the official endpoint
+          // Use api key with the official endpoint
           stream = await getChatCompletionStream(
             apiEndpoint,
             messages,
-            chats[currentChatIndex].config,
+            copletionsConfig,
             apiKey
           );
         }
       } else {
         // For custom API endpoints, proceed without an API key
-        // First, check for authentication statis
-
+        // First, check for authentication status (we're using Azure SWA)
         if (!(await isAuthenticated())) {
           console.log("User not authenticated, redirecting to login.");
           await redirectToLogin();
@@ -121,14 +136,14 @@ const useSubmit = () => {
         stream = await getChatCompletionStream(
           useStore.getState().apiEndpoint,
           messages,
-          chats[currentChatIndex].config,
+          copletionsConfig,
           undefined,
           {
-            'X-api-model': chats[currentChatIndex].config.model,
+            'x-portkey-provider': supportedModels[copletionsConfig.model].portkeyProvider,
+            'X-api-model': copletionsConfig.model,
             'X-messages-count': messages.length.toString(),
             'X-purpose': 'Chat Submission',
           }
-          // No API key is passed
         );
       }
 
@@ -205,7 +220,7 @@ const useSubmit = () => {
 
         const message: MessageInterface = {
           role: 'user',
-          content: `Generate a title in less than 6 words for the following message (language: ${i18n.language}):\n"""\nUser: ${user_message}\nAssistant: ${assistant_message}\n"""`,
+          content: `Generate a title in less than 6 words for the following message:\n"""\nUser: ${user_message}\nAssistant: ${assistant_message}\n"""`,
         };
 
         let title = (await generateTitle([message])).trim();

@@ -22,7 +22,7 @@ const useAddChat = () => {
       const newChat = generateDefaultChat(title, folder);
       if (model) {
         newChat.config = { ...newChat.config, model };
-        console.log(newChat)
+        //console.log(newChat)
       }  
 
       updatedChats.unshift(newChat);

@@ -1,9 +1,13 @@
 {
   "configuration": "Configuration",
   "model": "Model",
-  "token": {
+  "maxGenerationTokens": {
     "label": "Max Generation Tokens",
-    "description": "Maximum number of tokens to generate by the LLM in the chat completion. This does not include \"input\" tokens from your current Prompt and previous Conversation Context messages. Only the model's context length is limiting the total size of its processed input. Be careful, restart chats often. Compute costs ramp up quikly with extended conversations!"
+    "description": "Maximum number of tokens to generate by the LLM in the chat completion. This value is passed to the LLM API provider to limit how much the model is allowed to generate."
+  },
+  "maxPromptTokens": {
+    "label": "Max Input Tokens",
+    "description": "Maximum number of 'input' tokens to submit to LLM. This includes your latest message, the System Prompt, and previous conversation context messages (starting from most recent) - as much as fits into this limit. With high limit, compute costs ramp up quikly with extended conversations! Be careful, restart chats often or edit messages instead of adding more"
   },
   "default": "Default",
   "temperature": {

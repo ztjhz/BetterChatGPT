@@ -23,10 +23,19 @@ export const redirectToLogin = async() => {
   window.location.href = '/.auth/login/aad';
 }
 
+export interface OpenAICompletionsConfig {
+  model: ModelOptions;
+  max_tokens: number,
+  temperature: number;
+  presence_penalty: number;
+  top_p: number;
+  frequency_penalty: number;
+}
+
 export const getChatCompletion = async (
   endpoint: string,
   messages: MessageInterface[],
-  config: ConfigInterface,
+  config: OpenAICompletionsConfig,
   apiKey?: string,
   customHeaders?: Record<string, string>
 ) => {
@@ -54,8 +63,7 @@ export const getChatCompletion = async (
     headers,
     body: JSON.stringify({
       messages,
-      ...config,
-      max_tokens: undefined,
+      ...config
     }),
   });
   if (!response.ok) throw new Error(await response.text());
@@ -67,7 +75,7 @@ export const getChatCompletion = async (
 export const getChatCompletionStream = async (
   endpoint: string,
   messages: MessageInterface[],
-  config: ConfigInterface,
+  config: OpenAICompletionsConfig,
   apiKey?: string,
   customHeaders?: Record<string, string>
 ) => {
@@ -96,7 +104,6 @@ export const getChatCompletionStream = async (
     body: JSON.stringify({
       messages,
       ...config,
-      max_tokens: undefined,
       stream: true,
     }),
   });

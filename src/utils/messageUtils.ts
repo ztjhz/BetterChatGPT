@@ -49,6 +49,7 @@ export const limitMessageTokens = (
   model: ModelOptions
 ): MessageInterface[] => {
   const limitedMessages: MessageInterface[] = [];
+
   let tokenCount = 0;
 
   const isSystemFirstMessage = messages[0]?.role === 'system';
@@ -67,14 +68,18 @@ export const limitMessageTokens = (
   // until the token limit is reached (excludes first message)
   for (let i = messages.length - 1; i >= 1; i--) {
     const count = countTokens([messages[i]], model);
+    
     if (count + tokenCount > limit) break;
+
     tokenCount += count;
+
     limitedMessages.unshift({ ...messages[i] });
   }
 
   // Process first message
   if (retainSystemMessage) {
-    // Insert the system message in the third position from the end
+    // Insert the system message in the third position from the end (originally by BetterChatGPT)
+    // WHY?!!! @Dmitriy.Alergant-T1A
     limitedMessages.splice(-3, 0, { ...messages[0] });
   } else if (!isSystemFirstMessage) {
     // Check if the first message (non-system) can fit within the limit
@@ -83,6 +88,8 @@ export const limitMessageTokens = (
       limitedMessages.unshift({ ...messages[0] });
     }
   }
+
+  console.log(`Prepared messages for submission. Included ${limitedMessages.length} messages including System Prompt`)
 
   return limitedMessages;
 };

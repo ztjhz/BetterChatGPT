@@ -15,7 +15,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
   const addChat = useAddChat(); 
 
   const handleModelSelect = (model: string) => {
-    console.log(`Model selected: ${model}`);
+    //console.log(`Model selected: ${model}`);
 
     setIsModelSelectionOpen(false); // Close the modal
   

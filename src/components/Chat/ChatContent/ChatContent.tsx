@@ -131,7 +131,9 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
                       )
                       :
                       (
-                        <TokensToast />
+                        <>
+                          <TokensToast />
+                        </>
                       )
                     }
                   </>

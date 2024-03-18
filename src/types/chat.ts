@@ -20,7 +20,8 @@ export interface ChatInterface {
 
 export interface ConfigInterface {
   model: ModelOptions;
-  max_tokens: number;
+  maxPromptTokens: number,
+  maxGenerationTokens: number;
   temperature: number;
   presence_penalty: number;
   top_p: number;
@@ -58,7 +59,7 @@ export type ModelOptions =
   | 'claude-3-opus';
 
 export interface ModelDetails {
-  maxTokens: number;
+  maxModelTokens: number;
   displayName: string;
   apiAliasCurrent: string;
   portkeyProvider: string;
@@ -78,6 +79,7 @@ export type TotalTokenUsed = {
     completionTokens: number;
   };
 };
+
 export interface LocalStorageInterfaceV0ToV1 {
   chats: ChatInterface[];
   currentChatIndex: number;
@@ -164,4 +166,9 @@ export interface LocalStorageInterfaceV7oV8
   foldersName: string[];
   foldersExpanded: boolean[];
   folders: FolderCollection;
+}
+
+export interface LocalStorageInterfaceV8oV9
+  extends LocalStorageInterfaceV7oV8 {
+
 }

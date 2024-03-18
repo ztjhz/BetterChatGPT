@@ -25,7 +25,7 @@ export const defaultTitleGenModel: ModelOptions = 'gpt-3.5-turbo';
 
 export const supportedModels: ModelsList = {
   'gpt-3.5-turbo': {
-    maxTokens: 16385,
+    maxModelTokens: 16385,
     displayName: 'GPT-3.5',
     apiAliasCurrent: 'gpt-3.5-turbo',
     portkeyProvider: 'openai',
@@ -35,7 +35,7 @@ export const supportedModels: ModelsList = {
     },
   },
   'gpt-4': {
-    maxTokens: 8192,
+    maxModelTokens: 8192,
     displayName: 'GPT-4',
     apiAliasCurrent: 'gpt-4',
     portkeyProvider: 'openai',
@@ -45,7 +45,7 @@ export const supportedModels: ModelsList = {
     },
   },
   'gpt-4-turbo-preview': {
-    maxTokens: 128000,
+    maxModelTokens: 128000,
     displayName: 'GPT-4 Turbo',
     apiAliasCurrent: 'gpt-4-turbo-preview',
     portkeyProvider: 'openai',
@@ -55,7 +55,7 @@ export const supportedModels: ModelsList = {
     },
   },
   'claude-3-haiku': {
-    maxTokens: 120000,
+    maxModelTokens: 120000,
     displayName: 'Claude 3 Haiku',
     apiAliasCurrent: 'claude-3-haiku-20240307',
     portkeyProvider: 'anthropic',
@@ -65,7 +65,7 @@ export const supportedModels: ModelsList = {
     },
   },
   'claude-3-sonnet': {
-    maxTokens: 160000,
+    maxModelTokens: 160000,
     displayName: 'Claude 3 Sonnet',
     apiAliasCurrent: 'claude-3-sonnet-20240229',
     portkeyProvider: 'anthropic',
@@ -75,7 +75,7 @@ export const supportedModels: ModelsList = {
     },
   },
   'claude-3-opus': {
-    maxTokens: 160000,
+    maxModelTokens: 160000,
     displayName: 'Claude 3 Opus',
     apiAliasCurrent: 'claude-3-opus-20240229',
     portkeyProvider: 'anthropic',
@@ -86,11 +86,10 @@ export const supportedModels: ModelsList = {
   }
 };
 
-export const defaultUserMaxToken = 4000;
-
 export const _defaultChatConfig: ConfigInterface = {
   model: defaultModel,
-  max_tokens: defaultUserMaxToken,
+  maxPromptTokens: 8000,
+  maxGenerationTokens: 4000,
   temperature: 0.3,
   presence_penalty: 0,
   top_p: 0.2,

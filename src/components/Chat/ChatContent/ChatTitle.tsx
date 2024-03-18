@@ -54,7 +54,10 @@ const ChatTitle = React.memo(() => {
           {t('model')}: {config.model ? supportedModels[config.model].displayName : 'Select a model'}
         </div>
         <div className='text-center p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50'>
-          {t('token.label')}: {config.max_tokens}
+          {t('maxPromptTokens.label')}: {config.maxPromptTokens}
+        </div>
+        <div className='text-center p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50'>
+          {t('maxGenerationTokens.label')}: {config.maxGenerationTokens}
         </div>
         {advancedMode && (
           <>
