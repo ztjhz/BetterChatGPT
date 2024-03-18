@@ -7,6 +7,8 @@ import NewFolder from './NewFolder';
 import ChatHistoryList from './ChatHistoryList';
 import MenuOptions from './MenuOptions';
 
+import CloneChat from '@components/Chat/ChatContent/CloneChat';
+
 import CrossIcon2 from '@icon/CrossIcon2';
 import DownArrow from '@icon/DownArrow';
 import MenuIcon from '@icon/MenuIcon';
@@ -41,6 +43,7 @@ const Menu = React.memo(({chatDownloadAreaRef}: {chatDownloadAreaRef: React.RefO
             <nav className='flex h-full flex-1 flex-col space-y-1 px-2 pt-2'>
               <div className='flex gap-2'>
                 <NewChat />
+                <CloneChat /> 
                 <NewFolder />
               </div>
               <ChatHistoryList chatDownloadAreaRef={chatDownloadAreaRef}/>

@@ -17,7 +17,7 @@ const Toast = () => {
 
       const newTimeoutID = window.setTimeout(() => {
         setToastShow(false);
-      }, 5000);
+      }, 3600);
 
       setTimeoutID(newTimeoutID);
     }
@@ -25,7 +25,11 @@ const Toast = () => {
 
   return toastShow ? (
     <div
-      className={`flex fixed right-5 bottom-5 z-[1000] items-center w-3/4 md:w-full max-w-xs p-4 mb-4 text-gray-500 dark:text-gray-400 rounded-lg shadow-md border border-gray-400/30 animate-bounce`}
+      className={`flex fixed right-5 bottom-5 z-[1000] items-center w-3/4 
+        md:w-full max-w-xs p-4 mb-4 text-gray-500 
+        dark:text-gray-400 rounded-lg shadow-md 
+        border border-gray-400/30 animate-bounce
+        bg-stone-100 dark:bg-gray-600`}
       role='alert'
     >
       <StatusIcon status={status} />

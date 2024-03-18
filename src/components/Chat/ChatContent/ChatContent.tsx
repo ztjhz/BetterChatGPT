@@ -9,10 +9,6 @@ import NewMessageButton from './Message/NewMessageButton';
 import CrossIcon from '@icon/CrossIcon';
 
 import useSubmit from '@hooks/useSubmit';
-import DownloadChat from './DownloadChat';
-import CloneChat from './CloneChat';
-
-import { isMobile } from 'react-device-detect';
 
 import StopGeneratingButton from '@components/StopGeneratingButton/StopGeneratingButton';
 import TokensToast from '@components/Toast/TokensToast';
@@ -121,13 +117,6 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
       <div className='absolute bottom-6 left-8 m-auto flex min-w-[12em] gap-0 md:gap-2 justify-left'>
                 {
                   <>
-                    { 
-                      !isMobile && (
-                          <>
-                            <CloneChat /> 
-                          </>
-                      )
-                    }
                     {useStore.getState().generating ?
                       (
                         <StopGeneratingButton />

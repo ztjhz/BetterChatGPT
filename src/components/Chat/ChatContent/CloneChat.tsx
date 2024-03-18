@@ -16,6 +16,10 @@ const CloneChat = React.memo(() => {
 
   const [cloned, setCloned] = useState<boolean>(false);
 
+  const setToastStatus = useStore((state) => state.setToastStatus);
+  const setToastMessage = useStore((state) => state.setToastMessage);
+  const setToastShow = useStore((state) => state.setToastShow);
+
   const cloneChat = () => {
     const chats = useStore.getState().chats;
 
@@ -37,29 +41,26 @@ const CloneChat = React.memo(() => {
 
       setChats(updatedChats);
       setCurrentChatIndex(useStore.getState().currentChatIndex + 1);
-      setCloned(true);
 
-      window.setTimeout(() => {
-        setCloned(false);
-      }, 3000);
+      setToastStatus('success');
+      setToastMessage(t('cloned'));
+      setToastShow(true);
+    
     }
   };
 
   return (
-    <button
-      className='btn btn-neutral flex gap-1 border-gray-900 dark:border-gray-200'
-      aria-label={t('cloneChat') as string}
-      onClick={cloneChat}
-      title={t('cloneChat') || "Clone Chat"}
-    >
-      {cloned ? (
-        <>
-          <TickIcon /> {t('cloned')}
-        </>
-      ) : (
-        <><CloneIcon/></>
-      )}
-    </button>
+    <>
+      <button
+        className='btn py-3 px-3 items-center gap-3 rounded-md hover:bg-gray-500/10 transition-colors duration-200 text-white text-sm mb-2 flex-shrink-0 border border-white/20 transition-opacity'
+        aria-label={t('cloneChat') as string}
+        onClick={cloneChat}
+        title={t('cloneChat') || "Clone Chat"}
+      >
+        <CloneIcon/>
+      </button>
+    </>
+
   );
 });
 
