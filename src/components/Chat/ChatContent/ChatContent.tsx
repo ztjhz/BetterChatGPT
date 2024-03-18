@@ -114,8 +114,11 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
           >
 
         {/* right-0  md:w-full*/}
-
-              <div className='absolute bottom-6 left-8 m-auto flex min-w-[12em] gap-0 md:gap-2 justify-left'>
+          </div>
+          <div className='w-full h-36'></div>
+        </div>
+      </ScrollToBottom>
+      <div className='absolute bottom-6 left-8 m-auto flex min-w-[12em] gap-0 md:gap-2 justify-left'>
                 {
                   <>
                     { 
@@ -139,10 +142,6 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
                   </>
                 }
               </div>
-          </div>
-          <div className='w-full h-36'></div>
-        </div>
-      </ScrollToBottom>
     </div>
   );
 };
