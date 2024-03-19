@@ -4,6 +4,8 @@ import DeleteIcon from '@icon/DeleteIcon';
 
 import BaseButton from './BaseButton';
 
+
+
 const DeleteButton = memo(
   ({
     setIsDelete,
@@ -13,7 +15,7 @@ const DeleteButton = memo(
     return (
       <BaseButton
         icon={<DeleteIcon />}
-        buttonProps={{ 'aria-label': 'delete message' }}
+        buttonProps={{ 'aria-label': 'delete message', 'title': 'Delete Message' }}
         onClick={() => setIsDelete(true)}
       />
     );

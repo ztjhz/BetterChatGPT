@@ -14,7 +14,7 @@ const MarkdownModeButton = () => {
   return (
     <BaseButton
       icon={markdownMode ? <MarkdownIcon /> : <FileTextIcon />}
-      buttonProps={{ 'aria-label': 'toggle markdown mode' }}
+      buttonProps={{ 'aria-label': 'toggle markdown mode', 'title': 'Toggle Markdown Mode' }}
       onClick={() => {
         setMarkdownMode(!markdownMode);
       }}

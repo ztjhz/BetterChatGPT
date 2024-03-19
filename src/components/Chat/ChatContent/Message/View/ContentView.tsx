@@ -32,6 +32,9 @@ import DeleteButton from './Button/DeleteButton';
 import MarkdownModeButton from './Button/MarkdownModeButton';
 
 import CodeBlock from '../CodeBlock';
+import LikeButton from './Button/LikeButton';
+
+import { useTranslation } from 'react-i18next';
 
 const ContentView = memo(
   ({
@@ -57,12 +60,26 @@ const ContentView = memo(
     const inlineLatex = useStore((state) => state.inlineLatex);
     const markdownMode = useStore((state) => state.markdownMode);
 
+    const { t } = useTranslation();
+
     const handleDelete = () => {
       const updatedChats: ChatInterface[] = JSON.parse(
         JSON.stringify(useStore.getState().chats)
       );
-      updatedChats[currentChatIndex].messages.splice(messageIndex, 1);
-      setChats(updatedChats);
+
+      //Only allow deleting User messages. The button should be hidden in the UI otherwise, anyway*
+      if (updatedChats[currentChatIndex].messages[messageIndex].role === 'user')
+      {
+        //Delete this User message
+        updatedChats[currentChatIndex].messages.splice(messageIndex, 1);
+        
+        if (messageIndex < updatedChats[currentChatIndex].messages.length)
+          if (updatedChats[currentChatIndex].messages[messageIndex].role === 'assistant')
+            //Also delete the following Assistant message
+            updatedChats[currentChatIndex].messages.splice(messageIndex, 1);
+
+        setChats(updatedChats);
+      }
     };
 
     const handleMove = (direction: 'up' | 'down') => {
@@ -155,14 +172,18 @@ const ContentView = memo(
                 </>
               )}
 
-              {role === 'assistant' && <MarkdownModeButton />}
               {role === 'user'      && <EditButton setIsEdit={setIsEdit} />}
-              <DeleteButton setIsDelete={setIsDelete} />
+              {role === 'assistant' && <MarkdownModeButton />}
+
+              {role === 'user'      && <DeleteButton setIsDelete={setIsDelete} />}
+              {role === 'assistant' && <LikeButton />}
+
               <CopyButton onClick={handleCopy} />
             </>
           )}
           {isDelete && (
             <>
+              <span className='text-sm text-gray-500 dark:text-gray-300'>{t('deleteConfirmation')}</span>
               <button
                 className='p-1 hover:text-white'
                 aria-label='cancel'

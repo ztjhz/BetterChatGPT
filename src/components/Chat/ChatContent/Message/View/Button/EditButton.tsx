@@ -13,7 +13,7 @@ const EditButton = memo(
     return (
       <BaseButton
         icon={<EditIcon2 />}
-        buttonProps={{ 'aria-label': 'edit message' }}
+        buttonProps={{ 'aria-label': 'edit message', 'title': 'Edit Message' }}
         onClick={() => setIsEdit(true)}
       />
     );

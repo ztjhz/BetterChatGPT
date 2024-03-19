@@ -12,7 +12,7 @@ const RefreshButton = ({
   return (
     <BaseButton
       icon={<RefreshIcon />}
-      buttonProps={{ 'aria-label': 'regenerate message' }}
+      buttonProps={{ 'aria-label': 'regenerate message', 'title':'Regenerate Message' }}
       onClick={onClick}
     />
   );
