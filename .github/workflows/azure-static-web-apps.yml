@@ -37,7 +37,7 @@ jobs:
           ###### End of Repository/Build Configurations ######
         env:
           VITE_COMPANY_NAME: ${{ vars.VITE_COMPANY_NAME }} # This line passes the secret to the build process
-          VITE_ANTHROPIC_ENABLE: ${{ env.VITE_ANTHROPIC_ENABLE }}
+          VITE_ANTHROPIC_ENABLE: ${{ vars.VITE_ANTHROPIC_ENABLE }}
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
