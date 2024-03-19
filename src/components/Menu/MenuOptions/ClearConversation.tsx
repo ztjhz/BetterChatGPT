@@ -9,14 +9,19 @@ import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 const ClearConversation = () => {
   const { t } = useTranslation();
 
-  const initialiseNewChat = useInitialiseNewChat();
-  const setFolders = useStore((state) => state.setFolders);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const handleConfirm = () => {
-    setIsModalOpen(false);
-    initialiseNewChat();
+  
+  const setFolders = useStore((state) => state.setFolders);
+  const setChats = useStore((state) => state.setChats);
+  const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
+  
+  const handleConfirm = () => 
+  {
     setFolders({});
+    setChats([]);
+    setCurrentChatIndex(0);    
+
+    setIsModalOpen(false);
   };
 
   return (

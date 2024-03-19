@@ -56,11 +56,11 @@ function App() {
           setChats(chats);
           setCurrentChatIndex(0);
         } else {
-          initialiseNewChat();
+          //initialiseNewChat();
         }
       } catch (e: unknown) {
         console.log(e);
-        initialiseNewChat();
+        //initialiseNewChat();
       }
       localStorage.removeItem('chats');
     } else {
@@ -68,7 +68,7 @@ function App() {
       const chats = useStore.getState().chats;
       const currentChatIndex = useStore.getState().currentChatIndex;
       if (!chats || chats.length === 0) {
-        initialiseNewChat();
+        //initialiseNewChat();
       }
       if (
         chats &&
