@@ -8,7 +8,6 @@ const AboutMenu = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const companyName:string = import.meta.env.VITE_COMPANY_NAME || "";
-  const supportContact:string = import.meta.env.VITE_SUPPORT_CONTACT || "";
 
   return (
     <>
