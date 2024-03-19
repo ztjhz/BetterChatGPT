@@ -2,7 +2,7 @@ import React from 'react';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
 import { ChatInterface, MessageInterface, ModelOptions } from '@type/chat';
-import { isAuthenticated, redirectToLogin, getChatCompletion, getChatCompletionStream } from '@api/api';
+import { isAuthenticated, ensureUserAuthenticatedOrRedirect, getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
 import { limitMessageTokens, updateTotalTokenUsed } from '@utils/messageUtils';
 import { supportedModels, defaultTitleGenModel, _defaultChatConfig } from '@constants/chat';
@@ -60,13 +60,7 @@ const useSubmit = () => {
     /* Built-in endpoint (/api/v1/chat/completions) */
     if (apiEndpoint === builtinAPIEndpoint)
     {
-      const isAuthenticatedUser = await isAuthenticated();
-      
-      if (!isAuthenticatedUser) {
-        console.log("User not authenticated, redirecting to login.");
-        await redirectToLogin();
-        throw new Error(`API Authentication Error, please reload the page`);
-      }
+      ensureUserAuthenticatedOrRedirect();
 
       headers['X-api-model'] = supportedModels[model].apiAliasCurrent;
       headers['X-messages-count'] = messages.length.toString();

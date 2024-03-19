@@ -18,6 +18,24 @@ export const isAuthenticated = async () => {
   }
 }
 
+export const ensureUserAuthenticatedOrRedirect = async () => {
+  try {
+    const response = await fetch('/.auth/me');
+    if (response.ok) {
+      const data = await response.json();
+      // Check if the user data exists and has necessary properties
+      if (data.clientPrincipal != null)
+      {
+          console.log("User not authenticated in SWA, redirecting to login.");
+          await redirectToLogin();
+          throw new Error(`API Authentication Error, please reload the page`);
+      }
+    }
+  } catch (error) {
+    console.error('Error checking authentication status:', error);
+  }
+}
+
 export const redirectToLogin = async() => {
   // Redirect to a login route that triggers AAD authentication
   window.location.href = '/.auth/login/aad';
