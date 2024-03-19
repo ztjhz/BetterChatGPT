@@ -8,27 +8,27 @@ const useAddChat = () => {
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
 
   const addChat = (folder?: string, model?: ModelOptions) => { // Added optional model parameter
-    const chats = useStore.getState().chats;
-    if (chats) {
-      const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
-      let titleIndex = 1;
-      let title = `New Chat ${titleIndex}`;
 
-      while (chats.some((chat) => chat.title === title)) {
-        titleIndex += 1;
-        title = `New Chat ${titleIndex}`;
-      }
+    const chats = useStore.getState().chats || [];
 
-      const newChat = generateDefaultChat(title, folder);
-      if (model) {
-        newChat.config = { ...newChat.config, model };
-        //console.log(newChat)
-      }  
+    const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
+    let titleIndex = 1;
+    let title = `New Chat ${titleIndex}`;
 
-      updatedChats.unshift(newChat);
-      setChats(updatedChats);
-      setCurrentChatIndex(0);
+    while (chats.some((chat) => chat.title === title)) {
+      titleIndex += 1;
+      title = `New Chat ${titleIndex}`;
     }
+
+    const newChat = generateDefaultChat(title, folder);
+    if (model) {
+      newChat.config = { ...newChat.config, model };
+    }  
+
+    updatedChats.unshift(newChat);
+    setChats(updatedChats);
+    setCurrentChatIndex(0);
+    
   };
 
   return addChat;

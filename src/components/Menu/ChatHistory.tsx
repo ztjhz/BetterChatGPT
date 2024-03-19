@@ -48,12 +48,16 @@ const ChatHistory = React.memo(
         JSON.stringify(useStore.getState().chats)
       );
       updatedChats.splice(chatIndex, 1);
-      if (updatedChats.length > 0) {
-        setCurrentChatIndex(0);
-        setChats(updatedChats);
-      } else {
-        initialiseNewChat();
-      }
+      // if (updatedChats.length > 0) {
+      //   setCurrentChatIndex(0);
+      //   setChats(updatedChats);
+      // } else {
+      //   initialiseNewChat();
+      // }
+
+      //Now it's ok to have no chats
+      setChats(updatedChats);
+
       setIsDelete(false);
     };
 

@@ -20,6 +20,13 @@ interface ChatContentProps {
 const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
   const inputRole = useStore((state) => state.inputRole);
   const setError = useStore((state) => state.setError);
+
+  const chatExists =  useStore((state) =>
+    state.chats &&
+    state.chats.length > 0 &&
+    state.currentChatIndex >= 0 &&
+    state.currentChatIndex < state.chats.length
+  );
   const messages = useStore((state) =>
     state.chats &&
     state.chats.length > 0 &&
@@ -80,12 +87,18 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
             ))}
           </div>
 
-          <Message
-            role={inputRole}
-            content=''
-            messageIndex={stickyIndex}
-            sticky
-          />
+          {chatExists && (
+            <Message
+              role={inputRole}
+              content=''
+              messageIndex={stickyIndex}
+              sticky
+            />)}
+         
+          {!chatExists && (
+            <div className="relative mt-10 text-lg">You have no active chats. Please use the the New Chat button to start a chat.</div>
+            )}
+
           {error !== '' && (
             <div className='relative py-2 px-3 w-3/5 mt-3 max-md:w-11/12 border rounded-md border-red-500 bg-red-500/10'>
               <div className='text-gray-600 dark:text-gray-100 text-sm whitespace-pre-wrap'>
@@ -114,6 +127,7 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
           <div className='w-full h-36'></div>
         </div>
       </ScrollToBottom>
+
       <div className='absolute bottom-6 left-8 m-auto flex min-w-[12em] gap-0 md:gap-2 justify-left'>
                 {
                   <>
