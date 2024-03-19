@@ -1,6 +1,11 @@
 {
-  "save": "Add",
-  "generate": "Generate",
+  "save": "Save",
+  "generate": "Send New Message",
+  "tooltipShiftEnter": "Hotkey: Shift+Enter",
+  "tooltipCtrlEnter": "Hotkey: Ctrl+Enter",
+  "tooltipEnter": "Hotkey: Enter",
+  "appendRegenerate": "Add Clarification to Previous Message",
+  "regenerate": "Re-Generate",
   "cancel": "Cancel",
   "confirm": "Confirm",
   "warning": "Warning",
