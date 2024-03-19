@@ -87,6 +87,49 @@ export const limitMessageTokens = (
   return limitedMessages;
 };
 
+
+export const resolveWebLinks = async (messages: MessageInterface[]): Promise<MessageInterface[]> => {
+  const resolvedMessages: MessageInterface[] = [];
+
+  const fetchWebContent = async (link: string): Promise<string> => {
+    try {
+      const response = await fetch(link);
+      const resolvedContent = await response.text();
+      return resolvedContent;
+    } catch (error) {
+      console.error(`Failed to fetch web content from ${link}:`, error);
+      return '';
+    }
+  };
+
+  const replaceWebLinks = async (content: string): Promise<string> => {
+    const linkRegex = /(http[s]?:\/\/[^\s]+)/g;
+    const matches = content.match(linkRegex);
+
+    if (!matches) {
+      return content;
+    }
+
+    for (const match of matches) {
+      try {
+        const resolvedContent = await fetchWebContent(match);
+        content = content.replace(match, resolvedContent);
+      } catch (error) {
+        console.error(`Failed to fetch web content from ${match}:`, error);
+      }
+    }
+
+    return content;
+  };
+
+  for (const message of messages) {
+    const resolvedContent = await replaceWebLinks(message.content);
+    resolvedMessages.push({ ...message, content: resolvedContent });
+  }
+
+  return resolvedMessages;
+};
+
 export const updateTotalTokenUsed = (
   model: ModelOptions,
   promptMessages: MessageInterface[],
