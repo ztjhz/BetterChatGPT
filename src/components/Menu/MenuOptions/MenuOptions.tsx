@@ -14,7 +14,7 @@ const MenuOptions = () => {
   const countTotalTokens = useStore((state) => state.countTotalTokens);
   return (
     <>
-      <CollapseOptions />
+      {/* <CollapseOptions /> */}
       <div
         className={`${
           hideMenuOptions ? 'max-h-0' : 'max-h-full'
