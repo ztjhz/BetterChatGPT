@@ -1,6 +1,11 @@
 {
   "save": "Добавить",
-  "generate": "Генерировать",
+  "generate": "Отправить новое сообщение",
+  "tooltipShiftEnter": "Хоткей: Shift+Enter",
+  "tooltipCtrlEnter": "Хоткей: Ctrl+Enter",
+  "tooltipEnter": "Хоткей: Enter",
+  "appendRegenerate": "Уточнить прошлое сообщение",
+  "regenerate": "Перегенерировать",
   "cancel": "Отмена",
   "confirm": "Подтвердить",
   "warning": "Предупреждение",
