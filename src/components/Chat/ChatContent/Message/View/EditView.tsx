@@ -170,8 +170,9 @@ const EditView = ({
     }
   }, []);
 
-  const chats = JSON.parse(JSON.stringify(useStore.getState().chats));
-  const messages = chats[currentChatIndex].messages;
+  const chats = JSON.parse(JSON.stringify(useStore.getState().chats || []));
+  const messages = (currentChatIndex < chats.length) ? chats[currentChatIndex]?.messages : undefined;
+
   const lastUserMessageIndexAbove = findLastUserMessageIndex(messages, messageIndex)
 
 
