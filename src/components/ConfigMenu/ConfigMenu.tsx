@@ -49,7 +49,7 @@ const ConfigMenu = ({
       handleConfirm={handleConfirm}
       handleClickBackdrop={handleConfirm}
     >
-      <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
+      <div className='p-4 border-b border-gray-200 dark:border-gray-600'>
         <ModelSelector _model={_model} _setModel={_setModel} />
         <MaxTokenSlider
           _maxToken={_maxPromptTokens}
@@ -90,8 +90,11 @@ export const ModelSelector = ({
 }) => {
   const [dropDown, setDropDown] = useState<boolean>(false);
 
+  const { t } = useTranslation('model');
+
   return (
-    <div className='mb-4'>
+    <div className='mb-1'>
+      <div className="mb-1">{t('model')}</div>
       <button
         className='btn btn-neutral btn-small flex gap-1'
         type='button'
@@ -111,7 +114,9 @@ export const ModelSelector = ({
           className='text-sm text-gray-700 dark:text-gray-200 p-0 m-0'
           aria-labelledby='dropdownDefaultButton'
         >
-          {Object.entries(supportedModels).map(([modelKey, modelDetails]) => (
+          {Object.entries(supportedModels).filter(([_, modelDetails]) => 
+    import.meta.env.VITE_ANTHROPIC_ENABLE == 'Y' || modelDetails.portkeyProvider !== 'anthropic'
+  ).map(([modelKey, modelDetails]) => (
             <li
               className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer'
               onClick={() => {
@@ -150,7 +155,7 @@ export const MaxTokenSlider = ({
   }, [_model]);
 
   return (
-    <div className='mt-5 pt-5 border-t border-gray-500'>
+    <div className='mt-3 pt-3 border-t border-gray-500'>
       <label className='block text-sm font-medium text-gray-900 dark:text-white'>
         {t(`${_translationItem}.label`)}: {_maxToken}
       </label>
@@ -183,7 +188,7 @@ export const TemperatureSlider = ({
   const { t } = useTranslation('model');
 
   return (
-    <div className='mt-5 pt-5 border-t border-gray-500'>
+    <div className='mt-3 pt-3 border-t border-gray-500'>
       <label className='block text-sm font-medium text-gray-900 dark:text-white'>
         {t('temperature.label')}: {_temperature}
       </label>
@@ -216,7 +221,7 @@ export const TopPSlider = ({
   const { t } = useTranslation('model');
 
   return (
-    <div className='mt-5 pt-5 border-t border-gray-500'>
+    <div className='mt-3 pt-3 border-t border-gray-500'>
       <label className='block text-sm font-medium text-gray-900 dark:text-white'>
         {t('topP.label')}: {_topP}
       </label>
@@ -249,7 +254,7 @@ export const PresencePenaltySlider = ({
   const { t } = useTranslation('model');
 
   return (
-    <div className='mt-5 pt-5 border-t border-gray-500'>
+    <div className='mt-3 pt-3 border-t border-gray-500'>
       <label className='block text-sm font-medium text-gray-900 dark:text-white'>
         {t('presencePenalty.label')}: {_presencePenalty}
       </label>
@@ -282,7 +287,7 @@ export const FrequencyPenaltySlider = ({
   const { t } = useTranslation('model');
 
   return (
-    <div className='mt-5 pt-5 border-t border-gray-500'>
+    <div className='mt-3 pt-3 border-t border-gray-500'>
       <label className='block text-sm font-medium text-gray-900 dark:text-white'>
         {t('frequencyPenalty.label')}: {_frequencyPenalty}
       </label>
