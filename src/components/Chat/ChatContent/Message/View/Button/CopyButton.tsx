@@ -15,13 +15,13 @@ const CopyButton = ({
   return (
     <BaseButton
       icon={isCopied ? <TickIcon /> : <CopyIcon />}
-      buttonProps={{ 'aria-label': 'copy message' }}
+      buttonProps={{ 'aria-label': 'copy message', 'title': 'Copy to Clipboard' }}
       onClick={(e) => {
         onClick(e);
         setIsCopied(true);
         window.setTimeout(() => {
           setIsCopied(false);
-        }, 3000);
+        }, 500);
       }}
     />
   );
