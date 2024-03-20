@@ -102,7 +102,8 @@ const NewChat = ({ folder }: { folder?: string }) => {
                 {(anthropicEnable=='Y') && (
                   <>
                     <tr><td className='pt-2 text-lg border-t' colSpan={3}><b>Anthropic Claude 3: newest models by Anthropic, a strong OpenAI rival</b></td></tr>
-                    <tr><td className='' colSpan={3}>See <a className="text-blue-600 hover:text-blue-800 visited:text-purple-800" href="https://www.anthropic.com/news/claude-3-family">https://www.anthropic.com/news/claude-3-family</a></td></tr>
+                    <tr><td className='' colSpan={3}>See <a className={`text-indigo-700 hover:text-indigo-500 visited:text-indigo-700 dark:text-indigo-400 dark:hover:text-indigo-300 dark:visited:text-indigo-400`} 
+                        href="https://www.anthropic.com/news/claude-3-family">https://www.anthropic.com/news/claude-3-family</a></td></tr>
                     <tr>
                         <td style={{ paddingTop: '20px' }}>
                           <ModelSelectionButton model='claude-3-haiku'/>

@@ -98,7 +98,7 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
             />)}
          
           {!chatExists && (
-            <div className="relative flex mt-10 text-lg break-words">You have no active chats. Please use the the New Chat button.</div>
+            <div className="relative flex mt-10 text-xl text-gray-600 dark:text-gray-300 break-words">You have no active chats. Please use the the New Chat button.</div>
             )}
 
           {error !== '' && (
