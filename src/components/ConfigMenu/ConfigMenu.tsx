@@ -94,7 +94,7 @@ export const ModelSelector = ({
 
   return (
     <div className='mb-1'>
-      <div className="mb-1">{t('model')}</div>
+      <div className="mb-1 font-bold text-gray-900 dark:text-gray-300">{t('model')}</div>
       <button
         className='btn btn-neutral btn-small flex gap-1'
         type='button'

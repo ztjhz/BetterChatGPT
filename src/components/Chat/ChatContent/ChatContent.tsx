@@ -78,6 +78,7 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
                 <React.Fragment key={index}>
                   <Message
                     role={message.role}
+                    model={message.model} //Only applicable to Assistant: Which model generated the message;
                     content={message.content}
                     messageIndex={index}
                   />
@@ -91,6 +92,7 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
             <Message
               role={inputRole}
               content=''
+              model={undefined}
               messageIndex={stickyIndex}
               sticky
             />)}

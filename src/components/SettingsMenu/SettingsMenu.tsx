@@ -107,7 +107,7 @@ const DefaultSystemChat = () => {
       </div>
       <textarea
         // overflow-y-hidden
-        className='w-full my-2 mx-0 px-2 resize-none rounded-lg bg-transparent resize-none leading-7 p-1 border border-gray-400/50 focus:ring-1 focus:ring-blue max-h-8 transition-all'
+        className='w-full my-2 mx-0 px-2 resize-none rounded-lg bg-transparent resize-none leading-7 p-1 border border-gray-400/50 focus:ring-1 focus:ring-blue max-h-8 transition-all text-gray-900 dark:text-gray-300'
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
         onChange={(e) => {
