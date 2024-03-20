@@ -27,17 +27,29 @@ const NewChat = ({ folder }: { folder?: string }) => {
 
   // Function to handle Enter key press
   const handleEnterKeyPress = (event: KeyboardEvent) => {
-    if (event.key === 'Enter' && !generating && isModelSelectionOpen) {
+
+    //Use default model; Close ,modal;
+    if (event.key === 'Enter' && isModelSelectionOpen) {
       handleModelSelect(defaultModel);
+      event.preventDefault();
+    }
+
+    //Show New Chat modal
+    if (event.altKey && event.key === 'Enter' && !isModelSelectionOpen && !generating) {
+      setIsModelSelectionOpen(true);
     }
   };
+
   useEffect(() => {
     // Add event listener for keydown
-    window.addEventListener('keydown', handleEnterKeyPress);
+
+    if (!folder)  //Only handle for the main "New Chat" button not additional ones under Folders
+      window.addEventListener('keydown', handleEnterKeyPress);
 
     // Cleanup function to remove event listener
     return () => {
-      window.removeEventListener('keydown', handleEnterKeyPress);
+      if (!folder)
+        window.removeEventListener('keydown', handleEnterKeyPress);
     };
   }, [generating, isModelSelectionOpen, defaultModel]); // Add dependencies here
 
@@ -62,7 +74,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
         onClick={() => {
           if (!generating) setIsModelSelectionOpen(true);
         }}
-        title={folder ? String(t('newChat')) : ''}
+        title={folder ? String(t('newChat')) : 'Hotkey: Alt+Enter'}
       >
         {folder ? (
           <div className='max-h-0 parent-sibling-hover:max-h-10 hover:max-h-10 parent-sibling-hover:py-2 hover:py-2 px-2 overflow-hidden transition-all duration-200 delay-500 text-sm flex gap-3 items-center text-gray-100'>
