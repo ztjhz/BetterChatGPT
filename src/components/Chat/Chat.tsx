@@ -4,7 +4,7 @@ import useStore from '@store/store';
 import ChatContent from './ChatContent';
 import MobileBar from '../MobileBar';
 
-import StopGeneratingButton from '@components/StopGeneratingButton/StopGeneratingButton';
+import StopGeneratingButton from '@components/Chat/StopGeneratingButton/StopGeneratingButton';
 import TokensToast from '@components/Toast/TokensToast';
 
 

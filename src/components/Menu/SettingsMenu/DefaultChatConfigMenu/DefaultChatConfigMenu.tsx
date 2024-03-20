@@ -10,13 +10,13 @@ import {
   PresencePenaltySlider,
   TemperatureSlider,
   TopPSlider,
-} from '@components/ConfigMenu/ConfigMenu';
+} from '@components/Chat/ChatConfigMenu/ChatConfigMenu';
 
 import { ModelOptions } from '@type/chat';
 import { _defaultChatConfig } from '@constants/chat';
 import LinkIcon from '@icon/LinkIcon'
 
-const ChatConfigMenu = () => {
+const DefaultChatConfigMenu = () => {
   const { t } = useTranslation('model');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   return (
@@ -123,4 +123,4 @@ const ChatConfigPopup = ({
   );
 };
 
-export default ChatConfigMenu;
+export default DefaultChatConfigMenu;

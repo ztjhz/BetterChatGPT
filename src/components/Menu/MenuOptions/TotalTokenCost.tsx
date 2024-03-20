@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
 
 import { supportedModels } from '@constants/chat';
-import Toggle from '@components/Toggle/Toggle';
+import Toggle from '@components/Menu/Toggle/Toggle';
 
 import { ModelOptions, TotalTokenUsed } from '@type/chat';
 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { debounce } from 'lodash';
 import useStore from '@store/store';
 
-import SearchBar from '@components/SearchBar';
+import SearchBar from '@components/Chat/SearchBar';
 
 const ChatSearch = ({
   filter,

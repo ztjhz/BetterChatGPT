@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import PersonIcon from '@icon/PersonIcon';
-import ApiMenu from '@components/SettingsMenu/ApiMenu';
+import ApiMenu from '@components/Menu/SettingsMenu/ApiMenu';
 
 const ApiButton = () => {
   const { t } = useTranslation();

@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
-import Toggle from '@components/Toggle';
+import Toggle from '@components/Menu/Toggle';
 
-const ChatNamesAsPageTitlesToggle = () => {
+const RequestTokensCountToggle = () => {
   const { t } = useTranslation();
 
-  const setChatNamesAsPageTitles = useStore((state) => state.setChatNamesAsPageTitles);
+  const setRequestTokensCount = useStore((state) => state.setRequestTokensCount);
 
   const [isChecked, setIsChecked] = useState<boolean>(
-    useStore.getState().chatNamesAsPageTitles
+    useStore.getState().requestTokensCount
   );
 
   useEffect(() => {
-    setChatNamesAsPageTitles(isChecked);
+    setRequestTokensCount(isChecked);
   }, [isChecked]);
 
   return (
     <Toggle
-      label={t('chatNamesAsPageTitles') as string}
+      label={t('requestTokensCount') as string}
       isChecked={isChecked}
       setIsChecked={setIsChecked}
     />
   );
 };
 
-export default ChatNamesAsPageTitlesToggle;
+export default RequestTokensCountToggle;

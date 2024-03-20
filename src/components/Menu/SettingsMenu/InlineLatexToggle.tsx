@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
-import Toggle from '@components/Toggle';
+import Toggle from '@components/Menu/Toggle';
 
 const InlineLatexToggle = () => {
   const { t } = useTranslation();

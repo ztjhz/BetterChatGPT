@@ -10,7 +10,7 @@ import {
 } from '@type/chat';
 
 import ChatHistory from './ChatHistory';
-import NewChat from './NewChat';
+import NewChat from '../NewChat';
 import EditIcon from '@icon/EditIcon';
 import DeleteIcon from '@icon/DeleteIcon';
 import CrossIcon from '@icon/CrossIcon';

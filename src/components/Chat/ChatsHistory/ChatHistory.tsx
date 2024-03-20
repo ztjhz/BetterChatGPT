@@ -8,7 +8,7 @@ import DeleteIcon from '@icon/DeleteIcon';
 import EditIcon from '@icon/EditIcon';
 import TickIcon from '@icon/TickIcon';
 import useStore from '@store/store';
-import DownloadChat from '@components/Chat/ChatContent/DownloadChat';
+import DownloadChat from '@components/Chat/ChatsHistory/DownloadChat';
 
 const ChatHistoryClass = {
   normal:

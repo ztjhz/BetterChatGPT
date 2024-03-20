@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
 
@@ -7,9 +7,8 @@ import useSubmit from '@hooks/useSubmit';
 import { ChatInterface } from '@type/chat';
 
 import PopupModal from '@components/PopupModal';
-import TokenCount from '@components/TokenCount';
 import CommandPrompt from '../CommandPrompt';
-import { Role, MessageInterface } from '@type/chat';
+import { MessageInterface } from '@type/chat';
 
 export function findLastUserMessageIndex(updatedMessages: MessageInterface[], messageIndex: number): number {
   for (let i = messageIndex - 1; i >= 0; i--) {

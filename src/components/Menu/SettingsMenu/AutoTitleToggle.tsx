@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
-import Toggle from '@components/Toggle';
+import Toggle from '@components/Menu/Toggle';
 
-const EnterToSubmitToggle = () => {
+const AutoTitleToggle = () => {
   const { t } = useTranslation();
 
-  const setEnterToSubmit = useStore((state) => state.setEnterToSubmit);
+  const setAutoTitle = useStore((state) => state.setAutoTitle);
 
   const [isChecked, setIsChecked] = useState<boolean>(
-    useStore.getState().enterToSubmit
+    useStore.getState().autoTitle
   );
 
   useEffect(() => {
-    setEnterToSubmit(isChecked);
+    setAutoTitle(isChecked);
   }, [isChecked]);
 
   return (
     <Toggle
-      label={t('enterToSubmit') as string}
+      label={t('autoTitle') as string}
       isChecked={isChecked}
       setIsChecked={setIsChecked}
     />
   );
 };
 
-export default EnterToSubmitToggle;
+export default AutoTitleToggle;

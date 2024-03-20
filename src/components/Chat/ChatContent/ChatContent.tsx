@@ -3,14 +3,14 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 import useStore from '@store/store';
 
 import ScrollToBottomButton from './ScrollToBottomButton';
-import ChatTitle from './ChatTitle';
+import ChatHeader from './ChatHeader';
 import Message from './Message';
 import NewMessageButton from './Message/NewMessageButton';
 import CrossIcon from '@icon/CrossIcon';
 
 import useSubmit from '@hooks/useSubmit';
 
-import StopGeneratingButton from '@components/StopGeneratingButton/StopGeneratingButton';
+import StopGeneratingButton from '@components/Chat/StopGeneratingButton/StopGeneratingButton';
 import TokensToast from '@components/Toast/TokensToast';
 
 interface ChatContentProps {
@@ -58,7 +58,7 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
 
   return (
     <div className='flex-1 overflow-hidden'>
-      <ChatTitle />
+      <ChatHeader />
       <ScrollToBottom
         className='h-full dark:bg-gray-800'
         followButtonClassName='hidden'
@@ -69,7 +69,7 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
             className='flex flex-col items-center text-sm dark:bg-gray-800 w-full'
             ref={chatDownloadAreaRef}
           >
-            {/* {<ChatTitle />} */}
+            {/* {<ChatHeader />} */}
             
             {/* "Plus" New Message Button to insert messages in the middle of the thread 
               {!generating && advancedMode && messages?.length === 0 && (

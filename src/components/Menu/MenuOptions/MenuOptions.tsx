@@ -1,8 +1,8 @@
 import useStore from '@store/store';
 
-import AboutMenu from '@components/AboutMenu';
-import ImportExportChat from '@components/ImportExportChat';
-import SettingsMenu from '@components/SettingsMenu';
+import AboutMenu from '@components/Menu/AboutMenu';
+import ImportExportChat from '@components/Chat/ImportExportChat';
+import SettingsMenu from '@components/Menu/SettingsMenu';
 import CollapseOptions from './CollapseOptions';
 import TokensCostMenu from './TokensCostMenu'
 import AuthenticatedUserLogout from './AuthenticatedUserLogout';

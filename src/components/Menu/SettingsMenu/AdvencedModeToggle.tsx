@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
-import Toggle from '@components/Toggle';
+import Toggle from '@components/Menu/Toggle';
 
-const AutoTitleToggle = () => {
+const AdvancedModeToggle = () => {
   const { t } = useTranslation();
 
-  const setAutoTitle = useStore((state) => state.setAutoTitle);
+  const setAdvancedMode = useStore((state) => state.setAdvancedMode);
 
   const [isChecked, setIsChecked] = useState<boolean>(
-    useStore.getState().autoTitle
+    useStore.getState().advancedMode
   );
 
   useEffect(() => {
-    setAutoTitle(isChecked);
+    setAdvancedMode(isChecked);
   }, [isChecked]);
 
   return (
     <Toggle
-      label={t('autoTitle') as string}
+      label={t('advancedMode') as string}
       isChecked={isChecked}
       setIsChecked={setIsChecked}
     />
   );
 };
 
-export default AutoTitleToggle;
+export default AdvancedModeToggle;

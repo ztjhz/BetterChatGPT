@@ -2,12 +2,12 @@ import React, { useEffect, useRef } from 'react';
 
 import useStore from '@store/store';
 
-import NewChat from './NewChat';
+import NewChat from '../Chat/NewChat';
 import NewFolder from './NewFolder';
-import ChatHistoryList from './ChatHistoryList';
+import ChatHistoryList from '../Chat/ChatsHistory/ChatHistoryList';
 import MenuOptions from './MenuOptions';
 
-import CloneChat from '@components/Chat/ChatContent/CloneChat';
+import CloneChat from '@components/Chat/ChatsHistory/CloneChat';
 
 import CrossIcon2 from '@icon/CrossIcon2';
 import DownArrow from '@icon/DownArrow';

@@ -6,7 +6,7 @@ import { ConfigInterface, ModelOptions } from '@type/chat';
 import DownChevronArrow from '@icon/DownChevronArrow';
 import { supportedModels } from '@constants/chat';
 
-const ConfigMenu = ({
+const ChatConfigMenu = ({
   setIsModalOpen,
   config,
   setConfig,
@@ -310,4 +310,4 @@ export const FrequencyPenaltySlider = ({
   );
 };
 
-export default ConfigMenu;
+export default ChatConfigMenu;
