@@ -1,5 +1,6 @@
 import { MessageInterface, ModelOptions, TotalTokenUsed } from '@type/chat';
 
+import store from '@store/store';
 import useStore from '@store/store';
 
 import { Tiktoken } from '@dqbd/tiktoken/lite';
@@ -43,6 +44,10 @@ const countTokens = (messages: MessageInterface[], model: ModelOptions) => {
   return getChatGPTEncoding(messages, model).length;
 };
 
+const setToastStatus = store.getState().setToastStatus;
+const setToastMessage = store.getState().setToastMessage;
+const setToastShow = store.getState().setToastShow;
+
 export const limitMessageTokens = (
   messages: MessageInterface[],
   limit: number = 4096,
@@ -69,8 +74,16 @@ export const limitMessageTokens = (
   for (let i = messages.length - 1; i >= 1; i--) {
     const count = countTokens([messages[i]], model);
     
-    if (count + tokenCount > limit) break;
-
+    if (count + tokenCount > limit)
+    {
+      /* Limit exceeded */ 
+      console.log ('Prompt tokens limit exceeded, not all messages were included');
+      setToastStatus('warning');
+      setToastMessage('Chat exceeds Max Input Tokens. Not all messages were included.');
+      setToastShow(true);
+      
+      break;
+    }
     tokenCount += count;
 
     limitedMessages.unshift({ role: messages[i].role, content: messages[i].content });
@@ -79,8 +92,12 @@ export const limitMessageTokens = (
   // Process first message
   if (retainSystemMessage) {
     // Insert the system message in the third position from the end (originally by BetterChatGPT)
+
     // WHY?!!! @Dmitriy.Alergant-T1A
+    //the code limitedMessages.splice(-3, 0, { ...messages[0] }); 
+    //is inserting the first message from the messages array into the limitedMessages array at the third position from the end. 
     limitedMessages.splice(-3, 0, { ...messages[0] });
+    
   } else if (!isSystemFirstMessage) {
     // Check if the first message (non-system) can fit within the limit
     const firstMessageTokenCount = countTokens([messages[0]], model);
