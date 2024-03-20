@@ -72,7 +72,7 @@ const TokensTotalCost = () => {
               <td className='px-4 py-2'>
                ${costMapping
                   .reduce((prev, curr) => prev + curr.cost, 0)
-                  .toPrecision(2)}
+                  .toFixed(2)}
               </td>
             </tr>
           </tbody>
