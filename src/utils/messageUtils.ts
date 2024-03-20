@@ -73,7 +73,7 @@ export const limitMessageTokens = (
 
     tokenCount += count;
 
-    limitedMessages.unshift({ ...messages[i] });
+    limitedMessages.unshift({ role: messages[i].role, content: messages[i].content });
   }
 
   // Process first message
@@ -85,7 +85,7 @@ export const limitMessageTokens = (
     // Check if the first message (non-system) can fit within the limit
     const firstMessageTokenCount = countTokens([messages[0]], model);
     if (firstMessageTokenCount + tokenCount < limit) {
-      limitedMessages.unshift({ ...messages[0] });
+      limitedMessages.unshift({ role: messages[0].role, content: messages[0].content });
     }
   }
 

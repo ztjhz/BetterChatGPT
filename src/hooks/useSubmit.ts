@@ -114,6 +114,7 @@ const useSubmit = () => {
     updatedChats[currentChatIndex].messages.push({
       role: 'assistant',
       content: '',
+      model: updatedChats[currentChatIndex].config.model
     });
 
     setChats(updatedChats);

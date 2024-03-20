@@ -7,6 +7,7 @@ export const roles: Role[] = ['user', 'assistant', 'system'];
 export interface MessageInterface {
   role: Role;
   content: string;
+  model?: ModelOptions; //Only applicable to Assistant: which model generated the message;
 }
 
 export interface ChatInterface {

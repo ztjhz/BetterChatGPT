@@ -1,5 +1,5 @@
 import React from 'react';
-import { Role } from '@type/chat';
+import { ModelOptions, Role } from '@type/chat';
 import SettingIcon from '@icon/SettingIcon';
 import PersonIcon from '@icon/PersonIcon';
 
@@ -7,11 +7,20 @@ import useStore from '@store/store';
 
 import {supportedModels} from '@constants/chat';
 
-const Avatar = React.memo(({ role }: { role: Role }) => {
+const Avatar = React.memo(
+    ( 
+      { 
+        role, 
+        model = undefined }:
+      { 
+        role: Role; 
+        model: ModelOptions|undefined; 
+      }
+    ) => {
   return (
     <div className='w-[30px] flex flex-col relative items-end'>
       {role === 'user' && <UserAvatar />}
-      {role === 'assistant' && <AssistantAvatar />}
+      {role === 'assistant' && <AssistantAvatar model={model} />}
       {role === 'system' && <SystemAvatar />}
     </div>
   );
@@ -28,19 +37,23 @@ const UserAvatar = () => {
   );
 };
 
-const AssistantAvatar = () => {
-
+const AssistantAvatar = ({model = undefined}:{model: ModelOptions|undefined}) => {
   const chats = useStore.getState().chats;
   const currentChatIndex = useStore((state) => state.currentChatIndex);
-  let provider;
+  
+  let provider = 'openai';
 
-  if (chats && currentChatIndex !== undefined) {
-    const modelConfig = chats[currentChatIndex]?.config?.model;
-    if (modelConfig && supportedModels[modelConfig]) {
-      provider = supportedModels[modelConfig].portkeyProvider;
-      /* openai or anthropic*/
+  if (model)  // newer state: model recorded on the Message level
+    provider = supportedModels[model].portkeyProvider;
+  else {       // older state: no model on the Message level -> use chat config
+    if (chats && currentChatIndex !== undefined) {
+      const chatModelConfig = chats[currentChatIndex]?.config?.model;
+      if (chatModelConfig && supportedModels[chatModelConfig]) {
+        provider = supportedModels[chatModelConfig].portkeyProvider; /* openai or anthropic or ..*/
+      }
     }
-  }
+  } 
+
 
   let svgContent;
   let bgColor;
@@ -76,7 +89,7 @@ const AssistantAvatar = () => {
           bgColor = 'rgb(197, 144, 111)';
       break;
     default:
-      svgContent = (<svg>Your Default SVG here</svg>);
+      <SystemAvatar />
       break;
   }
   
