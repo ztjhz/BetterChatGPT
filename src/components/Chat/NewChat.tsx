@@ -29,14 +29,15 @@ const NewChat = ({ folder }: { folder?: string }) => {
   const handleEnterKeyPress = (event: KeyboardEvent) => {
 
     //Use default model; Close ,modal;
-    if (event.key === 'Enter' && isModelSelectionOpen) {
+    if (event.key === '/' && isModelSelectionOpen) {
       handleModelSelect(defaultModel);
       event.preventDefault();
     }
 
     //Show New Chat modal
-    if (event.altKey && event.key === 'Enter' && !isModelSelectionOpen && !generating) {
+    if (event.ctrlKey && event.key === '/' && !isModelSelectionOpen && !generating) {
       setIsModelSelectionOpen(true);
+      event.preventDefault();
     }
   };
 
@@ -74,7 +75,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
         onClick={() => {
           if (!generating) setIsModelSelectionOpen(true);
         }}
-        title={folder ? String(t('newChat')) : 'Hotkey: Alt+Enter'}
+        title={folder ? String(t('newChat')) : 'Hotkey: Ctrl + /'}
       >
         {folder ? (
           <div className='max-h-0 parent-sibling-hover:max-h-10 hover:max-h-10 parent-sibling-hover:py-2 hover:py-2 px-2 overflow-hidden transition-all duration-200 delay-500 text-sm flex gap-3 items-center text-gray-100'>
@@ -90,7 +91,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
 
       {isModelSelectionOpen && (
         <PopupModal
-          title="New Chat: Select Model"
+          title="New Chat: Select Model. Press / for default."
           setIsModalOpen={setIsModelSelectionOpen}
           cancelButton={true}
         >

@@ -30,24 +30,16 @@ const TokensToast = () => {
   }, [setTokensToastShow, tokensToastInputTokens, tokensToastCompletionTokens]);
 
   return (tokensToastShow && requestTokensCount) ? (
-        <div className={`flex z-0 justify-start`}>
-            <div className={`min-w-[12em] z-1000 text-gray-500 dark:text-gray-300 rounded-lg md:border border-gray-400/30 bg-neutral dark:bg-neutral-700`}>
-                <div className='ml-3 mr-3 text-sm font-normal text-start dark:bg-neutral-700 bg-neutral'>
-                    Input Tokens: {tokensToastInputTokens}<br/>
-                    Completion Tokens: {tokensToastCompletionTokens}
+                <div className={`flex w-full z-1000 justify-start`}>
+                      <div  className='bg-neutral-50 hover:bg-neutral-50 dark:bg-neutral-800 hover:dark:bg-neutral-800 
+                          prose dark:prose-invert text-sm rounded-md 
+                          relative min-w-[12em] z-1000 justify-center items-center border-0 md:border border-gray-900 dark:border-gray-200 
+                            p-1 pl-2
+                            text-'>
+                              Input Tokens: {tokensToastInputTokens}<br/>
+                              Generation Tokens: {tokensToastCompletionTokens}
+                    </div>
                 </div>
-                {/* <button
-                    type='button'
-                    className='ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700'
-                    aria-label='Close'
-                    onClick={() => {
-                        setTokensToastShow(false);
-                    }}
-                >
-                    <CloseIcon />
-                </button> */}
-        </div>
-    </div>
   ) : (
     <></>
   );
