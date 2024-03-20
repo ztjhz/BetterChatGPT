@@ -106,7 +106,7 @@ const AssistantAvatar = ({model = undefined}:{model: ModelOptions|undefined}) =>
 const SystemAvatar = () => {
   return (
     <div
-      className='relative h-[30px] w-[30px] p-1 rounded-sm text-white flex items-center justify-center'
+      className='relative h-[36px] w-[36px] p-1 rounded-sm text-white flex items-center justify-center'
       style={{ backgroundColor: 'rgb(126, 163, 227)' }}
     >
       <SettingIcon />

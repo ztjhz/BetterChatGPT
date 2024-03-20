@@ -70,9 +70,11 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
             ref={chatDownloadAreaRef}
           >
             {/* {<ChatTitle />} */}
-            {!generating && advancedMode && messages?.length === 0 && (
+            
+            {/* "Plus" New Message Button to insert messages in the middle of the thread 
+              {!generating && advancedMode && messages?.length === 0 && (
               <NewMessageButton messageIndex={-1} />
-            )}
+            )} */}
             {messages?.map((message, index) => (
               (advancedMode || index !== 0 || message.role !== 'system') && (
                 <React.Fragment key={index}>
@@ -82,7 +84,8 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
                     content={message.content}
                     messageIndex={index}
                   />
-                  {!generating && advancedMode && <NewMessageButton messageIndex={index} />}
+                  {/* "Plus" New Message Button to insert messages in the middle of the thread 
+                    {!generating && advancedMode && <NewMessageButton messageIndex={index} />} */}
                 </React.Fragment>
               )
             ))}

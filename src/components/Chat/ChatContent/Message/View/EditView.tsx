@@ -270,7 +270,8 @@ const EditView = ({
           )}
         </div>
 
-        {sticky && advancedMode && <TokenCount />}
+        {/* There was one more Tokens Counter display */}
+        {/* {sticky && advancedMode && <TokenCount />} */}
 
         <CommandPrompt _setContent={_setContent} />
 

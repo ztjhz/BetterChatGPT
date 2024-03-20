@@ -29,7 +29,7 @@
   "search": "Search",
   "total": "Total",
   "enterToSubmit": "Enter to Submit",
-  "advancedMode": "Advanced Mode",
+  "advancedMode": "Show System Prompt",
   "countTotalTokens": "Show Accumulated Costs",
   "requestTokensCount": "Show Request Tokens Count",
   "chatNamesAsPageTitles": "Use Chat Names as Page Titles",

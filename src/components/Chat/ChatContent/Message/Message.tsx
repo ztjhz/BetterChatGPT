@@ -45,19 +45,21 @@ const Message = React.memo(
           }`}
         >
           <Avatar role={role} model={model}/>
-          <div className='w-[calc(100%-50px)] '>
-            {advancedMode &&
-              <RoleSelector
-                role={role}
-                messageIndex={messageIndex}
-                sticky={sticky}
-              />}
+          <div className='w-[calc(100%-50px)]'>
+
+          {advancedMode && (role=='system') && 
+            ( 
+              // System Prompt
+              <div className='prose dark:prose-invert font-bold relative'>
+                System Prompt
+              </div>  
+            )}
+
             <MessageContent
               role={role}
               content={content}
               messageIndex={messageIndex}
-              sticky={sticky}
-            />
+              sticky={sticky} />
           </div>
         </div>
       </div>
