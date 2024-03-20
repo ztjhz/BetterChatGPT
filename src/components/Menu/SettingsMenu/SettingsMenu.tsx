@@ -12,12 +12,12 @@ import AdvancedModeToggle from './AdvencedModeToggle';
 import InlineLatexToggle from './InlineLatexToggle';
 import EnterToSubmitToggle from './EnterToSubmitToggle';
 import RequestTokensCountToggle from './RequestTokensCountToggle'
-import { TotalTokenCostToggle } from '../MenuOptions/TotalTokenCost';
+import { TotalTokenCostToggle } from '../TokensTotalCost';
 import ChatNamesAsPageTitlesToggle from './ChatNamesAsPageTitlesToggle';
 import PromptLibraryMenu from '@components/Menu/SettingsMenu/PromptLibraryMenu';
 import ChatConfigMenu from '@components/Menu/SettingsMenu/DefaultChatConfigMenu';
 import ApiButton from './ApiButton';
-import ClearConversation from '@components/Menu/MenuOptions/ClearConversation';
+import ClearConversation from '@components/Menu/SettingsMenu/ClearConversation';
 import ImportExportChat from '@components/Chat/ImportExportChat';
 import { _defaultChatConfig, _defaultSystemMessage } from '@constants/chat';
 

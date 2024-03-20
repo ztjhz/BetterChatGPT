@@ -24,7 +24,7 @@ const tokenCostToCost = (
   return completionCost + promptCost;
 };
 
-const TotalTokenCost = () => {
+const TokensTotalCost = () => {
   const { t } = useTranslation(['main', 'model']);
 
   const totalTokenUsed = useStore((state) => state.totalTokenUsed);
@@ -133,4 +133,4 @@ export const TotalTokenCostDisplay = () => {
   );
 };
 
-export default TotalTokenCost;
+export default TokensTotalCost;

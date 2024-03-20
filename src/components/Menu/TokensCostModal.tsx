@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import PopupModal from '@components/PopupModal';
-import {TotalTokenCostDisplay} from '@components/Menu/MenuOptions/TotalTokenCost';
-import TotalTokenCost from '@components/Menu/MenuOptions/TotalTokenCost';
+import {TotalTokenCostDisplay} from '@components/Menu/TokensTotalCost';
+import TokensTotalCost from '@components/Menu/TokensTotalCost';
 
-const TokensCostMenu = () => {
+const TokensCostModal = () => {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -41,7 +41,7 @@ const TokensCostMenu = () => {
                 <b>The AI LLMs are helping us working effeciently; Use it as much as needed!</b>
               </div>  
               <div className='p-3'>
-                <TotalTokenCost />
+                <TokensTotalCost />
               </div>
             </div>
           </>
@@ -51,4 +51,4 @@ const TokensCostMenu = () => {
   );
 };
 
-export default TokensCostMenu;
+export default TokensCostModal;
