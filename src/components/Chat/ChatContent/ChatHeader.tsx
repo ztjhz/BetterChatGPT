@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { shallow } from 'zustand/shallow';
 import useStore from '@store/store';
-import ConfigMenu from '@components/Chat/ChatConfigMenu';
+import ChatConfigMenu from '@components/Chat/ChatConfigMenu';
 import { ChatInterface, ConfigInterface } from '@type/chat';
 import { _defaultChatConfig, supportedModels } from '@constants/chat';
 
@@ -77,7 +77,7 @@ const ChatHeader = React.memo(() => {
         )}
       </div>
       {isModalOpen && (
-        <ConfigMenu
+        <ChatConfigMenu
           setIsModalOpen={setIsModalOpen}
           config={config}
           setConfig={setConfig}
