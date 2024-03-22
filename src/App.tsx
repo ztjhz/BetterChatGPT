@@ -18,6 +18,12 @@ function App() {
   const setApiKey = useStore((state) => state.setApiKey);
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
 
+  const urlChatTitle = window.location.hash.substring(1);
+  
+  const findChatIndexByTitle = (chats: ChatInterface[], title: string) => {
+    return chats.findIndex((chat) => chat.title === title);
+  }
+  
   useEffect(() => {
     document.documentElement.lang = i18n.language;
     i18n.on('languageChanged', (lng) => {
@@ -44,12 +50,12 @@ function App() {
     }
 
     if (oldChats) {
-      // legacy local storage
       try {
         const chats: ChatInterface[] = JSON.parse(oldChats);
         if (chats.length > 0) {
+          chatIndexToSet = urlChatTitle ? findChatIndexByTitle(chats, urlChatTitle) : 0;
           setChats(chats);
-          setCurrentChatIndex(0);
+          setCurrentChatIndex(chatIndexToSet !== -1 ? chatIndexToSet : 0);
         } else {
           initialiseNewChat();
         }
@@ -57,20 +63,15 @@ function App() {
         console.log(e);
         initialiseNewChat();
       }
+    
       localStorage.removeItem('chats');
+    } else if (chatsFromStore && chatsFromStore.length > 0) {
+      chatIndexToSet = urlChatTitle ? findChatIndexByTitle(chatsFromStore, urlChatTitle) : 0;
+      if (chatIndexToSet !== -1) {
+        setCurrentChatIndex(chatIndexToSet);
+      }
     } else {
-      // existing local storage
-      const chats = useStore.getState().chats;
-      const currentChatIndex = useStore.getState().currentChatIndex;
-      if (!chats || chats.length === 0) {
-        initialiseNewChat();
-      }
-      if (
-        chats &&
-        !(currentChatIndex >= 0 && currentChatIndex < chats.length)
-      ) {
-        setCurrentChatIndex(0);
-      }
+      initialiseNewChat();
     }
   }, []);
 
