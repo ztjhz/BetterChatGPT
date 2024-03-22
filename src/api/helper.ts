@@ -9,7 +9,7 @@ export const parseEventSource = (
     .map((chunk) => {
       const jsonString = chunk
         .split('\n')
-        .map((line) => line.replace(/^data: /, ''))
+        .map((line) => line.replace(/^data: ?/, ''))
         .join('');
       if (jsonString === '[DONE]') return jsonString;
       try {
