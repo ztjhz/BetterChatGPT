@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useStore from '@store/store';
-
 import { useTranslation } from 'react-i18next';
 import { matchSorter } from 'match-sorter';
 import { Prompt } from '@type/prompt';
-
 import useHideOnOutsideClick from '@hooks/useHideOnOutsideClick';
+import { findSimilarPrompts } from '@utils/findSimilarPrompts';
 
 const CommandPrompt = ({
   _setContent,
@@ -27,12 +26,20 @@ const CommandPrompt = ({
     }
   }, [dropDown]);
 
-  useEffect(() => {
-    const filteredPrompts = matchSorter(useStore.getState().prompts, input, {
-      keys: ['name'],
-    });
-    _setPrompts(filteredPrompts);
-  }, [input]);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setInput(inputValue);
+    if (inputValue.startsWith('/')) {
+      const filteredPrompts = matchSorter(useStore.getState().prompts, inputValue.slice(1), {
+        keys: ['name'],
+      });
+      _setPrompts(filteredPrompts);
+    } else {
+      // For non-commands add similar prompts functionality
+      const similarPrompts = findSimilarPrompts(inputValue, prompts);
+      _setPrompts(similarPrompts);
+    }
+  };
 
   useEffect(() => {
     _setPrompts(prompts);
@@ -59,10 +66,8 @@ const CommandPrompt = ({
           type='text'
           className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 m-0 w-full mr-0 h-8 focus:outline-none'
           value={input}
-          placeholder={t('search') as string}
-          onChange={(e) => {
-            setInput(e.target.value);
-          }}
+          placeholder="Type a message or click [/] for prompts..."
+          onChange={handleInputChange}
         />
         <ul className='text-sm text-gray-700 dark:text-gray-200 p-0 m-0 w-max max-w-sm max-md:max-w-[90vw] max-h-32 overflow-auto'>
           {_prompts.map((cp) => (
@@ -84,3 +89,4 @@ const CommandPrompt = ({
 };
 
 export default CommandPrompt;
+

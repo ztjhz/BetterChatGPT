@@ -43,5 +43,6 @@
   "cloneChat": "Klona chatt",
   "cloned": "Klonad",
   "enterToSubmit": "Tryck på Enter för att skicka",
-  "submitPlaceholder": "Skriv ett meddelande eller klicka på [/] för uppmaning..."
+  "submitPlaceholder": "Skriv ett meddelande eller klicka på [/] för uppmaning...",
+  "promptSuggestions": "Förslag på uppmaning"
 }

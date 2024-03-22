@@ -1,14 +1,15 @@
 import React, { memo, useEffect, useState } from 'react';
+import escape from 'lodash/escape';
 import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
-
+import { findSimilarPrompts } from '@utils/findSimilarPrompts';
 import useSubmit from '@hooks/useSubmit';
-
 import { ChatInterface } from '@type/chat';
-
+import { Prompt } from 'src/types/prompt';
 import PopupModal from '@components/PopupModal';
 import TokenCount from '@components/TokenCount';
 import CommandPrompt from '../CommandPrompt';
+import DOMPurify from 'dompurify';
 
 const EditView = ({
   content,
@@ -24,12 +25,25 @@ const EditView = ({
   const inputRole = useStore((state) => state.inputRole);
   const setChats = useStore((state) => state.setChats);
   const currentChatIndex = useStore((state) => state.currentChatIndex);
+  const prompts = useStore((state) => state.prompts);
+  const promptSuggestions = useStore((state) => state.promptSuggestions); // Add this line
 
   const [_content, _setContent] = useState<string>(content);
+  const [input, setInput] = useState("");
+  const [suggestions, setSuggestions] = useState<Prompt[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const textareaRef = React.createRef<HTMLTextAreaElement>();
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (input.length > 0 && promptSuggestions) {
+      const similarPrompts = findSimilarPrompts(input, prompts);
+      setSuggestions(similarPrompts);
+    } else {
+      setSuggestions([]);
+    }
+  }, [input, prompts, promptSuggestions]);
 
   const resetTextAreaHeight = () => {
     if (textareaRef.current) textareaRef.current.style.height = 'auto';
@@ -64,17 +78,17 @@ const EditView = ({
   };
 
   const handleSave = () => {
-    if (sticky && (_content === '' || useStore.getState().generating)) return;
+    if (sticky && (input === '' || useStore.getState().generating)) return;
     const updatedChats: ChatInterface[] = JSON.parse(
       JSON.stringify(useStore.getState().chats)
     );
     const updatedMessages = updatedChats[currentChatIndex].messages;
     if (sticky) {
-      updatedMessages.push({ role: inputRole, content: _content });
-      _setContent('');
+      updatedMessages.push({ role: inputRole, content: input });
+      setInput('');
       resetTextAreaHeight();
     } else {
-      updatedMessages[messageIndex].content = _content;
+      updatedMessages[messageIndex].content = input;
       setIsEdit(false);
     }
     setChats(updatedChats);
@@ -88,13 +102,13 @@ const EditView = ({
     );
     const updatedMessages = updatedChats[currentChatIndex].messages;
     if (sticky) {
-      if (_content !== '') {
-        updatedMessages.push({ role: inputRole, content: _content });
+      if (input !== '') {
+        updatedMessages.push({ role: inputRole, content: input });
       }
-      _setContent('');
+      setInput('');
       resetTextAreaHeight();
     } else {
-      updatedMessages[messageIndex].content = _content;
+      updatedMessages[messageIndex].content = input;
       updatedChats[currentChatIndex].messages = updatedMessages.slice(
         0,
         messageIndex + 1
@@ -110,7 +124,7 @@ const EditView = ({
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-  }, [_content]);
+  }, [input]);
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -121,6 +135,36 @@ const EditView = ({
 
   return (
     <>
+      {useStore.getState().promptSuggestions && (
+        <div className="flex justify-center">
+          {(suggestions.length > 0 ? suggestions : prompts).slice(0, 2).map((suggestion, index, array) => (
+            <button 
+              key={index} 
+              className="btn btn-neutral flex flex-col items-center justify-between flex-1 h-32 overflow-auto" 
+              aria-label={suggestion.name}
+              onClick={() => {
+                setInput(suggestion.prompt); // This sets the input for the default text box
+                _setContent(suggestion.prompt); // This sets the input for the non-default text box
+                const similarPrompts = findSimilarPrompts(suggestion.prompt, prompts);
+                setSuggestions(similarPrompts);
+              }}
+              style={{width: `${100 / array.length}%`}}
+            >
+              <div className="font-semibold text-center flex-shrink-0">{suggestion.name}</div>
+              <div 
+                className="text-center flex-grow" 
+                style={{maxWidth: '100%', wordWrap: 'break-word', overflowY: 'auto'}}
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(suggestion.prompt.replace(
+                    new RegExp(escape(suggestion.formattedTerm || '').replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi'), 
+                    match => `<strong>${escape(match)}</strong>`
+                  ))
+                }}
+              />
+            </button>
+          ))}
+        </div>
+      )}
       <div
         className={`w-full ${
           sticky
@@ -128,17 +172,19 @@ const EditView = ({
             : ''
         }`}
       >
-        <textarea
-          ref={textareaRef}
-          className='m-0 resize-none rounded-lg bg-transparent overflow-y-hidden focus:ring-0 focus-visible:ring-0 leading-7 w-full placeholder:text-gray-500/40'
-          onChange={(e) => {
-            _setContent(e.target.value);
-          }}
-          value={_content}
-          placeholder={t('submitPlaceholder') as string}
-          onKeyDown={handleKeyDown}
-          rows={1}
-        ></textarea>
+      <textarea
+        ref={textareaRef}
+        className='m-0 resize-none rounded-lg bg-transparent overflow-y-hidden focus:ring-0 focus-visible:ring-0 leading-7 w-full placeholder:text-gray-500/40'
+        onChange={(e) => {
+          const newValue = e.target.value;
+          setInput(newValue);
+          _setContent(newValue); // Add this line
+        }}
+        value={_content}
+        placeholder={t('submitPlaceholder') as string}
+        onKeyDown={handleKeyDown}
+        rows={1}
+      ></textarea>
       </div>
       <EditViewButtons
         sticky={sticky}
