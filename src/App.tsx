@@ -11,6 +11,8 @@ import { Theme } from '@type/theme';
 import ApiPopup from '@components/ApiPopup';
 import Toast from '@components/Toast';
 
+import { rtlLanguages } from '@constants/language';
+
 function App() {
   const initialiseNewChat = useInitialiseNewChat();
   const setChats = useStore((state) => state.setChats);
@@ -20,8 +22,13 @@ function App() {
 
   useEffect(() => {
     document.documentElement.lang = i18n.language;
+    document.documentElement.dir = rtlLanguages.has(i18n.language)
+      ? 'rtl'
+      : 'ltr';
+
     i18n.on('languageChanged', (lng) => {
       document.documentElement.lang = lng;
+      document.documentElement.dir = rtlLanguages.has(lng) ? 'rtl' : 'ltr';
     });
   }, []);
 
