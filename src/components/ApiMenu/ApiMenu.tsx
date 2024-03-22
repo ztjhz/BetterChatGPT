@@ -34,6 +34,11 @@ const ApiMenu = ({
     setIsModalOpen(false);
   };
 
+  const handleRemove = () => {
+    setApiKey('');
+    _setApiKey('');
+  };
+
   const handleToggleCustomEndpoint = () => {
     if (_customEndpoint) _setApiEndpoint(defaultAPIEndpoint);
     else _setApiEndpoint('');
@@ -78,19 +83,33 @@ const ApiMenu = ({
           )}
         </div>
 
-        <div className='flex gap-2 items-center justify-center mt-2'>
-          <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
-            {t('apiKey.inputLabel', { ns: 'api' })}
+        {apiKey && apiKey.length > 0 ? (
+          <div>
+            <div className='text-gray-900 dark:text-gray-300 text-sm'>
+              API Key Set <span> </span>
+              <button
+                className='underline'
+                onClick={handleRemove}
+              >
+                Click here to remove it
+              </button>
+            </div>
           </div>
-          <input
-            type='text'
-            className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md m-0 w-full mr-0 h-8 focus:outline-none'
-            value={_apiKey}
-            onChange={(e) => {
-              _setApiKey(e.target.value);
-            }}
-          />
-        </div>
+        ) : (
+          <div className='flex gap-2 items-center justify-center mt-2'>
+            <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
+              {t('apiKey.inputLabel', { ns: 'api' })}
+            </div>
+            <input
+              type='text'
+              className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md m-0 w-full mr-0 h-8 focus:outline-none'
+              value={_apiKey}
+              onChange={(e) => {
+                _setApiKey(e.target.value);
+              }}
+            />
+          </div>
+        )}
 
         <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm flex flex-col gap-3 leading-relaxed'>
           <p className='mt-4'>

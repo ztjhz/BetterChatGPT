@@ -29,6 +29,11 @@ const ApiPopup = () => {
     }
   };
 
+  const handleRemove = () => {
+    setApiKey('');
+    _setApiKey('');
+  };
+
   useEffect(() => {
     setFirstVisit(false);
   }, []);
@@ -41,20 +46,30 @@ const ApiPopup = () => {
       cancelButton={false}
     >
       <div className='p-6 border-b border-gray-200 dark:border-gray-600'>
-        <div className='flex gap-2 items-center justify-center mt-2'>
-          <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
-            {t('apiKey.inputLabel', { ns: 'api' })}
+      {apiKey && apiKey.length > 0 ? (
+          <div>
+            <div className='text-gray-900 dark:text-gray-300 text-sm'>
+              API Key Set <span> </span>
+            <button className='underline' onClick={handleRemove}>
+              Click here to remove it
+            </button>
+            </div>
           </div>
-          <input
-            type='text'
-            className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md m-0 w-full mr-0 h-8 focus:outline-none'
-            value={_apiKey}
-            onChange={(e) => {
-              _setApiKey(e.target.value);
-            }}
-          />
-        </div>
-
+        ) : (
+          <div className='flex gap-2 items-center justify-center mt-2'>
+            <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm'>
+              {t('apiKey.inputLabel', { ns: 'api' })}
+            </div>
+            <input
+              type='text'
+              className='text-gray-800 dark:text-white p-3 text-sm border-none bg-gray-200 dark:bg-gray-600 rounded-md m-0 w-full mr-0 h-8 focus:outline-none'
+              value={_apiKey}
+              onChange={(e) => {
+                _setApiKey(e.target.value);
+              }}
+            />
+          </div>
+        )}
         <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm mt-4'>
           <Trans
             i18nKey='apiKey.howTo'
