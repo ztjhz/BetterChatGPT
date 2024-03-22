@@ -33,14 +33,20 @@ const useSubmit = () => {
         // other endpoints
         data = await getChatCompletion(
           useStore.getState().apiEndpoint,
-          message,
+          message.map(msg => ({
+            ...msg,
+            content: msg.content.substring(0, 1000),
+          })),
           _defaultChatConfig
         );
       } else if (apiKey) {
         // own apikey
         data = await getChatCompletion(
           useStore.getState().apiEndpoint,
-          message,
+          message.map(msg => ({
+            ...msg,
+            content: msg.content.substring(0, 1000),
+          })),
           _defaultChatConfig,
           apiKey
         );
