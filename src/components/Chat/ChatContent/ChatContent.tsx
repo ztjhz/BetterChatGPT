@@ -8,8 +8,6 @@ import Message from './Message';
 import NewMessageButton from './Message/NewMessageButton';
 import CrossIcon from '@icon/CrossIcon';
 
-import useSubmit from '@hooks/useSubmit';
-
 import StopGeneratingButton from '@components/Chat/StopGeneratingButton/StopGeneratingButton';
 import TokensToast from '@components/Toast/TokensToast';
 
@@ -20,6 +18,8 @@ interface ChatContentProps {
 const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
   const inputRole = useStore((state) => state.inputRole);
   const setError = useStore((state) => state.setError);
+  const error = useStore((state) => state.error);
+
 
   const chatExists =  useStore((state) =>
     state.chats &&
@@ -53,8 +53,6 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
       setError('');
     }
   }, [generating]);
-
-  const { error } = useSubmit();
 
   return (
     <div className='flex-1 overflow-hidden'>
@@ -104,6 +102,7 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
             <div className="relative flex mt-10 text-xl text-gray-600 dark:text-gray-300 break-words">You have no active chats. Please use the the New Chat button.</div>
             )}
 
+          {/* ERROR MESSAGE (RED BOX) */}
           {error !== '' && (
             <div className='relative py-2 px-3 w-3/5 mt-3 max-md:w-11/12 border rounded-md border-red-500 bg-red-500/10'>
               <div className='text-gray-600 dark:text-gray-100 text-sm whitespace-pre-wrap'>
