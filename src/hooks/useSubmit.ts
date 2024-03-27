@@ -227,11 +227,23 @@ const useSubmit = () => {
           currChats[currentChatIndex].messages[messages_length - 1].content;
         const user_message =
           currChats[currentChatIndex].messages[messages_length - 2].content;
-
+          
+          function formatMessage(message: string, maxLength: number) {
+            if (message.length <= maxLength) {
+              return message;
+            } else {
+              const firstHalf = message.slice(0, maxLength/2);
+              const lastHalf = message.slice(-maxLength/2);
+              return `${firstHalf}... ${lastHalf}`;
+            }
+          }
+          
         const message: MessageInterface = {
           role: 'user',
-          content: `Generate a title in less than 6 words for the following message:\n"""\nUser: ${user_message}\nAssistant: ${assistant_message}\n"""`,
+          content: `Generate a title in less than 6 words for the following AI Chatbot Assistance scenario:\n"""\nUser:\n${formatMessage(user_message, 280)}\n\nAssistant:\n${formatMessage(assistant_message, 280)}\n"""`,
         };
+
+        console.log (JSON.stringify((message)));
 
         let title = (await generateTitle([message])).trim();
         if (title) // generateTitle function was able to return a non-blank Title
