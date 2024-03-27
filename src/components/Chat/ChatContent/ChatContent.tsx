@@ -60,7 +60,7 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
     <div className='flex-1 overflow-hidden'>
       <ChatHeader />
       <ScrollToBottom
-        className='h-full dark:bg-gray-800'
+        className='h-full pt-16 dark:bg-gray-800'
         followButtonClassName='hidden'
       >
         <ScrollToBottomButton />
