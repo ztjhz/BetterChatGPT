@@ -2,11 +2,11 @@
   "configuration": "Configuration",
   "model": "Model",
   "maxGenerationTokens": {
-    "label": "Max Generation Tokens",
+    "label": "Max Gen",
     "description": "Maximum number of tokens to generate by the LLM in the chat completion. This value is passed to the LLM API provider to limit how much the model is allowed to generate."
   },
   "maxPromptTokens": {
-    "label": "Max Input Tokens",
+    "label": "Max Input",
     "description": "Maximum number of 'input' tokens to submit to LLM. This includes your latest message, the System Prompt, and previous conversation context messages (starting from most recent) - as much as fits."
   },
   "default": "Default",
