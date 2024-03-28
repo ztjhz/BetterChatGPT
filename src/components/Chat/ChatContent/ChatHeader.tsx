@@ -45,18 +45,18 @@ const ChatHeader = React.memo(() => {
   return config ? (
     <>
       <div
-        className='absolute flex top-0 left-0 right-0 gap-x-4 gap-y-1 flex-wrap w-full items-center justify-center border-b border-black/10 bg-gray-50 p-3 dark:border-gray-900/50 dark:bg-gray-700 text-gray-600 dark:text-gray-300 cursor-pointer'
+        className='absolute flex top-0 left-0 right-0 gap-x-4 gap-y-1 w-full items-center justify-center border-b border-black/10 bg-gray-50 p-3 dark:border-gray-900/50 dark:bg-gray-700 text-gray-600 dark:text-gray-300 cursor-pointer'
         onClick={() => {
           setIsModalOpen(true);
         }}
       >
-        <div className='text-center p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50'>
+        <div className='text-center whitespace-nowrap p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50'>
           {t('model')}: {config.model ? supportedModels[config.model].displayName : 'Select a model'}
         </div>
-        <div className='text-center p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50'>
+        <div className='text-center truncate whitespace-nowrap p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50'>
           {t('maxPromptTokens.label')}: {config.maxPromptTokens}
         </div>
-        <div className='text-center p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50'>
+        <div className='text-center truncate whitespace-nowrap p-1 rounded-md bg-gray-300/20 dark:bg-gray-900/10 hover:bg-gray-300/50 dark:hover:bg-gray-900/50'>
           {t('maxGenerationTokens.label')}: {config.maxGenerationTokens}
         </div>
         {advancedMode && (
