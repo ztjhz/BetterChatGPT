@@ -115,7 +115,8 @@ export const ModelSelector = ({
           aria-labelledby='dropdownDefaultButton'
         >
           {Object.entries(supportedModels).filter(([_, modelDetails]) => 
-    import.meta.env.VITE_ANTHROPIC_ENABLE == 'Y' || modelDetails.portkeyProvider !== 'anthropic'
+    modelDetails.enabled == true && 
+    (import.meta.env.VITE_ANTHROPIC_ENABLE == 'Y' || modelDetails.portkeyProvider !== 'anthropic')
   ).map(([modelKey, modelDetails]) => (
             <li
               className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer'

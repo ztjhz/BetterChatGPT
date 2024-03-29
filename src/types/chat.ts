@@ -62,6 +62,7 @@ export type ModelOptions =
 export interface ModelDetails {
   maxModelTokens: number;
   displayName: string;
+  enabled: boolean;
   apiAliasCurrent: string;
   portkeyProvider: string;
   titleGenModel: ModelOptions;  
