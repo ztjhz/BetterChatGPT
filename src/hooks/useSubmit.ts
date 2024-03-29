@@ -1,6 +1,4 @@
-import React from 'react';
 import useStore from '@store/store';
-import { useTranslation } from 'react-i18next';
 import { ChatInterface, MessageInterface, ModelOptions } from '@type/chat';
 import { isAuthenticated, redirectToLogin, getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
@@ -19,16 +17,12 @@ export interface OpenAICompletionsConfig {
   frequency_penalty: number;
 }
 
-const useSubmit = () => {
-  const { t, i18n } = useTranslation('api');
-  const error = useStore((state) => state.error);
-  const setError = useStore((state) => state.setError);
-  const apiEndpoint = useStore((state) => state.apiEndpoint);
-  const apiKey = useStore((state) => state.apiKey);
-  const setGenerating = useStore((state) => state.setGenerating);
-  const generating = useStore((state) => state.generating)
-  const currentChatIndex = useStore((state) => state.currentChatIndex);
-  const setChats = useStore((state) => state.setChats);
+const _contentGeneratingPlaceholder = '_AI response requested..._';
+
+const useSubmit = () => 
+{
+  const setError          = useStore((state) => state.setError);
+  const setGenerating     = useStore((state) => state.setGenerating);
 
   /* Prepare API Request Headers */
 
@@ -37,8 +31,11 @@ const useSubmit = () => {
       messages: MessageInterface[],
       purpose: string) => {
 
+    const apiEndpoint  = useStore.getState().apiEndpoint;
+    const apiKey        = useStore.getState().apiKey;
+
     const headers: Record<string, string> = {};
-    
+
     if (apiEndpoint !== builtinAPIEndpoint){
 
       if (!apiKey || apiKey.length === 0) {
@@ -76,78 +73,71 @@ const useSubmit = () => {
     return {headers};
   };
 
-  const generateTitle = async ( message: MessageInterface[] ) => {
-    const chats = useStore.getState().chats;
-    if (!chats)
-      return;
-    
-    let data;
-
-    const titleGenModel = supportedModels[chats[currentChatIndex].config.model].titleGenModel;
-
-    const titleGenConfig: OpenAICompletionsConfig = {
-      model: supportedModels[titleGenModel].apiAliasCurrent,
-      max_tokens: 100,
-      temperature: _defaultChatConfig.temperature,
-      presence_penalty: _defaultChatConfig.presence_penalty,
-      top_p: _defaultChatConfig.top_p,
-      frequency_penalty: _defaultChatConfig.frequency_penalty
-    };
-
-    try
-    {
-      const headers = await prepareApiHeaders(titleGenModel, message, 'Title Generation');
-
-      data = await getChatCompletion(
-        useStore.getState().apiEndpoint,
-        message,
-        titleGenConfig,
-        headers.headers
-      );
-
-    } catch (error: unknown) {
-      throw new Error(`Error generating title!\n${(error as Error).message}`);
-    }
-    return data.choices[0].message.content;
-  };
-
   const handleSubmit = async () => {
-    const chats = useStore.getState().chats;
-    if (generating || !chats) return;
 
-    const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
+    const countTotalTokens  = useStore.getState().countTotalTokens;
+    const generating        = useStore.getState().generating;
+    const currentChatIndex  = useStore.getState().currentChatIndex;
+    const currChats         = useStore.getState().chats;
+    const setChats          = useStore.getState().setChats;
+
+    if (generating || !currChats) return;
+
+    setGenerating(true);
+
+    /* Add Assistant's message*/
+    const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(currChats));
 
     updatedChats[currentChatIndex].messages.push({
       role: 'assistant',
-      content: '',
+      content: _contentGeneratingPlaceholder,
       model: updatedChats[currentChatIndex].config.model
     });
 
+    const _currentChatIndex = currentChatIndex;
+    const _currentMessageIndex = updatedChats[currentChatIndex].messages.length - 1;
+
     setChats(updatedChats);
-    setGenerating(true);
+    /************/
+
+    const addAssistantContent = (content: string) => 
+    {
+      const updatedChats: ChatInterface[] = JSON.parse(
+        JSON.stringify(useStore.getState().chats)
+      );
+      const updatedMessages = updatedChats[_currentChatIndex].messages;
+
+      //Removing "Generating..." placeholder
+      if (updatedMessages[_currentMessageIndex].content == _contentGeneratingPlaceholder)
+        updatedMessages[_currentMessageIndex].content = ''; 
+
+      updatedMessages[_currentMessageIndex].content += content;
+      setChats(updatedChats);
+    }
+
 
     try {
       let stream;
-      if (chats[currentChatIndex].messages.length === 0)
+      if (currChats[currentChatIndex].messages.length === 0)
         throw new Error('No messages submitted!');
 
       const messages = limitMessageTokens(
-        chats[currentChatIndex].messages,
-        chats[currentChatIndex].config.maxPromptTokens,
-        chats[currentChatIndex].config.model
+        currChats[currentChatIndex].messages,
+        currChats[currentChatIndex].config.maxPromptTokens,
+        currChats[currentChatIndex].config.model
       );
-      if (messages.length === 0) throw new Error('Message exceeds Max Prompts Token!');
+      if (messages.length === 0) throw new Error('Message exceeds Max Input Token!');
       
       const completionsConfig: OpenAICompletionsConfig = {
-        model: supportedModels[chats[currentChatIndex].config.model].apiAliasCurrent,
-        max_tokens: chats[currentChatIndex].config.maxGenerationTokens,
-        temperature: chats[currentChatIndex].config.temperature,
-        presence_penalty: chats[currentChatIndex].config.presence_penalty,
-        top_p: chats[currentChatIndex].config.top_p,
-        frequency_penalty: chats[currentChatIndex].config.frequency_penalty
+        model: supportedModels[currChats[currentChatIndex].config.model].apiAliasCurrent,
+        max_tokens: currChats[currentChatIndex].config.maxGenerationTokens,
+        temperature: currChats[currentChatIndex].config.temperature,
+        presence_penalty: currChats[currentChatIndex].config.presence_penalty,
+        top_p: currChats[currentChatIndex].config.top_p,
+        frequency_penalty: currChats[currentChatIndex].config.frequency_penalty
       };
 
-      const headers = await prepareApiHeaders(chats[currentChatIndex].config.model, messages, 'Chat Submission');
+      const headers = await prepareApiHeaders(currChats[currentChatIndex].config.model, messages, 'Chat Submission');
         
       stream = await getChatCompletionStream(
         useStore.getState().apiEndpoint,
@@ -156,7 +146,6 @@ const useSubmit = () => {
         headers.headers
       );
   
-
       if (stream) {
         if (stream.locked)
           throw new Error(
@@ -185,12 +174,7 @@ const useSubmit = () => {
               return output;
             }, '');
 
-            const updatedChats: ChatInterface[] = JSON.parse(
-              JSON.stringify(useStore.getState().chats)
-            );
-            const updatedMessages = updatedChats[currentChatIndex].messages;
-            updatedMessages[updatedMessages.length - 1].content += resultString;
-            setChats(updatedChats);
+            addAssistantContent (resultString);
           }
         }
         if (useStore.getState().generating) {
@@ -203,9 +187,6 @@ const useSubmit = () => {
       }
 
       // update tokens used in chatting
-      const currChats = useStore.getState().chats;
-      const countTotalTokens = useStore.getState().countTotalTokens;
-
       if (currChats && countTotalTokens) {
         const model = currChats[currentChatIndex].config.model;
         const messages = currChats[currentChatIndex].messages;
@@ -215,43 +196,88 @@ const useSubmit = () => {
           messages[messages.length - 1]
         );
       }
+    } catch (e: unknown) {
+          const err = (e as Error).message;
+          console.log(err);
+          setError(err);
 
-      // generate title for new chats
-      if (
-        useStore.getState().autoTitle &&
-        currChats &&
-        !currChats[currentChatIndex]?.titleSet
-      ) {
-        const messages_length = currChats[currentChatIndex].messages.length;
-        const assistant_message =
-          currChats[currentChatIndex].messages[messages_length - 1].content;
-        const user_message =
-          currChats[currentChatIndex].messages[messages_length - 2].content;
-          
-          function formatMessage(message: string, maxLength: number) {
-            if (message.length <= maxLength) {
-              return message;
-            } else {
-              const firstHalf = message.slice(0, maxLength/2);
-              const lastHalf = message.slice(-maxLength/2);
-              return `${firstHalf}... ${lastHalf}`;
-            }
+          addAssistantContent ("***error*** could not obtain AI chat response\nuse the 'Regenerate Response' button to try again");
+    }
+
+    if (
+      useStore.getState().autoTitle &&
+      currChats &&
+      !currChats[currentChatIndex]?.titleSet
+    )
+      generateChatTitle();
+
+    setGenerating(false);
+  };
+
+
+
+  const generateChatTitle = async () => {
+
+    const countTotalTokens  = useStore.getState().countTotalTokens;
+    const currentChatIndex  = useStore.getState().currentChatIndex;
+    const currChats         = useStore.getState().chats;
+    const setChats          = useStore.getState().setChats;
+
+    if (!currChats)
+    return;
+
+    try {
+      const messages_length = currChats[currentChatIndex].messages.length;
+      const assistant_message =
+        currChats[currentChatIndex].messages[messages_length - 1].content;
+      const user_message =
+        currChats[currentChatIndex].messages[messages_length - 2].content;
+        
+        function formatMessage(message: string, maxLength: number) {
+          if (message.length <= maxLength) {
+            return message;
+          } else {
+            const firstHalf = message.slice(0, maxLength/2);
+            const lastHalf = message.slice(-maxLength/2);
+            return `${firstHalf}... ${lastHalf}`;
           }
-          
-        const message: MessageInterface = {
-          role: 'user',
-          content: `Generate a title in less than 6 words for the following AI Chatbot Assistance scenario:\n"""\nUser:\n${formatMessage(user_message, 280)}\n\nAssistant:\n${formatMessage(assistant_message, 280)}\n"""`,
-        };
+        }
+        
+      const titleGenMessage: MessageInterface = {
+        role: 'user',
+        content: `Generate a title in less than 6 words for the following AI Chatbot Assistance scenario:\n"""\nUser:\n${formatMessage(user_message, 280)}\n\nAssistant:\n${formatMessage(assistant_message, 280)}\n"""`,
+      };
 
-        console.log (JSON.stringify((message)));
+      const titleGenModel = supportedModels[currChats[currentChatIndex].config.model].titleGenModel;
 
-        let title = (await generateTitle([message])).trim();
+      const titleGenConfig: OpenAICompletionsConfig = {
+        model: supportedModels[titleGenModel].apiAliasCurrent,
+        max_tokens: 100,
+        temperature: _defaultChatConfig.temperature,
+        presence_penalty: _defaultChatConfig.presence_penalty,
+        top_p: _defaultChatConfig.top_p,
+        frequency_penalty: _defaultChatConfig.frequency_penalty
+      };
+
+      try
+      {
+        const headers = await prepareApiHeaders(titleGenModel, [titleGenMessage], 'Title Generation');
+
+        let data = await getChatCompletion(
+          useStore.getState().apiEndpoint,
+          [titleGenMessage],
+          titleGenConfig,
+          headers.headers
+        );
+
+        let title = data.choices[0].message.content.trim();
+    
         if (title) // generateTitle function was able to return a non-blank Title
         {
           if (title.startsWith('"') && title.endsWith('"')) {
             title = title.slice(1, -1);
           }
-
+  
           const updatedChats: ChatInterface[] = JSON.parse(
             JSON.stringify(useStore.getState().chats)
           );
@@ -262,22 +288,25 @@ const useSubmit = () => {
 
         // update tokens used for generating title
         if (countTotalTokens) {
-          const model = _defaultChatConfig.model;
-          updateTotalTokenUsed(model, [message], {
-            role: 'assistant',
-            content: title,
-          });
+          updateTotalTokenUsed(titleGenConfig.model as ModelOptions, 
+            [titleGenMessage], 
+            {
+              role: 'assistant',
+              content: title,
+            });
         }
+
+      } catch (error: unknown) {
+        throw new Error(`Error generating chat title!\n${(error as Error).message}`);
       }
     } catch (e: unknown) {
       const err = (e as Error).message;
       console.log(err);
       setError(err);
     }
-    setGenerating(false);
-  };
+  }
 
-  return { handleSubmit, error };
+  return { handleSubmit };
 };
 
 export default useSubmit;
