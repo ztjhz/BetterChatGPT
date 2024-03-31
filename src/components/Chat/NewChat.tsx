@@ -64,7 +64,7 @@ const NewChat = ({ folder }: { folder?: string }) => {
   }
 
   const anthropicEnable:string = import.meta.env.VITE_ANTHROPIC_ENABLE || "N";
-  console.log(`Anthropic Enable: ${anthropicEnable}`)
+  // console.log(`Anthropic Enable: ${anthropicEnable}`)
 
   return (
     <>

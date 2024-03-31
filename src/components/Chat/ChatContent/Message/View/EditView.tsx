@@ -39,8 +39,7 @@ const EditView = ({
   const textareaRef = React.createRef<HTMLTextAreaElement>();
 
   const { t } = useTranslation();
-  const generating = useStore.getState().generating;
-  const advancedMode = useStore((state) => state.advancedMode);
+  const generatingState = useStore((state) => state.generating);
 
   const enterToSubmit = useStore.getState().enterToSubmit;
 
@@ -81,7 +80,9 @@ const EditView = ({
   };
 
   const handleSave = () => {
+    // It's a handler, so better query Store directly for the generating state
     if (sticky && (_content === '' || useStore.getState().generating)) return;
+
     const updatedChats: ChatInterface[] = JSON.parse(
       JSON.stringify(useStore.getState().chats)
     );
@@ -99,31 +100,48 @@ const EditView = ({
 
   const { handleSubmit } = useSubmit();
 
-  const handleGenerate = () => {
+  const handleGenerate = () => 
+  {
+    // It's a handler, so better query Store directly for the generating state
     if (useStore.getState().generating) return;
-    const updatedChats: ChatInterface[] = JSON.parse(
-      JSON.stringify(useStore.getState().chats)
-    );
-    const updatedMessages = updatedChats[currentChatIndex].messages;
-    if (sticky) {
-      if (_content !== '') {
-        updatedMessages.push({ role: inputRole, content: _content });
-      }
+
+    if (_content == '') return;
+
+    const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(useStore.getState().chats));
+
+    let updatedMessages: MessageInterface[];
+    if (sticky)  // New Message box 
+    {
+      updatedMessages = [...updatedChats[currentChatIndex].messages, 
+                               { role: inputRole, content: _content }]; //add a message
+    } 
+    else        // Edit Messsage box
+    {
+      updatedMessages = updatedChats[currentChatIndex].messages.slice(0, messageIndex + 1); // truncate further messages
+      updatedMessages[messageIndex].content = _content;                 // update the current message
+    }
+
+    // Update the chat in the Store
+    updatedChats[currentChatIndex].messages = updatedMessages;
+    setChats(updatedChats);
+
+    // Clear the input box
+    if (sticky) 
+    {
       _setContent('');
       resetTextAreaHeight();
-    } else {
-      updatedMessages[messageIndex].content = _content;
-      updatedChats[currentChatIndex].messages = updatedMessages.slice(
-        0,
-        messageIndex + 1
-      );
+    } 
+    else 
+    {
       setIsEdit(false);
     }
-    setChats(updatedChats);
+
     handleSubmit();
   };
 
   const handleAppendLastAndGenerate = () => {
+
+    // It's a handler, so better query Store directly for the generating state
     if (useStore.getState().generating) return;
 
     const updatedChats: ChatInterface[] = JSON.parse(
@@ -206,9 +224,10 @@ const EditView = ({
             <>
               {/* Send New Message button */}
               <button
-                className={`btn relative mr-2 btn-primary ${generating ? 'cursor-not-allowed opacity-40' : ''}`}
+                className={`btn relative mr-2 btn-primary ${generatingState ? 'cursor-not-allowed opacity-40' : ''}`}
                   onClick={handleGenerate}
                   title={enterToSubmit?(t('tooltipEnter') as string):(t('tooltipShiftEnter') as string)}
+                  disabled={generatingState}
                   >
                   <div className='flex items-center justify-center gap-2'>
                     {t('generate')}
@@ -218,8 +237,9 @@ const EditView = ({
               {/* Clarification to Previous Message button */}
               {(lastUserMessageIndexAbove != -1) && (
                 <button
-                      className={`btn relative mr-2 btn-primary ${ generating ? 'cursor-not-allowed opacity-40' : ''}`}
+                      className={`btn relative mr-2 btn-primary ${ generatingState ? 'cursor-not-allowed opacity-40' : ''}`}
                       onClick={handleAppendLastAndGenerate}
+                      disabled={generatingState}
                       title={t('tooltipCtrlEnter') as string}
                     >
                   <div className='flex items-center justify-center gap-2'>
@@ -234,8 +254,9 @@ const EditView = ({
             <>
               {/* Regenerate Button */}
               <button
-                className='btn relative mr-2 btn-primary'
-                onClick={() => {!generating && setIsModalOpen(true);}}
+                className={`btn relative mr-2 btn-primary ${ generatingState ? 'cursor-not-allowed opacity-40' : ''}`}
+                onClick={() => {!generatingState && setIsModalOpen(true);}}
+                disabled={generatingState}
                 title={enterToSubmit?(t('tooltipEnter') as string):(t('tooltipShiftEnter') as string)}
                 >
                 <div className='flex items-center justify-center gap-2'>
@@ -245,8 +266,9 @@ const EditView = ({
               
               {/* Save Button */}
               <button
-                className={`btn relative mr-2 btn-neutral ${ generating ? 'cursor-not-allowed opacity-40' : ''}`}
+                className={`btn relative mr-2 btn-neutral ${ generatingState ? 'cursor-not-allowed opacity-40' : ''}`}
                 onClick={handleSave}
+                disabled={generatingState}
                 title={t('tooltipCtrlEnter') as string}
               >
                 <div className='flex items-center justify-center gap-2'>
