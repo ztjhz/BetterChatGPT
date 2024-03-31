@@ -44,15 +44,15 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
       : 0
   );
   const advancedMode = useStore((state) => state.advancedMode);
-  const generating = useStore.getState().generating;
+  const generatingState = useStore((state) => state.generating);
   const hideSideMenu = useStore((state) => state.hideSideMenu);
 
   // clear error at the start of generating new messages
   useEffect(() => {
-    if (generating) {
+    if (generatingState) {
       setError('');
     }
-  }, [generating]);
+  }, [generatingState]);
 
   return (
     <div className='flex-1 overflow-hidden'>
@@ -135,7 +135,7 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
       <div className='absolute bottom-6 left-8 m-auto flex min-w-[12em] gap-0 md:gap-2 justify-left'>
                 {
                   <>
-                    {useStore.getState().generating ?
+                    {generatingState ?
                       (
                         <StopGeneratingButton />
                       )
