@@ -52,63 +52,73 @@ export const limitMessageTokens = (
   messages: MessageInterface[],
   limit: number = 4096,
   model: ModelOptions
-): MessageInterface[] => {
+): [MessageInterface[], number, number, number] => {
+
   const limitedMessages: MessageInterface[] = [];
 
-  let tokenCount = 0;
+  let systemTokenCount = 0;
+  let chatTokenCount = 0;
+  let totalTokenCount = 0;
 
-  const isSystemFirstMessage = messages[0]?.role === 'system';
-  let retainSystemMessage = false;
+  let lastMessageTokens = 0;
 
-  // Check if the first message is a system message and if it fits within the token limit
-  if (isSystemFirstMessage) {
-    const systemTokenCount = countTokens([messages[0]], model);
-    if (systemTokenCount < limit) {
-      tokenCount += systemTokenCount;
-      retainSystemMessage = true;
+  //console.log(`Limiting messages to ${limit} tokens`);
+
+  // Search for the System message and add it, regardless of the tokens limit. Normally, it is expected at 0.
+  for (let i = 0; i < messages.length; i++) {
+
+    if (messages[i].role == 'system') 
+    {
+      const messageTokensCount = countTokens([messages[i]], model);
+
+      systemTokenCount += messageTokensCount;
+      totalTokenCount  += messageTokensCount;
+      limitedMessages.push(messages[0]);  
+
+      //console.log(`System message added to the limitedMessages. Total Tokens: ${totalTokenCount}`);
+
+      break; // We only support one System message.
     }
   }
 
-  // Iterate through messages in reverse order, adding them to the limitedMessages array
-  // until the token limit is reached (excludes first message)
-  for (let i = messages.length - 1; i >= 1; i--) {
-    const count = countTokens([messages[i]], model);
+  // Iterate through Non-System messages in REVERSE order, adding them to the limitedMessages until the token limit is reached
+  
+  for (let i = messages.length - 1; i >= 0; i--) {
+
+    //Skip System message that was taken care of already
+    if (messages[i].role == 'system') 
+      continue;
+
+    const messageTokensCount = countTokens([messages[i]], model);
+
+    if (i==messages.length - 1)
+      lastMessageTokens = messageTokensCount;
     
-    if (count + tokenCount > limit)
+    if (totalTokenCount + messageTokensCount > limit)
     {
-      /* Limit exceeded */ 
-      console.log ('Prompt tokens limit exceeded, not all messages were included');
+      /* Limit exceeded, show toast warning */ 
+
       setToastStatus('warning');
       setToastMessage('Chat exceeds Max Input Tokens. Not all messages were included.');
       setToastShow(true);
+
+      //console.log ('Prompt tokens limit exceeded, not all messages were included');
       
       break;
     }
-    tokenCount += count;
+
+    totalTokenCount += messageTokensCount;
+    chatTokenCount + messageTokensCount;
 
     limitedMessages.unshift({ role: messages[i].role, content: messages[i].content });
+
+    //console.log(`Message added to the limitedMessages. Total Tokens: ${totalTokenCount}`)
   }
 
-  // Process first message
-  if (retainSystemMessage) {
-    // Insert the system message in the third position from the end (originally by BetterChatGPT)
 
-    // WHY?!!! @Dmitriy.Alergant-T1A
-    //the code limitedMessages.splice(-3, 0, { ...messages[0] }); 
-    //is inserting the first message from the messages array into the limitedMessages array at the third position from the end. 
-    limitedMessages.splice(-3, 0, { ...messages[0] });
-    
-  } else if (!isSystemFirstMessage) {
-    // Check if the first message (non-system) can fit within the limit
-    const firstMessageTokenCount = countTokens([messages[0]], model);
-    if (firstMessageTokenCount + tokenCount < limit) {
-      limitedMessages.unshift({ role: messages[0].role, content: messages[0].content });
-    }
-  }
+  //console.log(`Prepared messages for submission. Added ${limitedMessages.length} messages including the System Prompt`)
 
-  //console.log(`Prepared messages for submission. Included ${limitedMessages.length} messages including System Prompt`)
-
-  return limitedMessages;
+  return [limitedMessages, systemTokenCount, chatTokenCount, lastMessageTokens];
 };
 
 export const updateTotalTokenUsed = (

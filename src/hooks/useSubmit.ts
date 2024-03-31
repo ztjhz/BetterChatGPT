@@ -17,7 +17,7 @@ export interface OpenAICompletionsConfig {
   frequency_penalty: number;
 }
 
-const _contentGeneratingPlaceholder = '_AI response requested..._';
+const _contentGeneratingPlaceholder = '_AI model response requested..._';
 
 const useSubmit = () => 
 {
@@ -83,22 +83,8 @@ const useSubmit = () =>
 
     if (generating || !currChats) return;
 
-    setGenerating(true);
-
-    /* Add Assistant's message*/
-    const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(currChats));
-
-    updatedChats[currentChatIndex].messages.push({
-      role: 'assistant',
-      content: _contentGeneratingPlaceholder,
-      model: updatedChats[currentChatIndex].config.model
-    });
-
-    const _currentChatIndex = currentChatIndex;
-    const _currentMessageIndex = updatedChats[currentChatIndex].messages.length - 1;
-
-    setChats(updatedChats);
-    /************/
+    let _currentChatIndex: number;
+    let _currentMessageIndex: number;
 
     const addAssistantContent = (content: string) => 
     {
@@ -115,18 +101,42 @@ const useSubmit = () =>
       setChats(updatedChats);
     }
 
-
     try {
-      let stream;
-      if (currChats[currentChatIndex].messages.length === 0)
-        throw new Error('No messages submitted!');
 
-      const messages = limitMessageTokens(
+      if (currChats[currentChatIndex].messages.length === 0)
+      throw new Error('No messages submitted!');
+
+      setGenerating(true);
+
+      /* Add Assistant's message*/
+      const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(currChats));
+
+      updatedChats[currentChatIndex].messages.push({
+        role: 'assistant',
+        content: _contentGeneratingPlaceholder,
+        model: updatedChats[currentChatIndex].config.model
+      });
+
+      _currentChatIndex = currentChatIndex;
+      _currentMessageIndex = updatedChats[currentChatIndex].messages.length - 1;
+
+      setChats(updatedChats);
+      /************/
+
+      /* Select context messages for submission */
+      const [messages, systemTokenCount, chatTokenCount, lastMessageTokens] = limitMessageTokens(
         currChats[currentChatIndex].messages,
         currChats[currentChatIndex].config.maxPromptTokens,
         currChats[currentChatIndex].config.model
       );
-      if (messages.length === 0) throw new Error('Message exceeds Max Input Token!');
+
+      // TBD refactor... 
+      // The limitMessageTokens was already called once during validation phase
+
+      /************/
+
+
+      let stream;
       
       const completionsConfig: OpenAICompletionsConfig = {
         model: supportedModels[currChats[currentChatIndex].config.model].apiAliasCurrent,
@@ -196,6 +206,7 @@ const useSubmit = () =>
           messages[messages.length - 1]
         );
       }
+      
     } catch (e: unknown) {
           const err = (e as Error).message;
           console.log(err);

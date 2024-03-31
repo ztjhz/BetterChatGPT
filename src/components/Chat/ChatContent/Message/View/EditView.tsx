@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import useStore from '@store/store';
 
 import useSubmit from '@hooks/useSubmit';
+import useValidatePreSubmit from '@hooks/useValidatePreSubmit';
 
 import { ChatInterface } from '@type/chat';
 
@@ -99,11 +100,15 @@ const EditView = ({
   };
 
   const { handleSubmit } = useSubmit();
+  const { validateMessages } = useValidatePreSubmit();
 
   const handleGenerate = () => 
   {
     // It's a handler, so better query Store directly for the generating state
     if (useStore.getState().generating) return;
+
+    // If this was called through a "Confirm" modal, we'll close it regardless
+    setIsModalOpen(false);
 
     if (_content == '') return;
 
@@ -120,6 +125,9 @@ const EditView = ({
       updatedMessages = updatedChats[currentChatIndex].messages.slice(0, messageIndex + 1); // truncate further messages
       updatedMessages[messageIndex].content = _content;                 // update the current message
     }
+
+    // Validate the messages for submission (mainly for checking token limits etc)
+    if (validateMessages(updatedMessages) === false) return;
 
     // Update the chat in the Store
     updatedChats[currentChatIndex].messages = updatedMessages;
