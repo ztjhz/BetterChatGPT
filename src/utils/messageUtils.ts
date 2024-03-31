@@ -56,6 +56,8 @@ export const limitMessageTokens = (
 
   const limitedMessages: MessageInterface[] = [];
 
+  let systemMessage = undefined;
+
   let systemTokenCount = 0;
   let chatTokenCount = 0;
   let totalTokenCount = 0;
@@ -73,7 +75,7 @@ export const limitMessageTokens = (
 
       systemTokenCount += messageTokensCount;
       totalTokenCount  += messageTokensCount;
-      limitedMessages.push(messages[0]);  
+      systemMessage = messages[i]; // don't push just yet, so we could rely on "unshift" for user messages
 
       //console.log(`System message added to the limitedMessages. Total Tokens: ${totalTokenCount}`);
 
@@ -115,8 +117,11 @@ export const limitMessageTokens = (
     //console.log(`Message added to the limitedMessages. Total Tokens: ${totalTokenCount}`)
   }
 
+  // Now add the System message to the limitedMessages
+  if (systemMessage)
+    limitedMessages.unshift(systemMessage);
 
-  //console.log(`Prepared messages for submission. Added ${limitedMessages.length} messages including the System Prompt`)
+  console.log(`Prepared messages for submission: ` + JSON.stringify(limitedMessages));
 
   return [limitedMessages, systemTokenCount, chatTokenCount, lastMessageTokens];
 };
