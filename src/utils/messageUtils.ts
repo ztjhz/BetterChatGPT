@@ -64,9 +64,7 @@ export const limitMessageTokens = (
 
   let lastMessageTokens = 0;
 
-  //console.log(`Limiting messages to ${limit} tokens`);
-
-  // Search for the System message and add it, regardless of the tokens limit. Normally, it is expected at 0.
+  // Search for the System message ( Normally, it is expected at [0]), and consider its token count.
   for (let i = 0; i < messages.length; i++) {
 
     if (messages[i].role == 'system') 
@@ -75,30 +73,32 @@ export const limitMessageTokens = (
 
       systemTokenCount += messageTokensCount;
       totalTokenCount  += messageTokensCount;
-      systemMessage = messages[i]; // don't push just yet, so we could rely on "unshift" for user messages
+      systemMessage = messages[i]; 
+      // Don't actually add the message just yet, so we could rely on "unshift" for user-assistant messages
 
-      //console.log(`System message added to the limitedMessages. Total Tokens: ${totalTokenCount}`);
-
-      break; // We only support one System message.
+      break; // We only support one System message for now - no need to look further
     }
   }
 
-  // Iterate through Non-System messages in REVERSE order, adding them to the limitedMessages until the token limit is reached
-  
+  /* Iterate through Non-System messages in REVERSE order,
+      adding them to the front of limitedMessages until the token limit is reached */
+
   for (let i = messages.length - 1; i >= 0; i--) {
 
-    //Skip System message that was taken care of already
+    //Skip System message that is being taken care of separately
     if (messages[i].role == 'system') 
       continue;
 
     const messageTokensCount = countTokens([messages[i]], model);
 
+    // This is for the error toaster IN CASE even the very last user message could not be included
     if (i==messages.length - 1)
       lastMessageTokens = messageTokensCount;
     
+    
     if (totalTokenCount + messageTokensCount > limit)
     {
-      /* Limit exceeded, show toast warning */ 
+      /* Limit exceeded, show warning toast */ 
 
       setToastStatus('warning');
       setToastMessage('Chat exceeds Max Input Tokens. Not all messages were included.');
@@ -113,15 +113,13 @@ export const limitMessageTokens = (
     chatTokenCount + messageTokensCount;
 
     limitedMessages.unshift({ role: messages[i].role, content: messages[i].content });
-
-    //console.log(`Message added to the limitedMessages. Total Tokens: ${totalTokenCount}`)
   }
 
-  // Now add the System message to the limitedMessages
+  // Finally, add the previously discovered System message to the front of limitedMessages
   if (systemMessage)
     limitedMessages.unshift(systemMessage);
 
-  console.log(`Prepared messages for submission: ` + JSON.stringify(limitedMessages));
+  console.debug(`limitMessageTokens: selected messages for submission: ` + JSON.stringify(limitedMessages));
 
   return [limitedMessages, systemTokenCount, chatTokenCount, lastMessageTokens];
 };
