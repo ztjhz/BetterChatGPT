@@ -24,8 +24,6 @@ const Toast = () => {
       }, 3600);
 
       setTimeoutID(newTimeoutID);
-
-      console.log (toastId);
     }
   }, [toastShow, status, message, toastId]);
 

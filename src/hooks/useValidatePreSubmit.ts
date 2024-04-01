@@ -1,6 +1,6 @@
 import useStore from '@store/store';
 import { MessageInterface } from '@type/chat';
-import { limitMessageTokens, updateTotalTokenUsed } from '@utils/messageUtils';
+import { limitMessageTokens } from '@utils/messageUtils';
 
 
 const useValidatePreSubmit = () => {
@@ -43,7 +43,7 @@ const useValidatePreSubmit = () => {
             
             if (limitedMessages.length <= 1) 
             {
-                throw new Error(`Last Message tokens (${lastMessageTokens})\n+ System Prompt (${systemTokenCount})\nexceed Max Input tokens (${maxPromptTokens})\nCan't send.`);
+                throw new Error(`Last Message tokens (${lastMessageTokens})\n+ System Prompt (${systemTokenCount})\nexceed Max Input tokens (${maxPromptTokens}).\n Can't send.`);
             } 
 
             return true;

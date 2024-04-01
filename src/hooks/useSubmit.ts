@@ -1,3 +1,5 @@
+//useSubmit.ts
+
 import useStore from '@store/store';
 import { ChatInterface, MessageInterface, ModelOptions } from '@type/chat';
 import { isAuthenticated, redirectToLogin, getChatCompletion, getChatCompletionStream } from '@api/api';
@@ -75,6 +77,8 @@ const useSubmit = () =>
 
   const handleSubmit = async () => {
 
+    //This is an util function not a renderable component, so direct State access is used
+
     const countTotalTokens  = useStore.getState().countTotalTokens;
     const generating        = useStore.getState().generating;
     const currentChatIndex  = useStore.getState().currentChatIndex;
@@ -124,7 +128,7 @@ const useSubmit = () =>
       /************/
 
       /* Select context messages for submission */
-      const [messages, systemTokenCount, chatTokenCount, lastMessageTokens] = limitMessageTokens(
+      const [inputMessagesLimited, systemTokenCount, chatTokenCount, lastMessageTokens] = limitMessageTokens(
         currChats[currentChatIndex].messages,
         currChats[currentChatIndex].config.maxPromptTokens,
         currChats[currentChatIndex].config.model
@@ -147,11 +151,11 @@ const useSubmit = () =>
         frequency_penalty: currChats[currentChatIndex].config.frequency_penalty
       };
 
-      const headers = await prepareApiHeaders(currChats[currentChatIndex].config.model, messages, 'Chat Submission');
+      const headers = await prepareApiHeaders(currChats[currentChatIndex].config.model, inputMessagesLimited, 'Chat Submission');
         
       stream = await getChatCompletionStream(
         useStore.getState().apiEndpoint,
-        messages,
+        inputMessagesLimited,
         completionsConfig,
         headers.headers
       );
@@ -198,12 +202,12 @@ const useSubmit = () =>
 
       // update tokens used in chatting
       if (currChats && countTotalTokens) {
-        const model = currChats[currentChatIndex].config.model;
-        const messages = currChats[currentChatIndex].messages;
+        const currChatsMessages = currChats[currentChatIndex].messages;
+
         updateTotalTokenUsed(
-          model,
-          messages.slice(0, -1),
-          messages[messages.length - 1]
+          currChats[currentChatIndex].config.model,
+          inputMessagesLimited,                           // Input Prompt
+          currChatsMessages[currChatsMessages.length - 1] // Assistant's response
         );
       }
       
@@ -254,7 +258,7 @@ const useSubmit = () =>
           }
         }
         
-      const titleGenMessage: MessageInterface = {
+      const titleGenPromptMessage: MessageInterface = {
         role: 'user',
         content: `Generate a title in less than 6 words for the following AI Chatbot Assistance scenario:\n"""\nUser:\n${formatMessage(user_message, 280)}\n\nAssistant:\n${formatMessage(assistant_message, 280)}\n"""`,
       };
@@ -272,11 +276,11 @@ const useSubmit = () =>
 
       try
       {
-        const headers = await prepareApiHeaders(titleGenModel, [titleGenMessage], 'Title Generation');
+        const headers = await prepareApiHeaders(titleGenModel, [titleGenPromptMessage], 'Title Generation');
 
         let data = await getChatCompletion(
           useStore.getState().apiEndpoint,
-          [titleGenMessage],
+          [titleGenPromptMessage],
           titleGenConfig,
           headers.headers
         );
@@ -300,7 +304,7 @@ const useSubmit = () =>
         // update tokens used for generating title
         if (countTotalTokens) {
           updateTotalTokenUsed(titleGenConfig.model as ModelOptions, 
-            [titleGenMessage], 
+            [titleGenPromptMessage], 
             {
               role: 'assistant',
               content: title,

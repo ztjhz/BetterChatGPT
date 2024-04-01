@@ -20,28 +20,35 @@ const encoder = new Tiktoken(
 // https://github.com/dqbd/tiktoken/issues/23#issuecomment-1483317174
 export const getChatGPTEncoding = (
   messages: MessageInterface[],
-  model: ModelOptions
+  model: ModelOptions,
+  includeAssistantRequest:boolean = true
 ) => {
   const isGpt3 = model === 'gpt-3.5-turbo';
 
   const msgSep = isGpt3 ? '\n' : '';
   const roleSep = isGpt3 ? '\n' : '<|im_sep|>';
 
-  const serialized = [
-    messages
-      .map(({ role, content }) => {
-        return `<|im_start|>${role}${roleSep}${content}<|im_end|>`;
-      })
-      .join(msgSep),
-    `<|im_start|>assistant${roleSep}`,
-  ].join(msgSep);
+  const messsagesStrArray = [messages
+    .map(({ role, content }) => {
+      return `<|im_start|>${role}${roleSep}${content}<|im_end|>`;
+    })
+    .join(msgSep)];
+
+  if (includeAssistantRequest)
+    messsagesStrArray.push(`<|im_start|>assistant${roleSep}`);
+
+  const serialized = messsagesStrArray.join(msgSep);
 
   return encoder.encode(serialized, 'all');
 };
 
-const countTokens = (messages: MessageInterface[], model: ModelOptions) => {
-  if (messages.length === 0) return 0;
-  return getChatGPTEncoding(messages, model).length;
+/*includeAssistantRequest:
+  pass "true" when requesting a final tokens calculation for the full messages array  
+  pass "false" when requesting message calculation for one message only (for estimation) */
+
+const countTokens = (messages: MessageInterface[], model: ModelOptions, includeAssistantRequest: boolean) => {
+  //if (messages.length === 0) return 0;
+  return getChatGPTEncoding(messages, model, includeAssistantRequest).length;
 };
 
 const setToastStatus = store.getState().setToastStatus;
@@ -58,9 +65,12 @@ export const limitMessageTokens = (
 
   let systemMessage = undefined;
 
+  // Include the "assistants message request" token count as per the serialization rules
+  const assistantsRequestTokenCount = countTokens([], model, true);
+  
   let systemTokenCount = 0;
-  let chatTokenCount = 0;
-  let totalTokenCount = 0;
+  let chatTokenCount = assistantsRequestTokenCount;
+  let totalTokenCount = assistantsRequestTokenCount;
 
   let lastMessageTokens = 0;
 
@@ -69,7 +79,7 @@ export const limitMessageTokens = (
 
     if (messages[i].role == 'system') 
     {
-      const messageTokensCount = countTokens([messages[i]], model);
+      const messageTokensCount = countTokens([messages[i]], model, false);
 
       systemTokenCount += messageTokensCount;
       totalTokenCount  += messageTokensCount;
@@ -89,12 +99,11 @@ export const limitMessageTokens = (
     if (messages[i].role == 'system') 
       continue;
 
-    const messageTokensCount = countTokens([messages[i]], model);
+    const messageTokensCount = countTokens([messages[i]], model, false);
 
     // This is for the error toaster IN CASE even the very last user message could not be included
     if (i==messages.length - 1)
-      lastMessageTokens = messageTokensCount;
-    
+      lastMessageTokens = messageTokensCount + assistantsRequestTokenCount;
     
     if (totalTokenCount + messageTokensCount > limit)
     {
@@ -104,7 +113,7 @@ export const limitMessageTokens = (
       setToastMessage('Chat exceeds Max Input Tokens. Not all messages were included.');
       setToastShow(true);
 
-      //console.log ('Prompt tokens limit exceeded, not all messages were included');
+      console.debug (`limitMessageTokens: Token limit exceeded. Total tokens: ${totalTokenCount}, Message tokens: ${messageTokensCount}, Limit: ${limit}`);
       
       break;
     }
@@ -134,8 +143,8 @@ export const updateTotalTokenUsed = (
     JSON.stringify(useStore.getState().totalTokenUsed)
   );
 
-  const newPromptTokens = countTokens(promptMessages, model);
-  const newCompletionTokens = countTokens([completionMessage], model);
+  const newPromptTokens = countTokens(promptMessages, model, true);
+  const newCompletionTokens = countTokens([completionMessage], model, false);
 
   const { setTokensToastInputTokens, setTokensToastCompletionTokens, setTokensToastShow} = useStore.getState();
   
