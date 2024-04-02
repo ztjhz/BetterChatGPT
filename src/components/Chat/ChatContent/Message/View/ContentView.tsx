@@ -35,6 +35,7 @@ import CodeBlock from '../CodeBlock';
 import LikeButton from './Button/LikeButton';
 
 import { useTranslation } from 'react-i18next';
+import useValidatePreSubmit from '@hooks/useValidatePreSubmit';
 
 const ContentView = memo(
   ({
@@ -63,6 +64,8 @@ const ContentView = memo(
     const generatingState = useStore((state) => state.generating);
 
     const { t } = useTranslation();
+
+    const { validateMessages } = useValidatePreSubmit();
 
     const handleDelete = () => {
       const updatedChats: ChatInterface[] = JSON.parse(
@@ -114,6 +117,10 @@ const ContentView = memo(
       );
       const updatedMessages = updatedChats[currentChatIndex].messages;
       updatedMessages.splice(updatedMessages.length - 1, 1);
+
+      // Validate the messages for submission (mainly for checking token limits etc)
+      if (validateMessages(updatedMessages) === false) return;
+
       setChats(updatedChats);
       handleSubmit();
     };

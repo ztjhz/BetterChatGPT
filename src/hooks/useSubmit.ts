@@ -112,7 +112,8 @@ const useSubmit = () =>
 
       setGenerating(true);
 
-      /* Add Assistant's message*/
+      /* Add Assistant's message placeholder (for future received content)*/
+
       const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(currChats));
 
       updatedChats[currentChatIndex].messages.push({

@@ -99,13 +99,35 @@ export const limitMessageTokens = (
     if (messages[i].role == 'system') 
       continue;
 
-    const messageTokensCount = countTokens([messages[i]], model, false);
+    const nextMessagesBatch: MessageInterface[] = []
+    let nextMessagesBatchTokensCount = 0;
 
-    // This is for the error toaster IN CASE even the very last user message could not be included
-    if (i==messages.length - 1)
-      lastMessageTokens = messageTokensCount + assistantsRequestTokenCount;
+    if (messages[i].role == 'user')
+    {
+      nextMessagesBatch.unshift(messages[i]);
+      nextMessagesBatchTokensCount += countTokens([messages[i]], model, false);
+
+      // This is for the error toaster IN CASE even the very last user message could not be included;
+      // Need to return its tokens count to show to the user
+      if (i==messages.length - 1)
+        lastMessageTokens = nextMessagesBatchTokensCount + assistantsRequestTokenCount;     
+    }
+
+    // Add assistant's message with the previous user message it was responding to
+    if (messages[i].role == 'assistant')
+    {
+      nextMessagesBatch.unshift(messages[i]);
+      nextMessagesBatchTokensCount += countTokens([messages[i]], model, false);
+
+      if (i >= 1 && messages[i-1].role == 'user')
+      {
+        nextMessagesBatch.unshift(messages[i-1]);
+        nextMessagesBatchTokensCount += countTokens([messages[i-1]], model, false);
+        i --;        
+      }
+    }
     
-    if (totalTokenCount + messageTokensCount > limit)
+    if (totalTokenCount + nextMessagesBatchTokensCount > limit)
     {
       /* Limit exceeded, show warning toast */ 
 
@@ -113,18 +135,19 @@ export const limitMessageTokens = (
       setToastMessage('Chat exceeds Max Input Tokens. Not all messages were included.');
       setToastShow(true);
 
-      console.debug (`limitMessageTokens: Token limit exceeded. Total tokens: ${totalTokenCount}, Message tokens: ${messageTokensCount}, Limit: ${limit}`);
+      console.debug (`limitMessageTokens: Token limit exceeded. Total tokens: ${totalTokenCount}, New Messages Batch (${nextMessagesBatch.length}) tokens: ${nextMessagesBatchTokensCount}, Limit: ${limit}`);
       
       break;
     }
 
-    totalTokenCount += messageTokensCount;
-    chatTokenCount + messageTokensCount;
+    totalTokenCount += nextMessagesBatchTokensCount;
+    chatTokenCount + nextMessagesBatchTokensCount;
 
-    limitedMessages.unshift({ role: messages[i].role, content: messages[i].content });
+    limitedMessages.unshift(...nextMessagesBatch);
   }
 
-  // Finally, add the previously discovered System message to the front of limitedMessages
+  // Finally, add the previously discovered System message to the front of limitedMessages; 
+  // No need to check tokens limit - it was already accounted for at the beinning
   if (systemMessage)
     limitedMessages.unshift(systemMessage);
 
