@@ -7,9 +7,13 @@ const Toast = () => {
   const message = useStore((state) => state.toastMessage);
   const status = useStore((state) => state.toastStatus);
   const toastShow = useStore((state) => state.toastShow);
+  const toastId = useStore((state) => state.toastId);
+
   const setToastShow = useStore((state) => state.setToastShow);
 
   const [timeoutID, setTimeoutID] = useState<number>();
+
+
 
   useEffect(() => {
     if (toastShow) {
@@ -21,10 +25,11 @@ const Toast = () => {
 
       setTimeoutID(newTimeoutID);
     }
-  }, [toastShow, status, message]);
+  }, [toastShow, status, message, toastId]);
 
   return toastShow ? (
     <div
+      key={toastId} 
       className={`flex fixed right-5 bottom-5 z-[1000] items-center w-3/4 
         md:w-full max-w-xs p-4 mb-4 text-gray-500 
         dark:text-gray-400 rounded-lg shadow-md 

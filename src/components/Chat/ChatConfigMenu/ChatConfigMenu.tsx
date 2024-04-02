@@ -56,26 +56,30 @@ const ChatConfigMenu = ({
           _setMaxToken={_setMaxPromptToken}
           _model={_model}
           _translationItem='maxPromptTokens'
+          _maxModelTokens={supportedModels[_model].maxModelInputTokens}
+          _absoluteMaxTokens={256000}
         />
         <MaxTokenSlider
           _maxToken={_maxGenerationTokens}
           _setMaxToken={_setMaxGenerationToken}
           _model={_model}
           _translationItem='maxGenerationTokens'
+          _maxModelTokens={supportedModels[_model].maxModelCompletionTokens}
+          _absoluteMaxTokens={16384}
         />
         <TemperatureSlider
           _temperature={_temperature}
           _setTemperature={_setTemperature}
         />
         <TopPSlider _topP={_topP} _setTopP={_setTopP} />
-        <PresencePenaltySlider
+        {/* <PresencePenaltySlider
           _presencePenalty={_presencePenalty}
           _setPresencePenalty={_setPresencePenalty}
         />
         <FrequencyPenaltySlider
           _frequencyPenalty={_frequencyPenalty}
           _setFrequencyPenalty={_setFrequencyPenalty}
-        />
+        /> */}
       </div>
     </PopupModal>
   );
@@ -115,7 +119,8 @@ export const ModelSelector = ({
           aria-labelledby='dropdownDefaultButton'
         >
           {Object.entries(supportedModels).filter(([_, modelDetails]) => 
-    import.meta.env.VITE_ANTHROPIC_ENABLE == 'Y' || modelDetails.portkeyProvider !== 'anthropic'
+    modelDetails.enabled == true && 
+    (import.meta.env.VITE_ANTHROPIC_ENABLE == 'Y' || modelDetails.portkeyProvider !== 'anthropic')
   ).map(([modelKey, modelDetails]) => (
             <li
               className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer'
@@ -138,12 +143,16 @@ export const MaxTokenSlider = ({
   _maxToken,
   _setMaxToken,
   _model,
-  _translationItem
+  _translationItem,
+  _maxModelTokens,
+  _absoluteMaxTokens
 }: {
   _maxToken: number;
   _setMaxToken: React.Dispatch<React.SetStateAction<number>>;
   _model: ModelOptions;
-  _translationItem: string
+  _translationItem: string;
+  _maxModelTokens: number;
+  _absoluteMaxTokens: number;
 }) => {
   const { t } = useTranslation('model');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -151,32 +160,47 @@ export const MaxTokenSlider = ({
   useEffect(() => {
     inputRef &&
       inputRef.current &&
-      _setMaxToken(Number(inputRef.current.value));
+      _setMaxToken(Math.min(Number(inputRef.current.value), _maxModelTokens));
   }, [_model]);
 
   return (
     <div className='mt-3 pt-3 border-t border-gray-500'>
       <label className='block text-sm font-medium text-gray-900 dark:text-white'>
-        {t(`${_translationItem}.label`)}: {_maxToken}
+        {t(`${_translationItem}.label`)}
       </label>
-      <input
-        type='range'
-        ref={inputRef}
-        value={_maxToken}
-        onChange={(e) => {
-          _setMaxToken(Number(e.target.value));
-        }}
-        min={0}
-        max={supportedModels[_model as ModelOptions].maxModelTokens}
-        step={1}
-        className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
-      />
+      <div className='flex items-center'>
+        <input
+          type='number'
+          value={_maxToken}
+          onChange={(e) => {
+            _setMaxToken(Number(e.target.value));
+          }}
+          min={0}
+          max={_maxModelTokens}
+          step={1}
+          className='w-1/4 h-10 p-2 border rounded-md text-gray-900 dark:text-gray-300 mr-2 mt-2'
+        />
+        <input
+          type='range'
+          ref={inputRef}
+          value={_maxToken}
+          onChange={(e) => {
+            const value = Math.min(Number(e.target.value), _maxModelTokens);
+            _setMaxToken(value);
+          }}
+          min={0}
+          max={_absoluteMaxTokens}
+          step={1}
+          className='w-3/4 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
+        />
+      </div>
       <div className='min-w-fit text-gray-500 dark:text-gray-300 text-sm mt-2'>
         {t(`${_translationItem}.description`)}
       </div>
     </div>
   );
 };
+
 
 export const TemperatureSlider = ({
   _temperature,

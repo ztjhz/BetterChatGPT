@@ -20,28 +20,35 @@ const encoder = new Tiktoken(
 // https://github.com/dqbd/tiktoken/issues/23#issuecomment-1483317174
 export const getChatGPTEncoding = (
   messages: MessageInterface[],
-  model: ModelOptions
+  model: ModelOptions,
+  includeAssistantRequest:boolean = true
 ) => {
   const isGpt3 = model === 'gpt-3.5-turbo';
 
   const msgSep = isGpt3 ? '\n' : '';
   const roleSep = isGpt3 ? '\n' : '<|im_sep|>';
 
-  const serialized = [
-    messages
-      .map(({ role, content }) => {
-        return `<|im_start|>${role}${roleSep}${content}<|im_end|>`;
-      })
-      .join(msgSep),
-    `<|im_start|>assistant${roleSep}`,
-  ].join(msgSep);
+  const messsagesStrArray = [messages
+    .map(({ role, content }) => {
+      return `<|im_start|>${role}${roleSep}${content}<|im_end|>`;
+    })
+    .join(msgSep)];
+
+  if (includeAssistantRequest)
+    messsagesStrArray.push(`<|im_start|>assistant${roleSep}`);
+
+  const serialized = messsagesStrArray.join(msgSep);
 
   return encoder.encode(serialized, 'all');
 };
 
-const countTokens = (messages: MessageInterface[], model: ModelOptions) => {
-  if (messages.length === 0) return 0;
-  return getChatGPTEncoding(messages, model).length;
+/*includeAssistantRequest:
+  pass "true" when requesting a final tokens calculation for the full messages array  
+  pass "false" when requesting message calculation for one message only (for estimation) */
+
+const countTokens = (messages: MessageInterface[], model: ModelOptions, includeAssistantRequest: boolean) => {
+  //if (messages.length === 0) return 0;
+  return getChatGPTEncoding(messages, model, includeAssistantRequest).length;
 };
 
 const setToastStatus = store.getState().setToastStatus;
@@ -52,63 +59,78 @@ export const limitMessageTokens = (
   messages: MessageInterface[],
   limit: number = 4096,
   model: ModelOptions
-): MessageInterface[] => {
+): [MessageInterface[], number, number, number] => {
+
   const limitedMessages: MessageInterface[] = [];
 
-  let tokenCount = 0;
+  let systemMessage = undefined;
 
-  const isSystemFirstMessage = messages[0]?.role === 'system';
-  let retainSystemMessage = false;
+  // Include the "assistants message request" token count as per the serialization rules
+  const assistantsRequestTokenCount = countTokens([], model, true);
+  
+  let systemTokenCount = 0;
+  let chatTokenCount = assistantsRequestTokenCount;
+  let totalTokenCount = assistantsRequestTokenCount;
 
-  // Check if the first message is a system message and if it fits within the token limit
-  if (isSystemFirstMessage) {
-    const systemTokenCount = countTokens([messages[0]], model);
-    if (systemTokenCount < limit) {
-      tokenCount += systemTokenCount;
-      retainSystemMessage = true;
+  let lastMessageTokens = 0;
+
+  // Search for the System message ( Normally, it is expected at [0]), and consider its token count.
+  for (let i = 0; i < messages.length; i++) {
+
+    if (messages[i].role == 'system') 
+    {
+      const messageTokensCount = countTokens([messages[i]], model, false);
+
+      systemTokenCount += messageTokensCount;
+      totalTokenCount  += messageTokensCount;
+      systemMessage = messages[i]; 
+      // Don't actually add the message just yet, so we could rely on "unshift" for user-assistant messages
+
+      break; // We only support one System message for now - no need to look further
     }
   }
 
-  // Iterate through messages in reverse order, adding them to the limitedMessages array
-  // until the token limit is reached (excludes first message)
-  for (let i = messages.length - 1; i >= 1; i--) {
-    const count = countTokens([messages[i]], model);
+  /* Iterate through Non-System messages in REVERSE order,
+      adding them to the front of limitedMessages until the token limit is reached */
+
+  for (let i = messages.length - 1; i >= 0; i--) {
+
+    //Skip System message that is being taken care of separately
+    if (messages[i].role == 'system') 
+      continue;
+
+    const messageTokensCount = countTokens([messages[i]], model, false);
+
+    // This is for the error toaster IN CASE even the very last user message could not be included
+    if (i==messages.length - 1)
+      lastMessageTokens = messageTokensCount + assistantsRequestTokenCount;
     
-    if (count + tokenCount > limit)
+    if (totalTokenCount + messageTokensCount > limit)
     {
-      /* Limit exceeded */ 
-      console.log ('Prompt tokens limit exceeded, not all messages were included');
+      /* Limit exceeded, show warning toast */ 
+
       setToastStatus('warning');
       setToastMessage('Chat exceeds Max Input Tokens. Not all messages were included.');
       setToastShow(true);
+
+      console.debug (`limitMessageTokens: Token limit exceeded. Total tokens: ${totalTokenCount}, Message tokens: ${messageTokensCount}, Limit: ${limit}`);
       
       break;
     }
-    tokenCount += count;
+
+    totalTokenCount += messageTokensCount;
+    chatTokenCount + messageTokensCount;
 
     limitedMessages.unshift({ role: messages[i].role, content: messages[i].content });
   }
 
-  // Process first message
-  if (retainSystemMessage) {
-    // Insert the system message in the third position from the end (originally by BetterChatGPT)
+  // Finally, add the previously discovered System message to the front of limitedMessages
+  if (systemMessage)
+    limitedMessages.unshift(systemMessage);
 
-    // WHY?!!! @Dmitriy.Alergant-T1A
-    //the code limitedMessages.splice(-3, 0, { ...messages[0] }); 
-    //is inserting the first message from the messages array into the limitedMessages array at the third position from the end. 
-    limitedMessages.splice(-3, 0, { ...messages[0] });
-    
-  } else if (!isSystemFirstMessage) {
-    // Check if the first message (non-system) can fit within the limit
-    const firstMessageTokenCount = countTokens([messages[0]], model);
-    if (firstMessageTokenCount + tokenCount < limit) {
-      limitedMessages.unshift({ role: messages[0].role, content: messages[0].content });
-    }
-  }
+  console.debug(`limitMessageTokens: selected messages for submission: ` + JSON.stringify(limitedMessages));
 
-  //console.log(`Prepared messages for submission. Included ${limitedMessages.length} messages including System Prompt`)
-
-  return limitedMessages;
+  return [limitedMessages, systemTokenCount, chatTokenCount, lastMessageTokens];
 };
 
 export const updateTotalTokenUsed = (
@@ -121,8 +143,8 @@ export const updateTotalTokenUsed = (
     JSON.stringify(useStore.getState().totalTokenUsed)
   );
 
-  const newPromptTokens = countTokens(promptMessages, model);
-  const newCompletionTokens = countTokens([completionMessage], model);
+  const newPromptTokens = countTokens(promptMessages, model, true);
+  const newCompletionTokens = countTokens([completionMessage], model, false);
 
   const { setTokensToastInputTokens, setTokensToastCompletionTokens, setTokensToastShow} = useStore.getState();
   

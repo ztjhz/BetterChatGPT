@@ -24,8 +24,10 @@ export const defaultTitleGenModel: ModelOptions = 'gpt-3.5-turbo';
 
 export const supportedModels: ModelsList = {
   'gpt-3.5-turbo': {
-    maxModelTokens: 16385,
+    maxModelInputTokens: 16384-4096,
+    maxModelCompletionTokens: 4096,
     displayName: 'GPT-3.5',
+    enabled: true,
     apiAliasCurrent: 'gpt-3.5-turbo',
     portkeyProvider: 'openai',
     titleGenModel: 'gpt-3.5-turbo',
@@ -35,8 +37,10 @@ export const supportedModels: ModelsList = {
     },
   },
   'gpt-4': {
-    maxModelTokens: 8192,
+    maxModelInputTokens: 8192,
+    maxModelCompletionTokens: 4096,
     displayName: 'GPT-4',
+    enabled: false,
     apiAliasCurrent: 'gpt-4',
     portkeyProvider: 'openai',
     titleGenModel: 'gpt-3.5-turbo',
@@ -46,8 +50,10 @@ export const supportedModels: ModelsList = {
     },
   },
   'gpt-4-turbo-preview': {
-    maxModelTokens: 128000,
+    maxModelInputTokens: 128000-4096,
+    maxModelCompletionTokens: 4096,
     displayName: 'GPT-4 Turbo',
+    enabled: true,
     apiAliasCurrent: 'gpt-4-turbo-preview',
     portkeyProvider: 'openai',
     titleGenModel: 'gpt-3.5-turbo',
@@ -57,8 +63,10 @@ export const supportedModels: ModelsList = {
     },
   },
   'claude-3-haiku': {
-    maxModelTokens: 120000,
+    maxModelInputTokens: 200000-4096,
+    maxModelCompletionTokens: 4096,
     displayName: 'Claude 3 Haiku',
+    enabled: true,
     apiAliasCurrent: 'claude-3-haiku-20240307',
     portkeyProvider: 'anthropic',
     titleGenModel: 'gpt-3.5-turbo', /*TODO: change to claude-3-haiku after resolving the fetch issue with Apim/Portkey in the dev environment*/
@@ -68,8 +76,10 @@ export const supportedModels: ModelsList = {
     },
   },
   'claude-3-sonnet': {
-    maxModelTokens: 160000,
+    maxModelInputTokens: 200000-4096,
+    maxModelCompletionTokens: 4096,
     displayName: 'Claude 3 Sonnet',
+    enabled: true,
     apiAliasCurrent: 'claude-3-sonnet-20240229',
     portkeyProvider: 'anthropic',
     titleGenModel: 'gpt-3.5-turbo', /*TODO: change to claude-3-haiku after resolving the fetch issue with Apim/Portkey in the dev environment*/
@@ -79,8 +89,10 @@ export const supportedModels: ModelsList = {
     },
   },
   'claude-3-opus': {
-    maxModelTokens: 160000,
+    maxModelInputTokens: 200000-4096,
+    maxModelCompletionTokens: 4096,
     displayName: 'Claude 3 Opus',
+    enabled: true,
     apiAliasCurrent: 'claude-3-opus-20240229',
     portkeyProvider: 'anthropic',
     titleGenModel: 'gpt-3.5-turbo', /*TODO: change to claude-3-haiku after resolving the fetch issue with Apim/Portkey in the dev environment*/

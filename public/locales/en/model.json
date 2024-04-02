@@ -2,7 +2,7 @@
   "configuration": "Configuration",
   "model": "Model",
   "maxGenerationTokens": {
-    "label": "Max Generation Tokens",
+    "label": "Max Gen Tokens",
     "description": "Maximum number of tokens to generate by the LLM in the chat completion. This value is passed to the LLM API provider to limit how much the model is allowed to generate."
   },
   "maxPromptTokens": {
