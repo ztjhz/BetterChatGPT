@@ -60,7 +60,8 @@ export type ModelOptions =
   | 'claude-3-opus';
 
 export interface ModelDetails {
-  maxModelTokens: number;
+  maxModelInputTokens: number;
+  maxModelCompletionTokens: number;
   displayName: string;
   enabled: boolean;
   apiAliasCurrent: string;

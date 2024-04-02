@@ -13,7 +13,7 @@ import {
 } from '@components/Chat/ChatConfigMenu/ChatConfigMenu';
 
 import { ModelOptions } from '@type/chat';
-import { _defaultChatConfig } from '@constants/chat';
+import { _defaultChatConfig, supportedModels } from '@constants/chat';
 import LinkIcon from '@icon/LinkIcon'
 
 const DefaultChatConfigMenu = () => {
@@ -92,12 +92,16 @@ const ChatConfigPopup = ({
           _setMaxToken={_setMaxPromptToken}
           _model={_model}
           _translationItem='maxPromptTokens'
+          _maxModelTokens={supportedModels[_model].maxModelInputTokens}
+          _absoluteMaxTokens={256000}
         />
         <MaxTokenSlider
           _maxToken={_maxGenerationTokens}
           _setMaxToken={_setMaxGenerationToken}
           _model={_model}
           _translationItem='maxGenerationTokens'
+          _maxModelTokens={supportedModels[_model].maxModelCompletionTokens}
+          _absoluteMaxTokens={16384}
         />
         <TemperatureSlider
           _temperature={_temperature}
