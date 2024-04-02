@@ -5,8 +5,6 @@ import { limitMessageTokens } from '@utils/messageUtils';
 
 const useValidatePreSubmit = () => {
 
-    const setError = useStore((state) => state.setError);
-
     const setToastStatus = useStore((state) => state.setToastStatus);
     const setToastMessage = useStore((state) => state.setToastMessage);
     const setToastShow = useStore((state) => state.setToastShow);

@@ -84,7 +84,7 @@ export const getChatCompletionStream = async (
     method: 'POST',
     headers,
     body: JSON.stringify({
-      messages,
+      messages: messages.map(({ role, content }) => ({ role, content })),
       ...config,
       stream: true,
     }),

@@ -115,6 +115,7 @@ const EditView = ({
     const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(useStore.getState().chats));
 
     let updatedMessages: MessageInterface[];
+
     if (sticky)  // New Message box 
     {
       updatedMessages = [...updatedChats[currentChatIndex].messages, 
@@ -167,6 +168,10 @@ const EditView = ({
     updatedMessages[lastUserMessageIndex].content += _content;
 
     updatedChats[currentChatIndex].messages = updatedMessages.slice(0,lastUserMessageIndex + 1);
+
+    // Validate the messages for submission (mainly for checking token limits etc)
+    if (validateMessages(updatedChats[currentChatIndex].messages) === false) return;
+
     setChats(updatedChats);
     handleSubmit();
 
