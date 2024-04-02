@@ -68,14 +68,14 @@ const ChatConfigMenu = ({
           _setTemperature={_setTemperature}
         />
         <TopPSlider _topP={_topP} _setTopP={_setTopP} />
-        <PresencePenaltySlider
+        {/* <PresencePenaltySlider
           _presencePenalty={_presencePenalty}
           _setPresencePenalty={_setPresencePenalty}
         />
         <FrequencyPenaltySlider
           _frequencyPenalty={_frequencyPenalty}
           _setFrequencyPenalty={_setFrequencyPenalty}
-        />
+        /> */}
       </div>
     </PopupModal>
   );
