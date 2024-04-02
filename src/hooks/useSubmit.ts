@@ -114,7 +114,7 @@ const useSubmit = () =>
 
       /* Add Assistant's message placeholder (for future received content)*/
 
-      const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(currChats));
+      const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(useStore.getState().chats));
 
       updatedChats[currentChatIndex].messages.push({
         role: 'assistant',
@@ -202,14 +202,24 @@ const useSubmit = () =>
       }
 
       // update tokens used in chatting
-      if (currChats && countTotalTokens) {
-        const currChatsMessages = currChats[currentChatIndex].messages;
 
-        updateTotalTokenUsed(
+      if (currChats && countTotalTokens) {
+
+        const currChatsMessages = JSON.parse(JSON.stringify(useStore.getState().chats))[currentChatIndex].messages;
+        
+        const [newPromptTokens, newCompletionTokens] = updateTotalTokenUsed(
           currChats[currentChatIndex].config.model,
           inputMessagesLimited,                           // Input Prompt
           currChatsMessages[currChatsMessages.length - 1] // Assistant's response
         );
+
+        // show toast with tokens used
+
+        const { setTokensToastInputTokens, setTokensToastCompletionTokens, setTokensToastShow} = useStore.getState();
+  
+        setTokensToastInputTokens(newPromptTokens.toString())
+        setTokensToastCompletionTokens(newCompletionTokens.toString())
+        setTokensToastShow(true)
       }
       
     } catch (e: unknown) {

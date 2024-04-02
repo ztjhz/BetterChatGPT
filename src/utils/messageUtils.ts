@@ -160,7 +160,7 @@ export const updateTotalTokenUsed = (
   model: ModelOptions,
   promptMessages: MessageInterface[],
   completionMessage: MessageInterface
-) => {
+): [number, number] => { // returns new tokens used by the message and completion
   const setTotalTokenUsed = useStore.getState().setTotalTokenUsed;
   const updatedTotalTokenUsed: TotalTokenUsed = JSON.parse(
     JSON.stringify(useStore.getState().totalTokenUsed)
@@ -168,12 +168,6 @@ export const updateTotalTokenUsed = (
 
   const newPromptTokens = countTokens(promptMessages, model, true);
   const newCompletionTokens = countTokens([completionMessage], model, false);
-
-  const { setTokensToastInputTokens, setTokensToastCompletionTokens, setTokensToastShow} = useStore.getState();
-  
-  setTokensToastInputTokens(newPromptTokens.toString())
-  setTokensToastCompletionTokens(newCompletionTokens.toString())
-  setTokensToastShow(true)
 
   const { promptTokens = 0, completionTokens = 0 } =
     updatedTotalTokenUsed[model] ?? {};
@@ -183,6 +177,8 @@ export const updateTotalTokenUsed = (
     completionTokens: completionTokens + newCompletionTokens,
   };
   setTotalTokenUsed(updatedTotalTokenUsed);
+
+  return [newPromptTokens, newCompletionTokens]
 };
 
 export default countTokens;
