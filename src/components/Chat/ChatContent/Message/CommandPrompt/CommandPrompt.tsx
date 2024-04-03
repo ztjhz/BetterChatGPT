@@ -8,9 +8,9 @@ import { Prompt } from '@type/prompt';
 import useHideOnOutsideClick from '@hooks/useHideOnOutsideClick';
 
 const CommandPrompt = ({
-  _setContent,
+  _addPromptContent,
 }: {
-  _setContent: React.Dispatch<React.SetStateAction<string>>;
+  _addPromptContent: (content: string) => void;
 }) => {
   const { t } = useTranslation();
   const prompts = useStore((state) => state.prompts);
@@ -69,7 +69,7 @@ const CommandPrompt = ({
             <li
               className='px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer text-start w-full'
               onClick={() => {
-                _setContent((prev) => prev + cp.prompt);
+                _addPromptContent(cp.prompt);
                 setDropDown(false);
               }}
               key={cp.id}

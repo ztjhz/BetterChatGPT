@@ -8,6 +8,7 @@ import { _defaultChatConfig, supportedModels } from '@constants/chat';
 
 const ChatHeader = React.memo(() => {
   const { t } = useTranslation('model');
+
   const config = useStore(
     (state) =>
       state.chats &&
@@ -18,6 +19,7 @@ const ChatHeader = React.memo(() => {
         : undefined,
     shallow
   );
+  
   const setChats = useStore((state) => state.setChats);
   const currentChatIndex = useStore((state) => state.currentChatIndex);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
