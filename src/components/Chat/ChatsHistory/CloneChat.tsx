@@ -7,22 +7,28 @@ import { ChatInterface } from '@type/chat';
 import TickIcon from '@icon/TickIcon';
 
 import CloneIcon from '@icon/CloneIcon';
+import { handleNewMessageDraftBufferPersist } from '@utils/handleNewMessageDraftsPersistence';
 
 const CloneChat = React.memo(() => {
   const { t } = useTranslation();
 
   const setChats = useStore((state) => state.setChats);
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
+  const setNewMessageDraftBuffer = useStore((state) => state.setNewMessageDraftBuffer);
 
   const generating = useStore((state) => state.generating);
-
-  const [cloned, setCloned] = useState<boolean>(false);
 
   const setToastStatus = useStore((state) => state.setToastStatus);
   const setToastMessage = useStore((state) => state.setToastMessage);
   const setToastShow = useStore((state) => state.setToastShow);
 
+
+  
   const cloneChat = () => {
+
+    //persist new message draft buffer where it belonged to
+    handleNewMessageDraftBufferPersist("cloneChat"); 
+
     const chats = useStore.getState().chats;
 
     if (chats) {
@@ -42,7 +48,9 @@ const CloneChat = React.memo(() => {
       updatedChats.unshift(clonedChat);
 
       setChats(updatedChats);
-      setCurrentChatIndex(useStore.getState().currentChatIndex + 1);
+
+      setNewMessageDraftBuffer("", 0);    // clear the new message draft buffer for new chat
+      setCurrentChatIndex(0);
 
       setToastStatus('success');
       setToastMessage(t('cloned'));

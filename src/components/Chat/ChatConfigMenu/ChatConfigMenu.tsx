@@ -173,7 +173,7 @@ export const MaxTokenSlider = ({
           type='number'
           value={_maxToken}
           onChange={(e) => {
-            _setMaxToken(Number(e.target.value));
+            _setMaxToken(Math.min(Number(e.target.value), _maxModelTokens));
           }}
           min={0}
           max={_maxModelTokens}

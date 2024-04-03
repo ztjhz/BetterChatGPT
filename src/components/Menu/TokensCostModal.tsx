@@ -19,26 +19,28 @@ const TokensCostModal = () => {
       {isModalOpen && (
         <PopupModal
           setIsModalOpen={setIsModalOpen}
-          title="Accumulated Token Costs"
+          title={t('accumulatedCost') as string}
           cancelButton={false}
         >
           <>
             <div className="text-gray-700 dark:text-gray-300">
               <div className='p-3'>
-                The AI model costs are tracked for your awareness, and to build healthy usage habits.<br/>
-                The metrics are counted locally, and are per device/browser. You can reset at any time.
+                {t("accumulatedCostPreambleProse.div1") as string}
               </div>  
               <div className='p-3'>
-                Long conversation threads are the primary driver of AI costs creep. With each message in the thread, the app is submitting the <u>entire thread history</u> (from the beginning) to the LLM model to evaluate. We recommend starting a new chat frequently to lighten the load.
+                {t("accumulatedCostPreambleProse.div2") as string}
+              </div>  
+              <div className='p-3'>
+                {t("accumulatedCostPreambleProse.div3") as string}
               </div>
               <div className='p-3'>
-                Please note the "<b>edit</b>" button for your messages. Often it is more effecient to edit your message and resubmit, then to keep adding new messages with clarifications to the thread. 
+                {t("accumulatedCostPreambleProse.div4") as string} 
               </div>
               <div className='p-3'>
-                Consider smaller model (<b>Claude Haiku or GPT 3.5</b>) when questions are easy, you may not need full power.
+                {t("accumulatedCostPreambleProse.div5") as string}
               </div>
               <div className='p-3'>
-                <b>The AI LLMs are helping us working effeciently; Use it as much as needed!</b>
+                <b>{t("accumulatedCostPreambleProse.div6") as string}</b>
               </div>  
               <div className='p-3'>
                 <TokensTotalCost />

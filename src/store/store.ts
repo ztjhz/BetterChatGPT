@@ -43,9 +43,14 @@ export type StoreSlice<T> = (
   get: StoreApi<StoreState>['getState']
 ) => T;
 
+
+/* These and only these attributes are actually persisted to LocalStore */
+
 export const createPartializedState = (state: StoreState) => ({
   chats: state.chats,
   currentChatIndex: state.currentChatIndex,
+  newMessageDraftBuffer: state.newMessageDraftBuffer,
+  newMessageDraftChatIndex: state.newMessageDraftChatIndex,
   apiKey: state.apiKey,
   apiEndpoint: state.apiEndpoint,
   theme: state.theme,

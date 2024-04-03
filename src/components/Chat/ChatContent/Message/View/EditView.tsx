@@ -31,18 +31,47 @@ const EditView = ({
   messageIndex: number;
   sticky?: boolean;
 }) => {
+
   const inputRole = useStore((state) => state.inputRole);
   const setChats = useStore((state) => state.setChats);
   const currentChatIndex = useStore((state) => state.currentChatIndex);
+  const currentChats = useStore((state) => state.chats);
 
-  const [_content, _setContent] = useState<string>(content);
+  // Current input message content draft - local state
+  const [__content, __setContent] = useState<string>(content); 
+
+  // Current input message content draft -> persist to global state (centralized buffer)
+  const newMessageDraftBuffer = (useStore(state => state.newMessageDraftBuffer));
+  const setNewMessageDraftBuffer = (useStore(state => state.setNewMessageDraftBuffer));
+
+  const _setContent = (content: string) => {
+      __setContent(content);                               // update local state (textarea display)
+
+      if (sticky)                                         //only for the "new" message prompt (not edits)
+        setNewMessageDraftBuffer(content, currentChatIndex); // persist to global state (centralized buffer)
+  }
+
+  const _addPromptContent = (promptContent: string) => {
+    const newContent = promptContent + "\n\n" + __content;
+    __setContent(newContent);                               // update local state (textarea display)
+    setNewMessageDraftBuffer(newContent, currentChatIndex); // persist to global state (centralized buffer)
+}
+
+  // On chat changes, refresh the textarea based on the buffer.
+  // See utils/handleNewMessageDraftsPersistence.ts on buffer synchronization with Chat-level state
+  useEffect(() => {
+    if (sticky) {
+      __setContent(newMessageDraftBuffer ?? "");
+    }
+  }, [currentChatIndex, currentChats, sticky]);
+
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const textareaRef = React.createRef<HTMLTextAreaElement>();
 
   const { t } = useTranslation();
   const generatingState = useStore((state) => state.generating);
 
-  const enterToSubmit = useStore.getState().enterToSubmit;
+  const enterToSubmit = useStore((state) => state.enterToSubmit);
 
   const resetTextAreaHeight = () => {
     if (textareaRef.current) textareaRef.current.style.height = 'auto';
@@ -82,18 +111,18 @@ const EditView = ({
 
   const handleSave = () => {
     // It's a handler, so better query Store directly for the generating state
-    if (sticky && (_content === '' || useStore.getState().generating)) return;
+    if (sticky && (__content === '' || useStore.getState().generating)) return;
 
     const updatedChats: ChatInterface[] = JSON.parse(
       JSON.stringify(useStore.getState().chats)
     );
     const updatedMessages = updatedChats[currentChatIndex].messages;
     if (sticky) {
-      updatedMessages.push({ role: inputRole, content: _content });
+      updatedMessages.push({ role: inputRole, content: __content });
       _setContent('');
       resetTextAreaHeight();
     } else {
-      updatedMessages[messageIndex].content = _content;
+      updatedMessages[messageIndex].content = __content;
       setIsEdit(false);
     }
     setChats(updatedChats);
@@ -110,7 +139,7 @@ const EditView = ({
     // If this was called through a "Confirm" modal, we'll close it regardless
     setIsModalOpen(false);
 
-    if (_content == '') return;
+    if (__content == '') return;
 
     const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(useStore.getState().chats));
 
@@ -119,12 +148,12 @@ const EditView = ({
     if (sticky)  // New Message box 
     {
       updatedMessages = [...updatedChats[currentChatIndex].messages, 
-                               { role: inputRole, content: _content }]; //add a message
+                               { role: inputRole, content: __content }]; //add a message
     } 
     else        // Edit Messsage box
     {
       updatedMessages = updatedChats[currentChatIndex].messages.slice(0, messageIndex + 1); // truncate further messages
-      updatedMessages[messageIndex].content = _content;                 // update the current message
+      updatedMessages[messageIndex].content = __content;                 // update the current message
     }
 
     // Validate the messages for submission (mainly for checking token limits etc)
@@ -165,7 +194,7 @@ const EditView = ({
       return;
     }
     updatedMessages[lastUserMessageIndex].content += "\n\n Clarification: "
-    updatedMessages[lastUserMessageIndex].content += _content;
+    updatedMessages[lastUserMessageIndex].content += __content;
 
     updatedChats[currentChatIndex].messages = updatedMessages.slice(0,lastUserMessageIndex + 1);
 
@@ -191,7 +220,7 @@ const EditView = ({
       textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
-  }, [_content]);
+  }, [__content]);
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -202,7 +231,6 @@ const EditView = ({
 
   const chats = JSON.parse(JSON.stringify(useStore.getState().chats || []));
   const messages = (currentChatIndex < chats.length) ? chats[currentChatIndex]?.messages : undefined;
-
   const lastUserMessageIndexAbove = findLastUserMessageIndex(messages, messageIndex)
 
 
@@ -222,7 +250,7 @@ const EditView = ({
           onChange={(e) => {
             _setContent(e.target.value);
           }}
-          value={_content}
+          value={__content}
           placeholder={t('submitPlaceholder') as string}
           onKeyDown={handleKeyDown}
           rows={1}
@@ -307,7 +335,7 @@ const EditView = ({
         {/* There was one more Tokens Counter display */}
         {/* {sticky && advancedMode && <TokenCount />} */}
 
-        <CommandPrompt _setContent={_setContent} />
+        <CommandPrompt _addPromptContent={_addPromptContent} />
 
       </div>
 

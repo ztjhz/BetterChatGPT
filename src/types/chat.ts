@@ -17,6 +17,7 @@ export interface ChatInterface {
   messages: MessageInterface[];
   config: ConfigInterface;
   titleSet: boolean;
+  newMessageDraft?: string;
 }
 
 export interface ConfigInterface {

@@ -9,6 +9,7 @@ import EditIcon from '@icon/EditIcon';
 import TickIcon from '@icon/TickIcon';
 import useStore from '@store/store';
 import DownloadChat from '@components/Chat/ChatsHistory/DownloadChat';
+import { handleNewMessageDraftBufferPersist, handleNewMessageDraftBufferRetrieve } from '@utils/handleNewMessageDraftsPersistence';
 
 const ChatHistoryClass = {
   normal:
@@ -44,6 +45,9 @@ const ChatHistory = React.memo(
     };
 
     const deleteChat = () => {
+
+      //console.debug ("deleteChat()")
+
       const updatedChats = JSON.parse(
         JSON.stringify(useStore.getState().chats)
       );
@@ -59,6 +63,8 @@ const ChatHistory = React.memo(
       setChats(updatedChats);
 
       setIsDelete(false);
+
+      handleNewMessageDraftBufferRetrieve(true);
     };
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

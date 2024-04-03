@@ -135,7 +135,7 @@ export const limitMessageTokens = (
       setToastMessage('Chat exceeds Max Input Tokens. Not all messages were included.');
       setToastShow(true);
 
-      console.debug (`limitMessageTokens: Token limit exceeded. Total tokens: ${totalTokenCount}, New Messages Batch (${nextMessagesBatch.length}) tokens: ${nextMessagesBatchTokensCount}, Limit: ${limit}`);
+      //console.debug (`limitMessageTokens: Token limit exceeded. Total tokens: ${totalTokenCount}, New Messages Batch (${nextMessagesBatch.length}) tokens: ${nextMessagesBatchTokensCount}, Limit: ${limit}`);
       
       break;
     }
@@ -151,7 +151,7 @@ export const limitMessageTokens = (
   if (systemMessage)
     limitedMessages.unshift(systemMessage);
 
-  console.debug(`limitMessageTokens: selected messages for submission: ` + JSON.stringify(limitedMessages));
+  //console.debug(`limitMessageTokens: selected messages for submission: ` + JSON.stringify(limitedMessages));
 
   return [limitedMessages, systemTokenCount, chatTokenCount, lastMessageTokens];
 };

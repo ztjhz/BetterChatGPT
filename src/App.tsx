@@ -15,9 +15,9 @@ import AuthenticationUpdater from './background-components/AuthenticationUpdater
 import PageTitleUpdater from './background-components/PageTitleUpdater';
 
 import { ClientPrincipalContextProvider } from "@aaronpowell/react-static-web-apps-auth";
+import { handleNewMessageDraftBufferRetrieve } from '@utils/handleNewMessageDraftsPersistence';
 
 function App() {
-  const initialiseNewChat = useInitialiseNewChat();
   const setChats = useStore((state) => state.setChats);
   const setTheme = useStore((state) => state.setTheme);
   const setApiKey = useStore((state) => state.setApiKey);
@@ -28,6 +28,11 @@ function App() {
     i18n.on('languageChanged', (lng) => {
       document.documentElement.lang = lng;
     });
+  }, []);
+
+  // Synchronize New Message Draft Buffer with chat-level state
+  useEffect(() => {
+    handleNewMessageDraftBufferRetrieve();
   }, []);
 
   useEffect(() => {

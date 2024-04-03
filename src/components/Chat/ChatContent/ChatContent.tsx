@@ -27,6 +27,7 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
     state.currentChatIndex >= 0 &&
     state.currentChatIndex < state.chats.length
   );
+
   const messages = useStore((state) =>
     state.chats &&
     state.chats.length > 0 &&
@@ -35,6 +36,22 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
       ? state.chats[state.currentChatIndex].messages
       : []
   );
+
+  /* For debugging */
+  const chatDrafts = useStore( (state) => state.chats?.map((chat) => chat.title + ": " + chat.newMessageDraft));
+
+  // const currChatNewMessageDraft = useStore((state) =>
+  // state.chats &&
+  // state.chats.length > 0 &&
+  // state.currentChatIndex >= 0 &&
+  // state.currentChatIndex < state.chats.length
+  //   ? (state.chats[state.currentChatIndex].newMessageDraft ?? '')
+  //   : ''
+  // );
+
+  const newMessageDraftBuffer = useStore((state) => state.newMessageDraftBuffer ?? "");
+  const newMessageDraftChatIndex = useStore((state) => state.newMessageDraftChatIndex ?? "");
+
   const stickyIndex = useStore((state) =>
     state.chats &&
     state.chats.length > 0 &&
@@ -92,7 +109,7 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
           {chatExists && (
             <Message
               role={inputRole}
-              content=''
+              content={newMessageDraftBuffer}
               model={undefined}
               messageIndex={stickyIndex}
               sticky
@@ -145,6 +162,18 @@ const ChatContent = ({ chatDownloadAreaRef }: ChatContentProps) =>  {
                           <TokensToast />
                         </>
                       )
+                    }
+                    {
+                    <>
+                      {
+                      //For debugging only - not needed
+                      /* <div className="flex w-full justify-center items-center align-center"> 
+                          Chat Drafts: {JSON.stringify(chatDrafts, undefined, 4)}
+                      </div> 
+                      <div className="flex w-full justify-center items-center align-center"> 
+                          New Message Bufer: "{newMessageDraftBuffer}" (for chatId: {newMessageDraftChatIndex})
+                      </div> */}
+                    </> 
                     }
                   </>
                 }
