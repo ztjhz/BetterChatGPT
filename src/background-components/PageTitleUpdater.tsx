@@ -18,7 +18,7 @@ const PageTitleUpdater = () => {
 
     useEffect(() => {
         
-        console.debug("PageTitleUpdater useEffect invoked")
+        //console.debug("PageTitleUpdater useEffect invoked")
 
         if (chatNamesAsPageTitles && chatTitles && currentChatIndex !== undefined) {
             document.title = chatTitles[currentChatIndex]
