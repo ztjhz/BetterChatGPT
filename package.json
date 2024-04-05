@@ -15,18 +15,12 @@
   "build": {
     "appId": "gpt-cx",
     "productName": "GPT-CX",
-    "artifactName": "${os}-${name}-${version}-${arch}.${ext}",
-    "directories": {
-      "output": "release"
-    }
+    "artifactName": "${os}-${name}-${version}-${arch}.${ext}"
   },
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.2",
     "@react-oauth/google": "^0.9.0",
     "core-js": "^3.36.1",
-    "electron-is-dev": "^2.0.0",
-    "electron-squirrel-startup": "^1.0.0",
-    "electron-updater": "^5.3.0",
     "html2canvas": "^1.4.1",
     "i18next": "^22.4.11",
     "i18next-browser-languagedetector": "^7.0.1",
@@ -60,8 +54,6 @@
     "@vitejs/plugin-react-swc": "^3.0.0",
     "autoprefixer": "^10.4.13",
     "concurrently": "^8.0.1",
-    "electron": "^24.8.5",
-    "electron-builder": "^24.13.3",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.2.7",
     "typescript": "^4.9.3",
