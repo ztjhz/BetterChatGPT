@@ -18,25 +18,6 @@
     "artifactName": "${os}-${name}-${version}-${arch}.${ext}",
     "directories": {
       "output": "release"
-    },
-    "dmg": {
-      "title": "${productName} ${version}",
-      "icon": "dist/icon-rounded-macos.png"
-    },
-    "mac": {
-      "icon": "dist/icon-rounded-macos.png"
-    },
-    "linux": {
-      "target": [
-        "tar.gz",
-        "AppImage"
-      ],
-      "category": "Chat",
-      "icon": "dist/icon-rounded.png"
-    },
-    "win": {
-      "target": "NSIS",
-      "icon": "dist/icon-rounded.png"
     }
   },
   "dependencies": {
