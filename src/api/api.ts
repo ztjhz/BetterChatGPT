@@ -30,9 +30,9 @@ export const getChatCompletion = async (
     // set api version to 2023-07-01-preview for gpt-4, gpt-4-32k, gpt-4-1106-preview or gpt-4-0125-preview otherwise use 2023-03-15-preview
     const apiVersion =
       model === 'gpt-4' ||
-        model === 'gpt-4-32k' ||
-        model === 'gpt-4-1106-preview' ||
-        model === 'gpt-4-0125-preview'
+      model === 'gpt-4-32k' ||
+      model === 'gpt-4-1106-preview' ||
+      model === 'gpt-4-0125-preview'
         ? '2023-07-01-preview'
         : '2023-03-15-preview';
 
@@ -87,9 +87,9 @@ export const getChatCompletionStream = async (
     // set api version to 2023-07-01-preview for gpt-4 and gpt-4-32k, otherwise use 2023-03-15-preview
     const apiVersion =
       model === 'gpt-4' ||
-        model === 'gpt-4-32k' ||
-        model === 'gpt-4-1106-preview' ||
-        model === 'gpt-4-0125-preview'
+      model === 'gpt-4-32k' ||
+      model === 'gpt-4-1106-preview' ||
+      model === 'gpt-4-0125-preview'
         ? '2023-07-01-preview'
         : '2023-03-15-preview';
     const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
@@ -118,7 +118,7 @@ export const getChatCompletionStream = async (
     if (text.includes('model_not_found')) {
       throw new Error(
         text +
-        '\nMessage from GPT-CX:\nPlease ensure that you have access to the GPT-4 API!'
+          '\nMessage from GPT-CX:\nPlease ensure that you have access to the GPT-4 API!'
       );
     } else {
       throw new Error(
