@@ -1,23 +1,21 @@
 {
-  "name": "better-chatgpt",
+  "name": "gpt-cx",
   "private": true,
-  "version": "1.0.4",
+  "version": "1.0.0",
   "type": "module",
   "homepage": "./",
-  "main": "electron/index.cjs",
   "author": "💙 WeMake <hey@wemake.cx>",
-  "description": "Play and chat smarter with BetterChatGPT - an amazing open-source web app with a better UI for exploring OpenAI's ChatGPT API!",
+  "description": "Play and chat smarter with GPT-CX - an amazing open-source web app with a better UI for exploring OpenAI's ChatGPT API!",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "electron": "concurrently -k \"BROWSER=none yarn dev\" \"wait-on tcp:5173 && electron .\"",
     "pack": "yarn build && electron-builder --dir",
     "make": "yarn build && electron-builder",
     "prettier": "prettier --write ."
   },
   "build": {
-    "appId": "better-chatgpt",
+    "appId": "gpt-cx",
     "productName": "GPT-CX",
     "artifactName": "${os}-${name}-${version}-${arch}.${ext}",
     "directories": {
