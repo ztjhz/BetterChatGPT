@@ -8,7 +8,7 @@
   "description": "Play and chat smarter with GPT-CX - an amazing open-source web app with a better UI for exploring OpenAI's ChatGPT API!",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --frozen-lockfile",
     "preview": "vite preview",
     "prettier": "prettier --write ."
   },
