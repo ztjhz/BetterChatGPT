@@ -83,25 +83,9 @@ const ApiMenu = ({
         </div>
 
         <div className='min-w-fit text-gray-900 dark:text-gray-300 text-sm flex flex-col gap-3 leading-relaxed'>
-          <p className='mt-4'>
-            <Trans
-              i18nKey='apiKey.howTo'
-              ns='api'
-              components={[
-                <a
-                  href='https://platform.openai.com/account/api-keys'
-                  className='link'
-                  target='_blank'
-                />,
-              ]}
-            />
-          </p>
+          <p className='mt-4'></p>
 
           <p>{t('securityMessage', { ns: 'api' })}</p>
-
-          <p>{t('apiEndpoint.description', { ns: 'api' })}</p>
-
-          <p>{t('apiEndpoint.warn', { ns: 'api' })}</p>
         </div>
       </div>
     </PopupModal>
