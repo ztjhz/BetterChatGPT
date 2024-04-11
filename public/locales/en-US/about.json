@@ -22,6 +22,6 @@
   "privacyStatement": {
     "title": "Privacy Statement",
     "paragraph1": "We highly value your privacy and are committed to safeguarding the privacy of our users. We do not collect or store any text you enter or receive from the OpenAI server in any form. Our source code is available for your inspection to verify this statement.",
-    "paragraph2": "We prioritize the security of your API key and handle it with utmost care. If you use your own API key, your key is exclusively stored on your browser and never shared with any third-party entity. It is solely used for the intended purpose of accessing the OpenAI API and not for any other unauthorized use."
+    "paragraph2": "We prioritize the security of your API key and handle it with utmost care. If you use your own API key, your key is exclusively stored on your browser and never shared with any third-party entity. It is solely used for the intended purpose of accessing the WeMake API and not for any other unauthorized use."
   }
 }

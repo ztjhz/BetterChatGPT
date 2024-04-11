@@ -22,6 +22,6 @@
   "privacyStatement": {
     "title": "Personvernerklæring",
     "paragraph1": "Vi verdsetter personvernet ditt høyt og er forpliktet til å beskytte personvernet til brukerne våre. Vi samler ikke inn eller lagrer noen tekst du skriver inn eller mottar fra OpenAI-serveren i noen form. Kildekoden vår er tilgjengelig for din inspeksjon for å bekrefte denne uttalelsen.",
-    "paragraph2": "Vi prioriterer sikkerheten til API-nøkkelen din og behandler den med største forsiktighet. Hvis du bruker din egen API-nøkkel, lagres nøkkelen utelukkende pånettleseren din og deles aldri med noen tredjeparts enhet. Den brukes kun for det tiltenkte formålet med å få tilgang til OpenAI API og ikke for noen annen uautorisert bruk."
+    "paragraph2": "Vi prioriterer sikkerheten til API-nøkkelen din og behandler den med største forsiktighet. Hvis du bruker din egen API-nøkkel, lagres nøkkelen utelukkende pånettleseren din og deles aldri med noen tredjeparts enhet. Den brukes kun for det tiltenkte formålet med å få tilgang til WeMake API og ikke for noen annen uautorisert bruk."
   }
 }
