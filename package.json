@@ -37,7 +37,7 @@
     "react-markdown": "^8.0.5",
     "react-scroll-to-bottom": "^4.2.0",
     "rehype-highlight": "^7.0.0",
-    "rehype-katex": "^6.0.2",
+    "rehype-katex": "^7.0.0",
     "remark-gfm": "^3.0.1",
     "remark-math": "^6.0.0",
     "uuid": "^9.0.0",
