@@ -1,7 +1,7 @@
 {
   "name": "gpt-cx",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.x",
   "type": "module",
   "homepage": "./",
   "author": "💙 WeMake <hey@wemake.cx>",
