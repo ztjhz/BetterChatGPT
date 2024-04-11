@@ -3,9 +3,9 @@
   "private": true,
   "version": "1.0.x",
   "type": "module",
-  "homepage": "./",
+  "homepage": "gpt.wemake.cx",
   "author": "💙 WeMake <hey@wemake.cx>",
-  "description": "Play and chat smarter with GPT-CX - an amazing open-source web app with a better UI for exploring OpenAI's ChatGPT API!",
+  "description": "Chat smarter with GPT-CX",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
