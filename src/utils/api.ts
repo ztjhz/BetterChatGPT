@@ -1,3 +1,3 @@
 export const isAzureEndpoint = (endpoint: string) => {
-  return endpoint.includes('gateway.ai.cloudflare.com');
+  return endpoint.indexOf('gateway.ai.cloudflare.com') !== -1;
 };
