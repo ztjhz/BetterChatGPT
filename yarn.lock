@@ -265,29 +265,29 @@
   resolved "https://registry.npmjs.org/@sideway/pinpoint/-/pinpoint-2.0.0.tgz"
   integrity sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==
 
-"@swc/core-darwin-arm64@1.4.12":
-  version "1.4.12"
-  resolved "https://registry.npmjs.org/@swc/core-darwin-arm64/-/core-darwin-arm64-1.4.12.tgz"
-  integrity sha512-BZUUq91LGJsLI2BQrhYL3yARkcdN4TS3YGNS6aRYUtyeWrGCTKHL90erF2BMU2rEwZLLkOC/U899R4o4oiSHfA==
+"@swc/core-darwin-arm64@1.4.13":
+  version "1.4.13"
+  resolved "https://registry.npmjs.org/@swc/core-darwin-arm64/-/core-darwin-arm64-1.4.13.tgz"
+  integrity sha512-36P72FLpm5iq85IvoEjBvi22DiqkkEIanJ1M0E8bkxcFHUbjBrYfPY9T6cpPyK5oQqkaTBvNAc3j1BlVD6IH6w==
 
 "@swc/core@^1.3.100", "@swc/core@^1.3.107":
-  version "1.4.12"
-  resolved "https://registry.npmjs.org/@swc/core/-/core-1.4.12.tgz"
-  integrity sha512-QljRxTaUajSLB9ui93cZ38/lmThwIw/BPxjn+TphrYN6LPU3vu9/ykjgHtlpmaXDDcngL4K5i396E7iwwEUxYg==
+  version "1.4.13"
+  resolved "https://registry.npmjs.org/@swc/core/-/core-1.4.13.tgz"
+  integrity sha512-rOtusBE+2gaeRkAJn5E4zp5yzZekZOypzSOz5ZG6P1hFbd+Cc26fWEdK6sUSnrkkvTd0Oj33KXLB/4UkbK/UHA==
   dependencies:
     "@swc/counter" "^0.1.2"
     "@swc/types" "^0.1.5"
   optionalDependencies:
-    "@swc/core-darwin-arm64" "1.4.12"
-    "@swc/core-darwin-x64" "1.4.12"
-    "@swc/core-linux-arm-gnueabihf" "1.4.12"
-    "@swc/core-linux-arm64-gnu" "1.4.12"
-    "@swc/core-linux-arm64-musl" "1.4.12"
-    "@swc/core-linux-x64-gnu" "1.4.12"
-    "@swc/core-linux-x64-musl" "1.4.12"
-    "@swc/core-win32-arm64-msvc" "1.4.12"
-    "@swc/core-win32-ia32-msvc" "1.4.12"
-    "@swc/core-win32-x64-msvc" "1.4.12"
+    "@swc/core-darwin-arm64" "1.4.13"
+    "@swc/core-darwin-x64" "1.4.13"
+    "@swc/core-linux-arm-gnueabihf" "1.4.13"
+    "@swc/core-linux-arm64-gnu" "1.4.13"
+    "@swc/core-linux-arm64-musl" "1.4.13"
+    "@swc/core-linux-x64-gnu" "1.4.13"
+    "@swc/core-linux-x64-musl" "1.4.13"
+    "@swc/core-win32-arm64-msvc" "1.4.13"
+    "@swc/core-win32-ia32-msvc" "1.4.13"
+    "@swc/core-win32-x64-msvc" "1.4.13"
 
 "@swc/counter@^0.1.2", "@swc/counter@^0.1.3":
   version "0.1.3"
@@ -353,9 +353,9 @@
   integrity sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==
 
 "@types/node@*", "@types/node@>= 14":
-  version "20.12.4"
-  resolved "https://registry.npmjs.org/@types/node/-/node-20.12.4.tgz"
-  integrity sha512-E+Fa9z3wSQpzgYQdYmme5X3OTuejnnTx88A6p6vkkJosR3KBz+HpE3kqNm98VE6cfLFcISx7zW7MsJkH6KwbTw==
+  version "20.12.7"
+  resolved "https://registry.npmjs.org/@types/node/-/node-20.12.7.tgz"
+  integrity sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==
   dependencies:
     undici-types "~5.26.4"
 
@@ -382,9 +382,9 @@
   integrity sha512-c4YAvMedbPZ5tEyxzQdMoOhhJ4RD3rngZIdwC2/qDN3d7JpEhB6fiBRKVY1lg5B7Wk+uPBjn5f39j1/2MY1oOw==
 
 "@types/react-dom@^18.0.10":
-  version "18.2.24"
-  resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.2.24.tgz"
-  integrity sha512-cN6upcKd8zkGy4HU9F1+/s98Hrp6D4MOcippK4PoE8OZRngohHZpbJn1GsaDLz87MqvHNoT13nHvNqM9ocRHZg==
+  version "18.2.25"
+  resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.2.25.tgz"
+  integrity sha512-o/V48vf4MQh7juIKZU2QGDfli6p1+OOi5oXx36Hffpc9adsHeXjVp8rHuPkjd8VT8sOJ2Zp05HR7CdpGTIUFUA==
   dependencies:
     "@types/react" "*"
 
@@ -396,9 +396,9 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^18.0.27", "@types/react@>=16", "@types/react@>=16.8":
-  version "18.2.74"
-  resolved "https://registry.npmjs.org/@types/react/-/react-18.2.74.tgz"
-  integrity sha512-9AEqNZZyBx8OdZpxzQlaFEVCSFUM2YXJH46yPOiOpm078k6ZLOCcuAzGum/zK8YBwY+dbahVNbHrbgrAwIRlqw==
+  version "18.2.76"
+  resolved "https://registry.npmjs.org/@types/react/-/react-18.2.76.tgz"
+  integrity sha512-T6z/v7YxpswDM61Vq5KoSPTJqCkroJfsDIsvXCr4+qOY6gik5Ju4w0jf67cpC5z7ydOnp/E0V0W08pDRy8u9Xw==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -567,9 +567,9 @@ camelcase-css@^2.0.1:
   integrity sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==
 
 caniuse-lite@^1.0.30001587, caniuse-lite@^1.0.30001599:
-  version "1.0.30001606"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001606.tgz"
-  integrity sha512-LPbwnW4vfpJId225pwjZJOgX1m9sGfbw/RKJvw/t0QhYOOaTXHvkjVGFGPpvwEzufrjvTlsULnVTxdy4/6cqkg==
+  version "1.0.30001608"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001608.tgz"
+  integrity sha512-cjUJTQkk9fQlJR2s4HMuPMvTiRggl0rAVMtthQuyOlDWuqHXqN8azLq+pi8B2TjwKJ32diHjUqRIKeFX4z1FoA==
 
 canvg@^3.0.6:
   version "3.0.10"
@@ -813,9 +813,9 @@ dlv@^1.1.3:
   integrity sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==
 
 dompurify@^2.2.0:
-  version "2.4.9"
-  resolved "https://registry.npmjs.org/dompurify/-/dompurify-2.4.9.tgz"
-  integrity sha512-iHtnxYMotKgOTvxIqq677JsKHvCOkAFqj9x8Mek2zdeHW1XjuFKwjpmZeMaXQRQ8AbJZDbcRz/+r1QhwvFtmQg==
+  version "2.5.0"
+  resolved "https://registry.npmjs.org/dompurify/-/dompurify-2.5.0.tgz"
+  integrity sha512-5RXhAXSCrKTqt9pSbobT9PVRX+oPpENplTZqCiK1l0ya+ZOzwo9kqsGLbYRsAhzIiLCwKEy99XKSSrqnRTLVcw==
 
 eastasianwidth@^0.2.0:
   version "0.2.0"
@@ -823,9 +823,9 @@ eastasianwidth@^0.2.0:
   integrity sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==
 
 electron-to-chromium@^1.4.668:
-  version "1.4.728"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.728.tgz"
-  integrity sha512-Ud1v7hJJYIqehlUJGqR6PF1Ek8l80zWwxA6nGxigBsGJ9f9M2fciHyrIiNMerSHSH3p+0/Ia7jIlnDkt41h5cw==
+  version "1.4.733"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.733.tgz"
+  integrity sha512-gUI9nhI2iBGF0OaYYLKOaOtliFMl+Bt1rY7VmEjwxOxqoYLub/D9xmduPEhbw2imE6gYkJKhIE5it+KE2ulVxQ==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
