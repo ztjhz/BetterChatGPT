@@ -22,6 +22,6 @@
   "privacyStatement": {
     "title": "Integritetspolicy",
     "paragraph1": "Vi värderar din integritet högt och är engagerade i att skydda våra användares privatliv. Vi samlar inte in eller lagrar någon text du skriver in eller tar emot från OpenAI-servern i någon form. Vår källkod finns tillgänglig för din granskning för att verifiera detta påstående.",
-    "paragraph2": "Vi prioriterar säkerheten för din API-nyckel och hanterar den med största omsorg. Om du använder din egen API-nyckel lagras din nyckel uteslutande i din webbläsare och delas aldrig med någon tredjepartsaktör. Den används enbart för det avsedda syftet att få tillgång till OpenAI API och inte för någon annan obehörig användning."
+    "paragraph2": "Vi prioriterar säkerheten för din API-nyckel och hanterar den med största omsorg. Om du använder din egen API-nyckel lagras din nyckel uteslutande i din webbläsare och delas aldrig med någon tredjepartsaktör. Den används enbart för det avsedda syftet att få tillgång till WeMake API och inte för någon annan obehörig användning."
   }
 }

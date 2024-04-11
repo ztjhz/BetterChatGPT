@@ -1,5 +1,5 @@
 {
-  "securityMessage": "Prioritizează securitatea cheii tale API și o gestionăm cu cea mai mare atenție. Cheia este stocată exclusiv în browser-ul tău și nu este niciodată partajată cu vreo entitate terță. Este folosită exclusiv în scopul propus de a accesa OpenAI API și nu pentru orice altă utilizare neautorizată.",
+  "securityMessage": "Prioritizează securitatea cheii tale API și o gestionăm cu cea mai mare atenție. Cheia este stocată exclusiv în browser-ul tău și nu este niciodată partajată cu vreo entitate terță. Este folosită exclusiv în scopul propus de a accesa WeMake API și nu pentru orice altă utilizare neautorizată.",
   "apiEndpoint": {
     "inputLabel": "Punctul final API",
     "description": "Când alegeți un punct final API neoficial, acesta funcționează ca un proxy. Un proxy funcționează ca intermediar între dispozitivul dvs. și serverul de destinație, în acest caz, API-ul OpenAI. Procedând astfel, vă permite pentru a accesa API-ul OpenAI în regiuni în care altfel ar putea fi restricționat.",
