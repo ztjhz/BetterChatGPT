@@ -22,7 +22,7 @@
     "@react-oauth/google": "^0.12.1",
     "core-js": "^3.36.1",
     "html2canvas": "^1.4.1",
-    "i18next": "^22.4.11",
+    "i18next": "^23.11.1",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.1.1",
     "jspdf": "^2.5.1",
