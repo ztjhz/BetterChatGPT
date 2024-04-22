@@ -118,11 +118,11 @@ export const getChatCompletionStream = async (
     if (text.includes('model_not_found')) {
       throw new Error(
         text +
-          '\nMessage from GPT-CX:\nPlease ensure that you have access to the GPT-4 API!'
+          '\nMessage from GPT-CX:\nPlease ensure that you have access to the WeMake API!'
       );
     } else {
       throw new Error(
-        'Message from GPT-CX:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
+        'Message from GPT-CX:\nInvalid API endpoint! Please contact support (hey@wemake.cx).'
       );
     }
   }
