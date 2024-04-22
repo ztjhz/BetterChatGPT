@@ -20,21 +20,21 @@ export const getChatCompletion = async (
 
     const modelmapping: Partial<Record<ModelOptions, string>> = {
       'gpt-3.5-turbo': 'gpt-35-turbo',
-      /*       'gpt-3.5-turbo-16k': 'gpt-35-turbo-16k',
-            'gpt-3.5-turbo-1106': 'gpt-35-turbo-1106', */
+      'gpt-3.5-turbo-16k': 'gpt-35-turbo-16k',
+      'gpt-3.5-turbo-1106': 'gpt-35-turbo-1106',
       'gpt-3.5-turbo-0125': 'gpt-35-turbo-0125',
     };
 
     const model = modelmapping[config.model] || config.model;
 
-    // set api version to 2023-07-01-preview for gpt-4, gpt-4-32k, gpt-4-1106-preview or gpt-4-0125-preview otherwise use 2023-03-15-preview
+    // set api version to 2024-02-15-preview for gpt-4, gpt-4-32k, gpt-4-1106-preview or gpt-4-0125-preview otherwise use 2023-07-01-preview
     const apiVersion =
       model === 'gpt-4' ||
       model === 'gpt-4-32k' ||
       model === 'gpt-4-1106-preview' ||
       model === 'gpt-4-0125-preview'
         ? '2024-02-15-preview'
-        : '2023-03-15-preview';
+        : '2023-07-01-preview';
 
     const path = `v1/7e298a91c3274f38a33f93ebe112cd91/gpt-cx/azure-openai/v41-platform-east-us/${model}/chat/completions?api-version=${apiVersion}`;
 
