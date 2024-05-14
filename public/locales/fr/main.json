@@ -43,5 +43,6 @@
   "cloneChat": "Cloner la Conversation",
   "cloned": "Clonée",
   "enterToSubmit": "Entrée pour soumettre",
-  "submitPlaceholder": "Saisissez un message ou cliquez sur [/] pour des prompts..."
+  "submitPlaceholder": "Saisissez un message ou cliquez sur [/] pour des prompts...",
+  "promptSuggestions": "Suggestions de prompt"
 }
