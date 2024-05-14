@@ -43,5 +43,6 @@
   "cloneChat": "Chat klonen",
   "cloned": "Klonen erfolgreich",
   "enterToSubmit": "Drücke Enter zum absenden",
-  "submitPlaceholder": "Verfasse eine Nachricht oder klicke auf [/] für gespeicherte Prompts..."
+  "submitPlaceholder": "Verfasse eine Nachricht oder klicke auf [/] für gespeicherte Prompts...",
+  "resetThisConversation": "Reset This Conversation"
 }

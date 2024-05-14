@@ -43,5 +43,6 @@
   "cloneChat": "Klon Chat",
   "cloned": "Klonet",
   "enterToSubmit": "Tryk Enter for at sende",
-  "submitPlaceholder": "Skriv en besked eller klik på [/] for opgave..."
+  "submitPlaceholder": "Skriv en besked eller klik på [/] for opgave...",
+  "resetThisConversation": "Reset This Conversation"
 }

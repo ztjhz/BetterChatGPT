@@ -43,5 +43,6 @@
    "cloneChat": "Clone Chat",
    "cloned": "Clonat",
    "enterToSubmit": "Intrați pentru a trimite",
-   "submitPlaceholder": "Tastați un mesaj sau faceți clic pe [/] pentru solicitări..."
+   "submitPlaceholder": "Tastați un mesaj sau faceți clic pe [/] pentru solicitări...",
+   "resetThisConversation": "Reset This Conversation"
 }
