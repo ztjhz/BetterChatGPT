@@ -7,6 +7,7 @@ export const i18nLanguages = [
   'en-GB',
   'en-US',
   'es',
+  'fa-IR',
   'fr',
   'fr-FR',
   'it',
@@ -33,6 +34,7 @@ export const selectableLanguages = [
   'en-GB',
   'en-US',
   'es',
+  'fa-IR',
   // 'fr',
   'fr-FR',
   'it',
@@ -50,6 +52,8 @@ export const selectableLanguages = [
   'zh-TW',
 ] as const;
 
+export const rtlLanguages = new Set(['fa-IR']);
+
 export const languageCodeToName = {
   // 'ar': 'العربية',
   'da': 'Dansk',
@@ -58,6 +62,7 @@ export const languageCodeToName = {
   'en-GB': 'English (UK)',
   'en-US': 'English (US)',
   'es': 'Español',
+  'fa-IR': 'فارسی', // 'فارسی (ایران)'. no need to include "ایران" at this time, as there is currently only one variant
   'fr': 'Français',
   'fr-FR': 'Français', // Français (France). no need to include "France" at this time, as there is currently only one variant
   'it': 'Italiano',
