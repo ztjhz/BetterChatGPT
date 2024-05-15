@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  ui_dev:
+    restart: always
+    image: better-chat-gpt
+    build:
+      context: ./
+    ports:
+      - 5173:3000
