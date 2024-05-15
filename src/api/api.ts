@@ -27,11 +27,8 @@ export const getChatCompletion = async (
 
     const model = modelmapping[config.model] || config.model;
 
-    // set api version to 2024-02-15-preview for gpt-4, gpt-4-32k, gpt-4-1106-preview or gpt-4-0125-preview otherwise use 2023-07-01-preview
+    // set api version to 2024-02-15-preview for gpt-4-0125-preview otherwise use 2024-02-15-preview
     const apiVersion =
-      model === 'gpt-4' ||
-      model === 'gpt-4-32k' ||
-      model === 'gpt-4-1106-preview' ||
       model === 'gpt-4-0125-preview'
         ? '2024-02-15-preview'
         : '2024-02-15-preview';
@@ -84,11 +81,8 @@ export const getChatCompletionStream = async (
 
     const model = modelmapping[config.model] || config.model;
 
-    // set api version to 2024-02-15-preview for gpt-4 and gpt-4-32k, otherwise use 2023-07-01-preview
+    // set api version to 2024-02-15-preview for gpt-4-0125-preview otherwise use 2024-02-15-preview
     const apiVersion =
-      model === 'gpt-4' ||
-      model === 'gpt-4-32k' ||
-      model === 'gpt-4-1106-preview' ||
       model === 'gpt-4-0125-preview'
         ? '2024-02-15-preview'
         : '2024-02-15-preview';
@@ -123,7 +117,7 @@ export const getChatCompletionStream = async (
       );
     } else {
       throw new Error(
-        'Message from GPT-CX:\nInvalid API endpoint! Please contact support (hey@wemake.cx).'
+        "Message from GPT-CX: Invalid API endpoint! Please contact support (hey@wemake.cx).\n\nIf you're using gpt-4-0125-preview, please request a new API Key and switch to gpt-4-turbo-2024-04-09."
       );
     }
   }
