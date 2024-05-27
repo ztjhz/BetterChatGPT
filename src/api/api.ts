@@ -117,7 +117,7 @@ export const getChatCompletionStream = async (
       );
     } else {
       throw new Error(
-        "Message from GPT-CX: Invalid API endpoint! Please contact support (hey@wemake.cx).\n\nIf you're using gpt-4-0125-preview, please request a new API Key and switch to gpt-4-turbo-2024-04-09."
+        "Message from GPT-CX: Invalid API endpoint! Please contact support (hey@wemake.cx).\n\nIf you're using an deprecated version, please request a new API Key and switch to gpt-4o."
       );
     }
   }
