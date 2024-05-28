@@ -14,7 +14,7 @@ const EditView = ({
   content,
   setIsEdit,
   messageIndex,
-  sticky,
+  sticky
 }: {
   content: string;
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,6 +28,7 @@ const EditView = ({
   const [_content, _setContent] = useState<string>(content);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const textareaRef = React.createRef<HTMLTextAreaElement>();
+  const bufferRef = React.createRef<HTMLTextAreaElement>();
 
   const { t } = useTranslation();
 
@@ -105,18 +106,23 @@ const EditView = ({
     handleSubmit();
   };
 
-  useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+  const adjustTextareaHeight = () => {
+    if (textareaRef.current && bufferRef.current) {
+      const textarea = textareaRef.current;
+      const buffer = bufferRef.current;
+
+      buffer.style.height = 'auto';
+      buffer.style.height = buffer.scrollHeight + 'px';
+      textarea.style.height = buffer.scrollHeight + 'px';
     }
+  };
+
+  useEffect(() => {
+    adjustTextareaHeight();
   }, [_content]);
 
   useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
-    }
+    adjustTextareaHeight();
   }, []);
 
   return (
@@ -128,6 +134,7 @@ const EditView = ({
             : ''
         }`}
       >
+        <div className="relative">
         <textarea
           ref={textareaRef}
           className='m-0 resize-none rounded-lg bg-transparent overflow-y-hidden focus:ring-0 focus-visible:ring-0 leading-7 w-full placeholder:text-gray-500/40'
@@ -139,6 +146,19 @@ const EditView = ({
           onKeyDown={handleKeyDown}
           rows={1}
         ></textarea>
+        <textarea
+          ref={bufferRef}
+          className='m-0 resize-none rounded-lg bg-transparent overflow-y-hidden focus:ring-0 focus-visible:ring-0 leading-7 w-full placeholder:text-gray-500/40 absolute top-0 left-0'
+          style={{
+            position: 'absolute',
+            visibility: 'hidden',
+            overflow: 'hidden'
+          }}
+          value={_content}
+          readOnly
+          rows={1}
+        ></textarea>
+        </div>
       </div>
       <EditViewButtons
         sticky={sticky}
