@@ -1,0 +1,22 @@
+# action.yml
+name: 'build Akasa BetterChatGPT'
+description: 'build akasa fork of BetterChatGPT'
+on:
+  push:
+    branches:
+      -'**'
+
+jobs:
+  build:
+    runs-on: self-hosted
+    container:
+      image:  277516517760.dkr.ecr.us-west-2.amazonaws.com/capsule:devlatest
+    defaults:
+      run:
+        shell:  bash
+    steps:
+      - name: make build image
+        run: make build
+      - name: push
+        if: github.ref == 'refs/heads/main'
+        run: make push
