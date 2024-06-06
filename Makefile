@@ -1,5 +1,19 @@
-VERSION=20240606
+DateStamp := $(shell /bin/date "+%Y%m%d%H%M%S")
+CURRENT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+
+# Conditionally set the BRANCH_NAME variable
+ifeq ($(CURRENT_BRANCH), main)
+    BRANCH_NAME :=
+else
+    BRANCH_NAME := "$(CURRENT_BRANCH)-"
+endif
+
+VERSION := "$(BRANCH_NAME)$(DateStamp)"
+
 URL=277516517760.dkr.ecr.us-west-2.amazonaws.com/akasa-brtterchatgpt
+
+info:
+	echo ${VERSION}
 
 build:
 	docker build -t ${URL}:${VERSION} --file dockerfileNpm .
