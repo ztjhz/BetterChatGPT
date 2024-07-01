@@ -203,5 +203,5 @@ export interface LocalStorageInterfaceV8oV8_1
   apiVersion: string;
 }
 
-// export interface LocalStorageInterfaceV8ToV9
-//   extends LocalStorageInterfaceV7oV8 {
+// export interface LocalStorageInterfaceV8_1ToV9
+//   extends LocalStorageInterfaceV8oV8_1 {

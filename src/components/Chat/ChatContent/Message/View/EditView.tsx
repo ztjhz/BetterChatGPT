@@ -15,7 +15,7 @@ import PopupModal from '@components/PopupModal';
 import TokenCount from '@components/TokenCount';
 import CommandPrompt from '../CommandPrompt';
 import FolderIcon from '@icon/FolderIcon';
-import { modelTypes } from '@constants/chat';
+import { defaultModel, modelTypes } from '@constants/chat';
 
 const EditView = ({
   content: content,
@@ -274,7 +274,7 @@ const EditViewButtons = memo(
         state.chats && state.chats.length > 0 && state.currentChatIndex >= 0;
       return isInitialised
         ? state.chats![state.currentChatIndex].config.model
-        : 'gpt-4o';
+        : defaultModel;
     });
     const fileInputRef = useRef(null);
 

@@ -78,7 +78,7 @@ export const getChatCompletionStream = async (
     'Content-Type': 'application/json',
     ...customHeaders,
   };
-  //if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
+  if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
 
   if (isAzureEndpoint(endpoint) && apiKey) {
     headers['api-key'] = apiKey;
@@ -96,7 +96,7 @@ export const getChatCompletionStream = async (
       (model === 'gpt-4' || model === 'gpt-4-32k'
         ? '2023-07-01-preview'
         : '2023-03-15-preview');
-    const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersionToUse}`;
+    const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
 
     if (!endpoint.endsWith(path)) {
       if (!endpoint.endsWith('/')) {
@@ -112,7 +112,7 @@ export const getChatCompletionStream = async (
     body: JSON.stringify({
       messages,
       ...config,
-      max_tokens: config.max_tokens,
+      max_tokens: undefined,
       stream: true,
     }),
   });

@@ -11,7 +11,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "electron": "concurrently -k \"BROWSER=none yarn dev\" \"wait-on tcp:25173 && electron .\"",
+    "electron": "concurrently -k \"BROWSER=none yarn dev\" \"wait-on tcp:5173 && electron .\"",
     "pack": "yarn build && electron-builder --dir",
     "make": "yarn build && electron-builder",
     "debug": "concurrently -k \"cross-env BROWSER=none yarn dev\" \"wait-on tcp:5173 && electron --inspect=5858 .\""

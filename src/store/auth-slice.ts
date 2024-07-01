@@ -13,7 +13,7 @@ export interface AuthSlice {
 }
 
 export const createAuthSlice: StoreSlice<AuthSlice> = (set, get) => ({
-  apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+  apiKey: import.meta.env.VITE_OPENAI_API_KEY || undefined,
   apiEndpoint: defaultAPIEndpoint,
   apiVersion: undefined,
   firstVisit: true,
