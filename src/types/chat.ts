@@ -198,6 +198,10 @@ export interface LocalStorageInterfaceV7oV8
   foldersExpanded: boolean[];
   folders: FolderCollection;
 }
+export interface LocalStorageInterfaceV8oV8_1
+  extends LocalStorageInterfaceV7oV8 {
+  apiVersion: string;
+}
 
 // export interface LocalStorageInterfaceV8ToV9
 //   extends LocalStorageInterfaceV7oV8 {

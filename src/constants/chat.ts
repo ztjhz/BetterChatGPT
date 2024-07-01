@@ -35,6 +35,7 @@ export const modelOptions: ModelOptions[] = [
   // 'gpt-4-32k-0314',
 ];
 
+export const defaultApiVersion = '2024-04-01-preview';
 export const defaultModel = 'gpt-3.5-turbo';
 
 export const modelMaxToken: { [key: string]: number }  = {
