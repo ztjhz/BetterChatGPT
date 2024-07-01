@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { ChatInterface, ConfigInterface, ModelOptions } from '@type/chat';
+import { ChatInterface, ConfigInterface, ModelOptions, ModelType, TextContentInterface } from '@type/chat';
 import useStore from '@store/store';
 
 const date = new Date();
@@ -157,7 +157,7 @@ export const generateDefaultChat = (
   title: title ? title : 'New Chat',
   messages:
     useStore.getState().defaultSystemMessage.length > 0
-      ? [{ role: 'system', content: useStore.getState().defaultSystemMessage }]
+      ? [{ role: 'system', content: [{type: 'text', text: useStore.getState().defaultSystemMessage} as TextContentInterface] }]
       : [],
   config: { ...useStore.getState().defaultChatConfig },
   titleSet: false,
