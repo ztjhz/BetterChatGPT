@@ -1,5 +1,6 @@
 import React from 'react';
 import useStore from '@store/store';
+import { UserButton } from '@clerk/clerk-react';
 
 import ImportExportChat from '@components/ImportExportChat';
 import SettingsMenu from '@components/SettingsMenu';
@@ -24,6 +25,9 @@ const MenuOptions = () => {
         {googleClientId && <GoogleSync clientId={googleClientId} />}
         <ImportExportChat />
         <SettingsMenu />
+        <div className='p-3 border-t border-gray-200 dark:border-gray-600'>
+          <UserButton />
+        </div>
       </div>
     </>
   );

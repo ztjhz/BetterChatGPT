@@ -1,6 +1,7 @@
 import React from 'react';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '@clerk/clerk-react';
 import { ChatInterface, MessageInterface } from '@type/chat';
 import { getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
@@ -10,6 +11,7 @@ import { officialAPIEndpoint } from '@constants/auth';
 
 const useSubmit = () => {
   const { t, i18n } = useTranslation('api');
+  const { getToken } = useAuth();
   const error = useStore((state) => state.error);
   const setError = useStore((state) => state.setError);
   const apiEndpoint = useStore((state) => state.apiEndpoint);
@@ -24,27 +26,17 @@ const useSubmit = () => {
   ): Promise<string> => {
     let data;
     try {
-      if (!apiKey || apiKey.length === 0) {
-        // official endpoint
-        if (apiEndpoint === officialAPIEndpoint) {
-          throw new Error(t('noApiKeyWarning') as string);
-        }
-
-        // other endpoints
-        data = await getChatCompletion(
-          useStore.getState().apiEndpoint,
-          message,
-          _defaultChatConfig
-        );
-      } else if (apiKey) {
-        // own apikey
-        data = await getChatCompletion(
-          useStore.getState().apiEndpoint,
-          message,
-          _defaultChatConfig,
-          apiKey
-        );
+      const token = await getToken();
+      if (!token) {
+        throw new Error('Authentication required');
       }
+
+      data = await getChatCompletion(
+        useStore.getState().apiEndpoint,
+        message,
+        _defaultChatConfig,
+        token
+      );
     } catch (error: unknown) {
       throw new Error(`Error generating title!\n${(error as Error).message}`);
     }
@@ -77,28 +69,17 @@ const useSubmit = () => {
       );
       if (messages.length === 0) throw new Error('Message exceed max token!');
 
-      // no api key (free)
-      if (!apiKey || apiKey.length === 0) {
-        // official endpoint
-        if (apiEndpoint === officialAPIEndpoint) {
-          throw new Error(t('noApiKeyWarning') as string);
-        }
-
-        // other endpoints
-        stream = await getChatCompletionStream(
-          useStore.getState().apiEndpoint,
-          messages,
-          chats[currentChatIndex].config
-        );
-      } else if (apiKey) {
-        // own apikey
-        stream = await getChatCompletionStream(
-          useStore.getState().apiEndpoint,
-          messages,
-          chats[currentChatIndex].config,
-          apiKey
-        );
+      const token = await getToken();
+      if (!token) {
+        throw new Error('Authentication required');
       }
+
+      stream = await getChatCompletionStream(
+        useStore.getState().apiEndpoint,
+        messages,
+        chats[currentChatIndex].config,
+        token
+      );
 
       if (stream) {
         if (stream.locked)

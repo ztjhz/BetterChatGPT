@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import useStore from '@store/store';
 import i18n from './i18n';
+import { ClerkProvider, useAuth } from '@clerk/clerk-react';
 
 import Chat from '@components/Chat';
 import Menu from '@components/Menu';
+import Auth from '@components/Auth';
 
 import useInitialiseNewChat from '@hooks/useInitialiseNewChat';
 import { ChatInterface } from '@type/chat';
@@ -11,12 +13,15 @@ import { Theme } from '@type/theme';
 import ApiPopup from '@components/ApiPopup';
 import Toast from '@components/Toast';
 
-function App() {
+const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+function AppContent() {
   const initialiseNewChat = useInitialiseNewChat();
   const setChats = useStore((state) => state.setChats);
   const setTheme = useStore((state) => state.setTheme);
   const setApiKey = useStore((state) => state.setApiKey);
   const setCurrentChatIndex = useStore((state) => state.setCurrentChatIndex);
+  const { isSignedIn } = useAuth();
 
   useEffect(() => {
     document.documentElement.lang = i18n.language;
@@ -74,6 +79,10 @@ function App() {
     }
   }, []);
 
+  if (!isSignedIn) {
+    return <Auth />;
+  }
+
   return (
     <div className='overflow-hidden w-full h-full relative'>
       <Menu />
@@ -81,6 +90,14 @@ function App() {
       <ApiPopup />
       <Toast />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ClerkProvider publishableKey={clerkPubKey}>
+      <AppContent />
+    </ClerkProvider>
   );
 }
 

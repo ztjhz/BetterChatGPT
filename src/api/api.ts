@@ -1,22 +1,27 @@
 import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface, ModelOptions } from '@type/chat';
 import { isAzureEndpoint } from '@utils/api';
+import { isEgidaEndpoint } from '@utils/egida';
 
 export const getChatCompletion = async (
   endpoint: string,
   messages: MessageInterface[],
   config: ConfigInterface,
-  apiKey?: string,
+  token?: string,
   customHeaders?: Record<string, string>
 ) => {
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
     ...customHeaders,
   };
-  if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
+  
+  // Use Clerk token for egida-app backend, API key for OpenAI
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
 
-  if (isAzureEndpoint(endpoint) && apiKey) {
-    headers['api-key'] = apiKey;
+  if (isAzureEndpoint(endpoint) && token) {
+    headers['api-key'] = token;
 
     const modelmapping: Partial<Record<ModelOptions, string>> = {
       'gpt-3.5-turbo': 'gpt-35-turbo',
@@ -62,17 +67,21 @@ export const getChatCompletionStream = async (
   endpoint: string,
   messages: MessageInterface[],
   config: ConfigInterface,
-  apiKey?: string,
+  token?: string,
   customHeaders?: Record<string, string>
 ) => {
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
     ...customHeaders,
   };
-  if (apiKey) headers.Authorization = `Bearer ${apiKey}`;
+  
+  // Use Clerk token for egida-app backend, API key for OpenAI
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
 
-  if (isAzureEndpoint(endpoint) && apiKey) {
-    headers['api-key'] = apiKey;
+  if (isAzureEndpoint(endpoint) && token) {
+    headers['api-key'] = token;
 
     const modelmapping: Partial<Record<ModelOptions, string>> = {
       'gpt-3.5-turbo': 'gpt-35-turbo',
