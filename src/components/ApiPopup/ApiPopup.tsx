@@ -14,9 +14,7 @@ const ApiPopup = () => {
   const setFirstVisit = useStore((state) => state.setFirstVisit);
 
   const [_apiKey, _setApiKey] = useState<string>(apiKey || '');
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(
-    !apiKey && firstVisit
-  );
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
   const handleConfirm = () => {
