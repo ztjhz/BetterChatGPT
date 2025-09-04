@@ -6,7 +6,7 @@ import { getChatCompletion, getChatCompletionStream } from '@api/api';
 import { parseEventSource } from '@api/helper';
 import { limitMessageTokens, updateTotalTokenUsed } from '@utils/messageUtils';
 import { _defaultChatConfig } from '@constants/chat';
-import { officialAPIEndpoint } from '@constants/auth';
+import { litellmProxyEndpoint } from '@constants/auth';
 
 const useSubmit = () => {
   const { t, i18n } = useTranslation('api');
@@ -26,7 +26,7 @@ const useSubmit = () => {
     try {
       if (!apiKey || apiKey.length === 0) {
         // official endpoint
-        if (apiEndpoint === officialAPIEndpoint) {
+        if (apiEndpoint === litellmProxyEndpoint) {
           throw new Error(t('noApiKeyWarning') as string);
         }
 
@@ -80,7 +80,7 @@ const useSubmit = () => {
       // no api key (free)
       if (!apiKey || apiKey.length === 0) {
         // official endpoint
-        if (apiEndpoint === officialAPIEndpoint) {
+        if (apiEndpoint === litellmProxyEndpoint) {
           throw new Error(t('noApiKeyWarning') as string);
         }
 
