@@ -9,8 +9,6 @@
   "clearConversation": "Chat-Verlauf löschen.",
   "import": "Importieren",
   "export": "Exportieren",
-  "author": "Made by Jing Hua",
-  "about": "Über uns & Sponsor",
   "api": "API",
   "personal": "Persönlich",
   "free": "Kostenlos",
@@ -35,10 +33,6 @@
   "countTotalTokens": "Gesamte Tokens zusammenrechnen",
   "morePrompts": "Du findest mehr Prompts hier: ",
   "clearPrompts": "Prompts löschen",
-  "postOnShareGPT": {
-    "title": "Auf ShareGPT teilen",
-    "warning": "Bitte beachte, dass durch das Posten deiner Konversation auf ShareGPT diese öffentlich zugänglich und für jeden einsehbar wird. Einmal veröffentlicht, kann die Konversation nicht mehr versteckt oder gelöscht werden und kann möglicherweise von anderen archiviert oder geteilt werden. Wir raten dir daher, sorgfältig zu drüber nachzudenken ob du die Konversation teilst. Vermeide grundsätzlich sensible oder private Informationen auf dieser Plattform zu teilen."
-  },
   "newFolder": "Neuer Ordner",
   "cloneChat": "Chat klonen",
   "cloned": "Klonen erfolgreich",

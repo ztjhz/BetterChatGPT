@@ -9,8 +9,6 @@
   "clearConversation": "Limpiar conversación",
   "import": "Importar",
   "export": "Exportar",
-  "author": "Hecho por Jing Hua",
-  "about": "Acerca de y Patrocinadores",
   "api": "API",
   "personal": "Personal",
   "free": "Gratuito",
@@ -35,10 +33,6 @@
   "countTotalTokens": "Contar tokens totales",
   "morePrompts": "Puedes encontrar más prompts aquí: ",
   "clearPrompts": "Prompts claras",
-  "postOnShareGPT": {
-    "title": "Publicar en ShareGPT",
-    "warning": "Por favor, tenga en cuenta que al publicar su conversación en ShareGPT, esta será accesible y visible para cualquiera. Una vez publicada, la conversación no se podrá ocultar ni eliminar, y puede ser archivada o compartida por otros. Le aconsejamos que lo considere detenidamente y evite compartir información sensible o privada en esta plataforma."
-  },
   "newFolder": "Nueva Carpeta",
   "cloneChat": "Clone Chat",
   "cloned": "Cloned",

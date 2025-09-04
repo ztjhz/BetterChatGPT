@@ -9,8 +9,6 @@
   "clearConversation": "清空傾偈",
   "import": "匯入",
   "export": "匯出",
-  "author": "由 Jing Hua 製作",
-  "about": "關於同贊助",
   "api": "API",
   "personal": "個人",
   "free": "免費",
@@ -35,10 +33,6 @@
   "countTotalTokens": "計算總 Token 數",
   "morePrompts": "如果你想揾更多 prompt，撳呢度：",
   "clearPrompts": "清空 prompts",
-  "postOnShareGPT": {
-    "title": "Po 上 ShareGPT",
-    "warning": "請注意，你將呢個傾偈 po 上 ShareGPT 之後，佢會係公開嘅，所有人都可以見到你寫嘅嘢。Po 咗之後，呢個傾偈將冇得被隱藏或刪除，亦都可能畀人存檔同分享。我哋建議你仔細諗下，唔好喺嗰度分享敏感或私人資料。"
-  },
   "newFolder": "新資料夾",
   "cloneChat": "建立傾偈副本",
   "cloned": "建立成功",

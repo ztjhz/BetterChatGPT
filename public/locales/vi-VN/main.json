@@ -9,8 +9,6 @@
   "clearConversation": "Xóa lịch sử trò chuyện",
   "import": "Nhập",
   "export": "Xuất",
-  "author": "Được tạo ra bởi Jing Hua",
-  "about": "Về chúng tôi và tài trợ",
   "api": "API",
   "personal": "Cá nhân",
   "free": "Miễn Phí",
@@ -35,10 +33,6 @@
   "countTotalTokens": "Tính tổng mã thông báo",
   "morePrompts": "Bạn có thể tìm thêm nhiều lời nhắc nữa tại đây: ",
   "clearPrompts": "Xóa lời nhắc",
-  "postOnShareGPT": {
-    "title": "Đăng lên ShareGPT",
-    "warning": "Xin lưu ý rằng bằng cách đăng cuộc trò chuyện của bạn lên ShareGPT, mọi người sẽ có thể truy cập và xem cuộc trò chuyện đó một cách công khai. Sau khi đăng, cuộc trò chuyện không thể bị ẩn hoặc xóa và có thể được người khác lưu trữ hoặc chia sẻ. Chúng tôi khuyên bạn nên cân nhắc cẩn thận và tránh chia sẻ thông tin nhạy cảm hoặc riêng tư trên nền tảng này."
-  },
   "newFolder": "Thư mục mới",
   "cloneChat": "Nhân đôi cuộc trò chuyện",
   "cloned": "Đã nhân bản",

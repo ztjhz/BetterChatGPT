@@ -9,8 +9,6 @@
    "clearConversation": "Ștergeți istoricul conversațiilor",
    "import": "Import",
    "export": "Export",
-   "author": "Făcut de Jing Hua",
-   "about": "Despre și sponsorizează",
    "api": "API",
    "personal": "Personal",
    "free": "Gratuit",
@@ -35,10 +33,6 @@
    "countTotalTokens": "Numără numărul total de jetoane",
    "morePrompts": "Puteți găsi mai multe solicitări aici: ",
    "clearPrompts": "Ștergeți solicitările",
-   "postOnShareGPT": {
-     "title": "Postați pe ShareGPT",
-     "warning": "Vă rugăm să rețineți că, prin postarea conversației dvs. pe ShareGPT, aceasta va deveni accesibilă public și va fi vizibilă pentru oricine. Odată postată, conversația nu poate fi ascunsă sau ștearsă și poate fi arhivată sau partajată de alții. Vă sfătuim să faceți luați în considerare cu atenție și evitați partajarea informațiilor sensibile sau private pe această platformă."
-   },
    "newFolder": "Folder nou",
    "cloneChat": "Clone Chat",
    "cloned": "Clonat",
