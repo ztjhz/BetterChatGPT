@@ -19,8 +19,9 @@ export const getChatCompletion = async (
     headers,
     body: JSON.stringify({
       messages,
-      ...config,
-      max_tokens: undefined,
+      model: config.model,
+      temperature: config.temperature,
+      max_tokens: config.max_tokens,
     }),
   });
   if (!response.ok) throw new Error(await response.text());
@@ -47,8 +48,9 @@ export const getChatCompletionStream = async (
     headers,
     body: JSON.stringify({
       messages,
-      ...config,
-      max_tokens: undefined,
+      model: config.model,
+      temperature: config.temperature,
+      max_tokens: config.max_tokens,
       stream: true,
     }),
   });
