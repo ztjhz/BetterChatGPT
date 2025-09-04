@@ -1,3 +1,3 @@
-export const isAzureEndpoint = (endpoint: string) => {
-  return endpoint.includes('openai.azure.com');
+export const isLiteLLMEndpoint = (endpoint: string) => {
+  return endpoint.includes('litellmproxy-production.up.railway.app');
 };
