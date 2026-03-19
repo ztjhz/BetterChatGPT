@@ -74,6 +74,7 @@ Better ChatGPT comes with a bundle of amazing features! Here are some of them:
 - Download chat (markdown / image / json)
 - Sync to Google Drive
 - Azure OpenAI endpoint support
+- [MiniMax](https://platform.minimax.io/) model support (MiniMax-M2.7, MiniMax-M2.7-highspeed)
 - Multiple language support (i18n)
 
 # 🛠️ Usage
@@ -83,6 +84,15 @@ To get started, simply visit our website at <https://bettergpt.chat/>. There are
 1. Enter into the API menu your OpenAI API Key obtained from [OpenAI API Keys](https://platform.openai.com/account/api-keys).
 2. Utilise the api endpoint proxy provided by [ayaka14732/ChatGPTAPIFree](https://github.com/ayaka14732/ChatGPTAPIFree) (if you are in a region with no access to ChatGPT)
 3. Host your own API endpoint by following the instructions provided here: <https://github.com/ayaka14732/ChatGPTAPIFree>. Subsequently, enter the API endpoint into the API menu.
+
+### Using MiniMax Models
+
+Better ChatGPT supports [MiniMax](https://platform.minimax.io/) models (MiniMax-M2.7 and MiniMax-M2.7-highspeed) via the OpenAI-compatible API:
+
+1. Get your API key from [MiniMax Platform](https://platform.minimax.io/)
+2. In the API menu, select the MiniMax endpoint (`https://api.minimax.io/v1/chat/completions`)
+3. Enter your MiniMax API key
+4. Select a MiniMax model from the model dropdown
 
 ## Desktop App
 

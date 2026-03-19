@@ -1,6 +1,11 @@
 import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface, ModelOptions } from '@type/chat';
-import { isAzureEndpoint } from '@utils/api';
+import {
+  isAzureEndpoint,
+  isMiniMaxEndpoint,
+  isMiniMaxModel,
+  clampMiniMaxTemperature,
+} from '@utils/api';
 
 export const getChatCompletion = async (
   endpoint: string,
@@ -43,13 +48,20 @@ export const getChatCompletion = async (
     }
   }
 
+  const requestConfig = { ...config, max_tokens: undefined };
+
+  if (isMiniMaxEndpoint(endpoint) || isMiniMaxModel(config.model)) {
+    requestConfig.temperature = clampMiniMaxTemperature(config.temperature);
+    delete (requestConfig as Record<string, unknown>).presence_penalty;
+    delete (requestConfig as Record<string, unknown>).frequency_penalty;
+  }
+
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
     body: JSON.stringify({
       messages,
-      ...config,
-      max_tokens: undefined,
+      ...requestConfig,
     }),
   });
   if (!response.ok) throw new Error(await response.text());
@@ -96,13 +108,20 @@ export const getChatCompletionStream = async (
     }
   }
 
+  const requestConfig = { ...config, max_tokens: undefined };
+
+  if (isMiniMaxEndpoint(endpoint) || isMiniMaxModel(config.model)) {
+    requestConfig.temperature = clampMiniMaxTemperature(config.temperature);
+    delete (requestConfig as Record<string, unknown>).presence_penalty;
+    delete (requestConfig as Record<string, unknown>).frequency_penalty;
+  }
+
   const response = await fetch(endpoint, {
     method: 'POST',
     headers,
     body: JSON.stringify({
       messages,
-      ...config,
-      max_tokens: undefined,
+      ...requestConfig,
       stream: true,
     }),
   });
