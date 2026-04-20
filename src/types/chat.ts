@@ -9,10 +9,13 @@ export interface MessageInterface {
   content: string;
 }
 
+export type ChatTag = 'work' | 'study' | 'other' | string;
+
 export interface ChatInterface {
   id: string;
   title: string;
   folder?: string;
+  tag?: ChatTag;
   messages: MessageInterface[];
   config: ConfigInterface;
   titleSet: boolean;

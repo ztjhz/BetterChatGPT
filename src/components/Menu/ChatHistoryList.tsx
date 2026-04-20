@@ -5,11 +5,13 @@ import { shallow } from 'zustand/shallow';
 import ChatFolder from './ChatFolder';
 import ChatHistory from './ChatHistory';
 import ChatSearch from './ChatSearch';
+import TagFilter from './TagFilter';
 
 import {
   ChatHistoryInterface,
   ChatHistoryFolderInterface,
   ChatInterface,
+  ChatTag,
   FolderCollection,
 } from '@type/chat';
 
@@ -30,10 +32,12 @@ const ChatHistoryList = () => {
     []
   );
   const [filter, setFilter] = useState<string>('');
+  const [selectedTag, setSelectedTag] = useState<ChatTag | undefined>(undefined);
 
   const chatsRef = useRef<ChatInterface[]>(useStore.getState().chats || []);
   const foldersRef = useRef<FolderCollection>(useStore.getState().folders);
   const filterRef = useRef<string>(filter);
+  const selectedTagRef = useRef<ChatTag | undefined>(selectedTag);
 
   const updateFolders = useRef(() => {
     const _folders: ChatHistoryFolderInterface = {};
@@ -59,6 +63,15 @@ const ChatHistoryList = () => {
           index !== useStore.getState().currentChatIndex
         )
           return;
+
+        const currentTagFilter = selectedTagRef.current;
+        if (currentTagFilter !== undefined) {
+          if (currentTagFilter === null) {
+            if (chat.tag) return;
+          } else {
+            if (chat.tag !== currentTagFilter) return;
+          }
+        }
 
         if (!chat.folder) {
           _noFolders.push({ title: chat.title, index: index, id: chat.id });
@@ -126,6 +139,11 @@ const ChatHistoryList = () => {
     updateFolders();
   }, [filter]);
 
+  useEffect(() => {
+    selectedTagRef.current = selectedTag;
+    updateFolders();
+  }, [selectedTag]);
+
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     if (e.dataTransfer) {
       e.stopPropagation();
@@ -164,6 +182,10 @@ const ChatHistoryList = () => {
       onDragEnd={handleDragEnd}
     >
       <ChatSearch filter={filter} setFilter={setFilter} />
+      <TagFilter
+        selectedTag={selectedTag}
+        onSelectTag={setSelectedTag}
+      />
       <div className='flex flex-col gap-2 text-gray-100 text-sm'>
         {Object.keys(chatFolders).map((folderId) => (
           <ChatFolder

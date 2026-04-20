@@ -43,5 +43,13 @@
   "cloneChat": "创建聊天副本",
   "cloned": "已创建副本",
   "enterToSubmit": "按回车键提交",
-  "submitPlaceholder": "输入消息或点击 [/] 以使用提示词…"
+  "submitPlaceholder": "输入消息或点击 [/] 以使用提示词…",
+  "setTag": "设置标签",
+  "noTag": "无标签",
+  "allTags": "全部",
+  "tagWork": "工作",
+  "tagStudy": "学习",
+  "tagOther": "其他",
+  "customTag": "自定义标签",
+  "enterTagName": "输入标签名称…"
 }
