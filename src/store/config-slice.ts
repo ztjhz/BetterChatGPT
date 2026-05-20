@@ -1,7 +1,9 @@
 import { StoreSlice } from './store';
 import { Theme } from '@type/theme';
 import { ConfigInterface, TotalTokenUsed } from '@type/chat';
+import { PluginDefinition } from '@type/plugin';
 import { _defaultChatConfig, _defaultSystemMessage } from '@constants/chat';
+import { defaultPluginDefinitions } from '@utils/plugins';
 
 export interface ConfigSlice {
   openConfig: boolean;
@@ -17,6 +19,7 @@ export interface ConfigSlice {
   markdownMode: boolean;
   countTotalTokens: boolean;
   totalTokenUsed: TotalTokenUsed;
+  plugins: PluginDefinition[];
   setOpenConfig: (openConfig: boolean) => void;
   setTheme: (theme: Theme) => void;
   setAutoTitle: (autoTitle: boolean) => void;
@@ -30,6 +33,7 @@ export interface ConfigSlice {
   setMarkdownMode: (markdownMode: boolean) => void;
   setCountTotalTokens: (countTotalTokens: boolean) => void;
   setTotalTokenUsed: (totalTokenUsed: TotalTokenUsed) => void;
+  setPlugins: (plugins: PluginDefinition[]) => void;
 }
 
 export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
@@ -46,6 +50,7 @@ export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
   markdownMode: true,
   countTotalTokens: false,
   totalTokenUsed: {},
+  plugins: defaultPluginDefinitions(),
   setOpenConfig: (openConfig: boolean) => {
     set((prev: ConfigSlice) => ({
       ...prev,
@@ -122,6 +127,12 @@ export const createConfigSlice: StoreSlice<ConfigSlice> = (set, get) => ({
     set((prev: ConfigSlice) => ({
       ...prev,
       totalTokenUsed: totalTokenUsed,
+    }));
+  },
+  setPlugins: (plugins: PluginDefinition[]) => {
+    set((prev: ConfigSlice) => ({
+      ...prev,
+      plugins: plugins,
     }));
   },
 });

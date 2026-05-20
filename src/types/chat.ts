@@ -1,4 +1,5 @@
 import { Prompt } from './prompt';
+import { PluginDefinition } from './plugin';
 import { Theme } from './theme';
 
 export type Role = 'user' | 'assistant' | 'system';
@@ -158,4 +159,14 @@ export interface LocalStorageInterfaceV7oV8
   foldersName: string[];
   foldersExpanded: boolean[];
   folders: FolderCollection;
+}
+
+export interface LocalStorageInterfaceV8ToV9
+  extends LocalStorageInterfaceV7oV8 {
+  enterToSubmit: boolean;
+  inlineLatex: boolean;
+  markdownMode: boolean;
+  totalTokenUsed: TotalTokenUsed;
+  countTotalTokens: boolean;
+  plugins?: PluginDefinition[];
 }
