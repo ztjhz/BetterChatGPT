@@ -1,13 +1,15 @@
 import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface, ModelOptions } from '@type/chat';
+import { ChatCompletionMessage, OpenAIFunctionDefinition } from '@type/plugin';
 import { isAzureEndpoint } from '@utils/api';
 
 export const getChatCompletion = async (
   endpoint: string,
-  messages: MessageInterface[],
+  messages: ChatCompletionMessage[],
   config: ConfigInterface,
   apiKey?: string,
-  customHeaders?: Record<string, string>
+  customHeaders?: Record<string, string>,
+  functions?: OpenAIFunctionDefinition[]
 ) => {
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
@@ -50,6 +52,9 @@ export const getChatCompletion = async (
       messages,
       ...config,
       max_tokens: undefined,
+      ...(functions && functions.length > 0
+        ? { functions, function_call: 'auto' }
+        : {}),
     }),
   });
   if (!response.ok) throw new Error(await response.text());

@@ -10,6 +10,7 @@ import LanguageSelector from '@components/LanguageSelector';
 import AutoTitleToggle from './AutoTitleToggle';
 import AdvancedModeToggle from './AdvencedModeToggle';
 import InlineLatexToggle from './InlineLatexToggle';
+import PluginMenu from './PluginMenu';
 
 import PromptLibraryMenu from '@components/PromptLibraryMenu';
 import ChatConfigMenu from '@components/ChatConfigMenu';
@@ -55,6 +56,7 @@ const SettingsMenu = () => {
             <ClearConversation />
             <PromptLibraryMenu />
             <ChatConfigMenu />
+            <PluginMenu />
             <TotalTokenCost />
           </div>
         </PopupModal>
