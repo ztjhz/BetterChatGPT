@@ -102,6 +102,12 @@ Better ChatGPT 已经包含了大量的功能。您可以使用以下功能：
 
 [![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fztjhz%2FBetterChatGPT)
 
+## ZopDay
+
+使用 ZopDay 一键部署
+
+[![ZopDay](https://zop.dev/deploytozopday-inkhard.svg)](https://zop.dev/zopday/app/deploy?repo=https://github.com/ztjhz/BetterChatGPT&name=betterchatgpt&port=3000&utm_source=github&utm_medium=one_click&utm_content=betterchatgpt)
+
 ## GitHub 页面
 
 ### 步骤
